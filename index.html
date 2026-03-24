@@ -71,6 +71,19 @@
   }
   nav a:hover { color: var(--gold2); }
 
+  /* === LANG SWITCHER === */
+  .lang-switcher {
+    display: flex; gap: 6px; align-items: center; margin-left: 24px;
+  }
+  .lang-btn {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text2); font-size: 0.72rem; padding: 4px 10px;
+    cursor: pointer; transition: all 0.2s; letter-spacing: 0.05em;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  .lang-btn:hover { border-color: var(--gold); color: var(--gold2); }
+  .lang-btn.active { border-color: var(--gold); color: var(--gold2); background: rgba(201,168,76,0.1); }
+
   /* === HERO === */
   .hero {
     position: relative; z-index: 1;
@@ -346,8 +359,10 @@
   .reveal.visible { opacity: 1; transform: none; }
 
   @media (max-width: 768px) {
-    header { padding: 16px 20px; }
+    header { padding: 16px 20px; flex-wrap: wrap; gap: 10px; }
     nav { display: none; }
+    .lang-switcher { margin-left: 0; }
+    .lang-btn { padding: 4px 8px; font-size: 0.68rem; }
     .section { padding: 70px 20px; }
     .form-row { grid-template-columns: 1fr; }
     .hero { padding: 100px 20px 60px; }
@@ -365,23 +380,30 @@
     <span>CHEONMYEONGDANG · 천명당</span>
   </div>
   <nav>
-    <a href="#services">서비스</a>
-    <a href="#order">신청하기</a>
-    <a href="#reviews">후기</a>
+    <a href="#services" data-i18n="nav_services">서비스</a>
+    <a href="#order" data-i18n="nav_order">신청하기</a>
+    <a href="#reviews" data-i18n="nav_reviews">후기</a>
     <a href="#faq">FAQ</a>
   </nav>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ja')">日本語</button>
+    <button class="lang-btn" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+  </div>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">천 년의 지혜 · 당신의 운명을 읽다</div>
-  <h1>하늘이 정한 길을<br>천명당이 밝힙니다</h1>
-  <p>사주팔자(四柱八字)는 태어난 연·월·일·시의 기운을 통해<br>
+  <div class="hero-badge" data-i18n="hero_badge">천 년의 지혜 · 당신의 운명을 읽다</div>
+  <h1 data-i18n="hero_title">하늘이 정한 길을<br>천명당이 밝힙니다</h1>
+  <p data-i18n="hero_desc">사주팔자(四柱八字)는 태어난 연·월·일·시의 기운을 통해<br>
   인생의 흐름과 본연의 운명을 읽는 동양 철학의 정수입니다.<br>
   천명당에서 당신만의 운명을 깊이 있게 풀어드립니다.</p>
   <div class="hero-btns">
-    <a href="#order" class="btn-gold">지금 신청하기</a>
-    <a href="#services" class="btn-outline">서비스 안내</a>
+    <a href="#order" class="btn-gold" data-i18n="hero_btn1">지금 신청하기</a>
+    <a href="#services" class="btn-outline" data-i18n="hero_btn2">서비스 안내</a>
   </div>
 </section>
 
@@ -394,7 +416,7 @@
 <section class="section" id="services">
   <p class="section-sub reveal">✦ &nbsp; SERVICES &nbsp; ✦</p>
   <h2 class="section-title reveal">천명당의 운명 서비스</h2>
-  <p class="section-sub reveal" style="margin-bottom:48px;">전문 역술인이 깊이 있게 풀어드리는 다섯 가지 서비스</p>
+  <p class="section-sub reveal" style="margin-bottom:48px;">전문 역술인이 깊이 있게 풀어드리는 일곱 가지 서비스</p>
   <div class="services-grid">
     <div class="service-card reveal" onclick="scrollToFortune()">
       <span class="service-icon">🌙</span>
@@ -402,6 +424,13 @@
       <div class="service-desc">생년월일을 입력하시면 오늘의 기운을 즉시 확인하실 수 있습니다. 하루의 길흉과 행운의 방향을 무료로 안내해 드립니다.</div>
       <div class="service-price" style="color:var(--jade);">무료 <span>/ 매일 확인 가능</span></div>
       <button class="service-btn" style="border-color:var(--jade);color:var(--jade);">바로 확인하기 →</button>
+    </div>
+    <div class="service-card reveal" onclick="openModal('신년운세')">
+      <span class="service-icon">🎍</span>
+      <div class="service-name">신년운세</div>
+      <div class="service-desc">병오년(丙午年) 2026년 한 해의 전반적인 운세를 풀이합니다. 올 한 해의 재물·직업·건강·애정운을 월별로 상세히 분석해 드립니다.</div>
+      <div class="service-price">20,000원 <span>/ 1회</span></div>
+      <button class="service-btn">신청하기 →</button>
     </div>
     <div class="service-card reveal" onclick="openModal('사주 기본 풀이')">
       <span class="service-icon">🔮</span>
@@ -431,6 +460,13 @@
       <div class="service-desc">사주팔자의 오행을 보완하는 이름을 지어드립니다. 신생아 작명, 개명, 아호 작명 모두 가능하며 3가지 후보를 제시합니다.</div>
       <div class="service-price">9,900원 <span>/ 1회</span></div>
       <button class="service-btn">신청하기 →</button>
+    </div>
+    <div class="service-card reveal" onclick="openModal('타로카드 리딩')" style="border-color:rgba(83,74,183,0.5);background:linear-gradient(135deg,rgba(13,16,32,0.95) 0%,rgba(16,13,30,0.95) 100%);">
+      <span class="service-icon">🃏</span>
+      <div class="service-name" style="color:#aea9ec;">타로카드 리딩</div>
+      <div class="service-desc">현재 상황과 고민에 맞는 타로 스프레드로 깊이 있는 통찰을 드립니다. 연애·직업·재물·관계 등 원하시는 주제로 리딩해 드립니다.</div>
+      <div class="service-price" style="color:#aea9ec;">9,900원 <span>/ 1회</span></div>
+      <button class="service-btn" style="border-color:rgba(83,74,183,0.5);color:#aea9ec;">신청하기 →</button>
     </div>
   </div>
 </section>
@@ -477,8 +513,10 @@
     <div class="form-tabs">
       <button class="form-tab active" onclick="switchTab('saju')">🔮 사주 기본 풀이</button>
       <button class="form-tab" onclick="switchTab('detail')" style="color:var(--gold);">📜 사주 상세 풀이</button>
+      <button class="form-tab" onclick="switchTab('sinyeon')">🎍 신년운세</button>
       <button class="form-tab" onclick="switchTab('gung')">💫 궁합보기</button>
       <button class="form-tab" onclick="switchTab('name')">✍️ 이름 작명</button>
+      <button class="form-tab" onclick="switchTab('tarot')" style="color:#aea9ec;">🃏 타로카드</button>
     </div>
 
     <!-- PANEL: SAJU 기본 -->
@@ -624,6 +662,85 @@
       <button class="submit-btn" onclick="submitForm()" style="background:linear-gradient(135deg,#a07828,var(--gold2));font-size:1rem;">✨ 프리미엄 풀이 신청하기</button>
     </div>
 
+    <!-- PANEL: 신년운세 -->
+    <div class="form-panel" id="panel-sinyeon">
+      <div style="background:rgba(201,168,76,0.05);border:1px solid var(--border);padding:20px 24px;margin-bottom:28px;">
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.9;">
+          🎍 <strong style="color:var(--gold2);">2026 병오년(丙午年) 신년운세</strong><br>
+          올 한 해의 재물·직업·건강·애정운을 <strong style="color:var(--gold2);">월별로 상세히</strong> 풀이해 드립니다.<br>
+          연초에 미리 한 해의 흐름을 파악하고 준비하세요.
+        </p>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>성함</label>
+          <input type="text" placeholder="홍길동">
+        </div>
+        <div class="form-group">
+          <label>성별</label>
+          <select>
+            <option>남성</option>
+            <option>여성</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>생년월일</label>
+          <input type="date">
+        </div>
+        <div class="form-group">
+          <label>태어난 시간</label>
+          <select>
+            <option>모름</option>
+            <option>자시 (23:00~01:00)</option>
+            <option>축시 (01:00~03:00)</option>
+            <option>인시 (03:00~05:00)</option>
+            <option>묘시 (05:00~07:00)</option>
+            <option>진시 (07:00~09:00)</option>
+            <option>사시 (09:00~11:00)</option>
+            <option>오시 (11:00~13:00)</option>
+            <option>미시 (13:00~15:00)</option>
+            <option>신시 (15:00~17:00)</option>
+            <option>유시 (17:00~19:00)</option>
+            <option>술시 (19:00~21:00)</option>
+            <option>해시 (21:00~23:00)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>집중 분석 항목 (선택)</label>
+        <select>
+          <option>전반적인 2026년 운세</option>
+          <option>2026년 재물·사업운 집중</option>
+          <option>2026년 직업·이직운 집중</option>
+          <option>2026년 연애·결혼운 집중</option>
+          <option>2026년 건강운 집중</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>궁금한 점 (선택)</label>
+        <input type="text" placeholder="예: 올해 이직 적기인지, 사업 시작해도 될지 궁금합니다">
+      </div>
+      <div class="form-group">
+        <label>답변 받을 이메일</label>
+        <input type="email" placeholder="example@email.com">
+      </div>
+      <div class="form-note">
+        <p>📌 입금 확인 후 <strong>24시간 이내</strong>에 이메일로 신년운세 풀이를 보내드립니다.<br>
+        결과는 <strong>월별 운세 포함 A4 3~4장 분량</strong>으로 정성껏 작성됩니다.</p>
+      </div>
+      <div class="payment-box">
+        <div class="amount">20,000원</div>
+        <div class="bank-info">
+          <strong>케이뱅크</strong> &nbsp;|&nbsp; 100137089386<br>
+          예금주: <strong>홍덕훈</strong><br>
+          <span style="font-size:0.78rem;color:#666;margin-top:6px;display:block;">입금자명을 신청자 성함과 동일하게 입력해 주세요</span>
+        </div>
+      </div>
+      <button class="submit-btn" onclick="submitForm()">🎍 신년운세 신청하기</button>
+    </div>
+
     <!-- PANEL: GUNG -->
     <div class="form-panel" id="panel-gung">
       <p style="font-size:0.85rem;color:var(--text2);margin-bottom:28px;line-height:1.8;">두 분의 정보를 모두 입력해 주세요. 연애·결혼·비즈니스 궁합 모두 분석해 드립니다.</p>
@@ -709,6 +826,63 @@
       </div>
       <button class="submit-btn" onclick="submitForm()">입금 완료 · 신청 접수하기</button>
     </div>
+
+    <!-- PANEL: 타로카드 -->
+    <div class="form-panel" id="panel-tarot">
+      <div style="background:linear-gradient(135deg,rgba(83,74,183,0.1),rgba(83,74,183,0.03));border:1px solid rgba(83,74,183,0.5);padding:20px 24px;margin-bottom:28px;">
+        <p style="font-size:0.82rem;color:#aea9ec;line-height:1.9;">
+          🃏 <strong>타로카드 리딩</strong>은 현재의 에너지와 흐름을 카드를 통해 읽어드립니다.<br>
+          연애·직업·재물·인간관계 등 <strong>원하시는 주제 1가지</strong>를 정해 주시면<br>
+          과거·현재·미래의 흐름과 조언을 상세히 풀이해 드립니다.
+        </p>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>성함</label>
+          <input type="text" placeholder="홍길동">
+        </div>
+        <div class="form-group">
+          <label>성별</label>
+          <select>
+            <option>남성</option>
+            <option>여성</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>리딩 주제</label>
+        <select>
+          <option>연애 · 이성관계</option>
+          <option>결혼 · 현재 파트너</option>
+          <option>직업 · 커리어</option>
+          <option>재물 · 사업</option>
+          <option>인간관계 · 갈등</option>
+          <option>전반적인 현재 상황</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>현재 고민 또는 질문 (자세할수록 정확합니다)</label>
+        <input type="text" placeholder="예: 현재 만나는 사람과 결혼해도 될지 고민입니다">
+      </div>
+      <div class="form-group">
+        <label>답변 받을 이메일</label>
+        <input type="email" placeholder="example@email.com">
+      </div>
+      <div class="form-note">
+        <p>📌 입금 확인 후 <strong>24시간 이내</strong>에 이메일로 타로 리딩 결과를 보내드립니다.<br>
+        카드 배열 이미지와 함께 <strong>상세한 해석</strong>을 제공합니다.</p>
+      </div>
+      <div class="payment-box" style="border-color:rgba(83,74,183,0.6);">
+        <div class="amount" style="color:#aea9ec;">9,900원</div>
+        <div class="bank-info">
+          <strong>케이뱅크</strong> &nbsp;|&nbsp; 100137089386<br>
+          예금주: <strong>홍덕훈</strong><br>
+          <span style="font-size:0.78rem;color:#666;margin-top:6px;display:block;">입금자명을 신청자 성함과 동일하게 입력해 주세요</span>
+        </div>
+      </div>
+      <button class="submit-btn" onclick="submitForm()" style="background:linear-gradient(135deg,#3c3489,#534ab7);">🃏 타로카드 리딩 신청하기</button>
+    </div>
+
   </div>
 </section>
 
@@ -917,8 +1091,170 @@
 
   // Submit
   function submitForm() {
-    alert('✅ 신청이 접수되었습니다!\n\n입금 확인 후 24시간 이내에 이메일로 결과를 보내드리겠습니다.\n감사합니다 🙏');
+    const msgs = {
+      ko: '✅ 신청이 접수되었습니다!\n\n입금 확인 후 24시간 이내에 이메일로 결과를 보내드리겠습니다.\n감사합니다 🙏',
+      en: '✅ Your request has been received!\n\nWe will send the results to your email within 24 hours after confirming payment.\nThank you 🙏',
+      ja: '✅ お申し込みを受け付けました！\n\nご入金確認後、24時間以内にメールでお送りします。\nありがとうございます 🙏',
+      zh: '✅ 您的申请已收到！\n\n确认付款后，我们将在24小时内将结果发送到您的电子邮件。\n谢谢 🙏',
+      es: '✅ ¡Su solicitud ha sido recibida!\n\nLe enviaremos los resultados por correo electrónico dentro de las 24 horas después de confirmar el pago.\nGracias 🙏'
+    };
+    alert(msgs[currentLang] || msgs.ko);
   }
+
+  // ===== MULTILINGUAL SYSTEM =====
+  let currentLang = 'ko';
+
+  const i18n = {
+    ko: {
+      nav_services: '서비스',
+      nav_order: '신청하기',
+      nav_reviews: '후기',
+      hero_badge: '천 년의 지혜 · 당신의 운명을 읽다',
+      hero_title: '하늘이 정한 길을<br>천명당이 밝힙니다',
+      hero_desc: '사주팔자(四柱八字)는 태어난 연·월·일·시의 기운을 통해<br>인생의 흐름과 본연의 운명을 읽는 동양 철학의 정수입니다.<br>천명당에서 당신만의 운명을 깊이 있게 풀어드립니다.',
+      hero_btn1: '지금 신청하기',
+      hero_btn2: '서비스 안내',
+      sec_services: '천명당의 운명 서비스',
+      sec_services_sub: '전문 역술인이 깊이 있게 풀어드리는 일곱 가지 서비스',
+      sec_order: '운명 풀이 신청',
+      sec_order_sub: '정확한 정보를 입력하실수록 더욱 세밀한 풀이가 가능합니다',
+      sec_reviews: '고객 후기',
+      sec_reviews_sub: '천명당을 경험한 분들의 이야기',
+      sec_faq: '자주 묻는 질문',
+      free_title: '오늘의 무료 운세',
+      free_sub: '생년월일을 입력하시면 오늘의 운세를 바로 확인하실 수 있습니다',
+      free_btn: '오늘의 운세 확인하기 →',
+      footer_quote: '운명은 하늘이 정하지만, 그 뜻을 아는 자는 준비할 수 있습니다.',
+    },
+    en: {
+      nav_services: 'Services',
+      nav_order: 'Order',
+      nav_reviews: 'Reviews',
+      hero_badge: 'A Thousand Years of Wisdom · Read Your Destiny',
+      hero_title: 'The Path Heaven Has Set<br>Cheonmyeongdang Will Reveal',
+      hero_desc: 'Saju (Four Pillars of Destiny) reads the flow of life<br>through the cosmic energy of your birth year, month, day and hour.<br>Discover your unique destiny at Cheonmyeongdang.',
+      hero_btn1: 'Order Now',
+      hero_btn2: 'Our Services',
+      sec_services: 'Our Destiny Services',
+      sec_services_sub: 'Seven in-depth services by our expert fortune reader',
+      sec_order: 'Request a Reading',
+      sec_order_sub: 'The more accurate your information, the more precise the reading',
+      sec_reviews: 'Customer Reviews',
+      sec_reviews_sub: 'Stories from those who experienced Cheonmyeongdang',
+      sec_faq: 'Frequently Asked Questions',
+      free_title: 'Free Daily Fortune',
+      free_sub: 'Enter your date of birth to instantly check today\'s fortune',
+      free_btn: 'Check Today\'s Fortune →',
+      footer_quote: 'Fate is set by heaven, but those who know its will can prepare.',
+    },
+    ja: {
+      nav_services: 'サービス',
+      nav_order: '申し込む',
+      nav_reviews: 'レビュー',
+      hero_badge: '千年の知恵 · あなたの運命を読む',
+      hero_title: '天が定めた道を<br>天命堂が照らします',
+      hero_desc: '四柱推命は、生まれた年・月・日・時の気を通じて<br>人生の流れと本来の運命を読む東洋哲学の精髄です。<br>天命堂であなただけの運命を深く解き明かします。',
+      hero_btn1: '今すぐ申し込む',
+      hero_btn2: 'サービス案内',
+      sec_services: '天命堂の運命サービス',
+      sec_services_sub: '専門の占い師が丁寧に解き明かす7つのサービス',
+      sec_order: '運命占い申し込み',
+      sec_order_sub: '正確な情報を入力するほど、より詳細な鑑定が可能です',
+      sec_reviews: 'お客様の声',
+      sec_reviews_sub: '天命堂をご利用いただいた方々のお話',
+      sec_faq: 'よくある質問',
+      free_title: '今日の無料運勢',
+      free_sub: '生年月日を入力すると今日の運勢をすぐに確認できます',
+      free_btn: '今日の運勢を確認する →',
+      footer_quote: '運命は天が定めるが、その意を知る者は備えることができる。',
+    },
+    zh: {
+      nav_services: '服务',
+      nav_order: '申请',
+      nav_reviews: '评价',
+      hero_badge: '千年智慧 · 解读您的命运',
+      hero_title: '天命堂为您揭示<br>上天注定的道路',
+      hero_desc: '四柱八字通过出生年、月、日、时的气运<br>解读人生流向与本源命运，是东方哲学的精髓。<br>天命堂为您深度解析专属命运。',
+      hero_btn1: '立即申请',
+      hero_btn2: '服务介绍',
+      sec_services: '天命堂命运服务',
+      sec_services_sub: '专业命理师为您深度解析的七项服务',
+      sec_order: '命运解析申请',
+      sec_order_sub: '信息越准确，解析越精准',
+      sec_reviews: '客户评价',
+      sec_reviews_sub: '体验天命堂的客户心声',
+      sec_faq: '常见问题',
+      free_title: '今日免费运势',
+      free_sub: '输入出生日期，立即查看今日运势',
+      free_btn: '查看今日运势 →',
+      footer_quote: '命运由天定，知其意者可先做准备。',
+    },
+    es: {
+      nav_services: 'Servicios',
+      nav_order: 'Solicitar',
+      nav_reviews: 'Reseñas',
+      hero_badge: 'Mil Años de Sabiduría · Lee Tu Destino',
+      hero_title: 'El Camino Marcado por el Cielo<br>Cheonmyeongdang lo Revelará',
+      hero_desc: 'Saju (Los Cuatro Pilares del Destino) lee el flujo de la vida<br>a través de la energía cósmica de tu año, mes, día y hora de nacimiento.<br>Descubre tu destino único en Cheonmyeongdang.',
+      hero_btn1: 'Solicitar Ahora',
+      hero_btn2: 'Nuestros Servicios',
+      sec_services: 'Nuestros Servicios de Destino',
+      sec_services_sub: 'Siete servicios en profundidad por nuestro experto en fortunas',
+      sec_order: 'Solicitar una Lectura',
+      sec_order_sub: 'Cuanto más precisa sea su información, más precisa será la lectura',
+      sec_reviews: 'Reseñas de Clientes',
+      sec_reviews_sub: 'Historias de quienes experimentaron Cheonmyeongdang',
+      sec_faq: 'Preguntas Frecuentes',
+      free_title: 'Fortuna Diaria Gratis',
+      free_sub: 'Ingrese su fecha de nacimiento para verificar instantáneamente la fortuna de hoy',
+      free_btn: 'Ver Fortuna de Hoy →',
+      footer_quote: 'El destino lo fija el cielo, pero quienes conocen su voluntad pueden prepararse.',
+    }
+  };
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll(`.lang-btn`).forEach(b => {
+      if (b.getAttribute('onclick') === `setLang('${lang}')`) b.classList.add('active');
+    });
+    const t = i18n[lang];
+    if (!t) return;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+    // Section titles
+    const svcTitle = document.querySelector('#services .section-title');
+    const svcSub = document.querySelector('#services .section-sub:last-of-type');
+    if (svcTitle) svcTitle.textContent = t.sec_services;
+
+    const orderTitle = document.querySelector('#order .section-title');
+    if (orderTitle) orderTitle.textContent = t.sec_order;
+    const orderSub = document.querySelector('#order .section-sub:last-of-type');
+    if (orderSub) orderSub.textContent = t.sec_order_sub;
+
+    const reviewTitle = document.querySelector('#reviews .section-title');
+    if (reviewTitle) reviewTitle.textContent = t.sec_reviews;
+
+    const faqTitle = document.querySelector('#faq .section-title');
+    if (faqTitle) faqTitle.textContent = t.sec_faq;
+
+    const freeTitle = document.querySelector('#free-fortune .section-title');
+    if (freeTitle) freeTitle.textContent = t.free_title;
+    const freeSub = document.querySelector('#free-fortune .section-sub:last-of-type');
+    if (freeSub) freeSub.textContent = t.free_sub;
+    const freeBtn = document.querySelector('#free-fortune button');
+    if (freeBtn) freeBtn.textContent = t.free_btn;
+
+    const footerQuote = document.querySelector('footer p');
+    if (footerQuote) {
+      footerQuote.innerHTML = `${t.footer_quote}<br>
+      케이뱅크 100137089386 · 홍덕훈<br><br>
+      <span style="font-size:0.72rem;opacity:0.5;">© 2026 천명당 CHEONMYEONGDANG · All Rights Reserved</span>`;
+    }
+  }
+
 </script>
 </body>
 </html>
