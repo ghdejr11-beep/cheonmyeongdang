@@ -1,0 +1,5 @@
+gradio>=4.0.0
+moviepy>=1.0.3
+openai-whisper
+numpy
+imageio[ffmpeg]
