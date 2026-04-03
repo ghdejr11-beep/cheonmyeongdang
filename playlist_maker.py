@@ -6,6 +6,16 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 OUTPUT_DIR = os.path.join(os.path.expanduser("~"), "Desktop", "playlist_output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+def unique_path(path):
+    """같은 이름 파일이 있으면 뒤에 숫자를 붙여서 고유 경로 반환"""
+    if not os.path.exists(path):
+        return path
+    base, ext = os.path.splitext(path)
+    n = 1
+    while os.path.exists(f"{base}_{n}{ext}"):
+        n += 1
+    return f"{base}_{n}{ext}"
+
 def find_ffmpeg():
     for path in [r"C:\ffmpeg\bin\ffmpeg.exe", r"C:\Program Files\ffmpeg\bin\ffmpeg.exe", "ffmpeg"]:
         try:
@@ -175,7 +185,7 @@ def process_single_file(args):
     run_cmd([FFMPEG, "-y", "-f", "concat", "-safe", "0", "-i", list_txt, "-c", "copy", tmp_long])
 
     out_name = f"{idx+1:02d}_{int(hours)}h.mp3"
-    out_path = os.path.join(OUTPUT_DIR, out_name)
+    out_path = unique_path(os.path.join(OUTPUT_DIR, out_name))
     run_cmd([FFMPEG, "-y", "-i", tmp_long, "-t", str(target_sec), "-c", "copy", out_path])
 
     if not os.path.exists(out_path):
@@ -241,7 +251,7 @@ def make_video(mp3_file, bg_image, text_color, progress=gr.Progress(), slot=0):
     shutil.copy2(mp3_src, mp3_safe)
 
     suffix = f"_{slot}" if slot else ""
-    out_path = os.path.join(OUTPUT_DIR, f"playlist_video{suffix}.mp4")
+    out_path = unique_path(os.path.join(OUTPUT_DIR, f"playlist_video{suffix}.mp4"))
 
     # ffmpeg: -framerate 1 추가, -pix_fmt yuv420p 추가 (호환성)
     cmd = [FFMPEG, "-y",
