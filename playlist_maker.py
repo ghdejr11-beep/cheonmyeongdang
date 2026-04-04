@@ -1,6 +1,6 @@
 import gradio as gr
-import os, shutil, subprocess, tempfile, json
-from PIL import Image, ImageDraw, ImageFont
+import os, shutil, subprocess, tempfile, json, random, math
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 OUTPUT_DIR = os.path.join(os.path.expanduser("~"), "Desktop", "playlist_output")
@@ -37,6 +37,11 @@ def find_ffprobe():
 FFMPEG = find_ffmpeg()
 FFPROBE = find_ffprobe()
 
+# 애니메이션 설정
+ANIM_FPS = 30
+ANIM_LOOP_SEC = 8  # 8초 루프 애니메이션
+ANIM_TOTAL_FRAMES = ANIM_FPS * ANIM_LOOP_SEC  # 240프레임
+
 def get_tmp(sub=""):
     """ASCII-only 임시 경로 사용 - 한글 경로 회피"""
     for base in [os.path.join("C:\\", "pl"), os.path.join(tempfile.gettempdir(), "pl")]:
@@ -51,11 +56,11 @@ def get_tmp(sub=""):
             continue
     return tempfile.mkdtemp()
 
-def run_cmd(cmd):
+def run_cmd(cmd, timeout=600):
     try:
         return subprocess.run(
             cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-            encoding='utf-8', errors='replace',
+            encoding='utf-8', errors='replace', timeout=timeout,
             creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
         )
     except:
@@ -99,33 +104,83 @@ def parse_color(c):
         pass
     return (255, 255, 255)
 
-def make_frame(bg_src, color_tuple, frame_path):
-    W, H = 1920, 1080
+def generate_stars(count=60):
+    """랜덤 별/파티클 위치 생성 (한번 생성 후 재사용)"""
+    stars = []
+    for _ in range(count):
+        stars.append({
+            'x': random.randint(0, 1919),
+            'y': random.randint(0, 1079),
+            'size': random.uniform(1, 3),
+            'speed': random.uniform(0.3, 1.0),  # 깜빡이는 속도
+            'phase': random.uniform(0, 2 * math.pi),  # 시작 위상
+        })
+    return stars
 
-    # 배경 생성
+def draw_stars(draw, stars, frame_idx, color_tuple):
+    """프레임마다 별을 그려서 반짝이는 효과"""
+    r, g, b = color_tuple
+    t = frame_idx / ANIM_FPS
+    for s in stars:
+        brightness = 0.3 + 0.7 * ((math.sin(t * s['speed'] * 4 + s['phase']) + 1) / 2)
+        alpha = int(255 * brightness)
+        sr = int(r * brightness)
+        sg = int(g * brightness)
+        sb = int(b * brightness)
+        sz = s['size']
+        draw.ellipse([s['x']-sz, s['y']-sz, s['x']+sz, s['y']+sz],
+                     fill=(sr, sg, sb))
+
+def draw_eq_bars(draw, frame_idx, color_tuple, y_base):
+    """하단 이퀄라이저 바 애니메이션"""
+    r, g, b = color_tuple
+    bar_count = 40
+    bar_width = 12
+    bar_gap = 6
+    total_w = bar_count * (bar_width + bar_gap)
+    start_x = (1920 - total_w) // 2
+    t = frame_idx / ANIM_FPS
+
+    for i in range(bar_count):
+        phase = i * 0.3
+        height = 10 + 30 * ((math.sin(t * 2.5 + phase) + 1) / 2)
+        height += 8 * ((math.sin(t * 4.1 + phase * 1.7) + 1) / 2)
+        x = start_x + i * (bar_width + bar_gap)
+        brightness = 0.5 + 0.5 * ((math.sin(t * 3 + phase) + 1) / 2)
+        br = int(r * brightness)
+        bg_ = int(g * brightness)
+        bb = int(b * brightness)
+        draw.rectangle([x, y_base - height, x + bar_width, y_base],
+                       fill=(br, bg_, bb))
+
+def make_base_image(bg_src, W=1920, H=1080):
+    """배경 이미지 생성 (줌용으로 약간 크게)"""
+    # 줌 효과를 위해 10% 크게 만듦
+    ZW, ZH = int(W * 1.1), int(H * 1.1)
+
     if bg_src and os.path.exists(bg_src):
         try:
             img = Image.open(bg_src).convert("RGB")
             iw, ih = img.size
-            if iw/ih > W/H:
-                new_h, new_w = H, int(H * iw/ih)
+            if iw/ih > ZW/ZH:
+                new_h, new_w = ZH, int(ZH * iw/ih)
             else:
-                new_w, new_h = W, int(W * ih/iw)
+                new_w, new_h = ZW, int(ZW * ih/iw)
             img = img.resize((new_w, new_h), Image.LANCZOS)
-            left, top = (new_w-W)//2, (new_h-H)//2
-            img = img.crop((left, top, left+W, top+H))
-            dark = Image.new("RGB", (W, H), (0, 0, 0))
+            left, top = (new_w-ZW)//2, (new_h-ZH)//2
+            img = img.crop((left, top, left+ZW, top+ZH))
+            dark = Image.new("RGB", (ZW, ZH), (0, 0, 0))
             img = Image.blend(img, dark, alpha=0.35)
         except Exception as e:
             print(f"[경고] 배경 이미지 로드 실패: {e}")
-            img = Image.new("RGB", (W, H), (13, 13, 13))
+            img = Image.new("RGB", (ZW, ZH), (13, 13, 13))
     else:
-        img = Image.new("RGB", (W, H), (13, 13, 13))
+        img = Image.new("RGB", (ZW, ZH), (13, 13, 13))
 
-    draw = ImageDraw.Draw(img)
+    return img
 
-    # 폰트 로드
-    font = None
+def get_font():
+    """폰트 로드"""
     for fc in [
         "C:/Windows/Fonts/arialbd.ttf",
         "C:/Windows/Fonts/arial.ttf",
@@ -136,31 +191,87 @@ def make_frame(bg_src, color_tuple, frame_path):
     ]:
         if os.path.exists(fc):
             try:
-                font = ImageFont.truetype(fc, 120)
-                break
+                return ImageFont.truetype(fc, 120)
             except:
                 continue
-    if font is None:
-        try:
-            font = ImageFont.load_default(size=120)
-        except:
-            font = ImageFont.load_default()
+    try:
+        return ImageFont.load_default(size=120)
+    except:
+        return ImageFont.load_default()
 
+def make_animated_frame(base_img, font, stars, color_tuple, frame_idx, W=1920, H=1080):
+    """한 프레임 생성 (별 반짝임 + 텍스트 글로우 + 느린 줌 + 이퀄라이저)"""
     r, g, b = color_tuple
+    t = frame_idx / ANIM_TOTAL_FRAMES  # 0.0 ~ 1.0 진행률
+
+    # 1) 느린 줌 효과 (살짝 줌인/줌아웃 반복)
+    zoom = 1.0 + 0.03 * math.sin(t * 2 * math.pi)  # 1.0 ~ 1.03 줌
+    ZW, ZH = base_img.size
+    crop_w = int(W / zoom)
+    crop_h = int(H / zoom)
+    left = (ZW - crop_w) // 2
+    top = (ZH - crop_h) // 2
+    frame = base_img.crop((left, top, left + crop_w, top + crop_h))
+    frame = frame.resize((W, H), Image.LANCZOS)
+
+    draw = ImageDraw.Draw(frame)
+
+    # 2) 반짝이는 별
+    draw_stars(draw, stars, frame_idx, color_tuple)
+
+    # 3) 텍스트 글로우 효과 (밝기 펄스)
     text = "Play List"
     bbox = draw.textbbox((0, 0), text, font=font)
     tw = bbox[2] - bbox[0]
     th = bbox[3] - bbox[1]
     tx = (W - tw) // 2
-    ty = (H - th) // 2
+    ty = (H - th) // 2 - 40  # 이퀄라이저 공간 확보를 위해 약간 위로
 
+    glow_strength = 0.7 + 0.3 * math.sin(frame_idx / ANIM_FPS * 2)
+    gr_ = int(r * glow_strength)
+    gg = int(g * glow_strength)
+    gb = int(b * glow_strength)
+
+    # 그림자
     draw.text((tx+4, ty+4), text, font=font, fill=(0, 0, 0))
-    draw.text((tx, ty), text, font=font, fill=(r, g, b))
-    draw.rectangle([W//2-200, ty+th+25, W//2+200, ty+th+30], fill=(r, g, b))
+    # 글로우 (약간 큰 텍스트 느낌)
+    for offset in [(2,0),(-2,0),(0,2),(0,-2)]:
+        draw.text((tx+offset[0], ty+offset[1]), text, font=font,
+                  fill=(gr_//3, gg//3, gb//3))
+    # 메인 텍스트
+    draw.text((tx, ty), text, font=font, fill=(gr_, gg, gb))
 
-    # PNG로 저장 (무손실, ffmpeg 호환성 더 좋음)
-    img.save(frame_path, quality=95)
-    print(f"[정보] 프레임 저장됨: {frame_path} ({os.path.getsize(frame_path)} bytes)")
+    # 구분선
+    line_alpha = 0.5 + 0.5 * math.sin(frame_idx / ANIM_FPS * 1.5)
+    lr = int(r * line_alpha)
+    lg = int(g * line_alpha)
+    lb = int(b * line_alpha)
+    draw.rectangle([W//2-200, ty+th+25, W//2+200, ty+th+30], fill=(lr, lg, lb))
+
+    # 4) 이퀄라이저 바
+    eq_y = ty + th + 80
+    draw_eq_bars(draw, frame_idx, color_tuple, eq_y)
+
+    return frame
+
+def make_animation_frames(bg_src, color_tuple, frames_dir, progress_cb=None):
+    """모든 애니메이션 프레임 생성"""
+    W, H = 1920, 1080
+    base_img = make_base_image(bg_src, W, H)
+    font = get_font()
+    stars = generate_stars(60)
+
+    os.makedirs(frames_dir, exist_ok=True)
+
+    for i in range(ANIM_TOTAL_FRAMES):
+        frame = make_animated_frame(base_img, font, stars, color_tuple, i, W, H)
+        frame_path = os.path.join(frames_dir, f"frame_{i:04d}.png")
+        frame.save(frame_path)
+        if progress_cb and i % 30 == 0:
+            progress_cb(i / ANIM_TOTAL_FRAMES)
+
+    print(f"[정보] {ANIM_TOTAL_FRAMES}개 프레임 생성 완료: {frames_dir}")
+    return os.path.join(frames_dir, "frame_%04d.png")
 
 def process_single_file(args):
     idx, src_path, hours, tmp_base = args
@@ -226,9 +337,9 @@ def make_video(mp3_file, bg_image, text_color, progress=gr.Progress(), slot=0):
     if not mp3_file:
         return None, "MP3 파일을 선택해주세요."
 
-    progress(0.1, desc="배경 프레임 생성 중..")
+    progress(0.05, desc="애니메이션 프레임 생성 중 (1/2)..")
     tmp_dir = get_tmp(f"vid{slot}")
-    frame_path = os.path.join(tmp_dir, "frame.png")
+    frames_dir = os.path.join(tmp_dir, "frames")
 
     # 배경 이미지를 안전한 경로로 복사
     bg_src = None
@@ -239,13 +350,19 @@ def make_video(mp3_file, bg_image, text_color, progress=gr.Progress(), slot=0):
             shutil.copy2(bp, bg_copy)
             bg_src = bg_copy
 
-    make_frame(bg_src, parse_color(text_color), frame_path)
+    color_tuple = parse_color(text_color)
+
+    def frame_progress(p):
+        progress(0.05 + p * 0.45, desc=f"프레임 생성 중.. {int(p*100)}%")
+
+    frame_pattern = make_animation_frames(bg_src, color_tuple, frames_dir, frame_progress)
 
     # 프레임 파일 검증
-    if not os.path.exists(frame_path) or os.path.getsize(frame_path) == 0:
+    first_frame = os.path.join(frames_dir, "frame_0000.png")
+    if not os.path.exists(first_frame):
         return None, "프레임 이미지 생성 실패"
 
-    progress(0.4, desc="MP4 변환 중..")
+    progress(0.55, desc="MP4 영상 인코딩 중 (2/2)..")
     mp3_src = mp3_file.name if hasattr(mp3_file, 'name') else str(mp3_file)
     mp3_safe = os.path.join(tmp_dir, "audio.mp3")
     shutil.copy2(mp3_src, mp3_safe)
@@ -253,18 +370,19 @@ def make_video(mp3_file, bg_image, text_color, progress=gr.Progress(), slot=0):
     suffix = f"_{slot}" if slot else ""
     out_path = unique_path(os.path.join(OUTPUT_DIR, f"playlist_video{suffix}.mp4"))
 
-    # ffmpeg: -framerate 1 추가, -pix_fmt yuv420p 추가 (호환성)
+    # -stream_loop -1: 8초 애니메이션을 무한 루프하여 오디오 길이에 맞춤
     cmd = [FFMPEG, "-y",
-           "-loop", "1", "-framerate", "1", "-i", frame_path,
+           "-stream_loop", "-1",
+           "-framerate", str(ANIM_FPS), "-i", frame_pattern,
            "-i", mp3_safe,
-           "-c:v", "libx264", "-preset", "ultrafast", "-tune", "stillimage",
+           "-c:v", "libx264", "-preset", "medium", "-crf", "23",
            "-pix_fmt", "yuv420p",
            "-c:a", "aac", "-b:a", "192k",
            "-shortest", "-movflags", "+faststart",
            out_path]
 
     print(f"[정보] ffmpeg 명령어: {' '.join(cmd)}")
-    result = run_cmd(cmd)
+    result = run_cmd(cmd, timeout=3600)
 
     if not result or result.returncode != 0 or not os.path.exists(out_path):
         err = ""
@@ -286,6 +404,13 @@ def make_video(mp3_file, bg_image, text_color, progress=gr.Progress(), slot=0):
 
     size_mb = os.path.getsize(out_path) / 1024 / 1024
     progress(1.0)
+
+    # 프레임 폴더 정리
+    try:
+        shutil.rmtree(frames_dir)
+    except:
+        pass
+
     return out_path, f"완성!\n경로: {out_path}\n크기: {size_mb:.1f} MB\n길이: {dur:.0f}초"
 
 def run_all(mp3_files, hours, bg, color, progress=gr.Progress(), slot=0):
@@ -306,7 +431,7 @@ def run_all(mp3_files, hours, bg, color, progress=gr.Progress(), slot=0):
             shutil.copy2(bp, bc)
             bg_safe = FakeFile(bc)
 
-    progress(0.5, desc="2단계: MP4 변환 중..")
+    progress(0.5, desc="2단계: 애니메이션 MP4 생성 중..")
     video_result, video_msg = make_video(FakeFile(loop_result), bg_safe, color, progress, slot=slot)
     return video_result, f"완료!\n\n[1단계]\n{loop_msg}\n\n[2단계]\n{video_msg}"
 
@@ -314,7 +439,7 @@ def run_all_1(f, h, bg, c, progress=gr.Progress()): return run_all(f, h, bg, c, 
 def run_all_2(f, h, bg, c, progress=gr.Progress()): return run_all(f, h, bg, c, progress, slot=2)
 
 with gr.Blocks(title="Playlist Maker") as app:
-    gr.Markdown(f"# Playlist Maker\n2개 병렬처리 | 폴더: `{OUTPUT_DIR}`")
+    gr.Markdown(f"# Playlist Maker\n애니메이션 효과 포함 | 2개 병렬처리 | 폴더: `{OUTPUT_DIR}`")
 
     with gr.Tab("MP3 루프 만들기"):
         with gr.Row():
@@ -332,7 +457,7 @@ with gr.Blocks(title="Playlist Maker") as app:
                 v_mp3 = gr.File(label="MP3 파일", file_types=[".mp3"])
                 v_bg = gr.File(label="배경 사진 (선택)", file_types=["image"])
                 v_color = gr.ColorPicker(label="텍스트 색상", value="#ffffff")
-                v_btn = gr.Button("영상 만들기", variant="primary", size="lg")
+                v_btn = gr.Button("애니메이션 영상 만들기", variant="primary", size="lg")
             with gr.Column():
                 v_status = gr.Textbox(label="상태", lines=4)
                 v_out = gr.File(label="완성된 MP4")
