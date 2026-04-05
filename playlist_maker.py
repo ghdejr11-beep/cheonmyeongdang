@@ -705,4 +705,5 @@ with gr.Blocks(title="Playlist Maker") as app:
                 a2_out = gr.File(label="완성된 MP4")
         a2_btn.click(run_all_2, [a2_mp3, a2_hours, a2_bg, a2_color], [a2_out, a2_status])
 
-app.launch(share=False, inbrowser=True, allowed_paths=[OUTPUT_DIR])
+if __name__ == "__main__":
+    app.launch(share=False, inbrowser=True, allowed_paths=[OUTPUT_DIR])
