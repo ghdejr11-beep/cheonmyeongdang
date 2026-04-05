@@ -4,7 +4,8 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from youtube_uploader import (
     detect_style, get_style_folder, read_mp3_metadata,
-    generate_title, generate_description, upload_to_youtube
+    generate_title, generate_description, upload_to_youtube,
+    generate_background
 )
 
 OUTPUT_DIR = os.path.join(os.path.expanduser("~"), "Desktop", "playlist_output")
@@ -588,6 +589,16 @@ def full_auto(mp3_files, hours, bg, color, privacy, progress=gr.Progress()):
             bc = os.path.join(get_tmp(), f"bg_auto{ext}")
             shutil.copy2(bp, bc)
             bg_safe = FakeFile(bc)
+
+    # 배경 이미지가 없으면 스타일에 맞게 자동 생성
+    if bg_safe is None:
+        progress(0.45, desc="배경 이미지 자동 생성 중..")
+        auto_bg_path = os.path.join(get_tmp(), f"auto_bg_{style_name}.png")
+        generate_background(style_name, style_info, auto_bg_path)
+        bg_safe = FakeFile(auto_bg_path)
+
+    # 스타일에 맞는 텍스트 색상 자동 적용
+    color = style_info.get("text_color", color)
 
     # 4단계: 영상 생성
     progress(0.5, desc="2단계: 애니메이션 MP4 생성 중..")

@@ -1,5 +1,5 @@
-"""YouTube 자동 업로드 + 제목/설명 자동 생성 + 스타일별 폴더 분류"""
-import os, json, re
+"""YouTube 자동 업로드 + 제목/설명 자동 생성 + 스타일별 폴더 분류 + 배경 자동 생성"""
+import os, json, re, random, math
 
 # ============================================================
 # 1) 스타일 감지 및 폴더 분류
@@ -11,7 +11,10 @@ STYLE_KEYWORDS = {
         "folder": "LoFi",
         "tags": ["lofi", "lo-fi hip hop", "study music", "chill beats", "relaxing"],
         "category": "10",
-        "playlist": "📚 Study Music",  # 유튜브 재생목록 이름
+        "playlist": "📚 Study Music",
+        "bg_colors": [(25, 20, 40), (45, 30, 60)],     # 보라-남색 야경
+        "accent": (200, 160, 255),                       # 연보라
+        "text_color": "#c8a0ff",
     },
     "sleep": {
         "keywords": ["sleep", "ambient", "drone", "healing", "asmr", "deep sleep"],
@@ -19,6 +22,9 @@ STYLE_KEYWORDS = {
         "tags": ["sleep music", "ambient", "relaxing", "deep sleep", "calm"],
         "category": "10",
         "playlist": "🌙 Sleep Music",
+        "bg_colors": [(5, 5, 25), (10, 15, 40)],        # 깊은 남색 밤하늘
+        "accent": (100, 140, 220),                        # 은은한 파랑
+        "text_color": "#80b0ff",
     },
     "rain": {
         "keywords": ["rain", "nature", "thunder", "ocean", "wave", "forest", "wind"],
@@ -26,6 +32,9 @@ STYLE_KEYWORDS = {
         "tags": ["rain sounds", "nature music", "sleep sounds", "relaxing rain"],
         "category": "10",
         "playlist": "🌧️ Rain Sounds",
+        "bg_colors": [(15, 20, 25), (25, 35, 45)],      # 어두운 청회색
+        "accent": (120, 170, 190),                        # 비 오는 느낌
+        "text_color": "#90c0d0",
     },
     "meditation": {
         "keywords": ["meditation", "yoga", "mindful", "calm", "zen", "relax", "peaceful"],
@@ -33,6 +42,9 @@ STYLE_KEYWORDS = {
         "tags": ["meditation music", "yoga music", "mindfulness", "relaxing"],
         "category": "10",
         "playlist": "🧘 Meditation",
+        "bg_colors": [(10, 20, 15), (20, 40, 30)],      # 깊은 숲 초록
+        "accent": (100, 190, 140),                        # 연초록
+        "text_color": "#70c090",
     },
     "jazz": {
         "keywords": ["jazz", "bossa", "swing", "cafe", "saxophone", "smooth jazz", "coffee"],
@@ -40,6 +52,9 @@ STYLE_KEYWORDS = {
         "tags": ["jazz", "cafe music", "smooth jazz", "bossa nova", "relaxing jazz"],
         "category": "10",
         "playlist": "☕ Cafe BGM",
+        "bg_colors": [(30, 18, 10), (50, 30, 15)],      # 따뜻한 갈색 카페
+        "accent": (210, 170, 100),                        # 골드
+        "text_color": "#d4aa64",
     },
     "study": {
         "keywords": ["study", "focus", "concentrate", "productive", "work"],
@@ -47,6 +62,9 @@ STYLE_KEYWORDS = {
         "tags": ["study music", "focus music", "concentration", "productivity"],
         "category": "10",
         "playlist": "📚 Study Music",
+        "bg_colors": [(15, 15, 30), (25, 25, 50)],      # 차분한 남색
+        "accent": (150, 180, 255),                        # 연파랑
+        "text_color": "#a0b8ff",
     },
     "classical": {
         "keywords": ["classical", "piano", "orchestra", "symphony", "sonata", "chopin", "beethoven", "mozart"],
@@ -54,6 +72,9 @@ STYLE_KEYWORDS = {
         "tags": ["classical music", "piano", "classical piano", "orchestra", "relaxing classical"],
         "category": "10",
         "playlist": "📚 Study Music",
+        "bg_colors": [(10, 10, 15), (20, 18, 25)],      # 고급스러운 검정
+        "accent": (220, 200, 160),                        # 크림 골드
+        "text_color": "#e0d0a0",
     },
     "electronic": {
         "keywords": ["edm", "electronic", "synth", "synthwave", "retrowave", "techno", "house", "trance"],
@@ -61,6 +82,9 @@ STYLE_KEYWORDS = {
         "tags": ["electronic music", "synthwave", "EDM", "electronic", "synth"],
         "category": "10",
         "playlist": "🎵 AI 작사작곡",
+        "bg_colors": [(10, 5, 20), (30, 10, 50)],       # 네온 보라
+        "accent": (255, 50, 200),                         # 핑크 네온
+        "text_color": "#ff40c8",
     },
     "pop": {
         "keywords": ["pop", "kpop", "k-pop", "ballad"],
@@ -68,6 +92,9 @@ STYLE_KEYWORDS = {
         "tags": ["pop music", "pop", "ballad", "music playlist"],
         "category": "10",
         "playlist": "🎵 AI 작사작곡",
+        "bg_colors": [(20, 10, 25), (40, 15, 45)],      # 핑크-보라
+        "accent": (255, 120, 180),                        # 핑크
+        "text_color": "#ff80b8",
     },
     },
     "classical": {
@@ -95,7 +122,147 @@ DEFAULT_STYLE = {
     "tags": ["playlist", "music", "relaxing", "background music"],
     "category": "10",
     "playlist": "🎵 AI 작사작곡",
+    "bg_colors": [(13, 13, 13), (25, 25, 30)],
+    "accent": (200, 200, 200),
+    "text_color": "#ffffff",
 }
+
+# ============================================================
+# 1.5) 스타일별 배경 자동 생성
+# ============================================================
+
+def generate_background(style_name, style_info, save_path, W=2112, H=1188):
+    """스타일에 맞는 배경 이미지 자동 생성 (줌 효과 대비 약간 크게)"""
+    from PIL import Image, ImageDraw
+
+    bg1, bg2 = style_info.get("bg_colors", [(13, 13, 13), (25, 25, 30)])
+    accent = style_info.get("accent", (200, 200, 200))
+
+    img = Image.new("RGB", (W, H), bg1)
+    draw = ImageDraw.Draw(img)
+
+    # 그라데이션 배경
+    for y in range(H):
+        ratio = y / H
+        r = int(bg1[0] + (bg2[0] - bg1[0]) * ratio)
+        g = int(bg1[1] + (bg2[1] - bg1[1]) * ratio)
+        b = int(bg1[2] + (bg2[2] - bg1[2]) * ratio)
+        draw.line([(0, y), (W, y)], fill=(r, g, b))
+
+    # 스타일별 장식 요소
+    random.seed(42)  # 일관된 패턴을 위해 시드 고정
+
+    if style_name in ("sleep", "lofi", "study", "classical"):
+        # 별/빛 점 효과
+        for _ in range(120):
+            x = random.randint(0, W)
+            y = random.randint(0, H)
+            sz = random.uniform(0.5, 2.5)
+            brightness = random.uniform(0.2, 0.7)
+            cr = int(accent[0] * brightness)
+            cg = int(accent[1] * brightness)
+            cb = int(accent[2] * brightness)
+            draw.ellipse([x-sz, y-sz, x+sz, y+sz], fill=(cr, cg, cb))
+
+    elif style_name == "rain":
+        # 빗줄기 효과
+        for _ in range(80):
+            x = random.randint(0, W)
+            y = random.randint(0, H)
+            length = random.randint(20, 80)
+            brightness = random.uniform(0.1, 0.3)
+            cr = int(accent[0] * brightness)
+            cg = int(accent[1] * brightness)
+            cb = int(accent[2] * brightness)
+            draw.line([(x, y), (x - 3, y + length)], fill=(cr, cg, cb), width=1)
+
+    elif style_name == "meditation":
+        # 원형 만다라 패턴
+        cx, cy = W // 2, H // 2
+        for i in range(8):
+            radius = 150 + i * 60
+            brightness = 0.08 + 0.03 * (8 - i) / 8
+            cr = int(accent[0] * brightness)
+            cg = int(accent[1] * brightness)
+            cb = int(accent[2] * brightness)
+            draw.ellipse([cx - radius, cy - radius, cx + radius, cy + radius],
+                        outline=(cr, cg, cb), width=1)
+
+    elif style_name == "jazz":
+        # 따뜻한 보케 원 (카페 조명 느낌)
+        for _ in range(25):
+            x = random.randint(0, W)
+            y = random.randint(0, H)
+            sz = random.randint(30, 100)
+            brightness = random.uniform(0.03, 0.08)
+            cr = int(accent[0] * brightness)
+            cg = int(accent[1] * brightness)
+            cb = int(accent[2] * brightness)
+            draw.ellipse([x-sz, y-sz, x+sz, y+sz], fill=(cr, cg, cb))
+
+    elif style_name == "electronic":
+        # 네온 라인 그리드
+        for x in range(0, W, 80):
+            brightness = random.uniform(0.05, 0.15)
+            cr = int(accent[0] * brightness)
+            cg = int(accent[1] * brightness)
+            cb = int(accent[2] * brightness)
+            draw.line([(x, 0), (x, H)], fill=(cr, cg, cb), width=1)
+        for y in range(0, H, 80):
+            brightness = random.uniform(0.05, 0.15)
+            cr = int(accent[0] * brightness)
+            cg = int(accent[1] * brightness)
+            cb = int(accent[2] * brightness)
+            draw.line([(0, y), (W, y)], fill=(cr, cg, cb), width=1)
+
+    elif style_name == "pop":
+        # 큰 보케 원 + 작은 반짝이
+        for _ in range(15):
+            x = random.randint(0, W)
+            y = random.randint(0, H)
+            sz = random.randint(50, 150)
+            brightness = random.uniform(0.03, 0.06)
+            cr = int(accent[0] * brightness)
+            cg = int(accent[1] * brightness)
+            cb = int(accent[2] * brightness)
+            draw.ellipse([x-sz, y-sz, x+sz, y+sz], fill=(cr, cg, cb))
+        for _ in range(80):
+            x = random.randint(0, W)
+            y = random.randint(0, H)
+            sz = random.uniform(1, 3)
+            brightness = random.uniform(0.3, 0.8)
+            cr = int(accent[0] * brightness)
+            cg = int(accent[1] * brightness)
+            cb = int(accent[2] * brightness)
+            draw.ellipse([x-sz, y-sz, x+sz, y+sz], fill=(cr, cg, cb))
+
+    else:
+        # 기본: 은은한 별
+        for _ in range(60):
+            x = random.randint(0, W)
+            y = random.randint(0, H)
+            sz = random.uniform(0.5, 2)
+            brightness = random.uniform(0.2, 0.5)
+            cr = int(accent[0] * brightness)
+            cg = int(accent[1] * brightness)
+            cb = int(accent[2] * brightness)
+            draw.ellipse([x-sz, y-sz, x+sz, y+sz], fill=(cr, cg, cb))
+
+    # 중앙부 비네팅 (가장자리 어둡게)
+    vignette = Image.new("RGB", (W, H), (0, 0, 0))
+    vdraw = ImageDraw.Draw(vignette)
+    for i in range(40):
+        ratio = i / 40
+        alpha = int(255 * (1 - ratio) * 0.4)
+        margin = int(min(W, H) * ratio * 0.5)
+        vdraw.rectangle(
+            [margin, margin, W - margin, H - margin],
+            outline=(alpha, alpha, alpha)
+        )
+
+    img.save(save_path, quality=95)
+    print(f"[정보] 배경 자동 생성: {save_path} (스타일: {style_name})")
+    return save_path
 
 def detect_style(filename, metadata=None):
     """파일명과 메타데이터에서 음악 스타일을 감지"""

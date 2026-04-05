@@ -192,7 +192,7 @@ def process_mp3(mp3_path):
         frames_dir = os.path.join(tmp_dir, "frames")
         color_tuple = parse_color(DEFAULT_COLOR)
 
-        # 배경 이미지: music_drop 폴더에 bg.png/bg.jpg가 있으면 사용
+        # 배경 이미지: music_drop 폴더에 bg.png/bg.jpg가 있으면 사용, 없으면 자동 생성
         bg_src = None
         for ext in [".png", ".jpg", ".jpeg", ".webp"]:
             bg_check = os.path.join(WATCH_DIR, f"bg{ext}")
@@ -202,6 +202,16 @@ def process_mp3(mp3_path):
                 bg_src = bg_copy
                 log.info(f"배경 이미지 사용: {bg_check}")
                 break
+
+        # 배경 없으면 스타일에 맞게 자동 생성
+        if bg_src is None:
+            from youtube_uploader import generate_background
+            bg_src = os.path.join(tmp_dir, f"auto_bg_{style_name}.png")
+            generate_background(style_name, style_info, bg_src)
+            log.info(f"배경 자동 생성: {style_name} 스타일")
+
+        # 스타일에 맞는 텍스트 색상
+        color_tuple = parse_color(style_info.get("text_color", DEFAULT_COLOR))
 
         # 오디오 분석은 원본 MP3로 (루프 전 원본이 더 빠름)
         duration = get_duration(loop_mp3_path) or target_sec
