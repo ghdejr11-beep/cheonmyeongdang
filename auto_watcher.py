@@ -1,10 +1,8 @@
-"""
-폴더 감시 자동 실행기
-C:\Users\쿤\Desktop\music_drop 폴더에 MP3를 넣으면
-→ 12시간 루프 → 애니메이션 MP4 → 스타일 폴더 분류 → YouTube 자동 업로드
+# 폴더 감시 자동 실행기
+# music_drop 폴더에 MP3를 넣으면
+# 12시간 루프 -> 애니메이션 MP4 -> 스타일 폴더 분류 -> YouTube 자동 업로드
+# 사용법: 더블클릭으로 실행하면 백그라운드에서 폴더를 계속 감시합니다.
 
-사용법: 더블클릭으로 실행하면 백그라운드에서 폴더를 계속 감시합니다.
-"""
 import os, sys, time, shutil, threading, logging
 from datetime import datetime
 
