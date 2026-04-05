@@ -2,6 +2,10 @@ import gradio as gr
 import os, shutil, subprocess, tempfile, json, random, math, struct, wave
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from youtube_uploader import (
+    detect_style, get_style_folder, read_mp3_metadata,
+    generate_title, generate_description, upload_to_youtube
+)
 
 OUTPUT_DIR = os.path.join(os.path.expanduser("~"), "Desktop", "playlist_output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -543,8 +547,102 @@ def run_all(mp3_files, hours, bg, color, progress=gr.Progress(), slot=0):
 def run_all_1(f, h, bg, c, progress=gr.Progress()): return run_all(f, h, bg, c, progress, slot=1)
 def run_all_2(f, h, bg, c, progress=gr.Progress()): return run_all(f, h, bg, c, progress, slot=2)
 
+# ============================================================
+# 전체 자동화: MP3 → 12시간 루프 → 영상 → 스타일 폴더 분류 → YouTube 업로드
+# ============================================================
+
+def full_auto(mp3_files, hours, bg, color, privacy, progress=gr.Progress()):
+    """MP3 → 루프 → 영상 → 스타일 폴더 분류 → YouTube 업로드"""
+    if not mp3_files:
+        return None, "MP3 파일을 선택해주세요.", "", ""
+
+    # MP3 경로
+    mp3_src = mp3_files[0].name if hasattr(mp3_files[0], 'name') else str(mp3_files[0])
+
+    # 1단계: 스타일 감지
+    progress(0.02, desc="스타일 분석 중..")
+    metadata = read_mp3_metadata(mp3_src)
+    style_name, style_info = detect_style(os.path.basename(mp3_src), metadata)
+    style_folder = get_style_folder(OUTPUT_DIR, style_info)
+    print(f"[정보] 감지된 스타일: {style_name} → 폴더: {style_folder}")
+
+    # 2단계: 제목/설명 자동 생성
+    auto_title = generate_title(style_name, metadata, hours)
+    auto_desc = generate_description(style_name, style_info, metadata, hours)
+    tags = style_info.get("tags", [])
+
+    # 3단계: MP3 루프
+    progress(0.05, desc="1단계: MP3 루프 중..")
+    loop_result, loop_msg = loop_mp3(mp3_files, hours, progress)
+    if not loop_result:
+        return None, f"루프 실패:\n{loop_msg}", auto_title, auto_desc
+
+    class FakeFile:
+        def __init__(self, p): self.name = p
+
+    bg_safe = None
+    if bg is not None:
+        bp = bg.name if hasattr(bg, 'name') else str(bg)
+        if bp and os.path.exists(bp):
+            ext = os.path.splitext(bp)[1] or ".png"
+            bc = os.path.join(get_tmp(), f"bg_auto{ext}")
+            shutil.copy2(bp, bc)
+            bg_safe = FakeFile(bc)
+
+    # 4단계: 영상 생성
+    progress(0.5, desc="2단계: 애니메이션 MP4 생성 중..")
+    video_result, video_msg = make_video(FakeFile(loop_result), bg_safe, color, progress, slot=0)
+    if not video_result:
+        return None, f"영상 생성 실패:\n{video_msg}", auto_title, auto_desc
+
+    # 5단계: 스타일 폴더로 복사
+    video_name = os.path.basename(video_result)
+    style_video_path = unique_path(os.path.join(style_folder, video_name))
+    shutil.copy2(video_result, style_video_path)
+    print(f"[정보] 스타일 폴더로 복사: {style_video_path}")
+
+    # 6단계: YouTube 업로드
+    progress(0.9, desc="3단계: YouTube 업로드 중..")
+    upload_ok, upload_msg = upload_to_youtube(
+        style_video_path, auto_title, auto_desc, tags,
+        category=style_info.get("category", "10"),
+        privacy=privacy
+    )
+
+    progress(1.0)
+    status = (
+        f"스타일: {style_name}\n"
+        f"폴더: {style_folder}\n\n"
+        f"[1단계 MP3 루프]\n{loop_msg}\n\n"
+        f"[2단계 영상]\n{video_msg}\n\n"
+        f"[3단계 업로드]\n{upload_msg}"
+    )
+    return style_video_path, status, auto_title, auto_desc
+
 with gr.Blocks(title="Playlist Maker") as app:
-    gr.Markdown(f"# Playlist Maker\n애니메이션 효과 포함 | 2개 병렬처리 | 폴더: `{OUTPUT_DIR}`")
+    gr.Markdown(f"# Playlist Maker\n애니메이션 + YouTube 자동 업로드 + 스타일 폴더 분류 | 폴더: `{OUTPUT_DIR}`")
+
+    with gr.Tab("전체 자동화 (추천)"):
+        gr.Markdown("### MP3 넣으면 → 12시간 루프 → 애니메이션 영상 → 스타일별 폴더 분류 → YouTube 업로드")
+        with gr.Row():
+            with gr.Column():
+                auto_mp3 = gr.File(label="MP3 파일", file_types=[".mp3"], file_count="multiple")
+                auto_hours = gr.Slider(1, 12, value=12, step=0.5, label="목표 시간")
+                auto_bg = gr.File(label="배경 사진 (선택)", file_types=["image"])
+                auto_color = gr.ColorPicker(label="텍스트 색상", value="#ffffff")
+                auto_privacy = gr.Radio(
+                    choices=["public", "unlisted", "private"],
+                    value="public", label="공개 설정"
+                )
+                auto_btn = gr.Button("전체 자동 실행", variant="primary", size="lg")
+            with gr.Column():
+                auto_title_box = gr.Textbox(label="자동 생성된 제목 (수정 가능)", lines=2)
+                auto_desc_box = gr.Textbox(label="자동 생성된 설명 (수정 가능)", lines=8)
+                auto_status = gr.Textbox(label="상태", lines=8)
+                auto_out = gr.File(label="완성된 MP4")
+        auto_btn.click(full_auto,
+                       [auto_mp3, auto_hours, auto_bg, auto_color, auto_privacy],
+                       [auto_out, auto_status, auto_title_box, auto_desc_box])
 
     with gr.Tab("MP3 루프 만들기"):
         with gr.Row():
