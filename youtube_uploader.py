@@ -10,19 +10,65 @@ STYLE_KEYWORDS = {
         "keywords": ["lofi", "lo-fi", "lo fi", "chillhop", "study beat", "homework"],
         "folder": "LoFi",
         "tags": ["lofi", "lo-fi hip hop", "study music", "chill beats", "relaxing"],
-        "category": "10",  # YouTube Music category
+        "category": "10",
+        "playlist": "📚 Study Music",  # 유튜브 재생목록 이름
     },
     "sleep": {
-        "keywords": ["sleep", "ambient", "drone", "meditation", "calm", "relax", "healing", "asmr", "rain", "nature"],
+        "keywords": ["sleep", "ambient", "drone", "healing", "asmr", "deep sleep"],
         "folder": "Sleep_Ambient",
-        "tags": ["sleep music", "ambient", "relaxing", "meditation", "deep sleep", "calm"],
+        "tags": ["sleep music", "ambient", "relaxing", "deep sleep", "calm"],
         "category": "10",
+        "playlist": "🌙 Sleep Music",
+    },
+    "rain": {
+        "keywords": ["rain", "nature", "thunder", "ocean", "wave", "forest", "wind"],
+        "folder": "Rain_Nature",
+        "tags": ["rain sounds", "nature music", "sleep sounds", "relaxing rain"],
+        "category": "10",
+        "playlist": "🌧️ Rain Sounds",
+    },
+    "meditation": {
+        "keywords": ["meditation", "yoga", "mindful", "calm", "zen", "relax", "peaceful"],
+        "folder": "Meditation",
+        "tags": ["meditation music", "yoga music", "mindfulness", "relaxing"],
+        "category": "10",
+        "playlist": "🧘 Meditation",
     },
     "jazz": {
-        "keywords": ["jazz", "bossa", "swing", "cafe", "saxophone", "smooth jazz"],
+        "keywords": ["jazz", "bossa", "swing", "cafe", "saxophone", "smooth jazz", "coffee"],
         "folder": "Jazz_Cafe",
         "tags": ["jazz", "cafe music", "smooth jazz", "bossa nova", "relaxing jazz"],
         "category": "10",
+        "playlist": "☕ Cafe BGM",
+    },
+    "study": {
+        "keywords": ["study", "focus", "concentrate", "productive", "work"],
+        "folder": "Study",
+        "tags": ["study music", "focus music", "concentration", "productivity"],
+        "category": "10",
+        "playlist": "📚 Study Music",
+    },
+    "classical": {
+        "keywords": ["classical", "piano", "orchestra", "symphony", "sonata", "chopin", "beethoven", "mozart"],
+        "folder": "Classical",
+        "tags": ["classical music", "piano", "classical piano", "orchestra", "relaxing classical"],
+        "category": "10",
+        "playlist": "📚 Study Music",
+    },
+    "electronic": {
+        "keywords": ["edm", "electronic", "synth", "synthwave", "retrowave", "techno", "house", "trance"],
+        "folder": "Electronic",
+        "tags": ["electronic music", "synthwave", "EDM", "electronic", "synth"],
+        "category": "10",
+        "playlist": "🎵 AI 작사작곡",
+    },
+    "pop": {
+        "keywords": ["pop", "kpop", "k-pop", "ballad"],
+        "folder": "Pop",
+        "tags": ["pop music", "pop", "ballad", "music playlist"],
+        "category": "10",
+        "playlist": "🎵 AI 작사작곡",
+    },
     },
     "classical": {
         "keywords": ["classical", "piano", "orchestra", "symphony", "sonata", "chopin", "beethoven", "mozart"],
@@ -48,6 +94,7 @@ DEFAULT_STYLE = {
     "folder": "General",
     "tags": ["playlist", "music", "relaxing", "background music"],
     "category": "10",
+    "playlist": "🎵 AI 작사작곡",
 }
 
 def detect_style(filename, metadata=None):
@@ -200,7 +247,8 @@ def get_youtube_service():
     except ImportError:
         return None, "필요한 라이브러리 설치 필요!\n아래 명령어를 실행하세요:\npip install google-auth google-auth-oauthlib google-api-python-client"
 
-    SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
+    SCOPES = ["https://www.googleapis.com/auth/youtube.upload",
+              "https://www.googleapis.com/auth/youtube"]
     creds = None
 
     # 저장된 토큰이 있으면 재사용
@@ -235,8 +283,44 @@ def get_youtube_service():
     except Exception as e:
         return None, f"YouTube 서비스 생성 실패: {e}"
 
-def upload_to_youtube(video_path, title, description, tags, category="10", privacy="public"):
-    """MP4 파일을 YouTube에 업로드"""
+def find_playlist_id(service, playlist_name):
+    """유튜브 재생목록 이름으로 ID 검색"""
+    try:
+        request = service.playlists().list(
+            part="snippet",
+            mine=True,
+            maxResults=50
+        )
+        response = request.execute()
+
+        for item in response.get("items", []):
+            if item["snippet"]["title"] == playlist_name:
+                return item["id"]
+    except Exception as e:
+        print(f"[경고] 재생목록 검색 실패: {e}")
+    return None
+
+def add_to_playlist(service, playlist_id, video_id):
+    """업로드된 동영상을 재생목록에 추가"""
+    try:
+        service.playlistItems().insert(
+            part="snippet",
+            body={
+                "snippet": {
+                    "playlistId": playlist_id,
+                    "resourceId": {
+                        "kind": "youtube#video",
+                        "videoId": video_id,
+                    }
+                }
+            }
+        ).execute()
+        return True, "재생목록 추가 성공!"
+    except Exception as e:
+        return False, f"재생목록 추가 실패: {e}"
+
+def upload_to_youtube(video_path, title, description, tags, category="10", privacy="public", playlist_name=""):
+    """MP4 파일을 YouTube에 업로드 후 재생목록에 자동 추가"""
     try:
         from googleapiclient.http import MediaFileUpload
     except ImportError:
@@ -248,14 +332,14 @@ def upload_to_youtube(video_path, title, description, tags, category="10", priva
 
     body = {
         "snippet": {
-            "title": title[:100],  # YouTube 제목 최대 100자
+            "title": title[:100],
             "description": description[:5000],
-            "tags": tags[:30],  # 최대 30개 태그
+            "tags": tags[:30],
             "categoryId": category,
             "defaultLanguage": "en",
         },
         "status": {
-            "privacyStatus": privacy,  # public, unlisted, private
+            "privacyStatus": privacy,
             "selfDeclaredMadeForKids": False,
         },
     }
@@ -264,7 +348,7 @@ def upload_to_youtube(video_path, title, description, tags, category="10", priva
         video_path,
         mimetype="video/mp4",
         resumable=True,
-        chunksize=10 * 1024 * 1024,  # 10MB 청크
+        chunksize=10 * 1024 * 1024,
     )
 
     try:
@@ -280,7 +364,18 @@ def upload_to_youtube(video_path, title, description, tags, category="10", priva
 
         video_id = response.get("id", "")
         video_url = f"https://youtube.com/watch?v={video_id}"
-        return True, f"업로드 성공!\nURL: {video_url}"
+        result_msg = f"업로드 성공!\nURL: {video_url}"
+
+        # 재생목록에 자동 추가
+        if playlist_name:
+            playlist_id = find_playlist_id(service, playlist_name)
+            if playlist_id:
+                pl_ok, pl_msg = add_to_playlist(service, playlist_id, video_id)
+                result_msg += f"\n재생목록 '{playlist_name}'에 추가 완료!"
+            else:
+                result_msg += f"\n[경고] 재생목록 '{playlist_name}'을 찾을 수 없습니다"
+
+        return True, result_msg
 
     except Exception as e:
         return False, f"업로드 실패: {e}"

@@ -603,10 +603,12 @@ def full_auto(mp3_files, hours, bg, color, privacy, progress=gr.Progress()):
 
     # 6단계: YouTube 업로드
     progress(0.9, desc="3단계: YouTube 업로드 중..")
+    playlist_name = style_info.get("playlist", "")
     upload_ok, upload_msg = upload_to_youtube(
         style_video_path, auto_title, auto_desc, tags,
         category=style_info.get("category", "10"),
-        privacy=privacy
+        privacy=privacy,
+        playlist_name=playlist_name
     )
 
     progress(1.0)
