@@ -96,25 +96,6 @@ STYLE_KEYWORDS = {
         "accent": (255, 120, 180),                        # 핑크
         "text_color": "#ff80b8",
     },
-    },
-    "classical": {
-        "keywords": ["classical", "piano", "orchestra", "symphony", "sonata", "chopin", "beethoven", "mozart"],
-        "folder": "Classical",
-        "tags": ["classical music", "piano", "classical piano", "orchestra", "relaxing classical"],
-        "category": "10",
-    },
-    "electronic": {
-        "keywords": ["edm", "electronic", "synth", "synthwave", "retrowave", "techno", "house", "trance"],
-        "folder": "Electronic",
-        "tags": ["electronic music", "synthwave", "EDM", "electronic", "synth"],
-        "category": "10",
-    },
-    "pop": {
-        "keywords": ["pop", "kpop", "k-pop", "ballad"],
-        "folder": "Pop",
-        "tags": ["pop music", "pop", "ballad", "music playlist"],
-        "category": "10",
-    },
 }
 
 DEFAULT_STYLE = {
