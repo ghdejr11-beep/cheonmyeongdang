@@ -496,12 +496,9 @@
 
   /* PALM THUMBNAILS */
   .palm-thumb-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; justify-content: center; }
-  .palm-thumb { width: 75px; height: 80px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; background-image: url('palm-canva.png'); background-size: 280% auto; background-position: center 58%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 3px; position: relative; overflow: hidden; }
-  .palm-thumb::before { content:''; position:absolute; inset:0; background:rgba(8,10,16,0.25); transition:background 0.2s; }
-  .palm-thumb:hover { border-color: rgba(201,168,76,0.5); transform: translateY(-2px); }
-  .palm-thumb:hover::before { background:rgba(8,10,16,0.2); }
-  .palm-thumb.selected { border-color: var(--gold); box-shadow: 0 0 12px rgba(201,168,76,0.3); }
-  .palm-thumb.selected::before { background:rgba(8,10,16,0.15); }
+  .palm-thumb { width: 75px; height: 80px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; background: rgba(255,255,255,0.04); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 3px; position: relative; overflow: hidden; }
+  .palm-thumb:hover { border-color: rgba(201,168,76,0.5); transform: translateY(-2px); background: rgba(255,255,255,0.07); }
+  .palm-thumb.selected { border-color: var(--gold); box-shadow: 0 0 12px rgba(201,168,76,0.3); background: rgba(201,168,76,0.08); }
   .palm-thumb svg { flex: 1; position:relative; z-index:1; }
   .palm-thumb-label { font-size: 9px; color: var(--gold3); text-align: center; margin-top: 2px; white-space: nowrap; position:relative; z-index:1; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
 
@@ -1384,18 +1381,51 @@
   <div class="section-inner">
     <!-- Palm line illustration -->
     <div class="palm-svg-wrap">
-      <div class="palm-img-container" style="max-width:750px;margin:0 auto;position:relative;">
-        <img src="palm-canva.png" alt="손금 안내도" style="display:block;width:100%;border-radius:12px;object-fit:cover;object-position:top;max-height:700px;">
-        <svg class="palm-highlight-overlay" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMin slice" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-          <!-- 생명선 Life Line - 엄지와 검지 사이에서 시작, 엄지 둘레를 감싸며 손목 방향으로 내려감 -->
-          <path id="palm-overlay-life_line" d="M 340,380 C 320,420 295,470 280,520 Q 265,580 265,640 Q 268,700 285,750" stroke="#ff4444" stroke-width="6" fill="none" stroke-linecap="round"/>
-          <!-- 감정선 Heart Line - 새끼손가락 아래에서 시작, 검지 방향으로 가로질러 곡선 -->
-          <path id="palm-overlay-heart_line" d="M 580,400 C 530,380 470,370 410,375 Q 350,380 300,395 Q 270,405 250,420" stroke="#ff69b4" stroke-width="6" fill="none" stroke-linecap="round"/>
-          <!-- 두뇌선 Head Line - 엄지와 검지 사이에서 시작, 손바닥 가로질러 수평으로 -->
-          <path id="palm-overlay-head_line" d="M 290,430 C 340,440 400,450 460,455 Q 520,458 570,470" stroke="#4488ff" stroke-width="6" fill="none" stroke-linecap="round"/>
-          <!-- 운명선 Fate Line - 손목에서 시작, 중지 방향으로 세로로 올라감 -->
-          <path id="palm-overlay-fate_line" d="M 400,780 C 398,720 395,650 393,580 Q 390,510 388,450 Q 386,400 385,350" stroke="#9966CC" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="10,5"/>
+      <div class="palm-img-container" style="max-width:700px;margin:0 auto;position:relative;">
+        <img src="palm-canva.png" alt="손금 안내도" style="display:block;width:100%;border-radius:12px;">
+        <!-- SVG 오버레이 - 실제 손금 선을 그려서 보여줌 -->
+        <svg id="palm-lines-svg" class="palm-highlight-overlay" viewBox="0 0 800 1100" preserveAspectRatio="xMidYMid meet" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
+          <defs>
+            <filter id="palmGlow">
+              <feGaussianBlur stdDeviation="4" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- 감정선 Heart Line: 소지 아래에서 검지 아래로 가로 곡선 (최상단 주름) -->
+          <path id="palm-line-heart_line" d="M 575,440 Q 490,400 420,405 Q 350,395 280,388" stroke="#ff69b4" stroke-width="5" fill="none" stroke-linecap="round" opacity="0" filter="url(#palmGlow)"/>
+          <!-- 두뇌선 Head Line: 엄지-검지 사이에서 소지 방향으로 가로 (중간 주름, 약간 아래로 기울어짐) -->
+          <path id="palm-line-head_line" d="M 275,468 Q 360,480 420,500 Q 490,515 560,530" stroke="#4488ff" stroke-width="5" fill="none" stroke-linecap="round" opacity="0" filter="url(#palmGlow)"/>
+          <!-- 생명선 Life Line: 엄지-검지 사이에서 시작, 엄지 둘레를 C자로 감싸며 아래로 (오른쪽으로 휘어짐) -->
+          <path id="palm-line-life_line" d="M 280,455 Q 310,530 330,600 Q 350,700 370,780 Q 380,820 378,845" stroke="#ff4444" stroke-width="5" fill="none" stroke-linecap="round" opacity="0" filter="url(#palmGlow)"/>
+          <!-- 운명선 Fate Line: 손목 중앙에서 중지 방향으로 세로 -->
+          <path id="palm-line-fate_line" d="M 400,855 Q 395,740 392,640 Q 388,540 385,435" stroke="#9966CC" stroke-width="4" fill="none" stroke-linecap="round" opacity="0" filter="url(#palmGlow)" stroke-dasharray="8,5"/>
         </svg>
+        <!-- 라벨 -->
+        <div id="palm-line-indicator" style="display:none;position:absolute;top:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.85);padding:10px 24px;border-radius:10px;border:2px solid;font-family:'Noto Serif KR',serif;font-size:1.2rem;font-weight:700;text-align:center;pointer-events:none;z-index:5;">
+        </div>
+      </div>
+
+      <!-- 손금 사진 업로드 비교 -->
+      <div style="max-width:600px;margin:30px auto 0;text-align:center;">
+        <h3 style="font-family:'Noto Serif KR',serif;color:var(--jade);font-size:1.1rem;margin-bottom:12px;">📷 내 손금 사진으로 비교하기</h3>
+        <p style="font-size:0.8rem;color:var(--text2);margin-bottom:16px;">손바닥 사진을 올리면 위 참고 이미지와 비교할 수 있습니다<br>📌 사진은 서버에 저장되지 않습니다</p>
+        <label style="display:inline-block;padding:12px 28px;background:rgba(74,158,142,0.15);border:2px dashed var(--jade);border-radius:10px;cursor:pointer;color:var(--jade);font-weight:600;transition:all 0.2s;" onmouseover="this.style.background='rgba(74,158,142,0.25)'" onmouseout="this.style.background='rgba(74,158,142,0.15)'">
+          📸 손바닥 사진 업로드
+          <input type="file" accept="image/*" capture="environment" style="display:none;" onchange="showPalmPhoto(this)">
+        </label>
+        <div id="palm-photo-result" style="display:none;margin-top:20px;">
+          <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;justify-content:center;">
+            <div style="text-align:center;">
+              <div style="font-size:0.8rem;color:var(--jade);margin-bottom:6px;">📖 참고 손금도</div>
+              <img src="palm-canva.png" style="width:250px;border-radius:10px;border:2px solid var(--jade);">
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:0.8rem;color:var(--gold2);margin-bottom:6px;">✋ 내 손바닥</div>
+              <img id="palm-user-photo" style="width:250px;border-radius:10px;border:2px solid var(--gold);">
+            </div>
+          </div>
+          <p style="margin-top:16px;font-size:0.82rem;color:var(--text2);line-height:1.8;">위 참고 이미지와 비교하여 자신의 손금 유형을 아래에서 선택해 주세요!</p>
+        </div>
       </div>
       <!-- OLD SVG REPLACED WITH CANVA IMAGE -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 550" width="320" style="display:none;">
@@ -3486,64 +3516,73 @@
     const container = document.getElementById('palm-selectors');
 
     const lines = [
-      { key: 'life_line', label: '생명선', section: 'main_lines' },
-      { key: 'head_line', label: '두뇌선', section: 'main_lines' },
-      { key: 'heart_line', label: '감정선', section: 'main_lines' },
-      { key: 'fate_line', label: '운명선', section: 'main_lines' },
+      { key: 'life_line', label: '생명선', color: '#ff4444', section: 'main_lines' },
+      { key: 'head_line', label: '두뇌선', color: '#4488ff', section: 'main_lines' },
+      { key: 'heart_line', label: '감정선', color: '#ff69b4', section: 'main_lines' },
+      { key: 'fate_line', label: '운명선', color: '#9966CC', section: 'main_lines' },
+      { key: 'hand_shape', label: '손 모양', color: '#90caf9', section: 'hand_shape' },
     ];
 
-    let html = '';
+    // 탭 버튼 생성
+    let tabsHtml = '<div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:16px;">';
+    lines.forEach((l, i) => {
+      tabsHtml += `<button onclick="togglePalmTab('${l.key}')" id="palm-tab-${l.key}" style="padding:8px 16px;border:2px solid ${l.color}44;background:transparent;color:${l.color};border-radius:20px;cursor:pointer;font-size:0.82rem;font-weight:700;font-family:'Noto Sans KR',sans-serif;transition:all 0.2s;" onmouseover="this.style.background='${l.color}22'" onmouseout="if(!this.classList.contains('active'))this.style.background='transparent'">${l.label}</button>`;
+    });
+    tabsHtml += '</div>';
+
+    // 각 카테고리별 카드 패널 (처음엔 숨김)
+    let panelsHtml = '';
     lines.forEach(l => {
-      const data = KD.palmistry[l.section]?.[l.key];
+      const isHandShape = l.key === 'hand_shape';
+      const data = isHandShape ? KD.palmistry.hand_shape : KD.palmistry[l.section]?.[l.key];
       if (!data || !data.types) return;
 
-      // Build thumbnail row
       let thumbsHtml = '<div class="palm-thumb-row">';
       Object.entries(data.types).forEach(([k, v]) => {
         const svgContent = buildPalmThumbSvg(l.key, k);
         thumbsHtml += `<div class="palm-thumb" data-value="${k}" onclick="selectPalmThumb('${l.key}','${k}','palm-${l.key}')">
           ${svgContent}
-          <span class="palm-thumb-label">${v.name}</span>
+          <span class="palm-thumb-label">${isHandShape ? v.name + ' (' + v.element + ')' : v.name}</span>
         </div>`;
       });
       thumbsHtml += '</div>';
 
-      const options = Object.entries(data.types).map(([k, v]) => `<option value="${k}">${v.name}</option>`).join('');
-      html += `<div class="form-group">
-        <label style="color:#90caf9;">${l.label}</label>
+      const options = Object.entries(data.types).map(([k, v]) => `<option value="${k}">${isHandShape ? v.name + ' (' + v.element + ')' : v.name}</option>`).join('');
+      panelsHtml += `<div id="palm-panel-${l.key}" style="display:none;">
+        <div style="text-align:center;font-size:0.85rem;color:${l.color};margin-bottom:10px;font-weight:600;">${l.label} 유형을 선택하세요</div>
         ${thumbsHtml}
-        <select id="palm-${l.key}" onchange="syncThumbFromDropdown(this,'${l.key}')">
+        <select id="palm-${l.key}" style="margin-top:8px;" onchange="syncThumbFromDropdown(this,'${l.key}')">
           <option value="">선택하세요</option>
           ${options}
         </select>
       </div>`;
     });
 
-    // Hand shape
-    if (KD.palmistry.hand_shape?.types) {
-      let thumbsHtml = '<div class="palm-thumb-row">';
-      Object.entries(KD.palmistry.hand_shape.types).forEach(([k, v]) => {
-        const svgContent = buildPalmThumbSvg('hand_shape', k);
-        thumbsHtml += `<div class="palm-thumb" data-value="${k}" onclick="selectPalmThumb('hand_shape','${k}','palm-hand_shape')">
-          ${svgContent}
-          <span class="palm-thumb-label">${v.name}</span>
-        </div>`;
-      });
-      thumbsHtml += '</div>';
+    // 선택 결과 표시 영역
+    panelsHtml += '<div id="palm-selection-summary" style="margin-top:12px;text-align:center;font-size:0.8rem;color:var(--text2);"></div>';
 
-      const options = Object.entries(KD.palmistry.hand_shape.types).map(([k, v]) => `<option value="${k}">${v.name} (${v.element})</option>`).join('');
-      html += `<div class="form-group">
-        <label style="color:#90caf9;">손 모양</label>
-        ${thumbsHtml}
-        <select id="palm-hand_shape" onchange="syncThumbFromDropdown(this,'hand_shape')">
-          <option value="">선택하세요</option>
-          ${options}
-        </select>
-      </div>`;
-    }
-
-    container.innerHTML = html;
+    container.innerHTML = tabsHtml + panelsHtml;
   }
+
+  // 탭 토글 함수
+  window.togglePalmTab = function(key) {
+    const lines = ['life_line','head_line','heart_line','fate_line','hand_shape'];
+    lines.forEach(k => {
+      var panel = document.getElementById('palm-panel-' + k);
+      var tab = document.getElementById('palm-tab-' + k);
+      if (k === key) {
+        var isOpen = panel.style.display !== 'none';
+        panel.style.display = isOpen ? 'none' : 'block';
+        if (tab) {
+          tab.classList.toggle('active', !isOpen);
+          tab.style.background = isOpen ? 'transparent' : tab.style.borderColor.replace('44','33');
+        }
+      } else {
+        if (panel) panel.style.display = 'none';
+        if (tab) { tab.classList.remove('active'); tab.style.background = 'transparent'; }
+      }
+    });
+  };
 
   window.selectPalmThumb = selectPalmThumb;
   window.syncThumbFromDropdown = syncThumbFromDropdown;
@@ -4309,20 +4348,130 @@
     el.querySelector('input[type="radio"]').checked = true;
   };
 
-  // === FIX 2: Palm line overlay highlighting ===
-  window.highlightPalmLine = function(lineKey) {
-    document.querySelectorAll('.palm-highlight-overlay path').forEach(p => p.classList.remove('active'));
-    const overlay = document.getElementById('palm-overlay-' + lineKey);
-    if (overlay) overlay.classList.add('active');
+  // === 손금 선 클릭 시 위 이미지에 표시 ===
+  const palmLineColors = {
+    life_line: {name: '생명선', color: '#ff4444', eng: 'Life Line'},
+    head_line: {name: '두뇌선', color: '#4488ff', eng: 'Head Line'},
+    heart_line: {name: '감정선', color: '#ff69b4', eng: 'Heart Line'},
+    fate_line: {name: '운명선', color: '#9966CC', eng: 'Fate Line'}
   };
 
-  // Patch selectPalmThumb to also highlight overlay
-  const origSelectPalmThumb = selectPalmThumb;
-  function patchedSelectPalmThumb(category, typeKey, selectId) {
-    origSelectPalmThumb(category, typeKey, selectId);
-    highlightPalmLine(category);
-  }
-  window.selectPalmThumb = patchedSelectPalmThumb;
+  // 각 유형별 SVG path 데이터 (800x1100 viewBox 기준, 실제 손 해부학 위치)
+  const palmOverlayPaths = {
+    life_line: {
+      long:    'M 280,455 Q 300,520 290,600 Q 275,700 270,800',
+      short:   'M 280,455 Q 295,510 290,570 Q 288,600 285,630',
+      thick:   'M 280,455 Q 300,520 290,600 Q 275,700 270,800',
+      thin:    'M 280,455 Q 300,520 290,600 Q 275,700 270,800',
+      broken:  'M 280,455 Q 295,510 290,570 M 285,620 Q 275,700 270,780',
+      forked:  'M 280,455 Q 300,520 290,600 Q 275,700 270,800 M 290,600 Q 310,680 330,740',
+      chained: 'M 280,455 Q 290,480 285,500 Q 280,520 285,540 Q 290,560 285,580 Q 278,610 280,640 Q 275,680 270,740',
+      double:  'M 280,455 Q 300,520 290,600 Q 275,700 270,800 M 300,465 Q 318,530 308,610 Q 293,710 288,800'
+    },
+    heart_line: {
+      long:       'M 560,445 Q 450,425 350,430 Q 260,440 200,455',
+      short:      'M 560,445 Q 480,432 420,435 Q 380,438 350,442',
+      curved:     'M 560,445 Q 450,405 350,400 Q 260,410 200,430',
+      straight:   'M 560,445 L 200,445',
+      broken:     'M 560,445 Q 490,432 440,435 M 380,438 Q 300,442 200,455',
+      forked_end: 'M 560,445 Q 450,425 350,430 Q 260,440 220,450 M 220,450 Q 195,430 180,410',
+      chained:    'M 560,445 Q 530,438 510,445 Q 490,435 470,445 Q 450,435 430,445 Q 410,435 390,445 Q 370,435 350,440 Q 300,445 250,450'
+    },
+    head_line: {
+      long:     'M 275,490 Q 370,500 450,510 Q 530,520 580,530',
+      short:    'M 275,490 Q 340,498 400,505 Q 430,508 450,510',
+      straight: 'M 275,490 L 570,490',
+      curved:   'M 275,490 Q 370,510 430,540 Q 490,570 540,600',
+      forked:   'M 275,490 Q 370,500 450,510 Q 510,518 550,525 M 450,510 Q 480,540 500,570',
+      broken:   'M 275,490 Q 340,498 390,505 M 440,510 Q 510,518 570,528',
+      double:   'M 275,490 Q 370,500 450,510 Q 530,520 580,530 M 275,505 Q 370,515 450,525 Q 530,535 580,545'
+    },
+    fate_line: {
+      clear:      'M 390,800 Q 388,700 386,600 Q 384,500 382,420',
+      faint:      'M 390,800 Q 388,700 386,600 Q 384,500 382,420',
+      broken:     'M 390,800 Q 389,730 388,660 M 386,580 Q 384,500 382,420',
+      absent:     '',
+      late_start: 'M 388,620 Q 386,550 384,480 Q 383,440 382,420',
+      forked:     'M 390,800 Q 388,700 386,600 Q 384,500 382,420 M 386,550 Q 400,490 420,440'
+    }
+  };
+
+  // 유형별 선 두께
+  const palmLineWidths = {
+    thick: 8, thin: 2, chained: 3, double: 4,
+    faint: 2
+  };
+
+  // selectPalmThumb을 패치해서 위 이미지에 유형별 SVG 선 표시
+  const _origPalmThumb = window.selectPalmThumb;
+  window.selectPalmThumb = function(category, typeKey, selectId) {
+    _origPalmThumb(category, typeKey, selectId);
+    const lineInfo = palmLineColors[category];
+    const indicator = document.getElementById('palm-line-indicator');
+
+    if (indicator && lineInfo) {
+      // 유형 이름 가져오기
+      var typeName = typeKey;
+      if (KD && KD.palmistry) {
+        var section = (category === 'hand_shape') ? 'hand_shape' : 'main_lines';
+        var data = KD.palmistry[section]?.[category];
+        if (data && data.types && data.types[typeKey]) typeName = data.types[typeKey].name;
+      }
+
+      // 라벨 표시
+      indicator.style.display = 'block';
+      indicator.style.borderColor = lineInfo.color;
+      indicator.style.color = lineInfo.color;
+      indicator.innerHTML = lineInfo.name + ' — ' + typeName + '<div style="font-size:0.7rem;color:#aaa;margin-top:4px;">' + lineInfo.eng + '</div>';
+
+      // SVG 선 업데이트: 해당 유형의 path로 교체
+      var svgEl = document.getElementById('palm-line-' + category);
+      if (svgEl && palmOverlayPaths[category] && palmOverlayPaths[category][typeKey]) {
+        var newPath = palmOverlayPaths[category][typeKey];
+        svgEl.setAttribute('d', newPath);
+        svgEl.style.strokeWidth = (palmLineWidths[typeKey] || 5) + '';
+        if (typeKey === 'faint') {
+          svgEl.setAttribute('stroke-dasharray', '6,4');
+          svgEl.style.opacity = '0.6';
+        } else if (typeKey === 'absent') {
+          svgEl.style.opacity = '0';
+        } else {
+          svgEl.removeAttribute('stroke-dasharray');
+          svgEl.style.opacity = '1';
+        }
+      }
+
+      // 다른 선들 숨기기
+      document.querySelectorAll('#palm-lines-svg path').forEach(p => {
+        if (p.id !== 'palm-line-' + category) {
+          p.style.transition = 'opacity 0.4s';
+          p.style.opacity = '0';
+        }
+      });
+
+      // 이미지로 스크롤
+      document.querySelector('.palm-img-container').scrollIntoView({behavior:'smooth', block:'center'});
+
+      // 8초 후 사라짐
+      clearTimeout(window._palmIndicatorTimer);
+      window._palmIndicatorTimer = setTimeout(() => {
+        indicator.style.display = 'none';
+        if (svgEl) svgEl.style.opacity = '0';
+      }, 8000);
+    }
+  };
+
+  // === 손금 사진 업로드 비교 ===
+  window.showPalmPhoto = function(input) {
+    if (!input.files || !input.files[0]) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('palm-user-photo').src = e.target.result;
+      document.getElementById('palm-photo-result').style.display = 'block';
+      document.getElementById('palm-photo-result').scrollIntoView({behavior:'smooth', block:'start'});
+    };
+    reader.readAsDataURL(input.files[0]);
+  };
 
   // === FIX 3: Dream search functionality ===
   window.onDreamSearch = function(query) {
