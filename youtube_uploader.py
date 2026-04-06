@@ -385,6 +385,30 @@ def generate_description(style_name, style_info, metadata, hours):
 CLIENT_SECRET_PATH = os.path.join(os.path.expanduser("~"), "Desktop", "client_secret.json")
 TOKEN_PATH = os.path.join(os.path.expanduser("~"), "Desktop", "youtube_token.json")
 
+def _find_client_secret():
+    """client_secret.json 파일을 자동으로 찾기 (이름이 약간 달라도 찾음)"""
+    desktop = os.path.join(os.path.expanduser("~"), "Desktop")
+    # 정확한 이름 먼저
+    if os.path.exists(CLIENT_SECRET_PATH):
+        return CLIENT_SECRET_PATH
+    # 비슷한 이름 검색 (client_secret.json.json 등)
+    import glob
+    patterns = [
+        os.path.join(desktop, "client_secret*.json"),
+        os.path.join(desktop, "client_secret*.json.json"),
+    ]
+    for pattern in patterns:
+        matches = glob.glob(pattern)
+        if matches:
+            found = matches[0]
+            # 올바른 이름으로 복사
+            if found != CLIENT_SECRET_PATH:
+                import shutil
+                shutil.copy2(found, CLIENT_SECRET_PATH)
+                print(f"[정보] client_secret 파일 발견: {found} -> {CLIENT_SECRET_PATH}")
+            return CLIENT_SECRET_PATH
+    return None
+
 def get_youtube_service():
     """YouTube API 서비스 객체 생성 (처음 한 번만 브라우저 인증 필요)"""
     try:
@@ -415,10 +439,11 @@ def get_youtube_service():
                 creds = None
 
         if not creds:
-            if not os.path.exists(CLIENT_SECRET_PATH):
+            secret_path = _find_client_secret()
+            if not secret_path:
                 return None, f"client_secret.json 파일을 찾을 수 없습니다!\n경로: {CLIENT_SECRET_PATH}"
 
-            flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_PATH, SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(secret_path, SCOPES)
             creds = flow.run_local_server(port=0)
 
         # 토큰 저장 (다음에 다시 로그인 안 해도 됨)
