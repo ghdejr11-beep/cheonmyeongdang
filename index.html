@@ -3259,6 +3259,13 @@
       }
     }
     updateComposite();
+    // update tab button to show checkmark
+    var partLabels = {face_shape:'얼굴형',forehead:'이마',eyes:'눈',nose:'코',mouth:'입',ears:'귀',chin:'턱'};
+    var tab = document.getElementById('gs-tab-' + partKey);
+    if (tab && partLabels[partKey]) {
+      tab.textContent = partLabels[partKey] + ' \u2713';
+      tab.style.borderColor = '#d4a0a0';
+    }
   };
 
   function initGwansangSelectors() {
@@ -3274,29 +3281,67 @@
       { key: 'chin', label: '턱' },
     ];
 
-    container.innerHTML = parts.map(p => {
-      const data = KD.gwansang[p.key];
-      if (!data || !data.types) return '';
-      const options = Object.entries(data.types).map(([k, v]) => `<option value="${k}">${v.name}</option>`).join('');
-      const svgDefs = GS_SVG[p.key] || {};
-      const thumbs = Object.entries(data.types).map(([k, v]) => {
-        const svgInner = svgDefs[k] || '<circle cx="20" cy="20" r="10" stroke="var(--gold)" fill="none" stroke-width="1"/>';
-        return `<div class="gs-thumb" data-part="${p.key}" data-type="${k}" onclick="selectGsThumb('${p.key}','${k}')" title="${v.name}">
-          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">${svgInner}</svg>
-          <span class="gs-thumb-label">${v.name}</span>
-        </div>`;
+    // Build tab buttons
+    var tabsHtml = '<div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:16px;">';
+    parts.forEach(function(p) {
+      tabsHtml += '<button onclick="toggleGsTab(\'' + p.key + '\')" id="gs-tab-' + p.key + '" style="padding:8px 16px;border:2px solid rgba(212,160,160,0.3);background:transparent;color:#d4a0a0;border-radius:20px;cursor:pointer;font-size:0.82rem;font-weight:700;font-family:\'Noto Sans KR\',sans-serif;transition:all 0.2s;" onmouseover="this.style.background=\'rgba(212,160,160,0.1)\'" onmouseout="if(!this.classList.contains(\'active\'))this.style.background=\'transparent\'">' + p.label + '</button>';
+    });
+    tabsHtml += '</div>';
+
+    // Build panels for each category
+    var panelsHtml = '';
+    parts.forEach(function(p) {
+      var data = KD.gwansang[p.key];
+      if (!data || !data.types) return;
+      var options = Object.entries(data.types).map(function(entry) { return '<option value="' + entry[0] + '">' + entry[1].name + '</option>'; }).join('');
+      var svgDefs = GS_SVG[p.key] || {};
+      var thumbs = Object.entries(data.types).map(function(entry) {
+        var k = entry[0], v = entry[1];
+        var svgInner = svgDefs[k] || '<circle cx="20" cy="20" r="10" stroke="var(--gold)" fill="none" stroke-width="1"/>';
+        return '<div class="gs-thumb" data-part="' + p.key + '" data-type="' + k + '" onclick="selectGsThumb(\'' + p.key + '\',\'' + k + '\')" title="' + v.name + '">' +
+          '<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">' + svgInner + '</svg>' +
+          '<span class="gs-thumb-label">' + v.name + '</span>' +
+        '</div>';
       }).join('');
-      return `<div class="form-group" style="grid-column:1/-1;">
-        <label style="color:#d4a0a0;">${p.label} (${data.name})</label>
-        <div class="gs-visual-row">${thumbs}</div>
-        <select id="gs-${p.key}" style="margin-top:4px;" onchange="selectGsThumb('${p.key}', this.value)">
-          <option value="">선택하세요</option>
-          ${options}
-        </select>
-        <div id="gs-interp-${p.key}"></div>
-      </div>`;
-    }).join('');
+      panelsHtml += '<div id="gs-panel-' + p.key + '" style="display:none;">' +
+        '<div class="form-group" style="grid-column:1/-1;">' +
+          '<label style="color:#d4a0a0;">' + p.label + ' (' + data.name + ')</label>' +
+          '<div class="gs-visual-row">' + thumbs + '</div>' +
+          '<select id="gs-' + p.key + '" style="margin-top:4px;" onchange="selectGsThumb(\'' + p.key + '\', this.value)">' +
+            '<option value="">선택하세요</option>' +
+            options +
+          '</select>' +
+          '<div id="gs-interp-' + p.key + '"></div>' +
+        '</div>' +
+      '</div>';
+    });
+
+    container.innerHTML = tabsHtml + panelsHtml;
   }
+
+  window.toggleGsTab = function(key) {
+    var partKeys = ['face_shape','forehead','eyes','nose','mouth','ears','chin'];
+    partKeys.forEach(function(k) {
+      var panel = document.getElementById('gs-panel-' + k);
+      var tab = document.getElementById('gs-tab-' + k);
+      if (k === key) {
+        var isOpen = panel && panel.style.display !== 'none';
+        if (panel) panel.style.display = isOpen ? 'none' : 'block';
+        if (tab) {
+          tab.classList.toggle('active', !isOpen);
+          tab.style.background = isOpen ? 'transparent' : 'rgba(212,160,160,0.15)';
+          tab.style.borderColor = isOpen ? 'rgba(212,160,160,0.3)' : '#d4a0a0';
+        }
+      } else {
+        if (panel) panel.style.display = 'none';
+        if (tab) {
+          tab.classList.remove('active');
+          tab.style.background = 'transparent';
+          tab.style.borderColor = 'rgba(212,160,160,0.3)';
+        }
+      }
+    });
+  };
 
   window.runGwansang = function() {
     if (!KD || !KD.gwansang) { showModal('알림', '데이터를 로딩 중입니다. 잠시 후 다시 시도해 주세요.'); return; }
