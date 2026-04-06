@@ -193,11 +193,11 @@ def process_mp3(mp3_path):
         frame_pattern = make_animation_frames(
             bg_src, color_tuple, frames_dir, safe_mp3, tmp_dir, short_frames, None)
 
-        # 1단계: 10초 짧은 루프 영상 만들기
+        # 1단계: 10초 짧은 루프 영상 만들기 (CRF 30으로 파일 크기 줄임)
         short_video = os.path.join(tmp_dir, "short_loop.mp4")
         cmd_short = [FFMPEG, "-y",
                "-framerate", str(ANIM_FPS), "-i", frame_pattern,
-               "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+               "-c:v", "libx264", "-preset", "medium", "-crf", "30",
                "-pix_fmt", "yuv420p",
                short_video]
 
@@ -251,15 +251,25 @@ def process_mp3(mp3_path):
         log.error(traceback.format_exc())
         return False
 
-    # 4단계: YouTube 업로드
+    # 4단계: YouTube 업로드 (실패 시 최대 3회 재시도)
     log.info("YouTube 업로드 중...")
     playlist_name = style_info.get("playlist", "")
-    upload_ok, upload_msg = upload_to_youtube(
-        out_path, auto_title, auto_desc, tags,
-        category=style_info.get("category", "10"),
-        privacy=DEFAULT_PRIVACY,
-        playlist_name=playlist_name
-    )
+    upload_ok = False
+    upload_msg = ""
+    for attempt in range(1, 4):
+        upload_ok, upload_msg = upload_to_youtube(
+            out_path, auto_title, auto_desc, tags,
+            category=style_info.get("category", "10"),
+            privacy=DEFAULT_PRIVACY,
+            playlist_name=playlist_name
+        )
+        if upload_ok:
+            break
+        log.info(f"업로드 실패 (시도 {attempt}/3): {upload_msg}")
+        if attempt < 3:
+            wait = attempt * 10
+            log.info(f"{wait}초 후 재시도...")
+            time.sleep(wait)
     log.info(upload_msg)
 
     # 5단계: 원본 MP3를 done 폴더로 이동
