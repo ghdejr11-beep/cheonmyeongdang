@@ -1392,13 +1392,13 @@
             </filter>
           </defs>
           <!-- 감정선 Heart Line: 소지 아래에서 검지 아래로 가로 곡선 (최상단 주름) -->
-          <path id="palm-line-heart_line" d="M 565,420 Q 480,395 400,400 Q 320,405 250,425" stroke="#ff69b4" stroke-width="5" fill="none" stroke-linecap="round" opacity="0" filter="url(#palmGlow)"/>
+          <path id="palm-line-heart_line" d="M 720,385 C 600,355 450,340 250,350" stroke="#ff69b4" stroke-width="5" fill="none" stroke-linecap="round" opacity="0" filter="url(#palmGlow)"/>
           <!-- 두뇌선 Head Line: 엄지-검지 사이에서 소지 방향으로 가로 (중간 주름, 약간 아래로 기울어짐) -->
-          <path id="palm-line-head_line" d="M 235,490 Q 320,498 400,510 Q 480,525 560,545" stroke="#4488ff" stroke-width="5" fill="none" stroke-linecap="round" opacity="0" filter="url(#palmGlow)"/>
+          <path id="palm-line-head_line" d="M 200,480 C 350,475 500,490 620,520" stroke="#4488ff" stroke-width="5" fill="none" stroke-linecap="round" opacity="0" filter="url(#palmGlow)"/>
           <!-- 생명선 Life Line: 엄지-검지 사이에서 시작, 엄지 둘레를 C자로 감싸며 아래로 (왼쪽으로 휘어짐) -->
-          <path id="palm-line-life_line" d="M 240,480 Q 230,540 220,600 Q 210,680 215,750 Q 225,810 245,860" stroke="#ff4444" stroke-width="5" fill="none" stroke-linecap="round" opacity="0" filter="url(#palmGlow)"/>
+          <path id="palm-line-life_line" d="M 200,480 C 220,580 340,720 200,880" stroke="#ff4444" stroke-width="5" fill="none" stroke-linecap="round" opacity="0" filter="url(#palmGlow)"/>
           <!-- 운명선 Fate Line: 손목 중앙에서 중지 방향으로 세로 -->
-          <path id="palm-line-fate_line" d="M 380,860 Q 378,750 375,640 Q 372,540 370,440" stroke="#9966CC" stroke-width="4" fill="none" stroke-linecap="round" opacity="0" filter="url(#palmGlow)" stroke-dasharray="8,5"/>
+          <path id="palm-line-fate_line" d="M 400,900 C 395,700 390,500 390,370" stroke="#9966CC" stroke-width="4" fill="none" stroke-linecap="round" opacity="0" filter="url(#palmGlow)" stroke-dasharray="8,5"/>
         </svg>
         <!-- 라벨 -->
         <div id="palm-line-indicator" style="display:none;position:absolute;top:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.85);padding:10px 24px;border-radius:10px;border:2px solid;font-family:'Noto Serif KR',serif;font-size:1.2rem;font-weight:700;text-align:center;pointer-events:none;z-index:5;">
@@ -4404,40 +4404,40 @@
   // 각 유형별 SVG path 데이터 (800x1100 viewBox 기준, 실제 손 해부학 위치)
   const palmOverlayPaths = {
     life_line: {
-      long:    'M 240,480 Q 230,540 220,600 Q 210,680 215,750 Q 225,810 245,860',
-      short:   'M 240,480 Q 232,530 225,580 Q 220,620 218,650',
-      thick:   'M 240,480 Q 230,540 220,600 Q 210,680 215,750 Q 225,810 245,860',
-      thin:    'M 240,480 Q 230,540 220,600 Q 210,680 215,750 Q 225,810 245,860',
-      broken:  'M 240,480 Q 232,530 225,580 M 222,640 Q 215,720 220,800',
-      forked:  'M 240,480 Q 230,540 220,600 Q 210,680 215,750 Q 225,810 245,860 M 215,750 Q 195,800 180,840',
-      chained: 'M 240,480 Q 236,500 232,520 Q 228,540 232,560 Q 236,580 230,600 Q 224,620 228,650 Q 220,680 218,720 Q 218,760 225,800',
-      double:  'M 240,480 Q 230,540 220,600 Q 210,680 215,750 Q 225,810 245,860 M 260,490 Q 250,550 240,610 Q 230,690 235,760 Q 245,820 265,870'
+      long:    'M 200,480 C 220,580 340,720 200,880',
+      short:   'M 200,480 C 220,550 300,640 250,700',
+      thick:   'M 200,480 C 220,580 340,720 200,880',
+      thin:    'M 200,480 C 220,580 340,720 200,880',
+      broken:  'M 200,480 C 215,540 280,600 260,650 M 240,710 C 230,760 210,830 200,880',
+      forked:  'M 200,480 C 220,580 340,720 200,880 M 270,750 C 300,800 330,840 350,870',
+      chained: 'M 200,480 C 215,510 230,520 225,540 C 220,560 235,580 230,600 C 225,630 240,660 235,690 C 225,730 215,780 200,840',
+      double:  'M 200,480 C 220,580 340,720 200,880 M 220,480 C 240,580 360,720 220,880'
     },
     heart_line: {
-      long:       'M 565,420 Q 480,395 400,400 Q 320,405 250,425 Q 210,435 180,445',
-      short:      'M 565,420 Q 500,400 440,403 Q 400,408 370,415',
-      curved:     'M 565,420 Q 480,380 400,380 Q 320,385 250,410 Q 210,425 180,440',
-      straight:   'M 565,420 L 200,420',
-      broken:     'M 565,420 Q 490,400 440,403 M 380,410 Q 320,415 250,425',
-      forked_end: 'M 565,420 Q 480,395 400,400 Q 320,405 260,420 M 260,420 Q 240,400 225,380',
-      chained:    'M 565,420 Q 540,412 520,420 Q 500,410 480,420 Q 460,410 440,420 Q 420,410 400,418 Q 370,412 340,420 Q 300,425 260,430'
+      long:       'M 720,385 C 600,355 450,340 250,350',
+      short:      'M 720,385 C 620,365 520,358 420,360',
+      curved:     'M 720,385 C 600,340 450,320 250,340',
+      straight:   'M 720,385 L 250,385',
+      broken:     'M 720,385 C 630,365 560,360 500,362 M 400,358 C 340,355 280,350 250,350',
+      forked_end: 'M 720,385 C 600,355 450,340 280,348 M 280,348 C 260,330 240,315 220,305',
+      chained:    'M 720,385 C 690,375 670,380 650,375 C 630,370 610,378 590,372 C 560,368 530,375 500,368 C 460,362 420,370 380,364 C 340,358 300,365 250,355'
     },
     head_line: {
-      long:     'M 235,490 Q 320,498 400,510 Q 480,525 560,545',
-      short:    'M 235,490 Q 310,496 380,505 Q 420,510 450,515',
-      straight: 'M 235,490 L 560,490',
-      curved:   'M 235,490 Q 320,510 400,535 Q 470,560 530,595',
-      forked:   'M 235,490 Q 320,498 400,510 Q 480,525 540,540 M 400,510 Q 430,545 450,580',
-      broken:   'M 235,490 Q 310,496 370,505 M 420,512 Q 490,525 560,540',
-      double:   'M 235,490 Q 320,498 400,510 Q 480,525 560,545 M 235,505 Q 320,513 400,525 Q 480,540 560,560'
+      long:     'M 200,480 C 350,475 500,490 620,520',
+      short:    'M 200,480 C 300,477 380,480 440,485',
+      straight: 'M 200,480 L 620,480',
+      curved:   'M 200,480 C 350,490 480,530 580,590',
+      forked:   'M 200,480 C 350,475 500,490 580,510 M 540,500 C 570,530 590,560 600,590',
+      broken:   'M 200,480 C 300,477 370,480 420,483 M 480,488 C 540,495 580,505 620,520',
+      double:   'M 200,480 C 350,475 500,490 620,520 M 200,500 C 350,495 500,510 620,540'
     },
     fate_line: {
-      clear:      'M 380,860 Q 378,750 375,640 Q 372,540 370,440',
-      faint:      'M 380,860 Q 378,750 375,640 Q 372,540 370,440',
-      broken:     'M 380,860 Q 379,780 378,700 M 375,610 Q 373,540 370,440',
+      clear:      'M 400,900 C 395,700 390,500 390,370',
+      faint:      'M 400,900 C 395,700 390,500 390,370',
+      broken:     'M 400,900 C 398,800 396,700 395,640 M 393,560 C 392,500 390,440 390,370',
       absent:     '',
-      late_start: 'M 376,650 Q 374,580 373,510 Q 372,470 370,440',
-      forked:     'M 380,860 Q 378,750 375,640 Q 372,540 370,440 M 375,580 Q 390,520 410,460'
+      late_start: 'M 395,650 C 393,560 391,480 390,370',
+      forked:     'M 400,900 C 395,700 390,500 390,400 M 392,480 C 410,440 430,400 440,370'
     }
   };
 
