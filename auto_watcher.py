@@ -152,10 +152,9 @@ def process_mp3(mp3_path):
         return False
     log.info(f"MP3 루프 완료: {os.path.getsize(loop_mp3_path) / 1024 / 1024:.1f} MB")
 
-    # 3-2: 애니메이션 MP4 생성
+    # 3-2: 애니메이션 MP4 생성 (2단계 방식: 짧은 루프 영상 → 12시간 확장)
     log.info("애니메이션 MP4 생성 중...")
 
-    # 프레임 생성을 위해 playlist_maker의 함수 직접 사용
     try:
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -166,7 +165,6 @@ def process_mp3(mp3_path):
 
         tmp_dir = get_tmp("auto_vid")
         frames_dir = os.path.join(tmp_dir, "frames")
-        color_tuple = parse_color(DEFAULT_COLOR)
 
         # 배경 이미지: music_drop 폴더에 bg.png/bg.jpg가 있으면 사용, 없으면 자동 생성
         bg_src = None
@@ -189,34 +187,50 @@ def process_mp3(mp3_path):
         # 스타일에 맞는 텍스트 색상
         color_tuple = parse_color(style_info.get("text_color", DEFAULT_COLOR))
 
-        # 오디오 분석은 원본 MP3로 (루프 전 원본이 더 빠름)
-        duration = get_duration(loop_mp3_path) or target_sec
-        max_analyze_sec = min(duration, 600)
-        analyze_frames = int(max_analyze_sec * ANIM_FPS)
-
-        log.info(f"프레임 생성 중... ({analyze_frames}개)")
+        # 짧은 루프용 프레임 생성 (10초 = 300프레임, 빠름!)
+        short_frames = ANIM_FPS * 10  # 10초
+        log.info(f"프레임 생성 중... ({short_frames}개, 10초 루프)")
         frame_pattern = make_animation_frames(
-            bg_src, color_tuple, frames_dir, safe_mp3, tmp_dir, analyze_frames, None)
+            bg_src, color_tuple, frames_dir, safe_mp3, tmp_dir, short_frames, None)
 
-        # MP4 인코딩
+        # 1단계: 10초 짧은 루프 영상 만들기
+        short_video = os.path.join(tmp_dir, "short_loop.mp4")
+        cmd_short = [FFMPEG, "-y",
+               "-framerate", str(ANIM_FPS), "-i", frame_pattern,
+               "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+               "-pix_fmt", "yuv420p",
+               short_video]
+
+        log.info("1/2: 짧은 루프 영상 인코딩 중...")
+        result = run_cmd(cmd_short, timeout=300)
+
+        if not result or result.returncode != 0 or not os.path.exists(short_video):
+            log.error("짧은 루프 영상 생성 실패")
+            return False
+
+        # 프레임 폴더 정리 (용량 절약)
+        try:
+            shutil.rmtree(frames_dir)
+        except:
+            pass
+
+        # 2단계: 짧은 영상을 루프 + 오디오 합치기 (매우 빠름!)
         video_filename = f"playlist_{style_name}_{int(time.time())}.mp4"
         out_path = unique_path(os.path.join(style_folder, video_filename))
 
         mp3_for_video = os.path.join(tmp_dir, "audio.mp3")
         shutil.copy2(loop_mp3_path, mp3_for_video)
 
-        cmd = [FFMPEG, "-y",
-               "-stream_loop", "-1",
-               "-framerate", str(ANIM_FPS), "-i", frame_pattern,
+        cmd_final = [FFMPEG, "-y",
+               "-stream_loop", "-1", "-i", short_video,
                "-i", mp3_for_video,
-               "-c:v", "libx264", "-preset", "medium", "-crf", "23",
-               "-pix_fmt", "yuv420p",
+               "-c:v", "copy",
                "-c:a", "aac", "-b:a", "192k",
                "-shortest", "-movflags", "+faststart",
                out_path]
 
-        log.info("ffmpeg 인코딩 중...")
-        result = run_cmd(cmd, timeout=7200)
+        log.info("2/2: 12시간 영상 합치기 중 (빠름)...")
+        result = run_cmd(cmd_final, timeout=3600)
 
         if not result or result.returncode != 0 or not os.path.exists(out_path):
             log.error("MP4 생성 실패")
