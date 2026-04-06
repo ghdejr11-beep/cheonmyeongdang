@@ -158,28 +158,6 @@ def process_mp3(mp3_path):
     # 프레임 생성을 위해 playlist_maker의 함수 직접 사용
     try:
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-        # gradio import를 피하기 위해 필요한 함수만 가져옴
-        import importlib.util
-        spec = importlib.util.spec_from_file_location(
-            "pm", os.path.join(os.path.dirname(os.path.abspath(__file__)), "playlist_maker.py"),
-            submodule_search_locations=[]
-        )
-        # gradio를 모킹하여 import 문제 회피
-        import types
-        mock_gr = types.ModuleType("gradio")
-        mock_gr.Progress = lambda: lambda *a, **k: None
-        mock_gr.Blocks = lambda **k: type('ctx', (), {'__enter__': lambda s: s, '__exit__': lambda *a: None})()
-        mock_gr.Markdown = lambda *a, **k: None
-        mock_gr.Tab = lambda *a, **k: type('ctx', (), {'__enter__': lambda s: s, '__exit__': lambda *a: None})()
-        mock_gr.Row = lambda *a, **k: type('ctx', (), {'__enter__': lambda s: s, '__exit__': lambda *a: None})()
-        mock_gr.Column = lambda *a, **k: type('ctx', (), {'__enter__': lambda s: s, '__exit__': lambda *a: None})()
-        mock_gr.File = lambda **k: None
-        mock_gr.Slider = lambda *a, **k: None
-        mock_gr.Button = lambda *a, **k: type('b', (), {'click': lambda *a, **k: None})()
-        mock_gr.Textbox = lambda **k: None
-        mock_gr.ColorPicker = lambda **k: None
-        mock_gr.Radio = lambda **k: None
-        sys.modules['gradio'] = mock_gr
 
         from playlist_maker import (
             make_animation_frames, parse_color, get_tmp, unique_path,
@@ -281,6 +259,21 @@ def process_mp3(mp3_path):
     # 루프 MP3 삭제 (용량 절약)
     try:
         os.remove(loop_mp3_path)
+        log.info("루프 MP3 삭제 완료 (용량 절약)")
+    except:
+        pass
+
+    # 업로드 성공 시 MP4도 삭제 (용량 절약)
+    if upload_ok:
+        try:
+            os.remove(out_path)
+            log.info("업로드 완료된 MP4 삭제 완료 (용량 절약)")
+        except:
+            pass
+
+    # 임시 폴더 정리
+    try:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
     except:
         pass
 

@@ -632,8 +632,9 @@ def full_auto(mp3_files, hours, bg, color, privacy, progress=gr.Progress()):
     )
     return style_video_path, status, auto_title, auto_desc
 
-with gr.Blocks(title="Playlist Maker") as app:
-    gr.Markdown(f"# Playlist Maker\n애니메이션 + YouTube 자동 업로드 + 스타일 폴더 분류 | 폴더: `{OUTPUT_DIR}`")
+def create_app():
+    with gr.Blocks(title="Playlist Maker") as app:
+        gr.Markdown(f"# Playlist Maker\n애니메이션 + YouTube 자동 업로드 + 스타일 폴더 분류 | 폴더: `{OUTPUT_DIR}`")
 
     with gr.Tab("전체 자동화 (추천)"):
         gr.Markdown("### MP3 넣으면 → 12시간 루프 → 애니메이션 영상 → 스타일별 폴더 분류 → YouTube 업로드")
@@ -704,6 +705,8 @@ with gr.Blocks(title="Playlist Maker") as app:
                 a2_status = gr.Textbox(label="상태", lines=6)
                 a2_out = gr.File(label="완성된 MP4")
         a2_btn.click(run_all_2, [a2_mp3, a2_hours, a2_bg, a2_color], [a2_out, a2_status])
+    return app
 
 if __name__ == "__main__":
+    app = create_app()
     app.launch(share=False, inbrowser=True, allowed_paths=[OUTPUT_DIR])
