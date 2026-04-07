@@ -1,0 +1,96 @@
+name: 원격 명령 처리
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  process-command:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Parse command
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = context.payload.issue.title.trim();
+            const body = context.payload.issue.body || '';
+            const labels = context.payload.issue.labels.map(l => l.name);
+
+            let command = '';
+            let target = '';
+
+            // 명령어 패턴 매칭
+            if (title.startsWith('/') || labels.includes('command')) {
+              command = title.replace(/^\//, '').split(' ')[0];
+              target = title.split(' ').slice(1).join(' ');
+            }
+
+            console.log('Command:', command, 'Target:', target);
+            core.setOutput('command', command);
+            core.setOutput('target', target);
+            core.setOutput('body', body);
+
+      - name: Execute - update fortune
+        if: steps.parse.outputs.command == '운세업데이트' || steps.parse.outputs.command == 'update-fortune'
+        run: |
+          gh workflow run daily-fortune.yml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Execute - deploy
+        if: steps.parse.outputs.command == '배포' || steps.parse.outputs.command == 'deploy'
+        run: |
+          git config user.name "Bot"
+          git config user.email "bot@cheonmyeongdang.com"
+          git commit --allow-empty -m "🚀 원격 배포 트리거 (Issue #${{ github.event.issue.number }})"
+          git push
+
+      - name: Execute - rebuild
+        if: steps.parse.outputs.command == '재빌드' || steps.parse.outputs.command == 'rebuild'
+        run: |
+          echo "재빌드 트리거"
+          git config user.name "Bot"
+          git config user.email "bot@cheonmyeongdang.com"
+          touch .nojekyll
+          git add .nojekyll
+          git diff --staged --quiet || git commit -m "🔨 재빌드 트리거"
+          git push || true
+
+      - name: Reply to issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const cmd = '${{ steps.parse.outputs.command }}';
+            const target = '${{ steps.parse.outputs.target }}';
+            let msg = '';
+            if (cmd === '운세업데이트' || cmd === 'update-fortune') {
+              msg = '✅ 매일 운세 업데이트가 시작되었습니다. 약 1분 후 사이트에 반영됩니다.';
+            } else if (cmd === '배포' || cmd === 'deploy') {
+              msg = '✅ 배포가 트리거되었습니다.';
+            } else if (cmd === '재빌드' || cmd === 'rebuild') {
+              msg = '✅ 재빌드가 시작되었습니다.';
+            } else if (cmd === '상태' || cmd === 'status') {
+              msg = '📊 사이트 상태:\n- URL: https://ghdejr11-beep.github.io/cheonmyeongdang/\n- 마지막 커밋 시간: ' + new Date().toISOString();
+            } else {
+              msg = '❓ 사용 가능한 명령:\n- `/운세업데이트` - 오늘의 운세 즉시 갱신\n- `/배포` - 강제 재배포\n- `/재빌드` - 재빌드 트리거\n- `/상태` - 사이트 상태 확인\n\n원하는 명령을 이슈 제목에 입력하세요. (예: `/운세업데이트`)';
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: msg
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });

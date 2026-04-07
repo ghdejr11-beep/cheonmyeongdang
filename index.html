@@ -3,7 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>천명당 — 사주명리 · 관상 · 풍수 · 손금</title>
+<title>천명당 — 무료 사주 · 관상 · 손금 · 타로 · 꿈해몽 · 별자리운세</title>
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="천명당에서 무료로 사주팔자, 관상, 손금, 타로카드, 꿈해몽, 오늘의 운세, 별자리 운세, 궁합을 확인하세요. 전통 명리학에 기반한 정확한 분석과 AI 기반 사진 관상 분석까지 제공합니다.">
+<meta name="keywords" content="무료 사주, 사주팔자, 무료 손금, 무료 관상, 타로카드, 꿈해몽, 오늘의 운세, 별자리 운세, 궁합, 신년운세, 작명, 풍수지리, 천명당, 무료운세, AI 관상">
+<meta name="author" content="천명당">
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow">
+<link rel="canonical" href="https://ghdejr11-beep.github.io/cheonmyeongdang/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ghdejr11-beep.github.io/cheonmyeongdang/">
+<meta property="og:title" content="천명당 — 무료 사주 · 관상 · 손금 · 타로">
+<meta property="og:description" content="무료로 사주팔자, 관상, 손금, 타로카드, 꿈해몽, 오늘의 운세를 확인하세요. AI가 분석해드립니다.">
+<meta property="og:image" content="https://ghdejr11-beep.github.io/cheonmyeongdang/palm-canva.png">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="천명당">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="천명당 — 무료 사주 · 관상 · 손금">
+<meta name="twitter:description" content="무료로 운명을 확인하세요. 사주, 관상, 손금, 타로, 꿈해몽 모두 무료!">
+<meta name="twitter:image" content="https://ghdejr11-beep.github.io/cheonmyeongdang/palm-canva.png">
+
+<!-- Naver -->
+<meta name="naver-site-verification" content="">
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-PLACEHOLDER" crossorigin="anonymous"></script>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "천명당",
+  "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/",
+  "description": "무료 사주, 관상, 손금, 타로, 꿈해몽, 운세 분석 사이트",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://ghdejr11-beep.github.io/cheonmyeongdang/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "천명당",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/palm-canva.png"
+    }
+  }
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -4514,12 +4568,56 @@
           '<div style="font-size:0.78rem;color:var(--gold3);margin-bottom:4px;">&#11088; 비슷한 손금의 유명인</div>' +
           '<div style="font-size:1rem;color:var(--gold);font-weight:700;font-family:\'Noto Serif KR\',serif;">' + t.celebrity + '</div>' +
         '</div>' +
-        '<button class="btn-gold" style="font-size:0.88rem;padding:13px 32px;" onclick="resetPalmQuiz()">&#128260; 다시 진단하기</button>' +
+        '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:6px;">' +
+          '<button class="btn-gold" style="font-size:0.85rem;padding:12px 24px;" onclick="resetPalmQuiz()">&#128260; 다시 진단</button>' +
+          '<button onclick="shareResult(\'손금\',\'' + t.name + '\')" style="background:#FEE500;color:#3C1E1E;border:none;font-size:0.85rem;padding:12px 24px;font-weight:700;cursor:pointer;border-radius:8px;font-family:\'Noto Sans KR\',sans-serif;">&#128172; 카카오톡 공유</button>' +
+          '<button onclick="copyResultLink()" style="background:rgba(255,255,255,0.08);color:var(--text);border:1px solid var(--border);font-size:0.85rem;padding:12px 24px;cursor:pointer;border-radius:8px;font-family:\'Noto Sans KR\',sans-serif;">&#128279; 링크 복사</button>' +
+        '</div>' +
       '</div>';
     result.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   window.showPalmResult = showPalmResult;
+
+  // === 카카오톡 공유 + 링크 복사 ===
+  window.shareResult = function(category, result) {
+    var url = window.location.href.split('#')[0];
+    var title = '천명당 - ' + category + ' 결과: ' + result;
+    var text = '나의 ' + category + ' 결과는 "' + result + '"입니다! 🔮 천명당에서 무료로 확인해보세요.';
+
+    // 카카오톡 공유 (모바일)
+    if (navigator.share) {
+      navigator.share({ title: title, text: text, url: url }).catch(function(){});
+    } else {
+      // 데스크톱: 카카오톡 웹 공유 URL
+      var kakaoUrl = 'https://accounts.kakao.com/login?continue=' + encodeURIComponent('https://sharer.kakao.com/talk/friends/picker/easylink?app_key=&validation_action=default&link_ver=4.0&template_id=&template_args=&template_object=' + encodeURIComponent(JSON.stringify({
+        objectType: 'feed',
+        content: { title: title, description: text, link: { mobileWebUrl: url, webUrl: url } }
+      })));
+      // 간단 fallback: 클립보드 복사
+      var shareText = title + '\n' + text + '\n' + url;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareText).then(function(){
+          showModal && showModal('공유 준비 완료', '내용이 클립보드에 복사되었습니다. 카카오톡에 붙여넣어 공유하세요!');
+        });
+      } else {
+        prompt('아래 내용을 카카오톡에 복사하여 공유하세요:', shareText);
+      }
+    }
+  };
+
+  window.copyResultLink = function() {
+    var url = window.location.href.split('#')[0];
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(function(){
+        showModal && showModal('복사 완료', '천명당 링크가 복사되었습니다!\n친구에게 공유해보세요.');
+      }).catch(function(){
+        prompt('링크를 복사하세요:', url);
+      });
+    } else {
+      prompt('링크를 복사하세요:', url);
+    }
+  };
 
   window.resetPalmQuiz = function() {
     palmQuizState = { current: 0, answers: [] };
