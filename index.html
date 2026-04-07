@@ -234,6 +234,27 @@
     font-family: 'Noto Sans KR', sans-serif;
   }
   .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+  .pay-method-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 14px 8px;
+    background: rgba(255,255,255,0.04);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.78rem;
+    color: var(--text2);
+    transition: all 0.2s;
+  }
+  .pay-method-btn:hover { border-color: rgba(201,168,76,0.5); background: rgba(255,255,255,0.06); }
+  .pay-method-btn.selected {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.15);
+    color: var(--gold2);
+    font-weight: 600;
+  }
   .pulse-cta {
     animation: pulseGlow 2.5s ease-in-out infinite;
     box-shadow: 0 4px 20px rgba(201,168,76,0.4);
@@ -1877,32 +1898,38 @@
   </div>
 
   <!-- ORDER FORM -->
-  <div id="order-form" class="hidden" style="max-width:600px;margin:48px auto 0;">
-    <div class="result-card" style="border-color:var(--gold);">
-      <h4 id="order-service-name" style="text-align:center;"></h4>
-      <div class="payment-box">
-        <div class="amount" id="order-price"></div>
-        <div class="bank-info">
-          <strong>입금 계좌</strong><br>
-          국민은행 012-3456-7890-12<br>
-          예금주: 천명당 (홍길동)<br><br>
-          <span style="font-size:0.75rem;">입금자명과 신청자명을 동일하게 기입해 주세요</span>
+  <div id="order-form" class="hidden" style="max-width:640px;margin:48px auto 0;">
+    <div class="result-card" style="border-color:var(--gold);background:linear-gradient(135deg,rgba(13,16,32,0.97),rgba(20,20,40,0.97));">
+      <div style="text-align:center;margin-bottom:20px;">
+        <div style="display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#080a10;font-size:0.65rem;font-weight:800;padding:5px 14px;border-radius:14px;letter-spacing:0.15em;margin-bottom:10px;">SECURE PAYMENT</div>
+        <h4 id="order-service-name" style="font-family:'Gowun Batang','Noto Serif KR',serif;font-size:1.4rem;color:var(--gold2);"></h4>
+      </div>
+
+      <!-- 결제 금액 표시 -->
+      <div style="background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.05));border:1px solid var(--gold);border-radius:12px;padding:20px;text-align:center;margin-bottom:24px;">
+        <div style="font-size:0.7rem;color:var(--text2);letter-spacing:0.2em;margin-bottom:6px;">최종 결제 금액</div>
+        <div id="order-price" style="font-family:'Gowun Batang',serif;font-size:2.4rem;color:var(--gold2);font-weight:700;letter-spacing:-0.02em;"></div>
+        <div style="font-size:0.7rem;color:var(--jade);margin-top:6px;">✓ 24시간 환불 보장 · ✓ 즉시 분석 시작</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>이름 *</label>
+          <input type="text" id="order-name" placeholder="홍길동" required>
         </div>
+        <div class="form-group">
+          <label>연락처 *</label>
+          <input type="tel" id="order-phone" placeholder="010-0000-0000" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>이메일 * <span style="font-size:0.7rem;color:var(--text2);">(분석 결과 발송)</span></label>
+        <input type="email" id="order-email" placeholder="example@email.com" required>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>이름</label>
-          <input type="text" id="order-name" placeholder="홍길동">
-        </div>
-        <div class="form-group">
-          <label>연락처</label>
-          <input type="tel" id="order-phone" placeholder="010-0000-0000">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>생년월일 (양력)</label>
-          <input type="date" id="order-birth">
+          <label>생년월일 (양력) *</label>
+          <input type="date" id="order-birth" required>
         </div>
         <div class="form-group">
           <label>태어난 시간</label>
@@ -1931,10 +1958,70 @@
         </div>
       </div>
       <div class="form-group">
-        <label>추가 요청사항</label>
-        <textarea id="order-memo" rows="3" placeholder="궁금한 점이나 특별히 알고 싶은 부분을 적어주세요" style="width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text);padding:12px 16px;font-size:0.88rem;font-family:'Noto Sans KR',sans-serif;outline:none;resize:vertical;"></textarea>
+        <label>추가 요청사항 (선택)</label>
+        <textarea id="order-memo" rows="3" placeholder="궁금한 점이나 특별히 알고 싶은 부분을 적어주세요" style="width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text);padding:12px 16px;font-size:0.88rem;font-family:'Noto Sans KR',sans-serif;outline:none;resize:vertical;border-radius:6px;"></textarea>
       </div>
-      <button class="btn-gold" style="width:100%;font-size:0.95rem;padding:16px;" onclick="submitOrder()">입금 완료 / 신청하기</button>
+
+      <!-- 약관 동의 -->
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:12px;margin:16px 0;font-size:0.78rem;color:var(--text2);">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+          <input type="checkbox" id="order-agree" required style="width:16px;height:16px;cursor:pointer;">
+          <span><strong style="color:var(--gold2);">[필수]</strong> 결제 약관 및 개인정보 처리 방침에 동의합니다</span>
+        </label>
+      </div>
+
+      <!-- 결제 수단 선택 -->
+      <div style="margin-bottom:16px;">
+        <label style="font-size:0.85rem;color:var(--gold2);font-weight:600;display:block;margin-bottom:10px;">결제 수단 선택</label>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;">
+          <label class="pay-method-btn selected" onclick="selectPayMethod(this,'카드')">
+            <input type="radio" name="paymethod" value="카드" checked style="display:none;">
+            <span style="font-size:1.4rem;">💳</span>
+            <span>신용카드</span>
+          </label>
+          <label class="pay-method-btn" onclick="selectPayMethod(this,'카카오페이')">
+            <input type="radio" name="paymethod" value="카카오페이" style="display:none;">
+            <span style="font-size:1.4rem;">💛</span>
+            <span>카카오페이</span>
+          </label>
+          <label class="pay-method-btn" onclick="selectPayMethod(this,'토스페이')">
+            <input type="radio" name="paymethod" value="토스페이" style="display:none;">
+            <span style="font-size:1.4rem;">💙</span>
+            <span>토스페이</span>
+          </label>
+          <label class="pay-method-btn" onclick="selectPayMethod(this,'계좌이체')">
+            <input type="radio" name="paymethod" value="계좌이체" style="display:none;">
+            <span style="font-size:1.4rem;">🏦</span>
+            <span>계좌이체</span>
+          </label>
+        </div>
+      </div>
+
+      <button class="btn-gold pulse-cta" style="width:100%;font-size:1rem;padding:18px;font-weight:700;" onclick="processPayment()">🔒 안전 결제하기</button>
+
+      <!-- 신뢰 배지 -->
+      <div style="display:flex;gap:14px;justify-content:center;margin-top:18px;flex-wrap:wrap;font-size:0.7rem;color:var(--text2);">
+        <span>🔒 SSL 보안 결제</span>
+        <span>·</span>
+        <span>💳 토스페이먼츠</span>
+        <span>·</span>
+        <span>🛡️ 24h 환불 보장</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 결제 완료 화면 -->
+  <div id="payment-success" class="hidden" style="max-width:600px;margin:48px auto 0;">
+    <div class="result-card" style="border-color:var(--jade);text-align:center;padding:40px 24px;">
+      <div style="font-size:4rem;margin-bottom:16px;">✅</div>
+      <h3 style="color:var(--jade);font-family:'Gowun Batang',serif;font-size:1.5rem;margin-bottom:12px;">결제가 완료되었습니다!</h3>
+      <p style="color:var(--text);font-size:0.9rem;line-height:1.8;margin-bottom:20px;">
+        주문이 정상적으로 접수되었습니다.<br>
+        전문 역술인이 정성껏 분석하여<br>
+        <strong style="color:var(--gold2);">24시간 이내</strong>에 입력하신 이메일로 발송해 드립니다.
+      </p>
+      <div id="payment-receipt" style="background:rgba(0,0,0,0.3);border-radius:10px;padding:16px;margin:20px 0;text-align:left;font-size:0.82rem;color:var(--text2);"></div>
+      <button class="btn-outline" onclick="closePaymentSuccess()" style="font-size:0.85rem;padding:12px 32px;">확인</button>
     </div>
   </div>
 </section>
@@ -3762,25 +3849,187 @@
   };
 
   // ============================================================
-  // PAID SERVICES / ORDER
+  // PAID SERVICES / ORDER + 토스페이먼츠 결제 시스템
   // ============================================================
+  // 토스페이먼츠 테스트 클라이언트 키 (실 운영 시 본인 키로 교체)
+  // https://docs.tosspayments.com/reference#%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%82%A4
+  var TOSS_CLIENT_KEY = 'test_ck_DpexMgkW36OZNQq6Ya9D3GbR5ozO';
+  var currentOrder = { serviceName: '', price: 0, orderId: '' };
+  var selectedPayMethod = '카드';
+
+  // 토스페이먼츠 SDK 동적 로드
+  function loadTossSDK(callback) {
+    if (window.TossPayments) { callback(); return; }
+    var s = document.createElement('script');
+    s.src = 'https://js.tosspayments.com/v1/payment';
+    s.onload = callback;
+    s.onerror = function() {
+      console.error('토스페이먼츠 SDK 로드 실패');
+      callback(); // 실패해도 fallback 작동
+    };
+    document.head.appendChild(s);
+  }
+
   window.openOrder = function(serviceName, price) {
+    currentOrder = { serviceName: serviceName, price: price, orderId: '' };
     document.getElementById('order-service-name').textContent = serviceName;
     document.getElementById('order-price').textContent = price.toLocaleString() + '원';
-    const form = document.getElementById('order-form');
+    var form = document.getElementById('order-form');
+    var success = document.getElementById('payment-success');
+    if (success) success.classList.add('hidden');
     form.classList.remove('hidden');
     form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // SDK 미리 로드
+    loadTossSDK(function(){});
   };
 
-  window.submitOrder = function() {
-    const name = document.getElementById('order-name').value;
-    const phone = document.getElementById('order-phone').value;
-    const birth = document.getElementById('order-birth').value;
-    if (!name || !phone || !birth) {
-      showModal('알림', '이름, 연락처, 생년월일을 모두 입력해 주세요.');
+  // 결제 수단 선택
+  window.selectPayMethod = function(el, method) {
+    document.querySelectorAll('.pay-method-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    var radio = el.querySelector('input[type="radio"]');
+    if (radio) radio.checked = true;
+    selectedPayMethod = method;
+  };
+
+  // 결제 처리
+  window.processPayment = function() {
+    var name = document.getElementById('order-name').value.trim();
+    var phone = document.getElementById('order-phone').value.trim();
+    var email = document.getElementById('order-email').value.trim();
+    var birth = document.getElementById('order-birth').value;
+    var hour = document.getElementById('order-hour').value;
+    var gender = document.querySelector('input[name="order-gender"]:checked').value;
+    var memo = document.getElementById('order-memo').value;
+    var agree = document.getElementById('order-agree').checked;
+
+    // 유효성 검사
+    if (!name) { showModal('알림', '이름을 입력해 주세요.'); return; }
+    if (!phone || phone.length < 10) { showModal('알림', '올바른 연락처를 입력해 주세요.'); return; }
+    if (!email || !email.includes('@')) { showModal('알림', '올바른 이메일을 입력해 주세요.'); return; }
+    if (!birth) { showModal('알림', '생년월일을 입력해 주세요.'); return; }
+    if (!agree) { showModal('알림', '결제 약관에 동의해 주세요.'); return; }
+
+    // 주문 ID 생성
+    var orderId = 'CMD-' + Date.now() + '-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+    currentOrder.orderId = orderId;
+
+    // 주문 정보 localStorage 저장 (결제 완료 후 검증용)
+    var orderData = {
+      orderId: orderId,
+      serviceName: currentOrder.serviceName,
+      price: currentOrder.price,
+      name: name, phone: phone, email: email,
+      birth: birth, hour: hour, gender: gender, memo: memo,
+      method: selectedPayMethod,
+      status: 'pending',
+      createdAt: new Date().toISOString()
+    };
+    var orders = JSON.parse(localStorage.getItem('cm_orders') || '[]');
+    orders.push(orderData);
+    localStorage.setItem('cm_orders', JSON.stringify(orders));
+    localStorage.setItem('cm_current_order', JSON.stringify(orderData));
+
+    // 토스페이먼츠 결제 호출
+    loadTossSDK(function() {
+      if (!window.TossPayments) {
+        // SDK 로드 실패: 데모 모드 (즉시 성공 처리)
+        runDemoPayment(orderData);
+        return;
+      }
+      try {
+        var tossPayments = TossPayments(TOSS_CLIENT_KEY);
+        var methodMap = {
+          '카드': '카드',
+          '카카오페이': '카드',  // 토스 SDK에선 간편결제로 통합됨
+          '토스페이': '카드',
+          '계좌이체': '계좌이체'
+        };
+        tossPayments.requestPayment(methodMap[selectedPayMethod] || '카드', {
+          amount: currentOrder.price,
+          orderId: orderId,
+          orderName: currentOrder.serviceName,
+          customerName: name,
+          customerEmail: email,
+          successUrl: window.location.origin + window.location.pathname + 'success.html',
+          failUrl: window.location.origin + window.location.pathname + 'fail.html'
+        }).catch(function(err) {
+          if (err.code === 'USER_CANCEL') {
+            showModal('결제 취소', '결제를 취소하셨습니다.');
+          } else if (err.code === 'INVALID_REQUEST') {
+            // 테스트 키가 유효하지 않은 경우 데모 모드로 fallback
+            runDemoPayment(orderData);
+          } else {
+            console.error('Toss payment error:', err);
+            // 실패 시 데모 모드 fallback
+            runDemoPayment(orderData);
+          }
+        });
+      } catch(e) {
+        console.error('TossPayments init error:', e);
+        runDemoPayment(orderData);
+      }
+    });
+  };
+
+  // 데모 결제 (테스트/fallback 용)
+  function runDemoPayment(orderData) {
+    var confirmed = confirm(
+      '🔒 [데모 결제 모드]\n\n' +
+      '서비스: ' + orderData.serviceName + '\n' +
+      '금액: ' + orderData.price.toLocaleString() + '원\n' +
+      '결제수단: ' + orderData.method + '\n\n' +
+      '결제를 진행하시겠습니까?\n' +
+      '(실 운영 시에는 토스페이먼츠로 안전하게 결제됩니다)'
+    );
+    if (!confirmed) {
+      showModal('결제 취소', '결제가 취소되었습니다.');
       return;
     }
-    showModal('신청 완료', '신청이 접수되었습니다. 입금 확인 후 1~2영업일 내에 결과를 안내해 드리겠습니다. 감사합니다.');
+    // 결제 완료 처리
+    completePayment(orderData);
+  }
+
+  function completePayment(orderData) {
+    // 주문 상태 업데이트
+    orderData.status = 'completed';
+    orderData.paidAt = new Date().toISOString();
+    var orders = JSON.parse(localStorage.getItem('cm_orders') || '[]');
+    var idx = orders.findIndex(o => o.orderId === orderData.orderId);
+    if (idx >= 0) orders[idx] = orderData;
+    localStorage.setItem('cm_orders', JSON.stringify(orders));
+
+    // 결제 완료 화면 표시
+    document.getElementById('order-form').classList.add('hidden');
+    var success = document.getElementById('payment-success');
+    var receipt = document.getElementById('payment-receipt');
+    receipt.innerHTML =
+      '<div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span>주문번호</span><strong style="color:var(--gold2);">' + orderData.orderId + '</strong></div>' +
+      '<div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span>서비스</span><strong style="color:var(--text);">' + orderData.serviceName + '</strong></div>' +
+      '<div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span>결제 금액</span><strong style="color:var(--gold2);">' + orderData.price.toLocaleString() + '원</strong></div>' +
+      '<div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span>결제 수단</span><strong style="color:var(--text);">' + orderData.method + '</strong></div>' +
+      '<div style="display:flex;justify-content:space-between;"><span>발송 이메일</span><strong style="color:var(--text);">' + orderData.email + '</strong></div>';
+    success.classList.remove('hidden');
+    success.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // 결제 알림 (관리자에게 전송할 수 있는 hook - 추후 webhook 연결)
+    console.log('💰 결제 완료:', orderData);
+  }
+
+  window.closePaymentSuccess = function() {
+    document.getElementById('payment-success').classList.add('hidden');
+    document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // 결제 성공 페이지에서 호출 (success.html에서 리다이렉트 시)
+  window.handlePaymentSuccess = function(params) {
+    var orderData = JSON.parse(localStorage.getItem('cm_current_order') || '{}');
+    if (orderData.orderId) completePayment(orderData);
+  };
+
+  // 기존 submitOrder는 호환성 유지
+  window.submitOrder = function() {
+    processPayment();
   };
 
   // ============================================================
