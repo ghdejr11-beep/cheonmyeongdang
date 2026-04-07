@@ -34,7 +34,10 @@ BOOK_MD_PATH = OUT / "book.md"
 # ============================================================
 # 클라이언트
 # ============================================================
-client = anthropic.Anthropic()  # ANTHROPIC_API_KEY 환경변수 자동 사용
+# 환경변수에서 API 키 읽을 때 앞뒤 공백/줄바꿈 자동 제거
+# (PowerShell에서 붙여넣기할 때 실수로 \n 이 끼는 경우가 흔함)
+_api_key = (os.environ.get("ANTHROPIC_API_KEY") or "").strip()
+client = anthropic.Anthropic(api_key=_api_key) if _api_key else anthropic.Anthropic()
 
 
 # ============================================================

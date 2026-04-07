@@ -22,7 +22,9 @@ SHORTS.mkdir(exist_ok=True)
 
 HOOKS_PATH = OUT / "hooks.json"
 
-client = anthropic.Anthropic()
+# 환경변수에서 API 키 읽을 때 앞뒤 공백/줄바꿈 자동 제거
+_api_key = (os.environ.get("ANTHROPIC_API_KEY") or "").strip()
+client = anthropic.Anthropic(api_key=_api_key) if _api_key else anthropic.Anthropic()
 
 
 # ============================================================
