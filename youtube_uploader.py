@@ -534,12 +534,13 @@ def upload_to_youtube(video_path, title, description, tags, category="10", priva
         },
     }
 
-    # 작은 청크가 SSL EOF에 더 강함 (4MB)
+    # 1MB 청크: 한국 가정용 회선에서 SSL EOF 빈도 최소화
+    # (Google 최소 256KB, 권장 1~5MB. 1.7GB 파일에 1MB = 1700개 청크)
     media = MediaFileUpload(
         video_path,
         mimetype="video/mp4",
         resumable=True,
-        chunksize=4 * 1024 * 1024,
+        chunksize=1 * 1024 * 1024,
     )
 
     # 재시도 가능한 예외/상태 코드
@@ -562,7 +563,30 @@ def upload_to_youtube(video_path, title, description, tags, category="10", priva
         retriable_exc.append(httplib2.HttpLib2Error)
     RETRIABLE_EXCEPTIONS = tuple(retriable_exc)
     RETRIABLE_STATUS_CODES = {500, 502, 503, 504}
-    MAX_RETRIES = 10
+    MAX_RETRIES = 20            # 더 끈질기게
+    MAX_HARD_FAILURES = 4       # 진척 없이 4번 연속 실패하면 연결 강제 재생성
+
+    def _force_close_http_connections(svc):
+        """httplib2의 좀비 SSL 연결을 강제로 닫는다.
+        SSL EOF 후 같은 객체로 next_chunk() 재호출하면 또 죽는 경우가 많아
+        다음 호출이 fresh TCP+TLS handshake 를 하도록 만든다."""
+        try:
+            http_obj = getattr(svc, "_http", None)
+            if http_obj is None:
+                return
+            connections = getattr(http_obj, "connections", None)
+            if connections:
+                for conn in list(connections.values()):
+                    try:
+                        conn.close()
+                    except Exception:
+                        pass
+                try:
+                    connections.clear()
+                except Exception:
+                    pass
+        except Exception:
+            pass
 
     try:
         request = service.videos().insert(
@@ -573,10 +597,20 @@ def upload_to_youtube(video_path, title, description, tags, category="10", priva
 
         response = None
         retry = 0
+        hard_failures = 0
+        last_progress = 0
         while response is None:
             error = None
             try:
                 status, response = request.next_chunk()
+                # 진척이 있으면 hard_failure 카운터 리셋
+                if status is not None:
+                    cur = getattr(status, "resumable_progress", 0) or 0
+                    if cur > last_progress:
+                        last_progress = cur
+                        hard_failures = 0
+                        pct = (cur / status.total_size * 100) if status.total_size else 0
+                        print(f"[업로드 진행] {cur/1024/1024:.1f}MB / {status.total_size/1024/1024:.1f}MB ({pct:.1f}%)")
                 if response is not None and "id" not in response:
                     return False, f"업로드 실패: 응답에 ID 없음: {response}"
             except HttpError as e:
@@ -589,9 +623,17 @@ def upload_to_youtube(video_path, title, description, tags, category="10", priva
 
             if error is not None:
                 retry += 1
+                hard_failures += 1
                 if retry > MAX_RETRIES:
                     return False, f"업로드 실패 (최대 재시도 {MAX_RETRIES}회 초과): {error}"
-                sleep_seconds = min(2 ** retry, 64) + random.random()
+
+                # 진척 없이 연속 실패 → 좀비 연결 강제 종료 (다음 호출이 fresh TLS)
+                if hard_failures >= MAX_HARD_FAILURES:
+                    print(f"[연결 재생성] {hard_failures}회 연속 진척 없음 → SSL 연결 강제 종료")
+                    _force_close_http_connections(service)
+                    hard_failures = 0
+
+                sleep_seconds = min(2 ** retry, 120) + random.random()
                 print(f"[업로드 재시도] {error} → {sleep_seconds:.1f}초 후 이어올리기 ({retry}/{MAX_RETRIES})")
                 time.sleep(sleep_seconds)
 
