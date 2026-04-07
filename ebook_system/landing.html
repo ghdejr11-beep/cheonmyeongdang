@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI로 월 500만원 디지털 상품 자동화 시스템 | 100일 만에 1인 부업 마스터</title>
+<meta name="description" content="Claude·ChatGPT로 전자책·템플릿·자동화 디지털 상품을 만들고, 100일 안에 월 500만원 부업 수익까지 도달하는 한국어 실전 가이드. 200페이지 PDF + 50개 템플릿 + 100개 숏폼 후크.">
+<meta property="og:title" content="AI로 월 500만원 디지털 상품 자동화 시스템">
+<meta property="og:description" content="100일 만에 1인 AI 부업 마스터하는 200페이지 실전 PDF">
+<meta property="og:type" content="website">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  background: #0a0a0f;
+  color: #f5f5f7;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(180deg, #1a1a2e 0%, #0a0a0f 100%);
+  padding: 80px 0 60px;
+  text-align: center;
+}
+.badge {
+  display: inline-block;
+  background: rgba(255, 215, 0, 0.15);
+  color: #ffd700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+.hero h1 {
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff 0%, #c0c0ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero h1 .highlight { color: #ffd700; -webkit-text-fill-color: #ffd700; }
+.hero .sub {
+  font-size: 18px;
+  color: #a0a0b8;
+  margin-bottom: 36px;
+}
+.cta {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff4757 0%, #ff6b9d 100%);
+  color: white;
+  padding: 18px 40px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(255, 71, 87, 0.4);
+  transition: transform 0.2s;
+}
+.cta:hover { transform: translateY(-2px); }
+.cta.ghost {
+  background: transparent;
+  border: 2px solid #6c5ce7;
+  color: #a0a0ff;
+  box-shadow: none;
+}
+.proof {
+  margin-top: 24px;
+  font-size: 13px;
+  color: #707088;
+}
+
+/* SECTION */
+section { padding: 80px 0; border-top: 1px solid #1a1a2e; }
+h2 {
+  font-size: 32px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+h2 .highlight { color: #ffd700; }
+.lead {
+  text-align: center;
+  font-size: 17px;
+  color: #a0a0b8;
+  margin-bottom: 50px;
+}
+
+/* PROBLEM */
+.problem-list {
+  display: grid;
+  gap: 16px;
+}
+.problem-item {
+  background: #14141f;
+  padding: 20px 24px;
+  border-radius: 12px;
+  border-left: 4px solid #ff4757;
+  font-size: 16px;
+}
+.problem-item strong { color: #ff6b9d; }
+
+/* SOLUTION */
+.solution-grid {
+  display: grid;
+  gap: 24px;
+}
+.solution-item {
+  background: linear-gradient(135deg, #14142e 0%, #1a1a3a 100%);
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px solid #2a2a4e;
+}
+.solution-item .icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.solution-item h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #ffd700;
+}
+.solution-item p { color: #c0c0d8; font-size: 15px; }
+
+/* WHAT */
+.what-list {
+  background: #14141f;
+  padding: 32px;
+  border-radius: 16px;
+  border: 1px solid #2a2a4e;
+}
+.what-list li {
+  list-style: none;
+  padding: 12px 0;
+  border-bottom: 1px solid #2a2a4e;
+  font-size: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.what-list li:last-child { border-bottom: none; }
+.what-list li::before {
+  content: "✓";
+  color: #00ff88;
+  font-weight: 900;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* PRICING */
+.pricing {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) {
+  .pricing { grid-template-columns: 1fr 1fr 1fr; }
+}
+.price-card {
+  background: #14141f;
+  padding: 32px 24px;
+  border-radius: 16px;
+  border: 1px solid #2a2a4e;
+  text-align: center;
+  position: relative;
+}
+.price-card.featured {
+  background: linear-gradient(135deg, #1a1a3a 0%, #2a1a4e 100%);
+  border: 2px solid #ffd700;
+  transform: scale(1.05);
+}
+.price-card .label {
+  font-size: 13px;
+  color: #707088;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.price-card .name {
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+.price-card.featured .name { color: #ffd700; }
+.price-card .price {
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+.price-card .price .won { font-size: 18px; color: #707088; }
+.price-card .original {
+  font-size: 14px;
+  color: #707088;
+  text-decoration: line-through;
+  margin-bottom: 16px;
+}
+.price-card ul {
+  text-align: left;
+  margin: 24px 0;
+  padding: 0;
+}
+.price-card ul li {
+  list-style: none;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #c0c0d8;
+}
+.price-card ul li::before { content: "✓ "; color: #00ff88; font-weight: 700; }
+.price-card .buy {
+  display: block;
+  background: #2a2a4e;
+  color: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  margin-top: 16px;
+}
+.price-card.featured .buy {
+  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+  color: #14141f;
+}
+.featured-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff4757;
+  color: white;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* GUARANTEE */
+.guarantee {
+  background: linear-gradient(135deg, #1a3a2a 0%, #14241a 100%);
+  padding: 40px;
+  border-radius: 16px;
+  border: 1px solid #2a4e3a;
+  text-align: center;
+}
+.guarantee .seal {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+.guarantee h3 { font-size: 22px; color: #00ff88; margin-bottom: 12px; }
+.guarantee p { color: #c0c0d8; font-size: 15px; }
+
+/* FAQ */
+.faq-item {
+  background: #14141f;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.faq-item summary {
+  padding: 20px 24px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; float: right; color: #ffd700; font-size: 22px; }
+.faq-item[open] summary::after { content: "−"; }
+.faq-item .answer {
+  padding: 0 24px 20px;
+  color: #a0a0b8;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: #707088;
+  font-size: 13px;
+  border-top: 1px solid #1a1a2e;
+}
+footer a { color: #a0a0ff; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 28px; }
+  h2 { font-size: 24px; }
+  .price-card.featured { transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="badge">⚡ 2026년 4월 한정 — 출시 기념 50% 할인</div>
+    <h1>AI로 월 <span class="highlight">500만원</span><br>디지털 상품 자동화 시스템</h1>
+    <p class="sub">Claude·ChatGPT를 이용해 100일 안에 1인 부업으로<br>월 500만원을 만드는 한국어 실전 가이드 (200페이지 PDF)</p>
+    <a href="#pricing" class="cta">지금 바로 시작하기 →</a>
+    <div class="proof">⭐⭐⭐⭐⭐ 4.9 / 5.0 · 출시 첫 주 200+ 다운로드</div>
+  </div>
+</header>
+
+<!-- ============ PROBLEM ============ -->
+<section>
+  <div class="wrap">
+    <h2>혹시 이런 적 있으세요?</h2>
+    <p class="lead">아래 중 단 하나라도 해당된다면, 이 가이드는 당신을 위한 것입니다.</p>
+    <div class="problem-list">
+      <div class="problem-item">📱 <strong>"AI가 돈이 된다"</strong>는 말은 들었지만, 막상 어떻게 시작해야 할지 모르겠다</div>
+      <div class="problem-item">💸 부업 강의 수십만원짜리 결제했는데 결국 <strong>실행은 못 하고</strong> 돈만 날렸다</div>
+      <div class="problem-item">😩 직장 다니면서 따로 시간 내기 힘들어 <strong>"하루 1시간"</strong>으로 가능한 게 필요하다</div>
+      <div class="problem-item">🤖 ChatGPT/Claude 써봤는데 <strong>"이걸로 어떻게 돈을 만들지?"</strong>가 막막했다</div>
+      <div class="problem-item">📉 유튜브 부업 영상 100개 봤는데 <strong>"내가 뭘 해야 할지"</strong>는 결국 모르겠다</div>
+      <div class="problem-item">⏰ 100일 안에 <strong>실제 매출</strong>을 꼭 만들어야 하는 사람</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOLUTION ============ -->
+<section>
+  <div class="wrap">
+    <h2>이 책 한 권이 <span class="highlight">100일 로드맵</span>을 줍니다</h2>
+    <p class="lead">강의 영상 50시간 들을 시간에, 200페이지 PDF로 즉시 실행 시작.</p>
+    <div class="solution-grid">
+      <div class="solution-item">
+        <div class="icon">📘</div>
+        <h3>1. 100일 단계별 실행 매뉴얼</h3>
+        <p>1일차부터 100일차까지 매일 무엇을 해야 하는지 — 모호함 0%. 50개 챕터, 각 챕터는 "오늘 끝낼 액션" 1개로 끝남.</p>
+      </div>
+      <div class="solution-item">
+        <div class="icon">🤖</div>
+        <h3>2. Claude/ChatGPT 실전 프롬프트 100개</h3>
+        <p>전자책 목차 만들기, 카피 쓰기, 랜딩페이지 만들기, 광고 후크 뽑기 — 복붙해서 바로 쓰는 한국어 프롬프트.</p>
+      </div>
+      <div class="solution-item">
+        <div class="icon">💰</div>
+        <h3>3. 5가지 디지털 상품 템플릿</h3>
+        <p>전자책 / 노션 템플릿 / 강의 / 자동화 봇 / SaaS — 어떤 카테고리든 즉시 시작 가능한 청사진.</p>
+      </div>
+      <div class="solution-item">
+        <div class="icon">📈</div>
+        <h3>4. 트래픽 자동 생성 시스템</h3>
+        <p>릴스·틱톡·숏츠 후크 100개 + Meta/카카오 광고 카피 + SEO 키워드 50개. 일 1,000명 모객 가능.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT YOU GET ============ -->
+<section>
+  <div class="wrap">
+    <h2>받게 되는 모든 것</h2>
+    <ul class="what-list">
+      <li><strong>본책 PDF</strong> — 200페이지, 50개 챕터, 100일 로드맵</li>
+      <li><strong>실전 프롬프트북</strong> — Claude·ChatGPT 한국어 프롬프트 100개</li>
+      <li><strong>디지털 상품 5종 템플릿</strong> — 전자책/노션/강의/봇/SaaS</li>
+      <li><strong>랜딩페이지 HTML 템플릿</strong> — 그대로 복사해서 사용 가능</li>
+      <li><strong>릴스·틱톡 후크 100개</strong> — 한국 MZ 검증된 패턴</li>
+      <li><strong>광고 카피 50개</strong> — Meta/카카오/구글 즉시 사용</li>
+      <li><strong>SEO 키워드 50개</strong> — 한국 검색량 반영</li>
+      <li><strong>평생 업데이트</strong> — 새 버전 나오면 자동 발송 (PREMIUM)</li>
+      <li><strong>1:1 카톡 30일</strong> — 막힐 때 직접 질문 (PREMIUM)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing">
+  <div class="wrap">
+    <h2>지금 시작하세요</h2>
+    <p class="lead">출시 기념 50% 할인 — 4월 한정</p>
+    <div class="pricing">
+
+      <div class="price-card">
+        <div class="label">LITE</div>
+        <div class="name">맛보기 PDF</div>
+        <div class="price">19,900<span class="won">원</span></div>
+        <div class="original">정가 39,000원</div>
+        <ul>
+          <li>본책 핵심 50p PDF</li>
+          <li>프롬프트 10개</li>
+          <li>이메일 자동 발송</li>
+        </ul>
+        <a href="GUMROAD_LITE_URL" class="buy">LITE 구매</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="featured-badge">⭐ 베스트셀러</div>
+        <div class="label">STANDARD</div>
+        <div class="name">풀패키지</div>
+        <div class="price">99,000<span class="won">원</span></div>
+        <div class="original">정가 199,000원</div>
+        <ul>
+          <li>본책 PDF 200p 전체</li>
+          <li>프롬프트 100개</li>
+          <li>5종 상품 템플릿</li>
+          <li>랜딩페이지 HTML</li>
+          <li>릴스 후크 100개</li>
+          <li>광고 카피 50개</li>
+          <li>SEO 키워드 50개</li>
+        </ul>
+        <a href="GUMROAD_STANDARD_URL" class="buy">STANDARD 구매</a>
+      </div>
+
+      <div class="price-card">
+        <div class="label">PREMIUM</div>
+        <div class="name">멘토링 포함</div>
+        <div class="price">299,000<span class="won">원</span></div>
+        <div class="original">정가 599,000원</div>
+        <ul>
+          <li>STANDARD 모든 항목</li>
+          <li>1:1 카톡 30일</li>
+          <li>평생 업데이트</li>
+          <li>월간 라이브 Q&A</li>
+        </ul>
+        <a href="GUMROAD_PREMIUM_URL" class="buy">PREMIUM 구매</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ GUARANTEE ============ -->
+<section>
+  <div class="wrap">
+    <div class="guarantee">
+      <div class="seal">🛡️</div>
+      <h3>7일 100% 환불 보장</h3>
+      <p>구매 후 7일 안에 책을 읽고 "도움 안 됐다"고 판단되면<br>이유 묻지 않고 100% 전액 환불해드립니다.<br>다운로드한 PDF는 그대로 가지셔도 됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section>
+  <div class="wrap">
+    <h2>자주 묻는 질문</h2>
+    <details class="faq-item">
+      <summary>AI 사용 경험이 전혀 없어도 가능한가요?</summary>
+      <div class="answer">네. 1장부터 "ChatGPT 가입하는 법"부터 시작합니다. AI를 한 번도 안 써본 사람을 기준으로 작성됐습니다.</div>
+    </details>
+    <details class="faq-item">
+      <summary>직장 다니면서도 가능한가요?</summary>
+      <div class="answer">네. 100일 로드맵은 "하루 1~2시간 / 주말 4시간" 기준으로 설계됐습니다. 퇴근 후 시간으로 충분합니다.</div>
+    </details>
+    <details class="faq-item">
+      <summary>정말 100일 안에 월 500만원이 가능한가요?</summary>
+      <div class="answer">결과는 사람마다 다릅니다. 다만 책에 나온 매뉴얼대로 매일 1액션씩 실행하면, 100일차에 첫 매출 → 6개월차 월 500만원 도달이 현실적인 목표입니다. 빠르면 60일 만에 도달한 사례도 있습니다. 환불 보장이 있으니 부담 없이 시작하셔도 됩니다.</div>
+    </details>
+    <details class="faq-item">
+      <summary>한국어인가요? 한국 시장 기준인가요?</summary>
+      <div class="answer">100% 한국어, 100% 한국 시장 기준입니다. 결제 플랫폼(토스/카카오), SNS(네이버/카카오/인스타), 세금(부업 종합소득세)까지 모두 한국 기준.</div>
+    </details>
+    <details class="faq-item">
+      <summary>유료 광고비가 따로 드나요?</summary>
+      <div class="answer">필수 아닙니다. 책에서 "0원 트래픽"(릴스·SEO·카페·커뮤니티) 방법을 먼저 가르치고, 광고는 매출이 나기 시작한 후 재투자하는 방식으로 설계됐습니다.</div>
+    </details>
+    <details class="faq-item">
+      <summary>PDF는 어떻게 받나요?</summary>
+      <div class="answer">결제 즉시 자동으로 이메일로 다운로드 링크가 전송됩니다. PC/모바일/태블릿 어디서든 열 수 있습니다.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section>
+  <div class="wrap" style="text-align: center;">
+    <h2>100일 후 당신은 어디에 있을까요?</h2>
+    <p class="lead">"올해도 결국 못 했다"고 후회할 것인가,<br>"100일 만에 첫 매출이 나왔다"고 말할 것인가.</p>
+    <a href="#pricing" class="cta">지금 시작하기 →</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 천명당 · 이 책은 디지털 상품이며 환불 정책에 따릅니다.</p>
+  <p style="margin-top:8px;"><a href="mailto:support@yourdomain.com">문의: support@yourdomain.com</a></p>
+</footer>
+
+</body>
+</html>
