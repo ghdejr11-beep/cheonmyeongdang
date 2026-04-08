@@ -1,18 +1,20 @@
 """
 AI 멘토봇 — PREMIUM 구매자 전용 챗봇 서버.
 
-아키텍처:
-1. 고객이 Gumroad 에서 PREMIUM 구매 → Gumroad 가 라이선스 키 자동 발급 (Gumroad 내장 기능)
-2. 고객이 멘토봇 URL 접속 → 라이선스 키 입력
-3. 서버가 Gumroad API 로 키 검증 → 유효하면 세션 쿠키 발급
-4. 고객이 질문 → 서버가 책 내용을 컨텍스트로 Claude API 호출 → 답변 반환
+두 가지 인증 모드 지원:
 
-사용자(책 저자)가 할 일: 0%
-  - Gumroad 에서 "라이선스 키 활성화" 체크박스 ON (1회, 1분)
-  - 이 서버를 Render.com 에 배포 (1회, 5분)
-  - 환경변수 2개 설정 (ANTHROPIC_API_KEY, GUMROAD_PRODUCT_ID)
+[MODE 1: shared] 공유 비밀 URL (기본값, 가장 간단)
+  - 환경변수 MENTOR_SHARED_SECRET 에 비밀 문자열 설정
+  - PREMIUM 구매자에게 URL 제공: https://your-bot.com/?key=SECRET
+  - URL 접속 시 자동 세션 발급, 라이선스 키 입력 불필요
+  - Gumroad 라이선스 키 기능 필요 없음
 
-이후 모든 고객 등록·인증·답변이 100% 자동.
+[MODE 2: license] Gumroad 라이선스 키 검증
+  - 환경변수 GUMROAD_PRODUCT_ID 설정 필요
+  - 고객이 라이선스 키 입력 → Gumroad API 검증 → 세션 발급
+  - Gumroad 에서 "Generate unique license key per sale" 활성화 필요
+
+모드 전환: 환경변수 MENTOR_MODE=shared (기본) 또는 MENTOR_MODE=license
 """
 
 import os
@@ -23,8 +25,8 @@ from pathlib import Path
 from typing import Optional
 
 import httpx
-from fastapi import FastAPI, HTTPException, Cookie, Response
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi import FastAPI, HTTPException, Cookie, Response, Request
+from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import anthropic
@@ -38,6 +40,8 @@ STATIC_DIR = ROOT / "static"
 
 ANTHROPIC_API_KEY = (os.environ.get("ANTHROPIC_API_KEY") or "").strip()
 GUMROAD_PRODUCT_ID = (os.environ.get("GUMROAD_PRODUCT_ID") or "").strip()
+MENTOR_SHARED_SECRET = (os.environ.get("MENTOR_SHARED_SECRET") or "").strip()
+MENTOR_MODE = (os.environ.get("MENTOR_MODE") or "shared").strip().lower()
 SESSION_SECRET = os.environ.get("SESSION_SECRET") or secrets.token_urlsafe(32)
 MODEL = os.environ.get("MENTOR_MODEL", "claude-haiku-4-5")
 MAX_TURNS = 10  # 유지할 대화 턴 수 (user+assistant 쌍 기준)
@@ -146,7 +150,24 @@ if STATIC_DIR.exists():
 
 
 @app.get("/", response_class=HTMLResponse)
-async def index():
+async def index(key: Optional[str] = None, response: Response = None):
+    """채팅 UI 제공. ?key=SECRET 있으면 shared 모드로 자동 세션 발급."""
+    # shared 모드: URL 파라미터로 자동 인증
+    if MENTOR_MODE == "shared" and key and MENTOR_SHARED_SECRET:
+        if hmac.compare_digest(key.strip(), MENTOR_SHARED_SECRET):
+            # 인증 성공 → 쿠키 발급 + 파라미터 없는 URL 로 리디렉션
+            session_token = sign_session(f"shared:{key[:8]}")
+            resp = RedirectResponse(url="/", status_code=302)
+            resp.set_cookie(
+                key="mentor_session",
+                value=session_token,
+                httponly=True,
+                samesite="lax",
+                max_age=60 * 60 * 24 * 365,
+                secure=True,
+            )
+            return resp
+
     html_path = STATIC_DIR / "index.html"
     if html_path.exists():
         return FileResponse(html_path)
@@ -159,7 +180,9 @@ async def health():
         "status": "ok",
         "book_loaded": len(BOOK_CONTENT) > 500,
         "book_size": len(BOOK_CONTENT),
+        "mode": MENTOR_MODE,
         "gumroad_configured": bool(GUMROAD_PRODUCT_ID),
+        "shared_secret_configured": bool(MENTOR_SHARED_SECRET),
         "claude_configured": bool(client),
         "model": MODEL,
     }

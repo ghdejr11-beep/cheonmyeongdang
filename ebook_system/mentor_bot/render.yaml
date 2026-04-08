@@ -16,10 +16,14 @@ services:
     envVars:
       - key: ANTHROPIC_API_KEY
         sync: false  # 대시보드에서 수동 입력 (보안)
+      - key: MENTOR_MODE
+        value: shared  # shared (기본) 또는 license
+      - key: MENTOR_SHARED_SECRET
+        generateValue: true  # Render 가 자동 생성 (shared 모드용)
       - key: GUMROAD_PRODUCT_ID
-        sync: false  # 대시보드에서 수동 입력
+        sync: false  # 대시보드에서 수동 입력 (license 모드용)
       - key: SESSION_SECRET
-        generateValue: true  # Render 가 자동 생성
+        generateValue: true  # 쿠키 서명용 자동 생성
       - key: MENTOR_MODEL
         value: claude-haiku-4-5
       - key: PYTHON_VERSION

@@ -2,14 +2,31 @@
 
 PREMIUM 구매자 전용 AI 챗봇. 책 50개 챕터 전체를 학습한 Claude 기반 멘토.
 
-## 어떻게 작동하나
+## 두 가지 인증 모드
+
+### 🟢 MODE 1: `shared` (기본값, 가장 쉬움) ⭐ 추천
+
+- Gumroad 라이선스 키 기능 불필요
+- PREMIUM 구매자에게 **공유 URL** 제공: `https://bot.com/?key=SECRET_TOKEN`
+- URL 클릭 한 번으로 자동 인증
+- 설정 5분, Gumroad 에서 아무것도 안 해도 됨
+
+### 🔵 MODE 2: `license` (고급)
+
+- Gumroad 의 "Generate a unique license key per sale" 기능 필요
+- 고객마다 개별 라이선스 키 발급 → 입력 → 검증
+- 보안은 더 좋지만 Gumroad UI 에서 옵션 찾기 어려움
+
+**기본값은 `shared`** 입니다. 처음엔 이걸로 시작하고, 나중에 라이선스 키 기능 쓰고 싶으면 `MENTOR_MODE=license` 로 바꾸면 됩니다.
+
+## 어떻게 작동하나 (shared 모드)
 
 ```
 1. 고객이 Gumroad 에서 PREMIUM 구매
-   → Gumroad 가 고유 라이선스 키 자동 발급 + 이메일 발송
-2. 고객이 이 봇 URL 접속 → 라이선스 키 입력
-3. 서버가 Gumroad API 로 키 검증 → 세션 발급
-4. 고객이 질문 → Claude + 책 내용 → 답변
+2. Gumroad 영수증/Content 에 표시된 URL 클릭:
+   → https://your-bot.onrender.com/?key=SHARED_SECRET
+3. 서버가 URL 파라미터 검증 → 자동 세션 쿠키 발급
+4. 바로 채팅 시작 → Claude + 책 내용 → 답변
 5. (사용자=책 저자가 할 일: 0%)
 ```
 
@@ -39,23 +56,17 @@ mentor_bot/
 
 ---
 
-## 🚀 배포 — 5단계 (30분)
+## 🚀 배포 — 5단계 (shared 모드, 15분)
 
-### 1️⃣ Gumroad 에서 라이선스 키 활성화 (1분)
+### 1️⃣ Gumroad 라이선스 키 설정 (불필요!)
 
-1. Gumroad 대시보드 → **PREMIUM 상품** 수정
-2. 하단 **"License key"** 섹션 → **Generate license keys** 체크 ON
-3. 저장
+**shared 모드에선 Gumroad 에서 아무것도 할 필요 없습니다.** 다음 단계로 바로 진행하세요.
 
-이제 PREMIUM 구매자마다 고유 라이선스 키가 자동 생성됩니다. 고객은 구매 확인 이메일에서 키를 볼 수 있어요.
+(license 모드를 쓰실 거면: Gumroad 대시보드 → PREMIUM 상품 → Additional features → Generate a unique license key per sale ON — 이 옵션이 안 보이면 shared 모드를 쓰세요)
 
-### 2️⃣ PREMIUM 상품 ID 복사 (30초)
+### 2️⃣ PREMIUM 상품 ID 복사 (shared 모드에선 불필요)
 
-1. Gumroad 대시보드 → **Account settings** → **Advanced**
-2. **Enable Gumroad API** 체크
-3. PREMIUM 상품 페이지로 가서 URL 확인. 예: `https://gumroad.com/products/abc123`
-4. 상품 **Edit** 페이지 URL 에서 `product_id` 확인 (또는 API 로 `/v2/products` 호출)
-5. 이 ID 를 메모장에 저장 (다음 단계에서 사용)
+shared 모드에선 이 단계 생략. license 모드로 전환할 때만 필요.
 
 ### 3️⃣ 책 내용 복사 + 커밋 (2분)
 
@@ -78,27 +89,54 @@ git push
 
 Render 가 자동으로 빌드 시작. 3~5분 소요.
 
-### 5️⃣ 환경변수 2개 입력 (2분)
+### 5️⃣ 환경변수 입력 (2분)
 
 배포가 완료되면 Render 대시보드에서:
 
 1. **ai-mentor-bot** 서비스 클릭
 2. 좌측 메뉴 **Environment** 클릭
-3. 다음 2개 변수 추가:
-   - `ANTHROPIC_API_KEY` = `sk-ant-api03-...` (본인 Claude 키)
-   - `GUMROAD_PRODUCT_ID` = 2단계에서 복사한 상품 ID
+3. 다음 변수 확인/추가:
+   - `ANTHROPIC_API_KEY` = `sk-ant-api03-...` (본인 Claude 키) ← **필수 수동 입력**
+   - `MENTOR_MODE` = `shared` (render.yaml 에서 자동 설정됨)
+   - `MENTOR_SHARED_SECRET` = (render.yaml 에서 자동 생성됨 — **이 값을 복사해두세요**)
+   - `SESSION_SECRET` = (자동 생성)
 4. **Save Changes** → 자동 재배포
 
-### 6️⃣ URL 확인 + 랜딩페이지에 연결 (2분)
+### 6️⃣ URL 만들기 + Gumroad Content 에 넣기 (3분)
 
-Render 가 준 URL 확인 (예: `https://ai-mentor-bot.onrender.com`)
+Render 가 준 URL (예: `https://ai-mentor-bot.onrender.com`) 에 `MENTOR_SHARED_SECRET` 값을 붙여 **고객용 접속 URL** 생성:
 
-`config.py` 를 열어서 추가:
+```
+https://ai-mentor-bot.onrender.com/?key=여기에MENTOR_SHARED_SECRET값
+```
+
+이 URL 을 **Gumroad PREMIUM 상품의 Content 탭**에 복사:
+
+1. Gumroad → PREMIUM 상품 → **Content** 탭
+2. 본책 PDF 아래에 **+ Page** 또는 **Insert → Text** 로 텍스트 블록 추가
+3. 다음 내용 입력:
+
+```
+🤖 AI 멘토봇 평생 무제한 이용
+
+아래 링크를 클릭하면 전용 AI 멘토에게 24시간 질문할 수 있습니다:
+
+👉 [AI 멘토봇 바로가기](https://ai-mentor-bot.onrender.com/?key=SECRET_TOKEN)
+
+책 50개 챕터 전체를 학습한 AI 가 즉시 답변드립니다.
+이 링크는 PREMIUM 구매자 전용이며, 외부 공유를 금합니다.
+```
+
+4. Save
+
+이제 PREMIUM 구매자는 Gumroad 다운로드 페이지에서 이 URL 을 클릭 → 바로 멘토봇 접속. 끝.
+
+### 7️⃣ 랜딩페이지에 연결 (1분)
+
+`config.py` 의 `MENTOR_BOT_URL` 수정 (secret 포함 X, 홍보용):
 ```python
 MENTOR_BOT_URL = "https://ai-mentor-bot.onrender.com"
 ```
-
-`landing.html` 의 PREMIUM 섹션에 "AI 멘토봇 접속 →" 버튼으로 이 URL 추가.
 
 `python build_landing.py` 재실행 → Netlify 재배포.
 
