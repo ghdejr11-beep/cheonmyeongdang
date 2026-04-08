@@ -36,7 +36,11 @@ MODEL_SHORTS = "claude-opus-4-6"
 # ============================================================
 PRICE_LITE = 19_900       # 미끼 상품 (PDF 50p)
 PRICE_STANDARD = 99_000   # 메인 상품 (PDF 200p + 템플릿)
-PRICE_PREMIUM = 299_000   # 프리미엄 (위 + 1:1 카톡 30일 + 평생 업데이트)
+PRICE_PREMIUM = 299_000   # 프리미엄 (위 + AI 멘토봇 평생 + 업데이트)
+
+# AI 멘토봇 URL (mentor_bot/ 배포 후 여기 채우기)
+# 예: "https://ai-mentor-bot.onrender.com"
+MENTOR_BOT_URL = "https://your-mentor-bot.onrender.com"
 
 # ============================================================
 # 판매 링크 (등록 후 채워넣기)
