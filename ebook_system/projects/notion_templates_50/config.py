@@ -36,7 +36,7 @@ CATEGORIES = [
 ]
 
 # Claude API 설정
-MODEL = "claude-sonnet-4-5"  # 템플릿 설계는 sonnet 권장 (더 구조적)
+MODEL = "claude-sonnet-4-6"  # 템플릿 설계는 sonnet 권장 (더 구조적)
 MAX_TOKENS_PER_TEMPLATE = 4000
 
 import os
