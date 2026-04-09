@@ -1,6 +1,7 @@
 # 폴더 감시 자동 실행기
 # music_drop 폴더에 MP3를 넣으면
-# 12시간 루프 -> 애니메이션 MP4 -> 스타일 폴더 분류 -> YouTube 자동 업로드
+# 8시간 루프 -> 애니메이션 MP4 -> 스타일 폴더 분류 -> YouTube 자동 업로드
+# (12시간은 YouTube 업로드 한도 경계라 삭제 위험. 8시간으로 안전 마진 확보)
 # 사용법: 더블클릭으로 실행하면 백그라운드에서 폴더를 계속 감시합니다.
 
 import os, sys, time, shutil, threading, logging
@@ -17,7 +18,7 @@ WATCH_DIR = os.path.join(os.path.expanduser("~"), "Desktop", "music_drop")
 DONE_DIR = os.path.join(WATCH_DIR, "done")
 
 # 기본 설정
-DEFAULT_HOURS = 12
+DEFAULT_HOURS = 8  # 이전에 12였으나 YouTube 가 "너무 길다"며 삭제 → 안전 범위 8시간
 DEFAULT_COLOR = "#ffffff"
 DEFAULT_PRIVACY = "public"
 
@@ -99,8 +100,8 @@ def process_mp3(mp3_path):
         except:
             safe_mp3 = mp3_path
 
-    # 3-1: MP3 루프 (12시간)
-    log.info("MP3 루프 생성 중... (12시간)")
+    # 3-1: MP3 루프
+    log.info(f"MP3 루프 생성 중... ({DEFAULT_HOURS}시간)")
     loop_mp3_path = os.path.join(style_folder, f"loop_{int(time.time())}.mp3")
 
     # ffmpeg/ffprobe 찾기
@@ -152,7 +153,7 @@ def process_mp3(mp3_path):
         return False
     log.info(f"MP3 루프 완료: {os.path.getsize(loop_mp3_path) / 1024 / 1024:.1f} MB")
 
-    # 3-2: 애니메이션 MP4 생성 (2단계 방식: 짧은 루프 영상 → 12시간 확장)
+    # 3-2: 애니메이션 MP4 생성 (2단계 방식: 짧은 루프 영상 → N시간 확장)
     log.info("애니메이션 MP4 생성 중...")
 
     try:
@@ -229,7 +230,7 @@ def process_mp3(mp3_path):
                "-shortest", "-movflags", "+faststart",
                out_path]
 
-        log.info("2/2: 12시간 영상 합치기 중 (빠름)...")
+        log.info(f"2/2: {DEFAULT_HOURS}시간 영상 합치기 중 (빠름)...")
         result = run_cmd(cmd_final, timeout=3600)
 
         if not result or result.returncode != 0 or not os.path.exists(out_path):

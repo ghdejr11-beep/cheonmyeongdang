@@ -1,10 +1,11 @@
 @echo off
 chcp 65001 >nul
-title [Auto Watcher] 12시간 루프 자동 업로드
+title [Auto Watcher] 8시간 루프 자동 업로드
 cd /d "%~dp0"
 
 echo ============================================================
-echo  12시간 루프 믹스 자동 업로드
+echo  8시간 루프 믹스 자동 업로드
+echo  (12시간 → YouTube 삭제 위험 → 8시간 안전 마진)
 echo ============================================================
 echo.
 echo  감시 폴더: %USERPROFILE%\Desktop\music_drop

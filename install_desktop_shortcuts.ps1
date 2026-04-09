@@ -48,10 +48,10 @@ function New-Shortcut {
     Write-Host "  [OK] $LinkName.lnk" -ForegroundColor Green
 }
 
-New-Shortcut -LinkName "12시간 믹스 자동 업로드" `
+New-Shortcut -LinkName "8시간 믹스 자동 업로드" `
              -TargetBat "auto_watcher.bat" `
              -IconRef "shell32.dll,137" `
-             -Description "12시간 루프 BGM YouTube 자동 업로드"
+             -Description "8시간 루프 BGM YouTube 자동 업로드 (12시간 삭제 회피)"
 
 New-Shortcut -LinkName "가사 노래 자동 업로드" `
              -TargetBat "lyrics_watcher.bat" `
