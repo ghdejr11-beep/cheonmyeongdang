@@ -182,6 +182,78 @@ def seconds_to_srt_time(seconds: float) -> str:
     return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
 
 
+def convert_txt_to_lrc(txt_path: str, lrc_path: str, audio_duration: float) -> bool:
+    """타임스탬프 없는 일반 .txt 가사 → .lrc 로 변환.
+
+    곡 전체 길이에 맞춰 가사 라인을 **균등 배분**. 정확한 싱크는 아니지만
+    Suno 에서 복사한 가사를 그대로 .txt 로 저장만 하면 자막이 화면에 뜬다.
+
+    - [Verse], [Chorus] 같은 섹션 마커는 무시 (화면엔 안 뜸)
+    - 빈 줄은 무시
+    - 첫 라인 시작 시간 = 2초 (인트로 여유)
+    - 마지막 라인 끝 = duration - 3초 (아웃트로 여유)
+    """
+    try:
+        content = Path(txt_path).read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        try:
+            content = Path(txt_path).read_text(encoding="cp949")
+        except Exception as e:
+            log.warning(f"TXT 가사 읽기 실패: {e}")
+            return False
+    except Exception as e:
+        log.warning(f"TXT 가사 읽기 실패: {e}")
+        return False
+
+    import re
+    lines: list[str] = []
+    for raw in content.split("\n"):
+        line = raw.strip()
+        if not line:
+            continue
+        # [Verse], [Chorus], [Bridge], [Intro] 등 섹션 마커 스킵
+        if re.match(r"^\[.+\]$", line):
+            continue
+        # 이미 타임스탬프가 있는 .lrc 형식이면 스킵하지 말고 그대로 통과
+        # (convert_lrc_to_srt 가 처리하도록)
+        if re.match(r"^\[\d+:\d+", line):
+            # 이미 LRC 형식 → TXT 변환 불필요, 원본 그대로 복사
+            Path(lrc_path).write_text(content, encoding="utf-8")
+            log.info(f"TXT 가 이미 LRC 형식 → 그대로 사용")
+            return True
+        lines.append(line)
+
+    if not lines:
+        log.warning(f"TXT 가사에 실제 라인 없음")
+        return False
+
+    # 균등 타이밍 계산
+    intro_buffer = 2.0          # 첫 라인 시작 = 2초
+    outro_buffer = 3.0          # 마지막 라인 종료 여유
+    usable = max(audio_duration - intro_buffer - outro_buffer, 1.0)
+    per_line = usable / max(len(lines), 1)
+
+    # LRC 포맷으로 저장 ([mm:ss.xx]텍스트)
+    lrc_lines = []
+    for i, text in enumerate(lines):
+        start = intro_buffer + i * per_line
+        mm = int(start // 60)
+        ss = int(start % 60)
+        xx = int(round((start - int(start)) * 100))
+        if xx == 100:
+            ss += 1
+            xx = 0
+        lrc_lines.append(f"[{mm:02d}:{ss:02d}.{xx:02d}]{text}")
+
+    try:
+        Path(lrc_path).write_text("\n".join(lrc_lines) + "\n", encoding="utf-8")
+        log.info(f"TXT → LRC 변환: {len(lines)}줄, 라인당 {per_line:.1f}초 균등 배분")
+        return True
+    except Exception as e:
+        log.error(f"LRC 쓰기 실패: {e}")
+        return False
+
+
 def convert_lrc_to_srt(lrc_path: str, srt_path: str) -> bool:
     """LRC (`[MM:SS.xx]가사`) → SRT 변환.
     [Verse], [Chorus] 같은 섹션 태그는 무시한다.
@@ -519,11 +591,42 @@ def process_mp3(mp3_path: str) -> bool:
     safe_stem = "".join(c if c.isalnum() or c in " -_" else "_" for c in Path(filename).stem)
     out_mp4 = str(unique_path(str(out_dir / f"lyric_{safe_stem}.mp4")))
 
-    # .lrc 파일 자동 감지 (MP3 와 같은 이름)
+    # .lrc 또는 .txt 가사 파일 자동 감지 (MP3 와 같은 이름)
+    # 우선순위: .lrc (타임스탬프 있음) > .txt (균등 배분)
+    lrc_path = None
     lrc_candidate = str(Path(mp3_path).with_suffix(".lrc"))
-    lrc_path = lrc_candidate if os.path.exists(lrc_candidate) else None
-    if lrc_path:
-        log.info(f"가사 파일 감지: {os.path.basename(lrc_path)}")
+    txt_candidate = str(Path(mp3_path).with_suffix(".txt"))
+
+    if os.path.exists(lrc_candidate):
+        lrc_path = lrc_candidate
+        log.info(f"LRC 가사 파일 감지: {os.path.basename(lrc_path)}")
+    elif os.path.exists(txt_candidate):
+        # .txt 를 .lrc 로 자동 변환 (오디오 길이 기반 균등 배분)
+        log.info(f"TXT 가사 파일 감지: {os.path.basename(txt_candidate)} → 자동 타이밍 생성")
+        try:
+            from playlist_maker import get_duration
+            dur = get_duration(mp3_path)
+            auto_lrc = os.path.join(tmp_dir, "auto_timed.lrc")
+            if dur > 0 and convert_txt_to_lrc(txt_candidate, auto_lrc, dur):
+                lrc_path = auto_lrc
+                # 생성된 가사로 설명글도 업데이트 (lyrics_section 재계산)
+                try:
+                    txt_content = Path(txt_candidate).read_text(encoding="utf-8")
+                except UnicodeDecodeError:
+                    txt_content = Path(txt_candidate).read_text(encoding="cp949")
+                import re
+                clean = re.sub(r"\[[^\]]*\]", "", txt_content)
+                clean = "\n".join(ln.strip() for ln in clean.splitlines() if ln.strip())
+                if clean and "[여기에 가사가 자동으로 들어갑니다" in auto_description:
+                    auto_description = auto_description.replace(
+                        "[여기에 가사가 자동으로 들어갑니다 — .lrc 파일 동봉 시]",
+                        clean[:2000],
+                    )
+                    log.info(f"설명글에 가사 {len(clean)} 자 자동 삽입")
+            else:
+                log.warning("TXT → LRC 변환 실패, 자막 없이 진행")
+        except Exception as e:
+            log.warning(f"TXT 자동 타이밍 생성 실패: {e}")
 
     if not make_lyric_video(mp3_path, bg_path, out_mp4, ffmpeg,
                              lrc_path=lrc_path, tmp_dir=tmp_dir):
