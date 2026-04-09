@@ -164,49 +164,252 @@ def generate_lyric_description(metadata: dict, filename: str, style_name: str, s
 
 
 # ============================================================
-# MP4 생성 (정적 배경 + 음원)
+# LRC → SRT 변환 (가사 자막용)
 # ============================================================
-def make_lyric_video(mp3_path: str, bg_image: str, out_path: str, ffmpeg: str) -> bool:
-    """MP3 길이 그대로 MP4 생성. 정적 이미지 + 오디오.
+def seconds_to_srt_time(seconds: float) -> str:
+    """초 단위 → SRT 시간 형식 (HH:MM:SS,mmm).
+    round() 로 부동소수점 오차 보정.
+    """
+    total_ms = int(round(seconds * 1000))
+    h = total_ms // 3_600_000
+    m = (total_ms % 3_600_000) // 60_000
+    s = (total_ms % 60_000) // 1000
+    ms = total_ms % 1000
+    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
 
-    12시간 루프 같은 거 없음. 그냥 원본 길이.
+
+def convert_lrc_to_srt(lrc_path: str, srt_path: str) -> bool:
+    """LRC (`[MM:SS.xx]가사`) → SRT 변환.
+    [Verse], [Chorus] 같은 섹션 태그는 무시한다.
+    성공 시 True.
+    """
+    import re
+    try:
+        lrc_content = Path(lrc_path).read_text(encoding="utf-8")
+    except Exception as e:
+        log.warning(f"LRC 읽기 실패: {e}")
+        return False
+
+    # [MM:SS.xx] 또는 [MM:SS] 형식 매칭. 소수점 2~3자리 모두 허용.
+    time_pat = re.compile(r"\[(\d+):(\d+)(?:[.:](\d+))?\](.*)")
+    entries: list[tuple[float, str]] = []
+    for line in lrc_content.split("\n"):
+        line = line.strip()
+        if not line:
+            continue
+        # [Verse], [Chorus] 같은 섹션 마커 스킵
+        if line.startswith("[") and not time_pat.match(line):
+            continue
+        m = time_pat.match(line)
+        if not m:
+            # 타임스탬프 없는 일반 텍스트도 스킵 (LRC 포맷만 처리)
+            continue
+        mm, ss, frac, text = m.groups()
+        start = int(mm) * 60 + int(ss)
+        if frac:
+            # 소수점 부분 처리 (2자리 = 1/100, 3자리 = 1/1000)
+            if len(frac) == 2:
+                start += int(frac) / 100
+            elif len(frac) == 3:
+                start += int(frac) / 1000
+            else:
+                start += int(frac) / (10 ** len(frac))
+        text = text.strip()
+        if text:
+            entries.append((start, text))
+
+    if not entries:
+        log.warning("LRC 에서 가사 라인을 찾지 못함")
+        return False
+
+    entries.sort(key=lambda x: x[0])
+
+    try:
+        with open(srt_path, "w", encoding="utf-8") as f:
+            for i, (start, text) in enumerate(entries):
+                end = entries[i + 1][0] - 0.05 if i + 1 < len(entries) else start + 4.0
+                if end <= start:
+                    end = start + 3.0
+                f.write(f"{i + 1}\n")
+                f.write(f"{seconds_to_srt_time(start)} --> {seconds_to_srt_time(end)}\n")
+                f.write(f"{text}\n\n")
+        log.info(f"LRC → SRT 변환 완료: {len(entries)}개 가사 라인")
+        return True
+    except Exception as e:
+        log.error(f"SRT 쓰기 실패: {e}")
+        return False
+
+
+# ============================================================
+# 경로 이스케이프 (ffmpeg filter 용)
+# ============================================================
+def escape_for_ffmpeg_filter(path: str) -> str:
+    """ffmpeg filtergraph 안에서 쓸 경로 이스케이프.
+    Windows 드라이브 콜론 `C:` → `C\\:` 로 변환.
+    """
+    p = path.replace("\\", "/")
+    p = p.replace(":", "\\:")
+    return p
+
+
+# ============================================================
+# MP4 생성 (오디오 리액티브 + 가사 자막 = 수익화 가능한 뮤직비디오)
+# ============================================================
+def make_lyric_video(mp3_path: str, bg_image: str, out_path: str, ffmpeg: str,
+                     lrc_path: str = None, tmp_dir: str = None) -> bool:
+    """오디오 리액티브 시각 효과 + 가사 자막이 들어간 뮤직비디오 생성.
+
+    2026년 YouTube 정책: "AI 음악 + 정적 이미지" 는 수익화 불가.
+    이 함수는 다음 3가지를 추가해서 수익화 가능한 '실질적 부가가치' 를 만든다:
+      1. showwaves: 음악 파형을 실시간으로 그리는 레이어
+      2. showspectrum: 주파수 스펙트럼 레이어
+      3. subtitles: .lrc 파일 있으면 가사 자막 표시 (타이밍 맞춤)
+
+    lrc_path 가 None 이거나 파일이 없으면 시각 효과만 적용.
+    tmp_dir 은 SRT 중간 파일을 쓰기 위한 작업 폴더.
     """
     try:
-        # ffprobe 로 오디오 길이 확인 (fallback: playlist_maker.get_duration)
         from playlist_maker import get_duration
         duration = get_duration(mp3_path)
         if duration <= 0:
             log.error("MP3 길이 감지 실패")
             return False
 
-        log.info(f"비디오 생성: {duration:.1f}초 길이")
+        log.info(f"뮤직비디오 생성: {duration:.1f}초 (오디오 리액티브 + 가사)")
 
+        # ---- 1. LRC → SRT 변환 (가사 있을 때만) ----
+        srt_path = None
+        if lrc_path and os.path.exists(lrc_path) and tmp_dir:
+            srt_candidate = os.path.join(tmp_dir, "lyrics.srt")
+            if convert_lrc_to_srt(lrc_path, srt_candidate):
+                srt_path = srt_candidate
+
+        # ---- 2. 폰트 경로 (워터마크 + 자막용) ----
+        font_file = SCRIPT_DIR / "fonts" / "NanumGothic-Bold.ttf"
+        if not font_file.exists():
+            # playlist_maker 나 다른 프로젝트 fonts 폴더에서 찾기
+            for candidate in [
+                SCRIPT_DIR / "ebook_system" / "projects" / "prompt_pack_1000" / "fonts" / "NanumGothic-Bold.ttf",
+                Path(r"C:\Windows\Fonts\malgun.ttf"),
+                Path("/usr/share/fonts/truetype/nanum/NanumGothic.ttf"),
+            ]:
+                if candidate.exists():
+                    font_file = candidate
+                    break
+
+        font_path_ffmpeg = escape_for_ffmpeg_filter(str(font_file))
+
+        # ---- 3. filter_complex 구성 ----
+        # 배경 이미지 1920x1080 로 스케일/패드
+        filters = [
+            "[0:v]scale=1920:1080:force_original_aspect_ratio=decrease,"
+            "pad=1920:1080:(ow-iw)/2:(oh-ih)/2:black,setsar=1[bg]",
+
+            # 오디오 파형 (showwaves): 하단에 얇게 깔림
+            "[1:a]showwaves=s=1920x120:mode=cline:colors=0xffd70080|0xffffff80:rate=30,"
+            "format=yuva420p,colorchannelmixer=aa=0.7[waves]",
+
+            # 배경 + 파형 오버레이 (하단 130px 띄워서)
+            "[bg][waves]overlay=0:main_h-h-120[bgwaves]",
+
+            # 주파수 스펙트럼 (showspectrum): 맨 아래 얇은 밴드
+            "[1:a]showspectrum=s=1920x50:mode=combined:color=rainbow:scale=log:"
+            "slide=scroll:saturation=0.8,format=yuva420p,colorchannelmixer=aa=0.6[spec]",
+
+            "[bgwaves][spec]overlay=0:main_h-h[bgspec]",
+        ]
+
+        # 워터마크 (우측 상단)
+        watermark = (
+            f"[bgspec]drawtext=text='덕구네 AI 발라드':"
+            f"fontfile='{font_path_ffmpeg}':"
+            f"fontcolor=white@0.65:"
+            f"fontsize=26:"
+            f"box=1:boxcolor=black@0.3:boxborderw=8:"
+            f"x=w-tw-30:y=30[watermarked]"
+        )
+        filters.append(watermark)
+
+        # 자막 오버레이 (SRT 있을 때만)
+        last_label = "[watermarked]"
+        if srt_path:
+            srt_ffmpeg = escape_for_ffmpeg_filter(srt_path)
+            fonts_dir = escape_for_ffmpeg_filter(str(font_file.parent))
+            # libass force_style 로 크게·가운데·외곽선
+            sub_filter = (
+                f"{last_label}subtitles='{srt_ffmpeg}':"
+                f"fontsdir='{fonts_dir}':"
+                f"force_style='FontName=NanumGothic,FontSize=34,"
+                f"PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,"
+                f"BackColour=&H80000000,BorderStyle=1,Outline=2.5,"
+                f"Shadow=1,Alignment=2,MarginV=180'[out]"
+            )
+            filters.append(sub_filter)
+            last_label = "[out]"
+
+        filter_complex = ";".join(filters)
+
+        # ---- 4. ffmpeg 명령어 ----
         cmd = [
             ffmpeg, "-y",
             "-loop", "1", "-i", bg_image,
             "-i", mp3_path,
+            "-filter_complex", filter_complex,
+            "-map", last_label,
+            "-map", "1:a",
             "-c:v", "libx264",
-            "-tune", "stillimage",
             "-preset", "veryfast",
+            "-crf", "23",
             "-c:a", "aac",
             "-b:a", "192k",
             "-pix_fmt", "yuv420p",
-            "-vf", "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:black",
+            "-r", "30",
             "-shortest",
             "-t", f"{duration:.2f}",
             out_path,
         ]
+
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=1800)
         if result.returncode != 0:
-            log.error(f"ffmpeg 에러: {result.stderr[-500:]}")
-            return False
+            log.error(f"ffmpeg 에러 (stderr 마지막 800자):")
+            log.error(result.stderr[-800:])
+            # 폴백: 자막/리액티브 없이 정적 배경 + 오디오만 시도
+            log.warning("폴백: 정적 배경 모드로 재시도")
+            return _make_static_video_fallback(mp3_path, bg_image, out_path, ffmpeg, duration)
 
         size_mb = os.path.getsize(out_path) / 1024 / 1024
-        log.info(f"MP4 완성: {out_path} ({size_mb:.1f} MB)")
+        log.info(f"✓ 뮤직비디오 완성: {out_path} ({size_mb:.1f} MB)")
         return True
     except Exception as e:
         log.error(f"비디오 생성 실패: {e}")
         return False
+
+
+def _make_static_video_fallback(mp3_path: str, bg_image: str, out_path: str,
+                                ffmpeg: str, duration: float) -> bool:
+    """filter_complex 실패 시 최소한의 정적 배경 + 오디오 영상 생성.
+    수익화는 어렵지만 최소한 업로드는 가능하게.
+    """
+    log.warning("[폴백] 정적 배경 비디오 생성 중")
+    cmd = [
+        ffmpeg, "-y",
+        "-loop", "1", "-i", bg_image,
+        "-i", mp3_path,
+        "-c:v", "libx264", "-tune", "stillimage", "-preset", "veryfast",
+        "-c:a", "aac", "-b:a", "192k",
+        "-pix_fmt", "yuv420p",
+        "-vf", "scale=1920:1080:force_original_aspect_ratio=decrease,"
+               "pad=1920:1080:(ow-iw)/2:(oh-ih)/2:black",
+        "-shortest", "-t", f"{duration:.2f}",
+        out_path,
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=1800)
+    if result.returncode != 0:
+        log.error(f"폴백도 실패: {result.stderr[-500:]}")
+        return False
+    size_mb = os.path.getsize(out_path) / 1024 / 1024
+    log.info(f"폴백 MP4 완성: {out_path} ({size_mb:.1f} MB)")
+    return True
 
 
 # ============================================================
@@ -275,13 +478,20 @@ def process_mp3(mp3_path: str) -> bool:
             log.error(f"배경 생성 실패: {e}")
             return False
 
-    # 6. MP4 생성
+    # 6. MP4 생성 (오디오 리액티브 + 가사 자막 자동 감지)
     out_dir = HOME / "Desktop" / "playlist_output" / "Lyrics"
     out_dir.mkdir(parents=True, exist_ok=True)
     safe_stem = "".join(c if c.isalnum() or c in " -_" else "_" for c in Path(filename).stem)
     out_mp4 = str(unique_path(str(out_dir / f"lyric_{safe_stem}.mp4")))
 
-    if not make_lyric_video(mp3_path, bg_path, out_mp4, ffmpeg):
+    # .lrc 파일 자동 감지 (MP3 와 같은 이름)
+    lrc_candidate = str(Path(mp3_path).with_suffix(".lrc"))
+    lrc_path = lrc_candidate if os.path.exists(lrc_candidate) else None
+    if lrc_path:
+        log.info(f"가사 파일 감지: {os.path.basename(lrc_path)}")
+
+    if not make_lyric_video(mp3_path, bg_path, out_mp4, ffmpeg,
+                             lrc_path=lrc_path, tmp_dir=tmp_dir):
         log.error("MP4 생성 실패 → 중단")
         return False
 
