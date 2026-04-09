@@ -86,7 +86,8 @@ def extract_json_array(text: str) -> list:
     e = text.rfind("]") + 1
     if s < 0 or e <= s:
         raise ValueError(f"JSON 파싱 실패: {text[:300]}")
-    return json.loads(text[s:e])
+    # strict=False: 문자열 내부 줄바꿈 등 제어 문자 허용
+    return json.loads(text[s:e], strict=False)
 
 
 def generate_category(cat: dict) -> list:
