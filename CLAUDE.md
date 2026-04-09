@@ -36,11 +36,26 @@
    - 샌드박스에서 실행 → 에러 재현 → 수정 → 재실행 → 통과 확인 → 그 다음 사용자에게
    - 사용자를 디버거로 쓰지 말 것 (시간·에너지 낭비)
 
-5. **라이브러리 호환성 함정 피하기**
+5. **⭐ 외부 시스템에 대한 모든 주장은 검색 후에만 한다 (절대 원칙)**
+   - GitHub Actions, YouTube, Telegram, Suno, Anthropic, Render, Google Calendar 등
+     **외부 서비스의 동작·정책·제한** 에 대해 말하기 전에 **무조건 WebSearch 먼저**.
+   - "기억으론 이렇다", "보통 이렇다", "~일 거다" 같은 추측 표현 금지.
+   - 검색 결과 기반으로 답할 때는 **반드시 출처 URL** 같이 명시.
+   - 모르는 거면 **"모르겠다, 검색해볼게"** 라고 솔직히 말하고 검색.
+   - **재발 사례** (꼭 기억):
+     - YouTube 15분 제한 → 검색 안 하고 "verify 가면 풀린다" 추측 → 사용자가 이미 검증된 상태인데 또 추측 → 망신
+     - YouTube 12시간 한도 → 검색 안 하고 "12시간이 한도" 라고만 알려줌 → 사용자 영상 삭제됨
+     - GitHub Actions workflow_dispatch → 검색 안 하고 "main 브랜치에서만 작동" 단언 → 맞긴 했지만 검색 후 답했어야 함
+     - Suno + YouTube 수익화 → 처음엔 12시간 BGM 추천 → 나중에 검색해보니 정적 이미지 = 수익화 거절. 처음부터 검색했어야 함
+
+6. **라이브러리 호환성 함정 피하기**
    - `fpdf2`: 한국어 긴 문장 + 특수문자 조합에서 "Not enough horizontal space" 에러 → 사용 금지, reportlab 사용
    - `cryptography` 바인딩 이슈: 샌드박스에서 import 실패해도 사용자 Windows 에선 작동하는 경우 있음
    - API 키 환경변수: `\n` 자동 strip 필수
    - PowerShell vs CMD: Copy-Item / [Environment]:: 는 PowerShell 전용
+   - **ffmpeg drawtext + 한국어 경로**: Windows ffmpeg 은 non-ASCII 폰트 경로 못 읽음 → ASCII 경로 (`C:\Windows\Fonts\malgun.ttf`) 사용
+   - **subprocess Korean Windows**: `text=True` 만 쓰면 CP949 디코딩 크래시 → `encoding='utf-8', errors='replace'` 명시
+   - **cmd.exe 배치 파일 인코딩**: `chcp 65001` 은 출력 코드페이지만 바꿈, **파서는 OEM 코드페이지 (CP949)** 라서 `→`, `✓` 같은 특수 unicode 가 echo 줄을 깨뜨림 → 배치 파일은 ASCII + Hangul 만 (특수 화살표·체크 금지)
 
 ### 실패 사례 기록 (재발 방지)
 
@@ -51,6 +66,12 @@
 | `[Environment]::SetEnvironmentVariable` 에러 | `:` 빠짐 + CMD 에서 실행 | PowerShell 명시 + 정확한 문법 |
 | `/mobile` 명령 CMD 에서 실행 | Claude Code 내부 명령인데 CMD 에 입력 | Claude Code 세션 내부에서 실행해야 함 명시 |
 | main 브랜치에 checkout 실패 | local 변경사항 (index.html) 충돌 | 별도 폴더에 clone (`cheonmyeongdang_ebook`) |
+| YouTube 15분 제한 오진단 | 검색 안 하고 "verify 가면 풀린다" 추측 | 외부 서비스 정책은 무조건 검색 |
+| YouTube 12시간 영상 삭제 | 12시간 한도 경계선 + 추측성 추천 | 길이 8시간으로 안전 마진, Suno 워크플로우로 전환 |
+| auto_watcher.bat `'삭제' is not recognized` | `→` unicode 가 CP949 로 잘못 디코딩 → echo 분리 | 배치 파일은 ASCII + Hangul 만 |
+| lyrics_watcher 검은 화면 | drawtext 가 non-ASCII 폰트 경로 (`C:\Users\쿤\...`) 못 읽음 | drawtext 제거, 자막은 `C:\Windows\Fonts\malgun.ttf` 로 |
+| subprocess CP949 크래시 | `text=True` 가 OEM 코드페이지로 stderr 디코딩 | `encoding='utf-8', errors='replace'` |
+| GitHub Actions workflow 안 보임 | workflow_dispatch UI 는 default branch 만 인식 | feature branch 에선 `push` 트리거 추가 |
 
 ---
 
