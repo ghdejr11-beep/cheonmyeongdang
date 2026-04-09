@@ -90,21 +90,18 @@ def process_mp3(mp3_path):
     style_folder = os.path.join(output_dir, style_info.get("folder", "General"))
     os.makedirs(style_folder, exist_ok=True)
 
-    # 안전한 경로로 MP3 복사 (한글 경로 회피)
+    # 안전한 경로로 원본 복사 (한글 경로 회피, 확장자 유지)
+    src_ext = os.path.splitext(mp3_path)[1].lower() or ".mp3"
     for base in [os.path.join("C:\\", "pl"), os.path.join(os.environ.get("TEMP", "/tmp"), "pl")]:
         try:
             os.makedirs(base, exist_ok=True)
-            safe_mp3 = os.path.join(base, "auto_input.mp3")
-            shutil.copy2(mp3_path, safe_mp3)
+            safe_src = os.path.join(base, f"auto_input{src_ext}")
+            shutil.copy2(mp3_path, safe_src)
             break
         except:
-            safe_mp3 = mp3_path
+            safe_src = mp3_path
 
-    # 3-1: MP3 루프
-    log.info(f"MP3 루프 생성 중... ({DEFAULT_HOURS}시간)")
-    loop_mp3_path = os.path.join(style_folder, f"loop_{int(time.time())}.mp3")
-
-    # ffmpeg/ffprobe 찾기
+    # ffmpeg/ffprobe 찾기 (루프 변환 전에 필요)
     ffmpeg = "ffmpeg"
     ffprobe = "ffprobe"
     for p in [r"C:\ffmpeg\bin\ffmpeg.exe", r"C:\Program Files\ffmpeg\bin\ffmpeg.exe"]:
@@ -112,6 +109,31 @@ def process_mp3(mp3_path):
             ffmpeg = p
             ffprobe = p.replace("ffmpeg.exe", "ffprobe.exe")
             break
+
+    # 3-0: 비-MP3 는 먼저 MP3 로 변환 (WAV/M4A/FLAC 등)
+    if src_ext != ".mp3":
+        log.info(f"{src_ext.upper()} 파일 감지 → MP3 로 변환 중...")
+        safe_mp3 = os.path.join(os.path.dirname(safe_src), "auto_input.mp3")
+        convert_result = subprocess.run(
+            [ffmpeg, "-y", "-i", safe_src,
+             "-vn",                       # 비디오 트랙 제거
+             "-c:a", "libmp3lame",
+             "-b:a", "192k",
+             "-ar", "44100",
+             safe_mp3],
+            capture_output=True, text=True,
+            creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
+        )
+        if convert_result.returncode != 0 or not os.path.exists(safe_mp3):
+            log.error(f"MP3 변환 실패: {convert_result.stderr[-500:]}")
+            return False
+        log.info(f"MP3 변환 완료: {os.path.getsize(safe_mp3) / 1024 / 1024:.1f} MB")
+    else:
+        safe_mp3 = safe_src
+
+    # 3-1: MP3 루프
+    log.info(f"MP3 루프 생성 중... ({DEFAULT_HOURS}시간)")
+    loop_mp3_path = os.path.join(style_folder, f"loop_{int(time.time())}.mp3")
 
     # 원본 길이 확인
     probe_result = subprocess.run(
@@ -321,11 +343,14 @@ def watch_folder():
 
     processed = set()
 
+    # 지원 오디오 포맷 (ffmpeg 가 전부 MP3 로 변환해서 처리)
+    audio_extensions = (".mp3", ".wav", ".m4a", ".flac", ".aac", ".ogg", ".opus", ".wma")
+
     while True:
         try:
-            # 폴더 내 MP3 파일 검색
+            # 폴더 내 오디오 파일 검색 (MP3 외 WAV/M4A 등도 지원)
             for f in os.listdir(WATCH_DIR):
-                if not f.lower().endswith(".mp3"):
+                if not f.lower().endswith(audio_extensions):
                     continue
                 if f in processed:
                     continue

@@ -538,13 +538,16 @@ def process_mp3(mp3_path: str) -> bool:
 # ============================================================
 # 폴더 감시 루프
 # ============================================================
+AUDIO_EXTENSIONS = (".mp3", ".wav", ".m4a", ".flac", ".aac", ".ogg", ".opus", ".wma")
+
+
 def watch_loop():
     log.info("=" * 50)
     log.info("가사 노래 자동 업로더 시작")
     log.info(f"감시 폴더: {WATCH_DIR}")
-    log.info("MP3 파일을 이 폴더에 넣으면 자동으로 처리됩니다.")
+    log.info("오디오 파일 (MP3/WAV/M4A/FLAC 등) 을 이 폴더에 넣으면 자동 처리됩니다.")
     log.info("배경 이미지를 쓰려면 bg.png 또는 bg.jpg 를 같은 폴더에 넣으세요.")
-    log.info(".lrc 파일을 MP3 와 같은 이름으로 두면 가사가 자동 포함됩니다.")
+    log.info(".lrc 파일을 오디오와 같은 이름으로 두면 가사가 자동 포함됩니다.")
     log.info("종료: Ctrl+C")
     log.info("=" * 50)
 
@@ -554,7 +557,7 @@ def watch_loop():
                 full = os.path.join(WATCH_DIR, f)
                 if not os.path.isfile(full):
                     continue
-                if not f.lower().endswith(".mp3"):
+                if not f.lower().endswith(AUDIO_EXTENSIONS):
                     continue
                 if full in _processing:
                     continue
