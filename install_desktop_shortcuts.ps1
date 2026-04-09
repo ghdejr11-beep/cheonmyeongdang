@@ -1,4 +1,4 @@
-# 바탕화면 바로가기 생성 스크립트
+﻿# 바탕화면 바로가기 생성 스크립트
 # install_desktop_shortcuts.bat 가 호출함.
 # 별도 .ps1 로 분리한 이유: cmd.exe 에서 powershell -Command 로 한국어
 # 인라인 인자를 넘기면 인코딩이 깨져서 조용히 실패하는 경우가 있다.
