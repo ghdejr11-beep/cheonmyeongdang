@@ -202,6 +202,14 @@ app = FastAPI(title="사주 AI SaaS", version="0.1.0")
 if config.STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(config.STATIC_DIR)), name="static")
 
+# 카카오톡 챗봇 엔드포인트 (kakao_endpoints.py)
+try:
+    from kakao_endpoints import router as kakao_router
+    app.include_router(kakao_router)
+    print("[init] 카카오톡 챗봇 endpoint mounted at /kakao/*")
+except ImportError as e:
+    print(f"[init] 카카오톡 endpoint mount 실패 (무시): {e}")
+
 
 # import 시점에 DB 초기화 (테스트·운영 모두 작동)
 init_db()
