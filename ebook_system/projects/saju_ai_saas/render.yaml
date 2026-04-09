@@ -1,0 +1,19 @@
+# Render.com 원클릭 배포 설정
+services:
+  - type: web
+    name: saju-ai-saas
+    runtime: python
+    plan: free
+    rootDir: ebook_system/projects/saju_ai_saas
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false  # 대시보드에서 수동 입력
+      - key: GUMROAD_SUBSCRIBE_URL
+        sync: false  # 나중에 Gumroad 구독 상품 만들면 입력
+      - key: SESSION_SECRET
+        generateValue: true  # Render 자동 생성
+      - key: PYTHON_VERSION
+        value: "3.11"
