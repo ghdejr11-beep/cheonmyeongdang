@@ -4,13 +4,24 @@ on:
   # 매일 23:00 KST = 14:00 UTC
   schedule:
     - cron: "0 14 * * *"
-  # 수동 트리거 (GitHub UI 에서 Run workflow 버튼)
+  # 수동 트리거 (main 브랜치에만 보임 — GitHub UI 제약)
   workflow_dispatch:
     inputs:
       reason:
         description: "수동 실행 사유 (선택)"
         required: false
         default: "manual test"
+  # push 트리거 — 분석부 코드가 변경될 때마다 자동 실행
+  # (workflow_dispatch 가 main 브랜치에서만 동작해서 feature 브랜치에서
+  # 테스트하려면 push 트리거가 필요함)
+  push:
+    branches:
+      - "claude/**"
+      - "main"
+    paths:
+      - ".github/workflows/analytics_team.yml"
+      - "scripts/teams/analytics_team.py"
+      - "scripts/lib/telegram_notify.py"
 
 # 동시 실행 방지 — 같은 시간에 여러 번 트리거 돼도 1개만
 concurrency:
