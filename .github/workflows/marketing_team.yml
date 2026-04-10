@@ -1,0 +1,57 @@
+name: 📣 마케팅부 (Marketing Team)
+
+on:
+  schedule:
+    # 매일 09:00 KST = 00:00 UTC
+    - cron: "0 0 * * *"
+    # 매일 21:00 KST = 12:00 UTC
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "수동 실행 사유"
+        required: false
+        default: "manual test"
+  push:
+    branches:
+      - "claude/**"
+      - "main"
+    paths:
+      - ".github/workflows/marketing_team.yml"
+      - "scripts/teams/marketing_team.py"
+
+concurrency:
+  group: marketing-team
+  cancel-in-progress: false
+
+jobs:
+  run-marketing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 📦 Install dependencies
+        run: pip install anthropic
+
+      - name: 📣 Run marketing team
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/teams/marketing_team.py
+
+      - name: 📤 Commit marketing content
+        run: |
+          git config user.name "덕구네 AI 마케팅부"
+          git config user.email "ghdejr11@gmail.com"
+          git add shared/marketing_ready/ || true
+          git diff --staged --quiet || git commit -m "[마케팅부] 자동 생성 콘텐츠 $(date +%Y-%m-%d)"
+          git push || true
