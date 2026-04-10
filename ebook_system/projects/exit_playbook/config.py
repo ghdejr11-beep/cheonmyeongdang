@@ -73,4 +73,4 @@ CHAPTERS_PATH.mkdir(exist_ok=True)
 
 OUTLINE_PATH = OUTPUT_DIR_PATH / "outline.json"
 BOOK_MD_PATH = OUTPUT_DIR_PATH / "book.md"
-BOOK_PDF_PATH = OUTPUT_DIR_PATH / "exit_playbook.pdf"
+BOOK_PDF_PATH = OUTPUT_DIR_PATH / "book.pdf"
