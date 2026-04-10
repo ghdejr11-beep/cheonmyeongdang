@@ -585,7 +585,8 @@ def process_mp3(mp3_path: str) -> bool:
             log.error(f"배경 생성 실패: {e}")
             return False
 
-    # 6. MP4 생성 (오디오 리액티브 + 가사 자막 자동 감지)
+    # 6. MP4 생성
+    # 우선순위: Pexels 영상 + 자막 > 오디오 리액티브 + 자막 > 정적 배경
     out_dir = HOME / "Desktop" / "playlist_output" / "Lyrics"
     out_dir.mkdir(parents=True, exist_ok=True)
     safe_stem = "".join(c if c.isalnum() or c in " -_" else "_" for c in Path(filename).stem)
@@ -594,28 +595,32 @@ def process_mp3(mp3_path: str) -> bool:
     # .lrc 또는 .txt 가사 파일 자동 감지 (MP3 와 같은 이름)
     # 우선순위: .lrc (타임스탬프 있음) > .txt (균등 배분)
     lrc_path = None
+    lyrics_raw = None  # Pexels 키워드 추출용 원문
     lrc_candidate = str(Path(mp3_path).with_suffix(".lrc"))
     txt_candidate = str(Path(mp3_path).with_suffix(".txt"))
 
     if os.path.exists(lrc_candidate):
         lrc_path = lrc_candidate
         log.info(f"LRC 가사 파일 감지: {os.path.basename(lrc_path)}")
+        try:
+            lyrics_raw = Path(lrc_candidate).read_text(encoding="utf-8")
+        except Exception:
+            pass
     elif os.path.exists(txt_candidate):
-        # .txt 를 .lrc 로 자동 변환 (오디오 길이 기반 균등 배분)
         log.info(f"TXT 가사 파일 감지: {os.path.basename(txt_candidate)} → 자동 타이밍 생성")
         try:
+            try:
+                lyrics_raw = Path(txt_candidate).read_text(encoding="utf-8")
+            except UnicodeDecodeError:
+                lyrics_raw = Path(txt_candidate).read_text(encoding="cp949")
+
             from playlist_maker import get_duration
             dur = get_duration(mp3_path)
             auto_lrc = os.path.join(tmp_dir, "auto_timed.lrc")
             if dur > 0 and convert_txt_to_lrc(txt_candidate, auto_lrc, dur):
                 lrc_path = auto_lrc
-                # 생성된 가사로 설명글도 업데이트 (lyrics_section 재계산)
-                try:
-                    txt_content = Path(txt_candidate).read_text(encoding="utf-8")
-                except UnicodeDecodeError:
-                    txt_content = Path(txt_candidate).read_text(encoding="cp949")
                 import re
-                clean = re.sub(r"\[[^\]]*\]", "", txt_content)
+                clean = re.sub(r"\[[^\]]*\]", "", lyrics_raw)
                 clean = "\n".join(ln.strip() for ln in clean.splitlines() if ln.strip())
                 if clean and "[여기에 가사가 자동으로 들어갑니다" in auto_description:
                     auto_description = auto_description.replace(
@@ -628,10 +633,45 @@ def process_mp3(mp3_path: str) -> bool:
         except Exception as e:
             log.warning(f"TXT 자동 타이밍 생성 실패: {e}")
 
-    if not make_lyric_video(mp3_path, bg_path, out_mp4, ffmpeg,
-                             lrc_path=lrc_path, tmp_dir=tmp_dir):
-        log.error("MP4 생성 실패 → 중단")
-        return False
+    # SRT 변환 (자막용)
+    srt_path = None
+    if lrc_path:
+        srt_candidate = os.path.join(tmp_dir, "lyrics.srt")
+        if convert_lrc_to_srt(lrc_path, srt_candidate):
+            srt_path = srt_candidate
+
+    # 6-A: Pexels 뮤직비디오 시도 (가사 있을 때만)
+    video_made = False
+    pexels_key = (os.environ.get("PEXELS_API_KEY") or "").strip()
+    if lyrics_raw and pexels_key:
+        log.info("=== Pexels 뮤직비디오 모드 ===")
+        try:
+            from scripts.lib.music_video_maker import make_pexels_music_video
+            from playlist_maker import get_duration
+            dur = get_duration(mp3_path)
+            video_made = make_pexels_music_video(
+                mp3_path=mp3_path,
+                lyrics_text=lyrics_raw,
+                srt_path=srt_path,
+                out_path=out_mp4,
+                ffmpeg=ffmpeg,
+                tmp_dir=tmp_dir,
+                duration=dur,
+                log=log,
+            )
+            if video_made:
+                log.info("Pexels 뮤직비디오 성공!")
+        except Exception as e:
+            log.warning(f"Pexels 뮤직비디오 실패: {e}")
+            video_made = False
+
+    # 6-B: 폴백 → 오디오 리액티브 (기존 방식)
+    if not video_made:
+        log.info("=== 오디오 리액티브 폴백 모드 ===")
+        if not make_lyric_video(mp3_path, bg_path, out_mp4, ffmpeg,
+                                 lrc_path=lrc_path, tmp_dir=tmp_dir):
+            log.error("MP4 생성 실패 → 중단")
+            return False
 
     # 7. YouTube 업로드
     log.info("YouTube 업로드 시작...")
