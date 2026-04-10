@@ -34,6 +34,35 @@ from pathlib import Path
 # ============================================================
 # 설정
 # ============================================================
+# .secrets 파일에서 키 자동 로드 (환경변수 매번 안 쳐도 됨)
+# ============================================================
+def load_secrets():
+    """스크립트 폴더의 .secrets 파일에서 KEY=VALUE 읽어서 환경변수 설정.
+    이미 환경변수 있으면 덮어쓰지 않음 (환경변수 우선).
+    .secrets 파일은 .gitignore 에 추가되어 GitHub 에 안 올라감.
+    """
+    secrets_path = Path(__file__).resolve().parent / ".secrets"
+    if not secrets_path.exists():
+        return
+    try:
+        for line in secrets_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+            if key and value and not os.environ.get(key):
+                os.environ[key] = value
+
+    except Exception as e:
+        print(f"[경고] .secrets 읽기 실패: {e}")
+
+
+load_secrets()
+
 TOKEN = (os.environ.get("TELEGRAM_BOT_TOKEN") or "").strip()
 ANTHROPIC_KEY = (os.environ.get("ANTHROPIC_API_KEY") or "").strip()
 
