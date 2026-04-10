@@ -38,6 +38,28 @@ LYRIC_PLAYLIST = "🎵 AI 작사작곡"
 _processing: set[str] = set()
 
 # ============================================================
+# .secrets 파일에서 키 자동 로드 (telegram_commander 와 동일)
+# ============================================================
+def _load_secrets():
+    secrets_path = SCRIPT_DIR / ".secrets"
+    if not secrets_path.exists():
+        return
+    try:
+        for line in secrets_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+            if key and value and not os.environ.get(key):
+                os.environ[key] = value
+    except Exception:
+        pass
+
+_load_secrets()
+
+# ============================================================
 # 초기화
 # ============================================================
 WATCH_DIR.mkdir(parents=True, exist_ok=True)
