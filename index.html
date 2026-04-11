@@ -2080,6 +2080,10 @@
         <input type="hidden" id="complaint-rating" value="0">
       </div>
       <button type="submit" class="btn-complaint">불만사항 접수하기</button>
+      <p style="font-size:0.72rem;color:var(--text2);text-align:center;margin-top:14px;line-height:1.6;">
+        접수된 내용은 자동 판독 후 관리자 검토를 위해 안전하게 저장됩니다.<br>
+        입력하신 연락처·이메일은 답변 목적으로만 사용되며 제3자에게 제공되지 않습니다.
+      </p>
     </form>
 
     <div class="complaint-success" id="complaint-success">
@@ -2131,6 +2135,8 @@
 <!-- SCRIPTS -->
 <script src="js/saju-engine.js"></script>
 <script src="js/complaint-triage.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-client.js"></script>
 <script>
 // Global scope (no IIFE)
 
@@ -6008,13 +6014,29 @@ function submitComplaint(e) {
     console.warn('complaint triage failed:', err);
   }
 
-  // 스팸/거부: localStorage 에 저장하지 않음
+  // 스팸/거부: 어디에도 저장하지 않음
   if (analysis && analysis.rejected) {
     renderComplaintResponse(complaint, analysis);
     return;
   }
 
-  // 정상 접수 → localStorage 저장
+  // ==========================================================================
+  // 저장: Supabase (원격, 백엔드) + localStorage (로컬 미러, 오프라인 안전망)
+  // ==========================================================================
+  // 1) Supabase 가 설정되어 있으면 원격 저장 시도 (백그라운드, UI 차단 없음)
+  if (window.SupabaseComplaint && window.SupabaseComplaint.isEnabled()) {
+    window.SupabaseComplaint.saveComplaint(complaint).then(function (r) {
+      if (r && r.ok) {
+        complaint.savedRemote = true;
+      } else {
+        console.warn('Supabase 저장 실패, localStorage 백업으로 폴백:', r);
+      }
+    }).catch(function (e) {
+      console.warn('Supabase 저장 중 예외:', e);
+    });
+  }
+
+  // 2) localStorage 미러 저장 (항상 실행 — 오프라인·실패 시 백업 역할)
   try {
     var complaints = JSON.parse(localStorage.getItem('cheonmyeong_complaints') || '[]');
     complaints.push(complaint);
@@ -6023,6 +6045,7 @@ function submitComplaint(e) {
     console.error('complaint save failed:', err);
   }
 
+  // 3) 즉시 응답 렌더 (백엔드 저장 완료를 기다리지 않음)
   renderComplaintResponse(complaint, analysis);
 }
 

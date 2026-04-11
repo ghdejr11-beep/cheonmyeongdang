@@ -289,13 +289,26 @@
 </head>
 <body>
 
-<!-- 진입 차단: 간단한 패스워드 (실제 보안용 아님, 우발적 접근 방지용) -->
+<!-- Supabase 사용 시 이메일 로그인 게이트, 미사용 시 간단 패스워드 게이트 -->
 <div id="gate" class="gate">
-  <h1>🔒 천명당 관리자</h1>
-  <p>불만 접수 현황 대시보드에 접근하려면<br>관리자 키를 입력해주세요</p>
-  <input type="password" id="gate-pw" placeholder="관리자 키" onkeydown="if(event.key==='Enter')tryGate()">
-  <button onclick="tryGate()">입장</button>
-  <div class="err" id="gate-err"></div>
+  <h1 id="gate-title">🔒 천명당 관리자</h1>
+
+  <!-- Supabase 로그인 영역 -->
+  <div id="gate-supabase" style="display:none;">
+    <p>Supabase 로그인 이메일과 비밀번호를 입력해주세요<br><span style="font-size:0.72rem;opacity:0.7;">(Dashboard → Authentication → Users 에서 등록한 계정)</span></p>
+    <input type="email" id="gate-email" placeholder="이메일 주소" autocomplete="username">
+    <input type="password" id="gate-password" placeholder="비밀번호" autocomplete="current-password" onkeydown="if(event.key==='Enter')signInWithPassword()">
+    <button onclick="signInWithPassword()">로그인</button>
+    <div class="err" id="gate-err"></div>
+  </div>
+
+  <!-- localStorage 폴백 영역 (Supabase 미설정 시) -->
+  <div id="gate-local" style="display:none;">
+    <p>Supabase 가 설정되지 않아 로컬 모드로 진입합니다<br><span style="font-size:0.72rem;opacity:0.7;">브라우저 localStorage 데이터만 표시됩니다</span></p>
+    <input type="password" id="gate-pw" placeholder="관리자 키" onkeydown="if(event.key==='Enter')tryLocalGate()">
+    <button onclick="tryLocalGate()">로컬 모드 입장</button>
+    <div class="err" id="gate-err-local"></div>
+  </div>
 </div>
 
 <!-- 메인 대시보드 -->
@@ -303,13 +316,14 @@
   <header>
     <div>
       <h1>🛎 천명당 불만 접수 관리자</h1>
-      <div class="meta">localStorage 기반 · 브라우저 로컬 데이터만 조회</div>
+      <div class="meta" id="dash-mode-label">—</div>
     </div>
     <div class="toolbar">
       <button onclick="reloadData()">🔄 새로고침</button>
       <button onclick="reanalyzeAll()">🧠 전체 재판독</button>
       <button onclick="exportCsv()">📄 CSV 내보내기</button>
       <button class="danger" onclick="clearAll()">🗑 전체 삭제</button>
+      <button id="signout-btn" onclick="signOut()" style="display:none;">🚪 로그아웃</button>
     </div>
   </header>
 
@@ -319,38 +333,136 @@
 
   <div id="list"></div>
 
-  <div class="note">
-    <strong>⚠️ 데이터 소스 안내</strong><br>
-    현재 불만 접수 시스템은 브라우저 <code>localStorage</code>에 저장됩니다. 즉, <strong>현재 브라우저에서 제출된 불만만</strong> 보입니다.
-    여러 사용자 불만을 수집하려면 실제 백엔드(Formspree·Google Forms·Supabase 등) 연동이 필요합니다. 이 대시보드는 자동 판독 엔진 검증 및 관리자 자체 테스트 용도로 설계되었습니다.<br><br>
-    <strong>🔗 GitHub 이슈 전환</strong> — "이슈 생성" 버튼을 누르면 해당 불만의 원문·카테고리·심각도·타당성·키워드가 미리 채워진 GitHub 이슈 작성 페이지가 새 탭으로 열립니다. 코드 수정은 이슈 리뷰 후 수동으로 진행합니다 (자동 수정 금지 — 보안 원칙).
+  <div class="note" id="data-source-note">
+    <!-- 데이터 소스 설명은 모드에 따라 JS 에서 주입 -->
   </div>
 </div>
 
 <script src="js/complaint-triage.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // ============================================================
-  // 게이트 (간단 키워드 확인 — 우발적 접근 방지용. 실제 보안 ×)
-  // localStorage 데이터는 이미 브라우저 내부이므로 실제 보안 게이트는
-  // 의미가 없음. 단순히 주소창 호기심으로 열었을 때 막는 용도.
+  // 모드 결정: Supabase 가 설정되어 있으면 원격 모드, 아니면 로컬 모드
   // ============================================================
-  const ADMIN_KEY = '천명당관리자';
+  const LOCAL_ADMIN_KEY = '천명당관리자';
+  let supabase = null;
+  let useSupabase = false;
+  let currentUser = null;
 
-  function tryGate() {
-    const pw = document.getElementById('gate-pw').value;
+  function cfgLooksValid(cfg) {
+    return cfg && cfg.enabled && cfg.url && cfg.anonKey
+           && cfg.url.indexOf('YOUR_') !== 0
+           && cfg.anonKey.indexOf('YOUR_') !== 0;
+  }
+
+  // Supabase SDK 로딩 확인 후 클라이언트 생성
+  if (window.supabase && cfgLooksValid(window.SUPABASE_CONFIG)) {
+    useSupabase = true;
+    supabase = window.supabase.createClient(
+      window.SUPABASE_CONFIG.url,
+      window.SUPABASE_CONFIG.anonKey
+    );
+  }
+
+  // ============================================================
+  // 게이트 UI 스위칭
+  // ============================================================
+  document.addEventListener('DOMContentLoaded', function () {
+    if (useSupabase) {
+      document.getElementById('gate-supabase').style.display = 'block';
+      // 이미 세션이 있는지 확인
+      supabase.auth.getSession().then(({ data }) => {
+        if (data.session) {
+          currentUser = data.session.user;
+          enterDashboard();
+        }
+      });
+      // Auth 상태 변화 구독 (매직 링크 등)
+      supabase.auth.onAuthStateChange((event, session) => {
+        if (session) {
+          currentUser = session.user;
+          enterDashboard();
+        } else {
+          currentUser = null;
+        }
+      });
+    } else {
+      document.getElementById('gate-local').style.display = 'block';
+    }
+  });
+
+  // ============================================================
+  // Supabase 로그인
+  // ============================================================
+  async function signInWithPassword() {
+    const email = document.getElementById('gate-email').value.trim();
+    const password = document.getElementById('gate-password').value;
     const err = document.getElementById('gate-err');
-    if (pw === ADMIN_KEY || pw === 'admin' || (new URLSearchParams(location.search)).get('key') === ADMIN_KEY) {
-      document.getElementById('gate').style.display = 'none';
-      document.getElementById('dashboard').style.display = 'block';
-      reloadData();
+    err.textContent = '';
+
+    if (!email || !password) {
+      err.textContent = '이메일과 비밀번호를 입력해주세요';
+      return;
+    }
+
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      err.textContent = '로그인 실패: ' + error.message;
+      return;
+    }
+    currentUser = data.user;
+    enterDashboard();
+  }
+
+  async function signOut() {
+    if (useSupabase && supabase) {
+      await supabase.auth.signOut();
+    }
+    location.reload();
+  }
+
+  // ============================================================
+  // 로컬 모드 게이트 (Supabase 미설정 시)
+  // ============================================================
+  function tryLocalGate() {
+    const pw = document.getElementById('gate-pw').value;
+    const err = document.getElementById('gate-err-local');
+    if (pw === LOCAL_ADMIN_KEY || pw === 'admin') {
+      enterDashboard();
     } else {
       err.textContent = '관리자 키가 일치하지 않습니다';
     }
   }
 
-  // URL 쿼리로 바로 진입 가능
-  if ((new URLSearchParams(location.search)).get('key') === ADMIN_KEY) {
-    document.addEventListener('DOMContentLoaded', tryGate);
+  function enterDashboard() {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+
+    const modeLabel = document.getElementById('dash-mode-label');
+    const note = document.getElementById('data-source-note');
+    const signoutBtn = document.getElementById('signout-btn');
+
+    if (useSupabase) {
+      modeLabel.innerHTML = '🟢 Supabase 원격 DB 연결됨' +
+        (currentUser ? ' · <code style="font-size:0.7rem;">' + escapeHtml(currentUser.email || '') + '</code>' : '');
+      signoutBtn.style.display = 'inline-block';
+      note.innerHTML =
+        '<strong>🟢 Supabase 원격 모드</strong><br>' +
+        '이 대시보드는 실제 Supabase DB 에서 모든 사용자의 접수 데이터를 조회합니다. ' +
+        '변경(삭제·재판독)은 DB 에 즉시 반영됩니다.<br><br>' +
+        '<strong>🔗 GitHub 이슈 전환</strong> — 각 불만 카드의 "이슈 생성" 버튼을 누르면 원문·분류·점수·키워드가 미리 채워진 GitHub 이슈 작성 페이지가 새 탭으로 열립니다. ' +
+        '코드 수정은 <strong>반드시 이슈 검토 후 수동으로</strong> 진행합니다 (프롬프트 인젝션 방지 원칙).';
+    } else {
+      modeLabel.textContent = '🟡 로컬 모드 · localStorage 에서 조회 (현재 브라우저 전용)';
+      signoutBtn.style.display = 'none';
+      note.innerHTML =
+        '<strong>⚠️ 로컬 모드 안내</strong><br>' +
+        'Supabase 가 아직 설정되지 않아 브라우저 <code>localStorage</code> 데이터만 조회합니다. 현재 브라우저에서 제출된 불만만 보입니다.<br><br>' +
+        '실제 다중 사용자 접수를 보려면 <code>js/supabase-config.js</code> 에서 프로젝트 URL·anon key 를 입력하고 <code>enabled: true</code> 로 변경한 뒤, <code>supabase/schema.sql</code> 을 Supabase SQL Editor 에서 실행하세요.';
+    }
+
+    reloadData();
   }
 
   // ============================================================
@@ -359,7 +471,7 @@
   let allComplaints = [];
   let activeFilter = 'all';
 
-  function loadComplaints() {
+  function loadLocal() {
     try {
       return JSON.parse(localStorage.getItem('cheonmyeong_complaints') || '[]');
     } catch (e) {
@@ -367,42 +479,96 @@
     }
   }
 
-  function saveComplaints(list) {
+  function saveLocal(list) {
     localStorage.setItem('cheonmyeong_complaints', JSON.stringify(list));
   }
 
-  function reloadData() {
-    allComplaints = loadComplaints();
-    // 최신순 정렬
-    allComplaints.sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
+  /** Supabase 행 → UI 표준 형태로 매핑 */
+  function mapRemoteRow(r) {
+    return {
+      id: r.id,
+      name: r.name,
+      tel: r.tel,
+      email: r.email,
+      type: r.type,
+      detail: r.detail,
+      rating: r.rating,
+      timestamp: r.submitted_at,
+      analysis: r.analysis
+    };
+  }
+
+  async function reloadData() {
+    if (useSupabase) {
+      const { data, error } = await supabase
+        .from('complaints')
+        .select('*')
+        .order('submitted_at', { ascending: false });
+      if (error) {
+        alert('원격 조회 실패: ' + error.message);
+        allComplaints = [];
+      } else {
+        allComplaints = (data || []).map(mapRemoteRow);
+      }
+    } else {
+      allComplaints = loadLocal();
+      allComplaints.sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
+    }
     render();
   }
 
-  function reanalyzeAll() {
+  async function reanalyzeAll() {
     if (!window.ComplaintTriage) {
       alert('판독 엔진이 로드되지 않았습니다');
       return;
     }
+    if (!confirm('모든 불만에 대해 판독 엔진을 재실행합니다. 계속하시겠습니까?')) return;
+
+    // 메모리 상에서 재판독
     allComplaints = allComplaints.map(c => {
-      try {
-        c.analysis = window.ComplaintTriage.analyze(c);
-      } catch (e) {}
+      try { c.analysis = window.ComplaintTriage.analyze(c); } catch (e) {}
       return c;
     });
-    saveComplaints(allComplaints);
+
+    if (useSupabase) {
+      // 각 행에 UPDATE — 개수가 많을 경우 병렬 제한
+      let ok = 0, fail = 0;
+      for (const c of allComplaints) {
+        const { error } = await supabase
+          .from('complaints')
+          .update({ analysis: c.analysis })
+          .eq('id', c.id);
+        if (error) fail++; else ok++;
+      }
+      alert('재판독 완료: 성공 ' + ok + '건, 실패 ' + fail + '건');
+    } else {
+      saveLocal(allComplaints);
+    }
     render();
   }
 
-  function deleteComplaint(id) {
+  async function deleteComplaint(id) {
     if (!confirm('이 불만을 삭제하시겠습니까?')) return;
+    if (useSupabase) {
+      const { error } = await supabase.from('complaints').delete().eq('id', id);
+      if (error) { alert('삭제 실패: ' + error.message); return; }
+    }
     allComplaints = allComplaints.filter(c => c.id !== id);
-    saveComplaints(allComplaints);
+    if (!useSupabase) saveLocal(allComplaints);
     render();
   }
 
-  function clearAll() {
+  async function clearAll() {
     if (!confirm('모든 불만 데이터를 삭제합니다. 계속하시겠습니까?')) return;
-    localStorage.removeItem('cheonmyeong_complaints');
+    if (useSupabase) {
+      const ids = allComplaints.map(c => c.id);
+      if (ids.length) {
+        const { error } = await supabase.from('complaints').delete().in('id', ids);
+        if (error) { alert('삭제 실패: ' + error.message); return; }
+      }
+    } else {
+      localStorage.removeItem('cheonmyeong_complaints');
+    }
     allComplaints = [];
     render();
   }
@@ -468,7 +634,9 @@
   window.reanalyzeAll = reanalyzeAll;
   window.clearAll = clearAll;
   window.deleteComplaint = deleteComplaint;
-  window.tryGate = tryGate;
+  window.signInWithPassword = signInWithPassword;
+  window.signOut = signOut;
+  window.tryLocalGate = tryLocalGate;
 
   function filtered() {
     if (activeFilter === 'all') return allComplaints;

@@ -285,7 +285,7 @@
     <div class="stat"><div class="num">12</div><div class="label">서비스 부서</div></div>
     <div class="stat"><div class="num">9</div><div class="label">무료 서비스</div></div>
     <div class="stat"><div class="num">3</div><div class="label">유료 상품</div></div>
-    <div class="stat"><div class="num">3</div><div class="label">자동화 엔진</div></div>
+    <div class="stat"><div class="num">9</div><div class="label">CS 파이프라인 단계</div></div>
   </div>
 
   <!-- 핵심 운세 부서 -->
@@ -501,22 +501,24 @@
         <div class="icon">📮</div>
         <div>
           <div class="name">고객지원 부서</div>
-          <div class="anchor">#complaint · complaint-triage.js</div>
+          <div class="anchor">#complaint · triage + Supabase</div>
         </div>
       </div>
-      <div class="desc">불만 자동 판독 · 분류 · 맞춤 응답까지 수행하는 자동화 CS 라인.</div>
+      <div class="desc">불만 자동 판독 · 분류 · 저장 · 맞춤 응답까지 수행하는 자동화 CS 라인.</div>
       <ul class="tasks">
         <li>불만사항 접수 폼 + 별점 수집</li>
         <li>🤖 자동 스팸/욕설 필터링</li>
         <li>🤖 카테고리 자동 분류 (환불/버그/개선/불만족)</li>
         <li>🤖 심각도·타당성 점수화</li>
         <li>🤖 카테고리별 맞춤 응답 자동 생성</li>
-        <li>관리자 대시보드 + GitHub 이슈 자동 전환</li>
+        <li>🗄 Supabase DB 저장 (RLS 정책 보호)</li>
+        <li>🔐 관리자 이메일 로그인 + GitHub 이슈 전환</li>
         <li>FAQ 토글 노출</li>
       </ul>
       <div class="foot">
         <span class="chip">CS</span>
         <span class="chip ai">Auto-Triage</span>
+        <span class="chip paid">Supabase</span>
         <span class="chip">admin.html</span>
       </div>
     </div>
@@ -551,12 +553,16 @@
       <div class="mname" style="color:var(--water);">⑥ 응답 생성</div>
       <div class="mdesc">카테고리별 맞춤 안내·액션 버튼 동적 렌더</div>
     </div>
-    <div class="module" style="background:rgba(167,139,250,0.06);border-color:rgba(167,139,250,0.2);">
-      <div class="mname" style="color:var(--purple);">⑦ 관리자 대시보드</div>
-      <div class="mdesc"><code style="font-size:0.7rem;">admin.html</code> — 필터·통계·CSV 내보내기</div>
+    <div class="module" style="background:rgba(244,208,111,0.06);border-color:rgba(244,208,111,0.2);">
+      <div class="mname" style="color:var(--gold2);">⑦ Supabase 저장</div>
+      <div class="mdesc">PostgREST INSERT · RLS 정책으로 anon 은 INSERT 만 허용</div>
     </div>
     <div class="module" style="background:rgba(167,139,250,0.06);border-color:rgba(167,139,250,0.2);">
-      <div class="mname" style="color:var(--purple);">⑧ GitHub 이슈 전환</div>
+      <div class="mname" style="color:var(--purple);">⑧ 관리자 대시보드</div>
+      <div class="mdesc"><code style="font-size:0.7rem;">admin.html</code> — 이메일 로그인 · 필터·통계·CSV</div>
+    </div>
+    <div class="module" style="background:rgba(167,139,250,0.06);border-color:rgba(167,139,250,0.2);">
+      <div class="mname" style="color:var(--purple);">⑨ GitHub 이슈 전환</div>
       <div class="mdesc">한 클릭으로 원문·분석이 채워진 이슈 생성</div>
     </div>
   </div>
