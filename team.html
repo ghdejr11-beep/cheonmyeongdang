@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>천명당 조직 부서 현황</title>
+<style>
+  :root {
+    --bg: #0d1020;
+    --card: rgba(20, 26, 48, 0.85);
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #e8ecf5;
+    --text2: #9ba3b8;
+    --gold: #d4af37;
+    --gold2: #f4d06f;
+    --jade2: #7bc4b5;
+    --burgundy: #c75a6e;
+    --water: #64b5f6;
+    --purple: #a78bfa;
+    --orange: #ffb74d;
+    --rose: #f48fb1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: radial-gradient(ellipse at top, #1a1f3a 0%, #0d1020 60%);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+  header .eyebrow { font-size: 0.72rem; letter-spacing: 0.3em; color: var(--gold2); margin-bottom: 10px; }
+  header h1 {
+    font-size: 2rem; font-weight: 800; margin-bottom: 6px;
+    background: linear-gradient(90deg, var(--gold2), var(--jade2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header p { color: var(--text2); font-size: 0.88rem; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 40px; }
+  .stat { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; }
+  .stat .num { font-size: 1.8rem; font-weight: 800; }
+  .stat .label { font-size: 0.72rem; color: var(--text2); margin-top: 4px; letter-spacing: 0.05em; }
+  .stat.active .num { color: var(--jade2); }
+  .stat.maintain .num { color: var(--gold2); }
+  .stat.weak .num { color: var(--orange); }
+  .stat.missing .num { color: var(--burgundy); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; margin-bottom: 28px; }
+
+  .dept {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--dept-color, var(--gold));
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+  }
+  .dept .head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .dept .icon {
+    font-size: 1.7rem; width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.04); border-radius: 10px; flex-shrink: 0;
+  }
+  .dept .name { font-size: 1.05rem; font-weight: 700; color: var(--dept-color, var(--text)); }
+  .dept .role { font-size: 0.7rem; color: var(--text2); }
+  .dept .status {
+    position: absolute; top: 18px; right: 18px;
+    font-size: 0.66rem; padding: 3px 9px; border-radius: 99px;
+    font-weight: 700; letter-spacing: 0.05em;
+  }
+  .status.active { background: rgba(123,196,181,0.15); color: var(--jade2); border: 1px solid rgba(123,196,181,0.4); }
+  .status.maintain { background: rgba(244,208,111,0.12); color: var(--gold2); border: 1px solid rgba(244,208,111,0.35); }
+  .status.weak { background: rgba(255,183,77,0.12); color: var(--orange); border: 1px solid rgba(255,183,77,0.35); }
+  .status.missing { background: rgba(199,90,110,0.12); color: var(--burgundy); border: 1px solid rgba(199,90,110,0.35); }
+
+  .dept .section-label {
+    font-size: 0.66rem; color: var(--text2); margin-top: 14px; margin-bottom: 5px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .dept ul { list-style: none; font-size: 0.8rem; }
+  .dept ul li { padding: 3px 0 3px 16px; position: relative; color: var(--text); }
+  .dept ul li::before {
+    content: "▸"; position: absolute; left: 2px; top: 4px;
+    color: var(--dept-color, var(--gold)); font-size: 0.68rem;
+  }
+  .dept ul.work-now li { color: var(--text); }
+  .dept ul.next-step li { color: var(--text2); }
+  .dept ul.next-step li::before { color: var(--text2); content: "○"; }
+  .dept .recent {
+    margin-top: 12px; padding: 10px 12px;
+    background: rgba(0,0,0,0.25); border-left: 2px solid var(--dept-color, var(--gold));
+    border-radius: 4px;
+    font-size: 0.73rem; color: var(--text2); line-height: 1.55;
+  }
+  .dept .recent code {
+    font-family: 'Courier New', monospace; font-size: 0.7rem;
+    color: var(--gold2); background: rgba(212,175,55,0.08);
+    padding: 1px 5px; border-radius: 3px;
+  }
+
+  h2.section-title {
+    font-size: 1.15rem; font-weight: 700; margin: 40px 0 18px;
+    padding-left: 14px; border-left: 4px solid var(--gold);
+  }
+
+  .legend {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    font-size: 0.75rem; color: var(--text2);
+    margin-bottom: 20px; padding: 12px 16px;
+    background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 8px;
+  }
+  .legend span::before { content: "●"; margin-right: 6px; font-size: 1rem; vertical-align: middle; }
+  .legend .l-active::before { color: var(--jade2); }
+  .legend .l-maintain::before { color: var(--gold2); }
+  .legend .l-weak::before { color: var(--orange); }
+  .legend .l-missing::before { color: var(--burgundy); }
+
+  footer { margin-top: 50px; text-align: center; color: var(--text2); font-size: 0.74rem; }
+  footer code { font-family: 'Courier New', monospace; }
+
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    header h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">CHEONMYEONGDANG · ORG CHART</div>
+    <h1>천명당 조직 부서 현황</h1>
+    <p>각 부서가 지금 무엇을 담당하고 어떻게 일하고 있는지 한눈에 정리</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat active"><div class="num">7</div><div class="label">🟢 활발 가동</div></div>
+    <div class="stat maintain"><div class="num">2</div><div class="label">🟡 유지 중</div></div>
+    <div class="stat weak"><div class="num">2</div><div class="label">🟠 부실</div></div>
+    <div class="stat missing"><div class="num">1</div><div class="label">🔴 미구축</div></div>
+  </div>
+
+  <div class="legend">
+    <span class="l-active"><strong>활발</strong> — 최근 1주일 내 작업 흔적·산출물 있음</span>
+    <span class="l-maintain"><strong>유지</strong> — 구조는 있으나 최근 변경 없음</span>
+    <span class="l-weak"><strong>부실</strong> — 일부만 구현, 보완 필요</span>
+    <span class="l-missing"><strong>미구축</strong> — 아직 시작 안 함</span>
+  </div>
+
+  <!-- ================== 전략·기획 ================== -->
+  <h2 class="section-title">🧠 전략·기획 라인</h2>
+  <div class="grid">
+
+    <div class="dept" style="--dept-color: var(--gold2);">
+      <span class="status maintain">유지</span>
+      <div class="head">
+        <div class="icon">🎯</div>
+        <div>
+          <div class="name">전략·기획실</div>
+          <div class="role">CEO 직할 · 솔로 오퍼레이터</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li>사업 목표 설정 ("월 1억" 드라이브 진행 중)</li>
+        <li>신사업 기획 (보험·세무·나라지원금 앱 3종)</li>
+        <li>로드맵·우선순위 판단</li>
+        <li>의사결정·전체 총괄</li>
+      </ul>
+      <div class="recent">최근: <code>9d95f63</code> "월 1억 위한 디자인/UX/매출 전환 강화" · 천명당 외 3개 앱 신규 기획 중</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li>신규 앱 3종 우선순위 결정 (보험/세무/지원금)</li>
+        <li>부서별 리소스 배분 계획</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ================== 실무 ================== -->
+  <h2 class="section-title">⚙️ 실무 부서</h2>
+  <div class="grid">
+
+    <!-- 개발부 -->
+    <div class="dept" style="--dept-color: var(--jade2);">
+      <span class="status active">활발</span>
+      <div class="head">
+        <div class="icon">💻</div>
+        <div>
+          <div class="name">개발부</div>
+          <div class="role">프론트엔드 · 엔진 · 백엔드 연동</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li>사주 엔진 (<code style="font-size:0.7rem">saju-engine.js</code> 1,634줄)</li>
+        <li>관상·손금 퀴즈+AI 분석 UI</li>
+        <li>불만 자동 판독 엔진 + 관리자 대시보드</li>
+        <li>Supabase DB 연동 + RLS 설계</li>
+      </ul>
+      <div class="recent">최근 5일: 10건 커밋. <code>d4a7dc1</code> Supabase, <code>5cd2f46</code> 자동 판독, <code>91fd5ee</code> 토스페이먼츠, <code>1049b61</code> 손금 전면 교체. 가장 활발한 부서.</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li>index.html 6,026줄 분리 리팩터</li>
+        <li>신규 앱 3종 스캐폴딩</li>
+      </ul>
+    </div>
+
+    <!-- 디자인·UX부 -->
+    <div class="dept" style="--dept-color: var(--rose);">
+      <span class="status active">활발</span>
+      <div class="head">
+        <div class="icon">🎨</div>
+        <div>
+          <div class="name">디자인·UX부</div>
+          <div class="role">시각 디자인 · 전환 최적화</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li>섹션별 테마 컬러 (jade·gold·burgundy·water·purple)</li>
+        <li>반응형 레이아웃 + 모바일 대응</li>
+        <li>매출 전환 UX (CTA·Hero·후기 동선)</li>
+        <li>관상·손금 SVG 일러스트</li>
+      </ul>
+      <div class="recent">최근: <code>9d95f63</code> "월 1억 위한 디자인/UX/매출 전환 강화" · <code>78abb4c</code> 관상 탭 UI 전면 개편</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li>결제 성공/실패 페이지 고도화</li>
+        <li>다크모드 기본 톤 통일</li>
+      </ul>
+    </div>
+
+    <!-- 콘텐츠부 -->
+    <div class="dept" style="--dept-color: var(--jade2);">
+      <span class="status active">활발</span>
+      <div class="head">
+        <div class="icon">📚</div>
+        <div>
+          <div class="name">콘텐츠부</div>
+          <div class="role">운세·지식베이스 제작</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li><code style="font-size:0.7rem">knowledge.json</code> 지식베이스 (125KB)</li>
+        <li>꿈해몽 220개+ 해석 데이터</li>
+        <li>사주 일간별 성격·오행 성향 콘텐츠</li>
+        <li>타로·별자리·관상 해설 문구</li>
+      </ul>
+      <div class="recent">최근: <code>ad35343</code> "꿈해몽 데이터 220개+ 확장" · 사주/관상/손금 3개 부서가 공유 사용</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li>유료 상품용 심층 해석 콘텐츠</li>
+        <li>신년운세 2026 작성</li>
+      </ul>
+    </div>
+
+    <!-- SEO·마케팅부 -->
+    <div class="dept" style="--dept-color: var(--gold2);">
+      <span class="status active">활발</span>
+      <div class="head">
+        <div class="icon">📈</div>
+        <div>
+          <div class="name">SEO·마케팅부</div>
+          <div class="role">검색 유입 · 바이럴 확산</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li>메타 태그·OG·Twitter Card 관리</li>
+        <li>JSON-LD 구조화 데이터</li>
+        <li><code>sitemap.xml</code> + <code>robots.txt</code></li>
+        <li>키워드 타겟팅 ("무료사주", "AI 관상" 등)</li>
+      </ul>
+      <div class="recent">최근: <code>da730cd</code> "무자본 자동화 + 바이럴 + SEO + 원격 명령 시스템" · 3/24 다국어 스위처 추가</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li>네이버 서치어드바이저 인증 코드 입력</li>
+        <li>구글 서치 콘솔 등록 확인</li>
+      </ul>
+    </div>
+
+    <!-- 홍보·소셜부 -->
+    <div class="dept" style="--dept-color: var(--rose);">
+      <span class="status maintain">유지</span>
+      <div class="head">
+        <div class="icon">📣</div>
+        <div>
+          <div class="name">홍보·소셜부</div>
+          <div class="role">후기 · 신뢰도 · 소셜 공유</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li>고객 후기 섹션 운영 (<code>#testimonials</code>)</li>
+        <li>소셜 공유 이미지 (palm-canva.png)</li>
+        <li>서비스별 별점·사용 후기 노출</li>
+      </ul>
+      <div class="recent">구조만 있음. 실제 SNS 채널 운영 없음. 후기 데이터도 정적 하드코딩 상태.</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li>인스타/틱톡 자동 포스팅 파이프라인</li>
+        <li>실사용 후기 수집 자동화</li>
+      </ul>
+    </div>
+
+    <!-- 결제·매출부 -->
+    <div class="dept" style="--dept-color: var(--gold);">
+      <span class="status active">활발</span>
+      <div class="head">
+        <div class="icon">💰</div>
+        <div>
+          <div class="name">결제·매출부</div>
+          <div class="role">토스페이먼츠 · 유료 상품</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li>토스페이먼츠 SDK 연동</li>
+        <li>유료 상품 3종: 사주상세(29,900원)·궁합(9,900원)·신년운세(20,000원)</li>
+        <li><code>success.html</code> / <code>fail.html</code> 리다이렉션</li>
+        <li>결제 약관 동의 플로우</li>
+      </ul>
+      <div class="recent">최근: <code>91fd5ee</code> "토스페이먼츠 결제 시스템 연동 완료" (4/8). 실질 매출 채널.</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li>카카오페이·네이버페이 추가 지원</li>
+        <li>매출 집계 대시보드</li>
+      </ul>
+    </div>
+
+    <!-- 고객지원부 -->
+    <div class="dept" style="--dept-color: var(--burgundy);">
+      <span class="status active">활발</span>
+      <div class="head">
+        <div class="icon">📮</div>
+        <div>
+          <div class="name">고객지원부 (CS)</div>
+          <div class="role">불만 접수 · 자동 응대 · FAQ</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li>불만 접수 폼 + 별점 수집</li>
+        <li>🤖 자동 판독 엔진 (스팸/분류/심각도/타당성)</li>
+        <li>🤖 카테고리별 맞춤 응답 자동 생성</li>
+        <li>관리자 대시보드 + GitHub 이슈 전환</li>
+        <li>FAQ 토글 운영</li>
+      </ul>
+      <div class="recent">최근: <code>d4a7dc1</code> Supabase 연동, <code>5cd2f46</code> 자동 판독 시스템 구축. 오늘 작업한 핵심 부서.</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li>Supabase 프로젝트 실제 생성·키 입력</li>
+        <li>관리자 이메일 초대</li>
+      </ul>
+    </div>
+
+    <!-- 인프라·DevOps -->
+    <div class="dept" style="--dept-color: var(--water);">
+      <span class="status active">활발</span>
+      <div class="head">
+        <div class="icon">🛠</div>
+        <div>
+          <div class="name">인프라·DevOps부</div>
+          <div class="role">호스팅 · 자동화 · CI</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li>GitHub Pages 배포 (정적 호스팅)</li>
+        <li><code>daily-fortune.yml</code> — 매일 KST 6시 운세 자동 생성 (cron)</li>
+        <li><code>remote-command.yml</code> — GitHub 이슈로 원격 명령 처리</li>
+        <li>Supabase 인프라 관리</li>
+      </ul>
+      <div class="recent">GitHub Actions 2개가 실제로 돌아가는 중. 자동화 파이프라인이 살아있는 부서.</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li>Supabase 백업 자동화</li>
+        <li>실제 도메인 연결 (cheonmyeongdang.kr)</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ================== 보조·지원 ================== -->
+  <h2 class="section-title">📋 지원·관리 부서</h2>
+  <div class="grid">
+
+    <!-- 광고수익부 -->
+    <div class="dept" style="--dept-color: var(--orange);">
+      <span class="status weak">부실</span>
+      <div class="head">
+        <div class="icon">📺</div>
+        <div>
+          <div class="name">광고수익부</div>
+          <div class="role">AdSense · 제휴 광고</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li>Google AdSense 스크립트 자리 (주석 처리됨)</li>
+      </ul>
+      <div class="recent">⚠️ <code>ca-pub-PLACEHOLDER</code> 였던 스크립트가 현재 주석 처리 상태. AdSense 계정 미발급으로 광고 수익 0.</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li>AdSense 계정 신청 + 심사 통과</li>
+        <li>ca-pub 발급 후 주석 해제</li>
+        <li>쿠팡 파트너스·제휴마케팅 검토</li>
+      </ul>
+    </div>
+
+    <!-- 법무·정책부 -->
+    <div class="dept" style="--dept-color: var(--orange);">
+      <span class="status weak">부실</span>
+      <div class="head">
+        <div class="icon">⚖️</div>
+        <div>
+          <div class="name">법무·정책부</div>
+          <div class="role">약관 · 개인정보 · 컴플라이언스</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li>결제 약관 동의 체크박스 운영</li>
+        <li>FAQ "개인정보 안전한가요" 응답</li>
+      </ul>
+      <div class="recent">⚠️ 전용 개인정보 처리방침/이용약관 페이지 미존재. 신규 앱(보험·세무·지원금)은 민감정보 다루므로 필수 정비 사항.</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li><code>privacy.html</code> · <code>terms.html</code> 신설</li>
+        <li>신규 앱용 개인정보 처리방침 (내보험다보여·마이헬스웨이 심사 조건)</li>
+        <li>쿨링오프·환불정책 명문화</li>
+      </ul>
+    </div>
+
+    <!-- 데이터·분석부 -->
+    <div class="dept" style="--dept-color: #9ba3b8;">
+      <span class="status missing">미구축</span>
+      <div class="head">
+        <div class="icon">📊</div>
+        <div>
+          <div class="name">데이터·분석부</div>
+          <div class="role">지표 · 전환율 · A/B 테스트</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li>(없음)</li>
+      </ul>
+      <div class="recent">🔴 GA / Matomo / Plausible 등 애널리틱스 일체 미설치. "월 1억" 목표가 있는데 지표 측정 수단이 0. 최우선 보강 필요.</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li>Google Analytics 4 또는 Plausible 설치</li>
+        <li>Supabase 자체 이벤트 로그 테이블 추가</li>
+        <li>전환 퍼널(방문→분석→결제) 측정</li>
+      </ul>
+    </div>
+
+    <!-- 문서·시각화부 -->
+    <div class="dept" style="--dept-color: var(--purple);">
+      <span class="status maintain">유지</span>
+      <div class="head">
+        <div class="icon">📁</div>
+        <div>
+          <div class="name">문서·시각화부</div>
+          <div class="role">내부 대시보드 · 가시성</div>
+        </div>
+      </div>
+      <div class="section-label">담당 업무</div>
+      <ul class="work-now">
+        <li><code>departments.html</code> — 서비스 섹션 지도</li>
+        <li><code>team.html</code> — 이 조직도 (지금 보는 화면)</li>
+      </ul>
+      <div class="recent">운영 상태 가시화 목적. 정기 업데이트 필요한 "살아있는 문서".</div>
+      <div class="section-label">다음 할 일</div>
+      <ul class="next-step">
+        <li>신규 앱 3종 편입 시 부서 갱신</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer>
+    천명당 조직 부서 현황 · 2026-04-11 기준 · 브랜치 <code>claude/visualize-department-tasks-Wzoad</code><br>
+    참고: 서비스 섹션 지도는 <code>departments.html</code> 참조
+  </footer>
+</div>
+</body>
+</html>
