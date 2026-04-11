@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>천명당 — 부서별 업무 현황 대시보드</title>
+<style>
+  :root {
+    --bg: #0d1020;
+    --bg2: #151a30;
+    --card: rgba(20, 26, 48, 0.85);
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #e8ecf5;
+    --text2: #9ba3b8;
+    --gold: #d4af37;
+    --gold2: #f4d06f;
+    --jade: #4a9e8e;
+    --jade2: #7bc4b5;
+    --burgundy: #c75a6e;
+    --water: #64b5f6;
+    --purple: #a78bfa;
+    --rose: #f48fb1;
+    --orange: #ffb74d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: radial-gradient(ellipse at top, #1a1f3a 0%, #0d1020 60%);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  header .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    color: var(--gold2);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, var(--gold2), var(--jade2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  header p { color: var(--text2); font-size: 0.92rem; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat .num {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--gold2);
+  }
+  .stat .label {
+    font-size: 0.74rem;
+    color: var(--text2);
+    margin-top: 4px;
+    letter-spacing: 0.08em;
+  }
+
+  h2.section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 48px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid var(--gold);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 18px;
+  }
+  .dept {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--dept-color, var(--gold));
+    border-radius: 12px;
+    padding: 22px;
+    transition: transform 0.15s, border-color 0.15s;
+    position: relative;
+  }
+  .dept:hover {
+    transform: translateY(-3px);
+    border-color: var(--dept-color, var(--gold));
+  }
+  .dept .head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .dept .icon {
+    font-size: 1.8rem;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+  .dept .name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--dept-color, var(--text));
+  }
+  .dept .anchor {
+    font-size: 0.7rem;
+    color: var(--text2);
+    font-family: 'Courier New', monospace;
+  }
+  .dept .desc {
+    font-size: 0.85rem;
+    color: var(--text2);
+    margin-bottom: 14px;
+    min-height: 3.2em;
+  }
+  .dept ul.tasks {
+    list-style: none;
+    font-size: 0.8rem;
+  }
+  .dept ul.tasks li {
+    padding: 4px 0 4px 18px;
+    color: var(--text);
+    position: relative;
+  }
+  .dept ul.tasks li::before {
+    content: "▸";
+    color: var(--dept-color, var(--gold));
+    position: absolute;
+    left: 4px;
+    font-size: 0.7rem;
+    top: 6px;
+  }
+  .dept .foot {
+    display: flex;
+    gap: 6px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    flex-wrap: wrap;
+  }
+  .chip {
+    font-size: 0.68rem;
+    padding: 3px 9px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    color: var(--text2);
+  }
+  .chip.free { color: var(--jade2); border-color: rgba(123, 196, 181, 0.3); }
+  .chip.paid { color: var(--gold2); border-color: rgba(244, 208, 111, 0.3); }
+  .chip.ai { color: var(--purple); border-color: rgba(167, 139, 250, 0.3); }
+
+  /* cleanup section */
+  .cleanup {
+    margin-top: 48px;
+    background: linear-gradient(135deg, rgba(199, 90, 110, 0.08), rgba(255, 183, 77, 0.05));
+    border: 1px solid rgba(255, 183, 77, 0.2);
+    border-radius: 14px;
+    padding: 28px;
+  }
+  .cleanup h2 {
+    font-size: 1.15rem;
+    color: var(--orange);
+    margin-bottom: 6px;
+  }
+  .cleanup .sub {
+    color: var(--text2);
+    font-size: 0.82rem;
+    margin-bottom: 20px;
+  }
+  .issue {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 14px;
+    align-items: start;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+  }
+  .issue:first-of-type { border-top: none; }
+  .issue .sev {
+    font-size: 0.66rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  .sev.high { background: rgba(199, 90, 110, 0.2); color: var(--burgundy); }
+  .sev.mid { background: rgba(255, 183, 77, 0.2); color: var(--orange); }
+  .sev.low { background: rgba(100, 181, 246, 0.15); color: var(--water); }
+  .issue .body strong { color: var(--text); font-size: 0.9rem; }
+  .issue .body p { font-size: 0.8rem; color: var(--text2); margin-top: 3px; }
+  .issue .body code {
+    font-family: 'Courier New', monospace;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    color: var(--gold2);
+  }
+  .issue .loc {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    color: var(--text2);
+    white-space: nowrap;
+  }
+
+  /* engine modules */
+  .modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .module {
+    background: rgba(74, 158, 142, 0.06);
+    border: 1px solid rgba(74, 158, 142, 0.2);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .module .mname {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--jade2);
+    margin-bottom: 4px;
+  }
+  .module .mdesc {
+    font-size: 0.73rem;
+    color: var(--text2);
+  }
+
+  footer {
+    margin-top: 60px;
+    text-align: center;
+    color: var(--text2);
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    header h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">CHEONMYEONGDANG · DEPARTMENT DASHBOARD</div>
+    <h1>천명당 부서별 업무 현황</h1>
+    <p>우리 부서들이 각자 맡고 있는 일을 한눈에 정리했습니다</p>
+  </header>
+
+  <!-- 요약 통계 -->
+  <div class="stats">
+    <div class="stat"><div class="num">12</div><div class="label">서비스 부서</div></div>
+    <div class="stat"><div class="num">9</div><div class="label">무료 서비스</div></div>
+    <div class="stat"><div class="num">3</div><div class="label">유료 상품</div></div>
+    <div class="stat"><div class="num">2</div><div class="label">AI 기반 분석</div></div>
+  </div>
+
+  <!-- 핵심 운세 부서 -->
+  <h2 class="section-title">핵심 운세 부서 (Fortune Analysis)</h2>
+  <div class="grid">
+
+    <div class="dept" style="--dept-color: var(--jade2);">
+      <div class="head">
+        <div class="icon">🔮</div>
+        <div>
+          <div class="name">사주팔자 부서</div>
+          <div class="anchor">#saju · saju-engine.js</div>
+        </div>
+      </div>
+      <div class="desc">생년월일시 기반 전통 명리학 분석. 플랫폼 핵심 엔진.</div>
+      <ul class="tasks">
+        <li>양력→음력 변환 (1920~2050)</li>
+        <li>년·월·일·시주 사주 계산</li>
+        <li>오행·십신·12운성·지장간 분석</li>
+        <li>대운·세운·월운·용신 판정</li>
+      </ul>
+      <div class="foot">
+        <span class="chip free">무료</span>
+        <span class="chip">1,634 LOC</span>
+        <span class="chip">플래그십</span>
+      </div>
+    </div>
+
+    <div class="dept" style="--dept-color: var(--gold2);">
+      <div class="head">
+        <div class="icon">💛</div>
+        <div>
+          <div class="name">궁합 부서</div>
+          <div class="anchor">#compat</div>
+        </div>
+      </div>
+      <div class="desc">두 사람의 사주를 비교하여 오행 궁합과 합충 관계를 분석.</div>
+      <ul class="tasks">
+        <li>두 사람 사주 동시 계산</li>
+        <li>오행 조화도 산출</li>
+        <li>합충 관계 매칭</li>
+      </ul>
+      <div class="foot">
+        <span class="chip free">무료 체험</span>
+        <span class="chip paid">유료 상세분석</span>
+      </div>
+    </div>
+
+    <div class="dept" style="--dept-color: #d4a0a0;">
+      <div class="head">
+        <div class="icon">👤</div>
+        <div>
+          <div class="name">관상 부서</div>
+          <div class="anchor">#gwansang</div>
+        </div>
+      </div>
+      <div class="desc">얼굴 부위별 관상학 해석. 퀴즈 모드 + AI 사진 분석.</div>
+      <ul class="tasks">
+        <li>이목구비 특징 선택 진단</li>
+        <li>AI 사진 업로드 분석</li>
+        <li>동물상 매칭</li>
+      </ul>
+      <div class="foot">
+        <span class="chip free">무료</span>
+        <span class="chip ai">AI 분석</span>
+      </div>
+    </div>
+
+    <div class="dept" style="--dept-color: var(--water);">
+      <div class="head">
+        <div class="icon">✋</div>
+        <div>
+          <div class="name">손금 부서</div>
+          <div class="anchor">#palm · palm-svg.html</div>
+        </div>
+      </div>
+      <div class="desc">손바닥 선으로 보는 운명. 질문 진단 + 사진 분석 이중 모드.</div>
+      <ul class="tasks">
+        <li>10가지 질문 진단</li>
+        <li>사진 업로드 분석</li>
+        <li>SVG 손금 시각화</li>
+      </ul>
+      <div class="foot">
+        <span class="chip free">무료</span>
+        <span class="chip ai">AI 분석</span>
+      </div>
+    </div>
+
+    <div class="dept" style="--dept-color: var(--purple);">
+      <div class="head">
+        <div class="icon">🃏</div>
+        <div>
+          <div class="name">타로카드 부서</div>
+          <div class="anchor">#tarot</div>
+        </div>
+      </div>
+      <div class="desc">직접 카드를 선택하는 인터랙티브 타로 리딩.</div>
+      <ul class="tasks">
+        <li>카드 덱 셔플·선택</li>
+        <li>의미 해석 출력</li>
+      </ul>
+      <div class="foot"><span class="chip free">무료</span></div>
+    </div>
+
+    <div class="dept" style="--dept-color: var(--gold2);">
+      <div class="head">
+        <div class="icon">🏠</div>
+        <div>
+          <div class="name">풍수지리 부서</div>
+          <div class="anchor">#fengshui</div>
+        </div>
+      </div>
+      <div class="desc">집 방향·공간별 맞춤 풍수 조언.</div>
+      <ul class="tasks">
+        <li>8방위 × 6개 공간 조합</li>
+        <li>맞춤 가이드 제공</li>
+      </ul>
+      <div class="foot"><span class="chip free">무료</span></div>
+    </div>
+
+    <div class="dept" style="--dept-color: var(--rose);">
+      <div class="head">
+        <div class="icon">⭐</div>
+        <div>
+          <div class="name">별자리 부서</div>
+          <div class="anchor">#zodiac</div>
+        </div>
+      </div>
+      <div class="desc">12별자리 서양 점성술 운세.</div>
+      <ul class="tasks">
+        <li>생일 기반 별자리 판정</li>
+        <li>일반 운세 해석</li>
+      </ul>
+      <div class="foot"><span class="chip free">무료</span></div>
+    </div>
+
+    <div class="dept" style="--dept-color: var(--jade2);">
+      <div class="head">
+        <div class="icon">💭</div>
+        <div>
+          <div class="name">꿈해몽 부서</div>
+          <div class="anchor">#dream</div>
+        </div>
+      </div>
+      <div class="desc">키워드 기반 꿈 풀이 사전.</div>
+      <ul class="tasks">
+        <li>키워드 검색</li>
+        <li>의미 매칭·해석</li>
+      </ul>
+      <div class="foot"><span class="chip free">무료</span></div>
+    </div>
+
+    <div class="dept" style="--dept-color: var(--jade2);">
+      <div class="head">
+        <div class="icon">📅</div>
+        <div>
+          <div class="name">오늘의 운세 부서</div>
+          <div class="anchor">#daily</div>
+        </div>
+      </div>
+      <div class="desc">매일 갱신되는 띠별·일별 데일리 운세.</div>
+      <ul class="tasks">
+        <li>12띠별 운세</li>
+        <li>일일 자동 갱신</li>
+      </ul>
+      <div class="foot"><span class="chip free">무료</span></div>
+    </div>
+
+  </div>
+
+  <!-- 수익/지원 부서 -->
+  <h2 class="section-title">수익 · 지원 부서 (Revenue &amp; Support)</h2>
+  <div class="grid">
+
+    <div class="dept" style="--dept-color: var(--gold);">
+      <div class="head">
+        <div class="icon">💰</div>
+        <div>
+          <div class="name">유료 서비스 부서</div>
+          <div class="anchor">#paid</div>
+        </div>
+      </div>
+      <div class="desc">천명당의 실질 매출 발생 지점. 상세 분석 상품 3종 운영.</div>
+      <ul class="tasks">
+        <li>사주 상세 풀이 (29,900원)</li>
+        <li>궁합 상세 분석 (9,900원)</li>
+        <li>신년운세 (20,000원)</li>
+      </ul>
+      <div class="foot">
+        <span class="chip paid">유료</span>
+        <span class="chip">매출 채널</span>
+      </div>
+    </div>
+
+    <div class="dept" style="--dept-color: var(--rose);">
+      <div class="head">
+        <div class="icon">⭐</div>
+        <div>
+          <div class="name">고객후기 부서</div>
+          <div class="anchor">#testimonials</div>
+        </div>
+      </div>
+      <div class="desc">실제 이용 후기 노출로 신뢰도·전환율 견인.</div>
+      <ul class="tasks">
+        <li>후기 카드 노출</li>
+        <li>서비스별 별점 표시</li>
+      </ul>
+      <div class="foot"><span class="chip">마케팅</span></div>
+    </div>
+
+    <div class="dept" style="--dept-color: var(--burgundy);">
+      <div class="head">
+        <div class="icon">📮</div>
+        <div>
+          <div class="name">고객지원 부서</div>
+          <div class="anchor">#complaint</div>
+        </div>
+      </div>
+      <div class="desc">불만 접수 창구 및 자주 묻는 질문(FAQ) 응대.</div>
+      <ul class="tasks">
+        <li>불만사항 접수 폼</li>
+        <li>별점 만족도 수집</li>
+        <li>FAQ 토글 노출</li>
+      </ul>
+      <div class="foot"><span class="chip">CS</span></div>
+    </div>
+
+  </div>
+
+  <!-- 사주 엔진 내부 모듈 -->
+  <h2 class="section-title">사주 엔진 내부 모듈 (saju-engine.js)</h2>
+  <p style="color:var(--text2);font-size:0.82rem;margin-bottom:18px;">사주팔자 부서가 내부적으로 운영하는 12개 분석 파트</p>
+  <div class="modules">
+    <div class="module"><div class="mname">① 기초 상수</div><div class="mdesc">천간·지지·오행·음양 정의</div></div>
+    <div class="module"><div class="mname">② 십신 (十神)</div><div class="mdesc">비견·겁재·식상·재성·관성·인성</div></div>
+    <div class="module"><div class="mname">③ 12운성</div><div class="mdesc">장생~양 운세 주기</div></div>
+    <div class="module"><div class="mname">④ 지장간</div><div class="mdesc">지지 속 숨은 천간 추출</div></div>
+    <div class="module"><div class="mname">⑤ 합·충·형·파·해</div><div class="mdesc">천간·지지 간 관계 분석</div></div>
+    <div class="module"><div class="mname">⑥ 음력 변환</div><div class="mdesc">양력→음력 (1920~2050)</div></div>
+    <div class="module"><div class="mname">⑦ 절기 데이터</div><div class="mdesc">24절기 기반 월주 보정</div></div>
+    <div class="module"><div class="mname">⑧ 사주 계산</div><div class="mdesc">년·월·일·시주 4기둥 생성</div></div>
+    <div class="module"><div class="mname">⑨ 오행 분석</div><div class="mdesc">목·화·토·금·수 분포</div></div>
+    <div class="module"><div class="mname">⑩ 대운 계산</div><div class="mdesc">10년 주기 운세 흐름</div></div>
+    <div class="module"><div class="mname">⑪ 용신 판정</div><div class="mdesc">신강·신약 기반 용신</div></div>
+    <div class="module"><div class="mname">⑫ 세운·월운</div><div class="mdesc">연·월 단위 유동 운세</div></div>
+  </div>
+
+  <!-- 정리해야 할 사항 -->
+  <div class="cleanup">
+    <h2>🧹 정리해야 할 사항</h2>
+    <p class="sub">코드베이스 점검 중 발견한 미완료 / 플레이스홀더 항목</p>
+
+    <div class="issue">
+      <span class="sev high">HIGH</span>
+      <div class="body">
+        <strong>Google AdSense 클라이언트 ID 미설정</strong>
+        <p><code>ca-pub-PLACEHOLDER</code> 값이 그대로 배포되어 있어 광고가 노출되지 않습니다. 실제 퍼블리셔 ID로 교체 필요.</p>
+      </div>
+      <span class="loc">index.html:35</span>
+    </div>
+
+    <div class="issue">
+      <span class="sev mid">MID</span>
+      <div class="body">
+        <strong>네이버 사이트 인증값 비어 있음</strong>
+        <p><code>&lt;meta name="naver-site-verification" content=""&gt;</code> 빈 값. 네이버 검색 등록에 영향. 발급받은 인증 코드 입력 필요.</p>
+      </div>
+      <span class="loc">index.html:32</span>
+    </div>
+
+    <div class="issue">
+      <span class="sev low">LOW</span>
+      <div class="body">
+        <strong>코드 비대화 — index.html 6,026 라인</strong>
+        <p>모든 섹션·스타일·스크립트가 단일 파일에 집약. 향후 섹션별 분리 또는 번들링 고려 가치.</p>
+      </div>
+      <span class="loc">index.html</span>
+    </div>
+
+    <div class="issue">
+      <span class="sev low">LOW</span>
+      <div class="body">
+        <strong>knowledge.json 데이터 소스 검증</strong>
+        <p>125KB 지식 베이스가 엔진과 연동되는지, 어느 부서에서 사용하는지 문서화 필요.</p>
+      </div>
+      <span class="loc">js/knowledge.json</span>
+    </div>
+  </div>
+
+  <footer>
+    천명당 부서별 업무 현황 · 2026-04-11 기준 · <code>claude/visualize-department-tasks-Wzoad</code>
+  </footer>
+</div>
+</body>
+</html>
