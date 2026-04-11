@@ -2083,10 +2083,8 @@
     </form>
 
     <div class="complaint-success" id="complaint-success">
-      <div class="success-icon">&#9745;</div>
-      <h3>접수되었습니다</h3>
-      <p>소중한 의견 감사합니다. 개선에 반영하겠습니다.</p>
-      <p id="complaint-reply-msg" style="display:none;color:#c75a6e;">답변은 영업일 기준 1~2일 이내에 연락드리겠습니다.</p>
+      <!-- 자동 판독 엔진이 여기에 동적으로 결과를 렌더링 -->
+      <div id="complaint-response-content"></div>
       <button class="btn-complaint" style="margin-top:24px;width:auto;padding:12px 32px;" onclick="resetComplaintForm()">새로운 의견 작성</button>
     </div>
   </div>
@@ -2132,6 +2130,7 @@
 
 <!-- SCRIPTS -->
 <script src="js/saju-engine.js"></script>
+<script src="js/complaint-triage.js"></script>
 <script>
 // Global scope (no IIFE)
 
@@ -5986,6 +5985,7 @@ function submitComplaint(e) {
   }
 
   var complaint = {
+    id: 'c_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
     name: document.getElementById('complaint-name').value.trim(),
     tel: document.getElementById('complaint-tel').value.trim(),
     email: document.getElementById('complaint-email').value.trim(),
@@ -5995,22 +5995,198 @@ function submitComplaint(e) {
     timestamp: new Date().toISOString()
   };
 
-  // Store in localStorage
-  var complaints = JSON.parse(localStorage.getItem('cheonmyeong_complaints') || '[]');
-  complaints.push(complaint);
-  localStorage.setItem('cheonmyeong_complaints', JSON.stringify(complaints));
+  // ==========================================================================
+  // 자동 판독 실행 (client-side only, 외부 호출 없음)
+  // ==========================================================================
+  var analysis = null;
+  try {
+    if (window.ComplaintTriage) {
+      analysis = window.ComplaintTriage.analyze(complaint);
+      complaint.analysis = analysis;
+    }
+  } catch (err) {
+    console.warn('complaint triage failed:', err);
+  }
 
-  // Show success
+  // 스팸/거부: localStorage 에 저장하지 않음
+  if (analysis && analysis.rejected) {
+    renderComplaintResponse(complaint, analysis);
+    return;
+  }
+
+  // 정상 접수 → localStorage 저장
+  try {
+    var complaints = JSON.parse(localStorage.getItem('cheonmyeong_complaints') || '[]');
+    complaints.push(complaint);
+    localStorage.setItem('cheonmyeong_complaints', JSON.stringify(complaints));
+  } catch (err) {
+    console.error('complaint save failed:', err);
+  }
+
+  renderComplaintResponse(complaint, analysis);
+}
+
+/**
+ * 자동 판독 결과를 사용자에게 시각적으로 렌더링
+ */
+function renderComplaintResponse(complaint, analysis) {
   document.getElementById('complaint-form').style.display = 'none';
   var successEl = document.getElementById('complaint-success');
   successEl.style.display = 'block';
 
-  // Show reply message if contact info provided
-  if (complaint.tel || complaint.email) {
-    document.getElementById('complaint-reply-msg').style.display = 'block';
-  } else {
-    document.getElementById('complaint-reply-msg').style.display = 'none';
+  var container = document.getElementById('complaint-response-content');
+
+  // 엔진이 로드되지 않은 경우 fallback
+  if (!analysis) {
+    container.innerHTML =
+      '<div class="success-icon">\u2611</div>' +
+      '<h3>접수되었습니다</h3>' +
+      '<p>소중한 의견 감사합니다. 개선에 반영하겠습니다.</p>' +
+      (complaint.tel || complaint.email
+        ? '<p style="color:#c75a6e;">답변은 영업일 기준 1~2일 이내에 연락드리겠습니다.</p>'
+        : '');
+    return;
   }
+
+  var tone = analysis.response.tone;
+  var iconMap = {
+    urgent: '\ud83d\udca1',   // 💡 urgent attention
+    action: '\ud83d\udd27',   // 🔧 action needed
+    thanks: '\ud83d\udc96',   // 💖 thanks
+    careful: '\ud83d\udcdc',  // 📜
+    neutral: '\u2611',        // ☑
+    reject: '\u26d4'          // ⛔
+  };
+  var toneColorMap = {
+    urgent: '#f4d06f',
+    action: '#64b5f6',
+    thanks: '#7bc4b5',
+    careful: '#d4a0a0',
+    neutral: '#9ba3b8',
+    reject: '#c75a6e'
+  };
+  var icon = iconMap[tone] || '\u2611';
+  var accent = toneColorMap[tone] || '#9ba3b8';
+
+  var html = '';
+  html += '<div class="success-icon" style="color:' + accent + ';">' + icon + '</div>';
+  html += '<h3 style="color:' + accent + ';">' + escapeHtml(analysis.response.title) + '</h3>';
+
+  // 거부 상태
+  if (analysis.rejected) {
+    html += '<p style="margin:16px 0;color:var(--text2);line-height:1.7;white-space:pre-line;">' +
+            escapeHtml(analysis.response.body) + '</p>';
+    html += '<div style="margin-top:16px;padding:12px;background:rgba(199,90,110,0.08);border:1px solid rgba(199,90,110,0.2);border-radius:8px;font-size:0.78rem;color:#c75a6e;">' +
+            '\u26a0 이 내용은 저장되지 않았습니다</div>';
+    container.innerHTML = html;
+    return;
+  }
+
+  // 정상 접수: 자동 판독 결과 카드
+  html += '<div style="margin:20px 0;padding:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;text-align:left;">';
+  html += '  <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">';
+  html += '    <span style="font-size:1.4rem;">' + analysis.category.icon + '</span>';
+  html += '    <span style="color:' + analysis.category.color + ';font-weight:700;font-size:0.9rem;">' +
+          escapeHtml(analysis.category.label) + '</span>';
+  html += '    <span style="margin-left:auto;font-size:0.72rem;color:var(--text2);">자동 분류</span>';
+  html += '  </div>';
+
+  // 심각도 바
+  html += '  <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:0.78rem;">';
+  html += '    <span style="color:var(--text2);min-width:56px;">심각도</span>';
+  for (var i = 1; i <= 5; i++) {
+    var on = i <= analysis.severity;
+    html += '    <span style="width:18px;height:6px;border-radius:3px;background:' +
+            (on ? '#c75a6e' : 'rgba(255,255,255,0.1)') + ';display:inline-block;"></span>';
+  }
+  html += '    <span style="color:var(--text2);font-size:0.7rem;margin-left:4px;">' + analysis.severity + ' / 5</span>';
+  html += '  </div>';
+
+  // 타당성 바
+  html += '  <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem;">';
+  html += '    <span style="color:var(--text2);min-width:56px;">타당성</span>';
+  for (var j = 1; j <= 5; j++) {
+    var on2 = j <= analysis.validityScore;
+    html += '    <span style="width:18px;height:6px;border-radius:3px;background:' +
+            (on2 ? '#7bc4b5' : 'rgba(255,255,255,0.1)') + ';display:inline-block;"></span>';
+  }
+  html += '    <span style="color:var(--text2);font-size:0.7rem;margin-left:4px;">' + analysis.validityScore + ' / 5</span>';
+  html += '  </div>';
+
+  // 키워드 chip
+  if (analysis.keywords && analysis.keywords.length) {
+    html += '  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;">';
+    for (var k = 0; k < analysis.keywords.length; k++) {
+      html += '<span style="font-size:0.68rem;padding:3px 8px;background:rgba(74,158,142,0.1);border:1px solid rgba(74,158,142,0.25);border-radius:99px;color:#7bc4b5;">#' +
+              escapeHtml(analysis.keywords[k]) + '</span>';
+    }
+    html += '  </div>';
+  }
+  html += '</div>';
+
+  // 응답 본문
+  html += '<p style="margin:16px 0;color:var(--text);line-height:1.7;white-space:pre-line;text-align:left;">' +
+          escapeHtml(analysis.response.body) + '</p>';
+
+  // 액션 버튼
+  if (analysis.response.actions && analysis.response.actions.length) {
+    html += '<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px;">';
+    for (var a = 0; a < analysis.response.actions.length; a++) {
+      var action = analysis.response.actions[a];
+      var payload = encodeURIComponent(JSON.stringify(action));
+      html += '<button class="btn-complaint-action" ' +
+              'style="padding:10px 18px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.35);' +
+              'border-radius:6px;color:#f4d06f;font-size:0.82rem;cursor:pointer;font-family:\'Noto Sans KR\',sans-serif;" ' +
+              'data-action="' + payload + '" onclick="handleComplaintAction(this)">' +
+              escapeHtml(action.label) + '</button>';
+    }
+    html += '</div>';
+  }
+
+  // 연락처 답변 안내
+  if (complaint.tel || complaint.email) {
+    html += '<p style="margin-top:16px;color:#c75a6e;font-size:0.82rem;">답변은 영업일 기준 1~2일 이내에 연락드리겠습니다.</p>';
+  }
+
+  container.innerHTML = html;
+}
+
+/**
+ * 자동 판독 응답의 액션 버튼 처리
+ */
+function handleComplaintAction(btn) {
+  var action;
+  try {
+    action = JSON.parse(decodeURIComponent(btn.getAttribute('data-action')));
+  } catch (e) { return; }
+
+  if (action.type === 'reopen') {
+    resetComplaintForm();
+    document.getElementById('complaint-detail').focus();
+    return;
+  }
+  if (action.type === 'scroll') {
+    var target = document.querySelector(action.data);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+  if (action.type === 'mailto') {
+    var to = action.data.to || 'support@cheonmyeongdang.kr';
+    var subject = encodeURIComponent(action.data.subject || '');
+    var body = encodeURIComponent(action.data.body || '');
+    window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+    return;
+  }
+}
+
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 function resetComplaintForm() {

@@ -285,7 +285,7 @@
     <div class="stat"><div class="num">12</div><div class="label">서비스 부서</div></div>
     <div class="stat"><div class="num">9</div><div class="label">무료 서비스</div></div>
     <div class="stat"><div class="num">3</div><div class="label">유료 상품</div></div>
-    <div class="stat"><div class="num">2</div><div class="label">AI 기반 분석</div></div>
+    <div class="stat"><div class="num">3</div><div class="label">자동화 엔진</div></div>
   </div>
 
   <!-- 핵심 운세 부서 -->
@@ -501,18 +501,71 @@
         <div class="icon">📮</div>
         <div>
           <div class="name">고객지원 부서</div>
-          <div class="anchor">#complaint</div>
+          <div class="anchor">#complaint · complaint-triage.js</div>
         </div>
       </div>
-      <div class="desc">불만 접수 창구 및 자주 묻는 질문(FAQ) 응대.</div>
+      <div class="desc">불만 자동 판독 · 분류 · 맞춤 응답까지 수행하는 자동화 CS 라인.</div>
       <ul class="tasks">
-        <li>불만사항 접수 폼</li>
-        <li>별점 만족도 수집</li>
+        <li>불만사항 접수 폼 + 별점 수집</li>
+        <li>🤖 자동 스팸/욕설 필터링</li>
+        <li>🤖 카테고리 자동 분류 (환불/버그/개선/불만족)</li>
+        <li>🤖 심각도·타당성 점수화</li>
+        <li>🤖 카테고리별 맞춤 응답 자동 생성</li>
+        <li>관리자 대시보드 + GitHub 이슈 자동 전환</li>
         <li>FAQ 토글 노출</li>
       </ul>
-      <div class="foot"><span class="chip">CS</span></div>
+      <div class="foot">
+        <span class="chip">CS</span>
+        <span class="chip ai">Auto-Triage</span>
+        <span class="chip">admin.html</span>
+      </div>
     </div>
 
+  </div>
+
+  <!-- 불만 자동 판독 파이프라인 -->
+  <h2 class="section-title">불만 자동 판독 파이프라인 (complaint-triage.js)</h2>
+  <p style="color:var(--text2);font-size:0.82rem;margin-bottom:18px;">고객지원 부서가 새로 도입한 자동 처리 흐름 — 100% 클라이언트 사이드, 외부 API 호출 없음</p>
+  <div class="modules" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+    <div class="module" style="background:rgba(199,90,110,0.06);border-color:rgba(199,90,110,0.2);">
+      <div class="mname" style="color:#e8a0ad;">① 스팸 탐지</div>
+      <div class="mdesc">욕설·URL·반복문자·무의미 내용 필터링 → 미접수</div>
+    </div>
+    <div class="module" style="background:rgba(244,208,111,0.06);border-color:rgba(244,208,111,0.2);">
+      <div class="mname" style="color:var(--gold2);">② 카테고리 분류</div>
+      <div class="mdesc">환불·버그·개선·불만족 자동 분류 (우선순위 가중)</div>
+    </div>
+    <div class="module" style="background:rgba(199,90,110,0.06);border-color:rgba(199,90,110,0.2);">
+      <div class="mname" style="color:#e8a0ad;">③ 심각도 산출</div>
+      <div class="mdesc">별점 + 키워드 가중치 → 1~5점</div>
+    </div>
+    <div class="module">
+      <div class="mname">④ 타당성 점수</div>
+      <div class="mdesc">길이·상황설명·구체명사 기반 0~5점</div>
+    </div>
+    <div class="module">
+      <div class="mname">⑤ 키워드 추출</div>
+      <div class="mdesc">본문에서 관련 키워드 자동 추출</div>
+    </div>
+    <div class="module" style="background:rgba(100,181,246,0.06);border-color:rgba(100,181,246,0.2);">
+      <div class="mname" style="color:var(--water);">⑥ 응답 생성</div>
+      <div class="mdesc">카테고리별 맞춤 안내·액션 버튼 동적 렌더</div>
+    </div>
+    <div class="module" style="background:rgba(167,139,250,0.06);border-color:rgba(167,139,250,0.2);">
+      <div class="mname" style="color:var(--purple);">⑦ 관리자 대시보드</div>
+      <div class="mdesc"><code style="font-size:0.7rem;">admin.html</code> — 필터·통계·CSV 내보내기</div>
+    </div>
+    <div class="module" style="background:rgba(167,139,250,0.06);border-color:rgba(167,139,250,0.2);">
+      <div class="mname" style="color:var(--purple);">⑧ GitHub 이슈 전환</div>
+      <div class="mdesc">한 클릭으로 원문·분석이 채워진 이슈 생성</div>
+    </div>
+  </div>
+
+  <div style="margin:20px 0 40px;padding:14px 18px;background:rgba(74,158,142,0.06);border-left:3px solid var(--jade);border-radius:6px;font-size:0.78rem;color:var(--text2);line-height:1.7;">
+    <strong style="color:var(--jade2);">🛡 보안 원칙</strong> —
+    이 파이프라인은 <strong>공개 사용자 입력으로 코드를 수정하지 않습니다.</strong>
+    판독·분류·응답·이슈 전환만 자동화되며, 실제 코드 수정은 관리자가 GitHub 이슈를 검토한 뒤 수동으로 진행합니다.
+    이는 프롬프트 인젝션·원격 코드 개조 위험을 근본적으로 차단하기 위한 설계입니다.
   </div>
 
   <!-- 사주 엔진 내부 모듈 -->
