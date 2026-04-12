@@ -654,6 +654,60 @@ def process_mp3(mp3_path: str) -> bool:
                 log.warning("TXT → LRC 변환 실패, 자막 없이 진행")
         except Exception as e:
             log.warning(f"TXT 자동 타이밍 생성 실패: {e}")
+    else:
+        # .lrc 도 .txt 도 없음 → Whisper 로 자동 추출 시도
+        log.info("가사 파일 없음 → Whisper 자동 가사 추출 시도...")
+        try:
+            import whisper as whisper_ai
+            whisper_model_name = "base"
+            log.info(f"Whisper 모델 로딩 ({whisper_model_name})... (첫 실행 시 다운로드 140MB)")
+            whisper_model = whisper_ai.load_model(whisper_model_name)
+            log.info("Whisper 가사 추출 중... (30초~2분 소요)")
+            whisper_result = whisper_model.transcribe(
+                mp3_path,
+                language="ko",
+                task="transcribe",
+            )
+
+            # segments 에서 LRC 생성
+            segments = whisper_result.get("segments", [])
+            if segments:
+                lrc_lines = []
+                lyrics_lines = []
+                for seg in segments:
+                    start = seg["start"]
+                    text = seg["text"].strip()
+                    if not text:
+                        continue
+                    mm = int(start // 60)
+                    ss = int(start % 60)
+                    xx = int(round((start - int(start)) * 100))
+                    lrc_lines.append(f"[{mm:02d}:{ss:02d}.{xx:02d}]{text}")
+                    lyrics_lines.append(text)
+
+                if lrc_lines:
+                    auto_lrc = os.path.join(tmp_dir, "whisper_auto.lrc")
+                    Path(auto_lrc).write_text("\n".join(lrc_lines), encoding="utf-8")
+                    lrc_path = auto_lrc
+                    lyrics_raw = "\n".join(lyrics_lines)
+                    log.info(f"Whisper 가사 추출 완료: {len(lrc_lines)}줄")
+
+                    # 설명글에 가사 삽입
+                    if lyrics_raw and "[여기에 가사가 자동으로 들어갑니다" in auto_description:
+                        auto_description = auto_description.replace(
+                            "[여기에 가사가 자동으로 들어갑니다 — .lrc 파일 동봉 시]",
+                            lyrics_raw[:2000],
+                        )
+                        log.info(f"설명글에 Whisper 가사 {len(lyrics_raw)} 자 삽입")
+                else:
+                    log.warning("Whisper 가사 추출 결과 비어있음")
+            else:
+                log.warning("Whisper segments 없음 (가사 인식 실패)")
+
+        except ImportError:
+            log.warning("Whisper 미설치. pip install openai-whisper 로 설치하면 자동 가사 추출 가능")
+        except Exception as e:
+            log.warning(f"Whisper 가사 추출 실패: {type(e).__name__}: {str(e)[:200]}")
 
     # SRT 변환 (자막용)
     srt_path = None
