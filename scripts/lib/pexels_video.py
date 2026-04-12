@@ -15,7 +15,9 @@ from pathlib import Path
 from typing import Optional
 
 
-PEXELS_KEY = (os.environ.get("PEXELS_API_KEY") or "").strip()
+def _get_pexels_key() -> str:
+    """호출 시점에 환경변수에서 키를 읽음 (모듈 로딩 시점이 아님)."""
+    return (os.environ.get("PEXELS_API_KEY") or "").strip()
 
 
 def search_videos(query: str, orientation: str = "landscape",
@@ -33,7 +35,7 @@ def search_videos(query: str, orientation: str = "landscape",
     Returns:
         [{"id": 123, "url": "https://...", "duration": 15, "width": 1920, ...}, ...]
     """
-    if not PEXELS_KEY:
+    if not _get_pexels_key():
         return []
 
     params = urllib.parse.urlencode({
@@ -43,7 +45,7 @@ def search_videos(query: str, orientation: str = "landscape",
         "size": "medium",  # Full HD
     })
     url = f"https://api.pexels.com/videos/search?{params}"
-    req = urllib.request.Request(url, headers={"Authorization": PEXELS_KEY})
+    req = urllib.request.Request(url, headers={"Authorization": _get_pexels_key()})
 
     try:
         with urllib.request.urlopen(req, timeout=15) as resp:
