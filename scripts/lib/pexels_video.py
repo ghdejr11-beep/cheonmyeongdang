@@ -86,7 +86,12 @@ def search_videos(query: str, orientation: str = "landscape",
 def download_video(url: str, save_path: str, timeout: int = 60) -> bool:
     """영상 1개 다운로드."""
     try:
-        urllib.request.urlretrieve(url, save_path)
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "DeokguneAI/1.0",
+        })
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            with open(save_path, "wb") as f:
+                f.write(resp.read())
         return os.path.exists(save_path) and os.path.getsize(save_path) > 10000
     except Exception as e:
         print(f"[pexels] 다운로드 실패: {e}")
