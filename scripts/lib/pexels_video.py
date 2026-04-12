@@ -84,11 +84,13 @@ def search_videos(query: str, orientation: str = "landscape",
 
 
 def download_video(url: str, save_path: str, timeout: int = 60) -> bool:
-    """영상 1개 다운로드."""
+    """영상 1개 다운로드. Pexels CDN 은 Authorization + User-Agent 필요."""
     try:
-        req = urllib.request.Request(url, headers={
-            "User-Agent": "DeokguneAI/1.0",
-        })
+        headers = {"User-Agent": "DeokguneAI/1.0"}
+        api_key = _get_pexels_key()
+        if api_key:
+            headers["Authorization"] = api_key
+        req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             with open(save_path, "wb") as f:
                 f.write(resp.read())
