@@ -45,7 +45,10 @@ def search_videos(query: str, orientation: str = "landscape",
         "size": "medium",  # Full HD
     })
     url = f"https://api.pexels.com/videos/search?{params}"
-    req = urllib.request.Request(url, headers={"Authorization": _get_pexels_key()})
+    req = urllib.request.Request(url, headers={
+        "Authorization": _get_pexels_key(),
+        "User-Agent": "DeokguneAI/1.0",
+    })
 
     try:
         with urllib.request.urlopen(req, timeout=15) as resp:
