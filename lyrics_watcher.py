@@ -356,20 +356,19 @@ def escape_for_ffmpeg_filter(path: str) -> str:
 
 
 # ============================================================
-# MP4 생성 (오디오 리액티브 + 가사 자막 = 수익화 가능한 뮤직비디오)
+# MP4 생성 (Ken Burns 애니메이션 + 가사 자막 = 수익화 가능한 뮤직비디오)
 # ============================================================
 def make_lyric_video(mp3_path: str, bg_image: str, out_path: str, ffmpeg: str,
                      lrc_path: str = None, tmp_dir: str = None) -> bool:
-    """오디오 리액티브 시각 효과 + 가사 자막이 들어간 뮤직비디오 생성.
+    """Ken Burns 애니메이션 + 가사 자막이 들어간 뮤직비디오 생성.
 
     2026년 YouTube 정책: "AI 음악 + 정적 이미지" 는 수익화 불가.
-    이 함수는 다음 3가지를 추가해서 수익화 가능한 '실질적 부가가치' 를 만든다:
-      1. showwaves: 음악 파형을 실시간으로 그리는 레이어
-      2. showspectrum: 주파수 스펙트럼 레이어
-      3. subtitles: .lrc 파일 있으면 가사 자막 표시 (타이밍 맞춤)
+    이 함수는 부드러운 줌/팬 애니메이션으로 '실질적 부가가치' 를 만든다:
+      1. zoompan: 배경 이미지를 느리게 줌인/줌아웃/팬 (Ken Burns 효과)
+      2. subtitles: .lrc 파일 있으면 가사 자막 표시 (타이밍 맞춤)
 
-    lrc_path 가 None 이거나 파일이 없으면 시각 효과만 적용.
-    tmp_dir 은 SRT 중간 파일을 쓰기 위한 작업 폴더.
+    showwaves/showspectrum 제거 — 화면이 무섭고 불필요.
+    Ken Burns 만으로 YouTube 수익화 "애니메이션" 조건 충족.
     """
     try:
         from playlist_maker import get_duration
@@ -378,7 +377,7 @@ def make_lyric_video(mp3_path: str, bg_image: str, out_path: str, ffmpeg: str,
             log.error("MP3 길이 감지 실패")
             return False
 
-        log.info(f"뮤직비디오 생성: {duration:.1f}초 (오디오 리액티브 + 가사)")
+        log.info(f"뮤직비디오 생성: {duration:.1f}초 (Ken Burns + 가사)")
 
         # ---- 1. LRC → SRT 변환 (가사 있을 때만) ----
         srt_path = None
@@ -387,36 +386,46 @@ def make_lyric_video(mp3_path: str, bg_image: str, out_path: str, ffmpeg: str,
             if convert_lrc_to_srt(lrc_path, srt_candidate):
                 srt_path = srt_candidate
 
-        # ---- 2. 폰트 확인 (자막용, 있으면 사용) ----
-        # 워터마크는 제거함 — Windows ffmpeg drawtext 가 non-ASCII 경로
-        # (C:\Users\쿤\...) 의 폰트 파일을 못 열어서 filter_complex 전체가
-        # 실패하는 버그가 있음. 자막용 폰트는 system Windows 의 malgun.ttf
-        # (ASCII 경로) 로 우선 fallback.
+        # ---- 2. 폰트 확인 (자막용) ----
         font_file = Path(r"C:\Windows\Fonts\malgun.ttf")
         if not font_file.exists():
             font_file = SCRIPT_DIR / "fonts" / "NanumGothic-Bold.ttf"
 
-        # ---- 3. filter_complex 구성 (폰트 의존 없음) ----
-        # 배경 1920x1080 스케일/패드
+        # ---- 3. Ken Burns 애니메이션 스타일 랜덤 선택 ----
+        fps = 30
+        total_frames = int(duration * fps) + fps  # 여유 프레임
+
+        kb_styles = [
+            # 느린 줌 인 (중앙으로)
+            (f"zoompan=z='min(zoom+0.0005,1.4)'"
+             f":x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"
+             f":d={total_frames}:s=1920x1080:fps={fps}", "줌 인"),
+            # 느린 줌 아웃 (넓어지는 느낌)
+            (f"zoompan=z='if(lte(zoom,1.0),1.4,max(1.001,zoom-0.0005))'"
+             f":x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"
+             f":d={total_frames}:s=1920x1080:fps={fps}", "줌 아웃"),
+            # 오른쪽으로 느린 팬 + 약간 줌
+            (f"zoompan=z='min(zoom+0.0002,1.2)'"
+             f":x='(iw-iw/zoom)/2+((iw/zoom)*0.12*on/{total_frames})'"
+             f":y='ih/2-(ih/zoom/2)'"
+             f":d={total_frames}:s=1920x1080:fps={fps}", "우측 팬"),
+            # 왼쪽으로 느린 팬 + 약간 줌
+            (f"zoompan=z='min(zoom+0.0002,1.2)'"
+             f":x='(iw-iw/zoom)/2-((iw/zoom)*0.12*on/{total_frames})'"
+             f":y='ih/2-(ih/zoom/2)'"
+             f":d={total_frames}:s=1920x1080:fps={fps}", "좌측 팬"),
+        ]
+        chosen_style, style_name = random.choice(kb_styles)
+        log.info(f"Ken Burns 스타일: {style_name}")
+
+        # ---- 4. filter_complex 구성 ----
+        # 이미지를 크게 스케일 → zoompan 이 줌/팬하면서 1920x1080 출력
         filters = [
-            "[0:v]scale=1920:1080:force_original_aspect_ratio=decrease,"
-            "pad=1920:1080:(ow-iw)/2:(oh-ih)/2:black,setsar=1[bg]",
-
-            # 오디오 파형 (showwaves): 골드+화이트 반투명, 하단 120px
-            "[1:a]showwaves=s=1920x120:mode=cline:colors=0xffd70080|0xffffff80:rate=30,"
-            "format=yuva420p,colorchannelmixer=aa=0.7[waves]",
-
-            "[bg][waves]overlay=0:main_h-h-120[bgwaves]",
-
-            # 주파수 스펙트럼 (showspectrum): 맨 아래 50px 레인보우
-            "[1:a]showspectrum=s=1920x50:mode=combined:color=rainbow:scale=log:"
-            "slide=scroll:saturation=0.8,format=yuva420p,colorchannelmixer=aa=0.6[spec]",
-
-            "[bgwaves][spec]overlay=0:main_h-h[bgspec]",
+            f"[0:v]scale=3840:-1,{chosen_style},format=yuv420p[bg]",
         ]
 
-        # 자막 오버레이 (SRT 있을 때만, malgun.ttf 로 libass 사용)
-        last_label = "[bgspec]"
+        # 자막 오버레이 (SRT 있을 때만)
+        last_label = "[bg]"
         if srt_path and font_file.exists():
             srt_ffmpeg = escape_for_ffmpeg_filter(srt_path)
             fonts_dir = escape_for_ffmpeg_filter(str(font_file.parent))
@@ -433,10 +442,11 @@ def make_lyric_video(mp3_path: str, bg_image: str, out_path: str, ffmpeg: str,
 
         filter_complex = ";".join(filters)
 
-        # ---- 4. ffmpeg 명령어 ----
+        # ---- 5. ffmpeg 명령어 ----
+        # zoompan 은 단일 이미지에서 프레임 생성 → -loop 1 불필요
         cmd = [
             ffmpeg, "-y",
-            "-loop", "1", "-i", bg_image,
+            "-i", bg_image,
             "-i", mp3_path,
             "-filter_complex", filter_complex,
             "-map", last_label,
@@ -447,7 +457,6 @@ def make_lyric_video(mp3_path: str, bg_image: str, out_path: str, ffmpeg: str,
             "-c:a", "aac",
             "-b:a", "192k",
             "-pix_fmt", "yuv420p",
-            "-r", "30",
             "-shortest",
             "-t", f"{duration:.2f}",
             out_path,
@@ -458,12 +467,11 @@ def make_lyric_video(mp3_path: str, bg_image: str, out_path: str, ffmpeg: str,
             capture_output=True,
             text=True,
             encoding="utf-8",
-            errors="replace",  # CP949 크래시 방지 (ffmpeg 는 UTF-8 로 stderr 출력)
+            errors="replace",
             timeout=1800,
         )
         if result.returncode != 0:
             log.error(f"ffmpeg 에러 (returncode={result.returncode})")
-            # stderr 전체를 임시파일에 써서 나중에 디버깅 가능
             try:
                 err_log = Path(tmp_dir) / "ffmpeg_error.log" if tmp_dir else None
                 if err_log:
@@ -471,16 +479,15 @@ def make_lyric_video(mp3_path: str, bg_image: str, out_path: str, ffmpeg: str,
                     log.error(f"  전체 stderr: {err_log}")
             except Exception:
                 pass
-            # 콘솔엔 마지막 2500자 출력 (앞쪽 configure 스팸 건너뛰기)
             tail = (result.stderr or "")[-2500:]
             for line in tail.split("\n"):
                 if line.strip():
                     log.error(f"  {line}")
-            log.warning("폴백: 정적 배경 모드로 재시도")
+            log.warning("폴백: 단순 줌 모드로 재시도")
             return _make_static_video_fallback(mp3_path, bg_image, out_path, ffmpeg, duration)
 
         size_mb = os.path.getsize(out_path) / 1024 / 1024
-        log.info(f"✓ 뮤직비디오 완성: {out_path} ({size_mb:.1f} MB)")
+        log.info(f"뮤직비디오 완성: {out_path} ({size_mb:.1f} MB)")
         return True
     except Exception as e:
         log.error(f"비디오 생성 실패: {e}")
@@ -489,28 +496,29 @@ def make_lyric_video(mp3_path: str, bg_image: str, out_path: str, ffmpeg: str,
 
 def _make_static_video_fallback(mp3_path: str, bg_image: str, out_path: str,
                                 ffmpeg: str, duration: float) -> bool:
-    """메인 filter_complex 실패 시 폴백.
-    여전히 오디오 리액티브 (showwaves) 는 포함 — 수익화 조건 유지 위해.
-    복잡한 필터만 제거.
+    """메인 Ken Burns 실패 시 폴백.
+    단순 느린 줌인만 적용 (loop 1 + scale_vaapi 대신 간단한 zoompan).
+    그래도 실패하면 정적 배경.
     """
-    log.warning("[폴백] 단순 오디오 리액티브 모드 재시도")
-    # 최소한의 showwaves 만 추가 (텍스트/스펙트럼/워터마크 다 제거)
+    fps = 30
+    total_frames = int(duration * fps) + fps
+    log.warning("[폴백] 단순 줌인 모드 재시도")
     simple_filter = (
-        "[0:v]scale=1920:1080:force_original_aspect_ratio=decrease,"
-        "pad=1920:1080:(ow-iw)/2:(oh-ih)/2:black,setsar=1[bg];"
-        "[1:a]showwaves=s=1920x150:mode=line:colors=0xffffff:rate=30[waves];"
-        "[bg][waves]overlay=0:main_h-h-100[out]"
+        f"[0:v]scale=2560:-1,"
+        f"zoompan=z='min(zoom+0.0003,1.2)'"
+        f":x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"
+        f":d={total_frames}:s=1920x1080:fps={fps},"
+        f"format=yuv420p[out]"
     )
     cmd = [
         ffmpeg, "-y",
-        "-loop", "1", "-i", bg_image,
+        "-i", bg_image,
         "-i", mp3_path,
         "-filter_complex", simple_filter,
         "-map", "[out]", "-map", "1:a",
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
         "-c:a", "aac", "-b:a", "192k",
         "-pix_fmt", "yuv420p",
-        "-r", "30",
         "-shortest", "-t", f"{duration:.2f}",
         out_path,
     ]
@@ -519,9 +527,8 @@ def _make_static_video_fallback(mp3_path: str, bg_image: str, out_path: str,
         encoding="utf-8", errors="replace", timeout=1800,
     )
     if result.returncode != 0:
-        log.error(f"단순 리액티브 폴백도 실패, 최종 정적 폴백 시도")
+        log.error(f"단순 줌 폴백도 실패, 최종 정적 폴백 시도")
         log.error((result.stderr or "")[-1500:])
-        # 정말 마지막: 정적 배경만
         cmd_static = [
             ffmpeg, "-y",
             "-loop", "1", "-i", bg_image,
