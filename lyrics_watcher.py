@@ -37,8 +37,13 @@ LYRIC_PLAYLIST = "🎵 AI 작사작곡"
 # 처리 중 파일 중복 감지 방지
 _processing: set[str] = set()
 
+# 스크립트 폴더 (다른 모듈 import 용)
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
 # ============================================================
-# .secrets 파일에서 키 자동 로드 (telegram_commander 와 동일)
+# .secrets 파일에서 키 자동 로드
 # ============================================================
 def _load_secrets():
     secrets_path = SCRIPT_DIR / ".secrets"
