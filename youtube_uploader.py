@@ -131,7 +131,7 @@ def generate_background(style_name, style_info, save_path, W=2112, H=1188):
         draw.line([(0, y), (W, y)], fill=(r, g, b))
 
     # 스타일별 장식 요소
-    random.seed(42)  # 일관된 패턴을 위해 시드 고정
+    # 매번 다른 패턴 생성 (시드 고정하지 않음)
 
     if style_name in ("sleep", "lofi", "study", "classical"):
         # 별/빛 점 효과
