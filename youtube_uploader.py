@@ -81,7 +81,7 @@ STYLE_KEYWORDS = {
         "folder": "Electronic",
         "tags": ["electronic music", "synthwave", "EDM", "electronic", "synth"],
         "category": "10",
-        "playlist": "🎵 AI 작사작곡",
+        "playlist": "📚 Study Music",
         "bg_colors": [(10, 5, 20), (30, 10, 50)],       # 네온 보라
         "accent": (255, 50, 200),                         # 핑크 네온
         "text_color": "#ff40c8",
@@ -91,7 +91,7 @@ STYLE_KEYWORDS = {
         "folder": "Pop",
         "tags": ["pop music", "pop", "ballad", "music playlist"],
         "category": "10",
-        "playlist": "🎵 AI 작사작곡",
+        "playlist": "🌙 Sleep Music",
         "bg_colors": [(20, 10, 25), (40, 15, 45)],      # 핑크-보라
         "accent": (255, 120, 180),                        # 핑크
         "text_color": "#ff80b8",
@@ -102,7 +102,7 @@ DEFAULT_STYLE = {
     "folder": "General",
     "tags": ["playlist", "music", "relaxing", "background music"],
     "category": "10",
-    "playlist": "🎵 AI 작사작곡",
+    "playlist": "🌙 Sleep Music",
     "bg_colors": [(13, 13, 13), (25, 25, 30)],
     "accent": (200, 200, 200),
     "text_color": "#ffffff",
