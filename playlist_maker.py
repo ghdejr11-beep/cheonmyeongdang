@@ -274,8 +274,8 @@ def get_font():
     except:
         return ImageFont.load_default()
 
-def make_animated_frame(base_img, font, stars, color_tuple, frame_idx, audio_frame=None, W=1920, H=1080):
-    """한 프레임 생성 - 음악에 반응하는 시각 효과"""
+def make_animated_frame(base_img, font, stars, color_tuple, frame_idx, audio_frame=None, W=1920, H=1080, style="general"):
+    """한 프레임 생성 - 음악에 반응하는 시각 효과 (스타일별 차별화)"""
     r, g, b = color_tuple
     t = frame_idx / ANIM_FPS
 
@@ -284,9 +284,16 @@ def make_animated_frame(base_img, font, stars, color_tuple, frame_idx, audio_fra
     energy = audio_frame['energy'] if audio_frame else 0.5
     bass = audio_frame['bass'] if audio_frame else 0.5
 
-    # 1) 느린 줌 + 베이스에 반응하는 펄스 줌
-    base_zoom = 1.0 + 0.02 * math.sin(t * 0.5)  # 느린 기본 줌
-    beat_zoom = bass * 0.015  # 저음에 따라 살짝 확대
+    # 스타일별 줌 속도/강도 차별화
+    if style in ("sleep", "meditation", "rain"):
+        base_zoom = 1.0 + 0.01 * math.sin(t * 0.3)  # 매우 느린 줌
+        beat_zoom = bass * 0.005
+    elif style in ("electronic", "pop"):
+        base_zoom = 1.0 + 0.03 * math.sin(t * 0.8)  # 빠른 줌
+        beat_zoom = bass * 0.025
+    else:
+        base_zoom = 1.0 + 0.02 * math.sin(t * 0.5)
+        beat_zoom = bass * 0.015
     zoom = base_zoom + beat_zoom
     ZW, ZH = base_img.size
     crop_w = int(W / zoom)
@@ -298,8 +305,50 @@ def make_animated_frame(base_img, font, stars, color_tuple, frame_idx, audio_fra
 
     draw = ImageDraw.Draw(frame)
 
-    # 2) 반짝이는 별 (에너지에 반응)
-    draw_stars(draw, stars, frame_idx, color_tuple, energy)
+    # 2) 스타일별 파티클 효과
+    if style == "rain":
+        # 비 내리는 효과 (별 대신 빗줄기)
+        for s in stars:
+            rain_y = (s['y'] + frame_idx * 4) % H
+            brightness = 0.15 + 0.2 * vol
+            sr = int(r * brightness)
+            sg = int(g * brightness)
+            sb = int(b * brightness)
+            draw.line([(s['x'], rain_y), (s['x'] - 1, rain_y + 15)],
+                     fill=(sr, sg, sb), width=1)
+    elif style == "meditation":
+        # 천천히 떠다니는 큰 원 (만다라 느낌)
+        for i, s in enumerate(stars[:15]):
+            cx = s['x'] + int(20 * math.sin(t * 0.3 + s['phase']))
+            cy = s['y'] + int(15 * math.cos(t * 0.2 + s['phase']))
+            sz = 8 + 6 * vol
+            brightness = 0.1 + 0.15 * ((math.sin(t * 0.5 + s['phase']) + 1) / 2)
+            sr = int(r * brightness)
+            sg = int(g * brightness)
+            sb = int(b * brightness)
+            draw.ellipse([cx-sz, cy-sz, cx+sz, cy+sz], outline=(sr, sg, sb))
+    elif style in ("electronic", "pop"):
+        # 빠르게 깜빡이는 네온 점
+        draw_stars(draw, stars, frame_idx, color_tuple, energy * 1.5)
+        # 추가: 수평 스캔라인 효과
+        for y_line in range(0, H, 4):
+            if random.random() < energy * 0.03:
+                brightness = random.uniform(0.02, 0.06)
+                draw.line([(0, y_line), (W, y_line)],
+                         fill=(int(r*brightness), int(g*brightness), int(b*brightness)))
+    elif style == "jazz":
+        # 따뜻한 보케 원 (느리게 움직임)
+        for s in stars[:20]:
+            cx = s['x'] + int(30 * math.sin(t * 0.2 + s['phase']))
+            cy = s['y'] + int(20 * math.cos(t * 0.15 + s['phase']))
+            sz = s['size'] * (6 + 4 * vol)
+            brightness = 0.06 + 0.08 * vol
+            sr = int(r * brightness)
+            sg = int(g * brightness)
+            sb = int(b * brightness)
+            draw.ellipse([cx-sz, cy-sz, cx+sz, cy+sz], fill=(sr, sg, sb))
+    else:
+        draw_stars(draw, stars, frame_idx, color_tuple, energy)
 
     # 3) 텍스트 글로우 효과 (음량에 반응)
     text = "Play List"
@@ -335,14 +384,59 @@ def make_animated_frame(base_img, font, stars, color_tuple, frame_idx, audio_fra
     lb = int(b * (0.4 + 0.6 * vol))
     draw.rectangle([W//2-line_w, ty+th+25, W//2+line_w, ty+th+30], fill=(lr, lg, lb))
 
-    # 4) 이퀄라이저 바 (음량/저음에 반응)
+    # 4) 스타일별 이퀄라이저
     eq_y = ty + th + 80
-    draw_eq_bars(draw, frame_idx, color_tuple, eq_y, vol, bass)
+    if style in ("sleep", "meditation", "rain"):
+        # 부드러운 파도형 라인 (바 없음)
+        points = []
+        for x in range(0, W, 8):
+            wave = math.sin(x * 0.01 + t * 1.5) * 15 * vol
+            wave += math.sin(x * 0.02 + t * 2.3) * 8 * bass
+            points.append((x, eq_y - wave))
+        if len(points) > 1:
+            brightness = 0.3 + 0.4 * vol
+            draw.line(points, fill=(int(r*brightness), int(g*brightness), int(b*brightness)), width=2)
+    elif style == "jazz":
+        # 둥근 도트 이퀄라이저
+        dot_count = 30
+        dot_gap = 20
+        start_x = (W - dot_count * dot_gap) // 2
+        for i in range(dot_count):
+            phase = i * 0.4
+            height = 5 + 30 * vol * ((math.sin(t * 2 + phase) + 1) / 2)
+            x = start_x + i * dot_gap
+            brightness = 0.4 + 0.5 * vol
+            cr = int(r * brightness)
+            cg = int(g * brightness)
+            cb = int(b * brightness)
+            sz = 3 + height * 0.1
+            draw.ellipse([x-sz, eq_y-height-sz, x+sz, eq_y-height+sz], fill=(cr, cg, cb))
+    else:
+        draw_eq_bars(draw, frame_idx, color_tuple, eq_y, vol, bass)
 
     return frame
 
-def make_animation_frames(bg_src, color_tuple, frames_dir, mp3_path, tmp_dir, total_frames, progress_cb=None):
-    """오디오를 분석하고 음악에 반응하는 프레임 생성"""
+def detect_style_from_filename(filename):
+    """파일명에서 스타일 감지 (간단 버전)"""
+    name = filename.lower()
+    styles = {
+        "rain": ["rain", "thunder", "storm", "ocean", "wave", "nature", "forest"],
+        "sleep": ["sleep", "ambient", "dream", "night", "deep", "rest"],
+        "meditation": ["meditation", "yoga", "zen", "calm", "peace", "mindful"],
+        "jazz": ["jazz", "cafe", "bossa", "swing", "coffee", "saxophone"],
+        "lofi": ["lofi", "lo-fi", "chillhop", "study"],
+        "classical": ["classical", "piano", "orchestra", "sonata"],
+        "electronic": ["edm", "electronic", "synth", "techno", "trance", "house"],
+        "pop": ["pop", "kpop", "ballad"],
+    }
+    for style, keywords in styles.items():
+        for kw in keywords:
+            if kw in name:
+                return style
+    return "general"
+
+def make_animation_frames(bg_src, color_tuple, frames_dir, mp3_path, tmp_dir, total_frames, progress_cb=None, style="general"):
+    """오디오를 분석하고 음악에 반응하는 프레임 생성 (스타일별 차별화)"""
     W, H = 1920, 1080
     base_img = make_base_image(bg_src, W, H)
     font = get_font()
@@ -355,7 +449,7 @@ def make_animation_frames(bg_src, color_tuple, frames_dir, mp3_path, tmp_dir, to
 
     for i in range(total_frames):
         af = audio_data[i] if audio_data and i < len(audio_data) else None
-        frame = make_animated_frame(base_img, font, stars, color_tuple, i, af, W, H)
+        frame = make_animated_frame(base_img, font, stars, color_tuple, i, af, W, H, style)
         frame_path = os.path.join(frames_dir, f"frame_{i:06d}.png")
         frame.save(frame_path)
         if progress_cb and i % ANIM_FPS == 0:
@@ -442,11 +536,13 @@ def make_video(mp3_file, bg_image, text_color, progress=gr.Progress(), slot=0):
     if not duration or duration < 1:
         return None, "오디오 길이를 확인할 수 없습니다"
 
-    # 너무 긴 영상은 프레임 수가 폭발하므로 최대 10분까지만 분석
-    # 그 이후는 반복 패턴 사용
-    max_analyze_sec = min(duration, 600)  # 최대 10분
+    # 짧은 노래: 전체 프레임 생성 (짤림 방지)
+    # 긴 노래: 최대 10분까지만 분석 후 루프
+    max_analyze_sec = min(duration, 600)
     analyze_frames = int(max_analyze_sec * ANIM_FPS)
     total_frames = int(duration * ANIM_FPS)
+    # 짧은 노래(10분 이하)는 전체 프레임 생성
+    is_short = duration <= 600
 
     print(f"[정보] 오디오 길이: {duration:.0f}초, 분석 프레임: {analyze_frames}, 전체 프레임: {total_frames}")
 
@@ -461,14 +557,18 @@ def make_video(mp3_file, bg_image, text_color, progress=gr.Progress(), slot=0):
 
     color_tuple = parse_color(text_color)
 
-    progress(0.05, desc="오디오 분석 + 프레임 생성 중..")
+    # 파일명에서 스타일 자동 감지
+    detected_style = detect_style_from_filename(os.path.basename(mp3_src))
+    print(f"[정보] 감지된 스타일: {detected_style}")
+
+    progress(0.05, desc=f"오디오 분석 + 프레임 생성 중.. (스타일: {detected_style})")
 
     def frame_progress(p):
         progress(0.05 + p * 0.50, desc=f"음악 반응 프레임 생성 중.. {int(p*100)}%")
 
     # 분석 구간만큼 프레임 생성
     frame_pattern = make_animation_frames(
-        bg_src, color_tuple, frames_dir, mp3_safe, tmp_dir, analyze_frames, frame_progress)
+        bg_src, color_tuple, frames_dir, mp3_safe, tmp_dir, analyze_frames, frame_progress, detected_style)
 
     # 프레임 파일 검증
     first_frame = os.path.join(frames_dir, "frame_000000.png")
@@ -480,16 +580,28 @@ def make_video(mp3_file, bg_image, text_color, progress=gr.Progress(), slot=0):
     suffix = f"_{slot}" if slot else ""
     out_path = unique_path(os.path.join(OUTPUT_DIR, f"playlist_video{suffix}.mp4"))
 
-    # 분석 구간 프레임을 루프하여 전체 오디오 길이에 맞춤
-    cmd = [FFMPEG, "-y",
-           "-stream_loop", "-1",
-           "-framerate", str(ANIM_FPS), "-i", frame_pattern,
-           "-i", mp3_safe,
-           "-c:v", "libx264", "-preset", "medium", "-crf", "23",
-           "-pix_fmt", "yuv420p",
-           "-c:a", "aac", "-b:a", "192k",
-           "-shortest", "-movflags", "+faststart",
-           out_path]
+    if is_short:
+        # 짧은 노래: 프레임 수가 정확히 맞으므로 루프 불필요, -t로 길이 고정
+        cmd = [FFMPEG, "-y",
+               "-framerate", str(ANIM_FPS), "-i", frame_pattern,
+               "-i", mp3_safe,
+               "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+               "-pix_fmt", "yuv420p",
+               "-c:a", "aac", "-b:a", "192k",
+               "-t", str(int(duration)),
+               "-movflags", "+faststart",
+               out_path]
+    else:
+        # 긴 노래: 프레임을 루프하여 오디오 길이에 맞춤
+        cmd = [FFMPEG, "-y",
+               "-stream_loop", "-1",
+               "-framerate", str(ANIM_FPS), "-i", frame_pattern,
+               "-i", mp3_safe,
+               "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+               "-pix_fmt", "yuv420p",
+               "-c:a", "aac", "-b:a", "192k",
+               "-shortest", "-movflags", "+faststart",
+               out_path]
 
     print(f"[정보] ffmpeg 명령어: {' '.join(cmd)}")
     result = run_cmd(cmd, timeout=3600)

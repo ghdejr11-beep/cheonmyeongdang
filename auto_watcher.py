@@ -191,7 +191,7 @@ def process_mp3(mp3_path):
         short_frames = ANIM_FPS * 10  # 10초
         log.info(f"프레임 생성 중... ({short_frames}개, 10초 루프)")
         frame_pattern = make_animation_frames(
-            bg_src, color_tuple, frames_dir, safe_mp3, tmp_dir, short_frames, None)
+            bg_src, color_tuple, frames_dir, safe_mp3, tmp_dir, short_frames, None, style_name)
 
         # 1단계: 10초 짧은 루프 영상 만들기 (CRF 30으로 파일 크기 줄임)
         short_video = os.path.join(tmp_dir, "short_loop.mp4")
