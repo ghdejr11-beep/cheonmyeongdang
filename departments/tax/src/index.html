@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>세금쏙 - 세무+지원금 통합</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0a0a2e;
+  --bg-card: #141450;
+  --bg-card2: #1a1a5e;
+  --main: #4caf50;
+  --main-dark: #388e3c;
+  --gold: #ffd54f;
+  --text: #ffffff;
+  --text-sub: #aab;
+  --text-dim: #778;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+body {
+  font-family: -apple-system, 'Pretendard', 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+/* Top Bar */
+.top-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px 10px;
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg);
+}
+.top-bar h1 { font-size: 22px; font-weight: 800; }
+.top-bar h1 span { color: var(--main); }
+.badge-zero {
+  background: var(--gold); color: #000; font-size: 11px; font-weight: 700;
+  padding: 4px 10px; border-radius: 20px;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+/* Tabs content */
+.tab-page { display: none; padding: 0 16px 160px; }
+.tab-page.active { display: block; }
+
+/* Cards */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.card-highlight {
+  background: linear-gradient(135deg, #1b3a1b 0%, #0a2a0a 100%);
+  border: 1px solid var(--main);
+}
+.card-gold {
+  background: linear-gradient(135deg, #3a2e00 0%, #1a1500 100%);
+  border: 1px solid var(--gold);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block; padding: 14px 0; width: 100%; text-align: center;
+  border: none; border-radius: var(--radius-sm); font-size: 16px; font-weight: 700;
+  cursor: pointer; transition: all .2s;
+}
+.btn-main { background: var(--main); color: #fff; }
+.btn-main:active { background: var(--main-dark); transform: scale(.97); }
+.btn-outline {
+  background: transparent; border: 1.5px solid var(--main); color: var(--main);
+}
+.btn-gold { background: var(--gold); color: #000; }
+.btn-sm {
+  padding: 8px 14px; width: auto; font-size: 13px; border-radius: 8px;
+}
+
+/* Section titles */
+.section-title {
+  font-size: 15px; font-weight: 700; margin: 18px 0 10px; color: var(--text-sub);
+}
+
+/* ============ TAB 1: Refund ============ */
+.refund-amount {
+  font-size: 36px; font-weight: 900; color: var(--main);
+  text-align: center; margin: 10px 0 4px;
+}
+.refund-sub { text-align: center; color: var(--text-sub); font-size: 13px; }
+
+/* Bar chart */
+.bar-chart { display: flex; align-items: flex-end; gap: 12px; height: 140px; margin-top: 16px; }
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.bar {
+  width: 100%; border-radius: 6px 6px 0 0;
+  background: linear-gradient(180deg, var(--main), #1b5e20);
+  transition: height .6s ease;
+}
+.bar-label { font-size: 11px; color: var(--text-dim); }
+.bar-value { font-size: 11px; color: var(--main); font-weight: 700; }
+
+/* ============ TAB 2: Tax Coaching ============ */
+.tip-list { list-style: none; }
+.tip-item {
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 10px;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.tip-icon { font-size: 24px; flex-shrink: 0; }
+.tip-text { font-size: 14px; line-height: 1.5; }
+.tip-text strong { color: var(--gold); }
+
+.guide-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px;
+}
+.guide-btn {
+  background: var(--bg-card2); border: none; border-radius: var(--radius-sm);
+  padding: 16px 10px; text-align: center; cursor: pointer;
+  font-size: 14px; color: var(--text); transition: all .2s;
+}
+.guide-btn:active { background: var(--bg-card); transform: scale(.96); }
+.guide-btn .emoji { font-size: 28px; display: block; margin-bottom: 6px; }
+.premium-tag {
+  display: inline-block; background: var(--gold); color: #000;
+  font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+  margin-left: 4px; vertical-align: middle;
+}
+
+/* ============ TAB 3: Subsidies ============ */
+.subsidy-item {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.subsidy-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.subsidy-title { font-size: 15px; font-weight: 700; }
+.subsidy-deadline {
+  font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px;
+}
+.deadline-urgent { background: #ff1744; color: #fff; }
+.deadline-normal { background: #ff9100; color: #fff; }
+.deadline-always { background: var(--main); color: #fff; }
+.subsidy-amount { font-size: 20px; font-weight: 800; color: var(--gold); margin: 6px 0 12px; }
+.subsidy-actions { display: flex; gap: 8px; }
+
+/* ============ TAB 4: AI Chat ============ */
+.chat-area {
+  display: flex; flex-direction: column; gap: 12px;
+  min-height: 300px; margin-bottom: 16px;
+}
+.chat-bubble {
+  max-width: 80%; padding: 14px 16px; border-radius: 18px;
+  font-size: 14px; line-height: 1.6;
+}
+.chat-ai {
+  background: var(--bg-card2); align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+.chat-user {
+  background: var(--main); align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+.quick-questions {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;
+}
+.quick-btn {
+  background: var(--bg-card2); border: 1px solid #333; border-radius: 20px;
+  padding: 8px 14px; font-size: 13px; color: var(--text); cursor: pointer;
+  transition: all .2s;
+}
+.quick-btn:active { background: var(--main); border-color: var(--main); }
+.chat-input-wrap {
+  display: flex; gap: 8px; position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%);
+  width: calc(100% - 32px); max-width: 448px; z-index: 50;
+}
+.chat-input {
+  flex: 1; background: var(--bg-card); border: 1px solid #333; border-radius: 24px;
+  padding: 12px 18px; font-size: 15px; color: #fff; outline: none;
+}
+.chat-input::placeholder { color: var(--text-dim); }
+.chat-send {
+  width: 48px; height: 48px; border-radius: 50%; border: none;
+  background: var(--main); color: #fff; font-size: 20px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.chat-notice {
+  text-align: center; font-size: 12px; color: var(--text-dim); margin-top: 8px;
+}
+
+/* ============ TAB 5: My Page ============ */
+.profile-card {
+  background: var(--bg-card); border-radius: var(--radius); padding: 20px;
+  display: flex; align-items: center; gap: 16px; margin-bottom: 14px;
+}
+.profile-avatar {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--main), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+}
+.profile-info h3 { font-size: 17px; font-weight: 700; }
+.profile-info p { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
+
+.premium-banner {
+  background: linear-gradient(135deg, #4a148c, #7b1fa2);
+  border-radius: var(--radius); padding: 20px; margin-bottom: 14px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.premium-banner::before {
+  content: ''; position: absolute; top: -30px; right: -30px;
+  width: 100px; height: 100px; border-radius: 50%;
+  background: rgba(255,213,79,.15);
+}
+.premium-banner h3 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.premium-banner .price { font-size: 28px; font-weight: 900; color: var(--gold); }
+.premium-banner .price-sub { font-size: 13px; color: #ccc; margin-bottom: 12px; }
+.premium-features { text-align: left; margin: 12px 0; }
+.premium-features li {
+  list-style: none; font-size: 13px; padding: 4px 0;
+  color: #ddd;
+}
+.premium-features li::before { content: '\2713 '; color: var(--gold); font-weight: 700; }
+
+.calendar-card {
+  background: var(--bg-card); border-radius: var(--radius); padding: 18px;
+  margin-bottom: 14px;
+}
+.calendar-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+.cal-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid #222;
+}
+.cal-item:last-child { border: none; }
+.cal-date { font-size: 13px; color: var(--gold); font-weight: 700; }
+.cal-name { font-size: 14px; }
+
+.settings-list { list-style: none; }
+.settings-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px; background: var(--bg-card); border-radius: var(--radius-sm);
+  margin-bottom: 8px; cursor: pointer; transition: all .2s;
+}
+.settings-item:active { background: var(--bg-card2); }
+.settings-item span { font-size: 14px; }
+.settings-arrow { color: var(--text-dim); }
+
+/* ============ Ad Banner ============ */
+.ad-banner {
+  position: fixed; bottom: 64px; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 480px; height: 50px;
+  background: #1a1a40; border-top: 1px solid #222;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: var(--text-dim); z-index: 90;
+}
+
+/* ============ Bottom Tab Bar ============ */
+.tab-bar {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 480px; height: 64px;
+  background: #0d0d35; border-top: 1px solid #1a1a50;
+  display: flex; z-index: 100;
+}
+.tab-btn {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 3px;
+  background: none; border: none; cursor: pointer;
+  color: var(--text-dim); transition: all .2s;
+}
+.tab-btn.active { color: var(--main); }
+.tab-btn .tab-icon { font-size: 22px; }
+.tab-btn .tab-label { font-size: 10px; font-weight: 600; }
+
+/* Animations */
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.tab-page.active { animation: fadeIn .3s ease; }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <h1><span>세금</span>쏙</h1>
+  <div class="badge-zero">수수료 0%</div>
+</div>
+
+<!-- ===== TAB 1: Refund ===== -->
+<div class="tab-page active" id="page-refund">
+  <div class="card card-highlight" style="text-align:center;">
+    <p style="font-size:14px; color:var(--text-sub); margin-bottom:8px;">5년간 돌려받을 수 있는 세금이 있어요</p>
+    <button class="btn btn-main" onclick="showRefundResult()">내 환급금 조회하기</button>
+  </div>
+
+  <div class="card" id="refund-result" style="display:none;">
+    <p style="font-size:13px; color:var(--text-sub);">예상 환급금</p>
+    <div class="refund-amount">&#8361;387,200</div>
+    <p class="refund-sub">최근 5년간 과납부 세금 기준</p>
+
+    <div class="section-title">연도별 환급금</div>
+    <div class="bar-chart">
+      <div class="bar-col">
+        <div class="bar-value">5.2만</div>
+        <div class="bar" style="height:25%;"></div>
+        <div class="bar-label">2021</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">8.7만</div>
+        <div class="bar" style="height:42%;"></div>
+        <div class="bar-label">2022</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">12.3만</div>
+        <div class="bar" style="height:60%;"></div>
+        <div class="bar-label">2023</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">7.8만</div>
+        <div class="bar" style="height:38%;"></div>
+        <div class="bar-label">2024</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">4.7만</div>
+        <div class="bar" style="height:23%;"></div>
+        <div class="bar-label">2025</div>
+      </div>
+    </div>
+
+    <button class="btn btn-main" style="margin-top:20px;">지금 바로 신청</button>
+  </div>
+</div>
+
+<!-- ===== TAB 2: Tax Coaching ===== -->
+<div class="tab-page" id="page-coaching">
+  <div class="card card-gold">
+    <p style="font-size:13px; color:var(--text-sub);">이번 달 절세 가능 금액</p>
+    <div style="font-size:32px; font-weight:900; color:var(--gold); margin:6px 0;">&#8361;125,000</div>
+    <p style="font-size:12px; color:var(--text-dim);">경비 처리 + 공제 항목 최적화 기준</p>
+  </div>
+
+  <div class="section-title">절세 팁 <span class="premium-tag">PREMIUM</span></div>
+  <ul class="tip-list">
+    <li class="tip-item">
+      <span class="tip-icon">🛡️</span>
+      <div class="tip-text"><strong>노란우산공제</strong> 가입하면 연 <strong>300만원</strong> 소득공제 가능</div>
+    </li>
+    <li class="tip-item">
+      <span class="tip-icon">📉</span>
+      <div class="tip-text"><strong>간이과세자</strong> 전환 시 부가세 면제 (매출 8,000만원 이하)</div>
+    </li>
+    <li class="tip-item">
+      <span class="tip-icon">💳</span>
+      <div class="tip-text"><strong>사업용 카드</strong> 등록하면 경비 자동 처리, 증빙 걱정 끝</div>
+    </li>
+  </ul>
+
+  <div class="section-title">직종별 절세 가이드</div>
+  <div class="guide-grid">
+    <button class="guide-btn"><span class="emoji">🛵</span>배달라이더</button>
+    <button class="guide-btn"><span class="emoji">🎬</span>유튜버</button>
+    <button class="guide-btn"><span class="emoji">💻</span>프리랜서</button>
+    <button class="guide-btn"><span class="emoji">🏪</span>사업자</button>
+  </div>
+</div>
+
+<!-- ===== TAB 3: Subsidies ===== -->
+<div class="tab-page" id="page-subsidy">
+  <div class="card card-highlight">
+    <p style="font-size:16px; font-weight:700; text-align:center;">나에게 맞는 지원금 <span style="color:var(--gold); font-size:24px; font-weight:900;">3건</span> 발견!</p>
+    <p style="font-size:12px; color:var(--text-sub); text-align:center; margin-top:4px;">사업자 정보 기반 자동 매칭 <span class="premium-tag">PREMIUM</span></p>
+  </div>
+
+  <div class="subsidy-item">
+    <div class="subsidy-header">
+      <span class="subsidy-title">소상공인 디지털 전환 지원</span>
+      <span class="subsidy-deadline deadline-urgent">D-15</span>
+    </div>
+    <div class="subsidy-amount">최대 400만원</div>
+    <p style="font-size:12px; color:var(--text-sub); margin-bottom:12px;">온라인 판로 개척, 스마트 기기 도입 등 디지털 전환 비용 지원</p>
+    <div class="subsidy-actions">
+      <button class="btn btn-outline btn-sm">자격 확인</button>
+      <button class="btn btn-main btn-sm">신청 방법</button>
+    </div>
+  </div>
+
+  <div class="subsidy-item">
+    <div class="subsidy-header">
+      <span class="subsidy-title">청년 창업 지원금</span>
+      <span class="subsidy-deadline deadline-normal">D-30</span>
+    </div>
+    <div class="subsidy-amount">최대 1억원</div>
+    <p style="font-size:12px; color:var(--text-sub); margin-bottom:12px;">만 39세 이하 청년 창업자 대상, 사업화 자금 및 멘토링 지원</p>
+    <div class="subsidy-actions">
+      <button class="btn btn-outline btn-sm">자격 확인</button>
+      <button class="btn btn-main btn-sm">신청 방법</button>
+    </div>
+  </div>
+
+  <div class="subsidy-item">
+    <div class="subsidy-header">
+      <span class="subsidy-title">고용보험 미적용자 출산급여</span>
+      <span class="subsidy-deadline deadline-always">상시</span>
+    </div>
+    <div class="subsidy-amount">150만원</div>
+    <p style="font-size:12px; color:var(--text-sub); margin-bottom:12px;">고용보험 미가입 프리랜서/자영업자 출산 시 지원</p>
+    <div class="subsidy-actions">
+      <button class="btn btn-outline btn-sm">자격 확인</button>
+      <button class="btn btn-main btn-sm">신청 방법</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 4: AI Chat ===== -->
+<div class="tab-page" id="page-chat">
+  <div class="chat-area" id="chatArea">
+    <div class="chat-bubble chat-ai">안녕하세요! 세금쏙 AI 상담사입니다. 세금 관련 궁금한 점을 편하게 물어보세요 😊</div>
+  </div>
+  <div class="quick-questions">
+    <button class="quick-btn" onclick="sendQuick('환급금 조회 방법 알려줘')">환급금 조회</button>
+    <button class="quick-btn" onclick="sendQuick('절세 방법 추천해줘')">절세 방법</button>
+    <button class="quick-btn" onclick="sendQuick('나에게 맞는 지원금 찾아줘')">지원금 찾기</button>
+    <button class="quick-btn" onclick="sendQuick('세무사에게 연결해줘')">세무사 연결</button>
+  </div>
+  <p class="chat-notice">복잡한 문제는 세무사에게 연결해드릴게요</p>
+  <div class="chat-input-wrap" id="chatInputWrap" style="display:none;">
+    <input type="text" class="chat-input" id="chatInput" placeholder="세금 관련 질문을 입력하세요..." onkeydown="if(event.key==='Enter')sendMsg()">
+    <button class="chat-send" onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
+<!-- ===== TAB 5: My Page ===== -->
+<div class="tab-page" id="page-my">
+  <div class="profile-card">
+    <div class="profile-avatar">👤</div>
+    <div class="profile-info">
+      <h3>홍길동</h3>
+      <p>사업자번호: 123-45-67890</p>
+      <p>업종: 온라인 소매업</p>
+    </div>
+  </div>
+
+  <div class="premium-banner">
+    <h3>프리미엄 구독</h3>
+    <div class="price">월 4,900원</div>
+    <div class="price-sub">첫 달 무료 체험</div>
+    <ul class="premium-features">
+      <li>AI 절세 코칭 무제한</li>
+      <li>맞춤 지원금 알림</li>
+      <li>광고 제거</li>
+      <li>전문 세무사 1:1 상담</li>
+    </ul>
+    <button class="btn btn-gold">무료 체험 시작</button>
+  </div>
+
+  <div class="calendar-card">
+    <h4>📅 세금 캘린더</h4>
+    <div class="cal-item">
+      <span class="cal-name">종합소득세 신고</span>
+      <span class="cal-date">2026.05.31</span>
+    </div>
+    <div class="cal-item">
+      <span class="cal-name">부가가치세 예정신고</span>
+      <span class="cal-date">2026.07.25</span>
+    </div>
+    <div class="cal-item">
+      <span class="cal-name">원천세 납부</span>
+      <span class="cal-date">매월 10일</span>
+    </div>
+  </div>
+
+  <ul class="settings-list">
+    <li class="settings-item"><span>알림 설정</span><span class="settings-arrow">›</span></li>
+    <li class="settings-item"><span>사업자 정보 수정</span><span class="settings-arrow">›</span></li>
+    <li class="settings-item"><span>고객센터</span><span class="settings-arrow">›</span></li>
+    <li class="settings-item"><span>이용약관</span><span class="settings-arrow">›</span></li>
+    <li class="settings-item"><span>로그아웃</span><span class="settings-arrow">›</span></li>
+  </ul>
+</div>
+
+<!-- Ad Banner -->
+<div class="ad-banner" id="adBanner">
+  <span>📢 광고 영역 (AdMob Banner)</span>
+</div>
+
+<!-- Bottom Tab Bar -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="refund" onclick="switchTab('refund')">
+    <span class="tab-icon">💰</span>
+    <span class="tab-label">환급</span>
+  </button>
+  <button class="tab-btn" data-tab="coaching" onclick="switchTab('coaching')">
+    <span class="tab-icon">📊</span>
+    <span class="tab-label">절세</span>
+  </button>
+  <button class="tab-btn" data-tab="subsidy" onclick="switchTab('subsidy')">
+    <span class="tab-icon">🏛️</span>
+    <span class="tab-label">지원금</span>
+  </button>
+  <button class="tab-btn" data-tab="chat" onclick="switchTab('chat')">
+    <span class="tab-icon">💬</span>
+    <span class="tab-label">상담</span>
+  </button>
+  <button class="tab-btn" data-tab="my" onclick="switchTab('my')">
+    <span class="tab-icon">👤</span>
+    <span class="tab-label">MY</span>
+  </button>
+</div>
+
+<script>
+// Tab switching
+function switchTab(tab) {
+  document.querySelectorAll('.tab-page').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('page-' + tab).classList.add('active');
+  document.querySelector('[data-tab="' + tab + '"]').classList.add('active');
+
+  // Show/hide chat input
+  var chatInput = document.getElementById('chatInputWrap');
+  chatInput.style.display = tab === 'chat' ? 'flex' : 'none';
+
+  window.scrollTo(0, 0);
+}
+
+// Refund result reveal
+function showRefundResult() {
+  var result = document.getElementById('refund-result');
+  result.style.display = 'block';
+  result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Chat functions
+var aiResponses = {
+  '환급금 조회 방법 알려줘': '환급금 조회는 간단해요! 홈 탭에서 "내 환급금 조회하기" 버튼을 누르면 국세청 데이터 기반으로 5년간 환급 가능 금액을 확인할 수 있어요. 수수료는 0원이에요!',
+  '절세 방법 추천해줘': '현재 업종 기준으로 추천드리는 절세 방법이에요:\n1. 노란우산공제 가입 (연 300만원 소득공제)\n2. 사업용 신용카드 등록\n3. 간이과세자 전환 검토\n자세한 내용은 절세 탭에서 확인해보세요!',
+  '나에게 맞는 지원금 찾아줘': '사업자 정보를 분석한 결과, 현재 신청 가능한 지원금 3건을 찾았어요! 지원금 탭에서 상세 내용과 신청 방법을 확인하실 수 있어요.',
+  '세무사에게 연결해줘': '전문 세무사 상담을 연결해드릴게요. 프리미엄 구독 시 1:1 전담 세무사 매칭이 가능해요. 무료 체험을 시작해보시겠어요?'
+};
+
+function addChatBubble(text, isUser) {
+  var area = document.getElementById('chatArea');
+  var bubble = document.createElement('div');
+  bubble.className = 'chat-bubble ' + (isUser ? 'chat-user' : 'chat-ai');
+  bubble.textContent = text;
+  area.appendChild(bubble);
+  bubble.scrollIntoView({ behavior: 'smooth' });
+}
+
+function sendQuick(text) {
+  addChatBubble(text, true);
+  setTimeout(function() {
+    addChatBubble(aiResponses[text] || '잠시만요, 확인 후 답변드릴게요!', false);
+  }, 800);
+}
+
+function sendMsg() {
+  var input = document.getElementById('chatInput');
+  var text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addChatBubble(text, true);
+  setTimeout(function() {
+    addChatBubble('네, 확인해볼게요! 해당 내용에 대해 분석 중이에요. 더 정확한 상담이 필요하시면 세무사 연결을 추천드려요.', false);
+  }, 1000);
+}
+</script>
+
+</body>
+</html>
