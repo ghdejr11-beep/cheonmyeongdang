@@ -46,6 +46,10 @@ body { font-family: 'Pretendard', -apple-system, sans-serif; background: var(--b
 .logo-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
 .nav-section { padding: 0 0.75rem; margin-bottom: 1.25rem; }
 .nav-label { font-size: 10px; font-weight: 700; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 0.5rem; margin-bottom: 4px; }
+.claim-type-btn { padding: 14px 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 13px; cursor: pointer; font-family: inherit; text-align: center; transition: all 0.15s; font-weight: 500; }
+.claim-type-btn:hover { border-color: #7c3aed; background: rgba(124,58,237,0.1); }
+.claim-type-btn.active { border-color: #7c3aed; background: #7c3aed; color: white; font-weight: 700; }
+
 .nav-item { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 9px; cursor: pointer; font-size: 13px; color: var(--text2); transition: all 0.12s; border: none; background: none; width: 100%; text-align: left; font-family: inherit; }
 .nav-item:hover { background: var(--surface2); color: var(--text); }
 .nav-item.active { background: var(--primary); color: white; font-weight: 600; }
@@ -244,6 +248,7 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
     <button class="nav-item" onclick="go('calculator',this)"><span class="nav-icon">🧮</span>보험료 계산기</button>
     <button class="nav-item" onclick="go('timeline',this)"><span class="nav-icon">📋</span>갱신·만기 알림</button>
     <button class="nav-item" onclick="go('healthcheck',this)"><span class="nav-icon">🏥</span>가입 전 건강분석</button>
+    <button class="nav-item" onclick="go('claim',this)"><span class="nav-icon">📋</span>청구 서류 안내</button>
   </div>
   <div class="nav-section">
     <div class="nav-label">설정</div>
@@ -1145,6 +1150,58 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
   <div id="customer-list" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.5rem;"></div>
 </div>
 
+<!-- ════════ 청구 서류 안내 (설계사용) ════════ -->
+<div id="page-claim" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">📋 청구 서류 안내 (설계사용 참고)</div>
+      <div class="page-sub">고객 청구 문의 대응 · 상황별 필요 서류 즉시 확인</div>
+    </div>
+  </div>
+
+  <div class="alert" style="background:rgba(124,58,237,0.1);border:1px solid #7c3aed;color:var(--text);margin-bottom:16px;padding:14px 18px;border-radius:10px;">
+    ℹ️ <strong>설계사 안내:</strong> 본 기능은 고객 청구 문의 시 참고용입니다. 실제 청구는 <strong>고객 본인이 보험사에 직접 신청</strong>해야 하며, 설계사는 <strong>서류 안내 및 상담</strong> 역할을 수행합니다.
+  </div>
+
+  <!-- 빠른 참조 테이블 -->
+  <div class="result-card" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:14px;color:var(--primary);">🎯 상황별 빠른 참조</h4>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));gap:10px;">
+      <button class="claim-type-btn" onclick="selectClaimType(this,'outpatient')">🏥 통원</button>
+      <button class="claim-type-btn" onclick="selectClaimType(this,'inpatient')">🛏️ 입원</button>
+      <button class="claim-type-btn" onclick="selectClaimType(this,'surgery')">⚕️ 수술</button>
+      <button class="claim-type-btn" onclick="selectClaimType(this,'emergency')">🚑 응급실</button>
+      <button class="claim-type-btn" onclick="selectClaimType(this,'cancer')">🎗️ 암 진단</button>
+      <button class="claim-type-btn" onclick="selectClaimType(this,'accident')">🚗 교통사고</button>
+      <button class="claim-type-btn" onclick="selectClaimType(this,'fracture')">🦴 골절/상해</button>
+      <button class="claim-type-btn" onclick="selectClaimType(this,'critical')">💔 뇌/심장</button>
+    </div>
+  </div>
+
+  <div id="claim-step2" class="result-card" style="display:none;margin-bottom:16px;">
+    <h4 style="margin-bottom:14px;color:var(--primary);">📝 진단명/특이사항 (선택)</h4>
+    <input type="text" id="claim-diagnosis" placeholder="예: 뇌졸중 I63, 급성심근경색 I21" style="width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:10px;background:var(--surface2);color:var(--text);font-size:14px;font-family:inherit;">
+    <button class="btn-jade" style="width:100%;margin-top:12px;" onclick="analyzeClaim()">🔍 청구 보험 목록 조회</button>
+  </div>
+
+  <div id="claim-result" style="display:none;"></div>
+
+  <!-- 복잡 케이스 체크리스트 -->
+  <div class="result-card" style="margin-top:16px;border-left:4px solid #7c3aed;">
+    <h4 style="margin-bottom:14px;color:#7c3aed;">💡 설계사 체크리스트 (복잡 케이스)</h4>
+    <ul style="list-style:none;padding:0;font-size:13px;color:var(--text);line-height:2;">
+      <li>□ 중복 보장 확인 (실손 중복 불가, 상해/질병은 중복 가능)</li>
+      <li>□ 자손보험 vs 실손보험 순서 (자손 먼저)</li>
+      <li>□ 암 조직검사 결과 코드 (C00~C97, D00~D48)</li>
+      <li>□ 뇌/심장 질환 코드 (I60~I69 뇌, I20~I25 심장)</li>
+      <li>□ 후유장해 진단 시점 (치료 종결 6개월 이후)</li>
+      <li>□ 청구 소멸시효 (3년 이내)</li>
+      <li>□ 약관상 대기기간 확인 (암보험 90일 등)</li>
+      <li>□ 고지의무 위반 여부 (가입 2년 이내 특히 주의)</li>
+    </ul>
+  </div>
+</div>
+
 <!-- ════════ 가입 전 건강 분석 (심평원) ════════ -->
 <div id="page-healthcheck" class="page">
   <div class="page-header">
@@ -1992,6 +2049,91 @@ function sendShareToAgent() {
   closeModal('share-modal');
   showToast('✅ 보험 분석 결과가 설계사에게 공유됐어요! 곧 연락드릴게요.');
 }
+
+/* ═══════════════════════════════════════
+ * 보험금 청구 도우미 (설계사용 참조)
+ * ═══════════════════════════════════════ */
+var CLAIM_RULES = {
+  outpatient: { name: '통원 치료', insurances: [
+    {type: '실손보험', docs: ['진료비 영수증', '세부산정내역서', '처방전 (30만원 이상 시)'], limit: '통원 1회당 20~30만원', via: '실손24 권장'},
+    {type: '상해/질병', docs: ['진단서'], limit: '약관', via: '각 보험사'},
+  ]},
+  inpatient: { name: '입원 치료', insurances: [
+    {type: '실손보험', docs: ['영수증', '세부내역서', '입·퇴원 확인서'], limit: '입원 1회당 5천만원', via: '실손24'},
+    {type: '입원일당', docs: ['입·퇴원 확인서', '진단서'], limit: '1일당 3~10만원', via: '각 보험사'},
+  ]},
+  surgery: { name: '수술', insurances: [
+    {type: '실손보험', docs: ['영수증', '세부내역서', '수술확인서'], limit: '수술비 90%', via: '실손24'},
+    {type: '수술보험', docs: ['수술확인서', '진단서', '병리검사 결과'], limit: '50~1000만원', via: '각 보험사'},
+  ]},
+  emergency: { name: '응급실', insurances: [
+    {type: '실손보험', docs: ['영수증', '세부내역서', '응급의료 수가 증명서'], limit: '응급 90%', via: '실손24'},
+    {type: '상해보험', docs: ['진단서'], limit: '약관', via: '각 보험사'},
+  ]},
+  cancer: { name: '암 진단', insurances: [
+    {type: '암보험 진단금', docs: ['진단서', '조직검사 결과', '암등록번호'], limit: '1천만~1억원', via: '보험사 본사'},
+    {type: '실손보험', docs: ['영수증', '세부내역서'], limit: '치료비 90%', via: '실손24'},
+    {type: '입원/통원 일당', docs: ['입·퇴원 확인서'], limit: '일당 기준', via: '각 보험사'},
+  ], note: '⚠️ 암 진단금 청구기한: 사고 발생 3개월 내 권장. 조직검사 결과지 필수.'},
+  accident: { name: '교통사고', insurances: [
+    {type: '실손보험', docs: ['영수증', '세부내역서', '교통사고 사실확인서'], limit: '치료비 90%', via: '실손24'},
+    {type: '자동차보험', docs: ['사실확인서', '경찰 신고번호', '진단서'], limit: '과실 비율', via: '자동차 보험사'},
+    {type: '운전자보험', docs: ['경찰 신고번호', '진단서', '벌금 영수증'], limit: '형사합의금/벌금', via: '각 보험사'},
+  ], note: '⚠️ 자손 + 실손 중복 불가. 자손 먼저 청구.'},
+  fracture: { name: '골절/상해', insurances: [
+    {type: '실손보험', docs: ['영수증', '세부내역서'], limit: '치료비 90%', via: '실손24'},
+    {type: '상해보험', docs: ['진단서', '영상 판독지'], limit: '10~500만원', via: '각 보험사'},
+    {type: '후유장해', docs: ['후유장해 진단서 (치료종결 6개월 후)'], limit: '장해 지급률', via: '설계사 상담'},
+  ], note: '⚠️ 후유장해는 치료 완료 후 6개월 경과 시점 재진단.'},
+  critical: { name: '뇌/심장 질환', insurances: [
+    {type: '진단금', docs: ['진단서', 'MRI/CT 판독지', '병력 기록'], limit: '500만~5천만원', via: '보험사 본사'},
+    {type: '실손보험', docs: ['영수증', '세부내역서'], limit: '치료비 90%', via: '실손24'},
+    {type: '후유장해', docs: ['후유장해 진단서'], limit: '장해 지급률', via: '설계사 상담'},
+  ], note: '⚠️ 약관상 해당 질병 코드 확인 (I63, I21 등)'},
+};
+
+var _selectedClaim = null;
+
+window.selectClaimType = function(btn, type) {
+  document.querySelectorAll('.claim-type-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  _selectedClaim = type;
+  document.getElementById('claim-step2').style.display = 'block';
+};
+
+window.analyzeClaim = function() {
+  if (!_selectedClaim) { alert('먼저 상황을 선택해주세요'); return; }
+  var rule = CLAIM_RULES[_selectedClaim];
+  var diagnosis = document.getElementById('claim-diagnosis').value.trim();
+
+  var html = '<div class="result-card" style="border-left:4px solid #7c3aed;">';
+  html += '<h4 style="margin-bottom:8px;color:#7c3aed;">📋 ' + rule.name + (diagnosis ? ' - ' + diagnosis : '') + '</h4>';
+  html += '<p style="font-size:12px;color:var(--text2);margin-bottom:16px;">고객 청구 시 아래 서류를 안내하세요.</p>';
+
+  rule.insurances.forEach(function(ins, idx) {
+    html += '<div style="padding:14px 16px;background:var(--surface2);border-radius:10px;margin-bottom:10px;border:1px solid var(--border);">';
+    html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">';
+    html += '<span style="background:#7c3aed;color:white;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;">' + (idx + 1) + '</span>';
+    html += '<strong style="color:var(--text);font-size:14px;">' + ins.type + '</strong>';
+    html += '</div>';
+    html += '<div style="font-size:12px;color:var(--text2);line-height:1.8;">';
+    html += '📋 <b>필요 서류:</b> ' + ins.docs.map(function(d){return '✓ ' + d;}).join(' · ') + '<br>';
+    html += '💰 <b>지급 범위:</b> ' + ins.limit + '<br>';
+    html += '🔗 <b>청구 경로:</b> ' + ins.via;
+    html += '</div>';
+    html += '</div>';
+  });
+
+  if (rule.note) {
+    html += '<div style="padding:12px 14px;background:rgba(231,76,60,0.1);border-left:3px solid #e74c3c;border-radius:8px;font-size:13px;color:var(--text);margin-top:12px;">' + rule.note + '</div>';
+  }
+  html += '</div>';
+
+  var resultEl = document.getElementById('claim-result');
+  resultEl.innerHTML = html;
+  resultEl.style.display = 'block';
+  resultEl.scrollIntoView({behavior:'smooth', block:'start'});
+};
 
 /* ── 페이지 이동 시 고객 목록 렌더링 ── */
 const origGo = window.go;
