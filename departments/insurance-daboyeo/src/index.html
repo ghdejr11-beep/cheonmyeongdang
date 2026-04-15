@@ -264,6 +264,22 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
 <!-- ── MAIN ── -->
 <main class="main">
 
+<!-- ════════ 담당 설계사 배너 (URL ?a= 파라미터로 설정) ════════ -->
+<div id="dedicatedAgentBanner" style="display:none;background:linear-gradient(135deg,#e0f2fe,#dbeafe);border:1px solid #3498db;border-radius:12px;padding:14px 20px;margin-bottom:16px;">
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+    <div style="font-size:32px;">👔</div>
+    <div style="flex:1;min-width:200px;">
+      <div style="font-size:12px;color:#3498db;font-weight:700;">담당 설계사</div>
+      <div style="font-size:16px;color:var(--text);font-weight:700;" id="bannerAgentName">-</div>
+      <div style="font-size:12px;color:var(--text2);" id="bannerAgentInfo">-</div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-outline btn-sm" onclick="callAgent()" style="background:white;" id="bannerCallBtn">📞 전화</button>
+      <button class="btn btn-outline btn-sm" onclick="messageAgent()" style="background:white;" id="bannerMsgBtn">💬 문자</button>
+    </div>
+  </div>
+</div>
+
 <!-- ════════ 내 보험 현황 ════════ -->
 <div id="page-overview" class="page active">
   <div class="page-header">
@@ -2234,6 +2250,79 @@ window.analyzeClaim = function() {
   resultEl.innerHTML = html;
   resultEl.style.display = 'block';
   resultEl.scrollIntoView({behavior:'smooth', block:'start'});
+};
+
+/* ═══════════════════════════════════════
+ * 담당 설계사 URL 파라미터 처리
+ * (URL ?a=<base64> 또는 localStorage에서 읽음)
+ * ═══════════════════════════════════════ */
+
+var _dedicatedAgent = null;
+
+(function initDedicatedAgent() {
+  try {
+    // 1. URL 파라미터 확인
+    var params = new URLSearchParams(window.location.search);
+    var encoded = params.get('a');
+
+    if (encoded) {
+      var decoded = decodeURIComponent(escape(atob(encoded)));
+      var profile = JSON.parse(decoded);
+      _dedicatedAgent = {
+        code: profile.c || '',
+        name: profile.n || '',
+        phone: profile.p || '',
+        email: profile.e || '',
+        branch: profile.b || '',
+        kakao: profile.k || '',
+        intro: profile.i || '',
+      };
+      // localStorage에 저장해서 재방문 시에도 유지
+      localStorage.setItem('dedicated_agent', JSON.stringify(_dedicatedAgent));
+    } else {
+      // 2. URL 없으면 localStorage에서 확인
+      var stored = localStorage.getItem('dedicated_agent');
+      if (stored) _dedicatedAgent = JSON.parse(stored);
+    }
+
+    // 3. 배너 업데이트
+    renderAgentBanner();
+  } catch(e) {
+    console.warn('Agent profile parse error:', e);
+  }
+})();
+
+function renderAgentBanner() {
+  var banner = document.getElementById('dedicatedAgentBanner');
+  if (!banner || !_dedicatedAgent || !_dedicatedAgent.name) return;
+
+  document.getElementById('bannerAgentName').textContent = _dedicatedAgent.name + ' 설계사';
+  var infoParts = [];
+  if (_dedicatedAgent.branch) infoParts.push(_dedicatedAgent.branch);
+  if (_dedicatedAgent.code) infoParts.push('사번 ' + _dedicatedAgent.code);
+  if (_dedicatedAgent.phone) infoParts.push(_dedicatedAgent.phone);
+  document.getElementById('bannerAgentInfo').textContent = infoParts.join(' · ');
+
+  banner.style.display = 'block';
+}
+
+window.callAgent = function() {
+  if (_dedicatedAgent && _dedicatedAgent.phone) {
+    window.location.href = 'tel:' + _dedicatedAgent.phone.replace(/-/g, '');
+  } else {
+    alert('담당 설계사 정보가 없습니다.');
+  }
+};
+
+window.messageAgent = function() {
+  if (_dedicatedAgent && _dedicatedAgent.phone) {
+    var phoneNum = _dedicatedAgent.phone.replace(/-/g, '');
+    var name = _dedicatedAgent.name || '';
+    var text = '안녕하세요 ' + name + ' 설계사님, 보험 상담 문의드립니다.';
+    window.location.href = 'sms:' + phoneNum + '?body=' + encodeURIComponent(text);
+  } else {
+    alert('담당 설계사 정보가 없습니다.');
+  }
 };
 
 /* ── 페이지 이동 시 설계사 렌더링 ── */

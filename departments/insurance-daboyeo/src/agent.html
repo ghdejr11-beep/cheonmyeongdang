@@ -252,10 +252,12 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
   </div>
   <div class="nav-section">
     <div class="nav-label">설정</div>
+    <button class="nav-item" onclick="go('profile',this)"><span class="nav-icon">👤</span>내 프로필 설정</button>
+    <button class="nav-item" onclick="go('shareLink',this)"><span class="nav-icon">🔗</span>고객 링크 공유</button>
     <button class="nav-item" onclick="go('api',this)"><span class="nav-icon">🔑</span>API 연동 설정</button>
   </div>
   <div class="sidebar-bottom">
-    <div style="font-size:11px;color:var(--text3);padding:8px 10px;line-height:1.6;">설계사: 홍덕훈 | 쿤스튜디오<br>생명·손해보험 자격증</div>
+    <div style="font-size:11px;color:var(--text3);padding:8px 10px;line-height:1.6;" id="sidebarAgentInfo">설계사 정보 미설정<br><span style="color:var(--primary);cursor:pointer;" onclick="go('profile',document.querySelector('[onclick*=profile]'))">→ 프로필 설정</span></div>
     <div class="api-status" style="margin-top:6px;"><span class="api-dot"></span>내보험다보여 API — 샘플 모드</div>
   </div>
 </nav>
@@ -1051,6 +1053,85 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
           <button class="toggle on" onclick="this.classList.toggle(&#39;on&#39;)"></button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ 내 프로필 설정 (설계사용) ════════ -->
+<div id="page-profile" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">👤 내 프로필 설정</div>
+      <div class="page-sub">설계사 정보를 입력하세요 · 고객 링크 생성 및 맞춤 서비스 제공</div>
+    </div>
+  </div>
+
+  <div class="alert" style="background:rgba(124,58,237,0.1);border:1px solid #7c3aed;color:var(--text);margin-bottom:16px;padding:14px 18px;border-radius:10px;">
+    ℹ️ 아래 정보를 입력하면 고객용 앱에서 자동으로 <strong>본인 설계사</strong>로 표시됩니다. 고객 전용 링크도 생성됩니다.
+  </div>
+
+  <div class="result-card" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:14px;color:var(--primary);">📝 기본 정보</h4>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div>
+        <label style="display:block;font-size:12px;color:var(--text2);margin-bottom:6px;">사번 / 설계사 코드</label>
+        <input type="text" id="profileCode" placeholder="예: HDH0123" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);font-size:14px;font-family:inherit;">
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;color:var(--text2);margin-bottom:6px;">이름</label>
+        <input type="text" id="profileName" placeholder="예: 홍덕훈" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);font-size:14px;font-family:inherit;">
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div>
+        <label style="display:block;font-size:12px;color:var(--text2);margin-bottom:6px;">연락처</label>
+        <input type="text" id="profilePhone" placeholder="010-0000-0000" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);font-size:14px;font-family:inherit;">
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;color:var(--text2);margin-bottom:6px;">이메일</label>
+        <input type="text" id="profileEmail" placeholder="example@az.co.kr" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);font-size:14px;font-family:inherit;">
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div>
+        <label style="display:block;font-size:12px;color:var(--text2);margin-bottom:6px;">소속 지점</label>
+        <input type="text" id="profileBranch" placeholder="예: 서울 강남지점" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);font-size:14px;font-family:inherit;">
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;color:var(--text2);margin-bottom:6px;">카카오톡 ID (선택)</label>
+        <input type="text" id="profileKakao" placeholder="예: deokhun_hong" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);font-size:14px;font-family:inherit;">
+      </div>
+    </div>
+
+    <div style="margin-bottom:12px;">
+      <label style="display:block;font-size:12px;color:var(--text2);margin-bottom:6px;">자격증 / 소개 (선택)</label>
+      <input type="text" id="profileIntro" placeholder="예: 생명·손해보험 10년 경력 · 연 500건 상담" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);font-size:14px;font-family:inherit;">
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <button class="btn-jade" style="flex:1;" onclick="saveAgentProfile()">💾 저장하기</button>
+      <button class="btn-outline" onclick="loadAgentProfile()">↻ 불러오기</button>
+    </div>
+  </div>
+
+  <div class="result-card" id="profileStatus" style="display:none;"></div>
+</div>
+
+<!-- ════════ 고객 링크 공유 ════════ -->
+<div id="page-shareLink" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">🔗 내 고객 전용 링크 공유</div>
+      <div class="page-sub">이 링크를 고객에게 보내면 자동으로 본인 설계사로 연결됩니다</div>
+    </div>
+  </div>
+
+  <div id="shareLinkContent">
+    <div class="alert" style="background:rgba(231,76,60,0.1);border:1px solid #e74c3c;color:var(--text);padding:14px 18px;border-radius:10px;">
+      ⚠️ 먼저 <strong style="cursor:pointer;text-decoration:underline;" onclick="go('profile',document.querySelector('[onclick*=profile]'))">프로필 설정</strong>을 완료해주세요.
     </div>
   </div>
 </div>
@@ -2051,6 +2132,154 @@ function sendShareToAgent() {
 }
 
 /* ═══════════════════════════════════════
+ * 설계사 프로필 관리
+ * ═══════════════════════════════════════ */
+
+const PROFILE_KEY = 'az_agent_profile';
+
+function getAgentProfile() {
+  try { return JSON.parse(localStorage.getItem(PROFILE_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+
+window.saveAgentProfile = function() {
+  var profile = {
+    code: document.getElementById('profileCode').value.trim(),
+    name: document.getElementById('profileName').value.trim(),
+    phone: document.getElementById('profilePhone').value.trim(),
+    email: document.getElementById('profileEmail').value.trim(),
+    branch: document.getElementById('profileBranch').value.trim(),
+    kakao: document.getElementById('profileKakao').value.trim(),
+    intro: document.getElementById('profileIntro').value.trim(),
+    updated: new Date().toISOString(),
+  };
+
+  if (!profile.code || !profile.name || !profile.phone) {
+    alert('사번, 이름, 연락처는 필수입니다.');
+    return;
+  }
+
+  localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+  updateSidebarProfile(profile);
+
+  var html = '<div style="padding:18px;border-left:4px solid #27ae60;background:rgba(39,174,96,0.08);border-radius:10px;">';
+  html += '<h4 style="color:#27ae60;margin-bottom:10px;">✅ 저장 완료!</h4>';
+  html += '<p style="color:var(--text);font-size:13px;line-height:1.7;">';
+  html += '프로필이 저장되었습니다. 이제 <strong>고객 링크 공유</strong> 메뉴에서 본인 전용 링크를 생성하여 고객에게 공유할 수 있습니다.';
+  html += '</p>';
+  html += '<button class="btn-jade" style="margin-top:12px;" onclick="go(\'shareLink\',document.querySelector(\'[onclick*=shareLink]\'))">🔗 고객 링크 생성하기</button>';
+  html += '</div>';
+  var s = document.getElementById('profileStatus');
+  s.innerHTML = html;
+  s.style.display = 'block';
+};
+
+window.loadAgentProfile = function() {
+  var p = getAgentProfile();
+  if (p.code) document.getElementById('profileCode').value = p.code;
+  if (p.name) document.getElementById('profileName').value = p.name;
+  if (p.phone) document.getElementById('profilePhone').value = p.phone;
+  if (p.email) document.getElementById('profileEmail').value = p.email;
+  if (p.branch) document.getElementById('profileBranch').value = p.branch;
+  if (p.kakao) document.getElementById('profileKakao').value = p.kakao;
+  if (p.intro) document.getElementById('profileIntro').value = p.intro;
+};
+
+function updateSidebarProfile(p) {
+  var el = document.getElementById('sidebarAgentInfo');
+  if (!el) return;
+  if (p && p.name) {
+    el.innerHTML = '설계사: ' + p.name + ' | ' + (p.branch || 'AZ금융') + '<br>사번: ' + p.code + ' · ' + p.phone;
+  } else {
+    el.innerHTML = '설계사 정보 미설정<br><span style="color:var(--primary);cursor:pointer;" onclick="go(\'profile\',document.querySelector(\'[onclick*=profile]\'))">→ 프로필 설정</span>';
+  }
+}
+
+function renderShareLink() {
+  var p = getAgentProfile();
+  var el = document.getElementById('shareLinkContent');
+  if (!el) return;
+
+  if (!p.code || !p.name) {
+    el.innerHTML = '<div class="alert" style="background:rgba(231,76,60,0.1);border:1px solid #e74c3c;color:var(--text);padding:14px 18px;border-radius:10px;">⚠️ 먼저 <strong style="cursor:pointer;text-decoration:underline;" onclick="go(\'profile\',document.querySelector(\'[onclick*=profile]\'))">프로필 설정</strong>을 완료해주세요.</div>';
+    return;
+  }
+
+  var baseUrl = 'https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/index.html';
+  // 설계사 프로필을 base64로 인코딩해서 URL에 포함 (고객이 접속 시 자동으로 해당 설계사로 연결)
+  var compactProfile = {
+    c: p.code, n: p.name, p: p.phone,
+    e: p.email || '', b: p.branch || '', k: p.kakao || '', i: p.intro || ''
+  };
+  var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(compactProfile))));
+  var customerUrl = baseUrl + '?a=' + encoded;
+
+  var html = '';
+
+  // 설계사 정보 카드
+  html += '<div class="result-card" style="margin-bottom:16px;border-left:4px solid #7c3aed;">';
+  html += '<h4 style="color:#7c3aed;margin-bottom:12px;">👤 현재 설계사 정보</h4>';
+  html += '<div style="font-size:14px;line-height:2;color:var(--text);">';
+  html += '<strong>이름:</strong> ' + p.name + '<br>';
+  html += '<strong>사번:</strong> ' + p.code + '<br>';
+  html += '<strong>지점:</strong> ' + (p.branch || '-') + '<br>';
+  html += '<strong>연락처:</strong> ' + p.phone + '<br>';
+  if (p.email) html += '<strong>이메일:</strong> ' + p.email + '<br>';
+  html += '</div></div>';
+
+  // 링크 카드
+  html += '<div class="result-card" style="margin-bottom:16px;">';
+  html += '<h4 style="color:var(--primary);margin-bottom:12px;">🔗 본인 고객 전용 링크</h4>';
+  html += '<div style="background:var(--surface2);padding:14px 16px;border-radius:8px;border:1px solid var(--border);font-size:12px;word-break:break-all;color:var(--text);font-family:monospace;margin-bottom:12px;">' + customerUrl + '</div>';
+  html += '<div style="display:flex;gap:10px;flex-wrap:wrap;">';
+  html += '<button class="btn-jade" onclick="copyCustomerLink(\'' + customerUrl + '\')">📋 링크 복사</button>';
+  html += '<button class="btn-outline" onclick="shareKakao(\'' + customerUrl + '\')">💬 카카오톡 공유</button>';
+  html += '<button class="btn-outline" onclick="shareSms(\'' + customerUrl + '\')">📱 문자 공유</button>';
+  html += '<button class="btn-outline" onclick="window.open(\'' + customerUrl + '\', \'_blank\')">👁️ 미리보기</button>';
+  html += '</div></div>';
+
+  // QR 코드 (선택)
+  html += '<div class="result-card" style="text-align:center;">';
+  html += '<h4 style="color:var(--primary);margin-bottom:12px;">📱 QR 코드</h4>';
+  html += '<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(customerUrl) + '" alt="QR code" style="background:white;padding:10px;border-radius:10px;">';
+  html += '<p style="font-size:12px;color:var(--text2);margin-top:10px;">고객이 QR 스캔 → 본인 설계사로 자동 연결</p>';
+  html += '</div>';
+
+  // 사용 안내
+  html += '<div class="result-card" style="margin-top:16px;background:rgba(52,152,219,0.05);border-left:4px solid #3498db;">';
+  html += '<h4 style="color:#3498db;margin-bottom:10px;">📖 사용 안내</h4>';
+  html += '<ul style="list-style:none;padding:0;font-size:13px;color:var(--text);line-height:2;">';
+  html += '<li>✓ 본인이 담당하는 고객에게만 링크 공유</li>';
+  html += '<li>✓ 고객이 링크로 접속 시 본인이 자동으로 담당 설계사로 표시</li>';
+  html += '<li>✓ 보험 상담 신청도 본인에게 자동 연결</li>';
+  html += '<li>✓ 대중 광고 / 앱스토어 공개 X — 개인 1:1 고객 관리용</li>';
+  html += '</ul></div>';
+
+  el.innerHTML = html;
+}
+
+window.copyCustomerLink = function(url) {
+  navigator.clipboard.writeText(url).then(function() {
+    alert('✅ 링크가 복사되었습니다!\n\n고객에게 카카오톡/문자로 붙여넣기 하세요.');
+  }).catch(function() {
+    prompt('수동으로 복사해주세요:', url);
+  });
+};
+
+window.shareKakao = function(url) {
+  var text = '안녕하세요. AZ금융 설계사입니다. 보험 현황을 편리하게 관리할 수 있는 개인 전용 앱입니다. ' + url;
+  window.open('https://accounts.kakao.com/weblogin/mobile_kakaolink?url=' + encodeURIComponent(url), '_blank');
+  navigator.clipboard.writeText(text).then(function(){
+    alert('카카오톡 공유 메시지가 클립보드에 복사되었습니다. 카카오톡을 열어 붙여넣기 하세요.');
+  }).catch(function(){});
+};
+
+window.shareSms = function(url) {
+  var text = '[AZ금융] 보험 관리 전용 앱: ' + url;
+  window.location.href = 'sms:?body=' + encodeURIComponent(text);
+};
+
+/* ═══════════════════════════════════════
  * 보험금 청구 도우미 (설계사용 참조)
  * ═══════════════════════════════════════ */
 var CLAIM_RULES = {
@@ -2135,11 +2364,21 @@ window.analyzeClaim = function() {
   resultEl.scrollIntoView({behavior:'smooth', block:'start'});
 };
 
+// 앱 로드 시 저장된 프로필 불러와 사이드바 갱신
+(function() {
+  try {
+    var p = getAgentProfile();
+    if (p && p.name) updateSidebarProfile(p);
+  } catch(e) {}
+})();
+
 /* ── 페이지 이동 시 고객 목록 렌더링 ── */
 const origGo = window.go;
 window.go = function(name, btn) {
   origGo(name, btn);
   if (name === 'agent') renderCustomers(CUSTOMERS);
+  if (name === 'profile') loadAgentProfile();
+  if (name === 'shareLink') renderShareLink();
   if (name === 'healthcheck') {
     // 페이지 진입 시 통과율 바 재애니메이션
     setTimeout(() => {
