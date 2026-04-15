@@ -1,0 +1,13 @@
+{
+  "name": "tax-n-benefit-api",
+  "version": "1.0.0",
+  "description": "세금N혜택 백엔드 API — CODEF 홈택스 연동",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "easycodef-node": "^1.0.0"
+  }
+}
