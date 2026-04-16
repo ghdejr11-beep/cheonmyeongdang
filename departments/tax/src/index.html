@@ -7,18 +7,22 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --bg: #0a0a2e;
-  --bg-card: #141450;
-  --bg-card2: #1a1a5e;
-  --main: #4caf50;
-  --main-dark: #388e3c;
-  --gold: #ffd54f;
-  --red: #ef5350;
-  --text: #ffffff;
-  --text-sub: #aab;
-  --text-dim: #778;
+  --bg: #f5f6f8;
+  --bg-card: #ffffff;
+  --bg-card2: #f0f1f3;
+  --main: #2563eb;
+  --main-dark: #1d4ed8;
+  --mint: #10b981;
+  --gold: #f59e0b;
+  --red: #ef4444;
+  --text: #1f2937;
+  --text-sub: #6b7280;
+  --text-dim: #9ca3af;
   --radius: 16px;
   --radius-sm: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 24px rgba(0,0,0,0.1);
 }
 body {
   font-family: -apple-system, 'Pretendard', 'Noto Sans KR', sans-serif;
@@ -29,19 +33,21 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .top-bar {
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 20px 10px;
   position: sticky; top: 0; z-index: 100;
-  background: var(--bg);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
 }
-.top-bar h1 { font-size: 20px; font-weight: 800; }
+.top-bar h1 { font-size: 20px; font-weight: 800; color: var(--text); }
 .top-bar h1 span { color: var(--main); }
 .badge-zero {
-  background: var(--gold); color: #000; font-size: 11px; font-weight: 700;
-  padding: 4px 10px; border-radius: 20px;
+  background: linear-gradient(135deg, var(--mint), #059669); color: #fff; font-size: 11px; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px;
 }
 
 .tab-page { display: none; padding: 0 16px 160px; }
@@ -53,17 +59,19 @@ body {
   border-radius: var(--radius);
   padding: 20px;
   margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  border: 1px solid #e5e7eb;
 }
 .card-highlight {
-  background: linear-gradient(135deg, #1b3a1b 0%, #0a2a0a 100%);
-  border: 1px solid var(--main);
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border: 1px solid var(--mint);
 }
 .card-gold {
-  background: linear-gradient(135deg, #3a2e00 0%, #1a1500 100%);
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
   border: 1px solid var(--gold);
 }
 .card-red {
-  background: linear-gradient(135deg, #3a1b1b 0%, #2a0a0a 100%);
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
   border: 1px solid var(--red);
 }
 
@@ -72,46 +80,48 @@ body {
   border: none; border-radius: var(--radius-sm); font-size: 16px; font-weight: 700;
   cursor: pointer; transition: all .2s; font-family: inherit;
 }
-.btn-main { background: var(--main); color: #fff; }
+.btn-main { background: var(--main); color: #fff; box-shadow: 0 2px 8px rgba(37,99,235,0.3); }
 .btn-main:active { background: var(--main-dark); transform: scale(.97); }
 .btn-outline { background: transparent; border: 1.5px solid var(--main); color: var(--main); }
-.btn-gold { background: var(--gold); color: #000; }
+.btn-gold { background: linear-gradient(135deg, var(--gold), #d97706); color: #fff; box-shadow: 0 2px 8px rgba(245,158,11,0.3); }
 .btn-sm { padding: 8px 14px; width: auto; font-size: 13px; border-radius: 8px; }
 
 .section-title {
-  font-size: 15px; font-weight: 700; margin: 18px 0 10px; color: var(--text-sub);
+  font-size: 15px; font-weight: 700; margin: 18px 0 10px; color: var(--text);
 }
 
 /* ============ TAB 1: 종소세 계산기 ============ */
 .calc-input-group { margin-bottom: 14px; }
 .calc-label { font-size: 13px; color: var(--text-sub); margin-bottom: 6px; display: block; }
 .calc-input {
-  width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
+  width: 100%; padding: 14px 16px; background: #f9fafb;
+  border: 1.5px solid #e5e7eb; border-radius: 10px;
   color: var(--text); font-size: 18px; font-weight: 700;
   font-family: inherit; outline: none; text-align: right;
+  transition: border-color .2s, box-shadow .2s;
 }
-.calc-input:focus { border-color: var(--main); }
+.calc-input:focus { border-color: var(--main); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
 .calc-input::placeholder { color: var(--text-dim); font-weight: 400; font-size: 14px; }
 
 .result-box {
-  background: linear-gradient(135deg, #0a2a0a, #1b3a1b);
-  border: 1px solid var(--main);
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border: 1px solid var(--mint);
   border-radius: var(--radius);
-  padding: 24px 20px;
+  padding: 28px 20px;
   text-align: center;
   margin-top: 16px;
+  box-shadow: var(--shadow-md);
 }
 .result-amount {
   font-size: 40px; font-weight: 900; margin: 8px 0 4px;
 }
-.result-amount.refund { color: var(--main); }
+.result-amount.refund { color: var(--mint); }
 .result-amount.pay { color: var(--red); }
 .result-sub { color: var(--text-sub); font-size: 13px; }
 .result-detail { margin-top: 16px; text-align: left; }
 .result-row {
   display: flex; justify-content: space-between; padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px;
+  border-bottom: 1px solid #f3f4f6; font-size: 14px;
 }
 .result-row span:first-child { color: var(--text-sub); }
 .result-row span:last-child { font-weight: 600; }
@@ -119,29 +129,31 @@ body {
 /* 선택 버튼 그룹 */
 .select-group { display: flex; gap: 8px; margin-bottom: 14px; }
 .select-btn {
-  flex: 1; padding: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px; background: rgba(255,255,255,0.03); color: var(--text-sub);
+  flex: 1; padding: 10px; text-align: center; border: 1.5px solid #e5e7eb;
+  border-radius: 8px; background: #f9fafb; color: var(--text-sub);
   font-size: 13px; cursor: pointer; font-family: inherit; font-weight: 500;
+  transition: all .2s;
 }
-.select-btn.active { border-color: var(--main); color: var(--main); background: rgba(76,175,80,0.1); }
+.select-btn.active { border-color: var(--main); color: var(--main); background: #eff6ff; }
 
 /* D-day 배너 */
 .dday-banner {
-  background: linear-gradient(135deg, #2a1a00, #3a2e00);
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
   border: 1px solid var(--gold);
   border-radius: var(--radius);
   padding: 16px 20px;
   display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 14px;
+  box-shadow: var(--shadow);
 }
-.dday-text { font-size: 14px; font-weight: 600; }
+.dday-text { font-size: 14px; font-weight: 600; color: #92400e; }
 .dday-count { font-size: 28px; font-weight: 900; color: var(--gold); }
 
 /* ============ TAB 2: 절세 ============ */
 .tip-list { list-style: none; }
 .tip-item {
   display: flex; gap: 12px; padding: 14px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid #f3f4f6;
 }
 .tip-icon { font-size: 24px; flex-shrink: 0; }
 .tip-text { font-size: 14px; line-height: 1.6; color: var(--text-sub); }
@@ -149,27 +161,29 @@ body {
 
 .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .guide-btn {
-  padding: 16px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
+  padding: 16px; background: var(--bg-card); border: 1px solid #e5e7eb;
   border-radius: 12px; color: var(--text); font-size: 14px; font-weight: 600;
   cursor: pointer; text-align: center; font-family: inherit;
+  box-shadow: var(--shadow); transition: all .2s;
 }
-.guide-btn:active { background: var(--bg-card2); }
+.guide-btn:active { background: var(--bg-card2); transform: scale(.97); }
 .guide-btn .emoji { display: block; font-size: 28px; margin-bottom: 6px; }
 
 /* ============ TAB 3: 지원금 ============ */
 .subsidy-item {
   background: var(--bg-card); border-radius: var(--radius);
   padding: 16px 20px; margin-bottom: 12px;
+  box-shadow: var(--shadow); border: 1px solid #e5e7eb;
 }
 .subsidy-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
 .subsidy-title { font-size: 15px; font-weight: 700; }
 .subsidy-deadline {
   font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 12px;
 }
-.deadline-urgent { background: var(--red); color: #fff; }
-.deadline-normal { background: var(--gold); color: #000; }
-.deadline-always { background: var(--main); color: #fff; }
-.subsidy-amount { font-size: 22px; font-weight: 900; color: var(--gold); margin: 4px 0 8px; }
+.deadline-urgent { background: #fee2e2; color: var(--red); }
+.deadline-normal { background: #fef3c7; color: #92400e; }
+.deadline-always { background: #dbeafe; color: var(--main); }
+.subsidy-amount { font-size: 22px; font-weight: 900; color: var(--main); margin: 4px 0 8px; }
 .subsidy-actions { display: flex; gap: 8px; }
 
 /* ============ TAB 4: AI 상담 ============ */
@@ -183,7 +197,7 @@ body {
   word-break: keep-all; white-space: pre-wrap;
 }
 .chat-ai {
-  background: var(--bg-card); color: var(--text);
+  background: #f3f4f6; color: var(--text);
   border-bottom-left-radius: 4px; margin-right: auto;
 }
 .chat-user {
@@ -191,26 +205,30 @@ body {
   border-bottom-right-radius: 4px; margin-left: auto;
 }
 .chat-typing {
-  background: var(--bg-card); color: var(--text-dim);
+  background: #f3f4f6; color: var(--text-dim);
   border-bottom-left-radius: 4px; margin-right: auto;
   font-style: italic;
 }
 .quick-questions { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
 .quick-btn {
-  padding: 8px 14px; background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.3);
+  padding: 8px 14px; background: #eff6ff; border: 1px solid #bfdbfe;
   border-radius: 20px; color: var(--main); font-size: 13px; cursor: pointer;
-  font-family: inherit;
+  font-family: inherit; transition: all .2s;
 }
+.quick-btn:active { background: #dbeafe; }
 .chat-input-wrap {
   display: none; position: fixed; bottom: 68px; left: 50%; transform: translateX(-50%);
   width: 100%; max-width: 448px; padding: 8px 16px;
-  background: var(--bg); gap: 8px; align-items: center; z-index: 90;
+  background: #ffffff; gap: 8px; align-items: center; z-index: 90;
+  border-top: 1px solid #e5e7eb;
 }
 .chat-input {
-  flex: 1; padding: 12px 16px; background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1); border-radius: 24px;
+  flex: 1; padding: 12px 16px; background: #f9fafb;
+  border: 1.5px solid #e5e7eb; border-radius: 24px;
   color: var(--text); font-size: 14px; outline: none; font-family: inherit;
+  transition: border-color .2s;
 }
+.chat-input:focus { border-color: var(--main); }
 .chat-send {
   width: 42px; height: 42px; border-radius: 50%; background: var(--main);
   border: none; color: #fff; font-size: 18px; cursor: pointer;
@@ -220,44 +238,46 @@ body {
 .profile-card {
   display: flex; align-items: center; gap: 16px;
   background: var(--bg-card); border-radius: var(--radius); padding: 20px;
-  margin-bottom: 14px;
+  margin-bottom: 14px; box-shadow: var(--shadow); border: 1px solid #e5e7eb;
 }
 .profile-avatar { font-size: 48px; }
 .profile-info h3 { font-size: 18px; margin-bottom: 4px; }
 .profile-info p { font-size: 13px; color: var(--text-sub); }
 
 .premium-banner {
-  background: linear-gradient(135deg, #3a2e00, #1a1500);
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
   border: 1px solid var(--gold); border-radius: var(--radius);
   padding: 24px 20px; text-align: center; margin-bottom: 14px;
+  box-shadow: var(--shadow);
 }
-.premium-banner h3 { color: var(--gold); margin-bottom: 6px; }
+.premium-banner h3 { color: #92400e; margin-bottom: 6px; }
 .price { font-size: 32px; font-weight: 900; color: var(--gold); }
 .price-sub { font-size: 13px; color: var(--text-sub); margin-bottom: 12px; }
 .premium-features { list-style: none; text-align: left; margin-bottom: 16px; }
 .premium-features li {
   padding: 6px 0; font-size: 14px; color: var(--text-sub);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid #f3f4f6;
 }
 .premium-features li::before { content: "✓ "; color: var(--gold); font-weight: 700; }
 
 .calendar-card {
   background: var(--bg-card); border-radius: var(--radius); padding: 20px; margin-bottom: 14px;
+  box-shadow: var(--shadow); border: 1px solid #e5e7eb;
 }
 .calendar-card h4 { margin-bottom: 12px; }
 .cal-item {
   display: flex; justify-content: space-between; padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px;
+  border-bottom: 1px solid #f3f4f6; font-size: 14px;
 }
 .cal-name { color: var(--text-sub); }
 .cal-date { color: var(--gold); font-weight: 600; }
 .cal-item.urgent .cal-name { color: var(--red); font-weight: 700; }
 .cal-item.urgent .cal-date { color: var(--red); }
 
-.settings-list { list-style: none; background: var(--bg-card); border-radius: var(--radius); overflow: hidden; }
+.settings-list { list-style: none; background: var(--bg-card); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid #e5e7eb; }
 .settings-item {
   display: flex; justify-content: space-between; padding: 16px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px;
+  border-bottom: 1px solid #f3f4f6; font-size: 14px;
 }
 .settings-arrow { color: var(--text-dim); }
 
@@ -265,13 +285,14 @@ body {
 .tab-bar {
   position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
   width: 100%; max-width: 480px;
-  background: #0d0d35; border-top: 1px solid rgba(255,255,255,0.08);
+  background: #ffffff; border-top: 1px solid #e5e7eb;
   display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
 }
 .tab-btn {
   flex: 1; padding: 10px 0 8px; background: none; border: none; color: var(--text-dim);
   display: flex; flex-direction: column; align-items: center; gap: 2px;
-  cursor: pointer; font-family: inherit;
+  cursor: pointer; font-family: inherit; transition: color .2s;
 }
 .tab-btn.active { color: var(--main); }
 .tab-icon { font-size: 20px; }
@@ -279,15 +300,17 @@ body {
 
 /* ============ CODEF 간편인증 모달 ============ */
 .auth-overlay {
-  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4);
   z-index: 200; justify-content: center; align-items: flex-end;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
 }
 .auth-overlay.active { display: flex; }
 .auth-modal {
-  width: 100%; max-width: 480px; background: var(--bg);
+  width: 100%; max-width: 480px; background: #ffffff;
   border-radius: 20px 20px 0 0; padding: 24px 20px 32px;
   max-height: 90vh; overflow-y: auto;
   animation: slideUp .3s ease;
+  box-shadow: var(--shadow-lg);
 }
 @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 .auth-modal-header {
@@ -295,58 +318,59 @@ body {
 }
 .auth-modal-header h3 { font-size: 18px; font-weight: 800; }
 .auth-close {
-  width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1);
+  width: 32px; height: 32px; border-radius: 50%; background: #f3f4f6;
   border: none; color: var(--text); font-size: 18px; cursor: pointer;
 }
 .auth-security-badge {
   display: flex; align-items: center; gap: 6px;
-  background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.3);
+  background: #eff6ff; border: 1px solid #bfdbfe;
   border-radius: 8px; padding: 8px 12px; margin-bottom: 16px; font-size: 12px; color: var(--main);
 }
 .auth-field { margin-bottom: 14px; }
 .auth-field label { display: block; font-size: 13px; color: var(--text-sub); margin-bottom: 6px; }
 .auth-field input {
-  width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
+  width: 100%; padding: 14px 16px; background: #f9fafb;
+  border: 1.5px solid #e5e7eb; border-radius: 10px;
   color: var(--text); font-size: 16px; font-family: inherit; outline: none;
+  transition: border-color .2s, box-shadow .2s;
 }
-.auth-field input:focus { border-color: var(--main); }
+.auth-field input:focus { border-color: var(--main); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
 .auth-field input::placeholder { color: var(--text-dim); font-size: 14px; }
 .auth-ssn-wrap { display: flex; gap: 8px; align-items: center; }
 .auth-ssn-wrap input { flex: 1; text-align: center; letter-spacing: 2px; }
 .auth-ssn-wrap span { color: var(--text-dim); font-size: 20px; }
 .auth-method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .auth-method-btn {
-  padding: 14px 10px; background: rgba(255,255,255,0.04);
-  border: 1.5px solid rgba(255,255,255,0.1); border-radius: 12px;
+  padding: 14px 10px; background: #f9fafb;
+  border: 1.5px solid #e5e7eb; border-radius: 12px;
   color: var(--text-sub); font-size: 14px; font-weight: 600;
   cursor: pointer; text-align: center; font-family: inherit; transition: all .2s;
 }
 .auth-method-btn.selected {
-  border-color: var(--main); color: var(--main); background: rgba(76,175,80,0.1);
+  border-color: var(--main); color: var(--main); background: #eff6ff;
 }
 .auth-method-btn .auth-method-icon { display: block; font-size: 24px; margin-bottom: 4px; }
 .auth-privacy-note {
   font-size: 11px; color: var(--text-dim); line-height: 1.6;
-  background: rgba(255,255,255,0.03); border-radius: 8px; padding: 10px 12px;
-  margin: 14px 0;
+  background: #f9fafb; border-radius: 8px; padding: 10px 12px;
+  margin: 14px 0; border: 1px solid #f3f4f6;
 }
 .auth-step { display: none; }
 .auth-step.active { display: block; }
 .auth-result-card {
-  background: var(--bg-card); border-radius: 12px; padding: 16px; margin-bottom: 10px;
+  background: #f9fafb; border-radius: 12px; padding: 16px; margin-bottom: 10px; border: 1px solid #e5e7eb;
 }
 .auth-result-card h4 { font-size: 14px; color: var(--text-sub); margin-bottom: 8px; }
 .auth-result-amount { font-size: 28px; font-weight: 900; }
 .auth-result-row {
   display: flex; justify-content: space-between; padding: 6px 0;
-  font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 13px; border-bottom: 1px solid #f3f4f6;
 }
 .auth-result-row span:first-child { color: var(--text-sub); }
 .auth-result-row span:last-child { font-weight: 600; }
 .auth-spinner {
   display: inline-block; width: 16px; height: 16px;
-  border: 2px solid rgba(255,255,255,0.2); border-top-color: var(--gold);
+  border: 2px solid #e5e7eb; border-top-color: var(--main);
   border-radius: 50%; animation: spin .8s linear infinite; vertical-align: middle; margin-right: 6px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -368,6 +392,22 @@ body {
       <div style="font-size:12px;color:var(--text-dim);">2026년 5월 31일까지</div>
     </div>
     <div class="dday-count" id="ddayCount">D-47</div>
+  </div>
+
+  <!-- Trust Badges -->
+  <div style="display:flex;gap:8px;margin-bottom:14px;">
+    <div style="flex:1;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;padding:12px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <div style="font-size:20px;margin-bottom:4px;">💰</div>
+      <div style="font-size:12px;font-weight:700;color:var(--mint);">수수료 0원</div>
+    </div>
+    <div style="flex:1;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;padding:12px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <div style="font-size:20px;margin-bottom:4px;">🔒</div>
+      <div style="font-size:12px;font-weight:700;color:var(--main);">암호화 통신</div>
+    </div>
+    <div style="flex:1;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;padding:12px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <div style="font-size:20px;margin-bottom:4px;">⚡</div>
+      <div style="font-size:12px;font-weight:700;color:var(--gold);">1분 조회</div>
+    </div>
   </div>
 
   <div class="card">
@@ -411,9 +451,9 @@ body {
 
   <div id="calcResult" style="display:none;"></div>
 
-  <div class="card" style="background:rgba(76,175,80,0.05);border:1px solid rgba(76,175,80,0.2);">
+  <div class="card" style="background:#f0fdf4;border:1px solid #bbf7d0;">
     <p style="font-size:13px;color:var(--text-sub);line-height:1.7;">
-      💡 <strong style="color:var(--main);">수수료 0원</strong> — 삼쩜삼은 환급액의 10~20% 수수료를 가져갑니다. 세금N혜택은 수수료가 없습니다.<br>
+      💡 <strong style="color:var(--mint);">수수료 0원</strong> — 타 서비스는 환급액의 10~20% 수수료를 청구합니다. 세금N혜택은 수수료가 없습니다.<br>
       📋 본 계산은 간편 추정이며, 정확한 신고는 홈택스 또는 세무사를 이용하세요.
     </p>
   </div>
@@ -422,27 +462,27 @@ body {
   <div class="card card-gold" style="margin-top:14px;">
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
       <span style="font-size:24px;">🏛️</span>
-      <strong style="color:var(--gold);font-size:15px;">홈택스 자동 연동 (BETA)</strong>
+      <strong style="color:#92400e;font-size:15px;">홈택스 자동 연동 (BETA)</strong>
     </div>
     <p style="font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:12px;">
       간편인증으로 로그인하면 수입/경비를 직접 입력하지 않아도 자동 계산됩니다.
-      <span style="color:var(--gold);">(CODEF API 연동)</span>
+      <span style="color:#92400e;">(CODEF API 연동)</span>
     </p>
     <button class="btn btn-gold" onclick="connectHomeTax()">🔐 홈택스 연동하기</button>
-    <div id="homeTaxStatus" style="display:none;margin-top:12px;padding:12px;background:rgba(0,0,0,0.3);border-radius:8px;font-size:13px;"></div>
+    <div id="homeTaxStatus" style="display:none;margin-top:12px;padding:12px;background:rgba(245,158,11,0.08);border-radius:8px;font-size:13px;border:1px solid #fde68a;"></div>
   </div>
 
   <!-- ───── 세무사 연결 ───── -->
-  <div class="card" style="margin-top:14px;background:linear-gradient(135deg,#0d2a3a,#1a2e3a);border:1px solid #3498db;">
+  <div class="card" style="margin-top:14px;background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #93c5fd;">
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
       <span style="font-size:24px;">👔</span>
-      <strong style="color:#5dade2;font-size:15px;">전문 세무사 1:1 상담</strong>
+      <strong style="color:var(--main);font-size:15px;">전문 세무사 1:1 상담</strong>
     </div>
     <p style="font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:12px;">
       계산 결과를 정확히 신고하고 싶으신가요? 세무사 무료 상담 연결해드립니다.<br>
-      <span style="color:#5dade2;">첫 상담 10분 무료 · 복잡한 신고는 대행도 가능</span>
+      <span style="color:var(--main);">첫 상담 10분 무료 · 복잡한 신고는 대행도 가능</span>
     </p>
-    <button class="btn" style="background:#3498db;color:#fff;" onclick="requestConsultation()">📞 세무사 상담 신청</button>
+    <button class="btn btn-main" onclick="requestConsultation()">📞 세무사 상담 신청</button>
   </div>
 </div>
 
@@ -450,7 +490,7 @@ body {
 <div class="tab-page" id="page-coaching">
   <div class="card card-gold">
     <p style="font-size:13px;color:var(--text-sub);">2026년 새로 바뀐 세법</p>
-    <div style="font-size:18px;font-weight:700;color:var(--gold);margin:8px 0;">주요 변경사항</div>
+    <div style="font-size:18px;font-weight:700;color:#92400e;margin:8px 0;">주요 변경사항</div>
     <ul style="font-size:13px;color:var(--text-sub);line-height:2;padding-left:16px;">
       <li>6% 구간: 1,200만원 → <strong style="color:var(--gold);">1,400만원</strong>으로 확대</li>
       <li>근로소득 기본공제: 150만원 → <strong style="color:var(--gold);">180만원</strong></li>
@@ -929,9 +969,9 @@ function displayAuthResults(results) {
   // 환급 예상액
   if (results.refund && results.refund.success) {
     var r = results.refund.data || results.refund;
-    html += '<div class="auth-result-card" style="border:1px solid var(--main);">';
+    html += '<div class="auth-result-card" style="border:1px solid var(--mint);">';
     html += '<h4>&#x1f4b0; 환급 예상액</h4>';
-    html += '<div class="auth-result-amount" style="color:var(--main);">';
+    html += '<div class="auth-result-amount" style="color:var(--mint);">';
     html += '&#8361;' + (r.refundAmount || r.estimatedRefund || 0).toLocaleString();
     html += '</div>';
     if (r.totalIncome) html += '<div class="auth-result-row"><span>총 소득</span><span>' + r.totalIncome.toLocaleString() + '원</span></div>';
@@ -1203,14 +1243,14 @@ function calculateTax() {
   html += '<div class="result-row"><span>산출세액</span><span>' + Math.round(tax).toLocaleString() + '원</span></div>';
   html += '<div class="result-row"><span>지방소득세 (10%)</span><span>' + localTax.toLocaleString() + '원</span></div>';
   html += '<div class="result-row"><span>총 세금</span><span style="font-size:16px;color:var(--red)">' + totalTax.toLocaleString() + '원</span></div>';
-  html += '<div class="result-row"><span>기납부 세액</span><span style="color:var(--main)">-' + prepaid.toLocaleString() + '원</span></div>';
-  html += '<div class="result-row" style="border-top:2px solid var(--main);padding-top:12px;"><span style="font-weight:700;color:var(--text)">' + (isRefund ? '환급 예상액' : '추가 납부액') + '</span><span style="font-size:20px;font-weight:900;color:' + (isRefund ? 'var(--main)' : 'var(--red)') + '">₩' + Math.abs(diff).toLocaleString() + '</span></div>';
+  html += '<div class="result-row"><span>기납부 세액</span><span style="color:var(--mint)">-' + prepaid.toLocaleString() + '원</span></div>';
+  html += '<div class="result-row" style="border-top:2px solid var(--mint);padding-top:12px;"><span style="font-weight:700;color:var(--text)">' + (isRefund ? '환급 예상액' : '추가 납부액') + '</span><span style="font-size:20px;font-weight:900;color:' + (isRefund ? 'var(--mint)' : 'var(--red)') + '">₩' + Math.abs(diff).toLocaleString() + '</span></div>';
   html += '</div></div>';
 
   if (isRefund && diff > 50000) {
     html += '<div class="card card-highlight" style="text-align:center;">';
-    html += '<p style="font-size:14px;margin-bottom:8px;">💰 삼쩜삼으로 신청하면 수수료 <strong style="color:var(--red);">' + Math.round(diff * 0.15).toLocaleString() + '원</strong></p>';
-    html += '<p style="font-size:16px;font-weight:700;color:var(--main);">세금N혜택은 수수료 0원! 직접 신고 가이드 제공</p>';
+    html += '<p style="font-size:14px;margin-bottom:8px;">💰 타 서비스 이용 시 수수료 약 <strong style="color:var(--red);">' + Math.round(diff * 0.15).toLocaleString() + '원</strong></p>';
+    html += '<p style="font-size:16px;font-weight:700;color:var(--mint);">세금N혜택은 수수료 0원! 직접 신고 가이드 제공</p>';
     html += '</div>';
   }
 
