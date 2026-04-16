@@ -1181,6 +1181,118 @@
   @media (max-width: 768px) {
     .complaint-form-wrap { padding: 24px 16px; }
   }
+
+  /* ═══ PREMIUM SAJU RESULT ═══ */
+  .premium-header { text-align:center; padding:40px 20px; border:1px solid var(--gold); border-radius:16px; background:linear-gradient(135deg,rgba(13,16,32,0.95),rgba(30,24,10,0.95)); margin-bottom:32px; }
+  .premium-badge { display:inline-block; background:var(--gold); color:#0d1020; font-size:0.7rem; font-weight:800; padding:4px 16px; border-radius:20px; letter-spacing:2px; margin-bottom:16px; }
+  .premium-header h2 { color:var(--gold2); font-family:'Noto Serif KR',serif; font-size:1.6rem; margin-bottom:12px; }
+  .premium-info { color:var(--text2); font-size:0.85rem; margin-bottom:8px; }
+  .premium-ganji { color:var(--gold2); font-family:'Noto Serif KR',serif; font-size:1.8rem; letter-spacing:0.3em; margin-bottom:4px; }
+  .premium-hanja { color:var(--text2); font-size:0.9rem; letter-spacing:0.2em; }
+
+  .premium-section { margin-bottom:32px; }
+  .premium-section h3 { color:var(--gold2); font-family:'Noto Serif KR',serif; font-size:1.15rem; margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid rgba(201,168,76,0.2); }
+  .premium-text { color:var(--text); font-size:0.9rem; line-height:1.85; }
+  .premium-card { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+  .premium-card h5 { color:var(--gold2); font-size:0.9rem; margin-bottom:8px; }
+  .premium-card p { color:var(--text); font-size:0.85rem; line-height:1.7; margin-bottom:4px; }
+
+  .premium-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+  .premium-grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+  @media(max-width:768px) { .premium-grid-2,.premium-grid-3 { grid-template-columns:1fr; } }
+
+  /* 오행 바 */
+  .premium-ohaeng { margin-bottom:16px; }
+  .ohaeng-item { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+  .ohaeng-name { width:30px; font-weight:700; font-size:0.85rem; }
+  .ohaeng-bar { flex:1; height:12px; background:rgba(255,255,255,0.05); border-radius:6px; overflow:hidden; }
+  .ohaeng-fill { height:100%; border-radius:6px; transition:width 0.5s; }
+  .ohaeng-cnt { width:20px; text-align:right; font-size:0.8rem; color:var(--text2); }
+
+  /* 월별 */
+  .monthly-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  @media(max-width:900px) { .monthly-grid { grid-template-columns:repeat(3,1fr); } }
+  @media(max-width:600px) { .monthly-grid { grid-template-columns:repeat(2,1fr); } }
+  .monthly-card { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px; padding:12px; }
+  .monthly-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+  .monthly-month { font-size:1.1rem; font-weight:700; color:var(--gold2); }
+  .monthly-score { font-size:1.1rem; font-weight:700; }
+  .monthly-ganji { font-size:0.75rem; color:var(--text2); margin-bottom:6px; }
+  .monthly-summary { font-size:0.78rem; color:var(--text); line-height:1.5; margin-bottom:8px; }
+  .monthly-stars { font-size:0.7rem; color:var(--text2); line-height:1.6; }
+  .monthly-days { display:flex; gap:8px; margin-top:6px; font-size:0.68rem; }
+  .lucky-day { color:#2ecc71; }
+  .caution-day { color:#e74c3c; }
+
+  /* 시간대별 */
+  .hourly-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  @media(max-width:768px) { .hourly-grid { grid-template-columns:repeat(3,1fr); } }
+  @media(max-width:480px) { .hourly-grid { grid-template-columns:repeat(2,1fr); } }
+  .hourly-card { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px; padding:10px; font-size:0.8rem; }
+  .hourly-card strong { color:var(--gold2); }
+  .hourly-time { font-size:0.68rem; color:var(--text2); }
+  .hourly-rating { display:block; font-weight:700; font-size:0.82rem; margin:4px 0; }
+  .hourly-card p { font-size:0.72rem; color:var(--text2); line-height:1.4; margin:0; }
+
+  /* 행운 색상 */
+  .color-swatches { display:flex; gap:8px; }
+  .color-swatch { width:60px; height:60px; border-radius:10px; display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px; }
+  .color-swatch span { font-size:0.65rem; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,0.7); }
+
+  /* 바이오리듬 */
+  .bio-grid { display:grid; gap:8px; }
+  .bio-item { display:flex; align-items:center; gap:10px; }
+  .bio-label { width:70px; font-size:0.85rem; color:var(--text); }
+  .bio-bar { flex:1; height:16px; background:rgba(255,255,255,0.05); border-radius:8px; overflow:hidden; }
+  .bio-fill-pos,.bio-fill-neg { height:100%; border-radius:8px; transition:width 0.5s; }
+  .bio-value { width:50px; text-align:right; font-weight:700; font-size:0.85rem; }
+
+  /* 대운 타임라인 */
+  .daeun-timeline { display:flex; overflow-x:auto; gap:8px; padding-bottom:8px; }
+  .daeun-item-premium { min-width:90px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px; padding:10px; text-align:center; flex-shrink:0; }
+  .daeun-item-premium.current { border-color:var(--gold); background:rgba(201,168,76,0.1); box-shadow:0 0 12px rgba(201,168,76,0.2); }
+  .daeun-age { font-size:0.72rem; color:var(--text2); margin-bottom:4px; }
+  .daeun-ganji-premium { font-size:1rem; font-weight:700; color:var(--gold2); margin-bottom:2px; }
+  .daeun-sipsin-premium { font-size:0.7rem; color:var(--text2); }
+
+  /* 인생 구간 */
+  .phase-card { text-align:center; }
+  .phase-card h5 { font-size:0.95rem; }
+  .phase-daeun { display:flex; flex-wrap:wrap; gap:4px; justify-content:center; margin-top:8px; }
+  .daeun-chip { font-size:0.68rem; background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.2); border-radius:12px; padding:2px 8px; color:var(--gold2); }
+
+  /* 종합 */
+  .premium-conclusion .premium-text { font-size:0.92rem; line-height:2; }
+  .premium-footer { text-align:center; padding:32px 0; border-top:1px solid var(--border); margin-top:32px; }
+  .premium-footer p { color:var(--text2); font-size:0.78rem; margin-bottom:8px; }
+  .premium-pdf-btn { margin-top:12px; }
+
+  /* 신살 카드 */
+  .shinsal-card { border-left:3px solid var(--gold); }
+
+  /* 대운 상세 카드 */
+  .daeun-detail-card { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px; padding:14px 16px; margin-bottom:8px; }
+  .daeun-detail-card.current { border-color:var(--gold); background:rgba(201,168,76,0.08); box-shadow:0 0 12px rgba(201,168,76,0.15); }
+  .daeun-detail-header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px; }
+  .daeun-age-label { font-size:0.85rem; font-weight:700; color:var(--gold2); }
+  .daeun-ganji-label { font-size:1rem; font-weight:700; color:var(--text); font-family:'Noto Serif KR',serif; }
+  .daeun-sipsin-label { font-size:0.8rem; color:var(--text2); }
+  .daeun-desc { font-size:0.82rem; color:var(--text); line-height:1.7; margin:0; }
+  .daeun-detail-card.current .daeun-desc { color:var(--gold2); }
+
+  /* AI 상담 */
+  .ai-chat-area { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:12px; padding:16px; }
+  .ai-messages { max-height:300px; overflow-y:auto; margin-bottom:12px; }
+  .ai-msg { padding:8px 12px; margin-bottom:8px; border-radius:8px; font-size:0.85rem; line-height:1.7; }
+  .ai-msg.user { background:rgba(74,158,142,0.1); border:1px solid rgba(74,158,142,0.2); color:var(--text); }
+  .ai-msg.bot { background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.15); color:var(--text); }
+  .ai-msg strong { display:block; margin-bottom:4px; font-size:0.8rem; }
+  .ai-input-wrap { display:flex; gap:8px; margin-bottom:10px; }
+  .ai-input-wrap input { flex:1; background:rgba(255,255,255,0.05); border:1px solid var(--border); color:var(--text); padding:10px 14px; border-radius:8px; font-size:0.88rem; font-family:'Noto Sans KR',sans-serif; outline:none; }
+  .ai-input-wrap input:focus { border-color:var(--gold); }
+  .ai-suggestions { display:flex; flex-wrap:wrap; gap:6px; }
+  .ai-suggestions span { font-size:0.75rem; padding:5px 12px; background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.2); border-radius:16px; color:var(--gold2); cursor:pointer; transition:all 0.2s; }
+  .ai-suggestions span:hover { background:rgba(201,168,76,0.2); }
 </style>
 </head>
 <body>
@@ -1390,6 +1502,27 @@
           <label class="gender-btn" onclick="selectGenderBtn(this)"><input type="radio" name="saju-gender" value="F">여성</label>
         </div>
       </div>
+      <div class="form-row" style="margin-top:8px;">
+        <div class="form-group">
+          <label style="color:var(--jade);">결혼 여부</label>
+          <select id="saju-marital">
+            <option value="unknown">선택 안함</option>
+            <option value="single">미혼</option>
+            <option value="married">기혼</option>
+            <option value="divorced">이혼/사별</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label style="color:var(--jade);">자녀 수</label>
+          <select id="saju-children">
+            <option value="-1">선택 안함</option>
+            <option value="0">없음</option>
+            <option value="1">1명</option>
+            <option value="2">2명</option>
+            <option value="3">3명 이상</option>
+          </select>
+        </div>
+      </div>
       <button class="btn-jade" style="width:100%;margin-top:8px;" onclick="runSajuAnalysis()" data-i18n="saju_btn">사주 분석하기</button>
     </div>
 
@@ -1491,46 +1624,11 @@
 <!-- ==================== GWANSANG ==================== -->
 <section class="section" id="gwansang" style="background:linear-gradient(135deg,rgba(13,16,32,0.98) 0%,rgba(18,14,24,0.98) 100%);border-top:1px solid rgba(139,44,62,0.3);border-bottom:1px solid rgba(139,44,62,0.3);">
   <p class="section-sub reveal" style="color:var(--crimson);opacity:0.8;">&#10022; FACE READING &#10022;</p>
-  <h2 class="section-title reveal" style="color:#d4a0a0;">관상 분석 가이드</h2>
-  <p class="section-sub reveal" style="margin-bottom:40px;">자신의 이목구비 특징을 선택하면 관상학적 해석을 알려드립니다</p>
+  <h2 class="section-title reveal" style="color:#d4a0a0;">AI 관상 분석</h2>
+  <p class="section-sub reveal" style="margin-bottom:40px;">셀카 한 장으로 AI가 이목구비를 분석하여 관상학적 해석을 알려드립니다</p>
 
-  <!-- Mode Tabs -->
-  <div class="gs-mode-tabs reveal">
-    <button class="gs-mode-tab active" onclick="switchGwansangMode('manual')" id="gs-tab-manual">&#9995; 직접 선택</button>
-    <button class="gs-mode-tab" onclick="switchGwansangMode('photo')" id="gs-tab-photo">&#128247; 사진 분석</button>
-  </div>
-
-  <!-- Manual Mode (existing) -->
-  <div class="section-inner" id="gwansang-manual-mode">
-    <!-- Gender Selector -->
-    <div class="gs-composite-area" id="gwansang-composite-area">
-      <h4>&#128100; 나의 관상</h4>
-      <div class="gs-gender-selector">
-        <div class="gs-gender-card" onclick="selectGsGender('male')" id="gs-gender-male">
-          <span class="gs-gender-icon">&#128104;</span>
-          <span class="gs-gender-label">남성</span>
-        </div>
-        <div class="gs-gender-card" onclick="selectGsGender('female')" id="gs-gender-female">
-          <span class="gs-gender-icon">&#128105;</span>
-          <span class="gs-gender-label">여성</span>
-        </div>
-      </div>
-      <div class="gs-gender-placeholder" id="gs-gender-placeholder">성별을 선택해주세요</div>
-      <div class="gs-avatar-wrap" id="gs-avatar-wrap">
-        <canvas id="gs-avatar-canvas" width="300" height="400"></canvas>
-      </div>
-      <div class="gs-part-label" id="gs-composite-status">각 부위를 선택하면 관상이 완성됩니다</div>
-    </div>
-    <div class="gwansang-grid" id="gwansang-selectors">
-      <!-- Dynamically populated -->
-    </div>
-    <div id="gwansang-composite" class="hidden"></div>
-    <button class="btn-gold" style="width:100%;max-width:500px;display:block;margin:24px auto 0;" onclick="runGwansang()">관상 분석 결과 보기</button>
-    <div id="gwansang-result" class="hidden" style="margin-top:32px;"></div>
-  </div>
-
-  <!-- Photo Mode (new) -->
-  <div class="section-inner" id="gwansang-photo-mode" style="display:none;">
+  <!-- Photo Mode (default) -->
+  <div class="section-inner" id="gwansang-photo-mode">
     <div id="gs-photo-upload-area">
       <div class="gs-photo-dropzone" id="gs-dropzone" onclick="document.getElementById('gs-file-input').click();">
         <div class="drop-icon">&#128247;</div>
@@ -1966,6 +2064,27 @@
           <label class="gender-btn" onclick="selectGenderBtn(this)"><input type="radio" name="order-gender" value="F">여성</label>
         </div>
       </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>결혼 여부</label>
+          <select id="order-marital" style="width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text);padding:12px 16px;font-size:0.88rem;border-radius:6px;">
+            <option value="unknown">선택 안함</option>
+            <option value="single">미혼</option>
+            <option value="married">기혼</option>
+            <option value="divorced">이혼/사별</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>자녀 수</label>
+          <select id="order-children" style="width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text);padding:12px 16px;font-size:0.88rem;border-radius:6px;">
+            <option value="-1">선택 안함</option>
+            <option value="0">없음</option>
+            <option value="1">1명</option>
+            <option value="2">2명</option>
+            <option value="3">3명 이상</option>
+          </select>
+        </div>
+      </div>
       <div class="form-group">
         <label>추가 요청사항 (선택)</label>
         <textarea id="order-memo" rows="3" placeholder="궁금한 점이나 특별히 알고 싶은 부분을 적어주세요" style="width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text);padding:12px 16px;font-size:0.88rem;font-family:'Noto Sans KR',sans-serif;outline:none;resize:vertical;border-radius:6px;"></textarea>
@@ -2030,9 +2149,13 @@
         <strong style="color:var(--gold2);">24시간 이내</strong>에 입력하신 이메일로 발송해 드립니다.
       </p>
       <div id="payment-receipt" style="background:rgba(0,0,0,0.3);border-radius:10px;padding:16px;margin:20px 0;text-align:left;font-size:0.82rem;color:var(--text2);"></div>
-      <button class="btn-outline" onclick="closePaymentSuccess()" style="font-size:0.85rem;padding:12px 32px;">확인</button>
+      <button class="btn-gold" onclick="showPremiumResult()" style="font-size:0.85rem;padding:12px 32px;">📜 상세 풀이 결과 보기</button>
+      <button class="btn-outline" onclick="closePaymentSuccess()" style="font-size:0.85rem;padding:12px 32px;margin-left:8px;">닫기</button>
     </div>
   </div>
+
+  <!-- 유료 풀이 결과 -->
+  <div id="premium-result" style="display:none;max-width:900px;margin:32px auto 0;"></div>
 </section>
 
 <div class="divider"><div class="divider-icon">&#9775;</div></div>
@@ -2138,7 +2261,9 @@
 </div>
 
 <!-- SCRIPTS -->
-<script src="js/saju-engine.js"></script>
+<script src="js/saju-engine.js?v=20260414c"></script>
+<script src="js/premium-saju.js?v=20260414c"></script>
+<script src="js/premium-render.js?v=20260414c"></script>
 <script>
 // Global scope (no IIFE)
 
@@ -2224,6 +2349,8 @@
     const year = parseInt(parts[0]), month = parseInt(parts[1]), day = parseInt(parts[2]);
     const hour = parseInt(document.getElementById('saju-hour').value);
     const gender = document.querySelector('input[name="saju-gender"]:checked').value;
+    const marital = document.getElementById('saju-marital').value;
+    const children = parseInt(document.getElementById('saju-children').value);
 
     if (year < 1920 || year > 2050) { showModal('알림', '1920~2050년 사이의 생년월일을 입력해 주세요.'); return; }
 
@@ -2234,8 +2361,82 @@
       showModal('오류', '사주 분석 중 오류가 발생했습니다: ' + e.message); return;
     }
 
+    // 사용자 상태 정보 추가
+    result._userContext = { marital: marital, children: children, gender: gender };
+
     renderSajuResult(result);
   };
+
+  // ─── 기혼/이혼자용 해석 변환 함수 ───
+  function adaptLoveStyleForMarried(originalText, uctx) {
+    // 미혼 전제 텍스트를 기혼자 맥락으로 변환
+    var text = originalText;
+    text = text.replace(/사랑에 빠지면/g, '배우자와의 관계에서');
+    text = text.replace(/한번 사랑하면/g, '결혼 생활에서');
+    text = text.replace(/좋아하면 주저 없이 다가가며/g, '가정에 대한 책임감이 강하며');
+    text = text.replace(/다양한 사람에게 관심을 보이며/g, '폭넓은 인간관계를 유지하며');
+    text = text.replace(/자유로운 연애를 선호합니다/g, '배우자에게 자유로운 분위기를 제공합니다');
+    text = text.replace(/연인에게/g, '배우자에게');
+    text = text.replace(/상대방/g, '배우자');
+
+    var extra = '';
+    if (uctx.children > 0) {
+      var childText = uctx.children >= 3 ? '3명 이상의' : uctx.children + '명의';
+      extra = ' 자녀 ' + childText + ' 자녀를 둔 가정으로서, 자녀 교육과 가정의 안정에 큰 에너지를 쏟는 시기입니다.';
+    }
+    return text + extra;
+  }
+
+  function adaptLoveStyleForDivorced(originalText) {
+    return '이전 관계에서의 경험이 내면의 성숙을 가져왔습니다. ' + originalText + ' 새로운 인연에서는 과거의 교훈을 바탕으로 더 깊고 안정적인 관계를 만들 수 있습니다.';
+  }
+
+  // 십신 기반 연애/결혼운 해석 — 기혼/미혼 분기
+  function getSipsinLoveReading(sipsinList, uctx) {
+    var isMarried = uctx.marital === 'married';
+    var isMale = uctx.gender === 'M';
+
+    // 남자: 정재=아내, 편재=애인/여자인연
+    // 여자: 정관=남편, 편관=남자인연
+    var spouseStar = isMale ? '정재' : '정관';
+    var loverStar = isMale ? '편재' : '편관';
+
+    var hasSpouse = sipsinList.some(function(s) { return s.천간.십신 === spouseStar || s.지지.십신 === spouseStar; });
+    var hasLover = sipsinList.some(function(s) { return s.천간.십신 === loverStar || s.지지.십신 === loverStar; });
+
+    if (isMarried) {
+      if (hasSpouse && !hasLover) {
+        return '배우자와의 인연이 깊고 안정적인 사주입니다. 가정 내 화합이 잘 이루어지며, 서로에 대한 신뢰가 굳건합니다.';
+      } else if (hasSpouse && hasLover) {
+        return '배우자운이 있으면서 대인관계도 넓은 사주입니다. 가정을 지키면서도 사회적 활동이 활발합니다. 배우자와의 소통에 더 신경 쓰면 더욱 좋은 관계를 유지할 수 있습니다.';
+      } else if (!hasSpouse && hasLover) {
+        return '현재 부부 관계에서 변화의 기운이 감지됩니다. 이는 위기가 아니라 관계를 재정립하는 시기입니다. 배우자와 깊은 대화를 나누고, 함께하는 시간을 늘리면 관계가 더욱 돈독해집니다.';
+      } else {
+        return '현재 가정운이 잠시 소강 상태입니다. 이는 인연이 없다는 뜻이 아니라, 부부 각자가 개인적 성장에 집중하는 시기를 의미합니다. 서로의 공간을 존중하면서도 작은 관심 표현을 잊지 마세요.';
+      }
+    } else if (uctx.marital === 'divorced') {
+      if (hasSpouse || hasLover) {
+        return '새로운 인연을 만날 가능성이 높은 사주입니다. 과거의 경험이 더 성숙한 관계를 만드는 밑거름이 됩니다. 마음을 열고 새로운 만남에 적극적으로 임하세요.';
+      } else {
+        return '지금은 자기 자신을 돌보고 내면을 성숙시키는 시기입니다. 억지로 인연을 찾기보다 자연스러운 만남을 기다리세요. 준비된 사람에게 좋은 인연이 찾아옵니다.';
+      }
+    } else {
+      // 미혼 또는 미선택
+      if (hasSpouse) {
+        return '배우자운이 뚜렷한 사주입니다. 안정적이고 좋은 인연을 만날 가능성이 높습니다.';
+      } else if (hasLover) {
+        return '이성 인연이 많은 사주입니다. 다만 진지한 관계로 발전시키려면 신중한 선택이 필요합니다.';
+      } else {
+        return '현재는 이성운보다 자기 발전에 집중하는 시기입니다. 때가 되면 좋은 인연이 자연스럽게 찾아옵니다.';
+      }
+    }
+  }
+
+  function buildLoveCard(r, uctx, isMarried, isDivorced) {
+    var loveReading = getSipsinLoveReading(r.십신, uctx);
+    var loveTitle = isMarried ? '💑 부부운 · 가정운' : isDivorced ? '💕 새 인연운' : '💕 연애 · 결혼운';
+    return '<div class="result-card"><h4>' + loveTitle + '</h4><p style="line-height:1.8;">' + loveReading + '</p></div>';
+  }
 
   function renderSajuResult(r) {
     const el = document.getElementById('saju-result');
@@ -2245,6 +2446,13 @@
     const saju = r.사주;
     const pillars = ['년주', '월주', '일주', '시주'];
 
+    // 사용자 상태 정보
+    const uctx = r._userContext || { marital: 'unknown', children: -1, gender: 'M' };
+    const isMarried = uctx.marital === 'married';
+    const isDivorced = uctx.marital === 'divorced';
+    const isSingle = uctx.marital === 'single';
+    const hasChildren = uctx.children > 0;
+
     // Day stem personality from knowledge
     let personalityHTML = '';
     if (KD && KD.saju && KD.saju.day_stem_personality) {
@@ -2252,6 +2460,18 @@
       const stemKey = stemMap[r.기본정보.일간.글자];
       if (stemKey && KD.saju.day_stem_personality[stemKey]) {
         const p = KD.saju.day_stem_personality[stemKey];
+
+        // 기혼/미혼에 따라 연애 섹션 라벨과 내용 변경
+        let loveLabel = '연애 스타일';
+        let loveContent = p.love_style;
+        if (isMarried) {
+          loveLabel = '부부 관계 & 가정운';
+          loveContent = adaptLoveStyleForMarried(p.love_style, uctx);
+        } else if (isDivorced) {
+          loveLabel = '새 인연 & 관계운';
+          loveContent = adaptLoveStyleForDivorced(p.love_style);
+        }
+
         personalityHTML = `
           <div class="result-card">
             <h4>${p.name} (${p.hanja}) - 기본 성격</h4>
@@ -2266,8 +2486,8 @@
                 <ul>${p.weaknesses.map(s => '<li>' + s + '</li>').join('')}</ul>
               </div>
               <div>
-                <strong style="color:#d4a0a0;font-size:0.82rem;">연애 스타일</strong>
-                <p style="margin-top:4px;">${p.love_style}</p>
+                <strong style="color:#d4a0a0;font-size:0.82rem;">${loveLabel}</strong>
+                <p style="margin-top:4px;">${loveContent}</p>
               </div>
             </div>
           </div>`;
@@ -2392,6 +2612,9 @@
       <!-- Yongshin -->
       ${yongshinHTML}
 
+      <!-- 연애/결혼운 분석 (기혼/미혼 맥락 반영) -->
+      ${buildLoveCard(r, uctx, isMarried, isDivorced)}
+
       <!-- Interactions -->
       ${interHTML}
 
@@ -2403,6 +2626,12 @@
         <h4>더 깊은 분석을 원하시나요?</h4>
         <p>상세 사주 풀이에서는 대운/세운/월운 흐름, 직업적성, 재물운, 결혼/연애운, 건강운, 올해의 운세까지 A4 5장 이상의 분량으로 심층 분석해 드립니다.</p>
         <button class="btn-gold" onclick="openOrder('사주 상세 풀이', 29900)" style="font-size:0.85rem;padding:12px 32px;">사주 상세 풀이 신청 (29,900원)</button>
+      </div>
+      <!-- 쿠팡 파트너스 추천 -->
+      <div style="margin-top:24px;padding:20px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:12px;">
+        <p style="font-size:0.8rem;color:var(--gold2);font-weight:600;margin-bottom:10px;">📖 사주 공부에 도움 되는 추천 도서</p>
+        <a href="https://link.coupang.com/a/emjC0T&subId=cheonmyeongdang" target="_blank" rel="noopener" style="display:block;padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;margin-bottom:6px;font-size:0.78rem;color:var(--text);text-decoration:none;">명리학 입문 · 사주팔자 베스트셀러 보러가기 →</a>
+        <p style="font-size:0.65rem;color:var(--text2);margin-top:8px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
       </div>
     `;
 
@@ -2485,6 +2714,11 @@
         <h4>상세 궁합 분석을 원하시나요?</h4>
         <p>합/충 관계, 대운 흐름 비교, 시기별 궁합 변화까지 심층 분석해 드립니다.</p>
         <button class="btn-gold" onclick="openOrder('궁합 상세 분석', 9900)" style="font-size:0.85rem;padding:10px 28px;">궁합 상세 분석 신청 (9,900원)</button>
+      </div>
+      <div style="margin-top:24px;padding:20px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:12px;">
+        <p style="font-size:0.8rem;color:var(--gold2);font-weight:600;margin-bottom:10px;">📖 궁합·연애운 추천 도서</p>
+        <a href="https://link.coupang.com/a/emjC0T&subId=cheonmyeongdang" target="_blank" rel="noopener" style="display:block;padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;margin-bottom:6px;font-size:0.78rem;color:var(--text);text-decoration:none;">궁합·연애운 명리학 베스트셀러 보러가기 →</a>
+        <p style="font-size:0.65rem;color:var(--text2);margin-top:8px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
       </div>`;
 
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -3910,6 +4144,8 @@
     var hour = document.getElementById('order-hour').value;
     var gender = document.querySelector('input[name="order-gender"]:checked').value;
     var memo = document.getElementById('order-memo').value;
+    var marital = document.getElementById('order-marital').value;
+    var children = document.getElementById('order-children').value;
     var agree = document.getElementById('order-agree').checked;
 
     // 유효성 검사
@@ -3929,7 +4165,7 @@
       serviceName: currentOrder.serviceName,
       price: currentOrder.price,
       name: name, phone: phone, email: email,
-      birth: birth, hour: hour, gender: gender, memo: memo,
+      birth: birth, hour: hour, gender: gender, marital: marital, children: children, memo: memo,
       method: selectedPayMethod,
       status: 'pending',
       createdAt: new Date().toISOString()
@@ -4028,6 +4264,155 @@
   window.closePaymentSuccess = function() {
     document.getElementById('payment-success').classList.add('hidden');
     document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // 유료 상세 풀이 결과 보기
+  window.showPremiumResult = function() {
+    var orderData = JSON.parse(localStorage.getItem('cm_current_order') || '{}');
+    if (!orderData.birth) { showModal('알림', '주문 정보를 찾을 수 없습니다.'); return; }
+
+    var parts = orderData.birth.split('-');
+    var year = parseInt(parts[0]), month = parseInt(parts[1]), day = parseInt(parts[2]);
+    var hour = parseInt(orderData.hour || '-1');
+    var gender = orderData.gender || 'M';
+    var userCtx = {
+      marital: orderData.marital || 'unknown',
+      children: parseInt(orderData.children || '-1'),
+      gender: gender
+    };
+
+    if (typeof PremiumSaju === 'undefined' || typeof PremiumRender === 'undefined') {
+      showModal('알림', '풀이 엔진을 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
+      return;
+    }
+
+    var report = PremiumSaju.generateReport(year, month, day, hour, gender, userCtx);
+    _lastReport = report;
+    PremiumRender.render(report, 'premium-result');
+
+    document.getElementById('payment-success').classList.add('hidden');
+    document.getElementById('premium-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // PDF 다운로드
+  window.downloadPremiumPDF = function() {
+    var el = document.getElementById('premium-result');
+    if (!el || el.style.display === 'none') { showModal('알림', '풀이 결과가 없습니다.'); return; }
+
+    // html2pdf.js 동적 로드
+    if (typeof html2pdf === 'undefined') {
+      var script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+      script.onload = function() { doDownloadPDF(el); };
+      document.head.appendChild(script);
+    } else {
+      doDownloadPDF(el);
+    }
+  };
+
+  function doDownloadPDF(el) {
+    var opt = {
+      margin: [10, 10, 10, 10],
+      filename: '천명당_사주상세풀이_' + new Date().toISOString().split('T')[0] + '.pdf',
+      image: { type: 'jpeg', quality: 0.95 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#0d1020' },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    };
+    html2pdf().set(opt).from(el).save();
+  }
+
+  // AI 사주 상담 (로컬 기반)
+  var _lastReport = null;
+  var _origTestPremium = null;
+
+  window.askAiSajuPreset = function(el) {
+    document.getElementById('ai-chat-input').value = el.textContent;
+    askAiSaju();
+  };
+
+  window.askAiSaju = function() {
+    var input = document.getElementById('ai-chat-input');
+    var q = input.value.trim();
+    if (!q) return;
+    input.value = '';
+
+    var msgs = document.getElementById('ai-chat-messages');
+    msgs.innerHTML += '<div class="ai-msg user"><strong>나:</strong> ' + q + '</div>';
+
+    var report = _lastReport;
+    if (!report) { msgs.innerHTML += '<div class="ai-msg bot">사주 데이터를 불러올 수 없습니다.</div>'; return; }
+
+    var answer = generateAiAnswer(q, report);
+    msgs.innerHTML += '<div class="ai-msg bot"><strong>🔮 천명당 AI:</strong> ' + answer + '</div>';
+    msgs.scrollTop = msgs.scrollHeight;
+  };
+
+  function generateAiAnswer(question, r) {
+    var q = question.toLowerCase();
+    var yongshin = r.yongshin.용신;
+    var ilgan = r.ilganDetail;
+    var yearly = r.yearlyDetail;
+    var lc = r.luckyCodi;
+    var isMarried = r.userContext && r.userContext.marital === 'married';
+
+    // 이직/직업
+    if (q.indexOf('이직') >= 0 || q.indexOf('직업') >= 0 || q.indexOf('직장') >= 0 || q.indexOf('취업') >= 0) {
+      var careerSipsin = yearly.십신;
+      if (['정관','편관','정재'].indexOf(careerSipsin) >= 0) {
+        return '올해 세운이 ' + careerSipsin + '으로, 직장/조직 내에서 인정받는 해입니다. 이직보다는 현 직장에서의 성장에 집중하는 것이 유리합니다. 다만 좋은 기회가 오면 ' + lc.direction + ' 방향의 회사를 눈여겨보세요.';
+      } else if (['상관','편재'].indexOf(careerSipsin) >= 0) {
+        return '올해 ' + careerSipsin + '운이 돌고 있어, 새로운 도전이나 이직에 유리한 해입니다. 특히 ' + (ilgan.career || '전문직') + ' 관련 분야를 추천합니다. 행운 방위(' + lc.direction + ')에 위치한 회사가 좋습니다.';
+      }
+      return '당신의 사주에서 ' + (ilgan.career || '다양한 분야') + '이 적합합니다. 올해 세운(' + careerSipsin + ')을 고려하면, 충분한 준비 후 움직이는 것이 좋습니다.';
+    }
+
+    // 재물/돈
+    if (q.indexOf('재물') >= 0 || q.indexOf('돈') >= 0 || q.indexOf('투자') >= 0 || q.indexOf('부업') >= 0 || q.indexOf('수입') >= 0) {
+      return '용신이 ' + yongshin + '이므로, ' + lc.lucky_colors.colors[0] + ' 계열의 지갑을 사용하고 ' + lc.direction + ' 방향에서 재물 기운을 받으세요. ' + (ilgan.wealth || '전문성 기반 수입이 유리합니다.') + ' 행운 숫자 ' + lc.numbers.join(',') + '을 활용하세요.';
+    }
+
+    // 건강
+    if (q.indexOf('건강') >= 0 || q.indexOf('아프') >= 0 || q.indexOf('병') >= 0 || q.indexOf('운동') >= 0) {
+      var healthAdvice = (ilgan.health_tip || '규칙적 운동을 추천합니다.');
+      var foods = lc.foods.length > 0 ? lc.foods[0] : '제철 음식';
+      return healthAdvice + ' 보양 음식으로는 ' + foods + '이 좋습니다. ' + (r.health.length > 0 ? r.health[0].advice : '전반적으로 건강에 유의하세요.');
+    }
+
+    // 부부/결혼/연애
+    if (q.indexOf('부부') >= 0 || q.indexOf('결혼') >= 0 || q.indexOf('연애') >= 0 || q.indexOf('배우자') >= 0 || q.indexOf('이혼') >= 0) {
+      if (isMarried) {
+        return '기혼자로서 현재 대운의 흐름을 보면, 배우자와의 관계에서 소통이 핵심입니다. ' + lc.lucky_colors.colors[0] + ' 계열의 침구류나 인테리어가 가정 화합에 도움됩니다. 매월 ' + r.monthlyFortunes[0].lucky_day + '일처럼 길일에 함께 시간을 보내세요.';
+      }
+      return '연애운을 높이려면 ' + lc.direction + ' 방향으로 외출하거나, ' + lc.lucky_colors.colors[0] + ' 계열 옷을 입어보세요. 올해 세운(' + yearly.십신 + ')이 인연에 영향을 미칩니다.';
+    }
+
+    // 적성/부업
+    if (q.indexOf('적성') >= 0 || q.indexOf('사업') >= 0 || q.indexOf('창업') >= 0) {
+      return '당신의 일간(' + (ilgan.nature || '') + ')에 적합한 분야: ' + (ilgan.career || '전문직') + '. 용신(' + yongshin + ') 기운을 활용한 사업이 유리합니다.';
+    }
+
+    // 올해 운
+    if (q.indexOf('올해') >= 0 || q.indexOf('2026') >= 0 || q.indexOf('신년') >= 0) {
+      return '올해 세운은 ' + yearly.간지 + '(' + yearly.한자 + ')년, 십신 ' + yearly.십신 + '입니다. ' + (yearly.detail.career || '좋은 기회가 있습니다.') + ' 행운색(' + lc.lucky_colors.colors[0] + ')과 행운 방위(' + lc.direction + ')를 활용하세요.';
+    }
+
+    // 자녀
+    if (q.indexOf('자녀') >= 0 || q.indexOf('아이') >= 0 || q.indexOf('교육') >= 0) {
+      return '시주의 기운을 보면, 자녀에게는 독립심을 키워주는 교육이 중요합니다. 각 자녀의 사주를 별도로 분석하면 맞춤 교육 방향을 찾을 수 있습니다. 자녀와의 소통 시간을 정기적으로 마련하세요.';
+    }
+
+    // 기본 응답
+    return '용신 ' + yongshin + '을 보강하는 것이 핵심입니다. 행운색(' + lc.lucky_colors.colors.join('/') + '), 행운 방위(' + lc.direction + '), 행운 숫자(' + lc.numbers.join(',') + ')를 일상에서 활용해보세요. 더 구체적인 질문을 해주시면 상세하게 답변드리겠습니다.';
+  }
+
+  // 테스트용: 결제 없이 상세 풀이 미리보기
+  window.testPremiumResult = function(year, month, day, hour, gender, marital, children) {
+    var userCtx = { marital: marital || 'unknown', children: children || -1, gender: gender || 'M' };
+    var report = PremiumSaju.generateReport(year, month, day, hour, gender, userCtx);
+    _lastReport = report;
+    PremiumRender.render(report, 'premium-result');
+    document.getElementById('premium-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   // 결제 성공 페이지에서 호출 (success.html에서 리다이렉트 시)
@@ -5237,21 +5622,9 @@
 var KD = window.KD; // reference from main script block
 
 window.switchGwansangMode = function(mode) {
-  const manualEl = document.getElementById('gwansang-manual-mode');
-  const photoEl = document.getElementById('gwansang-photo-mode');
-  const tabManual = document.getElementById('gs-tab-manual');
-  const tabPhoto = document.getElementById('gs-tab-photo');
-  if (mode === 'photo') {
-    manualEl.style.display = 'none';
-    photoEl.style.display = 'block';
-    tabManual.classList.remove('active');
-    tabPhoto.classList.add('active');
-  } else {
-    manualEl.style.display = 'block';
-    photoEl.style.display = 'none';
-    tabManual.classList.add('active');
-    tabPhoto.classList.remove('active');
-  }
+  // 사진 분석만 사용 (직접 선택 모드 제거됨)
+  var photoEl = document.getElementById('gwansang-photo-mode');
+  if (photoEl) photoEl.style.display = 'block';
 };
 
 // Drag and drop

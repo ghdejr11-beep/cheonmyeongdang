@@ -956,6 +956,16 @@ function saveProfile() {
 }
 
 loadProfile();
+
+// 쿠팡 파트너스 추천 삽입 (세금·절세 도서)
+(function(){
+  var banner = document.createElement('div');
+  banner.style.cssText = 'max-width:480px;margin:24px auto;padding:20px;background:#f8f9fa;border:1px solid #e2e8f0;border-radius:12px;text-align:center;font-family:sans-serif;';
+  banner.innerHTML = '<p style="font-size:0.85rem;font-weight:600;color:#2d3748;margin-bottom:10px;">📚 종소세 시즌 필독서</p>'
+    + '<a href="https://link.coupang.com/a/emjC0T&subId=taxnbenefit" target="_blank" rel="noopener" style="display:block;padding:12px;background:#fff;border:1px solid #cbd5e0;border-radius:8px;font-size:0.8rem;color:#2d3748;text-decoration:none;margin-bottom:8px;">절세·세무 베스트셀러 보러가기 →</a>'
+    + '<p style="font-size:0.6rem;color:#a0aec0;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>';
+  document.body.appendChild(banner);
+})();
 </script>
 </body>
 </html>
