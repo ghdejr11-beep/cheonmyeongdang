@@ -1,0 +1,80 @@
+[
+  {
+    "id": "saju-tracker",
+    "name_kr": "사주 운세 트래커",
+    "name_en": "Saju Fortune Tracker",
+    "price_usd": 9,
+    "price_krw": 12900,
+    "category": "Lifestyle",
+    "tags": [
+      "사주",
+      "운세",
+      "명리학",
+      "자기계발",
+      "fortune",
+      "astrology"
+    ]
+  },
+  {
+    "id": "tax-planner",
+    "name_kr": "프리랜서 종소세 플래너",
+    "name_en": "Freelancer Tax Planner",
+    "price_usd": 14,
+    "price_krw": 19900,
+    "category": "Finance",
+    "tags": [
+      "세금",
+      "종소세",
+      "프리랜서",
+      "절세",
+      "tax",
+      "freelancer"
+    ]
+  },
+  {
+    "id": "insurance-manager",
+    "name_kr": "보험 관리 대시보드",
+    "name_en": "Insurance Dashboard",
+    "price_usd": 9,
+    "price_krw": 12900,
+    "category": "Finance",
+    "tags": [
+      "보험",
+      "재테크",
+      "가계부",
+      "insurance",
+      "finance"
+    ]
+  },
+  {
+    "id": "ai-side-hustle",
+    "name_kr": "AI 부업 100일 플래너",
+    "name_en": "AI Side Hustle 100-Day Planner",
+    "price_usd": 19,
+    "price_krw": 24900,
+    "category": "Business",
+    "tags": [
+      "AI",
+      "부업",
+      "사이드허슬",
+      "ChatGPT",
+      "수익화",
+      "side hustle"
+    ]
+  },
+  {
+    "id": "soho-dashboard",
+    "name_kr": "1인사업자 올인원 대시보드",
+    "name_en": "Solopreneur All-in-One Dashboard",
+    "price_usd": 24,
+    "price_krw": 34900,
+    "category": "Business",
+    "tags": [
+      "1인사업자",
+      "소상공인",
+      "대시보드",
+      "business",
+      "solopreneur"
+    ]
+  }
+]
