@@ -1989,19 +1989,46 @@
     </div>
   </div>
 
-  <!-- 카카오 채널 구독 (월정액) -->
-  <div style="max-width:700px;margin:48px auto 0;padding:28px;background:linear-gradient(135deg,#FEE500 0%,#FFEB3B 100%);border-radius:16px;text-align:center;color:#3C1E1E;box-shadow:0 12px 40px rgba(254,229,0,0.2);">
-    <div style="font-size:0.7rem;letter-spacing:0.2em;margin-bottom:8px;font-weight:700;">⭐ KAKAOTALK CHANNEL ⭐</div>
-    <h3 style="font-family:'Noto Serif KR',serif;font-size:1.5rem;margin-bottom:10px;font-weight:700;">매일 아침 운세 카톡 구독</h3>
-    <p style="font-size:0.85rem;margin-bottom:18px;line-height:1.7;">
-      매일 아침 7시, <strong>나만의 맞춤 운세</strong>를 카톡으로 받아보세요<br>
-      재물·연애·건강·행운 색상까지 한 번에!
+  <!-- 무제한 프리미엄 구독 (NEW) -->
+  <div style="max-width:700px;margin:48px auto 0;padding:32px;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(139,44,62,0.2));border:2px solid var(--gold);border-radius:20px;text-align:center;color:var(--text);box-shadow:0 16px 48px rgba(201,168,76,0.15);position:relative;">
+    <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:#080a10;padding:6px 20px;border-radius:20px;font-size:0.7rem;font-weight:800;letter-spacing:0.15em;">🏆 BEST VALUE</div>
+    <div style="font-size:0.7rem;letter-spacing:0.2em;margin:12px 0 8px;color:var(--gold2);font-weight:700;">UNLIMITED PREMIUM</div>
+    <h3 style="font-family:'Noto Serif KR',serif;font-size:1.6rem;margin-bottom:12px;font-weight:700;color:var(--gold2);">무제한 사주 구독권</h3>
+    <p style="font-size:0.9rem;margin-bottom:20px;line-height:1.7;color:var(--text);">
+      <strong>상세 사주 풀이 · 궁합 분석 · 신년운세</strong><br>
+      월 횟수 제한 없이 <strong>전 기능 무제한</strong> 이용
     </p>
-    <div style="margin:16px 0;">
-      <span style="font-size:1.6rem;font-weight:900;">월 4,900원</span>
-      <span style="font-size:0.78rem;text-decoration:line-through;opacity:0.6;margin-left:8px;">월 9,900원</span>
+    <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:16px;margin:16px auto;max-width:400px;text-align:left;">
+      <div style="font-size:0.85rem;padding:4px 0;color:var(--text);">✓ 사주 상세 풀이 무제한 (정가 29,900원×N)</div>
+      <div style="font-size:0.85rem;padding:4px 0;color:var(--text);">✓ 궁합 상세 분석 무제한 (정가 9,900원×N)</div>
+      <div style="font-size:0.85rem;padding:4px 0;color:var(--text);">✓ 매일 아침 카톡 맞춤 운세</div>
+      <div style="font-size:0.85rem;padding:4px 0;color:var(--text);">✓ 신년운세 · 대운 흐름 분석</div>
+      <div style="font-size:0.85rem;padding:4px 0;color:var(--text);">✓ 광고 없음, 언제든 해지 가능</div>
     </div>
-    <button onclick="alert('카카오톡 채널 구독 기능은 준비 중입니다.')" style="background:#3C1E1E;color:#FEE500;border:none;padding:14px 32px;font-size:0.9rem;font-weight:700;border-radius:8px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">💬 채널 추가하고 구독</button>
+    <div style="margin:20px 0;">
+      <span style="font-size:0.85rem;color:var(--text2);text-decoration:line-through;">단건 총 49,700원</span>
+      <div style="font-size:2.2rem;font-weight:900;color:var(--gold2);margin-top:4px;">월 9,900원</div>
+      <div style="font-size:0.78rem;color:var(--jade);margin-top:4px;">첫 7일 무료 체험 · 언제든 해지</div>
+    </div>
+    <button onclick="openOrder('무제한 사주 구독권', 9900)" style="background:linear-gradient(135deg,var(--gold),var(--gold2));color:#080a10;border:none;padding:16px 40px;font-size:1rem;font-weight:800;border-radius:10px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;box-shadow:0 4px 16px rgba(201,168,76,0.3);">💎 구독 시작하기</button>
+
+    <!-- 런칭 이벤트: 10명 초대 = 첫달 무료 -->
+    <div style="margin-top:18px;padding:16px;background:linear-gradient(135deg,rgba(231,76,60,0.15),rgba(139,44,62,0.2));border:1px dashed #e74c3c;border-radius:12px;">
+      <div style="font-size:0.72rem;color:#e74c3c;font-weight:800;letter-spacing:0.15em;margin-bottom:6px;">🎁 런칭 이벤트</div>
+      <div style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:4px;">10명 초대하면 첫 달 무료!</div>
+      <div style="font-size:0.78rem;color:var(--text2);line-height:1.6;">친구·가족 10명에게 천명당 추천 링크를 공유하면<br>구독료 9,900원이 <strong style="color:var(--jade);">100% 환급</strong>됩니다.</div>
+      <button id="inviteBtn" onclick="showInviteModal()" style="margin-top:10px;background:transparent;border:1.5px solid #e74c3c;color:#e74c3c;padding:8px 20px;font-size:0.8rem;font-weight:700;border-radius:8px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">내 초대 링크 받기 →</button>
+    </div>
+  </div>
+
+  <!-- 카카오 채널 구독 (저가 옵션) -->
+  <div style="max-width:700px;margin:24px auto 0;padding:20px;background:linear-gradient(135deg,#FEE500 0%,#FFEB3B 100%);border-radius:14px;text-align:center;color:#3C1E1E;">
+    <h4 style="font-family:'Noto Serif KR',serif;font-size:1rem;margin-bottom:6px;font-weight:700;">💬 카톡 채널만 구독 (기본)</h4>
+    <p style="font-size:0.78rem;margin-bottom:10px;">매일 아침 7시 카톡 운세만 받기</p>
+    <div style="margin:8px 0;">
+      <span style="font-size:1.2rem;font-weight:900;">월 4,900원</span>
+    </div>
+    <button onclick="alert('카카오톡 채널 구독 기능은 준비 중입니다.')" style="background:#3C1E1E;color:#FEE500;border:none;padding:10px 24px;font-size:0.85rem;font-weight:700;border-radius:8px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">💬 카톡만 구독</button>
   </div>
 
   <!-- ORDER FORM -->
@@ -6422,5 +6449,197 @@ function resetComplaintForm() {
     <div style="margin-top:8px;color:#555;">© 2026 쿤스튜디오. All rights reserved.</div>
   </div>
 </footer>
+
+<!-- ===== 초대 모달 ===== -->
+<div id="inviteOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)closeInviteModal()">
+  <div style="background:linear-gradient(135deg,rgba(13,16,32,0.98),rgba(20,20,40,0.98));border:1px solid var(--gold);border-radius:20px;max-width:480px;width:100%;padding:32px 24px;color:var(--text);position:relative;">
+    <button onclick="closeInviteModal()" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);border:0;color:var(--text);font-size:18px;cursor:pointer;">×</button>
+    <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--gold2);font-weight:700;margin-bottom:8px;">🎁 INVITE 10 = FREE MONTH</div>
+    <h3 style="font-family:'Noto Serif KR',serif;font-size:1.4rem;color:var(--gold2);margin-bottom:12px;">10명 초대하고 첫 달 무료</h3>
+    <p style="font-size:0.85rem;color:var(--text2);line-height:1.7;margin-bottom:18px;">
+      아래 초대 링크를 친구·가족 10명에게 공유하세요.<br>
+      10명이 가입하면 구독료 9,900원 전액 환급됩니다.
+    </p>
+    <div id="inviteProgress" style="background:rgba(255,255,255,0.05);border-radius:12px;padding:16px;margin-bottom:16px;">
+      <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-bottom:8px;">
+        <span style="color:var(--text2);">내 초대 실적</span>
+        <span style="color:var(--gold2);font-weight:700;"><span id="inviteCount">0</span> / 10명</span>
+      </div>
+      <div style="background:rgba(255,255,255,0.05);height:8px;border-radius:4px;overflow:hidden;">
+        <div id="inviteBar" style="background:linear-gradient(90deg,var(--gold),var(--gold2));height:100%;width:0%;transition:width .3s;"></div>
+      </div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="display:block;font-size:0.8rem;color:var(--text2);margin-bottom:6px;">내 이메일 (초대 실적 추적용)</label>
+      <input id="inviterEmail" type="email" placeholder="example@email.com" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;box-sizing:border-box;" />
+    </div>
+    <div id="inviteLinkBox" style="display:none;margin-bottom:14px;">
+      <label style="display:block;font-size:0.8rem;color:var(--text2);margin-bottom:6px;">내 초대 링크</label>
+      <div style="display:flex;gap:8px;">
+        <input id="inviteLink" readonly style="flex:1;padding:12px 14px;background:rgba(201,168,76,0.1);border:1px solid var(--gold);border-radius:8px;color:var(--gold2);font-family:inherit;font-size:0.8rem;" />
+        <button onclick="copyInviteLink()" style="background:var(--gold);color:#080a10;border:0;padding:0 16px;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit;">복사</button>
+      </div>
+    </div>
+    <button id="genInviteBtn" onclick="generateInviteLink()" style="width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#080a10;border:0;border-radius:10px;font-size:0.95rem;font-weight:800;cursor:pointer;font-family:inherit;">초대 링크 생성 →</button>
+    <div style="display:flex;gap:8px;margin-top:12px;">
+      <button id="shareKakao" style="flex:1;padding:10px;background:#FEE500;color:#3C1E1E;border:0;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit;font-size:0.85rem;" onclick="shareToKakao()">💬 카톡으로 공유</button>
+      <button style="flex:1;padding:10px;background:rgba(255,255,255,0.1);color:var(--text);border:1px solid var(--border);border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit;font-size:0.85rem;" onclick="shareNative()">📤 더보기</button>
+    </div>
+    <p style="font-size:0.68rem;color:var(--text2);margin-top:14px;line-height:1.5;text-align:center;">
+      가입 후 7일 내 구독 결제 완료 시 실적 1건으로 집계됩니다.<br>
+      10명 달성 확인 후 7일 이내 구독료가 환급됩니다.
+    </p>
+  </div>
+</div>
+
+<script>
+  window.showInviteModal = function(){
+    document.getElementById('inviteOverlay').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    // localStorage에서 초대 현황 복원
+    const rec = JSON.parse(localStorage.getItem('cmd_invite') || '{}');
+    if (rec.email) {
+      document.getElementById('inviterEmail').value = rec.email;
+      showInviteLink(rec.code);
+      updateProgress(rec.count || 0);
+    }
+  };
+  window.closeInviteModal = function(){
+    document.getElementById('inviteOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+  };
+  window.generateInviteLink = function(){
+    const email = document.getElementById('inviterEmail').value.trim().toLowerCase();
+    if (!email || !email.includes('@')) { alert('이메일을 정확히 입력해주세요.'); return; }
+
+    // 자기 초대 방지: 현재 브라우저에 타인 초대 코드가 있으면, 초대자가 본인일 수 없음
+    const receivedRef = localStorage.getItem('cmd_ref');
+    if (receivedRef) {
+      // 이 브라우저는 이미 누군가의 초대를 받은 상태.
+      // 같은 사람이 초대자·피초대자로 동시에 활동 불가
+      const confirmed = confirm(
+        '이 브라우저는 이미 다른 분의 초대를 받았습니다.\n' +
+        '동일 인물이 본인을 초대할 수 없습니다.\n' +
+        '그래도 초대 링크를 만드시겠습니까? (이 경우 기존 추천 실적 무효)'
+      );
+      if (!confirmed) return;
+      localStorage.removeItem('cmd_ref');
+    }
+
+    // 간단한 코드 생성 (이메일 해시)
+    let h = 0;
+    for (let i = 0; i < email.length; i++) h = ((h << 5) - h) + email.charCodeAt(i);
+    const code = 'CMD' + Math.abs(h).toString(36).toUpperCase().substring(0, 6);
+    localStorage.setItem('cmd_invite', JSON.stringify({email, code, count: 0}));
+    showInviteLink(code);
+    // notify.js로 등록 알림 (선택)
+    try {
+      fetch('https://tax-n-benefit-api.vercel.app/api/notify', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({type: 'preregister', email, source: 'cheonmyeongdang-invite', job: 'etc'})
+      });
+    } catch(e) {}
+  };
+  function showInviteLink(code){
+    const link = 'https://ghdejr11-beep.github.io/cheonmyeongdang/?ref=' + code;
+    document.getElementById('inviteLink').value = link;
+    document.getElementById('inviteLinkBox').style.display = 'block';
+    document.getElementById('genInviteBtn').textContent = '✓ 링크 생성됨';
+    document.getElementById('genInviteBtn').disabled = true;
+    document.getElementById('genInviteBtn').style.opacity = '0.6';
+  }
+  function updateProgress(n){
+    document.getElementById('inviteCount').textContent = n;
+    document.getElementById('inviteBar').style.width = Math.min(100, n*10) + '%';
+  }
+  window.copyInviteLink = function(){
+    const link = document.getElementById('inviteLink');
+    link.select();
+    document.execCommand('copy');
+    alert('초대 링크가 복사되었습니다!');
+  };
+  window.shareToKakao = function(){
+    const link = document.getElementById('inviteLink').value;
+    if (!link) { alert('먼저 초대 링크를 생성해주세요.'); return; }
+    const text = `🔮 천명당 사주 프리미엄 구독 무료 체험!\n\n나는 지금 천명당에서 상세 사주 풀이를 무제한으로 받고 있어.\n이 링크로 가입하면 너도 7일 무료로 써볼 수 있어 ↓\n\n${link}`;
+    if (navigator.share) {
+      navigator.share({title: '천명당', text, url: link});
+    } else {
+      copyInviteLink();
+    }
+  };
+  window.shareNative = function(){
+    const link = document.getElementById('inviteLink').value;
+    if (!link) { alert('먼저 초대 링크를 생성해주세요.'); return; }
+    if (navigator.share) {
+      navigator.share({title: '천명당 초대', text: '천명당 사주 프리미엄 초대', url: link});
+    } else {
+      copyInviteLink();
+    }
+  };
+
+  // URL ?ref=XXX 처리 - 중복 방지 로직 포함
+  (function(){
+    const params = new URLSearchParams(location.search);
+    const ref = params.get('ref');
+    if (!ref || !/^CMD[A-Z0-9]+$/.test(ref)) return;
+
+    // 이미 이 사람의 초대 코드가 있으면 (본인 초대 시도) 무시
+    const myInvite = JSON.parse(localStorage.getItem('cmd_invite') || '{}');
+    if (myInvite.code === ref) {
+      console.log('[invite] 자기 자신 초대 링크 무시');
+      return;
+    }
+
+    // 이미 다른 초대 코드를 받은 적 있으면 첫 번째만 유효 (선착순)
+    const existingRef = localStorage.getItem('cmd_ref');
+    if (existingRef && existingRef !== ref) {
+      console.log('[invite] 이미 다른 초대 코드 적용됨, 무시:', existingRef);
+      return;
+    }
+
+    localStorage.setItem('cmd_ref', ref);
+    localStorage.setItem('cmd_ref_at', new Date().toISOString());
+  })();
+
+  // 구독 결제 시 초대 검증 후 카운트 (openOrder 훅)
+  // processPayment 완료 시 /api/notify로 referral 이벤트 전송
+  window.trackReferralSignup = function(email){
+    const ref = localStorage.getItem('cmd_ref');
+    if (!ref) return;
+
+    // 자기가 자기 초대 방지 (브라우저 재확인)
+    const myInvite = JSON.parse(localStorage.getItem('cmd_invite') || '{}');
+    if (myInvite.email === email) {
+      console.log('[invite] 동일 이메일 자기 초대 차단');
+      return;
+    }
+
+    // 이미 이 이메일로 초대된 기록이 localStorage에 있으면 무시
+    const usedEmails = JSON.parse(localStorage.getItem('cmd_referral_used_emails') || '[]');
+    if (usedEmails.includes(email)) {
+      console.log('[invite] 이 이메일은 이미 다른 링크로 추천됨');
+      return;
+    }
+    usedEmails.push(email);
+    localStorage.setItem('cmd_referral_used_emails', JSON.stringify(usedEmails));
+
+    // 서버에 추천 실적 기록 (Telegram notify 프록시 활용)
+    try {
+      fetch('https://tax-n-benefit-api.vercel.app/api/notify', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          type: 'preregister',
+          email: email,
+          job: 'referral',
+          source: 'cheonmyeongdang-ref-' + ref,
+        })
+      });
+    } catch(e) {}
+  };
+</script>
+
 </body>
 </html>

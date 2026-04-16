@@ -1,0 +1,40 @@
+{
+  "dept": "saju",
+  "label": "🔮 천명당 (사주)",
+  "date": "2026-04-17",
+  "targets": [
+    {
+      "name": "점신",
+      "url": "https://www.jeomsin.co.kr/",
+      "fetched": true,
+      "hash": "2bb676c8292cec17",
+      "texts": []
+    },
+    {
+      "name": "포스텔러",
+      "url": "https://www.posteller.com/",
+      "fetched": true,
+      "hash": "5ff37a6b009201ec",
+      "texts": [
+        "Posteller.comis for sale!",
+        "Make an Offer",
+        "Why Buy With Atom?",
+        "Comparable Brand Sales",
+        "Atom.com Purchase Protection Program",
+        "Buy with Confidence",
+        "Shop With Peace Of Mind",
+        "How Atom.com Purchase Protection Works",
+        "Featured Categories",
+        "Domain Details",
+        "Tracking Posteller.com — we'll notify you about any changes."
+      ]
+    },
+    {
+      "name": "헬로우봇",
+      "url": "https://hellobot.co/",
+      "fetched": true,
+      "hash": "65e48f46955dd8f8",
+      "texts": []
+    }
+  ]
+}
