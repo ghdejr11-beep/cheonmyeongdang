@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>세금N혜택 — 종합소득세 계산 · 절세 · 지원금</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  /* 배경 — 토스인컴 파스텔 블루 + 순백 조합 */
+  --bg: #ffffff;
+  --bg-hero: #dbe9fc;
+  --bg-card: #ffffff;
+  --bg-card2: #f0f5ff;
+  --bg-input: #f5f7fa;
+  /* 메인 컬러 — 토스 블루 단일 */
+  --main: #3282f6;
+  --main-dark: #1e6fd6;
+  --main-light: #e8f0ff;
+  --mint: #00c471;
+  --gold: #fee500;
+  --red: #ff4040;
+  /* 텍스트 */
+  --text: #1a1a1a;
+  --text-body: #333333;
+  --text-sub: #666666;
+  --text-dim: #999999;
+  /* 보더 */
+  --border: #e5e8ec;
+  --border-light: #f0f2f5;
+  /* 기타 */
+  --radius: 16px;
+  --radius-sm: 12px;
+  --radius-lg: 20px;
+  --shadow: none;
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.06);
+}
+body {
+  font-family: -apple-system, 'Pretendard', 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.top-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px 12px;
+  position: sticky; top: 0; z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+}
+.top-bar h1 { font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+.top-bar h1 span { color: var(--main); }
+.badge-zero {
+  background: var(--main-light); color: var(--main); font-size: 12px; font-weight: 700;
+  padding: 6px 12px; border-radius: 20px;
+}
+
+.tab-page { display: none; padding: 0 16px 160px; }
+.tab-page.active { display: block; animation: fadeIn .3s; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+.card-highlight {
+  background: var(--bg-card2);
+  border: 1px solid var(--main-light);
+}
+.card-gold {
+  background: #fffcef;
+  border: 1px solid #fde68a;
+}
+.card-red {
+  background: #fff5f5;
+  border: 1px solid #fed7d7;
+}
+
+.btn {
+  display: inline-block; padding: 16px 0; width: 100%; text-align: center;
+  border: none; border-radius: var(--radius-sm); font-size: 16px; font-weight: 700;
+  cursor: pointer; transition: all .15s; font-family: inherit;
+}
+.btn-main { background: var(--main); color: #fff; }
+.btn-main:active { background: var(--main-dark); transform: scale(.98); }
+.btn-outline { background: #ffffff; border: 1.5px solid var(--main); color: var(--main); }
+.btn-gold { background: var(--gold); color: #1a1a1a; }
+.btn-kakao { background: var(--gold); color: #1a1a1a; }
+.btn-sm { padding: 10px 16px; width: auto; font-size: 13px; border-radius: 10px; }
+
+.section-title {
+  font-size: 15px; font-weight: 700; margin: 18px 0 10px; color: var(--text);
+}
+
+/* ============ TAB 1: 종합소득세 계산기 ============ */
+.calc-input-group { margin-bottom: 14px; }
+.calc-label { font-size: 13px; color: var(--text-sub); margin-bottom: 6px; display: block; }
+.calc-input {
+  width: 100%; padding: 16px 18px; background: var(--bg-input);
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--text); font-size: 18px; font-weight: 700;
+  font-family: inherit; outline: none; text-align: right;
+  transition: border-color .15s, background .15s;
+}
+.calc-input:focus { border-color: var(--main); background: #ffffff; }
+.calc-input::placeholder { color: var(--text-dim); font-weight: 400; font-size: 15px; }
+
+.result-box {
+  background: var(--bg-hero);
+  border-radius: var(--radius);
+  padding: 32px 20px;
+  text-align: center;
+  margin-top: 16px;
+}
+.result-amount {
+  font-size: 36px; font-weight: 800; margin: 8px 0 4px; letter-spacing: -0.03em;
+}
+.result-amount.refund { color: var(--main); }
+.result-amount.pay { color: var(--red); }
+.result-sub { color: var(--text-sub); font-size: 13px; }
+.result-detail { margin-top: 16px; text-align: left; }
+.result-row {
+  display: flex; justify-content: space-between; padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6; font-size: 14px;
+}
+.result-row span:first-child { color: var(--text-sub); }
+.result-row span:last-child { font-weight: 600; }
+
+/* 선택 버튼 그룹 */
+.select-group { display: flex; gap: 8px; margin-bottom: 14px; }
+.select-btn {
+  flex: 1; padding: 12px; text-align: center; border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); background: #ffffff; color: var(--text-sub);
+  font-size: 14px; cursor: pointer; font-family: inherit; font-weight: 600;
+  transition: all .15s;
+}
+.select-btn.active { border-color: var(--main); color: var(--main); background: var(--main-light); }
+
+/* D-day 배너 — 히어로 느낌 파스텔 블루 */
+.dday-banner {
+  background: var(--bg-hero);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 14px;
+}
+.dday-text { font-size: 14px; font-weight: 600; color: #92400e; }
+.dday-count { font-size: 28px; font-weight: 900; color: var(--gold); }
+
+/* ============ TAB 2: 절세 ============ */
+.tip-list { list-style: none; }
+.tip-item {
+  display: flex; gap: 12px; padding: 14px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.tip-icon { font-size: 24px; flex-shrink: 0; }
+.tip-text { font-size: 14px; line-height: 1.6; color: var(--text-sub); }
+.tip-text strong { color: var(--text); }
+
+.guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.guide-btn {
+  padding: 22px 16px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text); font-size: 14px; font-weight: 600;
+  cursor: pointer; text-align: center; font-family: inherit;
+  transition: all .15s;
+}
+.guide-btn:active { background: var(--bg-card2); transform: scale(.98); }
+.guide-btn .emoji { display: block; font-size: 32px; margin-bottom: 8px; }
+
+/* ============ TAB 3: 지원금 ============ */
+.subsidy-item {
+  background: var(--bg-card); border-radius: var(--radius);
+  padding: 20px; margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+.subsidy-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.subsidy-title { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+.subsidy-deadline {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 12px;
+}
+.deadline-urgent { background: #fff5f5; color: var(--red); }
+.deadline-normal { background: #fffcef; color: #a05a00; }
+.deadline-always { background: var(--main-light); color: var(--main); }
+.subsidy-amount { font-size: 24px; font-weight: 800; color: var(--main); margin: 6px 0 10px; letter-spacing: -0.02em; }
+.subsidy-actions { display: flex; gap: 8px; }
+
+/* ============ TAB 4: AI 상담 ============ */
+.chat-area {
+  min-height: 300px; max-height: 50vh; overflow-y: auto;
+  padding: 10px 0;
+}
+.chat-bubble {
+  max-width: 85%; padding: 12px 16px; border-radius: 16px;
+  font-size: 14px; line-height: 1.6; margin-bottom: 10px;
+  word-break: keep-all; white-space: pre-wrap;
+}
+.chat-ai {
+  background: var(--bg-input); color: var(--text);
+  border-bottom-left-radius: 4px; margin-right: auto;
+}
+.chat-user {
+  background: var(--main); color: #fff;
+  border-bottom-right-radius: 4px; margin-left: auto;
+}
+.chat-typing {
+  background: var(--bg-input); color: var(--text-dim);
+  border-bottom-left-radius: 4px; margin-right: auto;
+  font-style: italic;
+}
+.quick-questions { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.quick-btn {
+  padding: 10px 16px; background: var(--main-light); border: 0;
+  border-radius: 20px; color: var(--main); font-size: 13px; font-weight: 600; cursor: pointer;
+  font-family: inherit; transition: all .15s;
+}
+.quick-btn:active { background: #d0e0ff; }
+.chat-input-wrap {
+  display: none; position: fixed; bottom: 68px; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 448px; padding: 12px 16px;
+  background: #ffffff; gap: 8px; align-items: center; z-index: 90;
+  border-top: 1px solid var(--border);
+}
+.chat-input {
+  flex: 1; padding: 12px 18px; background: var(--bg-input);
+  border: 1.5px solid var(--border); border-radius: 24px;
+  color: var(--text); font-size: 14px; outline: none; font-family: inherit;
+  transition: border-color .15s;
+}
+.chat-input:focus { border-color: var(--main); }
+.chat-send {
+  width: 42px; height: 42px; border-radius: 50%; background: var(--main);
+  border: none; color: #fff; font-size: 18px; cursor: pointer;
+}
+
+/* ============ TAB 5: MY ============ */
+.profile-card {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--bg-hero); border-radius: var(--radius); padding: 24px 20px;
+  margin-bottom: 14px;
+}
+.profile-avatar { font-size: 52px; }
+.profile-info h3 { font-size: 20px; margin-bottom: 4px; color: var(--text); letter-spacing: -0.02em; }
+.profile-info p { font-size: 13px; color: var(--text-sub); }
+
+.premium-banner {
+  background: var(--bg-hero);
+  border-radius: var(--radius);
+  padding: 28px 20px; text-align: center; margin-bottom: 14px;
+}
+.premium-banner h3 { color: var(--text); margin-bottom: 6px; font-size: 18px; }
+.price { font-size: 36px; font-weight: 800; color: var(--main); letter-spacing: -0.02em; }
+.price-sub { font-size: 13px; color: var(--text-sub); margin-bottom: 14px; }
+.premium-features { list-style: none; text-align: left; margin-bottom: 18px; background: #fff; padding: 16px; border-radius: var(--radius-sm); }
+.premium-features li {
+  padding: 8px 0; font-size: 14px; color: var(--text-body);
+  border-bottom: 1px solid var(--border-light);
+}
+.premium-features li:last-child { border-bottom: 0; }
+.premium-features li::before { content: "✓ "; color: var(--main); font-weight: 700; }
+
+.calendar-card {
+  background: var(--bg-card); border-radius: var(--radius); padding: 22px 20px; margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+.calendar-card h4 { margin-bottom: 12px; }
+.cal-item {
+  display: flex; justify-content: space-between; padding: 10px 0;
+  border-bottom: 1px solid #f3f4f6; font-size: 14px;
+}
+.cal-name { color: var(--text-sub); }
+.cal-date { color: var(--gold); font-weight: 600; }
+.cal-item.urgent .cal-name { color: var(--red); font-weight: 700; }
+.cal-item.urgent .cal-date { color: var(--red); }
+
+.settings-list { list-style: none; background: var(--bg-card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+.settings-item {
+  display: flex; justify-content: space-between; padding: 18px 20px;
+  border-bottom: 1px solid var(--border-light); font-size: 15px; color: var(--text-body);
+}
+.settings-item:last-child { border-bottom: 0; }
+.settings-arrow { color: var(--text-dim); }
+
+/* Bottom Tab Bar */
+.tab-bar {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 480px;
+  background: #ffffff; border-top: 1px solid var(--border);
+  display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom);
+}
+.tab-btn {
+  flex: 1; padding: 12px 0 10px; background: none; border: none; color: var(--text-dim);
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  cursor: pointer; font-family: inherit; transition: color .15s;
+}
+.tab-btn.active { color: var(--main); }
+.tab-icon { font-size: 22px; }
+.tab-label { font-size: 11px; font-weight: 600; }
+
+/* ============ CODEF 간편인증 모달 ============ */
+.auth-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+  z-index: 200; justify-content: center; align-items: flex-end;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+.auth-overlay.active { display: flex; }
+.auth-modal {
+  width: 100%; max-width: 480px; background: #ffffff;
+  border-radius: 20px 20px 0 0; padding: 24px 20px 32px;
+  max-height: 90vh; overflow-y: auto;
+  animation: slideUp .3s ease;
+  box-shadow: var(--shadow-lg);
+}
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.auth-modal-header {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+}
+.auth-modal-header h3 { font-size: 18px; font-weight: 800; }
+.auth-close {
+  width: 32px; height: 32px; border-radius: 50%; background: var(--bg-input);
+  border: none; color: var(--text); font-size: 18px; cursor: pointer;
+}
+.auth-security-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--main-light); border: 0;
+  border-radius: 10px; padding: 10px 14px; margin-bottom: 16px; font-size: 12px; color: var(--main); font-weight: 600;
+}
+.auth-field { margin-bottom: 14px; }
+.auth-field label { display: block; font-size: 13px; color: var(--text-sub); margin-bottom: 8px; font-weight: 500; }
+.auth-field input {
+  width: 100%; padding: 16px 18px; background: var(--bg-input);
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--text); font-size: 16px; font-family: inherit; outline: none;
+  transition: border-color .15s, background .15s;
+}
+.auth-field input:focus { border-color: var(--main); background: #ffffff; }
+.auth-field input::placeholder { color: var(--text-dim); font-size: 14px; }
+.auth-ssn-wrap { display: flex; gap: 8px; align-items: center; }
+.auth-ssn-wrap input { flex: 1; text-align: center; letter-spacing: 2px; }
+.auth-ssn-wrap span { color: var(--text-dim); font-size: 20px; }
+.auth-method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.auth-method-btn {
+  padding: 18px 10px; background: #ffffff;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--text-body); font-size: 14px; font-weight: 600;
+  cursor: pointer; text-align: center; font-family: inherit; transition: all .15s;
+}
+.auth-method-btn.selected {
+  border-color: var(--main); color: var(--main); background: var(--main-light); border-width: 2px; padding: 17px 9px;
+}
+.auth-method-btn .auth-method-icon { display: block; font-size: 28px; margin-bottom: 6px; }
+.auth-privacy-note {
+  font-size: 11px; color: var(--text-sub); line-height: 1.6;
+  background: var(--bg-input); border-radius: 10px; padding: 12px 14px;
+  margin: 14px 0;
+}
+.auth-step { display: none; }
+.auth-step.active { display: block; }
+.auth-result-card {
+  background: var(--bg-hero); border-radius: var(--radius); padding: 22px 20px; margin-bottom: 10px;
+}
+.auth-result-card h4 { font-size: 14px; color: var(--text-sub); margin-bottom: 8px; font-weight: 500; }
+.auth-result-amount { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; color: var(--main); }
+.auth-result-row {
+  display: flex; justify-content: space-between; padding: 8px 0;
+  font-size: 14px; border-bottom: 1px solid var(--border-light);
+}
+.auth-result-row span:first-child { color: var(--text-sub); }
+.auth-result-row span:last-child { font-weight: 700; color: var(--text); }
+.auth-spinner {
+  display: inline-block; width: 18px; height: 18px;
+  border: 2px solid var(--border); border-top-color: var(--main);
+  border-radius: 50%; animation: spin .8s linear infinite; vertical-align: middle; margin-right: 6px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>세금<span>N</span>혜택</h1>
+  <span class="badge-zero">수수료 0%</span>
+</div>
+
+<!-- ===== TAB 1: 종합소득세 계산기 ===== -->
+<div class="tab-page active" id="page-calc">
+  <!-- D-day -->
+  <div class="dday-banner" id="ddayBanner">
+    <div>
+      <div class="dday-text">종합소득세 신고 마감</div>
+      <div style="font-size:12px;color:var(--text-dim);">2026년 5월 31일까지</div>
+    </div>
+    <div class="dday-count" id="ddayCount">D-47</div>
+  </div>
+
+  <!-- Trust Badges -->
+  <div style="display:flex;gap:8px;margin-bottom:14px;">
+    <div style="flex:1;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;padding:12px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <div style="font-size:20px;margin-bottom:4px;">💰</div>
+      <div style="font-size:12px;font-weight:700;color:var(--mint);">수수료 0원</div>
+    </div>
+    <div style="flex:1;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;padding:12px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <div style="font-size:20px;margin-bottom:4px;">🔒</div>
+      <div style="font-size:12px;font-weight:700;color:var(--main);">암호화 통신</div>
+    </div>
+    <div style="flex:1;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;padding:12px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+      <div style="font-size:20px;margin-bottom:4px;">⚡</div>
+      <div style="font-size:12px;font-weight:700;color:var(--gold);">1분 조회</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:16px;font-weight:700;margin-bottom:16px;">종합소득세 간편 계산기</div>
+
+    <div class="calc-input-group">
+      <label class="calc-label">사업자 유형</label>
+      <div class="select-group">
+        <button class="select-btn active" onclick="selectType(this,'individual')">개인사업자</button>
+        <button class="select-btn" onclick="selectType(this,'freelancer')">프리랜서(3.3%)</button>
+      </div>
+    </div>
+
+    <div class="calc-input-group">
+      <label class="calc-label">2025년 총 수입 (매출)</label>
+      <input type="text" class="calc-input" id="calcRevenue" placeholder="0" oninput="formatNumber(this)">
+    </div>
+
+    <div class="calc-input-group">
+      <label class="calc-label">총 경비 (비용)</label>
+      <input type="text" class="calc-input" id="calcExpense" placeholder="0" oninput="formatNumber(this)">
+    </div>
+
+    <div class="calc-input-group">
+      <label class="calc-label">기납부 세액 (원천징수 등)</label>
+      <input type="text" class="calc-input" id="calcPrepaid" placeholder="0" oninput="formatNumber(this)">
+    </div>
+
+    <div class="calc-input-group">
+      <label class="calc-label">부양가족 수 (본인 포함)</label>
+      <div class="select-group">
+        <button class="select-btn active" onclick="selectFamily(this,1)">1명</button>
+        <button class="select-btn" onclick="selectFamily(this,2)">2명</button>
+        <button class="select-btn" onclick="selectFamily(this,3)">3명</button>
+        <button class="select-btn" onclick="selectFamily(this,4)">4명+</button>
+      </div>
+    </div>
+
+    <button class="btn btn-main" onclick="calculateTax()">종합소득세 계산하기</button>
+  </div>
+
+  <div id="calcResult" style="display:none;"></div>
+
+  <div class="card" style="background:#f0fdf4;border:1px solid #bbf7d0;">
+    <p style="font-size:13px;color:var(--text-sub);line-height:1.7;">
+      💡 <strong style="color:var(--mint);">수수료 0원</strong> — 타 서비스는 환급액의 10~20% 수수료를 청구합니다. 세금N혜택은 수수료가 없습니다.<br>
+      📋 본 계산은 간편 추정이며, 정확한 신고는 홈택스 또는 세무사를 이용하세요.
+    </p>
+  </div>
+
+  <!-- ───── 홈택스 자동 연동 ───── -->
+  <div class="card card-gold" style="margin-top:14px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="font-size:24px;">🏛️</span>
+      <strong style="color:#92400e;font-size:15px;">홈택스 자동 연동 (BETA)</strong>
+    </div>
+    <p style="font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:12px;">
+      간편인증으로 로그인하면 수입/경비를 직접 입력하지 않아도 자동 계산됩니다.
+      <span style="color:#92400e;">(CODEF API 연동)</span>
+    </p>
+    <button class="btn btn-gold" onclick="connectHomeTax()">🔐 홈택스 연동하기</button>
+    <div id="homeTaxStatus" style="display:none;margin-top:12px;padding:12px;background:rgba(245,158,11,0.08);border-radius:8px;font-size:13px;border:1px solid #fde68a;"></div>
+  </div>
+
+  <!-- ───── 세무사 연결 ───── -->
+  <div class="card" style="margin-top:14px;background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #93c5fd;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="font-size:24px;">👔</span>
+      <strong style="color:var(--main);font-size:15px;">전문 세무사 1:1 상담</strong>
+    </div>
+    <p style="font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:12px;">
+      계산 결과를 정확히 신고하고 싶으신가요? 세무사 무료 상담 연결해드립니다.<br>
+      <span style="color:var(--main);">첫 상담 10분 무료 · 복잡한 신고는 대행도 가능</span>
+    </p>
+    <button class="btn btn-main" onclick="requestConsultation()">📞 세무사 상담 신청</button>
+  </div>
+</div>
+
+<!-- ===== TAB 2: 절세 ===== -->
+<div class="tab-page" id="page-coaching">
+  <div class="card card-gold">
+    <p style="font-size:13px;color:var(--text-sub);">2026년 새로 바뀐 세법</p>
+    <div style="font-size:18px;font-weight:700;color:#92400e;margin:8px 0;">주요 변경사항</div>
+    <ul style="font-size:13px;color:var(--text-sub);line-height:2;padding-left:16px;">
+      <li>6% 구간: 1,200만원 → <strong style="color:var(--gold);">1,400만원</strong>으로 확대</li>
+      <li>근로소득 기본공제: 150만원 → <strong style="color:var(--gold);">180만원</strong></li>
+      <li>결혼 세액공제: 1인당 <strong style="color:var(--gold);">50만원</strong> (2024~2026 혼인신고)</li>
+      <li>자녀 세액공제: 1명 25만, 2명 55만, 3명+ 추가</li>
+    </ul>
+  </div>
+
+  <div class="section-title">절세 핵심 전략</div>
+  <ul class="tip-list">
+    <li class="tip-item">
+      <span class="tip-icon">🛡️</span>
+      <div class="tip-text"><strong>노란우산공제</strong> 가입 시 연 최대 <strong>500만원</strong> 소득공제. 사업자라면 필수!</div>
+    </li>
+    <li class="tip-item">
+      <span class="tip-icon">📉</span>
+      <div class="tip-text"><strong>간이과세자 전환</strong> — 매출 1억 400만원 이하면 부가세 면제. 간이과세 기준 상향됨.</div>
+    </li>
+    <li class="tip-item">
+      <span class="tip-icon">💳</span>
+      <div class="tip-text"><strong>사업용 카드 등록</strong> — 홈택스에 등록하면 경비 자동 인정. 증빙 누락 방지.</div>
+    </li>
+    <li class="tip-item">
+      <span class="tip-icon">🏠</span>
+      <div class="tip-text"><strong>사무실 겸용 주택</strong> — 집에서 사업하면 임대료/공과금의 일부를 경비 처리 가능.</div>
+    </li>
+    <li class="tip-item">
+      <span class="tip-icon">📱</span>
+      <div class="tip-text"><strong>통신비/차량비</strong> — 사업용 휴대폰, 차량 유류비도 경비 처리 가능. 업무 비율만큼.</div>
+    </li>
+    <li class="tip-item">
+      <span class="tip-icon">🧾</span>
+      <div class="tip-text"><strong>국민연금/건강보험</strong> — 전액 소득공제. 납부 확인서 챙기기.</div>
+    </li>
+  </ul>
+
+  <div class="section-title">직종별 절세 가이드</div>
+  <div class="guide-grid">
+    <button class="guide-btn" onclick="showGuide('delivery')"><span class="emoji">🛵</span>배달라이더</button>
+    <button class="guide-btn" onclick="showGuide('youtube')"><span class="emoji">🎬</span>유튜버</button>
+    <button class="guide-btn" onclick="showGuide('freelancer')"><span class="emoji">💻</span>프리랜서</button>
+    <button class="guide-btn" onclick="showGuide('shop')"><span class="emoji">🏪</span>소상공인</button>
+    <button class="guide-btn" onclick="showGuide('insurance')"><span class="emoji">🛡️</span>보험설계사</button>
+    <button class="guide-btn" onclick="showGuide('realtor')"><span class="emoji">🏠</span>부동산중개</button>
+  </div>
+  <div id="guideResult" style="margin-top:14px;"></div>
+</div>
+
+<!-- ===== TAB 3: 지원금 ===== -->
+<div class="tab-page" id="page-subsidy">
+  <div class="card card-highlight">
+    <p style="font-size:16px;font-weight:700;text-align:center;">신청 가능한 지원금</p>
+    <p style="font-size:12px;color:var(--text-sub);text-align:center;margin-top:4px;">2026년 4월 기준 | 소상공인/자영업자 대상</p>
+  </div>
+
+  <div class="subsidy-item">
+    <div class="subsidy-header">
+      <span class="subsidy-title">소상공인 디지털 전환 지원</span>
+      <span class="subsidy-deadline deadline-urgent">D-15</span>
+    </div>
+    <div class="subsidy-amount">최대 400만원</div>
+    <p style="font-size:12px;color:var(--text-sub);margin-bottom:12px;">온라인 판로, 스마트 기기 도입, 디지털 전환 비용 지원</p>
+    <div class="subsidy-actions">
+      <button class="btn btn-outline btn-sm">자격 확인</button>
+      <button class="btn btn-main btn-sm">신청 바로가기</button>
+    </div>
+  </div>
+
+  <div class="subsidy-item">
+    <div class="subsidy-header">
+      <span class="subsidy-title">청년 창업 사업화 지원</span>
+      <span class="subsidy-deadline deadline-normal">D-30</span>
+    </div>
+    <div class="subsidy-amount">최대 1억원</div>
+    <p style="font-size:12px;color:var(--text-sub);margin-bottom:12px;">만 39세 이하 청년 창업자, 사업화 자금 + 멘토링</p>
+    <div class="subsidy-actions">
+      <button class="btn btn-outline btn-sm">자격 확인</button>
+      <button class="btn btn-main btn-sm">신청 바로가기</button>
+    </div>
+  </div>
+
+  <div class="subsidy-item">
+    <div class="subsidy-header">
+      <span class="subsidy-title">소상공인 경영안정자금</span>
+      <span class="subsidy-deadline deadline-always">상시</span>
+    </div>
+    <div class="subsidy-amount">최대 7,000만원 (저금리)</div>
+    <p style="font-size:12px;color:var(--text-sub);margin-bottom:12px;">소상공인 저금리 대출, 연 2~3% 금리</p>
+    <div class="subsidy-actions">
+      <button class="btn btn-outline btn-sm">자격 확인</button>
+      <button class="btn btn-main btn-sm">신청 바로가기</button>
+    </div>
+  </div>
+
+  <div class="subsidy-item">
+    <div class="subsidy-header">
+      <span class="subsidy-title">고용보험 미적용자 출산급여</span>
+      <span class="subsidy-deadline deadline-always">상시</span>
+    </div>
+    <div class="subsidy-amount">150만원</div>
+    <p style="font-size:12px;color:var(--text-sub);margin-bottom:12px;">고용보험 미가입 프리랜서/자영업자 출산 시</p>
+    <div class="subsidy-actions">
+      <button class="btn btn-outline btn-sm">자격 확인</button>
+      <button class="btn btn-main btn-sm">신청 바로가기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 4: AI 상담 ===== -->
+<div class="tab-page" id="page-chat">
+  <div class="chat-area" id="chatArea">
+    <div class="chat-bubble chat-ai">안녕하세요! 세금N혜택 AI 세무 상담사입니다. 종합소득세, 절세, 경비처리 등 궁금한 점을 물어보세요 😊</div>
+  </div>
+  <div class="quick-questions">
+    <button class="quick-btn" onclick="sendQuick('종합소득세 신고 방법 알려줘')">종합소득세 신고방법</button>
+    <button class="quick-btn" onclick="sendQuick('경비 처리 가능한 항목 알려줘')">경비처리 항목</button>
+    <button class="quick-btn" onclick="sendQuick('프리랜서 3.3% 환급 방법')">3.3% 환급</button>
+    <button class="quick-btn" onclick="sendQuick('사업자 절세 방법 추천')">절세 방법</button>
+    <button class="quick-btn" onclick="sendQuick('부가세 신고 일정')">부가세 일정</button>
+    <button class="quick-btn" onclick="sendQuick('노란우산공제 혜택')">노란우산공제</button>
+  </div>
+  <div class="chat-input-wrap" id="chatInputWrap">
+    <input type="text" class="chat-input" id="chatInput" placeholder="세금 관련 질문을 입력하세요..." onkeydown="if(event.key==='Enter')sendMsg()">
+    <button class="chat-send" onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
+<!-- ===== TAB 5: MY ===== -->
+<div class="tab-page" id="page-my">
+  <div class="profile-card">
+    <div class="profile-avatar">👤</div>
+    <div class="profile-info">
+      <h3 id="myName">사용자</h3>
+      <p id="myBizNum">사업자번호를 입력해주세요</p>
+      <p id="myBizType"></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">내 정보 설정</div>
+    <div class="calc-input-group">
+      <label class="calc-label">이름</label>
+      <input type="text" class="calc-input" id="settingName" placeholder="이름 입력" style="font-size:14px;text-align:left;" onchange="saveProfile()">
+    </div>
+    <div class="calc-input-group">
+      <label class="calc-label">사업자등록번호</label>
+      <input type="text" class="calc-input" id="settingBizNum" placeholder="000-00-00000" style="font-size:14px;text-align:left;" onchange="saveProfile()">
+    </div>
+    <div class="calc-input-group">
+      <label class="calc-label">업종</label>
+      <input type="text" class="calc-input" id="settingBizType" placeholder="예: 소프트웨어 개발" style="font-size:14px;text-align:left;" onchange="saveProfile()">
+    </div>
+  </div>
+
+  <div class="calendar-card">
+    <h4>📅 세금 캘린더</h4>
+    <div class="cal-item urgent">
+      <span class="cal-name">⚠️ 종합소득세 신고</span>
+      <span class="cal-date">2026.05.31</span>
+    </div>
+    <div class="cal-item">
+      <span class="cal-name">부가가치세 확정신고</span>
+      <span class="cal-date">2026.07.25</span>
+    </div>
+    <div class="cal-item">
+      <span class="cal-name">원천세 납부</span>
+      <span class="cal-date">매월 10일</span>
+    </div>
+    <div class="cal-item">
+      <span class="cal-name">지방소득세 신고</span>
+      <span class="cal-date">2026.05.31</span>
+    </div>
+  </div>
+
+  <ul class="settings-list">
+    <li class="settings-item"><span>알림 설정</span><span class="settings-arrow">›</span></li>
+    <li class="settings-item"><span>이용약관</span><span class="settings-arrow">›</span></li>
+    <li class="settings-item"><span>개인정보처리방침</span><span class="settings-arrow">›</span></li>
+  </ul>
+
+  <p style="text-align:center;font-size:11px;color:var(--text-dim);margin-top:20px;">
+    세금N혜택 v1.0 | 쿤스튜디오<br>사업자등록번호: 552-59-00848 | 대표: 홍덕훈
+  </p>
+</div>
+
+<!-- Bottom Tab Bar -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="calc" onclick="switchTab('calc')">
+    <span class="tab-icon">🧮</span><span class="tab-label">계산기</span>
+  </button>
+  <button class="tab-btn" data-tab="coaching" onclick="switchTab('coaching')">
+    <span class="tab-icon">📊</span><span class="tab-label">절세</span>
+  </button>
+  <button class="tab-btn" data-tab="subsidy" onclick="switchTab('subsidy')">
+    <span class="tab-icon">🏛️</span><span class="tab-label">지원금</span>
+  </button>
+  <button class="tab-btn" data-tab="chat" onclick="switchTab('chat')">
+    <span class="tab-icon">💬</span><span class="tab-label">AI상담</span>
+  </button>
+  <button class="tab-btn" data-tab="my" onclick="switchTab('my')">
+    <span class="tab-icon">👤</span><span class="tab-label">MY</span>
+  </button>
+</div>
+
+<!-- ===== CODEF 간편인증 모달 ===== -->
+<div class="auth-overlay" id="authOverlay" onclick="if(event.target===this)closeAuthModal()">
+  <div class="auth-modal">
+    <div class="auth-modal-header">
+      <h3 id="authModalTitle">간편인증 로그인</h3>
+      <button class="auth-close" onclick="closeAuthModal()">&times;</button>
+    </div>
+
+    <!-- Step 1: 인증 정보 입력 -->
+    <div class="auth-step active" id="authStep1">
+      <div class="auth-security-badge">
+        <span>&#x1f512;</span> 256-bit 암호화 전송 | 개인정보 안전 보호
+      </div>
+
+      <div class="auth-field">
+        <label>이름</label>
+        <input type="text" id="authName" placeholder="홍길동" autocomplete="name">
+      </div>
+
+      <div class="auth-field">
+        <label>주민등록번호</label>
+        <div class="auth-ssn-wrap">
+          <input type="text" id="authSsn1" placeholder="생년월일 6자리" maxlength="6" inputmode="numeric">
+          <span>-</span>
+          <input type="password" id="authSsn2" placeholder="뒷자리 7자리" maxlength="7" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="auth-field">
+        <label>휴대폰 번호</label>
+        <input type="tel" id="authPhone" placeholder="01012345678" maxlength="11" inputmode="tel">
+      </div>
+
+      <div class="auth-field">
+        <label>인증 수단 선택</label>
+        <div class="auth-method-grid">
+          <button class="auth-method-btn" data-level="1" onclick="selectAuthMethod(this)">
+            <span class="auth-method-icon">&#x1f4ac;</span>카카오톡
+          </button>
+          <button class="auth-method-btn" data-level="5" onclick="selectAuthMethod(this)">
+            <span class="auth-method-icon">&#x1f4f1;</span>PASS (통신사)
+          </button>
+          <button class="auth-method-btn" data-level="6" onclick="selectAuthMethod(this)">
+            <span class="auth-method-icon">&#x1f7e2;</span>네이버
+          </button>
+          <button class="auth-method-btn" data-level="8" onclick="selectAuthMethod(this)">
+            <span class="auth-method-icon">&#x1f4b0;</span>토스
+          </button>
+        </div>
+      </div>
+
+      <div class="auth-privacy-note">
+        &#x1f6e1;&#xfe0f; 주민등록번호는 CODEF API 인증 전송에만 사용되며, 브라우저에서만 처리됩니다. 서버에 저장하지 않습니다.
+      </div>
+
+      <button class="btn btn-gold" id="authStartBtn" onclick="startAuth()" disabled>&#x1f510; 인증 시작</button>
+    </div>
+
+    <!-- Step 2: 2way SMS 추가인증 -->
+    <div class="auth-step" id="authStep2">
+      <div class="auth-security-badge">
+        <span>&#x1f4e8;</span> 휴대폰으로 인증번호가 전송되었습니다
+      </div>
+      <p style="font-size:14px;color:var(--text-sub);margin-bottom:14px;line-height:1.6;">
+        선택한 인증 앱에서 인증을 완료하거나, 수신된 SMS 인증번호를 입력해주세요.
+      </p>
+      <div class="auth-field">
+        <label>인증번호 입력</label>
+        <input type="text" id="auth2wayCode" placeholder="인증번호 6자리" maxlength="6" inputmode="numeric">
+      </div>
+      <button class="btn btn-gold" onclick="submit2wayAuth()">인증 확인</button>
+      <p style="font-size:12px;color:var(--text-dim);margin-top:10px;text-align:center;">
+        인증번호가 오지 않으면 인증 앱을 확인해주세요.
+      </p>
+    </div>
+
+    <!-- Step 3: 로딩 -->
+    <div class="auth-step" id="authStep3">
+      <div style="text-align:center;padding:40px 0;">
+        <div class="auth-spinner" style="width:40px;height:40px;border-width:4px;margin:0 auto 16px;"></div>
+        <p style="font-size:16px;font-weight:700;" id="authLoadingText">홈택스 데이터를 가져오는 중...</p>
+        <p style="font-size:13px;color:var(--text-sub);margin-top:8px;" id="authLoadingSubText">약 10~30초 소요됩니다</p>
+      </div>
+    </div>
+
+    <!-- Step 4: 결과 표시 -->
+    <div class="auth-step" id="authStep4">
+      <div id="authResultContent"></div>
+      <button class="btn btn-main" style="margin-top:14px;" onclick="closeAuthModal()">확인</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── API 설정 ───
+var TAX_API_URL = 'https://tax-n-benefit-api.vercel.app/api';
+// 보안: 클라이언트에 봇 토큰 직접 노출 금지 — Vercel API로 프록시
+var NOTIFY_API_URL = TAX_API_URL + '/notify';
+
+// ─── 홈택스 연동 (CODEF 간편인증) ───
+var selectedAuthLevel = null;
+var pendingConnectData = null; // 2way 인증용 임시 저장
+
+window.connectHomeTax = function() {
+  // 이미 connectedId가 있으면 바로 데이터 조회
+  var saved = localStorage.getItem('codef_connectedId');
+  if (saved) {
+    showAuthStep(3);
+    document.getElementById('authOverlay').classList.add('active');
+    fetchAllData(saved);
+    return;
+  }
+  // 모달 열기
+  showAuthStep(1);
+  selectedAuthLevel = null;
+  document.querySelectorAll('.auth-method-btn').forEach(function(b){ b.classList.remove('selected'); });
+  document.getElementById('authStartBtn').disabled = true;
+  document.getElementById('authOverlay').classList.add('active');
+};
+
+function closeAuthModal() {
+  document.getElementById('authOverlay').classList.remove('active');
+}
+
+function selectAuthMethod(el) {
+  document.querySelectorAll('.auth-method-btn').forEach(function(b){ b.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedAuthLevel = el.getAttribute('data-level');
+  validateAuthForm();
+}
+
+function validateAuthForm() {
+  var name = document.getElementById('authName').value.trim();
+  var ssn1 = document.getElementById('authSsn1').value.trim();
+  var ssn2 = document.getElementById('authSsn2').value.trim();
+  var phone = document.getElementById('authPhone').value.trim();
+  var ready = name.length > 0 && ssn1.length === 6 && ssn2.length === 7 && phone.length >= 10 && selectedAuthLevel;
+  document.getElementById('authStartBtn').disabled = !ready;
+}
+
+// 폼 입력 시 실시간 검증
+['authName','authSsn1','authSsn2','authPhone'].forEach(function(id){
+  document.getElementById(id).addEventListener('input', validateAuthForm);
+});
+
+function showAuthStep(n) {
+  document.querySelectorAll('.auth-step').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('authStep' + n).classList.add('active');
+  var titles = {1:'간편인증 로그인', 2:'추가 인증', 3:'데이터 조회 중', 4:'연동 결과'};
+  document.getElementById('authModalTitle').textContent = titles[n] || '';
+}
+
+async function startAuth() {
+  var userName = document.getElementById('authName').value.trim();
+  var ssn1 = document.getElementById('authSsn1').value.trim();
+  var ssn2 = document.getElementById('authSsn2').value.trim();
+  var phone = document.getElementById('authPhone').value.trim();
+  var identity = ssn1 + ssn2;
+
+  document.getElementById('authStartBtn').disabled = true;
+  document.getElementById('authStartBtn').innerHTML = '<span class="auth-spinner"></span> 인증 요청 중...';
+
+  try {
+    var res = await fetch(TAX_API_URL + '/connect', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        identity: identity,
+        userName: userName,
+        phone: phone,
+        loginTypeLevel: selectedAuthLevel
+      })
+    });
+    var data = await res.json();
+
+    if (data.connectedId) {
+      // 인증 성공 — connectedId 저장 후 데이터 조회
+      localStorage.setItem('codef_connectedId', data.connectedId);
+      showAuthStep(3);
+      fetchAllData(data.connectedId);
+    } else if (data.requires2way || data.twoWayInfo) {
+      // 2way 추가인증 필요
+      pendingConnectData = {
+        identity: identity,
+        userName: userName,
+        phone: phone,
+        loginTypeLevel: selectedAuthLevel,
+        twoWayInfo: data.twoWayInfo || data
+      };
+      showAuthStep(2);
+    } else if (data.error) {
+      alert('인증 실패: ' + data.error);
+      resetAuthBtn();
+    } else {
+      alert('인증 응답을 처리할 수 없습니다. 다시 시도해주세요.');
+      resetAuthBtn();
+    }
+  } catch (err) {
+    alert('네트워크 오류: ' + err.message);
+    resetAuthBtn();
+  }
+}
+
+function resetAuthBtn() {
+  var btn = document.getElementById('authStartBtn');
+  btn.disabled = false;
+  btn.innerHTML = '&#x1f510; 인증 시작';
+}
+
+async function submit2wayAuth() {
+  var code = document.getElementById('auth2wayCode').value.trim();
+  if (!code) { alert('인증번호를 입력해주세요.'); return; }
+
+  showAuthStep(3);
+  document.getElementById('authLoadingText').textContent = '인증 확인 중...';
+
+  try {
+    var body = Object.assign({}, pendingConnectData, { authCode: code });
+    var res = await fetch(TAX_API_URL + '/connect', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body)
+    });
+    var data = await res.json();
+
+    if (data.connectedId) {
+      localStorage.setItem('codef_connectedId', data.connectedId);
+      document.getElementById('authLoadingText').textContent = '홈택스 데이터를 가져오는 중...';
+      fetchAllData(data.connectedId);
+    } else {
+      alert('인증 실패: ' + (data.error || '다시 시도해주세요.'));
+      showAuthStep(2);
+    }
+  } catch (err) {
+    alert('네트워크 오류: ' + err.message);
+    showAuthStep(2);
+  }
+}
+
+async function fetchAllData(connectedId) {
+  document.getElementById('authLoadingText').textContent = '홈택스 데이터를 가져오는 중...';
+  document.getElementById('authLoadingSubText').textContent = '약 10~30초 소요됩니다';
+
+  var results = {};
+  var endpoints = [
+    { key: 'refund', url: '/refund', label: '환급 정보' },
+    { key: 'income', url: '/income', label: '소득 내역' },
+    { key: 'taxReport', url: '/tax-report', label: '신고 내역' }
+  ];
+
+  for (var i = 0; i < endpoints.length; i++) {
+    var ep = endpoints[i];
+    document.getElementById('authLoadingSubText').textContent = ep.label + ' 조회 중... (' + (i+1) + '/' + endpoints.length + ')';
+    try {
+      var res = await fetch(TAX_API_URL + ep.url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ connectedId: connectedId })
+      });
+      results[ep.key] = await res.json();
+    } catch (err) {
+      results[ep.key] = { error: err.message };
+    }
+  }
+
+  displayAuthResults(results);
+}
+
+function displayAuthResults(results) {
+  var html = '';
+
+  // 환급 예상액
+  if (results.refund && results.refund.success) {
+    var r = results.refund.data || results.refund;
+    html += '<div class="auth-result-card" style="border:1px solid var(--mint);">';
+    html += '<h4>&#x1f4b0; 환급 예상액</h4>';
+    html += '<div class="auth-result-amount" style="color:var(--mint);">';
+    html += '&#8361;' + (r.refundAmount || r.estimatedRefund || 0).toLocaleString();
+    html += '</div>';
+    if (r.totalIncome) html += '<div class="auth-result-row"><span>총 소득</span><span>' + r.totalIncome.toLocaleString() + '원</span></div>';
+    if (r.totalTaxPaid) html += '<div class="auth-result-row"><span>기납부 세액</span><span>' + r.totalTaxPaid.toLocaleString() + '원</span></div>';
+    if (r.calculatedTax !== undefined) html += '<div class="auth-result-row"><span>산출 세액</span><span>' + r.calculatedTax.toLocaleString() + '원</span></div>';
+    html += '</div>';
+  } else if (results.refund && results.refund.error) {
+    html += '<div class="auth-result-card"><h4>&#x1f4b0; 환급 정보</h4><p style="color:#e57373;font-size:13px;">조회 실패: ' + results.refund.error + '</p></div>';
+  }
+
+  // 소득 내역
+  if (results.income && results.income.success) {
+    var inc = results.income.data || results.income;
+    html += '<div class="auth-result-card">';
+    html += '<h4>&#x1f4cb; 소득 내역</h4>';
+    if (Array.isArray(inc.incomeList || inc.items)) {
+      var items = inc.incomeList || inc.items;
+      items.forEach(function(item) {
+        html += '<div class="auth-result-row">';
+        html += '<span>' + (item.name || item.source || item.type || '소득') + '</span>';
+        html += '<span>' + (item.amount || 0).toLocaleString() + '원</span>';
+        html += '</div>';
+      });
+    } else if (inc.totalIncome) {
+      html += '<div class="auth-result-row"><span>총 소득</span><span>' + inc.totalIncome.toLocaleString() + '원</span></div>';
+    }
+    html += '</div>';
+  }
+
+  // 신고 내역
+  if (results.taxReport && results.taxReport.success) {
+    var tr = results.taxReport.data || results.taxReport;
+    html += '<div class="auth-result-card">';
+    html += '<h4>&#x1f4c4; 신고 내역</h4>';
+    if (Array.isArray(tr.reports || tr.items)) {
+      var reps = tr.reports || tr.items;
+      reps.forEach(function(rep) {
+        html += '<div class="auth-result-row">';
+        html += '<span>' + (rep.year || rep.period || '') + ' ' + (rep.type || '종합소득세') + '</span>';
+        html += '<span>' + (rep.amount || 0).toLocaleString() + '원</span>';
+        html += '</div>';
+      });
+    }
+    html += '</div>';
+  }
+
+  if (!html) {
+    html = '<div class="auth-result-card"><h4>조회 완료</h4><p style="font-size:13px;color:var(--text-sub);">연동은 성공했지만 표시할 데이터가 없습니다. 홈택스에 신고 내역이 있는지 확인해주세요.</p></div>';
+  }
+
+  // 연동 해제 버튼
+  html += '<button class="btn btn-outline" style="margin-top:8px;font-size:13px;" onclick="disconnectCodef()">연동 해제</button>';
+
+  document.getElementById('authResultContent').innerHTML = html;
+  showAuthStep(4);
+  updateHomeTaxStatus(true);
+}
+
+function disconnectCodef() {
+  localStorage.removeItem('codef_connectedId');
+  updateHomeTaxStatus(false);
+  closeAuthModal();
+}
+
+function updateHomeTaxStatus(connected) {
+  var statusEl = document.getElementById('homeTaxStatus');
+  if (connected) {
+    statusEl.style.display = 'block';
+    statusEl.innerHTML = '<span style="color:var(--main);font-weight:700;">&#x2705; 홈택스 연동 완료</span>' +
+      '<span style="display:block;font-size:12px;color:var(--text-sub);margin-top:4px;">버튼을 다시 누르면 최신 데이터를 조회합니다.</span>';
+  } else {
+    statusEl.style.display = 'none';
+    statusEl.innerHTML = '';
+  }
+}
+
+// 페이지 로드 시 기존 연동 상태 표시
+(function() {
+  if (localStorage.getItem('codef_connectedId')) {
+    updateHomeTaxStatus(true);
+  }
+})();
+
+// ─── 출시 사전예약 ───
+window.preregister = function() {
+  var email = prompt('이메일 주소를 입력해주세요 (출시 시 알림)');
+  if (!email || !email.includes('@')) return;
+
+  // 로컬 저장
+  var list = JSON.parse(localStorage.getItem('tax_preregister') || '[]');
+  list.push({email: email, date: new Date().toISOString()});
+  localStorage.setItem('tax_preregister', JSON.stringify(list));
+
+  // 서버 프록시 경유 (클라이언트에 봇 토큰 노출 금지)
+  fetch(NOTIFY_API_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      type: 'preregister',
+      email: email,
+      timestamp: new Date().toISOString()
+    })
+  }).catch(function(){});
+
+  alert('✅ 사전예약 완료! ' + email + '\n\n5월 정식 출시 시 가장 먼저 알려드릴게요.');
+};
+
+// ─── 세무사 상담 신청 ───
+window.requestConsultation = function() {
+  var name = prompt('성함을 입력해주세요');
+  if (!name) return;
+  var phone = prompt('연락처를 입력해주세요 (010-xxxx-xxxx)');
+  if (!phone) return;
+
+  // 로컬 저장
+  var list = JSON.parse(localStorage.getItem('tax_consultations') || '[]');
+  list.push({name: name, phone: phone, date: new Date().toISOString()});
+  localStorage.setItem('tax_consultations', JSON.stringify(list));
+
+  // 서버 프록시 경유 (클라이언트에 봇 토큰 노출 금지)
+  fetch(NOTIFY_API_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      type: 'consultation',
+      name: name,
+      phone: phone,
+      timestamp: new Date().toISOString()
+    })
+  }).catch(function(){});
+
+  alert('✅ 상담 신청 접수!\n\n담당자가 24시간 이내 연락드리겠습니다.\n' + name + '님 / ' + phone);
+};
+
+// ─── D-day 계산 ───
+(function() {
+  var deadline = new Date('2026-05-31');
+  var today = new Date();
+  var diff = Math.ceil((deadline - today) / (1000*60*60*24));
+  document.getElementById('ddayCount').textContent = 'D-' + diff;
+  if (diff <= 14) {
+    document.getElementById('ddayBanner').style.borderColor = '#ef5350';
+    document.getElementById('ddayCount').style.color = '#ef5350';
+  }
+})();
+
+// ─── Tab 전환 ───
+function switchTab(tab) {
+  document.querySelectorAll('.tab-page').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('page-' + tab).classList.add('active');
+  document.querySelector('[data-tab="' + tab + '"]').classList.add('active');
+  var ci = document.getElementById('chatInputWrap');
+  ci.style.display = tab === 'chat' ? 'flex' : 'none';
+  window.scrollTo(0, 0);
+}
+
+// ─── 종합소득세 계산기 ───
+var taxType = 'individual';
+var familyCount = 1;
+
+function selectType(el, type) {
+  taxType = type;
+  el.parentElement.querySelectorAll('.select-btn').forEach(function(b) { b.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+function selectFamily(el, count) {
+  familyCount = count;
+  el.parentElement.querySelectorAll('.select-btn').forEach(function(b) { b.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+function formatNumber(input) {
+  var v = input.value.replace(/[^0-9]/g, '');
+  if (v) input.value = parseInt(v).toLocaleString();
+  else input.value = '';
+}
+
+function parseNum(id) {
+  return parseInt(document.getElementById(id).value.replace(/[^0-9]/g, '') || '0');
+}
+
+function calculateTax() {
+  var revenue = parseNum('calcRevenue');
+  var expense = parseNum('calcExpense');
+  var prepaid = parseNum('calcPrepaid');
+
+  if (revenue === 0) { alert('총 수입을 입력해주세요.'); return; }
+
+  // 소득금액
+  var income = revenue - expense;
+  if (income < 0) income = 0;
+
+  // 소득공제
+  var basicDeduction = 1800000; // 기본공제 180만원
+  var familyDeduction = (familyCount - 1) * 1500000; // 부양가족 1인당 150만원
+  var pensionDeduction = Math.min(income * 0.09, 5400000); // 국민연금 (추정)
+  var standardDeduction = 70000; // 표준세액공제 7만원
+
+  var totalDeduction = basicDeduction + familyDeduction + pensionDeduction;
+  var taxableIncome = Math.max(0, income - totalDeduction);
+
+  // 2026 세율 적용
+  var tax = 0;
+  if (taxableIncome <= 14000000) {
+    tax = taxableIncome * 0.06;
+  } else if (taxableIncome <= 50000000) {
+    tax = taxableIncome * 0.15 - 1260000;
+  } else if (taxableIncome <= 88000000) {
+    tax = taxableIncome * 0.24 - 5760000;
+  } else if (taxableIncome <= 150000000) {
+    tax = taxableIncome * 0.35 - 15440000;
+  } else if (taxableIncome <= 300000000) {
+    tax = taxableIncome * 0.38 - 19940000;
+  } else if (taxableIncome <= 500000000) {
+    tax = taxableIncome * 0.40 - 25940000;
+  } else if (taxableIncome <= 1000000000) {
+    tax = taxableIncome * 0.42 - 35940000;
+  } else {
+    tax = taxableIncome * 0.45 - 65940000;
+  }
+
+  // 세액공제
+  tax = Math.max(0, tax - standardDeduction);
+
+  // 지방소득세 (10%)
+  var localTax = Math.round(tax * 0.1);
+
+  // 총 세금
+  var totalTax = Math.round(tax) + localTax;
+
+  // 환급/납부
+  var diff = prepaid - totalTax;
+  var isRefund = diff > 0;
+
+  // 프리랜서 3.3% 기납부 자동 계산
+  if (taxType === 'freelancer' && prepaid === 0) {
+    prepaid = Math.round(revenue * 0.033);
+    diff = prepaid - totalTax;
+    isRefund = diff > 0;
+  }
+
+  // 세율 구간
+  var bracket = '';
+  if (taxableIncome <= 14000000) bracket = '6%';
+  else if (taxableIncome <= 50000000) bracket = '15%';
+  else if (taxableIncome <= 88000000) bracket = '24%';
+  else if (taxableIncome <= 150000000) bracket = '35%';
+  else bracket = '38%+';
+
+  var html = '<div class="result-box">';
+  html += '<p class="result-sub">' + (isRefund ? '예상 환급금' : '예상 납부세액') + '</p>';
+  html += '<div class="result-amount ' + (isRefund ? 'refund' : 'pay') + '">₩' + Math.abs(diff).toLocaleString() + '</div>';
+  html += '<p class="result-sub">' + (isRefund ? '돌려받을 수 있는 금액입니다!' : '납부해야 할 금액입니다.') + '</p>';
+  html += '</div>';
+
+  html += '<div class="card" style="margin-top:14px;">';
+  html += '<div style="font-size:15px;font-weight:700;margin-bottom:12px;">계산 상세</div>';
+  html += '<div class="result-detail">';
+  html += '<div class="result-row"><span>총 수입</span><span>' + revenue.toLocaleString() + '원</span></div>';
+  html += '<div class="result-row"><span>총 경비</span><span>-' + expense.toLocaleString() + '원</span></div>';
+  html += '<div class="result-row"><span>소득금액</span><span style="color:var(--gold)">' + income.toLocaleString() + '원</span></div>';
+  html += '<div class="result-row"><span>기본공제 (본인)</span><span>-' + basicDeduction.toLocaleString() + '원</span></div>';
+  if (familyDeduction > 0) html += '<div class="result-row"><span>부양가족공제</span><span>-' + familyDeduction.toLocaleString() + '원</span></div>';
+  html += '<div class="result-row"><span>국민연금 공제 (추정)</span><span>-' + Math.round(pensionDeduction).toLocaleString() + '원</span></div>';
+  html += '<div class="result-row"><span>과세표준</span><span style="color:var(--gold)">' + taxableIncome.toLocaleString() + '원</span></div>';
+  html += '<div class="result-row"><span>적용 세율</span><span style="color:var(--main)">' + bracket + '</span></div>';
+  html += '<div class="result-row"><span>산출세액</span><span>' + Math.round(tax).toLocaleString() + '원</span></div>';
+  html += '<div class="result-row"><span>지방소득세 (10%)</span><span>' + localTax.toLocaleString() + '원</span></div>';
+  html += '<div class="result-row"><span>총 세금</span><span style="font-size:16px;color:var(--red)">' + totalTax.toLocaleString() + '원</span></div>';
+  html += '<div class="result-row"><span>기납부 세액</span><span style="color:var(--mint)">-' + prepaid.toLocaleString() + '원</span></div>';
+  html += '<div class="result-row" style="border-top:2px solid var(--mint);padding-top:12px;"><span style="font-weight:700;color:var(--text)">' + (isRefund ? '환급 예상액' : '추가 납부액') + '</span><span style="font-size:20px;font-weight:900;color:' + (isRefund ? 'var(--mint)' : 'var(--red)') + '">₩' + Math.abs(diff).toLocaleString() + '</span></div>';
+  html += '</div></div>';
+
+  if (isRefund && diff > 50000) {
+    html += '<div class="card card-highlight" style="text-align:center;">';
+    html += '<p style="font-size:14px;margin-bottom:8px;">💰 타 서비스 이용 시 수수료 약 <strong style="color:var(--red);">' + Math.round(diff * 0.15).toLocaleString() + '원</strong></p>';
+    html += '<p style="font-size:16px;font-weight:700;color:var(--mint);">세금N혜택은 수수료 0원! 직접 신고 가이드 제공</p>';
+    html += '</div>';
+  }
+
+  var el = document.getElementById('calcResult');
+  el.innerHTML = html;
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ─── 직종별 절세 가이드 ───
+var guides = {
+  delivery: '<strong>🛵 배달라이더 절세 가이드</strong><br><br>• 오토바이/자전거 구입비, 수리비 → 경비처리<br>• 휴대폰 요금 (업무용 70%) → 경비처리<br>• 배달가방, 헬멧 등 장비 → 경비처리<br>• 주유비, 보험료 → 경비처리<br>• 단순경비율 적용 시 약 79.4% 경비 인정<br><br>💡 연 매출 7,500만원 이하면 간편장부 가능',
+  youtube: '<strong>🎬 유튜버/크리에이터 절세 가이드</strong><br><br>• 장비 (카메라, 마이크, 조명) → 경비처리<br>• 편집 프로그램 구독료 → 경비처리<br>• 촬영 장소 대여비 → 경비처리<br>• 외주 편집비 → 경비처리 (원천징수 3.3% 필수)<br>• 해외 광고수입 (구글 애드센스) → 종합소득세 신고 필수<br><br>💡 매출 규모에 따라 간이과세자 전환 검토',
+  freelancer: '<strong>💻 프리랜서 절세 가이드</strong><br><br>• 3.3% 원천징수 → 종합소득세 신고로 환급 가능!<br>• 작업용 노트북, 모니터 → 경비처리<br>• 카페 작업 시 음료비 → 경비처리 (한도 있음)<br>• 통신비 (인터넷, 휴대폰) → 경비처리<br>• 교육비, 도서 구입비 → 경비처리<br><br>💡 연 수입 2,400만원 이상이면 사업자등록 권장',
+  shop: '<strong>🏪 소상공인 절세 가이드</strong><br><br>• 매입 원가 → 전액 경비처리<br>• 임대료, 관리비 → 경비처리<br>• 직원 급여, 4대보험 → 경비처리<br>• 사업용 차량 리스/렌트 → 경비처리<br>• 노란우산공제 → 연 최대 500만원 소득공제<br><br>💡 매출 1억 400만원 이하 → 간이과세자 전환 검토',
+  insurance: '<strong>🛡️ 보험설계사 절세 가이드</strong><br><br>• 교통비 (차량유지비, 주유비) → 경비처리<br>• 고객 접대비 → 경비처리 (증빙 필수)<br>• 업무용 정장, 명함 → 경비처리<br>• 사무용품, 문구류 → 경비처리<br>• 단순경비율 약 48.1% 적용 가능<br><br>💡 수당 구조에 따라 근로소득/사업소득 구분 확인',
+  realtor: '<strong>🏠 부동산중개 절세 가이드</strong><br><br>• 사무실 임대료 → 경비처리<br>• 광고비 (온라인/오프라인) → 경비처리<br>• 직원 인건비 → 경비처리<br>• 차량유지비 (물건 안내용) → 경비처리<br>• 공인중개사 교육비 → 경비처리<br><br>💡 임대수입 있으면 주택임대 사업자등록 별도 필요',
+};
+
+function showGuide(type) {
+  var el = document.getElementById('guideResult');
+  el.innerHTML = '<div class="card" style="border:1px solid var(--gold);">' + (guides[type] || '') + '</div>';
+  el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ─── AI 상담 (강화) ───
+var aiKnowledge = {
+  '종합소득세 신고 방법 알려줘': '종합소득세 신고는 이렇게 해요:\n\n1. 홈택스(hometax.go.kr) 접속 → 로그인\n2. [신고/납부] → [종합소득세] 클릭\n3. 정기신고 선택\n4. 소득·경비·공제 입력\n5. 납부/환급 확인 후 제출\n\n📅 기간: 2026.05.01 ~ 05.31\n🔗 모바일은 손택스 앱에서도 가능해요!\n\n간편장부대상자(연 매출 7,500만 미만)는 ARS(1544-9944)로도 신고 가능합니다.',
+  '경비 처리 가능한 항목 알려줘': '사업자가 경비 처리할 수 있는 주요 항목:\n\n✅ 사무실 임대료/관리비\n✅ 통신비 (인터넷, 휴대폰)\n✅ 차량 유지비 (주유, 보험, 수리)\n✅ 사무용품, 소모품\n✅ 외주 용역비\n✅ 접대비 (연 1,200만~3,600만 한도)\n✅ 교육/도서 구입비\n✅ 보험료 (사업관련)\n✅ 감가상각 (장비, 인테리어)\n\n⚠️ 개인 생활비는 경비처리 불가!\n💡 사업용 카드를 홈택스에 등록하면 자동으로 경비 증빙됩니다.',
+  '프리랜서 3.3% 환급 방법': '프리랜서 3.3% 환급 절차:\n\n1. 원천징수된 3.3%는 "미리 낸 세금"이에요\n2. 5월 종합소득세 신고 시 실제 세금과 비교\n3. 미리 낸 세금 > 실제 세금 → 차액 환급!\n\n예시: 연수입 3,000만원\n• 기납부 세액: 3,000만 × 3.3% = 99만원\n• 실제 세금: 약 50만원 (경비 공제 후)\n• 환급액: 약 49만원!\n\n💡 경비를 많이 잡을수록 환급이 커져요.\n위 계산기 탭에서 직접 계산해보세요!',
+  '사업자 절세 방법 추천': '사업자 맞춤 절세 전략 TOP 5:\n\n1️⃣ 노란우산공제 가입 → 연 최대 500만원 소득공제\n2️⃣ 사업용 카드 홈택스 등록 → 경비 자동 증빙\n3️⃣ 간이과세자 전환 검토 (매출 1억400만 이하)\n4️⃣ 국민연금 추납 → 전액 소득공제\n5️⃣ 퇴직연금(IRP) 가입 → 연 900만원 세액공제\n\n💰 절세 탭에서 직종별 상세 가이드도 확인하세요!',
+  '부가세 신고 일정': '2026년 부가세 신고 일정:\n\n📅 1기 예정: 2026.04.25까지 (1~3월분)\n📅 1기 확정: 2026.07.25까지 (1~6월분)\n📅 2기 예정: 2026.10.25까지 (7~9월분)\n📅 2기 확정: 2027.01.25까지 (7~12월분)\n\n⚠️ 간이과세자는 1월에 1회만 신고!\n💡 부가세 = 매출세액 - 매입세액',
+  '노란우산공제 혜택': '노란우산공제 혜택 총정리:\n\n💰 소득공제 한도:\n• 연 매출 4,800만 이하: 연 500만원\n• 4,800~1억: 연 300만원\n• 1억 초과: 연 200만원\n\n📌 추가 혜택:\n• 공제금 압류 금지 (안전한 저축)\n• 폐업 시 목돈 수령\n• 복리 이자\n• 납입액 자유 변경 가능\n\n가입: 중소기업중앙회 또는 은행 방문\n☎️ 문의: 1666-9988',
+};
+
+function addChat(text, isUser) {
+  var area = document.getElementById('chatArea');
+  var bubble = document.createElement('div');
+  bubble.className = 'chat-bubble ' + (isUser ? 'chat-user' : 'chat-ai');
+  bubble.innerHTML = text;
+  area.appendChild(bubble);
+  bubble.scrollIntoView({ behavior: 'smooth' });
+}
+
+function showTyping() {
+  var area = document.getElementById('chatArea');
+  var typing = document.createElement('div');
+  typing.className = 'chat-bubble chat-typing';
+  typing.id = 'typingIndicator';
+  typing.textContent = '입력 중...';
+  area.appendChild(typing);
+  typing.scrollIntoView({ behavior: 'smooth' });
+}
+
+function removeTyping() {
+  var t = document.getElementById('typingIndicator');
+  if (t) t.remove();
+}
+
+function sendQuick(text) {
+  addChat(text, true);
+  showTyping();
+  setTimeout(function() {
+    removeTyping();
+    addChat(aiKnowledge[text] || '해당 질문에 대해 분석 중이에요. 더 자세한 상담이 필요하시면 세무사 연결을 도와드릴게요!', false);
+  }, 800);
+}
+
+function sendMsg() {
+  var input = document.getElementById('chatInput');
+  var text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addChat(text, true);
+  showTyping();
+
+  // 키워드 기반 응답
+  var answer = generateTaxAnswer(text);
+  setTimeout(function() {
+    removeTyping();
+    addChat(answer, false);
+  }, 1000);
+}
+
+function generateTaxAnswer(q) {
+  q = q.toLowerCase();
+  if (q.indexOf('종합소득세') >= 0 || q.indexOf('종합소득세') >= 0 || q.indexOf('신고') >= 0) {
+    return aiKnowledge['종합소득세 신고 방법 알려줘'];
+  }
+  if (q.indexOf('경비') >= 0 || q.indexOf('비용') >= 0 || q.indexOf('처리') >= 0) {
+    return aiKnowledge['경비 처리 가능한 항목 알려줘'];
+  }
+  if (q.indexOf('3.3') >= 0 || q.indexOf('프리랜서') >= 0 || q.indexOf('환급') >= 0) {
+    return aiKnowledge['프리랜서 3.3% 환급 방법'];
+  }
+  if (q.indexOf('절세') >= 0 || q.indexOf('세금') >= 0 && q.indexOf('줄') >= 0) {
+    return aiKnowledge['사업자 절세 방법 추천'];
+  }
+  if (q.indexOf('부가세') >= 0 || q.indexOf('부가가치') >= 0) {
+    return aiKnowledge['부가세 신고 일정'];
+  }
+  if (q.indexOf('노란우산') >= 0) {
+    return aiKnowledge['노란우산공제 혜택'];
+  }
+  if (q.indexOf('세율') >= 0 || q.indexOf('구간') >= 0) {
+    return '2026년 종합소득세 세율:\n\n• 1,400만 이하: 6%\n• 1,400~5,000만: 15%\n• 5,000~8,800만: 24%\n• 8,800만~1.5억: 35%\n• 1.5억~3억: 38%\n• 3억~5억: 40%\n• 5억~10억: 42%\n• 10억 초과: 45%\n\n💡 계산기 탭에서 내 세금을 직접 계산해보세요!';
+  }
+  if (q.indexOf('사업자') >= 0 && q.indexOf('등록') >= 0) {
+    return '사업자등록 방법:\n\n1. 홈택스 접속 → [신청/제출]\n2. [사업자등록 신청] 클릭\n3. 인적사항, 사업장 정보 입력\n4. 업종 선택\n5. 필요서류 첨부 후 제출\n\n⏱ 처리기간: 보통 2~3일\n📱 모바일: 손택스 앱에서도 가능!';
+  }
+  return '좋은 질문이에요! 세금 관련 더 자세한 상담이 필요하시면:\n\n1. 💬 위 빠른 질문 버튼을 눌러보세요\n2. 🧮 계산기 탭에서 직접 세금을 계산해보세요\n3. 📊 절세 탭에서 직종별 가이드를 확인하세요\n\n복잡한 문제는 전문 세무사 연결도 가능해요!';
+}
+
+// ─── 프로필 관리 ───
+function loadProfile() {
+  var profile = JSON.parse(localStorage.getItem('tax_profile') || '{}');
+  if (profile.name) {
+    document.getElementById('myName').textContent = profile.name;
+    document.getElementById('settingName').value = profile.name;
+  }
+  if (profile.bizNum) {
+    document.getElementById('myBizNum').textContent = '사업자번호: ' + profile.bizNum;
+    document.getElementById('settingBizNum').value = profile.bizNum;
+  }
+  if (profile.bizType) {
+    document.getElementById('myBizType').textContent = '업종: ' + profile.bizType;
+    document.getElementById('settingBizType').value = profile.bizType;
+  }
+}
+
+function saveProfile() {
+  var profile = {
+    name: document.getElementById('settingName').value,
+    bizNum: document.getElementById('settingBizNum').value,
+    bizType: document.getElementById('settingBizType').value,
+  };
+  localStorage.setItem('tax_profile', JSON.stringify(profile));
+  loadProfile();
+}
+
+loadProfile();
+
+// 쿠팡 파트너스 추천 삽입 (세금·절세 도서)
+(function(){
+  var banner = document.createElement('div');
+  banner.style.cssText = 'max-width:480px;margin:24px auto;padding:20px;background:#f8f9fa;border:1px solid #e2e8f0;border-radius:12px;text-align:center;font-family:sans-serif;';
+  banner.innerHTML = '<p style="font-size:0.85rem;font-weight:600;color:#2d3748;margin-bottom:10px;">📚 종합소득세 시즌 필독서</p>'
+    + '<a href="https://link.coupang.com/a/emjC0T&subId=taxnbenefit" target="_blank" rel="noopener" style="display:block;padding:12px;background:#fff;border:1px solid #cbd5e0;border-radius:8px;font-size:0.8rem;color:#2d3748;text-decoration:none;margin-bottom:8px;">절세·세무 베스트셀러 보러가기 →</a>'
+    + '<p style="font-size:0.6rem;color:#a0aec0;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>';
+  document.body.appendChild(banner);
+})();
+</script>
+</body>
+</html>
