@@ -1,0 +1,28 @@
+{
+  "date": "2026-04-17",
+  "targets": [
+    {
+      "name": "삼쩜삼",
+      "url": "https://3o3.co.kr/",
+      "fetched": true,
+      "hash": "7091d1c3435b1865",
+      "texts": [
+        "ì ê³ ê²°ê³¼ ë³´ê¸°"
+      ]
+    },
+    {
+      "name": "SSEM",
+      "url": "https://ssem.kr/",
+      "fetched": true,
+      "hash": "8bf2e7ba620b392c",
+      "texts": []
+    },
+    {
+      "name": "택슬리",
+      "url": "https://taxly.kr/",
+      "fetched": true,
+      "hash": "e568a9b95df651dc",
+      "texts": []
+    }
+  ]
+}

@@ -1589,6 +1589,259 @@
   }
 
   // ==========================================================================
+  // 신살 (神殺) 분석
+  // ==========================================================================
+
+  /**
+   * 주요 신살 계산
+   * 일간/일지 기준으로 사주 내 신살을 찾음
+   */
+  function calcShinsal(saju) {
+    const 일간 = saju.일주.stem;
+    const 일지 = saju.일주.branch;
+    const results = [];
+
+    // 각 주의 지지 모음
+    const branches = [];
+    if (saju.년주) branches.push({ name: '년지', idx: saju.년주.branch });
+    if (saju.월주) branches.push({ name: '월지', idx: saju.월주.branch });
+    branches.push({ name: '일지', idx: 일지 });
+    if (saju.시주) branches.push({ name: '시지', idx: saju.시주.branch });
+
+    // 도화살 (桃花殺) — 일지 기준
+    // 인오술→묘, 사유축→오, 신자진→유, 해묘미→자
+    const 도화_map = {2:3, 6:3, 10:3, 5:6, 9:6, 1:6, 8:9, 0:9, 4:9, 11:0, 3:0, 7:0};
+    const 도화_target = 도화_map[일지];
+    if (도화_target !== undefined) {
+      branches.forEach(function(b) {
+        if (b.idx === 도화_target && b.name !== '일지') {
+          results.push({
+            name: '도화살', hanja: '桃花殺', position: b.name,
+            description: '매력적이고 이성의 관심을 끄는 기운입니다. 예술적 감각과 사교성이 뛰어나며, 대중적 인기를 얻을 수 있습니다.',
+            type: 'neutral'
+          });
+        }
+      });
+    }
+
+    // 역마살 (驛馬殺) — 일지 기준
+    // 인오술→신, 사유축→해, 신자진→인, 해묘미→사
+    const 역마_map = {2:8, 6:8, 10:8, 5:11, 9:11, 1:11, 8:2, 0:2, 4:2, 11:5, 3:5, 7:5};
+    const 역마_target = 역마_map[일지];
+    if (역마_target !== undefined) {
+      branches.forEach(function(b) {
+        if (b.idx === 역마_target) {
+          results.push({
+            name: '역마살', hanja: '驛馬殺', position: b.name,
+            description: '이동, 변화, 해외 활동의 기운입니다. 한 곳에 머물기보다 활발하게 움직일 때 운이 열립니다. 무역, 유통, 여행 관련 업종에 유리합니다.',
+            type: 'positive'
+          });
+        }
+      });
+    }
+
+    // 화개살 (華蓋殺) — 일지 기준
+    // 인오술→술, 사유축→축, 신자진→진, 해묘미→미
+    const 화개_map = {2:10, 6:10, 10:10, 5:1, 9:1, 1:1, 8:4, 0:4, 4:4, 11:7, 3:7, 7:7};
+    const 화개_target = 화개_map[일지];
+    if (화개_target !== undefined) {
+      branches.forEach(function(b) {
+        if (b.idx === 화개_target) {
+          results.push({
+            name: '화개살', hanja: '華蓋殺', position: b.name,
+            description: '학문, 예술, 종교에 인연이 깊은 기운입니다. 영감이 풍부하고 독특한 세계관을 가지며, 전문 분야에서 두각을 나타냅니다.',
+            type: 'positive'
+          });
+        }
+      });
+    }
+
+    // 천을귀인 (天乙貴人) — 일간 기준
+    // 갑무→축미, 을기→자신, 병정→해유, 경신→인오, 임계→묘사
+    const 귀인_map = {
+      0:[1,7], 4:[1,7],   // 갑,무→축미
+      1:[0,8], 5:[0,8],   // 을,기→자신
+      2:[11,9], 3:[11,9], // 병,정→해유
+      6:[2,6], 7:[2,6],   // 경,신→인오
+      8:[3,5], 9:[3,5]    // 임,계→묘사
+    };
+    const 귀인_targets = 귀인_map[일간] || [];
+    branches.forEach(function(b) {
+      if (귀인_targets.indexOf(b.idx) >= 0) {
+        results.push({
+          name: '천을귀인', hanja: '天乙貴人', position: b.name,
+          description: '가장 큰 길신(吉神)입니다. 어려울 때 귀인의 도움을 받으며, 위기를 기회로 바꾸는 힘이 있습니다. 사회적 신망이 두텁고 인복이 있습니다.',
+          type: 'positive'
+        });
+      }
+    });
+
+    // 문창귀인 (文昌貴人) — 일간 기준 → 학업/시험운
+    const 문창_map = {0:5, 1:6, 2:8, 3:9, 4:8, 5:9, 6:11, 7:0, 8:2, 9:3};
+    const 문창_target = 문창_map[일간];
+    branches.forEach(function(b) {
+      if (b.idx === 문창_target) {
+        results.push({
+          name: '문창귀인', hanja: '文昌貴人', position: b.name,
+          description: '학문과 시험에 유리한 길신입니다. 지적 능력이 뛰어나고 글재주가 있으며, 자격증/시험/학업에서 좋은 결과를 얻습니다.',
+          type: 'positive'
+        });
+      }
+    });
+
+    // 괴강살 (魁罡殺) — 일주 간지 기준
+    // 경진, 임진, 경술, 무술
+    const 괴강_list = [[6,4],[8,4],[6,10],[4,10]];
+    괴강_list.forEach(function(pair) {
+      if (saju.일주.stem === pair[0] && saju.일주.branch === pair[1]) {
+        results.push({
+          name: '괴강살', hanja: '魁罡殺', position: '일주',
+          description: '강한 카리스마와 결단력을 가진 기운입니다. 리더십이 뛰어나지만 고집도 강합니다. 법조, 군인, 경찰, CEO 등 권위가 필요한 직업에 적합합니다.',
+          type: 'neutral'
+        });
+      }
+    });
+
+    // 양인살 (羊刃殺) — 일간 기준
+    // 갑→묘, 병무→오, 경→유, 임→자
+    const 양인_map = {0:3, 2:6, 4:6, 6:9, 8:0};
+    const 양인_target = 양인_map[일간];
+    if (양인_target !== undefined) {
+      branches.forEach(function(b) {
+        if (b.idx === 양인_target) {
+          results.push({
+            name: '양인살', hanja: '羊刃殺', position: b.name,
+            description: '강한 추진력과 승부욕을 가진 기운입니다. 경쟁에서 이기는 힘이 있지만, 과격하거나 급한 성격으로 나타날 수 있습니다. 잘 쓰면 큰 성취를 이룹니다.',
+            type: 'neutral'
+          });
+        }
+      });
+    }
+
+    return results;
+  }
+
+  // ==========================================================================
+  // 건강운 분석 (오행 기반)
+  // ==========================================================================
+
+  function calcHealthFortune(ohaeng) {
+    // 오행과 장기 매핑
+    const organMap = {
+      '목': { organ: '간장/담낭', body: '눈, 근육, 손톱', weak: '간 기능 저하, 피로 누적, 눈 건조', excess: '두통, 근육 경직, 혈압 상승, 화를 잘 냄' },
+      '화': { organ: '심장/소장', body: '혀, 혈관, 안색', weak: '심장 약화, 저혈압, 수족냉증, 우울', excess: '고혈압, 불면증, 가슴 두근거림, 안면홍조' },
+      '토': { organ: '위장/비장', body: '입, 살(肉), 입술', weak: '소화불량, 식욕부진, 체력 저하', excess: '비만, 당뇨 위험, 습담 축적, 부종' },
+      '금': { organ: '폐/대장', body: '코, 피부, 체모', weak: '호흡기 질환, 피부 트러블, 알레르기', excess: '피부 건조, 변비, 과도한 완벽주의로 스트레스' },
+      '수': { organ: '신장/방광', body: '귀, 뼈, 머리카락', weak: '신장 기능 저하, 허리 통증, 청력 감소', excess: '부종, 냉증, 비뇨기 문제, 공포심/불안감 증가' },
+    };
+
+    const results = [];
+    var maxEl = '', maxCnt = 0, minEl = '', minCnt = 99;
+    ['목','화','토','금','수'].forEach(function(el) {
+      var cnt = ohaeng[el] || 0;
+      if (cnt > maxCnt) { maxCnt = cnt; maxEl = el; }
+      if (cnt < minCnt) { minCnt = cnt; minEl = el; }
+    });
+
+    // 과다 오행
+    if (maxCnt >= 3) {
+      var info = organMap[maxEl];
+      results.push({
+        type: 'excess', element: maxEl, count: maxCnt,
+        organ: info.organ, body: info.body,
+        description: info.excess,
+        advice: maxEl + '(' + maxEl + ') 기운이 과다합니다. ' + info.organ + ' 관련 건강에 주의하세요.'
+      });
+    }
+
+    // 부족 오행
+    if (minCnt === 0) {
+      var info2 = organMap[minEl];
+      results.push({
+        type: 'deficient', element: minEl, count: 0,
+        organ: info2.organ, body: info2.body,
+        description: info2.weak,
+        advice: minEl + '(' + minEl + ') 기운이 전혀 없습니다. ' + info2.organ + '을 보강하는 음식과 운동이 필요합니다.'
+      });
+    } else if (minCnt === 1 && maxCnt >= 3) {
+      var info3 = organMap[minEl];
+      results.push({
+        type: 'weak', element: minEl, count: minCnt,
+        organ: info3.organ, body: info3.body,
+        description: info3.weak,
+        advice: minEl + '(' + minEl + ') 기운이 약합니다. ' + info3.organ + ' 건강 관리에 신경 쓰세요.'
+      });
+    }
+
+    // 보양 음식 추천
+    const foodMap = {
+      '목': ['시금치', '부추', '매실', '녹색 채소', '신맛 과일'],
+      '화': ['토마토', '대추', '고추', '석류', '쑥'],
+      '토': ['고구마', '단호박', '잡곡밥', '꿀', '대추차'],
+      '금': ['무', '배', '도라지', '양파', '백색 채소'],
+      '수': ['검은콩', '미역', '해삼', '흑임자', '검은깨'],
+    };
+
+    results.forEach(function(r) {
+      if (r.type === 'deficient' || r.type === 'weak') {
+        r.foods = foodMap[r.element] || [];
+      }
+    });
+
+    return results;
+  }
+
+  // ==========================================================================
+  // 행운 코디
+  // ==========================================================================
+
+  function calcLuckyCodi(yongshin, heeshin) {
+    const colorMap = {
+      '목': { colors: ['초록', '연두', '청록'], hex: ['#2ecc71', '#a8e6cf', '#1abc9c'] },
+      '화': { colors: ['빨강', '주황', '분홍'], hex: ['#e74c3c', '#e67e22', '#fd79a8'] },
+      '토': { colors: ['노랑', '갈색', '베이지'], hex: ['#f1c40f', '#a0522d', '#f5deb3'] },
+      '금': { colors: ['흰색', '은색', '금색'], hex: ['#ecf0f1', '#c0c0c0', '#f0c27f'] },
+      '수': { colors: ['검정', '남색', '파랑'], hex: ['#2c3e50', '#2c3e50', '#3498db'] },
+    };
+    const dirMap = { '목': '동쪽', '화': '남쪽', '토': '중앙', '금': '서쪽', '수': '북쪽' };
+    const numMap = { '목': [3, 8], '화': [2, 7], '토': [5, 10], '금': [4, 9], '수': [1, 6] };
+    const foodMap = {
+      '목': ['신맛 음식 (레몬, 식초, 매실)', '녹색 채소 (시금치, 브로콜리)'],
+      '화': ['쓴맛 음식 (커피, 쑥)', '붉은색 식품 (토마토, 딸기)'],
+      '토': ['단맛 음식 (고구마, 꿀)', '노란색 식품 (단호박, 옥수수)'],
+      '금': ['매운맛 음식 (생강, 마늘)', '흰색 식품 (무, 배)'],
+      '수': ['짠맛 음식 (미역, 김)', '검은색 식품 (검은콩, 흑미)'],
+    };
+
+    return {
+      lucky_colors: colorMap[yongshin] || colorMap['목'],
+      sub_colors: colorMap[heeshin] || colorMap['화'],
+      direction: dirMap[yongshin] || '동쪽',
+      sub_direction: dirMap[heeshin] || '남쪽',
+      numbers: numMap[yongshin] || [3, 8],
+      sub_numbers: numMap[heeshin] || [2, 7],
+      foods: foodMap[yongshin] || [],
+      sub_foods: foodMap[heeshin] || [],
+    };
+  }
+
+  // ==========================================================================
+  // 바이오리듬
+  // ==========================================================================
+
+  function calcBiorhythm(birthDate, targetDate) {
+    var birth = new Date(birthDate);
+    var target = new Date(targetDate);
+    var diff = Math.floor((target - birth) / (1000 * 60 * 60 * 24));
+    return {
+      physical: Math.round(Math.sin(2 * Math.PI * diff / 23) * 100),
+      emotional: Math.round(Math.sin(2 * Math.PI * diff / 28) * 100),
+      intellectual: Math.round(Math.sin(2 * Math.PI * diff / 33) * 100),
+      intuitive: Math.round(Math.sin(2 * Math.PI * diff / 38) * 100),
+    };
+  }
+
+  // ==========================================================================
   // 공개 API
   // ==========================================================================
 
@@ -1612,6 +1865,12 @@
     calcDaeun: calcDaeun,
     calcYearlyFortune: calcYearlyFortune,
     calcMonthlyFortune: calcMonthlyFortune,
+
+    // 신살/건강/행운/바이오리듬
+    calcShinsal: calcShinsal,
+    calcHealthFortune: calcHealthFortune,
+    calcLuckyCodi: calcLuckyCodi,
+    calcBiorhythm: calcBiorhythm,
 
     // 유틸리티
     generate60Ganji: generate60Ganji,

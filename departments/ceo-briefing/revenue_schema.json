@@ -1,0 +1,32 @@
+{
+  "_schema": "부서별 revenue.json 스키마",
+  "_description": "각 부서의 수익 데이터 구조. 모든 부서 파일이 이 형식을 따라야 함.",
+  "_fields": {
+    "today": "오늘 매출 (KRW)",
+    "week": "이번 주 매출",
+    "month": "이번 달 매출",
+    "total": "누적 매출",
+    "count_today": "오늘 판매 건수",
+    "count_month": "이번 달 판매 건수",
+    "last_updated": "마지막 업데이트 시각 (ISO 8601)",
+    "events": "상세 이벤트 로그 배열"
+  },
+  "_event_format": {
+    "at": "2026-04-17T09:00:00+09:00",
+    "amount": 9900,
+    "product": "블로그 프롬프트 100선",
+    "channel": "크티",
+    "customer": "익명(hash)",
+    "note": "선택"
+  },
+  "_example": {
+    "today": 0,
+    "week": 0,
+    "month": 0,
+    "total": 0,
+    "count_today": 0,
+    "count_month": 0,
+    "last_updated": null,
+    "events": []
+  }
+}

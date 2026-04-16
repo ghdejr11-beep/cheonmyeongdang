@@ -4,8 +4,12 @@
 const https = require('https');
 
 // trim() to remove accidental newlines from env vars (PowerShell echo 이슈 방지)
-const CLIENT_ID = (process.env.CODEF_CLIENT_ID || '57d8527e-e2a7-40e1-8bc5-d85ad4df2974').trim();
-const CLIENT_SECRET = (process.env.CODEF_CLIENT_SECRET || 'dfc6efea-b57a-4264-b61d-b5450dc36951').trim();
+const CLIENT_ID = (process.env.CODEF_CLIENT_ID || '').trim();
+const CLIENT_SECRET = (process.env.CODEF_CLIENT_SECRET || '').trim();
+
+if (!CLIENT_ID || !CLIENT_SECRET) {
+  console.error('[CODEF] CLIENT_ID 또는 CLIENT_SECRET 환경변수 미설정');
+}
 
 function getToken() {
   return new Promise((resolve, reject) => {

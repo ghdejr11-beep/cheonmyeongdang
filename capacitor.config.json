@@ -1,0 +1,8 @@
+{
+  "appId": "com.cheonmyeongdang.app",
+  "appName": "천명당",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

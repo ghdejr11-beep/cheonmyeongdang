@@ -53,10 +53,23 @@ module.exports = async (req, res) => {
 
   if (body.type === 'preregister') {
     const email = esc(body.email).slice(0, 100);
+    const phone = esc(body.phone || '').slice(0, 30);
+    const job = esc(body.job || '').slice(0, 30);
     if (!email || email.indexOf('@') === -1) {
       return res.status(400).json({ error: 'Invalid email' });
     }
-    text = `🎯 <b>세금N혜택 사전예약</b>\n이메일: ${email}\n시간: ${new Date().toLocaleString('ko-KR')}`;
+    // 부서 수익 집계 채널에도 동시 발송 (매 사전예약 = 미래 매출 1건)
+    const jobLabels = {
+      freelancer: '💼 프리랜서', shop: '🏪 자영업자', creator: '🎬 크리에이터',
+      worker: '🛵 플랫폼노동자', employee: '💻 직장인부업', insurance: '🛡️ 보험설계사',
+    };
+    const jobTxt = jobLabels[job] || job || '-';
+    text = `🎯 <b>세금N혜택 사전예약</b>\n`
+         + `이메일: ${email}\n`
+         + (phone ? `전화: ${phone}\n` : '')
+         + `직종: ${jobTxt}\n`
+         + `시간: ${new Date().toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'})}\n\n`
+         + `💰 <i>환급 서비스 오픈 시 인당 ~15,000원 수익 예상</i>`;
   } else if (body.type === 'consultation') {
     const name = esc(body.name).slice(0, 50);
     const phone = esc(body.phone).slice(0, 30);

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HexDrop Feature Graphic</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+body { background:#222; padding:20px; font-family:'Noto Sans KR',sans-serif; color:#fff; }
+canvas { display:block; margin:20px auto; border:2px solid #555; max-width:100%; }
+button { background:#ffd93d; color:#000; border:none; padding:14px 28px; font-size:16px; font-weight:700; cursor:pointer; border-radius:8px; margin:10px; }
+</style>
+</head>
+<body>
+<h1>HexDrop 피처드 그래픽 (1024x500)</h1>
+<canvas id="cv" width="1024" height="500"></canvas>
+<div style="text-align:center;">
+<button onclick="download()">📥 PNG 다운로드</button>
+</div>
+
+<script>
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+
+function rounded(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r);
+  ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
+}
+
+function draw() {
+  // 배경 그라데이션
+  const bg = ctx.createLinearGradient(0, 0, 1024, 500);
+  bg.addColorStop(0, '#1a0240');
+  bg.addColorStop(0.5, '#2a1060');
+  bg.addColorStop(1, '#0a0a18');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, 1024, 500);
+
+  // 별 효과
+  for (let i = 0; i < 80; i++) {
+    ctx.fillStyle = `rgba(255,255,255,${Math.random() * 0.5 + 0.2})`;
+    const sz = Math.random() * 2 + 0.5;
+    ctx.beginPath();
+    ctx.arc(Math.random() * 1024, Math.random() * 500, sz, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // 큰 글로우 원형
+  const glow = ctx.createRadialGradient(512, 250, 0, 512, 250, 400);
+  glow.addColorStop(0, 'rgba(255,107,107,0.3)');
+  glow.addColorStop(0.5, 'rgba(124,58,237,0.15)');
+  glow.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, 1024, 500);
+
+  // ===== 왼쪽 텍스트 =====
+  // HEX DROP 메인 제목
+  const titleGrad = ctx.createLinearGradient(60, 100, 60, 250);
+  titleGrad.addColorStop(0, '#ffeb3b');
+  titleGrad.addColorStop(0.5, '#ffd93d');
+  titleGrad.addColorStop(1, '#ff9f43');
+  ctx.fillStyle = titleGrad;
+  ctx.font = '900 92px "Fredoka One", "Noto Sans KR", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.shadowColor = 'rgba(255,217,61,0.6)';
+  ctx.shadowBlur = 30;
+  ctx.fillText('HEX', 60, 175);
+  ctx.fillText('DROP', 60, 265);
+  ctx.shadowBlur = 0;
+
+  // 부제목
+  ctx.fillStyle = '#a78bfa';
+  ctx.font = '700 18px "Noto Sans KR", sans-serif';
+  ctx.fillText('AI BATTLE · COMBO EDITION', 60, 305);
+
+  // 한국어 부제목
+  ctx.fillStyle = '#ffd93d';
+  ctx.font = '900 28px "Noto Sans KR", sans-serif';
+  ctx.fillText('AI와의 두뇌 대결!', 60, 360);
+
+  // 한국어 설명
+  ctx.fillStyle = '#fff';
+  ctx.font = '700 18px "Noto Sans KR", sans-serif';
+  ctx.fillText('1만점 선착순 승리 · 콤보 폭발', 60, 395);
+
+  // CTA
+  ctx.fillStyle = '#4ade80';
+  ctx.font = '900 22px "Noto Sans KR", sans-serif';
+  ctx.fillText('🎮 지금 무료 다운로드', 60, 440);
+
+  // ===== 오른쪽 게임 보드 미니어처 =====
+  drawMiniBoard(580, 80, 'PLAYER', '#4d96ff');
+  drawMiniBoard(810, 80, 'AI', '#ff6b6b');
+
+  // VS 텍스트
+  ctx.fillStyle = '#ffd93d';
+  ctx.font = '900 60px "Fredoka One", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.shadowColor = '#ffd93d';
+  ctx.shadowBlur = 25;
+  ctx.fillText('VS', 770, 270);
+  ctx.shadowBlur = 0;
+
+  // 점수 표시
+  ctx.fillStyle = '#fff';
+  ctx.font = '900 14px "Noto Sans KR", sans-serif';
+  ctx.fillText('8,540', 622, 410);
+  ctx.fillText('7,280', 852, 410);
+}
+
+function drawMiniBoard(x, y, label, color) {
+  const cellSize = 17;
+  const cols = 8, rows = 12;
+  const w = cellSize * cols + 12;
+  const h = cellSize * rows + 12;
+
+  // 라벨
+  ctx.fillStyle = color;
+  ctx.font = '900 13px "Noto Sans KR", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(label, x + w/2, y - 4);
+
+  // 보드 배경
+  ctx.fillStyle = 'rgba(18,17,42,0.95)';
+  rounded(x, y, w, h, 8);
+  ctx.fill();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // 셀
+  const colors = ['#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff', '#c77dff', '#ff9f43', '#00d2d3'];
+  // 랜덤 채워진 패턴
+  const filled = [];
+  for (let r = 0; r < rows; r++) {
+    filled[r] = [];
+    for (let c = 0; c < cols; c++) {
+      // 하단부터 채워진 느낌
+      filled[r][c] = (r > 6 && Math.random() > 0.3) ? colors[Math.floor(Math.random() * colors.length)] : null;
+    }
+  }
+  // 가비지 패턴 (아래쪽)
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const cx = x + 6 + c * cellSize;
+      const cy = y + 6 + r * cellSize;
+      if (filled[r][c]) {
+        ctx.fillStyle = filled[r][c];
+        rounded(cx + 1, cy + 1, cellSize - 2, cellSize - 2, 3);
+        ctx.fill();
+      } else {
+        ctx.fillStyle = 'rgba(255,255,255,0.04)';
+        rounded(cx + 1, cy + 1, cellSize - 2, cellSize - 2, 3);
+        ctx.fill();
+      }
+    }
+  }
+}
+
+document.fonts.ready.then(() => {
+  setTimeout(draw, 100);
+});
+
+function download() {
+  const link = document.createElement('a');
+  link.download = 'hexdrop-feature-1024x500.png';
+  link.href = cv.toDataURL('image/png');
+  link.click();
+}
+</script>
+</body>
+</html>
