@@ -503,20 +503,22 @@ def page7_request(c):
     y -= 92*mm
 
     # 데모 링크
-    draw_box(c, M, y - 30*mm, W - 2*M, 28*mm, color=VERY_LIGHT)
+    draw_box(c, M, y - 36*mm, W - 2*M, 34*mm, color=VERY_LIGHT)
     c.setFont('MalgunBd', 10)
     c.setFillColor(NAVY)
     c.drawString(M + 6*mm, y - 7*mm, '「 데모 사이트 (검토용) 」')
     c.setFont('Malgun', 8.5)
     c.setFillColor(BLUE)
-    c.drawString(M + 6*mm, y - 14*mm, '[고객용]')
-    c.drawString(M + 22*mm, y - 14*mm, 'https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/index.html')
-    c.drawString(M + 6*mm, y - 20*mm, '[설계사용]')
-    c.drawString(M + 22*mm, y - 20*mm, 'https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/agent.html')
+    c.drawString(M + 6*mm, y - 14*mm, '[소개]')
+    c.drawString(M + 22*mm, y - 14*mm, 'https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/landing.html')
+    c.drawString(M + 6*mm, y - 20*mm, '[고객용]')
+    c.drawString(M + 22*mm, y - 20*mm, 'https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/index.html')
+    c.drawString(M + 6*mm, y - 26*mm, '[설계사용]')
+    c.drawString(M + 22*mm, y - 26*mm, 'https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/agent.html')
     c.setFont('Malgun', 8.5)
     c.setFillColor(GRAY)
-    c.drawString(M + 6*mm, y - 26*mm, '※ 설계사용에서 프로필 설정 후 본인 전용 고객 링크를 생성할 수 있습니다.')
-    y -= 38*mm
+    c.drawString(M + 6*mm, y - 32*mm, '※ 소개 페이지에서 기능·차별화 개요 확인 후, 고객용/설계사용 앱을 체험하실 수 있습니다.')
+    y -= 44*mm
 
     c.setStrokeColor(LIGHT_GRAY)
     c.setLineWidth(0.5)
