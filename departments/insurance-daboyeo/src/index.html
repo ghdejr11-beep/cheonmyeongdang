@@ -256,6 +256,7 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
   </div>
   <div class="nav-section">
     <div class="nav-label">지원</div>
+    <button class="nav-item" onclick="go(&#39;chatbot&#39;,this)" style="font-size:14px;"><span class="nav-icon">❓</span>물어보기 (도움말) <span class="nav-badge" style="background:#f59e0b;">NEW</span></button>
     <button class="nav-item" onclick="go(&#39;support&#39;,this)"><span class="nav-icon">💬</span>고객센터·불만접수 <span class="nav-badge" style="background:#10b981;">BETA</span></button>
   </div>
   <div class="sidebar-bottom">
@@ -1163,6 +1164,63 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
 </div>
 
 <!-- ════════ API 연동 설정 ════════ -->
+<!-- ════════ Q&A 챗봇 (어르신 친화) ════════ -->
+<div id="page-chatbot" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title" style="font-size:28px;">❓ 궁금한 거 물어보세요</div>
+      <div class="page-sub" style="font-size:17px;">버튼만 누르시면 답을 알려드려요</div>
+    </div>
+  </div>
+
+  <div class="alert alert-blue" style="margin-bottom:1.5rem;font-size:16px;line-height:1.8;">
+    👵🏻👴🏻 <strong>큰 글씨로 쉽게 설명드립니다.</strong><br>
+    아래 <strong>파란 버튼</strong>을 누르시면 자주 묻는 질문을 바로 보실 수 있어요.<br>
+    답을 못 찾으면 아래쪽 <strong>"담당 설계사에게 연결"</strong> 버튼을 눌러주세요.
+  </div>
+
+  <!-- 채팅 영역 -->
+  <div class="card" style="min-height:400px;">
+    <div id="chat-log" style="display:flex;flex-direction:column;gap:14px;padding:10px;min-height:300px;max-height:500px;overflow-y:auto;">
+      <!-- 봇 환영 메시지 -->
+      <div class="chat-bubble bot" style="background:#eff6ff;border-radius:16px 16px 16px 4px;padding:16px 20px;max-width:85%;align-self:flex-start;font-size:17px;line-height:1.7;color:var(--text);">
+        <div style="font-weight:700;margin-bottom:6px;color:var(--primary);">🤖 보험 도우미</div>
+        안녕하세요! 보험다보여 도우미입니다.<br>
+        아래 버튼을 누르시거나 질문을 적어주세요.
+      </div>
+    </div>
+
+    <!-- 자주 묻는 질문 -->
+    <div style="margin-top:16px;">
+      <div style="font-size:15px;font-weight:700;color:var(--text-sub);margin-bottom:10px;">💡 자주 묻는 질문</div>
+      <div id="chat-quick" style="display:flex;flex-wrap:wrap;gap:8px;">
+        <button class="chat-q" onclick="askBot('내 보험 어디서 봐요?')" style="padding:12px 18px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:24px;font-size:15px;color:var(--primary);font-weight:600;cursor:pointer;">🛡️ 내 보험 어디서 봐요?</button>
+        <button class="chat-q" onclick="askBot('보험금 청구 어떻게 해요?')" style="padding:12px 18px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:24px;font-size:15px;color:var(--primary);font-weight:600;cursor:pointer;">📋 보험금 청구 어떻게 해요?</button>
+        <button class="chat-q" onclick="askBot('설계사 누구예요?')" style="padding:12px 18px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:24px;font-size:15px;color:var(--primary);font-weight:600;cursor:pointer;">👨‍💼 설계사 누구예요?</button>
+        <button class="chat-q" onclick="askBot('갱신 언제에요?')" style="padding:12px 18px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:24px;font-size:15px;color:var(--primary);font-weight:600;cursor:pointer;">📅 갱신 언제예요?</button>
+        <button class="chat-q" onclick="askBot('보장이 겹치나요?')" style="padding:12px 18px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:24px;font-size:15px;color:var(--primary);font-weight:600;cursor:pointer;">⚖️ 보장이 겹치나요?</button>
+        <button class="chat-q" onclick="askBot('개인정보 안전해요?')" style="padding:12px 18px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:24px;font-size:15px;color:var(--primary);font-weight:600;cursor:pointer;">🔒 개인정보 안전해요?</button>
+        <button class="chat-q" onclick="askBot('보험료 얼마예요?')" style="padding:12px 18px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:24px;font-size:15px;color:var(--primary);font-weight:600;cursor:pointer;">💰 보험료 얼마예요?</button>
+        <button class="chat-q" onclick="askBot('해지 어떻게 해요?')" style="padding:12px 18px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:24px;font-size:15px;color:var(--primary);font-weight:600;cursor:pointer;">❎ 해지 어떻게 해요?</button>
+        <button class="chat-q" onclick="askBot('새 보험 가입할래요')" style="padding:12px 18px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:24px;font-size:15px;color:var(--primary);font-weight:600;cursor:pointer;">✨ 새 보험 가입할래요</button>
+        <button class="chat-q" onclick="askBot('사용법을 모르겠어요')" style="padding:12px 18px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:24px;font-size:15px;color:var(--primary);font-weight:600;cursor:pointer;">🤔 사용법을 모르겠어요</button>
+      </div>
+    </div>
+
+    <!-- 자유 입력 -->
+    <div style="margin-top:18px;display:flex;gap:8px;">
+      <input id="chat-input" type="text" placeholder="직접 질문을 입력하세요..." style="flex:1;padding:14px 16px;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;font-family:inherit;font-size:16px;" onkeypress="if(event.key==='Enter')sendChat()" />
+      <button onclick="sendChat()" style="padding:14px 24px;background:var(--primary);color:#fff;border:0;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;">보내기</button>
+    </div>
+
+    <!-- 에스컬레이션 -->
+    <div style="margin-top:16px;padding:16px;background:#fff7ed;border:1px solid #fdba74;border-radius:12px;text-align:center;">
+      <div style="font-size:15px;color:#b45309;margin-bottom:10px;">답을 못 찾으셨나요?</div>
+      <button onclick="go('agent', document.querySelector('[onclick*=\"agent\"]'))" style="padding:14px 28px;background:#f59e0b;color:#fff;border:0;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer;">📞 담당 설계사에게 바로 연결</button>
+    </div>
+  </div>
+</div>
+
 <!-- ════════ 고객센터·불만접수 ════════ -->
 <div id="page-support" class="page">
   <div class="page-header">
@@ -2894,6 +2952,68 @@ function filterIns(type, btn) {
     });
     if (btn.id !== 'toggle-unjoined') btn.classList.add('active');
   }
+}
+
+/* ═══ Q&A 챗봇 ═══ */
+const FAQ_KB = [
+  { kw: ['내 보험', '내보험', '어디서', '현황', '가입된', '가입보험'], a: '왼쪽 메뉴 <strong>「내 보험 현황」</strong>을 눌러주세요.<br>현재 가입하신 보험 <strong>6개</strong>가 정리되어 보입니다.<br>월 보험료 합계와 보장 내역도 한눈에 확인할 수 있어요.' },
+  { kw: ['청구', '보험금', '신청', '받기'], a: '왼쪽 메뉴 <strong>「보험금 청구」</strong>를 눌러주세요.<br>상황에 맞는 청구 안내 <strong>8가지</strong>가 있어요:<br>• 병원 입원 · 통원<br>• 수술 · 사고<br>• 암 진단 · 장기 질환<br>• 사망 · 후유장해<br>필요한 서류와 절차를 단계별로 알려드립니다.' },
+  { kw: ['설계사', '담당자', '누구', '연결', '전화', '연락'], a: '왼쪽 메뉴 <strong>「설계사 연결」</strong>을 눌러주세요.<br>담당 설계사님의 이름·전화번호·카카오톡이 표시됩니다.<br>바로 전화 버튼을 누르시면 통화가 됩니다.' },
+  { kw: ['갱신', '만기', '언제', '일자', '기간'], a: '왼쪽 메뉴 <strong>「갱신·만기 알림」</strong>을 눌러주세요.<br>보험마다 갱신일·만기일이 달력에 표시되어 있어요.<br>한 달 전부터 자동으로 알림을 보내드립니다.' },
+  { kw: ['중복', '겹', '보장', '많', '절약'], a: '왼쪽 메뉴 <strong>「보장 분석」</strong>을 눌러주세요.<br>겹치는 보장이 있으면 빨간 표시로 알려드립니다.<br>현재 <strong>2건의 중복</strong>이 발견되어 월 <strong>42,000원 절약</strong> 가능해요.' },
+  { kw: ['개인정보', '보안', '안전', '새', '유출'], a: '걱정 마세요. <strong>매우 안전합니다.</strong><br>• 주민번호는 서버에 저장되지 않아요<br>• 공인기관(CODEF)의 안전한 API만 사용해요<br>• 256비트 암호화 통신<br>• 본인이 인증한 정보만 조회합니다' },
+  { kw: ['얼마', '보험료', '가격', '납입', '월'], a: '왼쪽 <strong>「내 보험 현황」</strong>에서 확인하세요.<br>보험마다 월 납입 보험료가 표시됩니다.<br>현재 총 납입액: <strong>월 487,000원</strong><br>겹치는 보장 정리하면 <strong>42,000원 절약</strong> 가능해요.' },
+  { kw: ['해지', '취소', '그만'], a: '보험 해지는 <strong>설계사와 꼭 상담하신 후</strong> 결정하세요.<br>해지하면 받은 혜택이 줄어들 수 있어요.<br>왼쪽 <strong>「설계사 연결」</strong>에서 담당 설계사님께 먼저 문의 주세요.' },
+  { kw: ['가입', '새', '들', '추천', '새로운'], a: '왼쪽 메뉴 <strong>「맞춤 추천」</strong>을 눌러주세요.<br>지금 부족한 보장을 AI가 분석해 추천합니다.<br>또는 <strong>「설계사 연결」</strong>에서 담당자에게 문의하실 수 있어요.' },
+  { kw: ['사용법', '모르겠', '어떻게', '처음', '방법'], a: '천천히 하나씩 알려드릴게요.<br>1️⃣ 왼쪽 큰 메뉴를 눌러보세요<br>2️⃣ <strong>「내 보험 현황」</strong>이 기본 화면이에요<br>3️⃣ 각 보험 카드를 누르면 자세히 보여요<br><br>모르겠으면 아래 <strong>「담당 설계사에게 연결」</strong> 버튼을 눌러주세요. 바로 도와드려요.' },
+  { kw: ['건강', '심사', '통과', '진료'], a: '왼쪽 메뉴 <strong>「가입 전 건강분석」</strong>을 눌러주세요.<br>최근 5년 진료기록을 바탕으로 <strong>어떤 보험이 가입 가능한지</strong> 알려드립니다.<br>(이 기능은 곧 실제 데이터 연동됩니다)' },
+];
+
+function askBot(q) {
+  // 사용자 버블 추가
+  appendChatBubble(q, 'user');
+  // 응답 찾기
+  setTimeout(() => {
+    const ans = findAnswer(q);
+    appendChatBubble(ans, 'bot');
+    // 스크롤
+    const log = document.getElementById('chat-log');
+    if (log) log.scrollTop = log.scrollHeight;
+  }, 300);
+}
+
+function sendChat() {
+  const input = document.getElementById('chat-input');
+  const q = input.value.trim();
+  if (!q) return;
+  input.value = '';
+  askBot(q);
+}
+
+function findAnswer(q) {
+  const text = q.toLowerCase();
+  for (const item of FAQ_KB) {
+    if (item.kw.some(k => text.includes(k.toLowerCase()))) {
+      return item.a;
+    }
+  }
+  return '죄송해요, 질문을 잘 못 알아들었어요 😅<br>위 파란 <strong>「자주 묻는 질문」</strong> 버튼 중 하나를 눌러보시거나,<br>아래 <strong>「담당 설계사에게 연결」</strong> 버튼으로 바로 문의해주세요.';
+}
+
+function appendChatBubble(text, who) {
+  const log = document.getElementById('chat-log');
+  if (!log) return;
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble ' + who;
+  if (who === 'bot') {
+    bubble.style.cssText = 'background:#eff6ff;border-radius:16px 16px 16px 4px;padding:16px 20px;max-width:85%;align-self:flex-start;font-size:17px;line-height:1.7;color:var(--text);';
+    bubble.innerHTML = '<div style="font-weight:700;margin-bottom:6px;color:var(--primary);">🤖 보험 도우미</div>' + text;
+  } else {
+    bubble.style.cssText = 'background:var(--primary);color:#fff;border-radius:16px 16px 4px 16px;padding:14px 18px;max-width:85%;align-self:flex-end;font-size:16px;';
+    bubble.textContent = text;
+  }
+  log.appendChild(bubble);
+  log.scrollTop = log.scrollHeight;
 }
 
 async function submitSupport(source) {
