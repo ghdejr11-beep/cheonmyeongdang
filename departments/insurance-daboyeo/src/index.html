@@ -114,8 +114,10 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
 /* ── INSURANCE CARDS ── */
 .ins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1rem; }
 .ins-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.1rem; transition: all 0.15s; cursor: pointer; }
-.ins-unjoined { opacity: 0.55; }
-.ins-unjoined:hover { opacity: 1; border-color: var(--primary) !important; }
+/* 미가입 보험사는 기본 숨김 (실 가입 계약만 표시) */
+.ins-unjoined { display: none; }
+.ins-unjoined.show-all { display: revert; opacity: 0.55; }
+.ins-unjoined.show-all:hover { opacity: 1; border-color: var(--primary) !important; }
 .ins-card.selected { border-color: var(--primary); background: var(--primary-bg); }
 .ins-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 .ins-logo { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
@@ -300,7 +302,7 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
   </div>
 
   <div class="grid-4" style="margin-bottom:1.5rem;">
-    <div class="metric"><div class="metric-label">가입 보험 수</div><div class="metric-value">7개</div><div class="metric-sub">4개 보험사</div></div>
+    <div class="metric"><div class="metric-label">가입 보험 수</div><div class="metric-value">6개</div><div class="metric-sub">6개 보험사</div></div>
     <div class="metric"><div class="metric-label">월 납입 보험료</div><div class="metric-value metric-info">₩487,000</div><div class="metric-sub">연 ₩5,844,000</div></div>
     <div class="metric"><div class="metric-label">보장 커버리지</div><div class="metric-value metric-up">74%</div><div class="metric-sub">▲ 권장 대비</div></div>
     <div class="metric"><div class="metric-label">중복 보장 항목</div><div class="metric-value metric-warn">3개</div><div class="metric-sub">절약 가능 ₩42,000/월</div></div>
@@ -388,11 +390,11 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
       </div>
     </div>
     <!-- 필터 탭 -->
-    <div style="display:flex;gap:4px;margin-bottom:12px;">
-      <button class="tab active" style="flex:none;padding:5px 14px;font-size:12px;" onclick="filterIns(&#39;all&#39;,this)">전체 <span id="cnt-all" style="opacity:0.6;">(34)</span></button>
-      <button class="tab" style="flex:none;padding:5px 14px;font-size:12px;" onclick="filterIns(&#39;life&#39;,this)">생명보험 <span style="opacity:0.6;">(22)</span></button>
-      <button class="tab" style="flex:none;padding:5px 14px;font-size:12px;" onclick="filterIns(&#39;nonlife&#39;,this)">손해보험 <span style="opacity:0.6;">(12)</span></button>
-      <button class="tab" style="flex:none;padding:5px 14px;font-size:12px;" onclick="filterIns(&#39;joined&#39;,this)">가입된 보험 <span id="cnt-joined" style="opacity:0.6;">(6)</span></button>
+    <div style="display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;">
+      <button class="tab active" style="flex:none;padding:5px 14px;font-size:12px;" onclick="filterIns(&#39;all&#39;,this)">전체 <span style="opacity:0.6;">(6)</span></button>
+      <button class="tab" style="flex:none;padding:5px 14px;font-size:12px;" onclick="filterIns(&#39;life&#39;,this)">생명보험 <span style="opacity:0.6;">(2)</span></button>
+      <button class="tab" style="flex:none;padding:5px 14px;font-size:12px;" onclick="filterIns(&#39;nonlife&#39;,this)">손해보험 <span style="opacity:0.6;">(4)</span></button>
+      <button class="tab" id="toggle-unjoined" style="flex:none;padding:5px 14px;font-size:12px;margin-left:auto;background:transparent;color:var(--text3);border:1px dashed var(--border);" onclick="toggleUnjoined(this)">+ 미가입 보험사 보기</button>
     </div>
 
     <div class="ins-grid" id="ins-grid-list" style="grid-template-columns:repeat(4,1fr);">
@@ -2796,19 +2798,35 @@ function showToast(msg) {
 }
 
 /* ── 기존 함수들 ── */
+/* 미가입 카드는 CSS 클래스(.show-all)로만 표시 제어.
+ * .ins-card의 원래 display 속성은 건드리지 않음 (style 속성 제거). */
 function filterIns(type, btn) {
-  document.querySelectorAll('#ins-grid-list').forEach(grid => {
-    grid.querySelectorAll('.ins-card').forEach(card => {
-      const ct = card.dataset.type;
-      const joined = card.dataset.joined === 'true';
-      if (type === 'all') card.style.display = '';
-      else if (type === 'life') card.style.display = ct === 'life' ? '' : 'none';
-      else if (type === 'nonlife') card.style.display = ct === 'nonlife' ? '' : 'none';
-      else if (type === 'joined') card.style.display = joined ? '' : 'none';
-    });
+  document.querySelectorAll('#ins-grid-list .ins-card').forEach(card => {
+    const ct = card.dataset.type;
+    const joined = card.dataset.joined === 'true';
+    card.style.display = ''; // 초기화 (CSS 원본 복원)
+    // 타입 필터로 걸러낼 것만 none 처리
+    if (type === 'life' && ct !== 'life') card.style.display = 'none';
+    else if (type === 'nonlife' && ct !== 'nonlife') card.style.display = 'none';
+    // 가입 여부는 CSS .ins-unjoined { display:none } + .show-all 클래스가 자동 처리
   });
-  document.querySelectorAll('.ins-filter-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn && btn.parentElement) {
+    btn.parentElement.querySelectorAll('.tab').forEach(t => {
+      if (t.id !== 'toggle-unjoined') t.classList.remove('active');
+    });
+    if (btn.id !== 'toggle-unjoined') btn.classList.add('active');
+  }
+}
+
+function toggleUnjoined(btn) {
+  const grid = document.getElementById('ins-grid-list');
+  const isOn = grid.classList.toggle('show-unjoined');
+  grid.querySelectorAll('.ins-unjoined').forEach(c => {
+    c.classList.toggle('show-all', isOn);
+  });
+  btn.textContent = isOn ? '× 미가입 숨기기' : '+ 미가입 보험사 보기';
+  btn.style.color = isOn ? 'var(--primary)' : 'var(--text3)';
+  btn.style.borderStyle = isOn ? 'solid' : 'dashed';
 }
 
 function go(name, btn) {
