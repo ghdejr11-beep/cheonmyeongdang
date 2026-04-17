@@ -115,6 +115,23 @@
     border: 1px solid var(--border);
   }
   .phone-mockup img { width: 100%; display: block; }
+  /* 실제 스크린샷 - 폰 프레임 */
+  .phone-shot {
+    width: 240px; background: #1a1a1a;
+    border-radius: 36px; padding: 10px;
+    box-shadow: 0 24px 60px rgba(50,130,246,0.22), 0 12px 30px rgba(0,0,0,0.15);
+    transition: transform .3s;
+  }
+  .phone-shot:hover { transform: translateY(-6px) !important; }
+  .phone-shot-lead {
+    width: 270px;
+    transform: scale(1.08);
+    z-index: 2;
+  }
+  .phone-shot img {
+    width: 100%; display: block;
+    border-radius: 28px;
+  }
   .phone-screen {
     background: #dbe9fc; padding: 20px; aspect-ratio: 9/16;
     display: flex; flex-direction: column; gap: 12px;
@@ -145,6 +162,54 @@
     .hero .sub { font-size: 17px; }
     .btn-primary, .btn-secondary { padding: 15px 28px; font-size: 15px; }
     .phone-mockup { width: 240px; }
+  }
+
+  /* ===== SHOWCASE (모바일 스크린샷) ===== */
+  .showcase {
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    padding: 100px 24px 80px;
+  }
+  .showcase-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;
+  }
+  .showcase-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(50,130,246,0.08);
+    transition: all .2s;
+  }
+  .showcase-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(50,130,246,0.15);
+  }
+  .showcase-card img {
+    width: 100%; display: block;
+    border-radius: 16px;
+    aspect-ratio: 9/19.5;
+    object-fit: cover;
+    object-position: top;
+  }
+  .showcase-label {
+    padding: 14px 8px 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  @media (max-width: 1024px) {
+    .showcase-inner { grid-template-columns: repeat(3, 1fr); }
+    .showcase-card:nth-child(4), .showcase-card:nth-child(5) { display: block; }
+  }
+  @media (max-width: 640px) {
+    .showcase { padding: 60px 20px; }
+    .showcase-inner {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
   }
 
   /* ===== STATS ===== */
@@ -388,55 +453,50 @@
     </p>
 
     <div class="hero-image">
-      <div class="phone-mockup" style="transform: rotate(-3deg);">
-        <div class="phone-screen">
-          <div class="ps-top">
-            <div class="ps-logo">세금<span>N</span>혜택</div>
-            <div class="ps-badge">수수료 0%</div>
-          </div>
-          <div class="ps-card">
-            <div class="ps-label">예상 환급금</div>
-            <div class="ps-amount" style="color: var(--mint);">425,600원</div>
-            <div class="ps-label" style="margin-top: 8px;">최근 5년치 조회</div>
-          </div>
-          <div class="ps-cta">홈택스 연동하기</div>
-        </div>
+      <div class="phone-shot" style="transform: rotate(-3deg);">
+        <img src="assets/app_calc.jpg" alt="세금N혜택 앱 - 계산기 화면" loading="lazy" />
       </div>
-      <div class="phone-mockup">
-        <div class="phone-screen">
-          <div class="ps-top">
-            <div class="ps-logo">간편인증</div>
-            <div class="ps-badge">🔒 암호화</div>
-          </div>
-          <div class="ps-card" style="background: #fff7d6;">
-            <div style="font-size: 32px;">💬</div>
-            <div style="font-weight: 700; margin-top: 8px;">카카오톡으로</div>
-          </div>
-          <div class="ps-card">
-            <div style="font-size: 32px;">📱</div>
-            <div style="font-weight: 700; margin-top: 8px;">PASS 인증</div>
-          </div>
-          <div class="ps-cta">인증 시작</div>
-        </div>
+      <div class="phone-shot phone-shot-lead">
+        <img src="assets/app_auth.jpg" alt="세금N혜택 앱 - 간편인증 화면" loading="lazy" />
       </div>
-      <div class="phone-mockup" style="transform: rotate(3deg);">
-        <div class="phone-screen">
-          <div class="ps-top">
-            <div class="ps-logo">종합소득세</div>
-            <div class="ps-badge">D-45</div>
-          </div>
-          <div class="ps-card">
-            <div class="ps-label">2025년 총 수입</div>
-            <div style="font-size: 20px; font-weight: 800; margin-top: 4px;">34,500,000원</div>
-          </div>
-          <div class="ps-card" style="background: #eaf5ff;">
-            <div class="ps-label">예상 세액</div>
-            <div class="ps-amount">-87,000원</div>
-          </div>
-          <div class="ps-cta" style="background: var(--mint);">환급 신청</div>
-        </div>
+      <div class="phone-shot" style="transform: rotate(3deg);">
+        <img src="assets/app_subsidy.jpg" alt="세금N혜택 앱 - 정부 지원금 화면" loading="lazy" />
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== APP SHOWCASE ===== -->
+<section class="showcase">
+  <div class="section-head">
+    <div class="section-tag">모바일 앱</div>
+    <h2>손안에서 1분만에 끝</h2>
+    <p>웹 브라우저 · 안드로이드 앱 어디서든 동일한 경험</p>
+  </div>
+  <div class="showcase-inner">
+    <div class="showcase-card">
+      <img src="assets/app_calc.jpg" alt="계산기" loading="lazy" />
+      <div class="showcase-label">종합소득세 간편 계산</div>
+    </div>
+    <div class="showcase-card">
+      <img src="assets/app_auth.jpg" alt="간편인증" loading="lazy" />
+      <div class="showcase-label">카카오·PASS·토스 간편인증</div>
+    </div>
+    <div class="showcase-card">
+      <img src="assets/app_coaching.jpg" alt="절세" loading="lazy" />
+      <div class="showcase-label">직종별 절세 가이드</div>
+    </div>
+    <div class="showcase-card">
+      <img src="assets/app_subsidy.jpg" alt="지원금" loading="lazy" />
+      <div class="showcase-label">정부 지원금 자동 매칭</div>
+    </div>
+    <div class="showcase-card">
+      <img src="assets/app_chat.jpg" alt="AI 상담" loading="lazy" />
+      <div class="showcase-label">24시간 AI 세무 상담</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:32px;">
+    <a href="app.html" class="btn-secondary">📱 모바일 앱 직접 체험하기 →</a>
   </div>
 </section>
 
