@@ -251,6 +251,10 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
     <button class="nav-item" onclick="go('claim',this)"><span class="nav-icon">📋</span>청구 서류 안내</button>
   </div>
   <div class="nav-section">
+    <div class="nav-label">지원</div>
+    <button class="nav-item" onclick="go('support',this)"><span class="nav-icon">💬</span>피드백·개선제안 <span class="nav-badge" style="background:#10b981;">BETA</span></button>
+  </div>
+  <div class="nav-section">
     <div class="nav-label">설정</div>
     <button class="nav-item" onclick="go('profile',this)"><span class="nav-icon">👤</span>내 프로필 설정</button>
     <button class="nav-item" onclick="go('shareLink',this)"><span class="nav-icon">🔗</span>고객 링크 공유</button>
@@ -1137,6 +1141,81 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
 </div>
 
 <!-- ════════ API 연동 설정 ════════ -->
+<!-- ════════ 피드백·개선제안 ════════ -->
+<div id="page-support" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">피드백 · 개선제안</div>
+      <div class="page-sub">설계사 업무에 부족한 기능·개선점 알려주세요</div>
+    </div>
+  </div>
+
+  <div class="alert alert-blue" style="margin-bottom:1.5rem;">
+    💡 <strong>설계사님의 목소리가 가장 중요합니다.</strong> 실제 업무에서 불편한 점, 필요한 기능, 개선 아이디어를 알려주세요. <strong>Claude AI가 자동 분류</strong>해서 간단한 수정은 24시간 내 반영됩니다.
+  </div>
+
+  <div class="grid-2" style="margin-bottom:1.5rem;">
+    <div class="card">
+      <div class="card-title">📝 피드백 제출</div>
+
+      <div class="form-group">
+        <label>카테고리</label>
+        <select id="sup-category" style="width:100%;padding:12px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;">
+          <option value="업무 효율">⚡ 업무 효율 개선 (반복 작업 자동화 등)</option>
+          <option value="고객 관리">👥 고객 관리 기능 (CRM 강화)</option>
+          <option value="데이터 정확도">📊 데이터 정확도 (API 연동 오류)</option>
+          <option value="보상 자료">📋 청구·보상 자료 부족</option>
+          <option value="UI/UX">🎨 UI/UX 개선</option>
+          <option value="버그 신고">🐞 버그 신고</option>
+          <option value="보안 우려">🔒 보안·개인정보 우려</option>
+          <option value="기능 요청">✨ 신기능 요청</option>
+          <option value="기타">💬 기타</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>제목 *</label>
+        <input id="sup-title" type="text" placeholder="예: 고객별 연락 이력 자동 기록 기능 필요" maxlength="100" style="width:100%;padding:12px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;" />
+      </div>
+
+      <div class="form-group">
+        <label>상세 내용 *</label>
+        <textarea id="sup-content" placeholder="실제 업무에서 어떤 상황인지, 어떻게 동작하면 좋을지 구체적으로 적어주시면 빠르게 개선됩니다." rows="5" maxlength="2000" style="width:100%;padding:12px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;resize:vertical;"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>사번·이메일 (선택)</label>
+        <input id="sup-email" type="email" placeholder="답변 받으실 이메일 (공개 답변 원하면 빈칸)" maxlength="100" style="width:100%;padding:12px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;" />
+      </div>
+
+      <button class="btn btn-primary" onclick="submitSupport('agent')" style="width:100%;margin-top:8px;">🚀 접수하기</button>
+      <div id="sup-result" style="margin-top:12px;"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚡ 자동 처리 분류</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="padding:12px;background:#ecfdf5;border-left:3px solid #10b981;border-radius:6px;">
+          <div style="font-weight:700;color:#047857;font-size:13px;margin-bottom:4px;">🔧 자동 수정 (auto_fix)</div>
+          <div style="font-size:12px;color:var(--text-sub);">오타·링크·UI 미세 버그 → 24시간 내 Claude Agent PR 생성</div>
+        </div>
+        <div style="padding:12px;background:#eff6ff;border-left:3px solid #2563eb;border-radius:6px;">
+          <div style="font-weight:700;color:#1e4aad;font-size:13px;margin-bottom:4px;">🐞 버그 리포트 (bug_report)</div>
+          <div style="font-size:12px;color:var(--text-sub);">기능 오류 → 로그 분석 후 수정</div>
+        </div>
+        <div style="padding:12px;background:#fff7ed;border-left:3px solid #f59e0b;border-radius:6px;">
+          <div style="font-weight:700;color:#b45309;font-size:13px;margin-bottom:4px;">🤔 CEO 판단 (needs_approval)</div>
+          <div style="font-size:12px;color:var(--text-sub);">새 기능·정책 변경 → 3일 내 답변</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding:10px;background:var(--surface);border-radius:8px;font-size:12px;color:var(--text-sub);line-height:1.7;">
+        📮 긴급: <strong style="color:var(--text);">ghdejr11@gmail.com</strong><br>
+        📊 모든 접수는 관리자 텔레그램 채널로 즉시 알림
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="page-api" class="page">
   <div class="page-header">
     <div>
@@ -1969,6 +2048,37 @@ const CUSTOMERS = [
 ];
 
 let filteredCustomers = [...CUSTOMERS];
+
+async function submitSupport(source) {
+  const category = document.getElementById('sup-category').value;
+  const title = document.getElementById('sup-title').value.trim();
+  const content = document.getElementById('sup-content').value.trim();
+  const email = document.getElementById('sup-email').value.trim();
+  const resultBox = document.getElementById('sup-result');
+
+  if (!title || title.length < 5) { resultBox.innerHTML = '<div style="padding:10px;background:#fef2f2;color:#991b1b;border-radius:8px;font-size:13px;">❗ 제목을 5자 이상 입력해주세요.</div>'; return; }
+  if (!content || content.length < 10) { resultBox.innerHTML = '<div style="padding:10px;background:#fef2f2;color:#991b1b;border-radius:8px;font-size:13px;">❗ 상세 내용을 10자 이상 입력해주세요.</div>'; return; }
+
+  resultBox.innerHTML = '<div style="padding:10px;background:#eff6ff;color:#1e4aad;border-radius:8px;font-size:13px;">⏳ 접수 중...</div>';
+  try {
+    const res = await fetch('https://tax-n-benefit-api.vercel.app/api/support', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ service: '보험다보여-' + source, category, title, content, email })
+    });
+    const data = await res.json();
+    if (data.success) {
+      const labels = { auto_fix: '🔧 자동 수정 대상 (24시간 내)', bug_report: '🐞 버그 리포트', needs_approval: '🤔 CEO 판단 필요 (3일 내)', reject: '🚫 부적절 요청', general: '💬 일반 문의 (24시간 내)' };
+      resultBox.innerHTML = `<div style="padding:14px;background:#ecfdf5;color:#047857;border-radius:8px;font-size:13px;">✅ 접수 완료!<br><strong>${labels[data.classification] || data.classification}</strong><br><span style="font-size:12px;color:var(--text-sub);">${data.message || ''}</span></div>`;
+      document.getElementById('sup-title').value = '';
+      document.getElementById('sup-content').value = '';
+    } else {
+      resultBox.innerHTML = `<div style="padding:10px;background:#fef2f2;color:#991b1b;border-radius:8px;font-size:13px;">❌ ${data.error || '접수 실패'}</div>`;
+    }
+  } catch (e) {
+    resultBox.innerHTML = '<div style="padding:10px;background:#fef2f2;color:#991b1b;border-radius:8px;font-size:13px;">❌ 네트워크 오류: ' + e.message + '</div>';
+  }
+}
 
 function getStatusColor(status) {
   switch(status) {

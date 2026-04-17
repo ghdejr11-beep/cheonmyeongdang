@@ -255,8 +255,8 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
     <button class="nav-item" onclick="go(&#39;claim&#39;,this)"><span class="nav-icon">📋</span>보험금 청구 <span class="nav-badge" style="background:#e74c3c;">NEW</span></button>
   </div>
   <div class="nav-section">
-    <div class="nav-label">설정</div>
-    <button class="nav-item" onclick="go(&#39;api&#39;,this)"><span class="nav-icon">🔑</span>API 연동 설정</button>
+    <div class="nav-label">지원</div>
+    <button class="nav-item" onclick="go(&#39;support&#39;,this)"><span class="nav-icon">💬</span>고객센터·불만접수 <span class="nav-badge" style="background:#10b981;">BETA</span></button>
   </div>
   <div class="sidebar-bottom">
     <div class="api-status"><span class="api-dot"></span>내보험다보여 API — 샘플 모드</div>
@@ -1163,6 +1163,84 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
 </div>
 
 <!-- ════════ API 연동 설정 ════════ -->
+<!-- ════════ 고객센터·불만접수 ════════ -->
+<div id="page-support" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">고객센터 · 불만접수</div>
+      <div class="page-sub">문의·불만·개선 제안 · 24시간 내 답변</div>
+    </div>
+  </div>
+
+  <div class="alert alert-blue" style="margin-bottom:1.5rem;">
+    💡 <strong>아직 완벽한 서비스가 아닙니다.</strong> 불편한 점·개선 아이디어를 알려주시면 빠르게 반영합니다. 모든 접수는 <strong>Claude AI가 자동 분류</strong>하여 즉시 조치 가능한 건(오타·링크 오류 등)은 당일 처리됩니다.
+  </div>
+
+  <div class="grid-2" style="margin-bottom:1.5rem;">
+    <div class="card">
+      <div class="card-title" style="display:flex;align-items:center;gap:8px;">📝 문의·불만 접수</div>
+
+      <div class="form-group">
+        <label>카테고리</label>
+        <select id="sup-category" style="width:100%;padding:12px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;">
+          <option value="버그 신고">🐞 버그 · 오류 신고</option>
+          <option value="UI/UX 개선">🎨 UI/UX 개선 제안</option>
+          <option value="기능 추가">✨ 기능 추가 요청</option>
+          <option value="데이터 오류">📊 데이터 오류 (보험 정보 등)</option>
+          <option value="보안 우려">🔒 보안·개인정보 우려</option>
+          <option value="서비스 불만">😠 서비스 불만</option>
+          <option value="칭찬·후기">👏 칭찬·긍정 피드백</option>
+          <option value="기타">💬 기타</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>제목 *</label>
+        <input id="sup-title" type="text" placeholder="예: 가입된 보험 중복 표시 문제" maxlength="100" style="width:100%;padding:12px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;" />
+      </div>
+
+      <div class="form-group">
+        <label>상세 내용 *</label>
+        <textarea id="sup-content" placeholder="어떤 화면에서 발생했는지, 어떻게 동작하길 바라는지 구체적으로 적어주시면 빠르게 처리됩니다." rows="5" maxlength="2000" style="width:100%;padding:12px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;resize:vertical;"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>회신 이메일 (선택)</label>
+        <input id="sup-email" type="email" placeholder="답변 받으실 이메일 (없으면 공개 답변)" maxlength="100" style="width:100%;padding:12px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;" />
+      </div>
+
+      <button class="btn btn-primary" onclick="submitSupport('customer')" style="width:100%;margin-top:8px;">🚀 접수하기</button>
+      <div id="sup-result" style="margin-top:12px;"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚡ 자동 처리 분류</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="padding:12px;background:#ecfdf5;border-left:3px solid #10b981;border-radius:6px;">
+          <div style="font-weight:700;color:#047857;font-size:13px;margin-bottom:4px;">🔧 자동 수정 (auto_fix)</div>
+          <div style="font-size:12px;color:var(--text-sub);">오타·링크 오류·UI 미세 버그 → Claude Agent가 24시간 내 PR 생성</div>
+        </div>
+        <div style="padding:12px;background:#eff6ff;border-left:3px solid #2563eb;border-radius:6px;">
+          <div style="font-weight:700;color:#1e4aad;font-size:13px;margin-bottom:4px;">🐞 버그 리포트 (bug_report)</div>
+          <div style="font-size:12px;color:var(--text-sub);">기능 오류 → 로그 분석 후 수정</div>
+        </div>
+        <div style="padding:12px;background:#fff7ed;border-left:3px solid #f59e0b;border-radius:6px;">
+          <div style="font-weight:700;color:#b45309;font-size:13px;margin-bottom:4px;">🤔 CEO 판단 (needs_approval)</div>
+          <div style="font-size:12px;color:var(--text-sub);">새 기능 추가·정책 변경 → 3일 내 답변</div>
+        </div>
+        <div style="padding:12px;background:#fef2f2;border-left:3px solid #dc2626;border-radius:6px;">
+          <div style="font-weight:700;color:#991b1b;font-size:13px;margin-bottom:4px;">🚫 자동 거부 (reject)</div>
+          <div style="font-size:12px;color:var(--text-sub);">스팸·사기·부적절 요청</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding:10px;background:var(--surface);border-radius:8px;font-size:12px;color:var(--text-sub);line-height:1.7;">
+        📮 긴급 문의: <strong style="color:var(--text);">ghdejr11@gmail.com</strong><br>
+        📊 모든 접수 건은 텔레그램 관리자 채널로 즉시 알림됩니다.
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="page-api" class="page">
   <div class="page-header">
     <div>
@@ -2815,6 +2893,47 @@ function filterIns(type, btn) {
       if (t.id !== 'toggle-unjoined') t.classList.remove('active');
     });
     if (btn.id !== 'toggle-unjoined') btn.classList.add('active');
+  }
+}
+
+async function submitSupport(source) {
+  const category = document.getElementById('sup-category').value;
+  const title = document.getElementById('sup-title').value.trim();
+  const content = document.getElementById('sup-content').value.trim();
+  const email = document.getElementById('sup-email').value.trim();
+  const resultBox = document.getElementById('sup-result');
+
+  if (!title || title.length < 5) { resultBox.innerHTML = '<div style="padding:10px;background:#fef2f2;color:#991b1b;border-radius:8px;font-size:13px;">❗ 제목을 5자 이상 입력해주세요.</div>'; return; }
+  if (!content || content.length < 10) { resultBox.innerHTML = '<div style="padding:10px;background:#fef2f2;color:#991b1b;border-radius:8px;font-size:13px;">❗ 상세 내용을 10자 이상 입력해주세요.</div>'; return; }
+
+  resultBox.innerHTML = '<div style="padding:10px;background:#eff6ff;color:#1e4aad;border-radius:8px;font-size:13px;">⏳ 접수 중...</div>';
+
+  try {
+    const res = await fetch('https://tax-n-benefit-api.vercel.app/api/support', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        service: '보험다보여-' + source,
+        category, title, content, email
+      })
+    });
+    const data = await res.json();
+    if (data.success) {
+      const clfLabel = {
+        auto_fix: '🔧 자동 수정 대상 (24시간 내 처리)',
+        bug_report: '🐞 버그 리포트로 분류 (로그 분석 중)',
+        needs_approval: '🤔 CEO 판단 필요 (3일 내 답변)',
+        reject: '🚫 부적절 요청으로 분류',
+        general: '💬 일반 문의 (24시간 내 답변)',
+      };
+      resultBox.innerHTML = `<div style="padding:14px;background:#ecfdf5;color:#047857;border-radius:8px;font-size:13px;">✅ 접수 완료!<br><strong>${clfLabel[data.classification] || data.classification}</strong><br><span style="font-size:12px;color:var(--text-sub);">${data.message || ''}</span></div>`;
+      document.getElementById('sup-title').value = '';
+      document.getElementById('sup-content').value = '';
+    } else {
+      resultBox.innerHTML = `<div style="padding:10px;background:#fef2f2;color:#991b1b;border-radius:8px;font-size:13px;">❌ ${data.error || '접수 실패'}</div>`;
+    }
+  } catch (e) {
+    resultBox.innerHTML = '<div style="padding:10px;background:#fef2f2;color:#991b1b;border-radius:8px;font-size:13px;">❌ 네트워크 오류: ' + e.message + '</div>';
   }
 }
 
