@@ -252,6 +252,7 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
   </div>
   <div class="nav-section">
     <div class="nav-label">지원</div>
+    <button class="nav-item" onclick="go('chatbot',this)"><span class="nav-icon">❓</span>사용법 도움말 <span class="nav-badge" style="background:#f59e0b;">NEW</span></button>
     <button class="nav-item" onclick="go('support',this)"><span class="nav-icon">💬</span>피드백·개선제안 <span class="nav-badge" style="background:#10b981;">BETA</span></button>
   </div>
   <div class="nav-section">
@@ -1140,6 +1141,50 @@ input[type=range] { width: 100%; accent-color: var(--primary); }
 </div>
 
 <!-- ════════ API 연동 설정 ════════ -->
+<!-- ════════ Q&A 사용법 도움말 ════════ -->
+<div id="page-chatbot" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">❓ 사용법 도움말</div>
+      <div class="page-sub">설계사 업무 중 궁금한 점을 빠르게 해결하세요</div>
+    </div>
+  </div>
+
+  <div class="alert alert-blue" style="margin-bottom:1.5rem;">
+    💡 <strong>자주 묻는 질문 10가지</strong>가 준비되어 있어요. 없으면 직접 입력하시거나 피드백 탭에서 개선 요청해 주세요.
+  </div>
+
+  <div class="card" style="min-height:400px;">
+    <div id="chat-log" style="display:flex;flex-direction:column;gap:14px;padding:10px;min-height:280px;max-height:500px;overflow-y:auto;">
+      <div class="chat-bubble bot" style="background:#eff6ff;border-radius:16px 16px 16px 4px;padding:16px 20px;max-width:85%;align-self:flex-start;font-size:15px;line-height:1.7;color:var(--text);">
+        <div style="font-weight:700;margin-bottom:6px;color:var(--primary);">🤖 설계사 도우미</div>
+        어서오세요. 설계사 업무 도구 사용에 궁금한 점을 물어보세요.
+      </div>
+    </div>
+
+    <div style="margin-top:16px;">
+      <div style="font-size:14px;font-weight:700;color:var(--text-sub);margin-bottom:10px;">💡 자주 묻는 질문</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <button class="chat-q" onclick="askBot('프로필 어디서 설정해요?')" style="padding:10px 16px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:22px;font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;">👤 프로필 설정 어디서?</button>
+        <button class="chat-q" onclick="askBot('고객 링크 어떻게 공유해요?')" style="padding:10px 16px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:22px;font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;">🔗 고객 링크 공유법</button>
+        <button class="chat-q" onclick="askBot('고객 데이터 어떻게 추가해요?')" style="padding:10px 16px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:22px;font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;">👥 고객 추가 방법</button>
+        <button class="chat-q" onclick="askBot('청구 서류 안내 어디서?')" style="padding:10px 16px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:22px;font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;">📋 청구 서류 안내</button>
+        <button class="chat-q" onclick="askBot('보장 분석 어떻게?')" style="padding:10px 16px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:22px;font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;">🛡️ 보장 분석 방법</button>
+        <button class="chat-q" onclick="askBot('QR코드 어디서 만들어요?')" style="padding:10px 16px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:22px;font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;">📱 QR코드 생성</button>
+        <button class="chat-q" onclick="askBot('갱신 알림 설정?')" style="padding:10px 16px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:22px;font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;">📅 갱신 알림 설정</button>
+        <button class="chat-q" onclick="askBot('법적 문제 없나요?')" style="padding:10px 16px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:22px;font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;">⚖️ 법적 리스크</button>
+        <button class="chat-q" onclick="askBot('API 연동 필요해요?')" style="padding:10px 16px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:22px;font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;">🔑 API 연동 필요?</button>
+        <button class="chat-q" onclick="askBot('건강분석 실데이터인가요?')" style="padding:10px 16px;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:22px;font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;">🏥 건강분석 실데이터?</button>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;display:flex;gap:8px;">
+      <input id="chat-input" type="text" placeholder="질문을 입력하세요..." style="flex:1;padding:14px 16px;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;font-family:inherit;font-size:14px;" onkeypress="if(event.key==='Enter')sendChat()" />
+      <button onclick="sendChat()" style="padding:14px 24px;background:var(--primary);color:#fff;border:0;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;">보내기</button>
+    </div>
+  </div>
+</div>
+
 <!-- ════════ 피드백·개선제안 ════════ -->
 <div id="page-support" class="page">
   <div class="page-header">
@@ -2047,6 +2092,64 @@ const CUSTOMERS = [
 ];
 
 let filteredCustomers = [...CUSTOMERS];
+
+/* ═══ 설계사용 Q&A 챗봇 ═══ */
+const AGENT_FAQ_KB = [
+  { kw: ['프로필', '설정', '사번', '내 정보'], a: '왼쪽 메뉴 <strong>「내 프로필 설정」</strong>을 눌러주세요.<br>사번·이름·연락처·지점을 입력하면 본인 전용 고객용 링크가 자동 생성됩니다.' },
+  { kw: ['링크', '공유', 'QR', '코드', 'URL'], a: '왼쪽 메뉴 <strong>「고객 링크 공유」</strong>를 눌러주세요.<br>• 전용 URL 복사 → 카톡·문자로 전송<br>• QR 코드 이미지 다운로드 → 명함 뒷면 인쇄<br>• URL 파라미터에 설계사 정보가 Base64로 인코딩되어 자동 인식됩니다.' },
+  { kw: ['고객 추가', '고객 데이터', '새 고객', '신규 고객'], a: '왼쪽 메뉴 <strong>「내 고객 관리」</strong> → 우측 상단 <strong>「+ 고객 추가」</strong> 버튼을 눌러주세요.<br>이름·연락처·가입 상품을 입력하면 고객별 대시보드가 생성됩니다.' },
+  { kw: ['청구', '서류', '보험금', '상담'], a: '왼쪽 메뉴 <strong>「청구 서류 안내」</strong>를 눌러주세요.<br>8가지 청구 케이스별로 필요한 서류·절차가 정리되어 있어 고객 상담 시 참고 가능합니다.' },
+  { kw: ['보장 분석', '분석', '중복', '공백'], a: '왼쪽 메뉴 <strong>「고객 보장 분석」</strong>을 눌러주세요.<br>고객별로 가입 보험의 중복·공백·리스크 점수를 자동 계산해 보여드립니다.' },
+  { kw: ['갱신 알림', '갱신', '만기', '알림', '푸시'], a: '왼쪽 메뉴 <strong>「갱신·만기 알림」</strong>에서 확인 가능합니다.<br>30일 전부터 자동 알림이 활성화되고, 고객별로 연락 이력을 기록할 수 있어요.' },
+  { kw: ['법', '87조', '저촉', '리스크', '문제'], a: '본 도구는 보험업법 제87조 범위 내에서 운영됩니다.<br>• AZ금융 계약 보험사 범위 내 안내만<br>• 청구 대행 X (안내만)<br>• 타 설계사 연결 X<br>자세한 법적 검토는 AZ 제안서 4장을 참고해주세요.' },
+  { kw: ['api', 'API', '연동', '실데이터'], a: '개별 설계사는 API 연동 필요 없습니다.<br>내보험다보여 API는 AZ금융 본사 차원에서 일괄 계약되고, 승인 후 자동으로 모든 설계사가 실데이터로 전환됩니다.<br>지금은 샘플 데이터로 시연·연습이 가능해요.' },
+  { kw: ['건강', '심평원', '마이헬스웨이', '진료기록'], a: '현재 샘플 데이터로 시연 중입니다.<br>실제 연동은 <strong>CODEF 마이헬스웨이 API</strong>를 통해 진행되며, 2026-04-17 정식 계약을 신청했어 3영업일 내 승인 예정입니다.<br>승인 후엔 5년 진료기록 기반 실데이터로 전환됩니다.' },
+  { kw: ['피드백', '개선', '버그', '요청', '불만'], a: '왼쪽 메뉴 <strong>「피드백·개선제안」</strong>을 눌러주세요.<br>9종 카테고리로 의견을 접수하시면 AI가 자동 분류 후 즉시 조치합니다.<br>• 간단 수정: 24시간 내<br>• 버그: 로그 분석 후 수정<br>• 신기능: 3일 내 답변' },
+];
+
+function askBot(q) {
+  appendChatBubble(q, 'user');
+  setTimeout(() => {
+    const ans = findAnswer(q);
+    appendChatBubble(ans, 'bot');
+    const log = document.getElementById('chat-log');
+    if (log) log.scrollTop = log.scrollHeight;
+  }, 300);
+}
+
+function sendChat() {
+  const input = document.getElementById('chat-input');
+  const q = input.value.trim();
+  if (!q) return;
+  input.value = '';
+  askBot(q);
+}
+
+function findAnswer(q) {
+  const text = q.toLowerCase();
+  for (const item of AGENT_FAQ_KB) {
+    if (item.kw.some(k => text.includes(k.toLowerCase()))) {
+      return item.a;
+    }
+  }
+  return '정확한 답을 찾지 못했습니다.<br>위 파란 버튼 중 하나를 선택하시거나, 왼쪽 <strong>「피드백·개선제안」</strong>에 질문을 남겨주세요.';
+}
+
+function appendChatBubble(text, who) {
+  const log = document.getElementById('chat-log');
+  if (!log) return;
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble ' + who;
+  if (who === 'bot') {
+    bubble.style.cssText = 'background:#eff6ff;border-radius:16px 16px 16px 4px;padding:14px 18px;max-width:85%;align-self:flex-start;font-size:15px;line-height:1.7;color:var(--text);';
+    bubble.innerHTML = '<div style="font-weight:700;margin-bottom:6px;color:var(--primary);">🤖 설계사 도우미</div>' + text;
+  } else {
+    bubble.style.cssText = 'background:var(--primary);color:#fff;border-radius:16px 16px 4px 16px;padding:12px 16px;max-width:85%;align-self:flex-end;font-size:14px;';
+    bubble.textContent = text;
+  }
+  log.appendChild(bubble);
+  log.scrollTop = log.scrollHeight;
+}
 
 async function submitSupport(source) {
   const category = document.getElementById('sup-category').value;

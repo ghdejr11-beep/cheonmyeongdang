@@ -653,21 +653,41 @@ body {
   </div>
 </div>
 
-<!-- ===== TAB 4: AI 상담 ===== -->
+<!-- ===== TAB 4: AI 상담 (어르신 친화 챗봇) ===== -->
 <div class="tab-page" id="page-chat">
+  <div style="background:var(--bg-hero);border-radius:16px;padding:16px 18px;margin-bottom:12px;font-size:14px;color:var(--text-body);line-height:1.7;">
+    💡 <strong>버튼만 누르셔도 답을 보실 수 있어요.</strong><br>
+    세금 관련 질문·앱 사용법 모두 답해드립니다.
+  </div>
+
   <div class="chat-area" id="chatArea">
-    <div class="chat-bubble chat-ai">안녕하세요! 세금N혜택 AI 세무 상담사입니다. 종합소득세, 절세, 경비처리 등 궁금한 점을 물어보세요 😊</div>
+    <div class="chat-bubble chat-ai">안녕하세요! 세금N혜택 AI 세무 상담사입니다. 아래 버튼을 누르시거나 질문을 직접 입력해주세요 😊</div>
   </div>
+
+  <div style="font-size:13px;font-weight:700;color:var(--text-sub);margin:14px 0 8px;">💰 세무 질문</div>
   <div class="quick-questions">
-    <button class="quick-btn" onclick="sendQuick('종합소득세 신고 방법 알려줘')">종합소득세 신고방법</button>
-    <button class="quick-btn" onclick="sendQuick('경비 처리 가능한 항목 알려줘')">경비처리 항목</button>
-    <button class="quick-btn" onclick="sendQuick('프리랜서 3.3% 환급 방법')">3.3% 환급</button>
-    <button class="quick-btn" onclick="sendQuick('사업자 절세 방법 추천')">절세 방법</button>
-    <button class="quick-btn" onclick="sendQuick('부가세 신고 일정')">부가세 일정</button>
-    <button class="quick-btn" onclick="sendQuick('노란우산공제 혜택')">노란우산공제</button>
+    <button class="quick-btn" onclick="sendQuick('종합소득세 신고 방법 알려줘')">📋 종합소득세 신고방법</button>
+    <button class="quick-btn" onclick="sendQuick('경비 처리 가능한 항목 알려줘')">🧾 경비처리 항목</button>
+    <button class="quick-btn" onclick="sendQuick('프리랜서 3.3% 환급 방법')">💰 3.3% 환급</button>
+    <button class="quick-btn" onclick="sendQuick('사업자 절세 방법 추천')">💡 절세 방법</button>
+    <button class="quick-btn" onclick="sendQuick('부가세 신고 일정')">📅 부가세 일정</button>
+    <button class="quick-btn" onclick="sendQuick('노란우산공제 혜택')">☔ 노란우산공제</button>
+    <button class="quick-btn" onclick="sendQuick('가산세 얼마나')">⚠️ 가산세 얼마</button>
+    <button class="quick-btn" onclick="sendQuick('환급금 얼마 들어와')">💵 환급금 확인</button>
   </div>
+
+  <div style="font-size:13px;font-weight:700;color:var(--text-sub);margin:14px 0 8px;">📱 앱 사용법</div>
+  <div class="quick-questions">
+    <button class="quick-btn" onclick="sendQuick('환급금 어떻게 조회해')">🔍 환급금 조회 방법</button>
+    <button class="quick-btn" onclick="sendQuick('카카오 인증 어떻게')">💬 카카오 인증</button>
+    <button class="quick-btn" onclick="sendQuick('계산기 어디서 써')">🧮 계산기 사용법</button>
+    <button class="quick-btn" onclick="sendQuick('지원금 신청 방법')">🏛️ 지원금 신청</button>
+    <button class="quick-btn" onclick="sendQuick('수수료 진짜 공짜야')">🆓 수수료 0원 맞나요</button>
+    <button class="quick-btn" onclick="sendQuick('개인정보 안전해')">🔒 개인정보 안전한가요</button>
+  </div>
+
   <div class="chat-input-wrap" id="chatInputWrap">
-    <input type="text" class="chat-input" id="chatInput" placeholder="세금 관련 질문을 입력하세요..." onkeydown="if(event.key==='Enter')sendMsg()">
+    <input type="text" class="chat-input" id="chatInput" placeholder="질문을 직접 입력하세요..." onkeydown="if(event.key==='Enter')sendMsg()">
     <button class="chat-send" onclick="sendMsg()">➤</button>
   </div>
 </div>
@@ -1338,6 +1358,14 @@ var aiKnowledge = {
   '사업자 절세 방법 추천': '사업자 맞춤 절세 전략 TOP 5:\n\n1️⃣ 노란우산공제 가입 → 연 최대 500만원 소득공제\n2️⃣ 사업용 카드 홈택스 등록 → 경비 자동 증빙\n3️⃣ 간이과세자 전환 검토 (매출 1억400만 이하)\n4️⃣ 국민연금 추납 → 전액 소득공제\n5️⃣ 퇴직연금(IRP) 가입 → 연 900만원 세액공제\n\n💰 절세 탭에서 직종별 상세 가이드도 확인하세요!',
   '부가세 신고 일정': '2026년 부가세 신고 일정:\n\n📅 1기 예정: 2026.04.25까지 (1~3월분)\n📅 1기 확정: 2026.07.25까지 (1~6월분)\n📅 2기 예정: 2026.10.25까지 (7~9월분)\n📅 2기 확정: 2027.01.25까지 (7~12월분)\n\n⚠️ 간이과세자는 1월에 1회만 신고!\n💡 부가세 = 매출세액 - 매입세액',
   '노란우산공제 혜택': '노란우산공제 혜택 총정리:\n\n💰 소득공제 한도:\n• 연 매출 4,800만 이하: 연 500만원\n• 4,800~1억: 연 300만원\n• 1억 초과: 연 200만원\n\n📌 추가 혜택:\n• 공제금 압류 금지 (안전한 저축)\n• 폐업 시 목돈 수령\n• 복리 이자\n• 납입액 자유 변경 가능\n\n가입: 중소기업중앙회 또는 은행 방문\n☎️ 문의: 1666-9988',
+  '가산세 얼마나': '⚠️ 종합소득세 미신고·지연 시 가산세:\n\n📌 무신고 가산세: 납부세액의 20%\n📌 과소신고 가산세: 차액의 10%\n📌 납부지연 가산세: 연 8.03% (일할)\n\n예) 세금 100만원 무신고 → 가산세 20만원 + 지연이자\n\n💡 환급 대상인 사람도 꼭 신고하세요. 안 하면 국가가 그대로 가져가요.',
+  '환급금 얼마 들어와': '💵 환급금 확인 방법:\n\n1. 이 앱 첫 화면 「홈택스 연동하기」 버튼 누르기\n2. 카카오·PASS·토스·네이버 중 선택해 본인인증 (1분)\n3. 최근 5년치 환급금 자동 조회\n4. 확인 후 신청 버튼 한 번만 누르시면 끝\n\n💡 평균 환급액: 32만원 (프리랜서 평균 49만원)\n💰 수수료: 9.9% 정액 + 환급 0원 시 100% 환불 보장',
+  '환급금 어떻게 조회해': '🔍 환급금 조회 3단계:\n\n1. 앱 첫 화면 「내 환급금 조회하기」 버튼\n2. 카카오톡 본인인증 (공동인증서 필요 없음)\n3. 자동으로 홈택스 데이터 불러옴\n\n⏱️ 총 소요시간 약 1분\n💡 가입·회원가입 필요 없어요.',
+  '카카오 인증 어떻게': '💬 카카오톡 본인인증 방법:\n\n1. 「내 환급금 조회하기」 버튼 누르기\n2. 이름·주민번호·휴대폰 번호 입력\n3. 「카카오톡」 아이콘 선택\n4. 카카오톡 앱이 자동으로 열려 인증 완료\n\n⚠️ 주민번호는 서버에 저장 안 됩니다.\n🔒 256비트 암호화 전송, 한국신용정보원 공인 API 사용.',
+  '계산기 어디서 써': '🧮 세금 계산기 사용법:\n\n1. 하단 메뉴 「계산기」 탭 누르기\n2. 사업자 유형 선택 (개인사업자 / 프리랜서)\n3. 총 수입·경비·원천징수액 입력\n4. 「종합소득세 계산하기」 버튼\n5. 실시간 예상 세액 + 환급액 표시\n\n💡 여러 번 바꿔가며 시뮬레이션 가능해요.',
+  '지원금 신청 방법': '🏛️ 정부 지원금 신청:\n\n1. 하단 메뉴 「지원금」 탭 누르기\n2. 내 사업에 맞는 지원금이 자동 매칭됨\n3. 각 지원금 카드의 「신청 바로가기」 버튼\n4. 해당 기관 홈페이지로 이동해 신청\n\n📌 주요 지원금:\n• 소상공인 디지털 전환: 최대 400만원\n• 청년 창업 사업화: 최대 1억원\n• 고용촉진 장려금: 최대 720만원',
+  '수수료 진짜 공짜야': '💰 수수료 정책:\n\n✅ 조회: 100% 무료 (영원히)\n✅ 계산기·절세 가이드: 무료\n✅ AI 상담: 무료\n\n📌 환급 신청 수수료:\n• 환급액의 9.9% 정액\n• 타 서비스(15~20%) 대비 절반\n• 환급금 0원이면 수수료 100% 환불\n\n💡 받은 만큼만 내는 구조라 손해 볼 일 없어요.',
+  '개인정보 안전해': '🔒 개인정보 보안:\n\n✅ 주민번호: 서버에 저장 안 함 (순간 처리 후 삭제)\n✅ 암호화: 256비트 TLS\n✅ 공인 API: 한국신용정보원 CODEF\n✅ 회원가입: 필요 없음 (이메일·비밀번호 X)\n✅ 로그인 정보 저장: 본인 기기 내 localStorage만\n\n💡 공동인증서도 필요 없어요. 카카오톡 하나면 됩니다.',
 };
 
 function addChat(text, isUser) {
