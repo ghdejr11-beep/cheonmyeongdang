@@ -24,3 +24,4 @@ www/
 # OS
 .DS_Store
 Thumbs.db
+departments/media/youtube/shared/token_*.pickle

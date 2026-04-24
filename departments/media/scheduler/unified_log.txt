@@ -1,0 +1,2 @@
+[2026-04-18T14:05:05] 큐 1개, 예약도달 1개
+[2026-04-18T14:05:05] → telegram (korlens/P_korlens_launch)

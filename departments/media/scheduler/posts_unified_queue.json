@@ -1,0 +1,423 @@
+[
+  {
+    "id": "P_korlens_launch",
+    "service": "korlens",
+    "targets": [
+      "telegram"
+    ],
+    "title": "🔍 KORLENS — 같은 한국, 다른 관점",
+    "body_ko": "한국관광공사 TourAPI 기반 AI 큐레이션 여행 웹서비스.\n같은 관광지를 외국인·커플·가족·솔로 4가지 관점으로 재해석합니다.\n\n✅ 17개 광역시도 · 192개 장소 × 768개 AI 하이라이트\n✅ 혼잡도 필터 + 🔥 인기 뱃지\n✅ AI 큐레이터 챗봇 (자연어 질의 → 장소 추천 카드)\n✅ 열린관광 API 통합 (무장애 편의시설)\n✅ 카카오맵·네이버지도 딥링크\n\n2026 관광데이터 활용 공모전 출품작 (접수 완료)",
+    "body_en": "KORLENS — Same Korea, Different Lenses. AI-curated Korean travel with 4 perspectives (Foreigner/Couple/Family/Solo).",
+    "link": "https://korlens.vercel.app",
+    "scheduled_at": null,
+    "status": "sent",
+    "results": {
+      "telegram": {
+        "ok": true,
+        "status": 200,
+        "resp": "{\"ok\":true,\"result\":{\"message_id\":209,\"from\":{\"id\":8650272218,\"is_bot\":true,\"first_name\":\"\\ub355\\uad6c\\ub124 AI\\ud300\",\"username\":\"deokgune_ai_team_bot\"},\"chat\":{\"id\":8556067663,\"first_name\":\"\\ub355\\u"
+      }
+    },
+    "sent_at": "2026-04-18T14:05:06"
+  },
+  {
+    "id": "kdp-adhd-planner-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 ADHD Daily Planner\n\nADHD 성인을 위한 일일 플래너 — 집중·루틴·감정 관리\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-23T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-adhd-planner-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 ADHD Daily Planner\n\nDaily planner for adults with ADHD — focus, routine, emotion\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#KDP #ADHD #Planner #eBook #AI",
+    "scheduled_at": "2026-04-23T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-ai-side-hustle-en-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 AI Side Hustle Guide\n\nAI로 월 $1000 부업 만드는 가이드 (영문)\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-23T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-ai-side-hustle-en-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 AI Side Hustle Guide\n\nMake $1000/month side income with AI — step-by-step\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#SideHustle #AI #PassiveIncome #KDP",
+    "scheduled_at": "2026-04-23T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-airbnb-guestbook-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Airbnb Guest Book\n\n에어비앤비 호스트용 방문자 방명록\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-23T19:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-airbnb-guestbook-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Airbnb Guest Book\n\nGuest book for Airbnb hosts & short-term rentals\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#Airbnb #Host #GuestBook #KDP",
+    "scheduled_at": "2026-04-23T19:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-blood-pressure-log-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Blood Pressure Log Book\n\n혈압 기록장 — 매일 수치·약·메모\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-24T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-blood-pressure-log-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Blood Pressure Log Book\n\nTrack daily blood pressure, meds, and notes\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#BloodPressure #Health #Tracker #KDP",
+    "scheduled_at": "2026-04-24T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-blood-sugar-tracker-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Diabetic Blood Sugar Log Book\n\n당뇨 환자용 혈당 기록장\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-24T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-blood-sugar-tracker-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Diabetic Blood Sugar Log Book\n\nBlood sugar log for diabetics — morning/evening tracking\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#Diabetes #BloodSugar #Health #KDP",
+    "scheduled_at": "2026-04-24T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-bold-easy-coloring-animals-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Bold and Easy Coloring Book: Animals\n\n두꺼운 선, 큰 그림의 동물 컬러링북\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-24T19:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-bold-easy-coloring-animals-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Bold and Easy Coloring Book: Animals\n\nBold outlines & large designs — animal coloring book\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#ColoringBook #Animals #BoldEasy #KDP",
+    "scheduled_at": "2026-04-24T19:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-budget-planner-couples-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Budget Planner for Couples\n\n부부/커플 공동 가계부 플래너\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-25T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-budget-planner-couples-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Budget Planner for Couples\n\nJoint budget planner for couples — monthly & weekly\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#BudgetPlanner #Couples #Finance #KDP",
+    "scheduled_at": "2026-04-25T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-cottagecore-coloring-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Cottagecore Aesthetic Coloring Book\n\n코티지코어 감성 컬러링북\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-25T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-cottagecore-coloring-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Cottagecore Aesthetic Coloring Book\n\nCottagecore aesthetic coloring — cozy farmhouse vibes\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#Cottagecore #ColoringBook #Aesthetic #KDP",
+    "scheduled_at": "2026-04-25T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-dot-marker-kids-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Dot Marker Activity Book for Toddlers\n\n유아용 도트마커 액티비티북\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-25T19:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-dot-marker-kids-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Dot Marker Activity Book for Toddlers\n\nDot marker activity book for toddlers (ages 2-4)\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#DotMarker #Toddler #Activity #KDP",
+    "scheduled_at": "2026-04-25T19:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-genz-stress-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Gen Z Stress Management Workbook\n\nZ세대를 위한 스트레스 관리 워크북\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-26T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-genz-stress-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Gen Z Stress Management Workbook\n\nStress management workbook designed for Gen Z\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#GenZ #Stress #Mental #KDP",
+    "scheduled_at": "2026-04-26T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-introvert-confidence-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Confidence Building for Introverts\n\n내향인을 위한 자신감 만들기\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-26T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-introvert-confidence-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Confidence Building for Introverts\n\nConfidence-building workbook tailored for introverts\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#Introvert #Confidence #SelfHelp #KDP",
+    "scheduled_at": "2026-04-26T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-math-workbook-grade1-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Math Workbook for 1st Graders\n\n초등 1학년 수학 워크북\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-26T19:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-math-workbook-grade1-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Math Workbook for 1st Graders\n\nMath workbook for 1st graders — practice pages\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#Math #1stGrade #Workbook #KDP",
+    "scheduled_at": "2026-04-26T19:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-meal-prep-planner-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Weekly Meal Prep Planner\n\n주간 식단·밀프렙 플래너\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-27T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-meal-prep-planner-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Weekly Meal Prep Planner\n\nWeekly meal prep planner with grocery list\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#MealPrep #Planner #Diet #KDP",
+    "scheduled_at": "2026-04-27T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-mental-reset-journal-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 30-Day Mental Reset Journal\n\n30일 멘탈 리셋 저널\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-27T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-mental-reset-journal-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 30-Day Mental Reset Journal\n\n30-day mental reset journal for clarity & calm\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#Journal #MentalReset #Mindfulness #KDP",
+    "scheduled_at": "2026-04-27T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-password-logbook-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Password Logbook\n\n패스워드 기록 북 — ID/PW 수기 정리\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-27T19:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-password-logbook-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Password Logbook\n\nPassword logbook — offline, secure, handwritten\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#Password #Logbook #Security #KDP",
+    "scheduled_at": "2026-04-27T19:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-password-logbook-premium-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Password Logbook Premium for Seniors\n\n시니어용 대형 글자 패스워드 북\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-28T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047240+09:00"
+  },
+  {
+    "id": "kdp-password-logbook-premium-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Password Logbook Premium for Seniors\n\nLarge-print password logbook for seniors\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#Senior #Password #LargePrint #KDP",
+    "scheduled_at": "2026-04-28T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047746+09:00"
+  },
+  {
+    "id": "kdp-sleep-planner-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Sleep Improvement Planner\n\n수면 개선 플래너 — 수면 루틴·꿈 기록\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-28T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047746+09:00"
+  },
+  {
+    "id": "kdp-sleep-planner-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Sleep Improvement Planner\n\nSleep improvement planner — routine & dream log\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#Sleep #Planner #Health #KDP",
+    "scheduled_at": "2026-04-28T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047746+09:00"
+  },
+  {
+    "id": "kdp-spot-difference-seniors-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Spot the Difference for Seniors\n\n시니어용 틀린그림찾기\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-28T19:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047746+09:00"
+  },
+  {
+    "id": "kdp-spot-difference-seniors-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Spot the Difference for Seniors\n\nSpot the difference puzzles for seniors\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#Senior #SpotDifference #Puzzle #KDP",
+    "scheduled_at": "2026-04-28T19:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047774+09:00"
+  },
+  {
+    "id": "kdp-yoga-progress-journal-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Yoga Progress Journal\n\n요가 진도 기록 저널\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-29T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047774+09:00"
+  },
+  {
+    "id": "kdp-yoga-progress-journal-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Yoga Progress Journal\n\nYoga progress journal — track poses and sessions\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#Yoga #Journal #Wellness #KDP",
+    "scheduled_at": "2026-04-29T09:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047774+09:00"
+  },
+  {
+    "id": "kdp-zodiac-mandala-coloring-ko",
+    "service": "kdp",
+    "targets": [
+      "telegram"
+    ],
+    "body": "📚 Zodiac Mandala Coloring Book\n\n별자리 만다라 컬러링북\n\n🔗 아마존에서 보기: https://www.amazon.com/s?k=Deokgu+Studio&i=digital-text",
+    "scheduled_at": "2026-04-29T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047785+09:00"
+  },
+  {
+    "id": "kdp-zodiac-mandala-coloring-en",
+    "service": "kdp",
+    "targets": [
+      "x"
+    ],
+    "body": "📚 Zodiac Mandala Coloring Book\n\nZodiac mandala coloring book — 12 zodiac designs\n\nhttps://www.amazon.com/s?k=Deokgu+Studio&i=digital-text\n\n#Zodiac #Mandala #Coloring #KDP",
+    "scheduled_at": "2026-04-29T13:00:00+09:00",
+    "created_at": "2026-04-22T22:53:12.047785+09:00"
+  }
+]
