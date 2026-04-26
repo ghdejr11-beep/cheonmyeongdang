@@ -190,5 +190,33 @@
         }
       ]
     }
+  },
+  {
+    "email_id": "19da3a0918a29539",
+    "subject": "Attention needed: Please review your title, Sleep Improvement Planner: 90-Night Tracker with Sleep Hygiene Guide & Dream Journal",
+    "book_title": "can be published on KDP: Cover Text on the spine is too close to the edges, which could lead to it being cut off during printing. To fix this, please move all spine text at least 0.375 inches (9.6 mm) away from both the top and bottom edges of the cover. This small change will ensure your book looks professional and that all text remains visible after printing. For more help with cover design: Learn about margins Visit our cover creation resource Download a cover template To view these issues within your book file, use our Previewer tool: https://kdp.amazon.com/print-preview/MXJF6PF8YWN?id=YNVT6XAKS7C&locale=en_US Where possible, we give pages numbers with examples. To make sure your entire book meets our guidelines, please review your entire manuscript file and fix all issues. To update book details, go to your KDP Bookshelf. If you update your manuscript or cover, you'll have to upload the revised file to KDP. We'll review your book again to ensure it meets our requirements. Learn more: -- Update book details -- Upload a revised manuscript -- Update a revised cover -- Paperback Formatting Help The Kindle Direct Publishing team Hi! We checked your files and found issues you need to fix before your book can be published on KDP: Cover Text on the spine is too close to the edges, which could lead to it being cut off during printing. To fix this, please move all spine text at least 0.375 inches (9.6 mm) away from both the top and bottom edges of the cover. This small change will ensure your book looks professional and that all text remains visible after printing. For more help with cover design: Learn about margins Visit our cover creation resource Download a cover template To view these issues within your book file, use our Previewer tool: https://kdp.amazon.com/print-preview/MXJF6PF8YWN?id=YNVT6XAKS7C&locale=en_US Where possible, we give pages numbers with examples. To make sure your entire book meets our guidelines, please review your entire manuscript file and fix all issues. To update book details, go to your KDP Bookshelf. If you update your manuscript or cover, you'll have to upload the revised file to KDP. We'll review your book again to ensure it meets our requirements. Learn more: -- Update book details -- Upload a revised manuscript -- Update a revised cover -- Paperback Formatting Help The Kindle Direct Publishing team ©2026 Amazon.com, Inc. or its affiliates. Amazon and all related marks are trademarks of Amazon.com, Inc. or its affiliates. All Rights Reserved. Amazon.com, Inc., 410 Terry Avenue North Seattle, Washington 98109-5210 SPC-USAmazon-1372192716302516",
+    "reason": "96 Attention needed: Please review your title, Sleep Improvement Planner: 90-Night Tracker with Sleep Hygiene Guide & Dream Journal Hi! We checked your files and found issues you need to fix before your book can be published on KDP: Cover Text on the spine is too close to the edges, which could lead to it being cut off during printing. To fix this, please move all spine text at least 0.375 inches (9.6 mm) away from both the top and bottom edges of the cover. This small change will ensure your book",
+    "received_at": "Sun, 19 Apr 2026 02:45:02 +0000",
+    "status": "drafted",
+    "plan": {
+      "book_title": "Sleep Improvement Planner: 90-Night Tracker with Sleep Hygiene Guide & Dream Journal",
+      "project_folder": "sleep-planner",
+      "issues": [
+        {
+          "type": "cover_spine_margin",
+          "desc": "책등 텍스트가 상하 가장자리에 너무 가까움",
+          "how_to": "표지 책등의 상하 여백을 최소 0.375인치(9.6mm) 확보하도록 재생성",
+          "auto": true,
+          "urgency": "auto_regen"
+        }
+      ],
+      "actions": [
+        {
+          "step": "표지 재생성 (책등 여백 0.375인치 확보)",
+          "executor": "편집부 자동 실행: python departments/ebook/projects/sleep-planner/generate.py",
+          "link": null
+        }
+      ]
+    }
   }
 ]
