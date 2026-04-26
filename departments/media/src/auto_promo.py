@@ -5,22 +5,33 @@
 향후 추가: 인스타그램, 쓰레드, 페이스북
 """
 
+import os
 import requests
 import tweepy
 import random
 import datetime
 import sys
 
+# ─── .secrets에서 자격증명 로드 (하드코딩 금지) ───
+_ROOT = os.path.expanduser('~/Desktop/cheonmyeongdang')
+_env = {}
+_secrets_path = os.path.join(_ROOT, '.secrets')
+if os.path.exists(_secrets_path):
+    for _line in open(_secrets_path, encoding='utf-8'):
+        if '=' in _line:
+            _k, _v = _line.strip().split('=', 1)
+            _env[_k] = _v
+
 # ─── 텔레그램 설정 ───
-TG_BOT_TOKEN = "8650272218:AAHIYmOVfqzMzr-hcOqWsfW6mftByoEd_SA"
-TG_CHAT_ID = "8556067663"
+TG_BOT_TOKEN = _env.get('TELEGRAM_BOT_TOKEN', '')
+TG_CHAT_ID = _env.get('TELEGRAM_CHAT_ID', '')
 TG_BASE_URL = f"https://api.telegram.org/bot{TG_BOT_TOKEN}"
 
 # ─── X (트위터) 설정 ───
-X_API_KEY = "OuiD2yU5PpfOBUhld8meu1V8j"
-X_API_SECRET = "7iPtvynNpluEIs5DyVi67Kl704O7aAm5fdouD4aADv99kQcxfK"
-X_ACCESS_TOKEN = "2042656247892029440-cxKtgeWT1O6FefZKU3fcvwosSXNoId"
-X_ACCESS_SECRET = "f87fAg8KtK0UAh86xvHucUNxwydHj7Ph1eZxr2Ab54fvF"
+X_API_KEY = _env.get('X_API_KEY', '')
+X_API_SECRET = _env.get('X_API_SECRET', '')
+X_ACCESS_TOKEN = _env.get('X_ACCESS_TOKEN', '')
+X_ACCESS_SECRET = _env.get('X_ACCESS_SECRET', '')
 
 # ─── 서비스 링크 ───
 LINKS = {
@@ -29,6 +40,7 @@ LINKS = {
     "보험한눈에_설계사": "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/agent.html",
     "세금N혜택": "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/tax/src/index.html",
     "테트리스AI대결": "https://ghdejr11-beep.github.io/cheonmyeongdang/tetris.html",
+    "KORLENS": "https://korlens.vercel.app",
 }
 
 # ─── 홍보 콘텐츠 ───
@@ -72,6 +84,18 @@ PROMO = {
             "🎮 AI와 테트리스 대결!\n\n실시간 1:1 대전 — Easy/Normal/Hard\n당신은 AI를 이길 수 있을까? 🏆\n\n지금 바로 도전 👇\n\n#테트리스 #AI게임 #브라우저게임 #무료게임",
         ],
     },
+    "KORLENS": {
+        "telegram": [
+            "<b>🔍 KORLENS — 같은 한국, 다른 관점</b>\n\n같은 관광지를 4가지 관점으로 재해석하는 AI 여행 큐레이션!\n\n✅ 17개 광역시도 · 192개 장소 × 768개 AI 하이라이트\n✅ 외국인·커플·가족·솔로 유형별 맞춤\n✅ 혼잡도 필터 + 🔥 인기 뱃지\n✅ AI 큐레이터 챗봇\n✅ 무장애 편의정보 통합\n\n2026 관광데이터 활용 공모전 출품작 👇",
+            "<b>🤖 AI 큐레이터 — KORLENS</b>\n\n\"내일 서울 커플여행 4시간\" 한 줄만 입력하세요.\n\nClaude Haiku가 실제 TourAPI 관광지로 맞춤 추천!\n✅ 장소 카드 인라인 표시\n✅ 동선·팁·시간대 자동 제안\n✅ 상세 페이지 자동 링크\n\n지금 체험 👇",
+            "<b>🌍 외국인 친구랑 한국 여행?</b>\n\nKORLENS 외국인 탭 열면:\n🧳 영어 해설 투어 시간\n🚇 지하철역 출구 번호\n👘 한복 체험관 위치\n💳 환전소·신용카드 OK 정보\n\n한국관광공사 공식 영문 데이터 + AI 재해석!\n👇",
+        ],
+        "x": [
+            "🔍 KORLENS — Same Korea, Different Lenses.\n\nAI-curated Korean travel with 4 perspectives:\n🧳 Foreigner · 💑 Couple · 👨‍👩‍👧 Family · 🚶 Solo\n\n17 regions · 192 places · 768 AI highlights\n\n#Korea #Travel #Seoul #AI\nhttps://korlens.vercel.app",
+            "🤖 \"Plan me a 4-hour couple trip in Seoul\" — KORLENS AI 큐레이터가 실제 TourAPI 장소로 추천!\n\n같은 경복궁도 외국인·커플·가족·솔로 4가지 관점으로 다르게 보입니다.\n\n#KORLENS #AI여행 #한국관광",
+            "🌏 Visiting Korea? Try KORLENS.\n\n4 perspectives (Foreigner/Couple/Family/Solo) on every place.\nReal-time Korean Tourism API + Claude AI curation.\n\n#VisitKorea #KoreaTourism #TravelAI",
+        ],
+    },
 }
 
 
@@ -79,6 +103,26 @@ PROMO = {
 # 텔레그램 전송
 # ═══════════════════════════════════════
 def send_telegram(text):
+    """Postiz(Telegram 등) + 직접 API(Bluesky/Discord/Mastodon/Reddit) 통합 발행.
+    키 없는 채널은 자동 skip — 하나씩 추가할 때마다 즉시 확장됨.
+    Postiz 미설정 시 구 Telegram Bot API 직접 호출로 fallback."""
+    try:
+        from postiz_poster import send_all_channels, POSTIZ_URL, POSTIZ_API_KEY
+        direct = {}
+        try:
+            from multi_poster import send_all_direct
+            direct = send_all_direct(text)
+        except Exception as e:
+            print(f"[auto_promo] multi_poster 실패: {e}")
+        if POSTIZ_URL and POSTIZ_API_KEY:
+            result = send_all_channels(text)
+            ok = any(result.values()) if result else False
+            return {"ok": ok or any(direct.values()), "postiz": result, "direct": direct}
+        if any(direct.values()):
+            return {"ok": True, "postiz": None, "direct": direct}
+    except Exception as e:
+        print(f"[auto_promo] Postiz 실패, 직접 Telegram으로 fallback: {e}")
+
     url = f"{TG_BASE_URL}/sendMessage"
     payload = {
         "chat_id": TG_CHAT_ID,
@@ -163,13 +207,13 @@ def daily_promo():
     days_kr = ['월', '화', '수', '목', '금', '토', '일']
 
     schedule = {
-        0: "천명당",
-        1: "보험한눈에",
-        2: "세금N혜택",
-        3: "테트리스",
-        4: "천명당",
-        5: "보험한눈에",
-        6: "천명당",
+        0: "KORLENS",    # 월: KORLENS
+        1: "천명당",     # 화
+        2: "세금N혜택",  # 수
+        3: "KORLENS",    # 목: KORLENS
+        4: "보험한눈에", # 금
+        5: "KORLENS",    # 토: KORLENS (주말 여행 계획 타이밍)
+        6: "천명당",     # 일
     }
 
     service = schedule[dow]

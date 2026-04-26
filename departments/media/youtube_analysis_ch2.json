@@ -1,0 +1,38 @@
+[
+  {
+    "channel_id": "UCjWwRPygY08bYH_vgaDV7ww",
+    "name": "KunStudio",
+    "desc": "",
+    "created": "2026-04-18",
+    "country": "",
+    "subs": 0,
+    "videos": 0,
+    "views": 0,
+    "hidden": false,
+    "uploads": "UUjWwRPygY08bYH_vgaDV7ww",
+    "error": "영상 조회 실패: 404 (채널이 비어있거나 비공개)",
+    "fetched": 0,
+    "top5": [],
+    "recent3": [],
+    "avg_views": 0,
+    "all_videos": []
+  },
+  {
+    "channel_id": "UC7G9_Y47IMQUaqKOBSg33TA",
+    "name": "Wealth Blueprint",
+    "desc": "Your blueprint to financial freedom. We break down money, investing, and wealth-building into simple steps anyone can follow. New videos every week — no jargon, just results.",
+    "created": "2026-04-01",
+    "country": "US",
+    "subs": 0,
+    "videos": 0,
+    "views": 0,
+    "hidden": false,
+    "uploads": "UU7G9_Y47IMQUaqKOBSg33TA",
+    "error": "영상 조회 실패: 404 (채널이 비어있거나 비공개)",
+    "fetched": 0,
+    "top5": [],
+    "recent3": [],
+    "avg_views": 0,
+    "all_videos": []
+  }
+]

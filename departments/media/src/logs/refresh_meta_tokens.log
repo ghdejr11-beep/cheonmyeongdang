@@ -1,0 +1,4 @@
+[2026-04-24 19:39:20] === Meta 토큰 갱신 시작 (dry=True) ===
+[2026-04-24 19:39:20] [Instagram] OK: new token (length 160), expires in 5178387s (59d)
+[2026-04-24 19:39:21] [Threads] OK: new token (length 187), expires in 5182258s (59d)
+[2026-04-24 19:39:21] === 완료: {'instagram': True, 'threads': True} ===

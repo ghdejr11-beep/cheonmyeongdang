@@ -1,0 +1,61 @@
+2026-04-25 16:23:25,565 [INFO] secrets loaded: 31 keys
+2026-04-25 16:23:25,565 [INFO] upload-post key: OK
+2026-04-25 16:23:25,565 [INFO] ffmpeg: OK
+2026-04-25 16:23:25,566 [INFO] storage root: D:\kunstudio-outputs\yt
+2026-04-25 16:23:25,567 [INFO]   whisper_atlas (Whisper Atlas) → D:\kunstudio-outputs\yt\whisper_atlas\2026-04-25
+2026-04-25 16:23:25,568 [INFO]   wealth_blueprint (Wealth Blueprint) → D:\kunstudio-outputs\yt\wealth_blueprint\2026-04-25
+2026-04-25 16:23:25,569 [INFO]   inner_archetypes (Inner Archetypes) → D:\kunstudio-outputs\yt\inner_archetypes\2026-04-25
+2026-04-25 16:23:29,771 [INFO] === Whisper Atlas | topic=night_crickets | hours=[1.0] | dry_run=True ===
+2026-04-25 16:23:29,771 [INFO]   image: Peaceful summer countryside at night, fireflies, soft moonli...
+2026-04-25 16:23:30,947 [INFO]   audio: synth pink noise (5min, vol=0.4)
+2026-04-25 16:23:35,195 [INFO]   audio: mix primary + white
+2026-04-25 16:23:37,299 [INFO]   loop audio → 1.0h
+2026-04-25 16:23:59,819 [INFO]   render mp4 → night_crickets_1h.mp4
+2026-04-25 16:24:15,998 [INFO] === Whisper Atlas | topic=night_crickets | hours=[1.0] | dry_run=True ===
+2026-04-25 16:24:15,998 [INFO]   image: Peaceful summer countryside at night, fireflies, soft moonli...
+2026-04-25 16:24:15,998 [INFO]   audio: synth pink noise (5min, vol=0.4)
+2026-04-25 16:24:15,999 [INFO]   audio: mix primary + white
+2026-04-25 16:24:17,929 [INFO]   reuse loop_1h.mp3
+2026-04-25 16:24:17,929 [INFO]   render mp4 → night_crickets_1h.mp4
+2026-04-25 16:29:27,287 [INFO]     size: 136.7 MB
+2026-04-25 16:29:27,287 [INFO] [DRY-RUN] would upload night_crickets_1h.mp4 → whisper_atlas ('Summer Night Crickets 1 Hours · Peaceful Sleep · No Ads')
+2026-04-25 16:29:27,288 [INFO]   upload ok=True (dry-run)
+2026-04-25 16:29:27,288 [INFO] === Whisper Atlas done · 1 files ===
+2026-04-25 16:29:31,795 [INFO] === Wealth Blueprint | quote=Richard Feynman theme=mindset dry_run=True ===
+2026-04-25 16:29:34,780 [INFO]   script: 864 chars
+2026-04-25 16:29:43,521 [INFO]   voice: edge-tts → mindset_2026-04-25.mp3
+2026-04-25 16:29:43,521 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-04-25 16:29:45,161 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-04-25 16:31:14,926 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-04-25 16:32:45,047 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-04-25 16:34:15,189 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-04-25 16:35:47,293 [INFO]   clip 1/5 544KB
+2026-04-25 16:35:48,985 [INFO]   clip 2/5 640KB
+2026-04-25 16:35:50,659 [INFO]   clip 3/5 554KB
+2026-04-25 16:35:52,356 [INFO]   clip 4/5 542KB
+2026-04-25 16:35:54,006 [INFO]   clip 5/5 471KB
+2026-04-25 16:35:54,006 [INFO]   render → mindset_2026-04-25.mp4
+2026-04-25 16:35:55,111 [INFO]   size: 3.34 MB
+2026-04-25 16:35:55,112 [INFO] [DRY-RUN] would upload mindset_2026-04-25.mp4 → wealth_blueprint ('The first principle is that you must not fool yourself, and ')
+2026-04-25 16:35:55,112 [INFO]   upload ok=True (dry-run)
+2026-04-25 16:35:55,112 [INFO] === Wealth Blueprint done ===
+2026-04-25 16:35:55,637 [INFO] === Inner Archetypes | Enneagram · Type 9 The Peacemaker | dry_run=True ===
+2026-04-25 16:36:16,419 [INFO]   script: 8335 chars (~1324 words)
+2026-04-25 16:38:33,717 [INFO]   voice: edge-tts → enn_9.mp3
+2026-04-25 16:38:33,717 [INFO]   image 1/6: Type 9 The Peacemaker archetype mood, abstract symbolic...
+2026-04-25 16:38:35,383 [INFO]   image 2/6: Inner landscape representing Type 9 The Peacemaker, sur...
+2026-04-25 16:40:05,242 [INFO]   image 3/6: Tarot-card-style emblem for Type 9 The Peacemaker, myst...
+2026-04-25 16:41:35,578 [INFO]   image 4/6: Shadow side of Type 9 The Peacemaker archetype, twiligh...
+2026-04-25 16:43:05,610 [INFO]   image 5/6: Light side of Type 9 The Peacemaker archetype, dawn moo...
+2026-04-25 16:44:35,695 [INFO]   image 6/6: Integration journey of Type 9 The Peacemaker, bridge fr...
+2026-04-25 16:46:12,280 [INFO]   clip 1/6 (60s)
+2026-04-25 16:46:19,108 [INFO]   clip 2/6 (60s)
+2026-04-25 16:46:25,871 [INFO]   clip 3/6 (60s)
+2026-04-25 16:46:32,676 [INFO]   clip 4/6 (60s)
+2026-04-25 16:46:39,338 [INFO]   clip 5/6 (60s)
+2026-04-25 16:46:46,184 [INFO]   clip 6/6 (60s)
+2026-04-25 16:46:46,184 [INFO]   render → enn_9.mp4
+2026-04-25 16:46:54,837 [INFO]   size: 14.21 MB
+2026-04-25 16:46:54,837 [INFO] [DRY-RUN] would upload enn_9.mp4 → inner_archetypes ('Type 9 The Peacemaker — Deep Dive | Enneagram')
+2026-04-25 16:46:54,837 [INFO]   upload ok=True (dry-run)
+2026-04-25 16:46:54,838 [INFO] === Inner Archetypes done ===

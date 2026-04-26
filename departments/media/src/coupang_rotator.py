@@ -23,14 +23,27 @@ STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 INTERVAL = 5  # N 회 포스트당 1회
 
-# 쿠팡 파트너스 링크 풀 (AI 부업/크리에이터 맥락 상품만)
+# 쿠팡 파트너스 링크 풀
+# 전략 (리서치 기반): 24시간 쿠키 → 랭킹 페이지가 개별 상품보다 CTR 높음.
+# 수수료율: 뷰티/패션 3%, 식품/생활 2%, 가전 1%. 고관여 중가 > 저가 대량.
+# 크리에이터 페르소나(AI 부업/앱) 매칭: 홈오피스·운동·베스트 랭킹 우선.
 PRODUCTS = [
+    {
+        "name": "쿠팡 BEST 100 (오늘의 인기 상품)",
+        "url": "https://www.coupang.com/np/campaigns/82",
+        "hashtags": "#쿠팡베스트 #오늘의쇼핑",
+        "note": "TODO: 파트너스 대시보드에서 link.coupang.com/a/ 단축링크로 교체",
+    },
     {
         "name": "실버바 100g 프라임 투자",
         "url": "https://link.coupang.com/a/emjC0T",
         "hashtags": "#재테크 #실버바 #쿠팡",
     },
-    # 추후 확장: 키보드/마우스/AI 서적 등 링크 발급 시 이곳에 추가
+    # 추후 확장 (사용자가 파트너스 대시보드에서 단축링크 발급 후 교체):
+    # - 홈오피스 BEST (노트북 스탠드/모니터 받침)
+    # - 뷰티 BEST (3% 수수료 카테고리)
+    # - 운동기구 (폼롤러/밴드, 크리에이터 페르소나 매칭)
+    # - AI/생산성 도서 BEST
 ]
 
 DISCLOSURE_KO = (
@@ -78,6 +91,10 @@ def maybe_coupang_block(lang="ko"):
     state["last_injected_at"] = datetime.datetime.now().isoformat()
     _save(state)
 
+    # 공정위 2024-12 개정: 광고 고지는 본문 상단(첫 줄) 권장.
+    # 반환받은 쪽에서 원 포스트 본문 뒤에 붙이면 되도록 블록만 반환.
+    # 이 블록 자체의 첫 줄이 [광고] 고지 — 호출측은 이 블록을 맨 앞에 두거나
+    # 최소한 링크·고지가 한 화면에 노출되도록 배치해야 한다.
     disclosure = DISCLOSURE_EN if lang == "en" else DISCLOSURE_KO
     tail = f"{product['name']}\n{product['url']}\n{product['hashtags']}"
     return f"{disclosure}\n\n{tail}"
