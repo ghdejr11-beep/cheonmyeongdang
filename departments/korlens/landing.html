@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KORLENS · 같은 한국, 다른 관점</title>
+<meta name="description" content="외국인·커플·가족·솔로 4가지 관점으로 한국 17개 광역시도를 AI가 큐레이션. 2026 관광데이터 활용 공모전 출품작.">
+<meta property="og:title" content="KORLENS · 같은 한국, 다른 관점">
+<meta property="og:description" content="4가지 관점 AI 큐레이션 한국 여행 가이드">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --amber: #F59E0B;
+  --amber-dark: #D97706;
+  --amber-soft: #FFFBEB;
+  --pov-foreign: #3B82F6;
+  --pov-couple: #EC4899;
+  --pov-family: #10B981;
+  --pov-solo: #8B5CF6;
+  --ink: #1C1917;
+  --warm-text: #44403C;
+  --warm-muted: #78716C;
+  --warm-border: #E7E5E4;
+  --warm-bg: #FAFAF9;
+  --warm-card: #FFFFFF;
+}
+body {
+  font-family: -apple-system, 'Pretendard', 'Noto Sans KR', sans-serif;
+  background: var(--warm-bg);
+  color: var(--ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,250,249,0.92); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--warm-border);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-size: 19px; font-weight: 800; letter-spacing: -0.03em; }
+.logo span { color: var(--amber); }
+.nav-cta {
+  padding: 9px 18px; background: var(--ink); color: #fff;
+  border-radius: 10px; font-size: 13px; font-weight: 700;
+}
+
+/* Hero with Visit Korea-style ambient image overlay */
+.hero {
+  position: relative;
+  padding: 100px 24px 80px; text-align: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, var(--amber-soft) 0%, var(--warm-bg) 100%);
+  z-index: -1;
+}
+.hero-inner { max-width: 880px; margin: 0 auto; }
+.hero-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  color: var(--warm-muted); text-transform: uppercase;
+  margin-bottom: 24px;
+}
+h1 {
+  font-size: 64px; font-weight: 700; letter-spacing: -0.04em;
+  line-height: 1.05; margin-bottom: 22px;
+}
+h1 .ink { color: var(--amber); }
+.hero p.sub {
+  font-size: 19px; color: var(--warm-text); max-width: 580px;
+  margin: 0 auto 36px; line-height: 1.6;
+}
+.hero-cta {
+  display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 32px; background: var(--ink); color: #fff;
+  border-radius: 12px; font-size: 15px; font-weight: 700;
+  transition: transform .15s;
+}
+.btn-primary:hover { transform: translateY(-1px); }
+.btn-secondary {
+  padding: 16px 32px; background: #fff; color: var(--ink);
+  border: 1.5px solid var(--warm-border); border-radius: 12px;
+  font-size: 15px; font-weight: 700;
+}
+
+.trust {
+  margin-top: 30px; display: flex; justify-content: center;
+  gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--warm-muted);
+}
+.trust span { display: inline-flex; align-items: center; gap: 6px; }
+.trust .dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--pov-family);
+}
+
+/* 4 관점 색상 칩 (Triple과의 차별점) */
+.pov {
+  padding: 80px 24px;
+  background: var(--warm-card);
+  border-top: 1px solid var(--warm-border);
+}
+.pov-inner { max-width: 1100px; margin: 0 auto; }
+.section-head { text-align: center; margin-bottom: 50px; }
+.section-tag {
+  display: inline-block; background: var(--amber-soft); color: var(--amber-dark);
+  padding: 5px 12px; border-radius: 999px;
+  font-size: 11px; font-weight: 700; margin-bottom: 12px;
+}
+h2 {
+  font-size: 36px; font-weight: 700; letter-spacing: -0.03em;
+  line-height: 1.2; margin-bottom: 12px;
+}
+.section-head p { font-size: 16px; color: var(--warm-muted); }
+.pov-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.pov-card {
+  background: var(--warm-card);
+  border: 1px solid var(--warm-border);
+  border-radius: 16px; padding: 28px 22px;
+  transition: all .2s;
+  position: relative; overflow: hidden;
+}
+.pov-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.pov-card.foreign::before { background: var(--pov-foreign); }
+.pov-card.couple::before  { background: var(--pov-couple); }
+.pov-card.family::before  { background: var(--pov-family); }
+.pov-card.solo::before    { background: var(--pov-solo); }
+.pov-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+}
+.pov-icon { font-size: 28px; margin-bottom: 14px; }
+.pov-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+.pov-card p { font-size: 13px; color: var(--warm-muted); line-height: 1.6; }
+
+.example {
+  padding: 80px 24px;
+}
+.ex-inner { max-width: 1100px; margin: 0 auto; }
+.ex-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  margin-top: 30px;
+}
+.ex-card {
+  background: var(--warm-card);
+  border: 1px solid var(--warm-border);
+  border-radius: 16px; padding: 24px;
+}
+.ex-card .label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.ex-card.f .label { color: var(--pov-foreign); }
+.ex-card.c .label { color: var(--pov-couple); }
+.ex-card.fa .label { color: var(--pov-family); }
+.ex-card.s .label { color: var(--pov-solo); }
+.ex-card .place { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+.ex-card p { font-size: 14px; color: var(--warm-text); line-height: 1.7; }
+
+.cta {
+  background: var(--ink); color: #fff;
+  padding: 80px 24px; text-align: center;
+}
+.cta h2 { color: #fff; margin-bottom: 14px; }
+.cta p { font-size: 16px; opacity: 0.85; margin-bottom: 32px; }
+.btn-amber {
+  background: var(--amber); color: #fff;
+  padding: 18px 36px; font-size: 15px; font-weight: 800;
+  border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;
+}
+
+footer {
+  background: var(--warm-card); color: var(--warm-muted);
+  padding: 32px 24px; font-size: 12px; text-align: center;
+  border-top: 1px solid var(--warm-border);
+}
+footer span { color: var(--amber-dark); }
+
+@media (max-width: 768px) {
+  h1 { font-size: 42px; }
+  h2 { font-size: 26px; }
+  .hero { padding: 60px 20px 40px; }
+  .pov-grid { grid-template-columns: 1fr 1fr; }
+  .ex-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">KOR<span>LENS</span></div>
+    <a href="https://korlens.vercel.app" class="nav-cta" target="_blank" rel="noopener">앱 열기 →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">2026 관광데이터 활용 공모전 출품작</div>
+    <h1>같은 한국,<br><span class="ink">다른 관점</span></h1>
+    <p class="sub">같은 장소도 누구와 가느냐에 따라 완전히 다른 여행이 됩니다. KORLENS는 당신의 관점으로 한국을 다시 소개합니다.</p>
+    <div class="hero-cta">
+      <a href="https://korlens.vercel.app" class="btn-primary" target="_blank" rel="noopener">17개 시도 둘러보기 →</a>
+      <a href="#example" class="btn-secondary">예시 보기</a>
+    </div>
+    <div class="trust">
+      <span><span class="dot"></span>한국관광공사 TourAPI 4종</span>
+      <span><span class="dot"></span>열린관광 무장애 데이터</span>
+      <span><span class="dot"></span>Claude Haiku 큐레이션 768건</span>
+    </div>
+  </div>
+</section>
+
+<section class="pov">
+  <div class="pov-inner">
+    <div class="section-head">
+      <div class="section-tag">차별점</div>
+      <h2>4가지 관점, 같은 장소를 다르게</h2>
+      <p>트리플·마이리얼트립과 다른 점: 한 장소 하나만 보여주지 않고, 4가지 시각으로 큐레이션합니다.</p>
+    </div>
+    <div class="pov-grid">
+      <div class="pov-card foreign">
+        <div class="pov-icon">✈️</div>
+        <h3>외국인</h3>
+        <p>영문 가이드, 대중교통, 한복 무료입장 등 외국인 친화 정보</p>
+      </div>
+      <div class="pov-card couple">
+        <div class="pov-icon">💑</div>
+        <h3>커플</h3>
+        <p>야경 포토스팟, 데이트 코스, 로맨틱 명소</p>
+      </div>
+      <div class="pov-card family">
+        <div class="pov-icon">👨‍👩‍👧</div>
+        <h3>가족</h3>
+        <p>유모차 대여, 어린이 체험, 무장애 편의시설</p>
+      </div>
+      <div class="pov-card solo">
+        <div class="pov-icon">🧘</div>
+        <h3>솔로</h3>
+        <p>한산한 시간대, 1인 추천 동선, 조용한 산책 루트</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="example" id="example">
+  <div class="ex-inner">
+    <div class="section-head">
+      <div class="section-tag">예시</div>
+      <h2>경복궁, 4가지 시선</h2>
+      <p>같은 장소도 이렇게 다르게 보입니다</p>
+    </div>
+    <div class="ex-grid">
+      <div class="ex-card f">
+        <div class="label">FOREIGNER</div>
+        <div class="place">경복궁</div>
+        <p>영어 해설 투어 11·14시 · 3호선 경복궁역 도보 3분 · 한복 착용 시 무료 입장</p>
+      </div>
+      <div class="ex-card c">
+        <div class="label">COUPLE</div>
+        <div class="place">경복궁</div>
+        <p>경회루 야경 포토스팟 · 주변 삼청동 데이트 코스 · 분기별 야간 특별관람</p>
+      </div>
+      <div class="ex-card fa">
+        <div class="label">FAMILY</div>
+        <div class="place">경복궁</div>
+        <p>수문장 교대식 10·14시 · 유모차 대여 무료 · 어린이 한복 체험관 별도</p>
+      </div>
+      <div class="ex-card s">
+        <div class="label">SOLO</div>
+        <div class="place">경복궁</div>
+        <p>향원정 조용한 산책 루트 · 평일 오전 한산 · 1인 관람 1.5시간 추천</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>지금 바로 둘러보세요</h2>
+  <p>17개 광역시도 × 4관점 매트릭스. 회원가입 없이 무료.</p>
+  <a href="https://korlens.vercel.app" class="btn-amber" target="_blank" rel="noopener">KORLENS 열기 →</a>
+</section>
+
+<footer>
+  © 2026 쿤스튜디오 · KOR<span>LENS</span> · 2026 관광데이터 활용 공모전 출품작
+</footer>
+
+</body>
+</html>
