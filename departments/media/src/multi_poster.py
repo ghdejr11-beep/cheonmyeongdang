@@ -141,10 +141,125 @@ def post_threads(text, env=None):
     return (s2 == 200 and isinstance(r2, dict) and 'id' in r2), r2
 
 
+# ───────── 이미지 자동 호스팅 (catbox + imgbb 폴백) ─────────
+def _is_local_path(p):
+    """파일 경로(로컬) vs URL 구분."""
+    if not p:
+        return False
+    if p.startswith(('http://', 'https://')):
+        return False
+    return os.path.exists(p)
+
+
+def _upload_catbox(filepath):
+    """catbox.moe 익명 업로드 (no auth, 무료, 영구).
+    multipart/form-data 직접 구성 (urllib만 사용, 의존성 X).
+    """
+    try:
+        import mimetypes, uuid
+        boundary = '----CatboxBoundary' + uuid.uuid4().hex
+        with open(filepath, 'rb') as f:
+            data_bytes = f.read()
+        ext = os.path.splitext(filepath)[1].lstrip('.').lower() or 'jpg'
+        mime = mimetypes.guess_type(filepath)[0] or f'image/{ext}'
+        body = []
+        body.append(f'--{boundary}\r\n'.encode())
+        body.append(b'Content-Disposition: form-data; name="reqtype"\r\n\r\nfileupload\r\n')
+        body.append(f'--{boundary}\r\n'.encode())
+        body.append(f'Content-Disposition: form-data; name="fileToUpload"; filename="{os.path.basename(filepath)}"\r\n'.encode())
+        body.append(f'Content-Type: {mime}\r\n\r\n'.encode())
+        body.append(data_bytes)
+        body.append(f'\r\n--{boundary}--\r\n'.encode())
+        payload = b''.join(body)
+        req = urllib.request.Request(
+            'https://catbox.moe/user/api.php',
+            data=payload,
+            headers={
+                'Content-Type': f'multipart/form-data; boundary={boundary}',
+                'User-Agent': 'KunStudio-Poster/1.0',
+            },
+            method='POST',
+        )
+        with urllib.request.urlopen(req, timeout=30) as r:
+            url = r.read().decode('utf-8').strip()
+        if url.startswith('https://') and ('catbox' in url or 'litterbox' in url):
+            return True, url
+        return False, f'catbox unexpected: {url[:200]}'
+    except Exception as e:
+        return False, f'catbox error: {type(e).__name__}: {e}'
+
+
+def _upload_imgbb(filepath, env=None):
+    """imgbb.com 업로드 (API key 필요, env에 IMGBB_API_KEY)."""
+    env = env or _load_secrets()
+    key = env.get('IMGBB_API_KEY', '').strip()
+    if not key:
+        return False, 'no IMGBB_API_KEY'
+    try:
+        import base64
+        with open(filepath, 'rb') as f:
+            b64 = base64.b64encode(f.read()).decode()
+        body = urllib.parse.urlencode({'key': key, 'image': b64}).encode()
+        req = urllib.request.Request(
+            'https://api.imgbb.com/1/upload',
+            data=body,
+            headers={'Content-Type': 'application/x-www-form-urlencoded'},
+            method='POST',
+        )
+        with urllib.request.urlopen(req, timeout=30) as r:
+            data = json.loads(r.read())
+        if data.get('success') and data.get('data', {}).get('url'):
+            return True, data['data']['url']
+        return False, f'imgbb fail: {data}'
+    except Exception as e:
+        return False, f'imgbb error: {type(e).__name__}: {e}'
+
+
+def host_image(filepath_or_url, env=None):
+    """이미지 → public URL.
+    - URL 입력 시 그대로 반환 (검증 X)
+    - 로컬 파일 → catbox 1차 → imgbb 2차 폴백
+    """
+    if not filepath_or_url:
+        return False, 'empty input'
+    if not _is_local_path(filepath_or_url):
+        return True, filepath_or_url  # 이미 URL
+    # 로컬 파일 → 호스팅
+    ok, url = _upload_catbox(filepath_or_url)
+    if ok:
+        return True, url
+    ok2, url2 = _upload_imgbb(filepath_or_url, env)
+    if ok2:
+        return True, url2
+    return False, f'host_image fail (catbox: {url}, imgbb: {url2})'
+
+
+def _validate_ig_image_url(url, timeout=8):
+    """IG 정책 점검: HTTPS + image/jpeg|png + < 8MB + 320~1440px."""
+    if not url.startswith('https://'):
+        return False, 'not HTTPS'
+    try:
+        req = urllib.request.Request(url, method='HEAD',
+                                     headers={'User-Agent': 'KunStudio-Validator/1.0'})
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            ct = r.headers.get('Content-Type', '').lower()
+            cl = int(r.headers.get('Content-Length', '0') or 0)
+        if not ct.startswith(('image/jpeg', 'image/png', 'image/jpg')):
+            return False, f'unsupported Content-Type: {ct}'
+        if cl > 8 * 1024 * 1024:
+            return False, f'too large: {cl} bytes'
+        return True, f'OK ct={ct} size={cl}'
+    except Exception as e:
+        return False, f'HEAD fail: {type(e).__name__}: {e}'
+
+
 # ───────── Instagram Graph API (이미지 필수) ─────────
-def post_instagram(text, image_url=None, env=None):
+def post_instagram(text, image_url=None, env=None, max_retry=2):
     """IG는 이미지 필수. image_url 없으면 skip.
     2단계 플로우: /media (컨테이너) → /media_publish.
+
+    image_url이 로컬 파일 경로면 catbox/imgbb로 자동 호스팅.
+    HTTPS + image/jpeg|png + <8MB + Content-Type 검증 후 발행.
     """
     env = env or _load_secrets()
     uid = env.get('IG_USER_ID', '').strip()
@@ -154,24 +269,54 @@ def post_instagram(text, image_url=None, env=None):
     if not image_url:
         return False, 'IG requires image_url (skipped)'
 
-    s1, r1 = _http('POST', f'https://graph.instagram.com/v21.0/{uid}/media',
-                   body=urllib.parse.urlencode({
-                       'image_url': image_url,
-                       'caption': text[:2200],
-                       'access_token': tok,
-                   }),
-                   headers={'Content-Type': 'application/x-www-form-urlencoded'})
-    if s1 != 200 or not isinstance(r1, dict) or 'id' not in r1:
-        return False, f'container fail: {s1} {r1}'
+    # 1) 로컬 파일이면 자동 호스팅
+    ok_host, hosted_url = host_image(image_url, env)
+    if not ok_host:
+        return False, hosted_url
+
+    # 2) 이미지 정책 검증 (실패해도 IG 자체 검증으로 fallback — warn만)
+    ok_v, msg_v = _validate_ig_image_url(hosted_url)
+    if not ok_v:
+        # DNS 실패 등 검증 자체 못 하는 경우: IG에 직접 시도 (IG가 다운로드 가능하면 OK)
+        print(f'[WARN] IG image validation failed ({msg_v}), proceeding anyway')
+
+    # 3) Container 생성 + retry
+    last_err = None
+    for attempt in range(max_retry + 1):
+        s1, r1 = _http('POST', f'https://graph.instagram.com/v21.0/{uid}/media',
+                       body=urllib.parse.urlencode({
+                           'image_url': hosted_url,
+                           'caption': text[:2200],
+                           'access_token': tok,
+                       }),
+                       headers={'Content-Type': 'application/x-www-form-urlencoded'})
+        if s1 == 200 and isinstance(r1, dict) and 'id' in r1:
+            break
+        last_err = f'container fail (attempt {attempt+1}): {s1} {r1}'
+        if attempt < max_retry:
+            import time
+            time.sleep(2 ** attempt)
+    else:
+        return False, last_err
 
     creation_id = r1['id']
-    s2, r2 = _http('POST', f'https://graph.instagram.com/v21.0/{uid}/media_publish',
-                   body=urllib.parse.urlencode({
-                       'creation_id': creation_id,
-                       'access_token': tok,
-                   }),
-                   headers={'Content-Type': 'application/x-www-form-urlencoded'})
-    return (s2 == 200 and isinstance(r2, dict) and 'id' in r2), r2
+
+    # 4) Publish + retry
+    last_err2 = None
+    for attempt in range(max_retry + 1):
+        s2, r2 = _http('POST', f'https://graph.instagram.com/v21.0/{uid}/media_publish',
+                       body=urllib.parse.urlencode({
+                           'creation_id': creation_id,
+                           'access_token': tok,
+                       }),
+                       headers={'Content-Type': 'application/x-www-form-urlencoded'})
+        if s2 == 200 and isinstance(r2, dict) and 'id' in r2:
+            return True, r2
+        last_err2 = f'publish fail (attempt {attempt+1}): {s2} {r2}'
+        if attempt < max_retry:
+            import time
+            time.sleep(2 ** attempt)
+    return False, last_err2
 
 
 # ───────── X (Twitter) — tweepy OAuth 1.0a ─────────
