@@ -1,0 +1,80 @@
+[
+  {
+    "name": "KORLENS",
+    "url": "https://korlens.vercel.app/",
+    "type": "vercel"
+  },
+  {
+    "name": "Tax API",
+    "url": "https://tax-n-benefit-api.vercel.app/api/connect",
+    "type": "vercel-api"
+  },
+  {
+    "name": "Tax Front",
+    "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/tax/src/app.html",
+    "type": "ghpages"
+  },
+  {
+    "name": "Insurance Customer",
+    "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/index.html",
+    "type": "ghpages"
+  },
+  {
+    "name": "Insurance Agent",
+    "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/agent.html",
+    "type": "ghpages"
+  },
+  {
+    "name": "Cheonmyeongdang Web",
+    "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/",
+    "type": "ghpages"
+  },
+  {
+    "name": "ghpages:src",
+    "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src",
+    "type": "ghpages",
+    "auto": true
+  },
+  {
+    "name": "ghpages:landing.html",
+    "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/landing.html",
+    "type": "ghpages",
+    "auto": true
+  },
+  {
+    "name": "ghpages:src",
+    "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/tax/src/",
+    "type": "ghpages",
+    "auto": true
+  },
+  {
+    "name": "ghpages:index.html",
+    "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/tax/src/index.html",
+    "type": "ghpages",
+    "auto": true
+  },
+  {
+    "name": "ghpages:privacy.html",
+    "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/privacy.html",
+    "type": "ghpages",
+    "auto": true
+  },
+  {
+    "name": "ghpages:terms.html",
+    "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/terms.html",
+    "type": "ghpages",
+    "auto": true
+  },
+  {
+    "name": "ghpages:tetris.html",
+    "url": "https://ghdejr11-beep.github.io/cheonmyeongdang/tetris.html",
+    "type": "ghpages",
+    "auto": true
+  },
+  {
+    "name": "tax-n-benefit-api:api",
+    "url": "https://tax-n-benefit-api.vercel.app/api",
+    "type": "vercel",
+    "auto": true
+  }
+]

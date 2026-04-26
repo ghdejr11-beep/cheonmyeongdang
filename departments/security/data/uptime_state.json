@@ -1,0 +1,100 @@
+{
+  "https://korlens.vercel.app/": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:14+00:00"
+  },
+  "https://tax-n-benefit-api.vercel.app/api/connect": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:15+00:00"
+  },
+  "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/tax/src/app.html": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:16+00:00"
+  },
+  "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/index.html": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:16+00:00"
+  },
+  "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/agent.html": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:16+00:00"
+  },
+  "https://ghdejr11-beep.github.io/cheonmyeongdang/": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:16+00:00"
+  },
+  "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:17+00:00"
+  },
+  "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/insurance-daboyeo/src/landing.html": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:17+00:00"
+  },
+  "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/tax/src/": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:18+00:00"
+  },
+  "https://ghdejr11-beep.github.io/cheonmyeongdang/departments/tax/src/index.html": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:18+00:00"
+  },
+  "https://ghdejr11-beep.github.io/cheonmyeongdang/privacy.html": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:18+00:00"
+  },
+  "https://ghdejr11-beep.github.io/cheonmyeongdang/terms.html": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:19+00:00"
+  },
+  "https://ghdejr11-beep.github.io/cheonmyeongdang/tetris.html": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:19+00:00"
+  },
+  "https://tax-n-benefit-api.vercel.app/api": {
+    "fail_streak": 0,
+    "down_since": null,
+    "alerted_down": false,
+    "last_alert_ts": null,
+    "last_ok": "2026-04-25T07:20:19+00:00"
+  }
+}
