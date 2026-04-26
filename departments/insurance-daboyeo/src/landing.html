@@ -322,6 +322,174 @@
   @media (max-width: 768px) {
     .footer-inner { grid-template-columns: 1fr; gap: 24px; }
   }
+
+  /* ===== 사전등록 (Pre-Signup) ===== */
+  .presignup {
+    padding: 90px 24px;
+    background: linear-gradient(135deg, #fff 0%, var(--bg-hero) 100%);
+  }
+  .presignup-inner {
+    max-width: 880px; margin: 0 auto;
+    background: #fff;
+    border-radius: 28px;
+    padding: 48px 44px;
+    box-shadow: 0 20px 60px rgba(37,99,235,0.12);
+    border: 1px solid var(--border);
+  }
+  .ps-badge {
+    display: inline-block;
+    background: #fef3c7; color: #b45309;
+    padding: 8px 16px; border-radius: 20px;
+    font-size: 13px; font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .ps-head h2 {
+    font-size: 34px; font-weight: 800; letter-spacing: -0.03em;
+    color: var(--navy); margin-bottom: 12px; line-height: 1.25;
+  }
+  .ps-head h2 .accent { color: var(--primary); }
+  .ps-head p {
+    font-size: 16px; color: var(--text-sub); line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .ps-pricebox {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-bottom: 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .ps-price-left .ps-tag {
+    display: inline-block;
+    background: #fde68a; color: #92400e;
+    padding: 4px 10px; border-radius: 6px;
+    font-size: 11px; font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .ps-price-left .ps-amount {
+    font-size: 32px; font-weight: 800; letter-spacing: -0.02em;
+  }
+  .ps-price-left .ps-amount s { opacity: 0.6; font-size: 18px; margin-right: 8px; font-weight: 600; }
+  .ps-price-left .ps-period { font-size: 14px; opacity: 0.85; margin-top: 2px; }
+  .ps-price-right { font-size: 13px; opacity: 0.95; line-height: 1.55; max-width: 240px; }
+
+  .ps-counter {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 28px;
+  }
+  .ps-counter-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .ps-counter-row .ps-count {
+    font-size: 15px; font-weight: 700; color: var(--navy);
+  }
+  .ps-counter-row .ps-count .ps-num { color: var(--primary); font-size: 22px; font-weight: 800; }
+  .ps-counter-row .ps-launch {
+    font-size: 12px; color: var(--text-sub); font-weight: 600;
+  }
+  .ps-bar {
+    width: 100%; height: 8px; background: var(--border);
+    border-radius: 999px; overflow: hidden;
+  }
+  .ps-bar-fill {
+    height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 999px; transition: width .4s ease;
+  }
+
+  .ps-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .ps-form .full { grid-column: 1 / -1; }
+  .ps-field label {
+    display: block; font-size: 13px; font-weight: 700;
+    color: var(--text); margin-bottom: 8px;
+  }
+  .ps-field label .req { color: var(--red); }
+  .ps-field input, .ps-field select {
+    width: 100%; padding: 13px 14px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    font-size: 15px; color: var(--text);
+    background: #fff;
+    transition: border-color .15s, box-shadow .15s;
+    font-family: inherit;
+  }
+  .ps-field input:focus, .ps-field select:focus {
+    outline: none; border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+  }
+  .ps-checks {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    margin-top: 6px;
+  }
+  .ps-check {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 12px; border: 1.5px solid var(--border);
+    border-radius: 10px; cursor: pointer;
+    transition: all .15s;
+    font-size: 13px; font-weight: 600; color: var(--text-sub);
+    background: #fff;
+  }
+  .ps-check:hover { border-color: var(--primary); }
+  .ps-check input { width: 16px; height: 16px; accent-color: var(--primary); }
+  .ps-check.active { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+  .ps-submit {
+    grid-column: 1 / -1;
+    padding: 18px 24px;
+    background: var(--primary); color: #fff;
+    border-radius: 12px;
+    font-size: 17px; font-weight: 800;
+    transition: all .15s;
+    margin-top: 8px;
+  }
+  .ps-submit:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  .ps-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+  .ps-note {
+    grid-column: 1 / -1;
+    font-size: 12px; color: var(--text-dim);
+    text-align: center; line-height: 1.6; margin-top: 4px;
+  }
+  .ps-success {
+    display: none;
+    background: #ecfdf5; border: 1.5px solid var(--green);
+    color: var(--green); padding: 16px;
+    border-radius: 12px; font-size: 14px; font-weight: 700;
+    text-align: center; margin-top: 12px;
+  }
+  .ps-success.show { display: block; }
+
+  .ps-testimonials {
+    margin-top: 36px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  }
+  .ps-testi {
+    background: var(--bg-soft);
+    border-left: 3px solid var(--primary);
+    padding: 14px 16px; border-radius: 8px;
+    font-size: 13px; color: var(--text-sub);
+    line-height: 1.6;
+  }
+  .ps-testi .ps-author {
+    display: block; margin-top: 6px;
+    color: var(--text-dim); font-size: 11px; font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    .presignup { padding: 50px 18px; }
+    .presignup-inner { padding: 32px 22px; border-radius: 20px; }
+    .ps-head h2 { font-size: 24px; }
+    .ps-pricebox { flex-direction: column; align-items: flex-start; padding: 18px 18px; }
+    .ps-price-right { max-width: 100%; }
+    .ps-form { grid-template-columns: 1fr; }
+    .ps-checks { grid-template-columns: 1fr 1fr; }
+    .ps-testimonials { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -333,6 +501,7 @@
       <li><a href="#segments">누구를 위한?</a></li>
       <li><a href="#diff">차별화</a></li>
       <li><a href="#showcase">화면 소개</a></li>
+      <li><a href="#signup" style="color:var(--primary);font-weight:800;">사전등록 50%↓</a></li>
     </ul>
     <div class="nav-cta-group">
       <a href="index.html" class="nav-cta sec">고객용</a>
@@ -350,19 +519,118 @@
       전 보험사 실시간 연동 · 가족 계약 포함 · CODEF 공인 API 기반
     </p>
     <div class="hero-cta">
-      <a href="index.html" class="btn-primary">고객용 앱 체험 →</a>
-      <a href="agent.html" class="btn-accent">설계사용 앱 체험 →</a>
+      <a href="#signup" class="btn-primary">사전등록 (월 14,500원) →</a>
+      <a href="agent.html" class="btn-secondary">설계사용 데모 →</a>
+      <a href="index.html" class="btn-secondary">고객용 데모 →</a>
+    </div>
+    <!-- Trust strip: 보맵·굿리치 약점 즉시 부각 (Hero 내부 신뢰 시그널) -->
+    <div style="margin-top:28px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--text-sub);align-items:center;">
+      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);"></span>전 보험사 실시간 연동</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);"></span>가족 계약 포함</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);"></span>CODEF 공인 API</span>
     </div>
 
     <div class="hero-image">
       <div class="phone-shot" style="transform: rotate(-3deg);">
-        <img src="assets/c_overview.jpg" alt="고객용 - 내 보험 현황" loading="lazy" />
+        <picture><source srcset="assets/c_overview.webp" type="image/webp"><img src="assets/c_overview.jpg" alt="고객용 - 내 보험 현황" loading="lazy" /></picture>
       </div>
       <div class="phone-shot phone-shot-lead">
-        <img src="assets/a_dashboard.jpg" alt="설계사용 - 대시보드" loading="lazy" />
+        <picture><source srcset="assets/a_dashboard.webp" type="image/webp"><img src="assets/a_dashboard.jpg" alt="설계사용 - 대시보드" loading="lazy" /></picture>
       </div>
       <div class="phone-shot" style="transform: rotate(3deg);">
-        <img src="assets/c_healthcheck.jpg" alt="고객용 - 건강 분석" loading="lazy" />
+        <picture><source srcset="assets/c_healthcheck.webp" type="image/webp"><img src="assets/c_healthcheck.jpg" alt="고객용 - 건강 분석" loading="lazy" /></picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 사전등록 폼 (수요 검증) ===== -->
+<section class="presignup" id="signup">
+  <div class="presignup-inner">
+    <div class="ps-head">
+      <span class="ps-badge">⏰ 100명 사전등록 시 본격 개발 시작</span>
+      <h2>먼저 등록하면 <span class="accent">평생 50% 할인</span></h2>
+      <p>설계사 업무를 매일 갈아넣는 사람의 도구는, 매일 갈아넣는 사람이 만듭니다.<br>
+      얼리버드 100명에게는 정식 출시 후에도 <strong>월 14,500원</strong>(정식가의 절반)으로 평생 보장.</p>
+    </div>
+
+    <div class="ps-pricebox">
+      <div class="ps-price-left">
+        <span class="ps-tag">EARLY BIRD</span>
+        <div class="ps-amount"><s>월 29,000원</s>월 14,500원</div>
+        <div class="ps-period">정식 출시 후에도 평생 동결 / 50% OFF</div>
+      </div>
+      <div class="ps-price-right">
+        ※ 정식가는 월 29,000원 예정.<br>
+        사전등록 100명 한정 가격입니다.
+      </div>
+    </div>
+
+    <div class="ps-counter">
+      <div class="ps-counter-row">
+        <div class="ps-count"><span class="ps-num" id="countNow">0</span> / 100명 등록 완료</div>
+        <div class="ps-launch">📅 5월 1일 정식 출시 예정 (placeholder)</div>
+      </div>
+      <div class="ps-bar"><div class="ps-bar-fill" id="countBar" style="width:0%"></div></div>
+    </div>
+
+    <form class="ps-form" id="signupForm" onsubmit="return submitSignup(event)" novalidate>
+      <div class="ps-field">
+        <label>이름 <span class="req">*</span></label>
+        <input type="text" name="name" placeholder="홍길동" required autocomplete="name" />
+      </div>
+      <div class="ps-field">
+        <label>이메일 <span class="req">*</span></label>
+        <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+      </div>
+      <div class="ps-field">
+        <label>휴대폰 <span class="req">*</span></label>
+        <input type="tel" name="phone" placeholder="010-0000-0000" required autocomplete="tel" />
+      </div>
+      <div class="ps-field">
+        <label>소속 <span class="req">*</span></label>
+        <select name="affiliation" required>
+          <option value="">선택해주세요</option>
+          <option value="az">AZ금융 설계사</option>
+          <option value="other_company">기타 보험사 설계사</option>
+          <option value="none">미가입 (입문 예정)</option>
+        </select>
+      </div>
+
+      <div class="ps-field full">
+        <label>관심 기능 TOP 3 (복수 선택 가능)</label>
+        <div class="ps-checks">
+          <label class="ps-check"><input type="checkbox" name="features" value="contracts"><span>계약 통합</span></label>
+          <label class="ps-check"><input type="checkbox" name="features" value="family"><span>가족 계약</span></label>
+          <label class="ps-check"><input type="checkbox" name="features" value="coverage"><span>보장 분석</span></label>
+          <label class="ps-check"><input type="checkbox" name="features" value="claim"><span>청구 자동화</span></label>
+          <label class="ps-check"><input type="checkbox" name="features" value="quote"><span>견적서</span></label>
+          <label class="ps-check"><input type="checkbox" name="features" value="myhealthway"><span>마이헬스웨이</span></label>
+        </div>
+      </div>
+
+      <button type="submit" class="ps-submit" id="signupBtn">사전등록하고 50% 평생 할인 받기 →</button>
+      <p class="ps-note">
+        * 본 등록은 출시 알림과 얼리버드 가격 적용을 위한 정보 수집입니다.<br>
+        * 보험업법 제87조 및 개인정보보호법 준수. 마케팅 외 목적 사용 금지.
+      </p>
+      <div class="ps-success" id="signupSuccess">
+        ✓ 사전등록이 완료되었습니다. 출시일에 안내드릴게요.
+      </div>
+    </form>
+
+    <div class="ps-testimonials">
+      <div class="ps-testi">
+        "후기 placeholder — 실제 사전등록자 후기가 수집되면 이 자리에 게재됩니다."
+        <span class="ps-author">— AZ금융 설계사 (예시)</span>
+      </div>
+      <div class="ps-testi">
+        "후기 placeholder — 베타테스터 의견을 수집 중입니다."
+        <span class="ps-author">— 베타 사용자 (예시)</span>
+      </div>
+      <div class="ps-testi">
+        "후기 placeholder — 정식 출시 후 실제 사용자 인용으로 교체 예정."
+        <span class="ps-author">— 사용자 (예시)</span>
       </div>
     </div>
   </div>
@@ -450,19 +718,19 @@
   </div>
 
   <div class="showcase-grid" id="grid-customer">
-    <div class="show-card"><img src="assets/c_overview.jpg" alt="" loading="lazy" /><div class="show-label">내 보험 현황</div></div>
-    <div class="show-card"><img src="assets/c_coverage.jpg" alt="" loading="lazy" /><div class="show-label">보장 분석</div></div>
-    <div class="show-card"><img src="assets/c_recommend.jpg" alt="" loading="lazy" /><div class="show-label">AI 맞춤 추천</div></div>
-    <div class="show-card"><img src="assets/c_healthcheck.jpg" alt="" loading="lazy" /><div class="show-label">건강 분석</div></div>
-    <div class="show-card"><img src="assets/c_claim.jpg" alt="" loading="lazy" /><div class="show-label">보험금 청구</div></div>
+    <div class="show-card"><picture><source srcset="assets/c_overview.webp" type="image/webp"><img src="assets/c_overview.jpg" alt="" loading="lazy" /></picture><div class="show-label">내 보험 현황</div></div>
+    <div class="show-card"><picture><source srcset="assets/c_coverage.webp" type="image/webp"><img src="assets/c_coverage.jpg" alt="" loading="lazy" /></picture><div class="show-label">보장 분석</div></div>
+    <div class="show-card"><picture><source srcset="assets/c_recommend.webp" type="image/webp"><img src="assets/c_recommend.jpg" alt="" loading="lazy" /></picture><div class="show-label">AI 맞춤 추천</div></div>
+    <div class="show-card"><picture><source srcset="assets/c_healthcheck.webp" type="image/webp"><img src="assets/c_healthcheck.jpg" alt="" loading="lazy" /></picture><div class="show-label">건강 분석</div></div>
+    <div class="show-card"><picture><source srcset="assets/c_claim.webp" type="image/webp"><img src="assets/c_claim.jpg" alt="" loading="lazy" /></picture><div class="show-label">보험금 청구</div></div>
   </div>
 
   <div class="showcase-grid hidden" id="grid-agent">
-    <div class="show-card"><img src="assets/a_dashboard.jpg" alt="" loading="lazy" /><div class="show-label">대시보드</div></div>
-    <div class="show-card"><img src="assets/a_customers.jpg" alt="" loading="lazy" /><div class="show-label">고객 관리</div></div>
-    <div class="show-card"><img src="assets/a_profile.jpg" alt="" loading="lazy" /><div class="show-label">프로필 설정</div></div>
-    <div class="show-card"><img src="assets/a_link.jpg" alt="" loading="lazy" /><div class="show-label">고객 링크</div></div>
-    <div class="show-card"><img src="assets/a_analysis.jpg" alt="" loading="lazy" /><div class="show-label">분석 대시보드</div></div>
+    <div class="show-card"><picture><source srcset="assets/a_dashboard.webp" type="image/webp"><img src="assets/a_dashboard.jpg" alt="" loading="lazy" /></picture><div class="show-label">대시보드</div></div>
+    <div class="show-card"><picture><source srcset="assets/a_customers.webp" type="image/webp"><img src="assets/a_customers.jpg" alt="" loading="lazy" /></picture><div class="show-label">고객 관리</div></div>
+    <div class="show-card"><picture><source srcset="assets/a_profile.webp" type="image/webp"><img src="assets/a_profile.jpg" alt="" loading="lazy" /></picture><div class="show-label">프로필 설정</div></div>
+    <div class="show-card"><picture><source srcset="assets/a_link.webp" type="image/webp"><img src="assets/a_link.jpg" alt="" loading="lazy" /></picture><div class="show-label">고객 링크</div></div>
+    <div class="show-card"><picture><source srcset="assets/a_analysis.webp" type="image/webp"><img src="assets/a_analysis.jpg" alt="" loading="lazy" /></picture><div class="show-label">분석 대시보드</div></div>
   </div>
 </section>
 
@@ -512,6 +780,90 @@
     document.getElementById('grid-customer').classList.toggle('hidden', target !== 'customer');
     document.getElementById('grid-agent').classList.toggle('hidden', target !== 'agent');
   }
+
+  // ===== 사전등록 카운터 + 폼 처리 (localStorage 기반) =====
+  var SIGNUP_KEY = 'daboyeo_signup_count_v1';
+  var SIGNUP_LIST_KEY = 'daboyeo_signup_list_v1';
+  var SIGNUP_GOAL = 100;
+
+  function getSignupCount() {
+    try {
+      var n = parseInt(localStorage.getItem(SIGNUP_KEY) || '0', 10);
+      return isNaN(n) ? 0 : n;
+    } catch (e) { return 0; }
+  }
+  function setSignupCount(n) {
+    try { localStorage.setItem(SIGNUP_KEY, String(n)); } catch (e) {}
+  }
+  function renderSignupCount() {
+    var n = getSignupCount();
+    var bar = document.getElementById('countBar');
+    var num = document.getElementById('countNow');
+    if (num) num.textContent = String(n);
+    if (bar) bar.style.width = Math.min(100, (n / SIGNUP_GOAL) * 100) + '%';
+  }
+
+  function submitSignup(e) {
+    e.preventDefault();
+    var form = document.getElementById('signupForm');
+    var btn = document.getElementById('signupBtn');
+    var success = document.getElementById('signupSuccess');
+
+    var data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      affiliation: form.affiliation.value,
+      features: Array.prototype.slice.call(form.querySelectorAll('input[name=features]:checked')).map(function(c){return c.value;}),
+      ts: new Date().toISOString()
+    };
+
+    if (!data.name || !data.email || !data.phone || !data.affiliation) {
+      alert('필수 항목(이름/이메일/휴대폰/소속)을 모두 입력해 주세요.');
+      return false;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      alert('이메일 형식이 올바르지 않습니다.');
+      return false;
+    }
+
+    btn.disabled = true;
+    btn.textContent = '등록 중...';
+
+    // === 실제 API 연동 자리 (사용자 결정 후 fetch 추가) ===
+    // fetch('/api/signup', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
+    // 현재는 콘솔 로그 + localStorage 누적
+    console.log('[보험다보여 사전등록]', data);
+
+    try {
+      var list = JSON.parse(localStorage.getItem(SIGNUP_LIST_KEY) || '[]');
+      list.push(data);
+      localStorage.setItem(SIGNUP_LIST_KEY, JSON.stringify(list));
+    } catch (e) {}
+
+    setSignupCount(getSignupCount() + 1);
+    renderSignupCount();
+
+    setTimeout(function(){
+      success.classList.add('show');
+      btn.textContent = '✓ 등록 완료';
+      form.reset();
+      // 체크박스 active 클래스 정리
+      document.querySelectorAll('.ps-check.active').forEach(function(el){ el.classList.remove('active'); });
+    }, 350);
+
+    return false;
+  }
+
+  // 체크박스 시각 활성화
+  document.addEventListener('DOMContentLoaded', function() {
+    renderSignupCount();
+    document.querySelectorAll('.ps-check input[type=checkbox]').forEach(function(cb){
+      cb.addEventListener('change', function(){
+        cb.closest('.ps-check').classList.toggle('active', cb.checked);
+      });
+    });
+  });
 </script>
 </body>
 </html>
