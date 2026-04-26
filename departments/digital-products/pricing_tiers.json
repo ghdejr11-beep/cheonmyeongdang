@@ -1,0 +1,76 @@
+{
+  "_doc": "Gumroad/크티 3티어 가격 전략 (디코이 + 앵커링). 단일가 → 3티어 시 객단가 +30~50% 기대.",
+  "_source": "Adapty / GetCone / Gumroad Creator's Playbook 2026",
+  "_updated": "2026-04-25",
+  "strategy": "Lite(no-brainer) → Pro(flagship 메인 수익) → Bundle(anchor decoy)",
+  "tiers": {
+    "lite": {
+      "label_kr": "Lite — 입문 팩",
+      "label_en": "Lite Starter",
+      "price_usd": 9,
+      "price_krw": 12900,
+      "role": "no-brainer 진입 / 부담 0",
+      "contents": [
+        "단일 카테고리 100 프롬프트",
+        "PDF 1권",
+        "기본 사용 가이드"
+      ]
+    },
+    "pro": {
+      "label_kr": "★ Pro — 메인 패키지",
+      "label_en": "Pro Bundle",
+      "price_usd": 29,
+      "price_krw": 39000,
+      "role": "flagship — 메인 수익원",
+      "highlight": true,
+      "contents": [
+        "3개 카테고리 통합 프롬프트",
+        "Notion 템플릿 5종",
+        "5분 시작 가이드 동영상",
+        "월 1회 업데이트 12개월"
+      ]
+    },
+    "bundle": {
+      "label_kr": "Bundle — 평생 풀팩",
+      "label_en": "Lifetime Bundle",
+      "price_usd": 79,
+      "price_krw": 99000,
+      "role": "anchor — Pro를 싸 보이게 함 (decoy)",
+      "contents": [
+        "전체 900+ 프롬프트",
+        "Notion 템플릿 12종",
+        "Canva 템플릿 30종",
+        "평생 업데이트",
+        "1:1 30분 코칭 (1회)"
+      ]
+    }
+  },
+  "landing_structure": [
+    "1. HOOK (1줄 강력) — '~하고 싶나요?'",
+    "2. PROBLEM (3줄) — 고객 단어로 고통 재현",
+    "3. TRANSFORMATION — Mockup 미리보기",
+    "4. WHAT'S INSIDE — 불릿 5~7개",
+    "5. SOCIAL PROOF — 후기 3개 ★★★★★",
+    "6. PRICING TIERS — 위 3티어",
+    "7. GUARANTEE — 30일 환불 + 무료 업데이트",
+    "8. CTA — '지금 받기' 버튼 + 가격 노출",
+    "9. FAQ — 5~7문항"
+  ],
+  "thumbnail_design_2026": {
+    "size_main": "1280x720",
+    "size_pinterest": "1200x1800",
+    "rule_typography": "Bold sans-serif, 제목이 캔버스 40~50% 차지",
+    "rule_contrast": "WCAG AAA 7:1 이상 (모바일 작은 썸네일 가독)",
+    "rule_number": "프롬프트/페이지/템플릿 갯수를 가장 큰 폰트로",
+    "rule_3pin": "같은 상품에 톤만 다른 핀 3~5개 (Pinterest 분산 노출)"
+  },
+  "faq_template": [
+    {"q": "환불 가능한가요?", "a": "30일 무조건 환불"},
+    {"q": "업데이트는 어떻게 받나요?", "a": "Gumroad 자동 알림"},
+    {"q": "한국어 가이드 있나요?", "a": "한/영 가이드 모두 포함"},
+    {"q": "상업적으로 사용해도 되나요?", "a": "Pro 이상 가능"},
+    {"q": "결제는 어떻게 하나요?", "a": "카드/PayPal/네이버페이"},
+    {"q": "구매 후 어디서 다운로드하나요?", "a": "이메일 링크 + 마이페이지"},
+    {"q": "기술 지원은요?", "a": "Pro 이상 24시간 이내 응답"}
+  ]
+}
