@@ -71,6 +71,17 @@ DEPT_TARGETS = {
             {'name': 'Amazon 베스트셀러 저널', 'url': 'https://www.amazon.com/Best-Sellers-Books-Journals/zgbs/books/10807'},
         ],
     },
+    'korlens': {
+        'label': '🔍 KORLENS (관광 큐레이션)',
+        'targets': [
+            {'name': '대한민국 구석구석 (공식)', 'url': 'https://korean.visitkorea.or.kr/'},
+            {'name': '트리플', 'url': 'https://triple.guide/intro'},
+            {'name': '마이리얼트립', 'url': 'https://www.myrealtrip.com/'},
+            {'name': '트립닷컴 국내여행', 'url': 'https://kr.trip.com/'},
+            {'name': 'Mindtrip AI', 'url': 'https://mindtrip.ai/'},
+            {'name': 'Layla AI', 'url': 'https://layla.ai/'},
+        ],
+    },
 }
 
 

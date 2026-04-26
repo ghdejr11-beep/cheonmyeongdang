@@ -1,0 +1,219 @@
+[
+  {
+    "source": "wevity",
+    "title": "[과학기술정보통신부] 2026 글로벌 피우다프로젝트 (SW개발 경진대회)",
+    "url": "https://www.wevity.com/?c=find&s=1&gub=1&gbn=view&gp=1&ix=106194",
+    "id": "5b2255ef46f4"
+  },
+  {
+    "source": "wevity",
+    "title": "포항 로컬 MICE 창업 아이디어 공모전",
+    "url": "https://www.wevity.com/?c=find&s=1&gub=1&gbn=view&gp=1&ix=106680",
+    "id": "94167a9bc71c"
+  },
+  {
+    "source": "wevity",
+    "title": "포항 로컬 MICE 창업 아이디어 공모전신규SPECIAL",
+    "url": "https://www.wevity.com/?c=find&s=1&gub=1&gbn=view&gp=1&ix=106680",
+    "id": "c1cf9921cd85"
+  },
+  {
+    "source": "wevity",
+    "title": "[과학기술정보통신부] 2026 글로벌 피우다프로젝트 (SW개발 경진대회)SPECIAL",
+    "url": "https://www.wevity.com/?c=find&s=1&gub=1&gbn=view&gp=1&ix=106194",
+    "id": "650c572b9de9"
+  },
+  {
+    "source": "contestkorea",
+    "title": "9.동원대학교 웹툰창작과 웹툰·일러스트 공모전",
+    "url": "https://www.contestkorea.com/sub/view.php?int_gbn=1&Txt_bcode=030610001&str_no=202604140059",
+    "id": "c61517d94675"
+  },
+  {
+    "source": "contestkorea",
+    "title": "10.제 1회  서울 플레이업  AI 게임 챌린지",
+    "url": "https://www.contestkorea.com/sub/view.php?int_gbn=1&Txt_bcode=031810001&str_no=202604140057",
+    "id": "d0037ca08bd2"
+  },
+  {
+    "source": "contestkorea",
+    "title": "8.[잇다고_구로2기] AI를 활용한 데이터 분석 취업 캠프 - 연봉을 올리고 싶은 마케터/MD/영업/기획자를 위한",
+    "url": "https://www.contestkorea.com/sub/view.php?int_gbn=2&Txt_bcode=040710001&str_no=202604100034",
+    "id": "be7c02b2f44d"
+  },
+  {
+    "source": "bizinfo",
+    "title": "[경기] 시흥시 2026년 스타트업 투자유치 지원사업 모집 연장 공고",
+    "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?hashCode=&rowsSel=&rows=15&cpage=&cat=&schPblancDiv=&schJrsdCodeTy=&schWntyAt=&schAreaDetailCodes=&schEndAt=N&orderGb=&sort=&preKeywords=&condition=&condition1=&keyword=&pblancId=PBLN_000000000120979",
+    "gov": true,
+    "id": "48626e455414"
+  },
+  {
+    "source": "bizinfo",
+    "title": "2026년 한의약산업 전주기 지원체계 구축사업 한의약 제품 개발 맞춤형 기업지원 재공고",
+    "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?hashCode=&rowsSel=&rows=15&cpage=&cat=&schPblancDiv=&schJrsdCodeTy=&schWntyAt=&schAreaDetailCodes=&schEndAt=N&orderGb=&sort=&preKeywords=&condition=&condition1=&keyword=&pblancId=PBLN_000000000120972",
+    "gov": true,
+    "id": "69a49a80d353"
+  },
+  {
+    "source": "k-startup",
+    "title": "2026년 창업지원사업 통합공고",
+    "url": "https://www.k-startup.go.kr/web/contents/webFSBIPBANC.do",
+    "gov": true,
+    "id": "0c0c1e0d6c5a"
+  },
+  {
+    "source": "k-startup",
+    "title": "창업사업 시스템 매뉴얼",
+    "url": "https://www.k-startup.go.kr/web/contents/webFBMN.do",
+    "gov": true,
+    "id": "11b09389a700"
+  },
+  {
+    "source": "k-startup",
+    "title": "소상공인마당창업 및 운영 정보 제공",
+    "url": "https://www.k-startup.go.kr/magicsso/requestAuthEx.jsp?RelayState=https://sso.sbiz.or.kr/magicsso/requestConnect.jsp?RelayState=/sso/agentLoginAction.do?reqSite=sbiz",
+    "gov": true,
+    "id": "feb31c095ad2"
+  },
+  {
+    "source": "k-startup",
+    "title": "중소기업 기술개발사업종합관리시스템기술개발지원사업 정보 제공",
+    "url": "https://www.k-startup.go.kr/magicsso/requestAuthEx.jsp?RelayState=https://www.smtech.go.kr/front/magicsso/requestConnect.jsp",
+    "gov": true,
+    "id": "9a84ce1452d4"
+  },
+  {
+    "source": "k-startup",
+    "title": "창업보육센터네트워크시스템창업지원 종합정보 제공",
+    "url": "https://www.k-startup.go.kr/magicsso/requestAuthEx.jsp?RelayState=https://www.smes.go.kr/binet/magicsso/requestConnect.jsp?RelayState=https://www.smes.go.kr/binet/connApi/connClient.jsp",
+    "gov": true,
+    "id": "fc9eb2536ede"
+  },
+  {
+    "source": "k-startup",
+    "title": "창업기업 확인시스템창업기업 확인시스템",
+    "url": "https://www.k-startup.go.kr/magicsso/requestAuthEx.jsp?RelayState=https://cert.k-startup.go.kr/magicsso/requestConnect.jsp?RelayState=/uat/uia/ssoLoginByCi.do",
+    "gov": true,
+    "id": "14cc4b665837"
+  },
+  {
+    "source": "k-startup",
+    "title": "사업화D-18마감일자 2026-05-072026년 재도전성공패키지(추가경정예산) 예비재창업자 및 재창업기업 모집공고새로운게시글재도전성공패키지창업진흥원조회 4,067",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "35b51d44fc55"
+  },
+  {
+    "source": "k-startup",
+    "title": "멘토링ㆍ컨설팅ㆍ교육D-57마감일자 2026-06-152026년 창업이민종합지윈시스템(OASIS 4&5) 참여자 모집 공고2026년 창업이민종합지윈시스템(OASIS 4&5) 참여자 모집 공고창업진흥원조회 2,269",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "3e6dec60588f"
+  },
+  {
+    "source": "k-startup",
+    "title": "판로ㆍ해외진출D-11마감일자 2026-04-302026 K-Startup New York Revenue-First Growth Program 수행사 공개공모2026 K-Startup New York Revenue-First Growth Program 수행사 공개공모창업진흥원조회 2,647",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "45f1480263d9"
+  },
+  {
+    "source": "k-startup",
+    "title": "사업화D-22마감일자 2026-05-11초격차 스타트업 프로젝트 모두의 챌린지 팹리스 참여기업 모집공고초격차 스타트업 프로젝트창업진흥원조회 2,952",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "b6877ead5063"
+  },
+  {
+    "source": "k-startup",
+    "title": "사업화D-2마감일자 2026-04-21초격차 스타트업 프로젝트 모두의 챌린지 AX - 버티컬 분야 참여기업 모집공고초격차 스타트업 프로젝트창업진흥원조회 21,515",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "376a01f781b5"
+  },
+  {
+    "source": "k-startup",
+    "title": "글로벌D-2마감일자 2026-04-212026년 투자연계형 GMEP 창업기업 모집 공고2026년 투자연계형 GMEP 창업기업 모집 공고창업진흥원조회 20,804",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "bba844cab675"
+  },
+  {
+    "source": "k-startup",
+    "title": "사업화D-9마감일자 2026-04-28초격차 스타트업 프로젝트(DIPS) Link-up(링크업) - 4대 도메인 AX 프로그램 창업기업 모집공고초격차 스타트업 프로젝트창업진흥원조회 11,980",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "bfcc3789b65e"
+  },
+  {
+    "source": "k-startup",
+    "title": "사업화D-2마감일자 2026-04-21초격차 스타트업 프로젝트 모두의 챌린지 AX - LLM 분야 참여기업 모집공고초격차 스타트업 프로젝트창업진흥원조회 20,781",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "7a91f1a2b0e4"
+  },
+  {
+    "source": "k-startup",
+    "title": "사업화D-26마감일자 2026-05-15「모두의 창업 프로젝트」통합 모집 수정공고「모두의 창업 프로젝트」통합 모집 수정공고창업진흥원조회 40,371",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "53e5a9f13f98"
+  },
+  {
+    "source": "k-startup",
+    "title": "사업화D-1마감일자 2026-04-202026년 프리 팁스 창업기업 모집 공고민관공동창업자발굴육성사업창업진흥원조회 29,240",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "7cc15e392881"
+  },
+  {
+    "source": "k-startup",
+    "title": "사업화D-1마감일자 2026-04-202026년 글로벌 팁스(사업화) 창업기업 모집공고민관공동창업자발굴육성사업창업진흥원조회 21,027",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "f2ec2eed8e71"
+  },
+  {
+    "source": "k-startup",
+    "title": "멘토링ㆍ컨설팅ㆍ교육D-225마감일자 2026-11-30창업지원사업 예비위원단 재모집 (신산업분야)창업지원사업 예비위원단 재모집 (신산업분야)창업진흥원조회 24,444",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "40a8ba8f1b40"
+  },
+  {
+    "source": "k-startup",
+    "title": "사업화D-256마감일자 2026-12-312026년 팁스(TIPS) 창업기업 지원계획 수정 공고2026년 팁스(TIPS) 창업기업 지원계획 수정 공고창업진흥원조회 50,701",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "7f8275eec9d8"
+  },
+  {
+    "source": "k-startup",
+    "title": "사업화D-256마감일자 2026-12-312026년 중앙부처 및 지자체 창업지원사업 통합공고2026년 중앙부처 및 지자체 창업지원사업 통합공고창업진흥원조회 147,913",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "59d372920222"
+  },
+  {
+    "source": "k-startup",
+    "title": "「2026 광주콘텐츠코리아랩」콘텐츠 창·제작 지원사업 주니어 크리에이터(1단계) 추가 모집 공고새로운게시글",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "8bb0138c2355"
+  },
+  {
+    "source": "k-startup",
+    "title": "2026 상반기 서울 AI 허브 고성능 컴퓨팅 인프라 지원사업새로운게시글",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "26464cbf81a6"
+  },
+  {
+    "source": "k-startup",
+    "title": "K-Camp 강원 6기 액셀러레이팅 프로그램 스타트업 모집 공고새로운게시글",
+    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+    "gov": true,
+    "id": "21293a966e55"
+  }
+]
