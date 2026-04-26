@@ -25,3 +25,15 @@ www/
 .DS_Store
 Thumbs.db
 departments/media/youtube/shared/token_*.pickle
+
+# 추가 보안 (2026-04-26)
+.secrets_*
+*.aab
+*.apk
+*.keystore
+*.jks
+android/app/release/
+android/app/build/
+android/.gradle/
+.kdp_reports/
+autofix_budget.json
