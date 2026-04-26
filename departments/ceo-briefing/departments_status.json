@@ -1,0 +1,88 @@
+{
+  "_meta": {
+    "updated": "2026-04-19",
+    "description": "각 부서 실시간 상태. update_status.py로 업데이트하면 브리핑 자동 반영."
+  },
+  "teams": [
+    {
+      "key": "ebook",
+      "emoji": "📚",
+      "name": "전자책팀",
+      "progress": "KDP 10/20권 출판 | 디지털 상품 10종 생성",
+      "issue": "크티 등록 진행 중, 심사 대기",
+      "next": "나머지 10권 다음주 업로드",
+      "status": "ongoing",
+      "updated": "2026-04-17"
+    },
+    {
+      "key": "cheonmyeongdang",
+      "emoji": "🔮",
+      "name": "천명당팀",
+      "progress": "v1.1 내부 테스트 출시 (4/11) + 무료/유료 사주 15개 섹션 완성",
+      "issue": "Play Store 앱 설정(스토어 등록·심사) 미완료",
+      "next": "플레이 콘솔 직접 업로드 — 관리자 권한 필요 (사용자 수동)",
+      "status": "blocked_user_action",
+      "updated": "2026-04-11"
+    },
+    {
+      "key": "insurance",
+      "emoji": "🛡",
+      "name": "보험팀",
+      "progress": "고객용/설계사용 데모 배포 완료",
+      "issue": "GADP 겸업 승인 필요 (법적 리스크)",
+      "next": "상관에게 보고 후 진행 결정",
+      "status": "blocked_legal",
+      "updated": "2026-04-17"
+    },
+    {
+      "key": "tax",
+      "emoji": "💼",
+      "name": "세무팀",
+      "progress": "종소세 계산기 완성 · Vercel 배포 (tax-n-benefit-api.vercel.app)",
+      "issue": "CODEF 프로덕션 승인됨 (2026-04-22 확인, .secrets에 저장). service_no 000007456002, authorities PUBLIC 포함 전체",
+      "next": "Vercel에 CODEF_CLIENT_ID/SECRET/PUBLIC_KEY env 추가, /v1/kr/public/nt/proof-issue/tax-cert-all 연동",
+      "status": "ongoing",
+      "updated": "2026-04-22"
+    },
+    {
+      "key": "media",
+      "emoji": "📺",
+      "name": "미디어팀",
+      "progress": "텔레그램 자동 홍보 가동 (매일 10·20시, 요일별 서비스 회전) · KORLENS 콘텐츠 통합",
+      "issue": "X Tweet 발송 유료 ($100/월) · IG·틱톡·YouTube 미연결",
+      "next": "Postiz Railway 셀프호스팅 ($5/월) 배포 → 6개 플랫폼 단일 API",
+      "status": "in_progress",
+      "updated": "2026-04-19"
+    },
+    {
+      "key": "game",
+      "emoji": "🎮",
+      "name": "게임팀",
+      "progress": "HexDrop 1.3 비공개 테스트 게시 완료 (4/10) · 테트리스 AI 대결 완성",
+      "issue": "정식 출시 전 QA 필요 · AAB 업로드는 플레이 콘솔 수동",
+      "next": "비공개 테스터 피드백 수집 후 정식 출시 결정",
+      "status": "blocked_user_action",
+      "updated": "2026-04-10"
+    },
+    {
+      "key": "korlens",
+      "emoji": "🔍",
+      "name": "KORLENS팀",
+      "progress": "2026 관광데이터 공모전 출품 완료 (4/18) · Vercel 배포 · AI 큐레이터 챗봇 가동",
+      "issue": "공모전 예비심사 결과 5월 예정 · 외국인 모드 UI 영문화 v2 계획",
+      "next": "예비심사 통과 시 개발 지원금 + 컨설팅 수령 → 시상식 11월",
+      "status": "in_progress",
+      "updated": "2026-04-18"
+    },
+    {
+      "key": "ops",
+      "emoji": "🛡",
+      "name": "운영부 (보안+수집+수익)",
+      "progress": "자동화 태스크 12개 가동 (Health Check·공모전·보안·수익집계·미디어)",
+      "issue": "register_all_schedules.bat 관리자 실행 필요",
+      "next": "사용자 1회 실행 시 전부 가동",
+      "status": "ready",
+      "updated": "2026-04-19"
+    }
+  ]
+}

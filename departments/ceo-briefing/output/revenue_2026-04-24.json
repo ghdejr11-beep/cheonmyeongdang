@@ -1,0 +1,519 @@
+{
+  "revenue": {
+    "gumroad": {
+      "period": "2026-04-23 ~ 2026-04-24",
+      "total_sales": 0,
+      "total_krw": 0,
+      "by_product": {}
+    },
+    "gumroad_products": {
+      "total_products": 8,
+      "total_sales_count": 0,
+      "total_revenue": 0.0,
+      "zero_sale_products": [
+        "퇴사 후 1인 사업 플레이북",
+        "클로드 코드 실전 가이드 — 코딩 몰라도 하루 만에 앱 만드는 법",
+        "2026 AI 부업 수익 리포트 — 13개 카테고리 실제 수익 분석",
+        "노션 템플릿 50개 + 제작·판매 완전 가이드",
+        "Claude·ChatGPT 실전 프롬프트 1,000개 팩 [얼리버드]",
+        "AI 부업 시스템 PREMIUM (AI 멘토봇 평생 무제한)",
+        "AI로 월 500만원 자동화 시스템 - 100일 실전 가이드",
+        "AI 부업 시작 가이드 - 무료 샘플 + 프롬프트 10개"
+      ],
+      "warning": "🚨 Gumroad 8상품 등록돼있지만 누적 판매 0건 — 노출/마케팅 필요"
+    },
+    "kdp": {
+      "status": "no_data",
+      "message": "수동 CSV 다운로드 필요 — C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\.kdp_reports 에 저장",
+      "how_to": "kdp.amazon.com/reports → Sales Dashboard → Download → .csv → 해당 폴더 저장"
+    },
+    "coupang": {
+      "status": "waiting_approval",
+      "message": "쿠팡 Open API 심사 대기 중 (웹사이트/스크린샷 검수)",
+      "fallback": "심사 승인 후 COUPANG_ACCESS_KEY, COUPANG_SECRET_KEY 저장 시 자동 활성화"
+    },
+    "play": {
+      "status": "no_credentials",
+      "message": "GCP 서비스 계정 JSON 저장 필요: C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\.secrets\\play-service-account.json",
+      "how_to": "1) console.cloud.google.com 프로젝트 생성 2) Play Developer Reporting API 활성화 3) 서비스 계정 생성 + JSON 다운로드 4) Play Console에서 해당 서비스 계정 연결 + 재무 권한"
+    }
+  },
+  "customer_feedback": {
+    "play_reviews": {
+      "our_apps": {
+        "천명당": {
+          "status": "unlisted_or_404",
+          "error": "App not found(404)."
+        },
+        "HexDrop": {
+          "status": "unlisted_or_404",
+          "error": "App not found(404)."
+        }
+      },
+      "competitors": {},
+      "warnings": [
+        "📱 천명당 Play Store 미출시 (리뷰 수집 불가)",
+        "📱 HexDrop Play Store 미출시 (리뷰 수집 불가)"
+      ]
+    }
+  },
+  "market_signals": {
+    "trends": {
+      "core_keywords": {
+        "ai side hustle": {
+          "avg": 0.2,
+          "latest": 0,
+          "direction": "📉 하락",
+          "change_pct": -44.4
+        },
+        "사주 앱": {
+          "avg": 0.0,
+          "latest": 0,
+          "direction": "➡️ 유지",
+          "change_pct": 0
+        },
+        "세금 환급": {
+          "avg": 0.0,
+          "latest": 0,
+          "direction": "➡️ 유지",
+          "change_pct": 0.0
+        },
+        "ai agent": {
+          "avg": 43.6,
+          "latest": 46,
+          "direction": "➡️ 유지",
+          "change_pct": 1.2
+        },
+        "notion template": {
+          "avg": 1.9,
+          "latest": 2,
+          "direction": "➡️ 유지",
+          "change_pct": 2.5
+        }
+      },
+      "rising_items": [],
+      "related_rising_queries": [
+        {
+          "query": "best freelancing platforms",
+          "value": 38600
+        }
+      ]
+    },
+    "product_hunt": {
+      "total_entries": 49,
+      "top_today": [
+        {
+          "title": "Magic Patterns Agent 2.0",
+          "link": "https://www.producthunt.com/products/magicpatterns",
+          "summary": "The best AI design agent to go from idea to production Discussion | Link",
+          "published": "2026-04-19T11:34:07-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Reloop Animation Studio",
+          "link": "https://www.producthunt.com/products/reloop",
+          "summary": "Turn any video idea into Pixar, Clay or Manga Discussion | Link",
+          "published": "2026-04-22T04:56:18-07:00",
+          "kun_score": 4,
+          "matched_keywords": [
+            "ai",
+            "video"
+          ]
+        },
+        {
+          "title": "FocuSee 2.0",
+          "link": "https://www.producthunt.com/products/focusee",
+          "summary": "Record screen to get polished demos & tutorials Discussion | Link",
+          "published": "2026-04-21T03:16:14-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Typewise AI Customer Service",
+          "link": "https://www.producthunt.com/products/typewise",
+          "summary": "Automate customer support across systems with AI agents Discussion | Link",
+          "published": "2026-04-05T21:56:29-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "automat"
+          ]
+        },
+        {
+          "title": "Docsio",
+          "link": "https://www.producthunt.com/products/docsio",
+          "summary": "Lovable for doc sites Discussion | Link",
+          "published": "2026-04-08T14:41:46-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Skill Inspector",
+          "link": "https://www.producthunt.com/products/snyk",
+          "summary": "Audit your AI agent skills to avoid malware Discussion | Link",
+          "published": "2026-04-20T03:30:34-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Blink AI CFO",
+          "link": "https://www.producthunt.com/products/blink-21",
+          "summary": "AI CFO that autonomously trades stocks and options via Slack Discussion | Link",
+          "published": "2026-04-21T19:36:26-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Design.MD",
+          "link": "https://www.producthunt.com/products/figma-for-ai-agents",
+          "summary": "Drop-in design systems your AI coding agent can read Discussion | Link",
+          "published": "2026-04-21T01:31:47-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "MiMo-V2.5 & Pro",
+          "link": "https://www.producthunt.com/products/mimo-3",
+          "summary": "Frontier agent capability with better token efficiency Discussion | Link",
+          "published": "2026-04-22T09:51:37-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Gemini Enterprise Agent Platform",
+          "link": "https://www.producthunt.com/products/google",
+          "summary": "Google's platform to run AI agents at enterprise scale Discussion | Link",
+          "published": "2026-04-22T09:14:59-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        }
+      ],
+      "high_match_for_kun": [
+        {
+          "title": "Typewise AI Customer Service",
+          "link": "https://www.producthunt.com/products/typewise",
+          "summary": "Automate customer support across systems with AI agents Discussion | Link",
+          "published": "2026-04-05T21:56:29-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "automat"
+          ]
+        },
+        {
+          "title": "Free LLM API",
+          "link": "https://www.producthunt.com/products/free-llm-api",
+          "summary": "Access 1 billion tokens per month for free Discussion | Link",
+          "published": "2026-04-22T10:04:31-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "llm"
+          ]
+        },
+        {
+          "title": "Basedash Automations",
+          "link": "https://www.producthunt.com/products/basedash",
+          "summary": "Your AI data analyst that works while you sleep. Discussion | Link",
+          "published": "2026-04-21T10:49:45-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "automat"
+          ]
+        },
+        {
+          "title": "Toki 2.0",
+          "link": "https://www.producthunt.com/products/toki-ai",
+          "summary": "Automatically go from ideas to scheduled plan Discussion | Link",
+          "published": "2026-04-10T01:59:25-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "automat"
+          ]
+        },
+        {
+          "title": "InstantDB",
+          "link": "https://www.producthunt.com/products/instant-db",
+          "summary": "Complete backend with auth and storage in one prompt Discussion | Link",
+          "published": "2025-10-27T13:41:12-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "prompt"
+          ]
+        }
+      ],
+      "fetched_at": "2026-04-24T08:30:09.817015"
+    }
+  },
+  "departments": {
+    "ceo-briefing": {
+      "dept": "ceo-briefing",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 2,
+      "changes_summary": "편집 작업 2건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [
+        {
+          "file": "departments\\ceo-briefing\\support_agent.py",
+          "kw": "TODO",
+          "text": "`claude -p \"티켓 {tid} 분석 후 해당 수정 커밋\"` 호출"
+        },
+        {
+          "file": "departments\\ceo-briefing\\integrations\\dept_activity.py",
+          "kw": "TODO",
+          "text": "\", \"FIXME:\", \"BUG:\", \"HACK:\"]):"
+        },
+        {
+          "file": "departments\\ceo-briefing\\integrations\\dept_activity.py",
+          "kw": "TODO",
+          "text": "\", \"FIXME:\", \"BUG:\", \"HACK:\"]:"
+        }
+      ],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\ceo-briefing\\output\\revenue_2026-04-23.json",
+        "departments\\ceo-briefing\\output\\revenue_2026-04-23.md"
+      ]
+    },
+    "cheonmyeongdang": {
+      "dept": "cheonmyeongdang",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 4,
+      "changes_summary": "편집 작업 4건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\cheonmyeongdang\\logs\\dreams_2026-04-24.json",
+        "departments\\cheonmyeongdang\\logs\\dreams_2026-04-23.json",
+        "departments\\cheonmyeongdang\\dreams_daily_collector.py",
+        "departments\\cheonmyeongdang\\output\\health_2026-04-23.json"
+      ]
+    },
+    "digital-products": {
+      "dept": "digital-products",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "ebook": {
+      "dept": "ebook",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "game": {
+      "dept": "game",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "insurance-daboyeo": {
+      "dept": "insurance-daboyeo",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "intelligence": {
+      "dept": "intelligence",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [
+        {
+          "file": "departments\\intelligence\\sales_collector.py",
+          "kw": "TODO",
+          "text": "실제 Vercel Analytics API 연동"
+        }
+      ],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "korlens": {
+      "dept": "korlens",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "media": {
+      "dept": "media",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 17,
+      "changes_summary": "편집 작업 17건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\media\\youtube\\ai_sidehustle\\run_history.jsonl",
+        "departments\\media\\youtube\\shared\\token_wealth.pickle",
+        "departments\\media\\youtube\\bgm_channel\\topics.py",
+        "departments\\media\\youtube\\bgm_channel\\apiframe_client.py",
+        "departments\\media\\src\\kdp_books.json"
+      ]
+    },
+    "secretary": {
+      "dept": "secretary",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 1,
+      "changes_summary": "편집 작업 1건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\secretary\\edit_queue.json"
+      ]
+    },
+    "security": {
+      "dept": "security",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "tax": {
+      "dept": "tax",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 3,
+      "changes_summary": "편집 작업 3건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [
+        {
+          "file": "departments\\tax\\server\\api\\support.js",
+          "kw": "TODO",
+          "text": "Claude Agent SDK로 분류 재판정 + auto_fix는 PR 자동 생성"
+        }
+      ],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\tax\\logs\\run_2026-04-23.log",
+        "departments\\tax\\output\\seen_ids.json",
+        "departments\\tax\\output\\leads_2026-04-23.md"
+      ]
+    },
+    "travelmap": {
+      "dept": "travelmap",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 6,
+      "changes_summary": "편집 작업 6건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\travelmap\\logs\\poi_2026-04-24.json",
+        "departments\\travelmap\\logs\\korlens_2026-04-24.json",
+        "departments\\travelmap\\korlens_poi_collector.py",
+        "departments\\travelmap\\logs\\korlens_2026-04-23.json",
+        "departments\\travelmap\\korlens_daily_collector.py"
+      ]
+    }
+  }
+}

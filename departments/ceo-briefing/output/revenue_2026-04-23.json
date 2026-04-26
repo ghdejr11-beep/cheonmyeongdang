@@ -1,0 +1,543 @@
+{
+  "revenue": {
+    "gumroad": {
+      "period": "2026-04-22 ~ 2026-04-23",
+      "total_sales": 0,
+      "total_krw": 0,
+      "by_product": {}
+    },
+    "gumroad_products": {
+      "total_products": 8,
+      "total_sales_count": 0,
+      "total_revenue": 0.0,
+      "zero_sale_products": [
+        "퇴사 후 1인 사업 플레이북",
+        "클로드 코드 실전 가이드 — 코딩 몰라도 하루 만에 앱 만드는 법",
+        "2026 AI 부업 수익 리포트 — 13개 카테고리 실제 수익 분석",
+        "노션 템플릿 50개 + 제작·판매 완전 가이드",
+        "Claude·ChatGPT 실전 프롬프트 1,000개 팩 [얼리버드]",
+        "AI 부업 시스템 PREMIUM (AI 멘토봇 평생 무제한)",
+        "AI로 월 500만원 자동화 시스템 - 100일 실전 가이드",
+        "AI 부업 시작 가이드 - 무료 샘플 + 프롬프트 10개"
+      ],
+      "warning": "🚨 Gumroad 8상품 등록돼있지만 누적 판매 0건 — 노출/마케팅 필요"
+    },
+    "kdp": {
+      "status": "no_data",
+      "message": "수동 CSV 다운로드 필요 — C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\.kdp_reports 에 저장",
+      "how_to": "kdp.amazon.com/reports → Sales Dashboard → Download → .csv → 해당 폴더 저장"
+    },
+    "coupang": {
+      "status": "waiting_approval",
+      "message": "쿠팡 Open API 심사 대기 중 (웹사이트/스크린샷 검수)",
+      "fallback": "심사 승인 후 COUPANG_ACCESS_KEY, COUPANG_SECRET_KEY 저장 시 자동 활성화"
+    },
+    "play": {
+      "status": "no_credentials",
+      "message": "GCP 서비스 계정 JSON 저장 필요: C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\.secrets\\play-service-account.json",
+      "how_to": "1) console.cloud.google.com 프로젝트 생성 2) Play Developer Reporting API 활성화 3) 서비스 계정 생성 + JSON 다운로드 4) Play Console에서 해당 서비스 계정 연결 + 재무 권한"
+    }
+  },
+  "customer_feedback": {
+    "play_reviews": {
+      "our_apps": {
+        "천명당": {
+          "status": "unlisted_or_404",
+          "error": "App not found(404)."
+        },
+        "HexDrop": {
+          "status": "unlisted_or_404",
+          "error": "App not found(404)."
+        }
+      },
+      "competitors": {},
+      "warnings": [
+        "📱 천명당 Play Store 미출시 (리뷰 수집 불가)",
+        "📱 HexDrop Play Store 미출시 (리뷰 수집 불가)"
+      ]
+    }
+  },
+  "market_signals": {
+    "trends": {
+      "core_keywords": {
+        "ai side hustle": {
+          "avg": 0.1,
+          "latest": 0,
+          "direction": "➡️ 유지",
+          "change_pct": -7.7
+        },
+        "사주 앱": {
+          "avg": 0.0,
+          "latest": 0,
+          "direction": "➡️ 유지",
+          "change_pct": 0
+        },
+        "세금 환급": {
+          "avg": 0.0,
+          "latest": 0,
+          "direction": "📉 하락",
+          "change_pct": -100.0
+        },
+        "ai agent": {
+          "avg": 43.0,
+          "latest": 39,
+          "direction": "➡️ 유지",
+          "change_pct": -10.7
+        },
+        "notion template": {
+          "avg": 1.9,
+          "latest": 1,
+          "direction": "➡️ 유지",
+          "change_pct": -3.7
+        }
+      },
+      "rising_items": [],
+      "related_rising_queries": [
+        {
+          "query": "remote jobs usa",
+          "value": 56300
+        },
+        {
+          "query": "best freelancing platforms",
+          "value": 31850
+        },
+        {
+          "query": "fiverr",
+          "value": 350
+        }
+      ]
+    },
+    "product_hunt": {
+      "total_entries": 50,
+      "top_today": [
+        {
+          "title": "Seeknal",
+          "link": "https://www.producthunt.com/products/seeknal",
+          "summary": "Data & AI/ML CLI for pipelines and NL queries Discussion | Link",
+          "published": "2026-04-21T09:02:49-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Cavalry Studio",
+          "link": "https://www.producthunt.com/products/cavalry-2",
+          "summary": "Free Motion Design tool by Canva Discussion | Link",
+          "published": "2026-04-21T04:15:49-07:00",
+          "kun_score": 4,
+          "matched_keywords": [
+            "ai",
+            "tool"
+          ]
+        },
+        {
+          "title": "Portt",
+          "link": "https://www.producthunt.com/products/portt-time-travel-for-ios",
+          "summary": "Transform your photo into any era and any location Discussion | Link",
+          "published": "2026-04-14T03:50:14-07:00",
+          "kun_score": 5,
+          "matched_keywords": [
+            "ai",
+            "travel"
+          ]
+        },
+        {
+          "title": "Iris Studio",
+          "link": "https://www.producthunt.com/products/iris-studio",
+          "summary": "The Swiss Army Knife for AI & Video Creators Discussion | Link",
+          "published": "2026-04-21T01:18:54-07:00",
+          "kun_score": 4,
+          "matched_keywords": [
+            "ai",
+            "video"
+          ]
+        },
+        {
+          "title": "Wrangle",
+          "link": "https://www.producthunt.com/products/wrangle-4",
+          "summary": "The markdown editor that understands CLAUDE.md Discussion | Link",
+          "published": "2026-04-21T19:20:47-07:00",
+          "kun_score": 5,
+          "matched_keywords": [
+            "ai",
+            "claude"
+          ]
+        },
+        {
+          "title": "Kyohansha",
+          "link": "https://www.producthunt.com/products/kyohansha",
+          "summary": "Web-based 60FPS Live2D AI with Lite-RAG long-term memory Discussion | Link",
+          "published": "2026-04-21T12:07:16-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "ConsoleMini",
+          "link": "https://www.producthunt.com/products/consolemini",
+          "summary": "Turn a Mac mini into a living-room retro/PS console Discussion | Link",
+          "published": "2026-04-21T20:43:57-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "BlankOut",
+          "link": "https://www.producthunt.com/products/blankout",
+          "summary": "Redact your docs on-device before sharing to AI Discussion | Link",
+          "published": "2026-04-21T01:29:36-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Stet",
+          "link": "https://www.producthunt.com/products/stet-a-smart-dictation-for-rest-of-us",
+          "summary": "Smart open-source dictation that sounds like you, not AI. Discussion | Link",
+          "published": "2026-04-20T02:34:17-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Zernio Ads API",
+          "link": "https://www.producthunt.com/products/zernio",
+          "summary": "Create, manage & report ads on 6 platforms via one API Discussion | Link",
+          "published": "2026-04-20T03:57:04-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        }
+      ],
+      "high_match_for_kun": [
+        {
+          "title": "ChatFolders",
+          "link": "https://www.producthunt.com/products/chatfolders",
+          "summary": "Folders for your AI chats with ChatGPT Claude, Gemini & Grok Discussion | Link",
+          "published": "2026-04-21T01:55:25-07:00",
+          "kun_score": 7,
+          "matched_keywords": [
+            "ai",
+            "gpt",
+            "claude"
+          ]
+        },
+        {
+          "title": "InstantDB",
+          "link": "https://www.producthunt.com/products/instant-db",
+          "summary": "Complete backend with auth and storage in one prompt Discussion | Link",
+          "published": "2025-10-27T13:41:12-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "prompt"
+          ]
+        },
+        {
+          "title": "OneGlanse",
+          "link": "https://www.producthunt.com/products/oneglanse",
+          "summary": "Free open-source GEO tracker for LLM visibility Discussion | Link",
+          "published": "2026-04-21T10:10:03-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "llm"
+          ]
+        },
+        {
+          "title": "Basedash Automations",
+          "link": "https://www.producthunt.com/products/basedash",
+          "summary": "Your AI data analyst that works while you sleep. Discussion | Link",
+          "published": "2026-04-21T10:49:45-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "automat"
+          ]
+        },
+        {
+          "title": "Toki 2.0",
+          "link": "https://www.producthunt.com/products/toki-ai",
+          "summary": "Automatically go from ideas to scheduled plan Discussion | Link",
+          "published": "2026-04-10T01:59:25-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "automat"
+          ]
+        }
+      ],
+      "fetched_at": "2026-04-23T08:30:12.430300"
+    }
+  },
+  "departments": {
+    "ceo-briefing": {
+      "dept": "ceo-briefing",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 5,
+      "changes_summary": "편집 작업 5건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [
+        {
+          "file": "departments\\ceo-briefing\\support_agent.py",
+          "kw": "TODO",
+          "text": "`claude -p \"티켓 {tid} 분석 후 해당 수정 커밋\"` 호출"
+        },
+        {
+          "file": "departments\\ceo-briefing\\integrations\\dept_activity.py",
+          "kw": "TODO",
+          "text": "\", \"FIXME:\", \"BUG:\", \"HACK:\"]):"
+        },
+        {
+          "file": "departments\\ceo-briefing\\integrations\\dept_activity.py",
+          "kw": "TODO",
+          "text": "\", \"FIXME:\", \"BUG:\", \"HACK:\"]:"
+        }
+      ],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\ceo-briefing\\output\\revenue_2026-04-22.json",
+        "departments\\ceo-briefing\\output\\revenue_2026-04-22.md",
+        "departments\\ceo-briefing\\register_revenue_output.bat",
+        "departments\\ceo-briefing\\revenue_output.py",
+        "departments\\ceo-briefing\\.env.example"
+      ]
+    },
+    "cheonmyeongdang": {
+      "dept": "cheonmyeongdang",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 4,
+      "changes_summary": "편집 작업 4건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\cheonmyeongdang\\output\\health_2026-04-22.json",
+        "departments\\cheonmyeongdang\\run_daily.bat",
+        "departments\\cheonmyeongdang\\daily_check.py",
+        "departments\\cheonmyeongdang\\README.md"
+      ]
+    },
+    "digital-products": {
+      "dept": "digital-products",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "ebook": {
+      "dept": "ebook",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "game": {
+      "dept": "game",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 1,
+      "changes_summary": "편집 작업 1건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\game\\TODO_FACE_PUNCH_APP.md"
+      ]
+    },
+    "insurance-daboyeo": {
+      "dept": "insurance-daboyeo",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "intelligence": {
+      "dept": "intelligence",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 2,
+      "changes_summary": "편집 작업 2건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [
+        {
+          "file": "departments\\intelligence\\sales_collector.py",
+          "kw": "TODO",
+          "text": "실제 Vercel Analytics API 연동"
+        }
+      ],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\intelligence\\codef\\codef_privacy_policy_addition.md",
+        "departments\\intelligence\\codef\\codef_application_draft.md"
+      ]
+    },
+    "korlens": {
+      "dept": "korlens",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 2,
+      "changes_summary": "편집 작업 2건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\korlens\\korlens_icon_128.png",
+        "departments\\korlens\\korlens_icon_256.png"
+      ]
+    },
+    "media": {
+      "dept": "media",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 20,
+      "changes_summary": "편집 작업 20건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\media\\youtube\\shared\\claude_script.py",
+        "departments\\media\\youtube\\shared\\token_kunstudio.pickle",
+        "departments\\media\\youtube\\shared\\token_wealth.pickle",
+        "departments\\media\\youtube\\shared\\token_deokgune.pickle",
+        "departments\\media\\youtube\\future_stack\\orchestrator.py"
+      ]
+    },
+    "secretary": {
+      "dept": "secretary",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 2,
+      "changes_summary": "편집 작업 2건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\secretary\\edit_queue.json",
+        "departments\\secretary\\token.json"
+      ]
+    },
+    "security": {
+      "dept": "security",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "tax": {
+      "dept": "tax",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 36,
+      "changes_summary": "편집 작업 36건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [
+        {
+          "file": "departments\\tax\\server\\api\\support.js",
+          "kw": "TODO",
+          "text": "Claude Agent SDK로 분류 재판정 + auto_fix는 PR 자동 생성"
+        }
+      ],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\tax\\logs\\run_2026-04-22.log",
+        "departments\\tax\\output\\seen_ids.json",
+        "departments\\tax\\output\\leads_2026-04-22.md",
+        "departments\\tax\\lead_watcher.py",
+        "departments\\tax\\applications\\gyeongbuk_doyak\\docs\\_preview\\innov_p1.png"
+      ]
+    },
+    "travelmap": {
+      "dept": "travelmap",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 4,
+      "changes_summary": "편집 작업 4건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\travelmap\\daily_check.py",
+        "departments\\travelmap\\output\\health_2026-04-22.json",
+        "departments\\travelmap\\run_daily.bat",
+        "departments\\travelmap\\README.md"
+      ]
+    }
+  }
+}

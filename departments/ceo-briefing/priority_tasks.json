@@ -1,0 +1,71 @@
+[
+  {
+    "title": "YouTube 4채널 배너/프로필 이미지 업로드",
+    "priority": 1,
+    "done": true,
+    "done_date": "2026-04-24",
+    "note": "4채널 모두 2560×1440 배너 + 800×800 프로필 완료"
+  },
+  {
+    "title": "Gumroad 'Claude 프롬프트팩 v1' $19 등록 (리서치 1위, 월 $500~$1,500)",
+    "priority": 1,
+    "done": false,
+    "owner": "auto_scriptable",
+    "due_date": "2026-04-26",
+    "note": "오늘 저녁 2시간이면 등록 가능. KDP 20권 축적 프롬프트 재활용"
+  },
+  {
+    "title": "크몽 'AI 숏폼 월 30개 자동 대행' 월 20만원 상품 등록 (리서치 2위, 월 200~800만)",
+    "priority": 2,
+    "done": false,
+    "owner": "user",
+    "due_date": "2026-04-28",
+    "note": "Pollinations 파이프라인 세일즈 페이지로 전환"
+  },
+  {
+    "title": "쿠팡 파트너스 단축링크 5개 발급 (홈오피스·뷰티·운동·도서 등)",
+    "priority": 2,
+    "done": false,
+    "owner": "user",
+    "note": "파트너스 대시보드 로그인 후 link.coupang.com/a/ 발급"
+  },
+  {
+    "title": "AI 에이전시 Audit 콜드메일 50건 작성 (월 MRR 2500만 목표)",
+    "priority": 3,
+    "done": false,
+    "owner": "auto_scriptable",
+    "note": "리서치 기반 최우선 수익 전략. 자동 생성 가능."
+  },
+  {
+    "title": "경북도약 pbanc/661 & pbanc/660 신청",
+    "priority": 1,
+    "done": true,
+    "done_date": "2026-04-22",
+    "note": "기신청 완료 (로컬기업 5천만 + 강한소상공인 1억)"
+  },
+  {
+    "title": "모두의 창업 기술트랙 신청",
+    "priority": 2,
+    "done": true,
+    "done_date": "2026-04-24",
+    "note": "사용자 기신청 완료 (modoo.or.kr)"
+  },
+  {
+    "title": "YouTube 4채널 이름 리브랜딩 (Healing Sleep Realm / Whisper Atlas / Wealth Blueprint / Inner Archetypes)",
+    "priority": 2,
+    "done": true,
+    "done_date": "2026-04-24"
+  },
+  {
+    "title": "Meta 토큰 자동 refresh 스케줄러 (IG + Threads, 매주 월 08:00)",
+    "priority": 3,
+    "done": true,
+    "done_date": "2026-04-24"
+  },
+  {
+    "title": "7채널 SNS 자동 포스터 구축 (Telegram/Bluesky/Discord/Mastodon/X/Threads/IG)",
+    "priority": 1,
+    "done": true,
+    "done_date": "2026-04-24"
+  }
+]

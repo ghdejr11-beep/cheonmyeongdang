@@ -1,0 +1,485 @@
+{
+  "revenue": {
+    "gumroad": {
+      "period": "2026-04-21 ~ 2026-04-22",
+      "total_sales": 0,
+      "total_krw": 0,
+      "by_product": {}
+    },
+    "gumroad_products": {
+      "total_products": 8,
+      "total_sales_count": 0,
+      "total_revenue": 0.0,
+      "zero_sale_products": [
+        "퇴사 후 1인 사업 플레이북",
+        "클로드 코드 실전 가이드 — 코딩 몰라도 하루 만에 앱 만드는 법",
+        "2026 AI 부업 수익 리포트 — 13개 카테고리 실제 수익 분석",
+        "노션 템플릿 50개 + 제작·판매 완전 가이드",
+        "Claude·ChatGPT 실전 프롬프트 1,000개 팩 [얼리버드]",
+        "AI 부업 시스템 PREMIUM (AI 멘토봇 평생 무제한)",
+        "AI로 월 500만원 자동화 시스템 - 100일 실전 가이드",
+        "AI 부업 시작 가이드 - 무료 샘플 + 프롬프트 10개"
+      ],
+      "warning": "🚨 Gumroad 8상품 등록돼있지만 누적 판매 0건 — 노출/마케팅 필요"
+    },
+    "kdp": {
+      "status": "no_data",
+      "message": "수동 CSV 다운로드 필요 — C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\.kdp_reports 에 저장",
+      "how_to": "kdp.amazon.com/reports → Sales Dashboard → Download → .csv → 해당 폴더 저장"
+    },
+    "coupang": {
+      "status": "waiting_approval",
+      "message": "쿠팡 Open API 심사 대기 중 (웹사이트/스크린샷 검수)",
+      "fallback": "심사 승인 후 COUPANG_ACCESS_KEY, COUPANG_SECRET_KEY 저장 시 자동 활성화"
+    },
+    "play": {
+      "status": "no_credentials",
+      "message": "GCP 서비스 계정 JSON 저장 필요: C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\.secrets\\play-service-account.json",
+      "how_to": "1) console.cloud.google.com 프로젝트 생성 2) Play Developer Reporting API 활성화 3) 서비스 계정 생성 + JSON 다운로드 4) Play Console에서 해당 서비스 계정 연결 + 재무 권한"
+    }
+  },
+  "customer_feedback": {
+    "play_reviews": {
+      "our_apps": {
+        "천명당": {
+          "status": "unlisted_or_404",
+          "error": "App not found(404)."
+        },
+        "HexDrop": {
+          "status": "unlisted_or_404",
+          "error": "App not found(404)."
+        }
+      },
+      "competitors": {},
+      "warnings": [
+        "📱 천명당 Play Store 미출시 (리뷰 수집 불가)",
+        "📱 HexDrop Play Store 미출시 (리뷰 수집 불가)"
+      ]
+    }
+  },
+  "market_signals": {
+    "trends": {
+      "core_keywords": {
+        "error": "The request failed: Google returned a response with code 429"
+      },
+      "rising_items": [],
+      "related_rising_queries": []
+    },
+    "product_hunt": {
+      "total_entries": 50,
+      "top_today": [
+        {
+          "title": "VibeAround",
+          "link": "https://www.producthunt.com/products/vibearound",
+          "summary": "Chat with your local AI coding agent from any IM or browser Discussion | Link",
+          "published": "2026-04-21T13:26:15-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "sneo.ai",
+          "link": "https://www.producthunt.com/products/sneo-ai",
+          "summary": "Chat with your SEO data Discussion | Link",
+          "published": "2026-02-03T21:42:51-08:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Loomal",
+          "link": "https://www.producthunt.com/products/loomal",
+          "summary": "Identity infrastructure for AI agents Discussion | Link",
+          "published": "2026-04-21T00:07:27-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Entendo",
+          "link": "https://www.producthunt.com/products/entendo",
+          "summary": "Turn plain-language questions into live chart & analysis Discussion | Link",
+          "published": "2026-04-10T14:58:06-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "BlankOut",
+          "link": "https://www.producthunt.com/products/blankout",
+          "summary": "Redact your docs on-device before sharing to AI Discussion | Link",
+          "published": "2026-04-21T01:29:36-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "OneGlanse",
+          "link": "https://www.producthunt.com/products/oneglanse",
+          "summary": "Free open-source GEO tracker for LLM visibility Discussion | Link",
+          "published": "2026-04-21T10:10:03-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "llm"
+          ]
+        },
+        {
+          "title": "Portt",
+          "link": "https://www.producthunt.com/products/portt-time-travel-for-ios",
+          "summary": "Transform your photo into any era and any location! Discussion | Link",
+          "published": "2026-04-14T03:50:14-07:00",
+          "kun_score": 5,
+          "matched_keywords": [
+            "ai",
+            "travel"
+          ]
+        },
+        {
+          "title": "Nova Recruiter",
+          "link": "https://www.producthunt.com/products/nova-recruiter",
+          "summary": "Agentic platform to find, contact and recruit top talent Discussion | Link",
+          "published": "2026-04-09T05:13:08-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Kyohansha",
+          "link": "https://www.producthunt.com/products/kyohansha",
+          "summary": "Web-based 60FPS Live2D AI with Lite-RAG long-term memory Discussion | Link",
+          "published": "2026-04-21T12:07:16-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Basedash Automations",
+          "link": "https://www.producthunt.com/products/basedash",
+          "summary": "Your AI data analyst that works while you sleep. Discussion | Link",
+          "published": "2026-04-21T10:49:45-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "automat"
+          ]
+        }
+      ],
+      "high_match_for_kun": [
+        {
+          "title": "Framework Laptop 13 Pro",
+          "link": "https://www.producthunt.com/products/framework-chromebook-edition",
+          "summary": "A Linux-first laptop with premium ambitions Discussion | Link",
+          "published": "2026-04-21T20:51:16-07:00",
+          "kun_score": 8,
+          "matched_keywords": [
+            "ai",
+            "ebook",
+            "book"
+          ]
+        },
+        {
+          "title": "ChatFolders",
+          "link": "https://www.producthunt.com/products/chatfolders",
+          "summary": "Folders for your AI chats with ChatGPT Claude, Gemini & Grok Discussion | Link",
+          "published": "2026-04-21T01:55:25-07:00",
+          "kun_score": 7,
+          "matched_keywords": [
+            "ai",
+            "gpt",
+            "claude"
+          ]
+        },
+        {
+          "title": "OneGlanse",
+          "link": "https://www.producthunt.com/products/oneglanse",
+          "summary": "Free open-source GEO tracker for LLM visibility Discussion | Link",
+          "published": "2026-04-21T10:10:03-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "llm"
+          ]
+        },
+        {
+          "title": "Basedash Automations",
+          "link": "https://www.producthunt.com/products/basedash",
+          "summary": "Your AI data analyst that works while you sleep. Discussion | Link",
+          "published": "2026-04-21T10:49:45-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "automat"
+          ]
+        },
+        {
+          "title": "InstantDB",
+          "link": "https://www.producthunt.com/products/instant-db",
+          "summary": "Complete backend with auth and storage in one prompt Discussion | Link",
+          "published": "2025-10-27T13:41:12-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "prompt"
+          ]
+        }
+      ],
+      "fetched_at": "2026-04-22T19:46:14.332263"
+    }
+  },
+  "departments": {
+    "ceo-briefing": {
+      "dept": "ceo-briefing",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 6,
+      "changes_summary": "편집 작업 6건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [
+        {
+          "file": "departments\\ceo-briefing\\support_agent.py",
+          "kw": "TODO",
+          "text": "`claude -p \"티켓 {tid} 분석 후 해당 수정 커밋\"` 호출"
+        },
+        {
+          "file": "departments\\ceo-briefing\\integrations\\dept_activity.py",
+          "kw": "TODO",
+          "text": "\", \"FIXME:\", \"BUG:\", \"HACK:\"]):"
+        },
+        {
+          "file": "departments\\ceo-briefing\\integrations\\dept_activity.py",
+          "kw": "TODO",
+          "text": "\", \"FIXME:\", \"BUG:\", \"HACK:\"]:"
+        }
+      ],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\ceo-briefing\\register_revenue_output.bat",
+        "departments\\ceo-briefing\\revenue_output.py",
+        "departments\\ceo-briefing\\.env.example",
+        "departments\\ceo-briefing\\briefing_v2.py",
+        "departments\\ceo-briefing\\integrations\\dept_activity.py"
+      ]
+    },
+    "cheonmyeongdang": {
+      "dept": "cheonmyeongdang",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "digital-products": {
+      "dept": "digital-products",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "ebook": {
+      "dept": "ebook",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "game": {
+      "dept": "game",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "insurance-daboyeo": {
+      "dept": "insurance-daboyeo",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "intelligence": {
+      "dept": "intelligence",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 1,
+      "changes_summary": "편집 작업 1건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [
+        {
+          "file": "departments\\intelligence\\sales_collector.py",
+          "kw": "TODO",
+          "text": "실제 Vercel Analytics API 연동"
+        }
+      ],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\intelligence\\codef\\codef_application_draft.md"
+      ]
+    },
+    "korlens": {
+      "dept": "korlens",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "media": {
+      "dept": "media",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 7,
+      "changes_summary": "편집 작업 7건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\media\\youtube\\wealth_blueprint_week1_shorts.json",
+        "departments\\media\\youtube\\wealth_blueprint_week1_scripts.md",
+        "departments\\media\\youtube_analysis_ch2.json",
+        "departments\\media\\youtube_analysis.json",
+        "departments\\media\\src\\youtube_analyzer.py"
+      ]
+    },
+    "secretary": {
+      "dept": "secretary",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 2,
+      "changes_summary": "편집 작업 2건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\secretary\\edit_queue.json",
+        "departments\\secretary\\token.json"
+      ]
+    },
+    "security": {
+      "dept": "security",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "tax": {
+      "dept": "tax",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 36,
+      "changes_summary": "편집 작업 36건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [
+        {
+          "file": "departments\\tax\\server\\api\\support.js",
+          "kw": "TODO",
+          "text": "Claude Agent SDK로 분류 재판정 + auto_fix는 PR 자동 생성"
+        }
+      ],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\tax\\applications\\gyeongbuk_doyak\\docs\\_preview\\innov_p1.png",
+        "departments\\tax\\applications\\gyeongbuk_doyak\\01_사업계획서_혁신_final.pdf",
+        "departments\\tax\\applications\\gyeongbuk_doyak\\사업계획서_혁신유형_세금N혜택_v2.docx",
+        "departments\\tax\\applications\\gyeongbuk_doyak\\docs\\_preview\\innov_p2.png",
+        "departments\\tax\\applications\\gyeongbuk_doyak\\_docx_to_pdf.py"
+      ]
+    },
+    "travelmap": {
+      "dept": "travelmap",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    }
+  }
+}
