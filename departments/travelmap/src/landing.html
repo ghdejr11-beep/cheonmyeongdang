@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>travelmap · 한국 여행 인터랙티브 지도 데이터 부서</title>
+<meta name="description" content="KORLENS 장소 DB · 4관점 매트릭스 · 무장애 편의시설 태그. TourAPI + 열린관광 + 경주 768 POI.">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --teal: #0d9488;
+  --teal-dark: #0f766e;
+  --teal-soft: #f0fdfa;
+  --ink: #0f172a;
+  --slate: #334155;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --bg: #ffffff;
+  --bg-alt: #f8fafc;
+  --warn: #f59e0b;
+  --ok: #10b981;
+}
+body {
+  font-family: -apple-system, 'Pretendard', 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-size: 19px; font-weight: 800; letter-spacing: -0.02em; }
+.logo span { color: var(--teal); }
+.nav-cta {
+  padding: 9px 18px; background: var(--teal); color: #fff;
+  border-radius: 10px; font-size: 13px; font-weight: 700;
+}
+
+.hero {
+  background: linear-gradient(180deg, var(--teal-soft) 0%, #ffffff 100%);
+  padding: 80px 24px 60px; text-align: center;
+  position: relative; overflow: hidden;
+}
+/* Polarsteps-style ambient map dots */
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(13,148,136,0.08) 1px, transparent 2px),
+    radial-gradient(circle at 70% 60%, rgba(13,148,136,0.06) 1px, transparent 2px),
+    radial-gradient(circle at 45% 80%, rgba(13,148,136,0.10) 1px, transparent 2px);
+  background-size: 80px 80px, 120px 120px, 100px 100px;
+  pointer-events: none;
+}
+.hero-inner { max-width: 880px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-block; background: #fff; color: var(--teal);
+  padding: 7px 16px; border-radius: 999px;
+  font-size: 12px; font-weight: 700;
+  margin-bottom: 22px; border: 1px solid var(--teal);
+}
+h1 {
+  font-size: 52px; font-weight: 800; letter-spacing: -0.04em;
+  line-height: 1.08; margin-bottom: 18px;
+}
+h1 .ink { color: var(--teal); }
+.hero p.sub {
+  font-size: 18px; color: var(--slate); max-width: 640px;
+  margin: 0 auto 32px;
+}
+.hero-cta {
+  display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 30px; background: var(--teal); color: #fff;
+  border-radius: 12px; font-size: 15px; font-weight: 700;
+  transition: background .15s;
+}
+.btn-primary:hover { background: var(--teal-dark); }
+.btn-secondary {
+  padding: 16px 30px; background: #fff; color: var(--ink);
+  border: 1.5px solid var(--border); border-radius: 12px;
+  font-size: 15px; font-weight: 700;
+}
+
+.trust {
+  margin-top: 26px; display: flex; justify-content: center;
+  gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--muted);
+}
+.trust span { display: inline-flex; align-items: center; gap: 6px; }
+.trust .dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--ok);
+}
+
+.stats {
+  background: var(--bg-alt);
+  padding: 56px 24px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stats-inner {
+  max-width: 1000px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  text-align: center;
+}
+.stat-num {
+  font-size: 40px; font-weight: 800; color: var(--teal);
+  letter-spacing: -0.03em;
+}
+.stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+.what {
+  padding: 80px 24px;
+}
+.what-inner { max-width: 1100px; margin: 0 auto; }
+.section-head { text-align: center; margin-bottom: 50px; }
+.section-tag {
+  display: inline-block; background: var(--teal-soft); color: var(--teal);
+  padding: 5px 12px; border-radius: 999px;
+  font-size: 11px; font-weight: 700; margin-bottom: 12px;
+}
+h2 {
+  font-size: 36px; font-weight: 800; letter-spacing: -0.03em;
+  line-height: 1.2; margin-bottom: 12px;
+}
+.section-head p { font-size: 16px; color: var(--muted); }
+.what-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.what-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 28px 24px;
+  transition: all .2s;
+}
+.what-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--teal);
+  box-shadow: 0 12px 30px rgba(13,148,136,0.10);
+}
+.what-icon {
+  width: 48px; height: 48px; background: var(--teal-soft);
+  border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 16px;
+}
+.what-card h3 {
+  font-size: 17px; font-weight: 800; margin-bottom: 8px;
+}
+.what-card p {
+  font-size: 14px; color: var(--slate); line-height: 1.7;
+}
+
+.cta {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+  color: #fff; padding: 80px 24px; text-align: center;
+}
+.cta h2 { color: #fff; margin-bottom: 14px; }
+.cta p { font-size: 16px; opacity: 0.95; margin-bottom: 32px; }
+.btn-white {
+  background: #fff; color: var(--teal);
+  padding: 18px 36px; font-size: 15px; font-weight: 800;
+  border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;
+}
+
+footer {
+  background: #0f172a; color: #94a3b8;
+  padding: 36px 24px; font-size: 12px; text-align: center;
+}
+footer span { color: var(--teal); }
+
+@media (max-width: 768px) {
+  h1 { font-size: 36px; }
+  h2 { font-size: 26px; }
+  .hero { padding: 56px 20px 40px; }
+  .stats-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .stat-num { font-size: 30px; }
+  .what-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">travel<span>map</span></div>
+    <a href="https://korlens.vercel.app" class="nav-cta" target="_blank" rel="noopener">KORLENS 보기 →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🗺️ KORLENS 장소 DB · 4관점 매트릭스</div>
+    <h1>한국을 <span class="ink">지도로</span> 다시 보다</h1>
+    <p class="sub">17개 광역시도 × 4관점(외국인·커플·가족·솔로) AI 큐레이션. TourAPI 4종 + 열린관광 무장애 데이터까지 통합.</p>
+    <div class="hero-cta">
+      <a href="https://korlens.vercel.app" class="btn-primary" target="_blank" rel="noopener">KORLENS 둘러보기 →</a>
+      <a href="#what" class="btn-secondary">데이터 소스 보기</a>
+    </div>
+    <div class="trust">
+      <span><span class="dot"></span>한국관광공사 TourAPI</span>
+      <span><span class="dot"></span>경주시 문화관광 공공데이터</span>
+      <span><span class="dot"></span>열린관광 (무장애)</span>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num">17</div>
+      <div class="stat-label">광역시도 매트릭스</div>
+    </div>
+    <div>
+      <div class="stat-num">4</div>
+      <div class="stat-label">관점 큐레이션</div>
+    </div>
+    <div>
+      <div class="stat-num">768+</div>
+      <div class="stat-label">경주 POI</div>
+    </div>
+    <div>
+      <div class="stat-num">1500</div>
+      <div class="stat-label">목표 POI (2026 Q4)</div>
+    </div>
+  </div>
+</section>
+
+<section class="what" id="what">
+  <div class="what-inner">
+    <div class="section-head">
+      <div class="section-tag">데이터</div>
+      <h2>지도 위에 무엇이 올라가는가</h2>
+      <p>경쟁 앱(트리플·마이리얼트립)이 다루지 않는 공공·접근성 데이터를 통합</p>
+    </div>
+    <div class="what-grid">
+      <div class="what-card">
+        <div class="what-icon">🏛️</div>
+        <h3>TourAPI 4종 통합</h3>
+        <p>지역기반·키워드·축제·반려동물 동반 가능 카테고리를 단일 매트릭스로 통합. 갱신 주기 7일.</p>
+      </div>
+      <div class="what-card">
+        <div class="what-icon">♿</div>
+        <h3>열린관광 무장애 태그</h3>
+        <p>휠체어 접근·점자 안내·수어 가이드 데이터를 장소별로 표시. 경쟁 앱 거의 없음.</p>
+      </div>
+      <div class="what-card">
+        <div class="what-icon">🤖</div>
+        <h3>4관점 AI 큐레이션</h3>
+        <p>Claude Haiku로 한 장소를 외국인/커플/가족/솔로 4가지 시각으로 사전 큐레이션 후 JSON 캐싱.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>같은 한국, 다른 관점</h2>
+  <p>KORLENS에서 직접 4관점 매트릭스를 체험하세요.</p>
+  <a href="https://korlens.vercel.app" class="btn-white" target="_blank" rel="noopener">KORLENS 바로가기 →</a>
+</section>
+
+<footer>
+  © 2026 쿤스튜디오 · travel<span>map</span> 부서 · KORLENS 장소 DB 및 지도 레이어 담당
+</footer>
+
+</body>
+</html>

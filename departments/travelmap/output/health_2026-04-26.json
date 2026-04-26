@@ -1,0 +1,15 @@
+{
+  "date": "2026-04-26",
+  "checks": {
+    "korlens_live": {
+      "status": 200,
+      "ok": true
+    },
+    "supabase": {
+      "status": 401,
+      "ok": true,
+      "error": "HTTP Error 401: Unauthorized",
+      "note": "responds with auth-required (alive)"
+    }
+  }
+}
