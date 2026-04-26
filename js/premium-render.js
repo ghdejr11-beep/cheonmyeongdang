@@ -269,19 +269,27 @@
       {name: '🧠 지성', value: bio.intellectual, color: '#3498db'},
       {name: '✨ 직관', value: bio.intuitive, color: '#9b59b6'},
     ];
+    function bioStateLabel(v) {
+      if (v >= 80) return '최고조';
+      if (v >= 30) return '좋음';
+      if (v >= -29) return '평이';
+      if (v >= -79) return '저조';
+      return '최저';
+    }
     bioItems.forEach(function(b) {
-      var width = Math.abs(b.value);
+      var width = Math.abs(b.value) / 2; // 반쪽 바라서 /2
       var isPositive = b.value >= 0;
+      var state = bioStateLabel(b.value);
       html += '<div class="bio-item">';
       html += '<span class="bio-label">' + b.name + '</span>';
       html += '<div class="bio-bar">';
       if (isPositive) {
         html += '<div class="bio-fill-pos" style="width:' + width + '%;background:' + b.color + '"></div>';
       } else {
-        html += '<div class="bio-fill-neg" style="width:' + width + '%;background:' + b.color + ';opacity:0.4"></div>';
+        html += '<div class="bio-fill-neg" style="width:' + width + '%;background:' + b.color + ';opacity:0.7"></div>';
       }
       html += '</div>';
-      html += '<span class="bio-value" style="color:' + b.color + '">' + b.value + '%</span>';
+      html += '<span class="bio-value" style="color:' + b.color + '">' + b.value + '%<span class="bio-state">(' + state + ')</span></span>';
       html += '</div>';
     });
     html += '</div></div>';
