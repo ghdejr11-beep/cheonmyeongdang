@@ -1,0 +1,449 @@
+{
+  "snapshots": [
+    {
+      "date": "2026-04-25",
+      "channels": {
+        "healing_sleep_realm": {
+          "status": "ok",
+          "title": "Healing Sleep Realm",
+          "channel_id": "UCXAo8cXhyXIRa_8bjNdBh9w",
+          "subscriber_count": 0,
+          "view_count_total": 0,
+          "video_count": 3,
+          "yesterday_views_diff": 0,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "1.5 Hours 528Hz Deep Sleep Music | Healing Frequency for Power Nap & Anxiety Rel",
+              "video_id": "05hJXqBihaM",
+              "view_count": 0,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "1 Hour 528Hz Deep Sleep Music | Healing Frequency + Tibetan Singing Bowls",
+              "video_id": "f-wLCPRkNCI",
+              "view_count": 0,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "[TEST] 528Hz Deep Sleep Drone - 5min Preview 00:31",
+              "video_id": "x__se6AoiTQ",
+              "view_count": 0,
+              "like_count": 0,
+              "comment_count": 0
+            }
+          ],
+          "revenue_estimate_usd": 0.0,
+          "revenue_source": "cpm_estimate($1.5/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.0
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUCXAo8cXhyXIRa_8bjNdBh9w&startDate=2026-04-24&endDa"
+          }
+        },
+        "whisper_atlas": {
+          "status": "ok",
+          "title": "Whisper Atlas",
+          "channel_id": "UCbySuORbU6r4zvaX1fj8urg",
+          "subscriber_count": 922,
+          "view_count_total": 340151,
+          "video_count": 24,
+          "yesterday_views_diff": 0,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "[Idol Imagine] When Male kpop idols have crushes on you.",
+              "video_id": "6FA0SR9PmRk",
+              "view_count": 107207,
+              "like_count": 2810,
+              "comment_count": 65
+            },
+            {
+              "title": "Imagine// You are Suga's Girlfriend and he spoils you hard",
+              "video_id": "gSOE0QCgHcI",
+              "view_count": 48116,
+              "like_count": 1072,
+              "comment_count": 17
+            },
+            {
+              "title": "[Idol Imagine] When you are a newly debuted solo artist and many female idols ha",
+              "video_id": "H3fyYSizSjc",
+              "view_count": 28071,
+              "like_count": 848,
+              "comment_count": 8
+            },
+            {
+              "title": "EXO idol imagine - when u are Sehun's girlfriend; many people are curious of you",
+              "video_id": "70TfGafyBpE",
+              "view_count": 27545,
+              "like_count": 553,
+              "comment_count": 5
+            },
+            {
+              "title": "[Imagine] When u are a Blackpink member and idols have crushes on u pt1",
+              "video_id": "IdYjML6inwM",
+              "view_count": 24064,
+              "like_count": 648,
+              "comment_count": 12
+            }
+          ],
+          "revenue_estimate_usd": 0.0,
+          "revenue_source": "cpm_estimate($1.2/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.0
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUCbySuORbU6r4zvaX1fj8urg&startDate=2026-04-24&endDa"
+          }
+        },
+        "wealth_blueprint": {
+          "status": "ok",
+          "title": "Wealth Blueprint",
+          "channel_id": "UClmNlmBKu9P60wTIws1ATtA",
+          "subscriber_count": 251,
+          "view_count_total": 32136,
+          "video_count": 91,
+          "yesterday_views_diff": 0,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "I Used My Credit Card PERFECTLY… Still Lost Money!",
+              "video_id": "Dht1gL2-akE",
+              "view_count": 918,
+              "like_count": 18,
+              "comment_count": 0
+            },
+            {
+              "title": "How Henry Ford \"Hacked\" Time (You too can do it)",
+              "video_id": "MkbdaC40TyM",
+              "view_count": 444,
+              "like_count": 15,
+              "comment_count": 0
+            },
+            {
+              "title": "Stop Losing Money While Grocery Shopping — One Simple Fix",
+              "video_id": "Huza37z4Ais",
+              "view_count": 304,
+              "like_count": 5,
+              "comment_count": 3
+            },
+            {
+              "title": "They Took Extra. Kept It All Year. Gave It Back. You Said Thank You.",
+              "video_id": "l1Wtup6rvYU",
+              "view_count": 289,
+              "like_count": 5,
+              "comment_count": 0
+            },
+            {
+              "title": "2 Million Australians Are Paying These Fees Without Knowing.     #hiddenfees",
+              "video_id": "gPen3r5OL-k",
+              "view_count": 246,
+              "like_count": 6,
+              "comment_count": 5
+            }
+          ],
+          "revenue_estimate_usd": 0.0,
+          "revenue_source": "cpm_estimate($5.0/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.0
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUClmNlmBKu9P60wTIws1ATtA&startDate=2026-04-24&endDa"
+          }
+        },
+        "inner_archetypes": {
+          "status": "ok",
+          "title": "Inner Archetypes",
+          "channel_id": "UCkk4_C8ZK0aREtW9n0CDNiA",
+          "subscriber_count": 1150,
+          "view_count_total": 87843,
+          "video_count": 173,
+          "yesterday_views_diff": 0,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "12 Things Sigma Females Have No Idea Men Notice About Them | Carl Jung",
+              "video_id": "un-IBUGdjic",
+              "view_count": 60,
+              "like_count": 4,
+              "comment_count": 0
+            },
+            {
+              "title": "The Significance of Sigma Females' Birth into Toxic Families | Carl Jung",
+              "video_id": "GfDIYKVtM54",
+              "view_count": 53,
+              "like_count": 6,
+              "comment_count": 0
+            },
+            {
+              "title": "If a Guy Is on Your Mind Everyday, These 5 Things Are Actually Happening to Him ",
+              "video_id": "EGB2p7FZL6E",
+              "view_count": 37,
+              "like_count": 1,
+              "comment_count": 0
+            },
+            {
+              "title": "Why Sigma Females Pretend to Be Naive — and Outsmart Everyone | Carl Jung",
+              "video_id": "ckvchTfb5mU",
+              "view_count": 34,
+              "like_count": 1,
+              "comment_count": 0
+            },
+            {
+              "title": "I Have 1 Message From Your Person and It's Urgent | Carl Jung",
+              "video_id": "0Kj2Uy52zEg",
+              "view_count": 33,
+              "like_count": 1,
+              "comment_count": 1
+            }
+          ],
+          "revenue_estimate_usd": 0.0,
+          "revenue_source": "cpm_estimate($2.0/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.0
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUCkk4_C8ZK0aREtW9n0CDNiA&startDate=2026-04-24&endDa"
+          }
+        }
+      },
+      "totals": {
+        "view_count_total_all": 460130,
+        "subscriber_count_all": 2323,
+        "yesterday_views_all": 0,
+        "yesterday_subs_gained_all": 0,
+        "revenue_estimate_usd_all": 0.0
+      }
+    },
+    {
+      "date": "2026-04-26",
+      "channels": {
+        "healing_sleep_realm": {
+          "status": "ok",
+          "title": "Healing Sleep Realm",
+          "channel_id": "UCXAo8cXhyXIRa_8bjNdBh9w",
+          "subscriber_count": 0,
+          "view_count_total": 0,
+          "video_count": 2,
+          "yesterday_views_diff": 0,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "1.5 Hours 528Hz Deep Sleep Music | Healing Frequency for Power Nap & Anxiety Rel",
+              "video_id": "05hJXqBihaM",
+              "view_count": 0,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "1 Hour 528Hz Deep Sleep Music | Healing Frequency + Tibetan Singing Bowls",
+              "video_id": "f-wLCPRkNCI",
+              "view_count": 0,
+              "like_count": 0,
+              "comment_count": 0
+            }
+          ],
+          "revenue_estimate_usd": 0.0,
+          "revenue_source": "cpm_estimate($1.5/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.0
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUCXAo8cXhyXIRa_8bjNdBh9w&startDate=2026-04-25&endDa"
+          }
+        },
+        "whisper_atlas": {
+          "status": "ok",
+          "title": "Whisper Atlas",
+          "channel_id": "UCbySuORbU6r4zvaX1fj8urg",
+          "subscriber_count": 922,
+          "view_count_total": 340159,
+          "video_count": 24,
+          "yesterday_views_diff": 8,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "[Idol Imagine] When Male kpop idols have crushes on you.",
+              "video_id": "6FA0SR9PmRk",
+              "view_count": 107213,
+              "like_count": 2811,
+              "comment_count": 65
+            },
+            {
+              "title": "Imagine// You are Suga's Girlfriend and he spoils you hard",
+              "video_id": "gSOE0QCgHcI",
+              "view_count": 48117,
+              "like_count": 1072,
+              "comment_count": 17
+            },
+            {
+              "title": "[Idol Imagine] When you are a newly debuted solo artist and many female idols ha",
+              "video_id": "H3fyYSizSjc",
+              "view_count": 28078,
+              "like_count": 848,
+              "comment_count": 8
+            },
+            {
+              "title": "EXO idol imagine - when u are Sehun's girlfriend; many people are curious of you",
+              "video_id": "70TfGafyBpE",
+              "view_count": 27549,
+              "like_count": 553,
+              "comment_count": 5
+            },
+            {
+              "title": "[Imagine] When u are a Blackpink member and idols have crushes on u pt1",
+              "video_id": "IdYjML6inwM",
+              "view_count": 24064,
+              "like_count": 648,
+              "comment_count": 12
+            }
+          ],
+          "revenue_estimate_usd": 0.01,
+          "revenue_source": "cpm_estimate($1.2/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.01
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUCbySuORbU6r4zvaX1fj8urg&startDate=2026-04-25&endDa"
+          }
+        },
+        "wealth_blueprint": {
+          "status": "ok",
+          "title": "Wealth Blueprint",
+          "channel_id": "UClmNlmBKu9P60wTIws1ATtA",
+          "subscriber_count": 251,
+          "view_count_total": 32139,
+          "video_count": 92,
+          "yesterday_views_diff": 3,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "I Used My Credit Card PERFECTLY… Still Lost Money!",
+              "video_id": "Dht1gL2-akE",
+              "view_count": 918,
+              "like_count": 18,
+              "comment_count": 0
+            },
+            {
+              "title": "How Henry Ford \"Hacked\" Time (You too can do it)",
+              "video_id": "MkbdaC40TyM",
+              "view_count": 444,
+              "like_count": 15,
+              "comment_count": 0
+            },
+            {
+              "title": "Stop Losing Money While Grocery Shopping — One Simple Fix",
+              "video_id": "Huza37z4Ais",
+              "view_count": 304,
+              "like_count": 5,
+              "comment_count": 3
+            },
+            {
+              "title": "They Took Extra. Kept It All Year. Gave It Back. You Said Thank You.",
+              "video_id": "l1Wtup6rvYU",
+              "view_count": 290,
+              "like_count": 5,
+              "comment_count": 0
+            },
+            {
+              "title": "2 Million Australians Are Paying These Fees Without Knowing.     #hiddenfees",
+              "video_id": "gPen3r5OL-k",
+              "view_count": 246,
+              "like_count": 6,
+              "comment_count": 5
+            }
+          ],
+          "revenue_estimate_usd": 0.01,
+          "revenue_source": "cpm_estimate($5.0/1k)",
+          "revenue_low_high": [
+            0.01,
+            0.02
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUClmNlmBKu9P60wTIws1ATtA&startDate=2026-04-25&endDa"
+          }
+        },
+        "inner_archetypes": {
+          "status": "ok",
+          "title": "Inner Archetypes",
+          "channel_id": "UCkk4_C8ZK0aREtW9n0CDNiA",
+          "subscriber_count": 1150,
+          "view_count_total": 87868,
+          "video_count": 173,
+          "yesterday_views_diff": 25,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "12 Things Sigma Females Have No Idea Men Notice About Them | Carl Jung",
+              "video_id": "un-IBUGdjic",
+              "view_count": 60,
+              "like_count": 4,
+              "comment_count": 0
+            },
+            {
+              "title": "The Significance of Sigma Females' Birth into Toxic Families | Carl Jung",
+              "video_id": "GfDIYKVtM54",
+              "view_count": 53,
+              "like_count": 6,
+              "comment_count": 0
+            },
+            {
+              "title": "If a Guy Is on Your Mind Everyday, These 5 Things Are Actually Happening to Him ",
+              "video_id": "EGB2p7FZL6E",
+              "view_count": 37,
+              "like_count": 1,
+              "comment_count": 0
+            },
+            {
+              "title": "Why Sigma Females Pretend to Be Naive — and Outsmart Everyone | Carl Jung",
+              "video_id": "ckvchTfb5mU",
+              "view_count": 34,
+              "like_count": 1,
+              "comment_count": 0
+            },
+            {
+              "title": "I Have 1 Message From Your Person and It's Urgent | Carl Jung",
+              "video_id": "0Kj2Uy52zEg",
+              "view_count": 33,
+              "like_count": 1,
+              "comment_count": 1
+            }
+          ],
+          "revenue_estimate_usd": 0.05,
+          "revenue_source": "cpm_estimate($2.0/1k)",
+          "revenue_low_high": [
+            0.03,
+            0.07
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUCkk4_C8ZK0aREtW9n0CDNiA&startDate=2026-04-25&endDa"
+          }
+        }
+      },
+      "totals": {
+        "view_count_total_all": 460166,
+        "subscriber_count_all": 2323,
+        "yesterday_views_all": 36,
+        "yesterday_subs_gained_all": 0,
+        "revenue_estimate_usd_all": 0.07
+      }
+    }
+  ]
+}

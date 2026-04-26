@@ -1,0 +1,45 @@
+{
+  "_comment": "4채널 매핑. channel_id 비어있으면 yt_dashboard.py --resolve 로 자동 해상도. handle 은 @kunstudio_xxx 형식 추정 (실제 채널 검색 시 title 매칭).",
+  "channels": [
+    {
+      "key": "healing_sleep_realm",
+      "title": "Healing Sleep Realm",
+      "handle": "",
+      "channel_id": "UCXAo8cXhyXIRa_8bjNdBh9w",
+      "search_terms": [
+        "Healing Sleep Realm"
+      ],
+      "category": "sleep_meditation"
+    },
+    {
+      "key": "whisper_atlas",
+      "title": "Whisper Atlas",
+      "handle": "",
+      "channel_id": "UCbySuORbU6r4zvaX1fj8urg",
+      "search_terms": [
+        "Whisper Atlas"
+      ],
+      "category": "asmr"
+    },
+    {
+      "key": "wealth_blueprint",
+      "title": "Wealth Blueprint",
+      "handle": "",
+      "channel_id": "UClmNlmBKu9P60wTIws1ATtA",
+      "search_terms": [
+        "Wealth Blueprint"
+      ],
+      "category": "finance_education"
+    },
+    {
+      "key": "inner_archetypes",
+      "title": "Inner Archetypes",
+      "handle": "",
+      "channel_id": "UCkk4_C8ZK0aREtW9n0CDNiA",
+      "search_terms": [
+        "Inner Archetypes"
+      ],
+      "category": "psychology_spiritual"
+    }
+  ]
+}

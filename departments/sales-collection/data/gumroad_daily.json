@@ -1,0 +1,28 @@
+{
+  "2026-04-24": {
+    "date": "2026-04-24",
+    "status": "ok",
+    "total_sales_count": 0,
+    "total_amount_cents": 0,
+    "total_amount_usd": 0.0,
+    "refund_count": 0,
+    "refund_amount_cents": 0,
+    "refund_amount_usd": 0.0,
+    "net_usd": 0.0,
+    "by_product": {},
+    "by_currency": {}
+  },
+  "2026-04-25": {
+    "date": "2026-04-25",
+    "status": "ok",
+    "total_sales_count": 0,
+    "total_amount_cents": 0,
+    "total_amount_usd": 0.0,
+    "refund_count": 0,
+    "refund_amount_cents": 0,
+    "refund_amount_usd": 0.0,
+    "net_usd": 0.0,
+    "by_product": {},
+    "by_currency": {}
+  }
+}
