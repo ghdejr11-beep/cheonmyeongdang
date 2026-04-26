@@ -1,0 +1,73 @@
+{
+  "_doc": "장르별 표지 색상 심리학 매핑 (62~90% 구매 결정이 색상 기반). agent 분석 결과 + WebSearch 2026 트렌드.",
+  "_source": "Pixapaper / INeedABookCover / DAMONZA 2026 trends",
+  "_updated": "2026-04-25",
+  "genres": {
+    "romance": {
+      "primary": "#E63946",
+      "secondary": "#FFB6C1",
+      "psychology": "Red/Pink - 사랑, 열정",
+      "books": []
+    },
+    "thriller": {
+      "primary": "#0A0A0A",
+      "secondary": "#C1121F",
+      "psychology": "Black + Red - 긴장, 위협",
+      "books": []
+    },
+    "self_help_business": {
+      "primary": "#F4A261",
+      "secondary": "#1D4ED8",
+      "psychology": "Yellow/Blue - 낙관 + 신뢰",
+      "books": ["ai-side-hustle-en", "mental-reset-journal", "introvert-confidence", "genz-stress", "ai-prompt-workbook"]
+    },
+    "health_wellness": {
+      "primary": "#06A77D",
+      "secondary": "#A8DADC",
+      "psychology": "Green - 건강, 평온",
+      "books": ["blood-pressure-log", "blood-sugar-tracker", "sleep-planner", "yoga-progress-journal", "meal-prep-planner", "caregiver-daily-log"]
+    },
+    "fantasy_spiritual": {
+      "primary": "#6D28D9",
+      "secondary": "#C4B5FD",
+      "psychology": "Purple - 신비, 영성",
+      "books": ["zodiac-mandala-coloring", "saju-diary", "fortune-notebook"]
+    },
+    "kids_education": {
+      "primary": "#FFD60A",
+      "secondary": "#FFFFFF",
+      "psychology": "Bright Yellow + White - 활력, 순수",
+      "books": ["math-workbook-grade1", "dot-marker-kids", "bold-easy-coloring-animals", "cottagecore-coloring"]
+    },
+    "seniors": {
+      "primary": "#F4E4BC",
+      "secondary": "#1E3A5F",
+      "psychology": "Soft Beige + Navy - 안정, 신뢰",
+      "books": ["spot-difference-seniors"]
+    },
+    "finance_planner": {
+      "primary": "#1E3A5F",
+      "secondary": "#C9A961",
+      "psychology": "Navy + Gold - 재정 안정, 부",
+      "books": ["budget-planner-couples", "password-logbook", "password-logbook-premium"]
+    },
+    "lifestyle_pet": {
+      "primary": "#06A77D",
+      "secondary": "#F4A261",
+      "psychology": "Green + Orange - 활동, 따뜻함",
+      "books": ["dog-health-training-log", "fishing-log-book", "adhd-planner", "airbnb-guestbook"]
+    }
+  },
+  "design_principles_2026": {
+    "bold_typography_dominance": "이미지 빼고 큰 제목만, all-caps, 두꺼운 글씨",
+    "strong_color_contrast": "WCAG AAA 7:1 이상",
+    "ai_generated_art": "Midjourney/DALL-E 분위기 일러스트 (영문판)",
+    "minimalism": "셀프헬프는 텍스트만 (white space 활용)",
+    "dual_scale_validation": "썸네일 200x300 + 실물 1600x2400 모두 작동"
+  },
+  "fonts": {
+    "english": ["Bebas Neue", "Anton", "Impact", "Inter Bold"],
+    "korean": ["Pretendard", "Noto Sans KR", "Gowun Batang (제목)"],
+    "rule": "한자 혼용 거의 사라짐 (2026), 한글 고딕(산세리프) 위주"
+  }
+}

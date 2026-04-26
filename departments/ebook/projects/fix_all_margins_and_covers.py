@@ -493,12 +493,13 @@ def generate_full_wrap_covers():
                 c.drawCentredString(0, -spine_font_size / 3, spine_text)
                 c.restoreState()
 
-                # Author at bottom of spine
+                # Author at bottom of spine — KDP safe margin 0.5" from edge
                 if spine_font_size >= 6:
-                    c.setFont("Helvetica", max(5, spine_font_size - 2))
+                    author_size = max(5, spine_font_size - 2)
+                    c.setFont("Helvetica", author_size)
                     c.setFillColor(accent)
                     c.saveState()
-                    c.translate(spine_cx, bleed + 0.4 * rl_inch)
+                    c.translate(spine_cx, bleed + 0.5 * rl_inch + author_size + 10)
                     c.rotate(90)
                     c.drawCentredString(0, -spine_font_size / 4, "Deokgu Studio")
                     c.restoreState()
@@ -541,20 +542,7 @@ def generate_full_wrap_covers():
         c.drawCentredString(back_cx, bleed + 0.8 * rl_inch, "Deokgu Studio")
         c.drawCentredString(back_cx, bleed + 0.6 * rl_inch, "deokgu.studio")
 
-        # Barcode area (leave blank rectangle at bottom-right of back)
-        barcode_w = 2.0 * rl_inch
-        barcode_h = 1.2 * rl_inch
-        barcode_x = back_cx + 0.5 * rl_inch
-        barcode_y = bleed + 0.3 * rl_inch
-        c.setFillColor(white)
-        c.rect(barcode_x, barcode_y, barcode_w, barcode_h, fill=1, stroke=0)
-        c.setStrokeColor(HexColor("#cccccc"))
-        c.setLineWidth(0.5)
-        c.rect(barcode_x, barcode_y, barcode_w, barcode_h, fill=0, stroke=1)
-        c.setFillColor(HexColor("#999999"))
-        c.setFont("Helvetica", 7)
-        c.drawCentredString(barcode_x + barcode_w / 2, barcode_y + barcode_h / 2,
-                           "ISBN Barcode Area")
+        # KDP auto-inserts barcode — never draw template box or "ISBN Barcode Area" text (rejection cause)
 
         c.save()
         fsize = os.path.getsize(cover_path) / 1024

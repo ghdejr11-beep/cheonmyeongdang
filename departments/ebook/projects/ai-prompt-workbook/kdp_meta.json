@@ -1,0 +1,29 @@
+{
+  "book_id": "ai-prompt-workbook",
+  "title": "AI 프롬프트 워크북",
+  "subtitle": "200개 ChatGPT 템플릿과 실습으로 배우는 AI 활용법",
+  "author": "Deokgu Studio",
+  "language": "ko",
+  "genre": "self_help_business",
+  "primary_color": "#F4A261",
+  "secondary_color": "#1D4ED8",
+  "isbn": "PLACEHOLDER_KDP_FREE",
+  "pages": 156,
+  "trim_size": "8.5x11",
+  "low_content": false,
+  "price_krw_paperback": 19900,
+  "price_krw_kindle": 9900,
+  "categories": [
+    "컴퓨터/IT > 인공지능 > AI 활용",
+    "자기계발 > 직무능력 > 업무생산성"
+  ],
+  "keywords": [
+    "ChatGPT 프롬프트",
+    "AI 프롬프트 책",
+    "인공지능 활용법",
+    "챗GPT 워크북",
+    "AI 자기계발",
+    "프롬프트 엔지니어링",
+    "AI 활용 가이드"
+  ]
+}

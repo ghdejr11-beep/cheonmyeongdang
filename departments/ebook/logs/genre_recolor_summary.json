@@ -1,0 +1,215 @@
+{
+  "ts": "2026-04-25T16:05:14.628820",
+  "test": false,
+  "results": [
+    {
+      "folder": "adhd-planner",
+      "old_bg": "#6A0DAD",
+      "old_accent": "#FFD700",
+      "status": "ok",
+      "new_bg": "#06A77D",
+      "new_accent": "#F4A261",
+      "genre": "lifestyle_pet",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\adhd-planner\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "mental-reset-journal",
+      "old_bg": "#A8B89C",
+      "old_accent": "#5C4033",
+      "status": "ok",
+      "new_bg": "#F4A261",
+      "new_accent": "#1D4ED8",
+      "genre": "self_help_business",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\mental-reset-journal\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "sleep-planner",
+      "old_bg": "#0B0B3B",
+      "old_accent": "#F0E68C",
+      "status": "ok",
+      "new_bg": "#06A77D",
+      "new_accent": "#A8DADC",
+      "genre": "health_wellness",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\sleep-planner\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "ai-side-hustle-en",
+      "old_bg": "#0D1B2A",
+      "old_accent": "#FFD700",
+      "status": "ok",
+      "new_bg": "#F4A261",
+      "new_accent": "#1D4ED8",
+      "genre": "self_help_business",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\ai-side-hustle-en\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "dot-marker-kids",
+      "old_bg": "#FF4444",
+      "old_accent": "#FFFFFF",
+      "status": "ok",
+      "new_bg": "#FFD60A",
+      "new_accent": "#FFFFFF",
+      "genre": "kids_education",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\dot-marker-kids\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "spot-difference-seniors",
+      "old_bg": "#1A3A4A",
+      "old_accent": "#20B2AA",
+      "status": "ok",
+      "new_bg": "#F4E4BC",
+      "new_accent": "#1E3A5F",
+      "genre": "seniors",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\spot-difference-seniors\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "genz-stress",
+      "old_bg": "#4A0E4E",
+      "old_accent": "#FF8C94",
+      "status": "ok",
+      "new_bg": "#F4A261",
+      "new_accent": "#1D4ED8",
+      "genre": "self_help_business",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\genz-stress\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "introvert-confidence",
+      "old_bg": "#2C3E6B",
+      "old_accent": "#87CEEB",
+      "status": "ok",
+      "new_bg": "#F4A261",
+      "new_accent": "#1D4ED8",
+      "genre": "self_help_business",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\introvert-confidence\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "password-logbook-premium",
+      "old_bg": "#0F0F2E",
+      "old_accent": "#D4A843",
+      "status": "ok",
+      "new_bg": "#1E3A5F",
+      "new_accent": "#C9A961",
+      "genre": "finance_planner",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\password-logbook-premium\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "blood-pressure-log",
+      "old_bg": "#FFFFFF",
+      "old_accent": "#DC143C",
+      "status": "ok",
+      "new_bg": "#06A77D",
+      "new_accent": "#A8DADC",
+      "genre": "health_wellness",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\blood-pressure-log\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "blood-sugar-tracker",
+      "old_bg": "#F0FFFF",
+      "old_accent": "#20B2AA",
+      "status": "ok",
+      "new_bg": "#06A77D",
+      "new_accent": "#A8DADC",
+      "genre": "health_wellness",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\blood-sugar-tracker\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "airbnb-guestbook",
+      "old_bg": "#FFF5E6",
+      "old_accent": "#D2691E",
+      "status": "ok",
+      "new_bg": "#06A77D",
+      "new_accent": "#F4A261",
+      "genre": "lifestyle_pet",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\airbnb-guestbook\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "bold-easy-coloring-animals",
+      "old_bg": "#7CFC00",
+      "old_accent": "#006400",
+      "status": "ok",
+      "new_bg": "#FFD60A",
+      "new_accent": "#FFFFFF",
+      "genre": "kids_education",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\bold-easy-coloring-animals\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "cottagecore-coloring",
+      "old_bg": "#FFE4E1",
+      "old_accent": "#DB7093",
+      "status": "ok",
+      "new_bg": "#FFD60A",
+      "new_accent": "#FFFFFF",
+      "genre": "kids_education",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\cottagecore-coloring\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "math-workbook-grade1",
+      "old_bg": "#4169E1",
+      "old_accent": "#FFFFFF",
+      "status": "ok",
+      "new_bg": "#FFD60A",
+      "new_accent": "#FFFFFF",
+      "genre": "kids_education",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\math-workbook-grade1\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "yoga-progress-journal",
+      "old_bg": "#E6E6FA",
+      "old_accent": "#20B2AA",
+      "status": "ok",
+      "new_bg": "#06A77D",
+      "new_accent": "#A8DADC",
+      "genre": "health_wellness",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\yoga-progress-journal\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "budget-planner-couples",
+      "old_bg": "#0F0F2E",
+      "old_accent": "#D4A843",
+      "status": "ok",
+      "new_bg": "#1E3A5F",
+      "new_accent": "#C9A961",
+      "genre": "finance_planner",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\budget-planner-couples\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "zodiac-mandala-coloring",
+      "old_bg": "#1A0A2E",
+      "old_accent": "#D4A843",
+      "status": "ok",
+      "new_bg": "#6D28D9",
+      "new_accent": "#C4B5FD",
+      "genre": "fantasy_spiritual",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\zodiac-mandala-coloring\\cover.pdf",
+      "validate": "fitz"
+    },
+    {
+      "folder": "meal-prep-planner",
+      "old_bg": "#F5F5DC",
+      "old_accent": "#228B22",
+      "status": "ok",
+      "new_bg": "#06A77D",
+      "new_accent": "#A8DADC",
+      "genre": "health_wellness",
+      "pdf": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\meal-prep-planner\\cover.pdf",
+      "validate": "fitz"
+    }
+  ]
+}

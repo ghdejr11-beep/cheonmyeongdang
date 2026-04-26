@@ -1,0 +1,29 @@
+{
+  "book_id": "fortune-notebook",
+  "title": "운세노트",
+  "subtitle": "매월 운세를 기록하고 행운을 끌어당기는 12개월 트래커",
+  "author": "Deokgu Studio",
+  "language": "ko-en",
+  "genre": "fantasy_spiritual",
+  "primary_color": "#6D28D9",
+  "secondary_color": "#C4B5FD",
+  "isbn": "PLACEHOLDER_KDP_FREE",
+  "pages": 160,
+  "trim_size": "8.5x11",
+  "low_content": true,
+  "price_krw_paperback": 14900,
+  "price_krw_kindle": 5900,
+  "categories": [
+    "자기계발 > 자기관리 > 일기/저널",
+    "Religion & Spirituality > New Age & Spirituality > Astrology"
+  ],
+  "keywords": [
+    "운세노트",
+    "행운 다이어리",
+    "월간 운세 트래커",
+    "fortune notebook",
+    "lucky color tracker",
+    "2026 운세 노트",
+    "monthly horoscope journal"
+  ]
+}

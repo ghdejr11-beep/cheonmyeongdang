@@ -1,0 +1,58 @@
+[2026-04-25 16:04:59] ============================================================
+[2026-04-25 16:04:59] apply_genre_colors START (test=True, book=None)
+[2026-04-25 16:04:59] ============================================================
+[2026-04-25 16:04:59] genre map books: 23
+[2026-04-25 16:04:59] --test: adhd-planner 만 dry run
+[2026-04-25 16:04:59] 처리 대상: 1권
+[2026-04-25 16:04:59]   [OK]   adhd-planner (lifestyle_pet) bg #6A0DAD->#06A77D, accent #FFD700->#F4A261
+[2026-04-25 16:04:59] ------------------------------------------------------------
+[2026-04-25 16:04:59] DONE  ok=1  skipped(no_genre)=0  failed=0  total=1
+[2026-04-25 16:04:59] ------------------------------------------------------------
+[2026-04-25 16:04:59] summary -> C:\Users\hdh02\Desktop\cheonmyeongdang\departments\ebook\logs\genre_recolor_summary.json
+[2026-04-25 16:05:12] ============================================================
+[2026-04-25 16:05:12] apply_genre_colors START (test=False, book=None)
+[2026-04-25 16:05:12] ============================================================
+[2026-04-25 16:05:12] genre map books: 23
+[2026-04-25 16:05:12] 처리 대상: 19권
+[2026-04-25 16:05:12]   [backup] adhd-planner/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:12]   [OK]   adhd-planner (lifestyle_pet) bg #6A0DAD->#06A77D, accent #FFD700->#F4A261
+[2026-04-25 16:05:12]   [backup] mental-reset-journal/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:12]   [OK]   mental-reset-journal (self_help_business) bg #A8B89C->#F4A261, accent #5C4033->#1D4ED8
+[2026-04-25 16:05:12]   [backup] sleep-planner/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:12]   [OK]   sleep-planner (health_wellness) bg #0B0B3B->#06A77D, accent #F0E68C->#A8DADC
+[2026-04-25 16:05:12]   [backup] ai-side-hustle-en/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:12]   [OK]   ai-side-hustle-en (self_help_business) bg #0D1B2A->#F4A261, accent #FFD700->#1D4ED8
+[2026-04-25 16:05:12]   [backup] dot-marker-kids/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:12]   [OK]   dot-marker-kids (kids_education) bg #FF4444->#FFD60A, accent #FFFFFF->#FFFFFF
+[2026-04-25 16:05:12]   [backup] spot-difference-seniors/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:13]   [OK]   spot-difference-seniors (seniors) bg #1A3A4A->#F4E4BC, accent #20B2AA->#1E3A5F
+[2026-04-25 16:05:13]   [backup] genz-stress/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:13]   [OK]   genz-stress (self_help_business) bg #4A0E4E->#F4A261, accent #FF8C94->#1D4ED8
+[2026-04-25 16:05:13]   [backup] introvert-confidence/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:13]   [OK]   introvert-confidence (self_help_business) bg #2C3E6B->#F4A261, accent #87CEEB->#1D4ED8
+[2026-04-25 16:05:13]   [backup] password-logbook-premium/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:13]   [OK]   password-logbook-premium (finance_planner) bg #0F0F2E->#1E3A5F, accent #D4A843->#C9A961
+[2026-04-25 16:05:13]   [backup] blood-pressure-log/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:13]   [OK]   blood-pressure-log (health_wellness) bg #FFFFFF->#06A77D, accent #DC143C->#A8DADC
+[2026-04-25 16:05:13]   [backup] blood-sugar-tracker/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:13]   [OK]   blood-sugar-tracker (health_wellness) bg #F0FFFF->#06A77D, accent #20B2AA->#A8DADC
+[2026-04-25 16:05:13]   [backup] airbnb-guestbook/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:13]   [OK]   airbnb-guestbook (lifestyle_pet) bg #FFF5E6->#06A77D, accent #D2691E->#F4A261
+[2026-04-25 16:05:13]   [backup] bold-easy-coloring-animals/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:13]   [OK]   bold-easy-coloring-animals (kids_education) bg #7CFC00->#FFD60A, accent #006400->#FFFFFF
+[2026-04-25 16:05:13]   [backup] cottagecore-coloring/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:14]   [OK]   cottagecore-coloring (kids_education) bg #FFE4E1->#FFD60A, accent #DB7093->#FFFFFF
+[2026-04-25 16:05:14]   [backup] math-workbook-grade1/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:14]   [OK]   math-workbook-grade1 (kids_education) bg #4169E1->#FFD60A, accent #FFFFFF->#FFFFFF
+[2026-04-25 16:05:14]   [backup] yoga-progress-journal/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:14]   [OK]   yoga-progress-journal (health_wellness) bg #E6E6FA->#06A77D, accent #20B2AA->#A8DADC
+[2026-04-25 16:05:14]   [backup] budget-planner-couples/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:14]   [OK]   budget-planner-couples (finance_planner) bg #0F0F2E->#1E3A5F, accent #D4A843->#C9A961
+[2026-04-25 16:05:14]   [backup] zodiac-mandala-coloring/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:14]   [OK]   zodiac-mandala-coloring (fantasy_spiritual) bg #1A0A2E->#6D28D9, accent #D4A843->#C4B5FD
+[2026-04-25 16:05:14]   [backup] meal-prep-planner/cover.pdf -> cover_v_pre_genre.pdf
+[2026-04-25 16:05:14]   [OK]   meal-prep-planner (health_wellness) bg #F5F5DC->#06A77D, accent #228B22->#A8DADC
+[2026-04-25 16:05:14] ------------------------------------------------------------
+[2026-04-25 16:05:14] DONE  ok=19  skipped(no_genre)=0  failed=0  total=19
+[2026-04-25 16:05:14] ------------------------------------------------------------
+[2026-04-25 16:05:14] summary -> C:\Users\hdh02\Desktop\cheonmyeongdang\departments\ebook\logs\genre_recolor_summary.json

@@ -54,7 +54,7 @@ CHAPTERS = [
         "",
         "1. EBOOKS & GUIDES ($9-49): Lowest barrier. Write with AI in days, not months. Best for: niche expertise, how-to content.",
         "2. TEMPLATES (Notion/Excel/Canva) ($5-39): Visual, instantly useful. AI generates formulas, layouts, and variations at scale.",
-        "3. PROMPT PACKS ($9-29): Curated ChatGPT/Midjourney prompts. Meta: using AI to sell AI tools.",
+        "3. PROMPT PACKS ($9-29): Curated AI writing and image prompts. Meta: using AI to sell AI tools.",
         "4. ONLINE MINI-COURSES ($29-199): AI writes scripts, you record with free tools. Loom + Canva + AI = professional course.",
         "5. PRINTABLES & PLANNERS ($5-15): Journals, trackers, coloring books. Low competition in micro-niches.",
         "6. AI CHATBOT TEMPLATES ($49-299): Pre-built Make.com/Zapier workflows. High value, low competition.",
@@ -62,15 +62,15 @@ CHAPTERS = [
         "",
         "KEY INSIGHT: The winners in 2026 aren't selling ONE product. They're building a PORTFOLIO of 5-10 products across 2-3 types, creating a flywheel where each product promotes the others.",
     ]),
-    ("Chapter 3", "Claude vs ChatGPT vs Gemini: Choosing Your AI", [
+    ("Chapter 3", "Choosing Your AI Writing Assistant: Choosing Your AI", [
         "You don't need all of them. You need the RIGHT one for each task.",
         "",
-        "CLAUDE (Anthropic):",
+        "LONG-FORM AI MODELS:",
         "- Best for: Long-form writing, analysis, coding, nuanced content",
         "- Strength: 200K context window, follows complex instructions",
         "- Use when: Writing eBooks, creating detailed guides, building systems",
         "",
-        "CHATGPT (OpenAI):",
+        "GENERAL-PURPOSE AI MODELS:",
         "- Best for: Quick tasks, GPTs marketplace, DALL-E images, plugins",
         "- Strength: Ecosystem (GPT Store, plugins, API breadth)",
         "- Use when: Image generation, quick brainstorming, customer-facing chatbots",
@@ -80,7 +80,7 @@ CHAPTERS = [
         "- Strength: Real-time web access, multimodal understanding",
         "- Use when: Market research, trend analysis, YouTube optimization",
         "",
-        "MY RECOMMENDATION: Start with Claude for creation, ChatGPT for images, Gemini for research. As you grow, you'll naturally gravitate toward 1-2 primary tools.",
+        "MY RECOMMENDATION: Start with a long-form AI for creation, a multimodal AI for images, and a search-grounded AI for research. As you grow, you'll naturally gravitate toward 1-2 primary tools.",
     ]),
     ("Chapter 4", "The 100-Day Roadmap", [
         "Stop planning forever. Here's your timeline:",
@@ -132,15 +132,15 @@ CHAPTERS = [
         "Yes, one day. Here's the exact process:",
         "",
         "HOUR 1-2: OUTLINE",
-        "Prompt Claude: 'Create a detailed outline for a [niche] eBook. Target audience: [who]. Length: 15,000-20,000 words. Include chapter titles, 3-5 bullet points per chapter, and a compelling hook for each.'",
+        "Prompt your AI: 'Create a detailed outline for a [niche] eBook. Target audience: [who]. Length: 15,000-20,000 words. Include chapter titles, 3-5 bullet points per chapter, and a compelling hook for each.'",
         "",
         "HOUR 3-6: DRAFT",
-        "Feed Claude each chapter outline one by one:",
+        "Feed your AI each chapter outline one by one:",
         "'Write Chapter 3 based on this outline: [paste]. Tone: conversational, practical. Include 2 real examples, 1 actionable exercise, and 1 key takeaway box.'",
         "",
         "HOUR 7-8: EDIT & POLISH",
         "- Read through once (out loud if possible)",
-        "- Ask Claude to 'improve clarity and flow' for weak sections",
+        "- Ask your AI to 'improve clarity and flow' for weak sections",
         "- Add personal anecdotes or case studies (AI can't fake these)",
         "- Format: headers, bullet points, callout boxes",
         "",
@@ -177,7 +177,7 @@ CHAPTERS = [
         "Selling prompts is the most meta side hustle of 2026. And it works.",
         "",
         "WHAT SELLS:",
-        "- ChatGPT prompt packs for specific professions (realtors, teachers, marketers)",
+        "- AI prompt packs for specific professions (realtors, teachers, marketers)",
         "- Midjourney/DALL-E prompt libraries with example outputs",
         "- 'Copy-paste' business prompts (emails, proposals, social posts)",
         "- System prompts for building custom GPTs",
@@ -539,7 +539,7 @@ def draw_title_page(c):
     c.setFont("Helvetica", 12)
     c.setFillColor(GOLD)
     c.drawCentredString(cx, H*0.52, "Build $5,000/Month in Digital Products")
-    c.drawCentredString(cx, H*0.48, "with Claude & ChatGPT")
+    c.drawCentredString(cx, H*0.48, "with AI Tools")
 
     c.setFont("Helvetica", 10)
     c.setFillColor(HexColor("#999999"))

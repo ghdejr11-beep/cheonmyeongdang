@@ -1,0 +1,29 @@
+{
+  "book_id": "saju-diary",
+  "title": "사주일기",
+  "subtitle": "매일 사주 키워드와 함께 쓰는 365일 자기성찰 다이어리",
+  "author": "Deokgu Studio",
+  "language": "ko",
+  "genre": "fantasy_spiritual",
+  "primary_color": "#6D28D9",
+  "secondary_color": "#C4B5FD",
+  "isbn": "PLACEHOLDER_KDP_FREE",
+  "pages": 395,
+  "trim_size": "8.5x11",
+  "low_content": true,
+  "price_krw_paperback": 12900,
+  "price_krw_kindle": 4900,
+  "categories": [
+    "자기계발 > 자기관리 > 일기/저널",
+    "종교/역학 > 동양철학 > 사주/명리"
+  ],
+  "keywords": [
+    "사주일기",
+    "365일 다이어리",
+    "자기계발 일기",
+    "운세 다이어리",
+    "사주명리 입문",
+    "명리학 노트",
+    "자기성찰 일기"
+  ]
+}
