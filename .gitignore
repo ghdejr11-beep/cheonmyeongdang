@@ -37,3 +37,9 @@ android/app/build/
 android/.gradle/
 .kdp_reports/
 autofix_budget.json
+
+# 일일 생성 데이터 (런타임 산출물)
+departments/*/logs/*.json
+departments/*/output/*.json
+!departments/*/logs/.gitkeep
+!departments/*/output/.gitkeep
