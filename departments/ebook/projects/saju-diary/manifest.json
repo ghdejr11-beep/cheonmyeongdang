@@ -1,0 +1,35 @@
+{
+  "book_id": "saju-diary",
+  "title": "Saju Diary",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "ko",
+  "description": "내 사주, 내 손으로 풀어보는 1년치 일진 다이어리.\n\n사주명리에 막연한 호기심만 있던 분도, 이미 만세력 앱과 친한 분도, 매일 아침 5분이면 오늘의 흐름과 내 상태를 기록할 수 있는 393페이지 본격 사주 다이어리입니다.\n\n이런 분께 추천합니다:\n- 사주 입문자: 매일 적으며 자연스럽게 음양오행과 십신을 익히고 싶은 분\n- 사주 중급자: 일진을 직접 추적하며 본인의 운세 패턴을 검증하고 싶은 분\n- 명리 상담을 받아본 후 일상에서 활용하고 싶은 분\n- 단순 운세보다 깊이 있는 자기 이해를 원하는 분\n\n이런 내용이 들어 있습니다:\n- 1일 1페이지 일진 기록 양식: 천간지지, 오늘의 십신, 길흉 메모, 컨디션 체크\n- 음양오행 균형 자가 진단 페이지\n- 12지지·10천간·60갑자 핵심 요약 레퍼런스\n- 월별 회고 페이지: 들어온 운, 빠져나간 운, 잡아야 할 흐름\n- 인연·재물·건강·진로 영역별 기록 섹션\n- 주요 절기와 입춘 기점 표기\n\n단순한 운세 노트가 아닙니다. 매일 적는 데이터가 쌓이면 \"내가 어떤 흐름에 강하고 약한지\"가 직접 보입니다. 1년 후에는 누군가의 풀이가 아니라 본인의 사주를 본인이 가장 잘 아는 사람이 됩니다.\n\n올해를 운명에 맡기지 말고, 운명을 기록해 보세요.\n\n지금 주문하고 오늘부터 첫 페이지를 시작하세요.",
+  "keywords": [
+    "사주 다이어리",
+    "사주명리",
+    "운세 노트",
+    "일진 기록",
+    "음양오행",
+    "saju diary",
+    "korean astrology"
+  ],
+  "categories": [
+    "BISAC: BODY, MIND & SPIRIT / Astrology / General",
+    "BISAC: SELF-HELP / Journaling"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 393,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "saju_diary.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": false,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

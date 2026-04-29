@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>천명당 별자리 카드 디자인 시안 10종</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#080a10;color:#e9ecf3;font-family:'Noto Sans KR',sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:48px 24px 96px}
+  .page-title{font-family:'Noto Serif KR',serif;font-size:clamp(24px,4vw,40px);font-weight:900;line-height:1.3;margin:0 0 12px;letter-spacing:-.02em}
+  .page-sub{color:#8a93a6;font-size:15px;line-height:1.6;margin:0 0 36px}
+  .nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 48px;padding:16px;border:1px solid #1a1f2c;border-radius:14px;background:#0d111a;position:sticky;top:0;z-index:50;backdrop-filter:blur(8px)}
+  .nav a{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:#161b27;border:1px solid #232a3b;font-size:13px;color:#cfd6e6;transition:all .15s}
+  .nav a:hover{background:#1f2738;border-color:#3a4661;color:#fff;transform:translateY(-1px)}
+  .nav a strong{color:#7da7ff}
+  .style-section{margin:0 0 96px;scroll-margin-top:96px}
+  .style-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:0 0 24px;padding:0 0 14px;border-bottom:1px solid #1a1f2c}
+  .style-num{font-family:'Noto Serif KR',serif;font-size:42px;font-weight:900;color:#7da7ff;line-height:1}
+  .style-title{font-family:'Noto Serif KR',serif;font-size:26px;font-weight:700;margin:0;letter-spacing:-.02em}
+  .style-desc{color:#8a93a6;font-size:14px;margin:6px 0 0;flex-basis:100%}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media (max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:600px){.grid{grid-template-columns:repeat(2,1fr)}}
+
+  /* ============ Style 1: Glassmorphism ============ */
+  .s1 .card{position:relative;aspect-ratio:3/4;border-radius:18px;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.18);padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+  .s1 .card::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 30% 20%,rgba(125,167,255,.35),transparent 60%);pointer-events:none}
+  .s1 .sym{font-size:64px;line-height:1;color:#fff;text-shadow:0 4px 20px rgba(125,167,255,.5);position:relative}
+  .s1 .name{font-family:'Noto Serif KR',serif;font-size:16px;font-weight:700;margin:14px 0 4px;position:relative}
+  .s1 .date{font-size:11px;color:#cfd6e6;opacity:.85;position:relative}
+  .s1 .el{position:absolute;top:12px;right:14px;font-family:'Noto Serif KR',serif;font-size:14px;font-weight:700;color:rgba(255,255,255,.7)}
+
+  /* ============ Style 2: Minimal Line ============ */
+  .s2 .card{aspect-ratio:3/4;border-radius:4px;background:#11141c;border:1px solid #232a3b;padding:32px 18px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;transition:border-color .2s}
+  .s2 .card:hover{border-color:#7da7ff}
+  .s2 .sym{font-size:56px;font-weight:300;color:#cfd6e6;line-height:1}
+  .s2 .meta{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .s2 .name{font-size:13px;font-weight:500;letter-spacing:.05em;color:#e9ecf3}
+  .s2 .date{font-size:10px;color:#6b7488;letter-spacing:.04em}
+  .s2 .el{font-family:'Noto Serif KR',serif;font-size:11px;color:#6b7488;border:1px solid #2a3247;padding:2px 8px;border-radius:2px}
+
+  /* ============ Style 3: Gradient Glow ============ */
+  .s3 .card{aspect-ratio:3/4;border-radius:20px;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+  .s3 .card:hover{transform:translateY(-4px)}
+  .s3 .card[data-i="0"]{background:linear-gradient(135deg,#ff5e62,#ff9966);box-shadow:0 12px 40px -8px #ff5e62aa}
+  .s3 .card[data-i="1"]{background:linear-gradient(135deg,#56ab2f,#a8e063);box-shadow:0 12px 40px -8px #56ab2faa}
+  .s3 .card[data-i="2"]{background:linear-gradient(135deg,#fceabb,#f8b500);box-shadow:0 12px 40px -8px #f8b500aa;color:#3a2a00}
+  .s3 .card[data-i="3"]{background:linear-gradient(135deg,#36d1dc,#5b86e5);box-shadow:0 12px 40px -8px #36d1dcaa}
+  .s3 .card[data-i="4"]{background:linear-gradient(135deg,#f7971e,#ffd200);box-shadow:0 12px 40px -8px #f7971eaa;color:#3a2300}
+  .s3 .card[data-i="5"]{background:linear-gradient(135deg,#11998e,#38ef7d);box-shadow:0 12px 40px -8px #11998eaa}
+  .s3 .card[data-i="6"]{background:linear-gradient(135deg,#fbc2eb,#a6c1ee);box-shadow:0 12px 40px -8px #a6c1eeaa;color:#2a1a3a}
+  .s3 .card[data-i="7"]{background:linear-gradient(135deg,#434343,#000);box-shadow:0 12px 40px -8px #4343438c}
+  .s3 .card[data-i="8"]{background:linear-gradient(135deg,#cc2b5e,#753a88);box-shadow:0 12px 40px -8px #cc2b5eaa}
+  .s3 .card[data-i="9"]{background:linear-gradient(135deg,#283048,#859398);box-shadow:0 12px 40px -8px #283048aa}
+  .s3 .card[data-i="10"]{background:linear-gradient(135deg,#4ca1af,#c4e0e5);box-shadow:0 12px 40px -8px #4ca1afaa;color:#0a2a30}
+  .s3 .card[data-i="11"]{background:linear-gradient(135deg,#1e3c72,#2a5298);box-shadow:0 12px 40px -8px #1e3c72aa}
+  .s3 .sym{font-size:60px;line-height:1;text-shadow:0 0 20px rgba(255,255,255,.5)}
+  .s3 .name{font-family:'Noto Serif KR',serif;font-size:15px;font-weight:700;margin:12px 0 2px}
+  .s3 .date{font-size:11px;opacity:.85}
+  .s3 .el{position:absolute;top:10px;right:12px;font-family:'Noto Serif KR',serif;font-size:14px;font-weight:700;opacity:.9}
+
+  /* ============ Style 4: Star Dots ============ */
+  .s4 .card{aspect-ratio:3/4;border-radius:14px;background:radial-gradient(ellipse at center,#0a0e1a 0%,#000 100%);border:1px solid #1a1f2c;padding:14px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden}
+  .s4 .card::before{content:"";position:absolute;inset:0;background-image:radial-gradient(1px 1px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 70% 60%,#aaa,transparent),radial-gradient(1px 1px at 40% 80%,#fff,transparent),radial-gradient(2px 2px at 80% 20%,#fff,transparent),radial-gradient(1px 1px at 50% 50%,#ddd,transparent),radial-gradient(1px 1px at 15% 70%,#fff,transparent);opacity:.6}
+  .s4 .svgbox{width:100%;height:60%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+  .s4 .svgbox svg{width:100%;height:100%}
+  .s4 .name{font-family:'Noto Serif KR',serif;font-size:14px;font-weight:700;color:#fff;margin-top:auto;position:relative;z-index:1}
+  .s4 .date{font-size:10px;color:#7d8aa8;letter-spacing:.06em;position:relative;z-index:1;margin-top:2px}
+  .s4 .el{position:absolute;top:8px;right:10px;font-family:'Noto Serif KR',serif;font-size:12px;color:#7da7ff;z-index:2}
+
+  /* ============ Style 5: Card Flip ============ */
+  .s5 .card{aspect-ratio:3/4;perspective:1000px;background:transparent}
+  .s5 .inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+  .s5 .card:hover .inner{transform:rotateY(180deg)}
+  .s5 .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .s5 .front{background:linear-gradient(160deg,#1a2138,#0a0e1a);border:1px solid #2a3247}
+  .s5 .back{background:linear-gradient(160deg,#7da7ff,#3a5fd9);color:#fff;transform:rotateY(180deg);border:1px solid #7da7ff}
+  .s5 .sym{font-size:54px;color:#cfd6e6;line-height:1}
+  .s5 .name{font-family:'Noto Serif KR',serif;font-size:14px;font-weight:700;margin-top:10px;color:#e9ecf3}
+  .s5 .date{font-size:10px;color:#7d8aa8;margin-top:2px}
+  .s5 .back-name{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:900;margin:0 0 8px}
+  .s5 .back-el{font-family:'Noto Serif KR',serif;font-size:38px;font-weight:900;line-height:1;margin:6px 0;text-shadow:0 2px 8px rgba(0,0,0,.25)}
+  .s5 .back-tag{font-size:11px;opacity:.9;letter-spacing:.1em}
+
+  /* ============ Style 6: Text First ============ */
+  .s6 .card{aspect-ratio:3/4;border-radius:8px;background:#0e1118;border-left:3px solid #7da7ff;padding:22px 18px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
+  .s6 .name{font-family:'Noto Serif KR',serif;font-size:1.5rem;font-weight:900;line-height:1.15;letter-spacing:-.02em;color:#fff}
+  .s6 .sym-mini{font-size:14px;color:#7da7ff;margin-top:6px}
+  .s6 .date{font-size:11px;color:#6b7488;letter-spacing:.05em;margin-top:8px}
+  .s6 .el-stamp{position:absolute;bottom:16px;right:16px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif KR',serif;font-weight:900;font-size:24px;color:#fff;background:#cc2b3a;border-radius:6px;transform:rotate(-6deg);box-shadow:0 4px 12px rgba(204,43,58,.3)}
+
+  /* ============ Style 7: Sumukhwa (수묵화) ============ */
+  .s7 .card{aspect-ratio:3/4;border-radius:6px;background:linear-gradient(160deg,#e8dcc4 0%,#d4c4a4 60%,#b59f7d 100%);padding:22px 18px;display:flex;flex-direction:column;justify-content:space-between;position:relative;color:#3a2818;border:1px solid #a08862;box-shadow:inset 0 0 40px rgba(120,90,50,.15)}
+  .s7 .card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 10%,rgba(60,40,20,.15),transparent 50%),radial-gradient(circle at 10% 90%,rgba(60,40,20,.1),transparent 40%);pointer-events:none;border-radius:6px}
+  .s7 .sym{font-family:'Noto Serif KR',serif;font-size:48px;line-height:1;color:#2a1a0a;opacity:.85;position:relative}
+  .s7 .name{font-family:'Noto Serif KR',serif;font-size:17px;font-weight:700;color:#2a1a0a;letter-spacing:.02em;position:relative;margin-top:12px}
+  .s7 .date{font-size:11px;color:#6b4a2a;margin-top:4px;letter-spacing:.04em;position:relative}
+  .s7 .el-stamp{position:absolute;top:16px;right:16px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif KR',serif;font-weight:900;font-size:22px;color:#fff;background:#8a2818;border:2px solid #6a1808;border-radius:3px;box-shadow:1px 1px 0 rgba(0,0,0,.2)}
+
+  /* ============ Style 8: Neon Cyberpunk ============ */
+  .s8 .card{aspect-ratio:3/4;border-radius:4px;background:#000;border:1px solid #ff00ff;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;box-shadow:0 0 20px rgba(255,0,255,.3),inset 0 0 20px rgba(0,255,255,.1);transition:box-shadow .25s,transform .25s}
+  .s8 .card:hover{box-shadow:0 0 32px rgba(255,0,255,.6),inset 0 0 24px rgba(0,255,255,.2);transform:translateY(-2px)}
+  .s8 .card::after{content:"";position:absolute;inset:6px;border:1px solid rgba(0,255,255,.4);border-radius:2px;pointer-events:none}
+  .s8 .sym{font-size:60px;color:#fff;line-height:1;text-shadow:0 0 8px #ff00ff,0 0 16px #ff00ff,0 0 32px #00ffff;position:relative;z-index:1}
+  .s8 .name{font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:700;color:#00ffff;margin-top:14px;letter-spacing:.15em;text-shadow:0 0 6px #00ffff;position:relative;z-index:1}
+  .s8 .date{font-size:10px;color:#ff66ff;letter-spacing:.1em;margin-top:4px;font-family:monospace;position:relative;z-index:1}
+  .s8 .el{position:absolute;top:10px;right:12px;font-family:'Noto Serif KR',serif;font-size:13px;color:#ff00ff;text-shadow:0 0 6px #ff00ff;z-index:2}
+
+  /* ============ Style 9: Paper Texture ============ */
+  .s9 .card{aspect-ratio:3/4;border-radius:2px;background:#e9dcb6;padding:20px 16px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;color:#3a2810;position:relative;box-shadow:0 4px 16px rgba(0,0,0,.4),inset 0 0 60px rgba(120,80,30,.18);overflow:hidden}
+  .s9 .card::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .15 0 0 0 0 .05 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");pointer-events:none;mix-blend-mode:multiply;opacity:.45}
+  .s9 .sym{font-size:56px;line-height:1;color:#3a2810;position:relative;font-weight:300}
+  .s9 .name{font-family:'Noto Serif KR',serif;font-size:14px;font-weight:700;color:#3a2810;position:relative}
+  .s9 .date{font-size:10px;color:#6a4818;letter-spacing:.04em;position:relative;margin-top:2px}
+  .s9 .el{position:absolute;top:10px;right:12px;font-family:'Noto Serif KR',serif;font-size:13px;color:#5a3818;font-weight:700;z-index:2}
+
+  /* ============ Style 10: 3D Depth ============ */
+  .s10{perspective:1200px}
+  .s10 .card{aspect-ratio:3/4;border-radius:14px;background:linear-gradient(145deg,#1f263a,#0e1118);padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;box-shadow:8px 12px 24px rgba(0,0,0,.6),-2px -2px 6px rgba(255,255,255,.04),inset 0 1px 0 rgba(255,255,255,.08);transform:translateZ(0) rotateX(0);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s;transform-style:preserve-3d}
+  .s10 .card:hover{transform:translateY(-8px) rotateX(4deg) translateZ(20px);box-shadow:12px 24px 36px rgba(0,0,0,.7),-2px -2px 8px rgba(255,255,255,.05)}
+  .s10 .sym{font-size:62px;line-height:1;color:#7da7ff;text-shadow:2px 4px 8px rgba(0,0,0,.5);transform:translateZ(20px)}
+  .s10 .name{font-family:'Noto Serif KR',serif;font-size:15px;font-weight:700;color:#e9ecf3;margin-top:14px;transform:translateZ(15px)}
+  .s10 .date{font-size:11px;color:#8a93a6;margin-top:3px;transform:translateZ(10px)}
+  .s10 .el{position:absolute;top:12px;right:14px;font-family:'Noto Serif KR',serif;font-size:14px;font-weight:700;color:#7da7ff;transform:translateZ(25px)}
+
+  footer{margin-top:64px;padding-top:32px;border-top:1px solid #1a1f2c;text-align:center;color:#6b7488;font-size:13px;line-height:1.7}
+  footer strong{color:#cfd6e6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 class="page-title">별자리 카드 디자인 시안 — 마음에 드는 번호를 알려주세요</h1>
+  <p class="page-sub">10가지 컨셉을 한 페이지에서 비교하세요. 마음에 드는 스타일 번호(1~10)를 알려주시면 천명당 사이트에 바로 적용합니다.</p>
+
+  <nav class="nav" aria-label="스타일 바로가기">
+    <a href="#s1"><strong>1</strong> 글래스모피즘</a>
+    <a href="#s2"><strong>2</strong> 미니멀 라인</a>
+    <a href="#s3"><strong>3</strong> 그라데이션 글로우</a>
+    <a href="#s4"><strong>4</strong> 별 점 패턴</a>
+    <a href="#s5"><strong>5</strong> 카드 플립</a>
+    <a href="#s6"><strong>6</strong> 텍스트 우선</a>
+    <a href="#s7"><strong>7</strong> 수묵화</a>
+    <a href="#s8"><strong>8</strong> 네온 사이버펑크</a>
+    <a href="#s9"><strong>9</strong> 종이 질감</a>
+    <a href="#s10"><strong>10</strong> 3D 입체</a>
+  </nav>
+
+  <section id="s1" class="style-section s1">
+    <header class="style-head"><span class="style-num">01</span><h2 class="style-title">글래스모피즘 — 반투명 유리</h2><p class="style-desc">반투명 + 블러 + 흰색 헤어라인. 모던하고 가벼운 느낌.</p></header>
+    <div class="grid" id="g1"></div>
+  </section>
+
+  <section id="s2" class="style-section s2">
+    <header class="style-head"><span class="style-num">02</span><h2 class="style-title">미니멀 라인 — 절제된 여백</h2><p class="style-desc">단색 배경 + 얇은 라인. 정보 위주의 깔끔한 인상.</p></header>
+    <div class="grid" id="g2"></div>
+  </section>
+
+  <section id="s3" class="style-section s3">
+    <header class="style-head"><span class="style-num">03</span><h2 class="style-title">그라데이션 글로우 — 화려한 색감</h2><p class="style-desc">별자리별 12색 그라데이션 + 빛나는 그림자.</p></header>
+    <div class="grid" id="g3"></div>
+  </section>
+
+  <section id="s4" class="style-section s4">
+    <header class="style-head"><span class="style-num">04</span><h2 class="style-title">별 점 패턴 — 실제 별자리 도식</h2><p class="style-desc">검정 배경 + SVG 별자리 점·라인. 천문학적 무드.</p></header>
+    <div class="grid" id="g4"></div>
+  </section>
+
+  <section id="s5" class="style-section s5">
+    <header class="style-head"><span class="style-num">05</span><h2 class="style-title">카드 플립 — 호버 시 회전</h2><p class="style-desc">마우스를 올리면 3D로 뒤집혀 원소 한자가 노출됩니다.</p></header>
+    <div class="grid" id="g5"></div>
+  </section>
+
+  <section id="s6" class="style-section s6">
+    <header class="style-head"><span class="style-num">06</span><h2 class="style-title">텍스트 우선 — 큰 별자리명 + 한자 도장</h2><p class="style-desc">일러스트를 빼고 타이포 + 도장으로 임팩트.</p></header>
+    <div class="grid" id="g6"></div>
+  </section>
+
+  <section id="s7" class="style-section s7">
+    <header class="style-head"><span class="style-num">07</span><h2 class="style-title">수묵화 — 동양 회화 톤</h2><p class="style-desc">베이지·먹 톤 + 한자 도장. 천명당 브랜드와 가장 잘 맞음.</p></header>
+    <div class="grid" id="g7"></div>
+  </section>
+
+  <section id="s8" class="style-section s8">
+    <header class="style-head"><span class="style-num">08</span><h2 class="style-title">네온 사이버펑크 — 보라/시안 글로우</h2><p class="style-desc">검정 배경 + 형광 네온. 젊은 타깃에 강렬한 인상.</p></header>
+    <div class="grid" id="g8"></div>
+  </section>
+
+  <section id="s9" class="style-section s9">
+    <header class="style-head"><span class="style-num">09</span><h2 class="style-title">종이 질감 — 양피지 + 갈색 라인</h2><p class="style-desc">SVG 노이즈 필터로 종이결. 빈티지·신비로운 무드.</p></header>
+    <div class="grid" id="g9"></div>
+  </section>
+
+  <section id="s10" class="style-section s10">
+    <header class="style-head"><span class="style-num">10</span><h2 class="style-title">3D 입체 — 그림자와 깊이</h2><p class="style-desc">호버 시 카드가 살짝 떠오르며 회전합니다.</p></header>
+    <div class="grid" id="g10"></div>
+  </section>
+
+  <footer>
+    천명당 별자리 카드 시안 v1 · 2026-04-27<br>
+    <strong>마음에 드는 번호를 채팅으로 알려주세요</strong> — 즉시 사이트에 적용합니다.
+  </footer>
+</div>
+
+<script>
+const ZODIACS = [
+  {sign:'♈', name:'양자리', date:'3/21-4/19', element:'火', el:'fire'},
+  {sign:'♉', name:'황소자리', date:'4/20-5/20', element:'土', el:'earth'},
+  {sign:'♊', name:'쌍둥이자리', date:'5/21-6/21', element:'風', el:'air'},
+  {sign:'♋', name:'게자리', date:'6/22-7/22', element:'水', el:'water'},
+  {sign:'♌', name:'사자자리', date:'7/23-8/22', element:'火', el:'fire'},
+  {sign:'♍', name:'처녀자리', date:'8/23-9/22', element:'土', el:'earth'},
+  {sign:'♎', name:'천칭자리', date:'9/23-10/22', element:'風', el:'air'},
+  {sign:'♏', name:'전갈자리', date:'10/23-11/21', element:'水', el:'water'},
+  {sign:'♐', name:'사수자리', date:'11/22-12/21', element:'火', el:'fire'},
+  {sign:'♑', name:'염소자리', date:'12/22-1/19', element:'土', el:'earth'},
+  {sign:'♒', name:'물병자리', date:'1/20-2/18', element:'風', el:'air'},
+  {sign:'♓', name:'물고기자리', date:'2/19-3/20', element:'水', el:'water'}
+];
+
+// 간단한 별자리 점·라인 좌표 (각 별자리별 4~6개 점)
+const STAR_PATTERNS = {
+  0:  [[20,30],[40,50],[60,40],[78,55],[88,30]],            // 양자리
+  1:  [[15,55],[35,40],[50,55],[68,42],[82,52],[55,72]],    // 황소자리
+  2:  [[25,15],[25,55],[25,90],[60,15],[60,55],[60,90]],    // 쌍둥이자리
+  3:  [[20,40],[50,25],[80,40],[35,70],[65,70]],            // 게자리
+  4:  [[15,40],[35,25],[55,35],[75,30],[85,55],[55,75]],    // 사자자리
+  5:  [[20,20],[35,45],[20,70],[55,55],[80,35],[80,70]],    // 처녀자리
+  6:  [[15,75],[35,55],[55,40],[70,55],[85,75]],            // 천칭자리
+  7:  [[15,30],[30,50],[50,40],[70,55],[85,30],[55,75],[35,85]], // 전갈자리
+  8:  [[15,75],[35,55],[50,30],[70,45],[85,25]],            // 사수자리
+  9:  [[20,30],[40,20],[60,30],[80,45],[60,65],[35,60]],    // 염소자리
+  10: [[20,30],[40,55],[60,35],[80,55],[30,75],[70,75]],    // 물병자리
+  11: [[20,40],[40,25],[60,40],[80,30],[40,70],[60,75]]     // 물고기자리
+};
+
+function makeStarSVG(idx){
+  const pts = STAR_PATTERNS[idx] || [];
+  const lines = pts.slice(1).map((p,i)=>`<line x1="${pts[i][0]}" y1="${pts[i][1]}" x2="${p[0]}" y2="${p[1]}" stroke="rgba(255,255,255,.45)" stroke-width=".7"/>`).join('');
+  const dots = pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="1.8" fill="#fff"/>`).join('');
+  return `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">${lines}${dots}</svg>`;
+}
+
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
+
+function build(g, render){
+  ZODIACS.forEach((z,i)=>{ g.appendChild(render(z,i)); });
+}
+
+// Style 1
+build(document.getElementById('g1'), (z,i)=>{
+  const c=el('div','card');
+  c.innerHTML = `<span class="el">${z.element}</span><div class="sym">${z.sign}</div><div class="name">${z.name}</div><div class="date">${z.date}</div>`;
+  return c;
+});
+
+// Style 2
+build(document.getElementById('g2'), (z,i)=>{
+  const c=el('div','card');
+  c.innerHTML = `<div class="sym">${z.sign}</div><div class="meta"><div class="name">${z.name}</div><div class="date">${z.date}</div><div class="el">${z.element}</div></div>`;
+  return c;
+});
+
+// Style 3
+build(document.getElementById('g3'), (z,i)=>{
+  const c=el('div','card');
+  c.dataset.i=i;
+  c.innerHTML = `<span class="el">${z.element}</span><div class="sym">${z.sign}</div><div class="name">${z.name}</div><div class="date">${z.date}</div>`;
+  return c;
+});
+
+// Style 4
+build(document.getElementById('g4'), (z,i)=>{
+  const c=el('div','card');
+  c.innerHTML = `<span class="el">${z.element}</span><div class="svgbox">${makeStarSVG(i)}</div><div class="name">${z.name}</div><div class="date">${z.date}</div>`;
+  return c;
+});
+
+// Style 5
+build(document.getElementById('g5'), (z,i)=>{
+  const c=el('div','card');
+  c.innerHTML = `<div class="inner">
+    <div class="face front"><div class="sym">${z.sign}</div><div class="name">${z.name}</div><div class="date">${z.date}</div></div>
+    <div class="face back"><div class="back-name">${z.name}</div><div class="back-el">${z.element}</div><div class="back-tag">${z.date}</div></div>
+  </div>`;
+  return c;
+});
+
+// Style 6
+build(document.getElementById('g6'), (z,i)=>{
+  const c=el('div','card');
+  c.innerHTML = `<div><div class="name">${z.name}</div><div class="sym-mini">${z.sign} · ${z.date}</div></div><div class="el-stamp">${z.element}</div>`;
+  return c;
+});
+
+// Style 7
+build(document.getElementById('g7'), (z,i)=>{
+  const c=el('div','card');
+  c.innerHTML = `<div class="el-stamp">${z.element}</div><div class="sym">${z.sign}</div><div><div class="name">${z.name}</div><div class="date">${z.date}</div></div>`;
+  return c;
+});
+
+// Style 8
+build(document.getElementById('g8'), (z,i)=>{
+  const c=el('div','card');
+  c.innerHTML = `<span class="el">${z.element}</span><div class="sym">${z.sign}</div><div class="name">${z.name}</div><div class="date">${z.date}</div>`;
+  return c;
+});
+
+// Style 9
+build(document.getElementById('g9'), (z,i)=>{
+  const c=el('div','card');
+  c.innerHTML = `<span class="el">${z.element}</span><div class="sym">${z.sign}</div><div><div class="name">${z.name}</div><div class="date">${z.date}</div></div>`;
+  return c;
+});
+
+// Style 10
+build(document.getElementById('g10'), (z,i)=>{
+  const c=el('div','card');
+  c.innerHTML = `<span class="el">${z.element}</span><div class="sym">${z.sign}</div><div class="name">${z.name}</div><div class="date">${z.date}</div>`;
+  return c;
+});
+</script>
+</body>
+</html>

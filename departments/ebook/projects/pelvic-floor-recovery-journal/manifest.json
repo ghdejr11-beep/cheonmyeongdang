@@ -1,0 +1,36 @@
+{
+  "book_id": "pelvic-floor-recovery-journal",
+  "title": "Postpartum Pelvic Floor Recovery Journal",
+  "subtitle": "12-Week Daily Tracker for New Moms - Kegels, Leakage, Prolapse, Pain & Pelvic PT Visit Prep",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Most postpartum care ends at the 6-week visit - but pelvic floor recovery doesn't. This 12-week daily journal is built for the fourth trimester, the months when leakage, prolapse heaviness, and perineal or C-section pain are most plastic - and most often dismissed.\n\nWho it's for:\n- New moms in the first 12 weeks postpartum (vaginal birth, C-section, VBAC)\n- Patients preparing for OB, midwife, or pelvic-floor PT visits\n- Anyone tracking Kegels, leakage, or prolapse symptoms after birth\n- Baby-shower gift for any expecting mom who wants real recovery support\n\nWhat's inside:\n- Daily symptom log: leakage, urge, bowel, prolapse, perineum/incision pain (0-5)\n- Daily Kegel table: long holds, quick flicks, how it felt\n- Weekly review with leakage trend graph\n- 4 Pelvic Floor PT visit prep pages (every 3 weeks)\n- Recovery milestones reference (week 1 through beyond 12)\n- Kegel & symptom guide + red-flag list\n- Baseline (Day 1) + 12-week checkpoint comparison\n\nThis is data, by you, about you - the kind that turns the 6-week brush-off into a real referral.",
+  "keywords": [
+    "postpartum recovery journal",
+    "pelvic floor exercise log",
+    "kegel tracker for new moms",
+    "fourth trimester planner",
+    "postpartum gift for new mom",
+    "c-section recovery journal",
+    "pelvic floor PT log book"
+  ],
+  "categories": [
+    "BISAC: HEALTH & FITNESS / Women's Health / Postnatal",
+    "BISAC: FAMILY & RELATIONSHIPS / Babies & Toddlers / Postnatal Care"
+  ],
+  "isbn": "",
+  "price_usd": 11.99,
+  "page_count": 108,
+  "trim_size": "8.5x11",
+  "publication_date": "2026-04-29",
+  "interior_pdf": "pelvic_floor_recovery_journal.pdf",
+  "cover_pdf": "",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "design_cover_pdf",
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

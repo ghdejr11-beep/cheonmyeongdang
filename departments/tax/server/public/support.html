@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S4HPJHT5QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S4HPJHT5QR');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#3282f6">
+<title>고객센터 | 세금N혜택 — 쿤스튜디오</title>
+<meta name="description" content="세금N혜택 고객센터. 환급/결제/CODEF 연동/환불 등 문의. 영업일 1일 이내 답변.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tax-n-benefit-api.vercel.app/support">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="세금N혜택">
+<meta property="og:url" content="https://tax-n-benefit-api.vercel.app/support">
+<meta property="og:title" content="고객센터 | 세금N혜택">
+<meta property="og:description" content="문의는 영업일 1일 이내 답변드립니다.">
+<meta property="og:image" content="https://tax-n-benefit-api.vercel.app/og.png">
+
+<style>
+  :root {
+    --blue: #3282f6;
+    --blue-dark: #1e6fd6;
+    --blue-light: #e8f0ff;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --text: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #767676;
+    --border: #e5e8ec;
+    --bg-soft: #f7f9fc;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Noto Sans KR', sans-serif;
+    color: var(--text); line-height: 1.7; background: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .nav {
+    background: #fff; border-bottom: 1px solid var(--border);
+    padding: 14px 20px; display:flex; align-items:center; justify-content: space-between;
+  }
+  .nav .logo { font-weight: 800; color: var(--blue); font-size: 1.05rem; }
+  .nav a { color: var(--text-secondary); font-size: 0.9rem; margin-left: 16px; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 50px 20px 80px; }
+  header.h { text-align: left; margin-bottom: 36px; }
+  header.h .badge {
+    display:inline-block; padding: 4px 12px; border-radius: 999px;
+    background: var(--blue-light); color: var(--blue-dark);
+    font-size: 0.78rem; font-weight: 700; margin-bottom: 12px;
+  }
+  header.h h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+  header.h .sub { color: var(--text-muted); margin-top: 10px; font-size: 0.95rem; }
+
+  section.box {
+    background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px; margin-bottom: 18px;
+  }
+  section.box h2 {
+    color: var(--blue-dark); font-size: 1.15rem; font-weight: 800;
+    margin-bottom: 18px;
+  }
+  .row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 12px 0; border-bottom: 1px dashed var(--border);
+    font-size: 0.94rem;
+  }
+  .row:last-child { border-bottom: none; }
+  .row .k { color: var(--text-muted); flex-shrink: 0; min-width: 110px; }
+  .row .v { color: var(--text); text-align: right; }
+
+  .channels { display: grid; gap: 12px; }
+  .ch {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px; border-radius: 12px;
+    background: #fff; border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .ch:hover { border-color: var(--blue); box-shadow: 0 2px 8px rgba(50,130,246,0.08); transform: translateY(-1px); text-decoration: none; }
+  .ch .ico {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--blue-light); color: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .ch .meta { flex: 1; }
+  .ch .title { color: var(--text); font-weight: 700; font-size: 0.95rem; }
+  .ch .sub { color: var(--text-muted); font-size: 0.85rem; margin-top: 2px; }
+
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { color: var(--text); font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+  .faq-q::before { content: "Q. "; color: var(--blue); font-weight: 800; }
+  .faq-a { color: var(--text-secondary); font-size: 0.9rem; padding-left: 22px; }
+
+  .cta-row { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+  .btn {
+    flex: 1; min-width: 200px;
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 13px 20px; border-radius: 10px;
+    background: var(--blue); color: #fff !important;
+    font-weight: 700; font-size: 0.95rem;
+  }
+  .btn:hover { background: var(--blue-dark); text-decoration: none; }
+  .btn.ghost {
+    background: #fff; color: var(--blue) !important; border: 1px solid var(--blue);
+  }
+  .btn.ghost:hover { background: var(--blue-light); }
+
+  footer { padding: 28px 20px; text-align: center; color: var(--text-muted); font-size: 0.82rem; line-height: 1.9; border-top: 1px solid var(--border); margin-top: 28px; }
+  footer a { color: var(--text-muted); margin: 0 4px; }
+  footer .copy { margin-top: 10px; font-size: 0.78rem; }
+
+  @media (max-width: 520px) {
+    .wrap { padding: 36px 16px 60px; }
+    header.h h1 { font-size: 1.55rem; }
+    .row { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .row .v { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="logo">세금N혜택</a>
+  <div>
+    <a href="/terms">이용약관</a>
+    <a href="/privacy">개인정보</a>
+    <a href="/refund">환불정책</a>
+    <a href="/support">고객센터</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="h">
+    <span class="badge">SUPPORT CENTER</span>
+    <h1>고객센터</h1>
+    <div class="sub">환급·결제·CODEF 연동 등 문의 — 영업일 1일 이내 답변드립니다.</div>
+  </header>
+
+  <section class="box">
+    <h2>📮 운영자 정보</h2>
+    <div class="row"><span class="k">상호</span><span class="v">쿤스튜디오 (KunStudio)</span></div>
+    <div class="row"><span class="k">대표</span><span class="v">홍덕훈</span></div>
+    <div class="row"><span class="k">사업자등록번호</span><span class="v">552-59-00848</span></div>
+    <div class="row"><span class="k">소재지</span><span class="v">경상북도 경주시</span></div>
+    <div class="row"><span class="k">통신판매업</span><span class="v">신고 진행 중</span></div>
+    <div class="row"><span class="k">운영시간</span><span class="v">평일 10:00 ~ 18:00 (주말·공휴일 휴무)</span></div>
+  </section>
+
+  <section class="box">
+    <h2>📞 문의 채널</h2>
+    <div class="channels">
+      <a class="ch" href="mailto:ghdejr11@gmail.com?subject=[세금N혜택] 문의">
+        <div class="ico">✉️</div>
+        <div class="meta">
+          <div class="title">이메일 문의 (권장)</div>
+          <div class="sub">ghdejr11@gmail.com — 영업일 1일 이내 답변</div>
+        </div>
+      </a>
+      <a class="ch" href="tel:07080187832">
+        <div class="ico">📱</div>
+        <div class="meta">
+          <div class="title">전화 상담</div>
+          <div class="sub">070-8018-7832 (평일 10:00 ~ 18:00)</div>
+        </div>
+      </a>
+      <a class="ch" href="mailto:ghdejr11@gmail.com?subject=[세금N혜택] 환불 신청&body=▢ 회원 이름:%0A▢ 가입 이메일:%0A▢ 신청 일자:%0A▢ 주문번호(있을 경우):%0A▢ 환불 사유:%0A▢ 환불 받을 계좌 정보:%0A">
+        <div class="ico">💸</div>
+        <div class="meta">
+          <div class="title">환불 신청 (메일)</div>
+          <div class="sub">환불정책 기준 영업일 7일 이내 처리</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn" href="mailto:ghdejr11@gmail.com?subject=[세금N혜택] 문의&body=▢ 문의 유형:%0A▢ 회원 이메일:%0A▢ 문의 내용:%0A">📧 메일로 문의하기</a>
+      <a class="btn ghost" href="/">홈으로</a>
+    </div>
+  </section>
+
+  <section class="box">
+    <h2>❓ 자주 묻는 질문</h2>
+    <div class="faq-item">
+      <div class="faq-q">홈택스 연동(CODEF)이 안 돼요</div>
+      <div class="faq-a">한국신용정보원 인증 API(CODEF)는 홈택스 본인인증을 거칩니다. 인증 정보는 회사가 보관하지 않으며, 인증 실패 시 다시 시도해주세요. 반복 실패 시 메일로 문의해주세요.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">환급 예상금이 0원이에요. 결제했는데?</div>
+      <div class="faq-a">환급 0원 확정 시 결제 금액 100% 자동 환불됩니다. 별도 신청 없이 결제 수단으로 영업일 7일 이내 반환됩니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">환불은 어떻게 신청하나요?</div>
+      <div class="faq-a">상단 「환불 신청 (메일)」 버튼 또는 ghdejr11@gmail.com으로 신청해주세요. 환불정책에 따라 단계별 비율이 적용됩니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">제 데이터는 안전한가요?</div>
+      <div class="faq-a">홈택스 데이터는 CODEF API를 통해 안전하게 처리되며, 환급 계산 외 어떤 용도로도 사용·저장되지 않습니다. 자세한 내용은 개인정보처리방침을 참고해주세요.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">분쟁 시 조정 기관은 어디인가요?</div>
+      <div class="faq-a">한국소비자원(1372) 또는 전자거래분쟁조정위원회(<a href="https://www.ecmc.or.kr" target="_blank" rel="noopener">www.ecmc.or.kr</a>)에 분쟁 조정 신청이 가능합니다.</div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div>
+    <a href="/">홈</a> ·
+    <a href="/terms">이용약관</a> ·
+    <a href="/privacy">개인정보처리방침</a> ·
+    <a href="/refund">환불정책</a> ·
+    <a href="/support">고객센터</a> ·
+    <a href="/blog/">블로그</a> ·
+    <a href="mailto:ghdejr11@gmail.com">이메일 문의</a>
+  </div>
+  <div class="copy">
+    © 2026 쿤스튜디오 (사업자번호 552-59-00848) · All rights reserved.<br>
+    한국신용정보원 인증 API(CODEF)를 통해 홈택스 데이터를 안전하게 처리합니다.
+  </div>
+</footer>
+
+</body>
+</html>

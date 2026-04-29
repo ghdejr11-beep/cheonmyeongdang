@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S4HPJHT5QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S4HPJHT5QR');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#3282f6">
+<title>환불정책 | 세금N혜택 — 쿤스튜디오</title>
+<meta name="description" content="세금N혜택 환불정책. 환급 0원시 100% 자동 환불, 신청 24시간 이내 100% 환불, 처리 시작 후 50% 환불. 영업일 7일 이내 처리.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tax-n-benefit-api.vercel.app/refund">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="세금N혜택">
+<meta property="og:url" content="https://tax-n-benefit-api.vercel.app/refund">
+<meta property="og:title" content="환불정책 | 세금N혜택">
+<meta property="og:description" content="환급 0원시 100% 자동 환불 — 계약서급 약속.">
+
+<style>
+  :root {
+    --blue: #3282f6;
+    --blue-dark: #1e6fd6;
+    --blue-light: #e8f0ff;
+    --yellow: #FFD93D;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --text: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #767676;
+    --border: #e5e8ec;
+    --bg-soft: #f7f9fc;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Noto Sans KR', sans-serif;
+    color: var(--text); line-height: 1.7; background: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ul, ol { list-style: none; }
+
+  header.top {
+    position: sticky; top: 0; background: #fff; z-index: 50;
+    border-bottom: 1px solid var(--border);
+  }
+  .top-inner {
+    max-width: 960px; margin: 0 auto;
+    padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+  .logo span { color: var(--blue); }
+  .top-inner nav a { color: var(--text-secondary); margin-left: 18px; font-size: 14px; font-weight: 500; }
+  .top-inner nav a:hover { color: var(--blue); text-decoration: none; }
+
+  .hero {
+    background: linear-gradient(135deg, #3282f6 0%, #1e6fd6 100%);
+    color: #fff; padding: 56px 24px;
+  }
+  .hero-inner { max-width: 960px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block; background: var(--yellow); color: #1a1a1a;
+    padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .hero h1 { font-size: 36px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 10px; }
+  .hero .meta { font-size: 14px; opacity: 0.95; }
+  .hero .meta span { margin-right: 16px; }
+
+  .container {
+    max-width: 960px; margin: 0 auto; padding: 40px 24px 80px;
+  }
+
+  /* 핵심 약속 카드 */
+  .promise {
+    background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+    border: 2px solid var(--yellow); border-radius: 16px;
+    padding: 28px 28px; margin-bottom: 32px; text-align: center;
+  }
+  .promise .label {
+    display: inline-block; background: #1a1a1a; color: var(--yellow);
+    padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.05em; margin-bottom: 12px;
+  }
+  .promise h2 {
+    font-size: 28px; font-weight: 800; color: #1a1a1a;
+    letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.3;
+  }
+  .promise h2 strong { color: var(--blue-dark); }
+  .promise p { color: var(--text-secondary); font-size: 15px; }
+
+  /* 환불 등급 표 */
+  .tiers {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+    margin: 32px 0;
+  }
+  @media (max-width: 720px) { .tiers { grid-template-columns: 1fr; } }
+  .tier {
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px; transition: all 0.15s;
+  }
+  .tier:hover { border-color: var(--blue); transform: translateY(-2px); }
+  .tier-100 { border-color: var(--green); background: var(--green-light); }
+  .tier-50 { border-color: #f59e0b; background: #FFFBEB; }
+  .tier-0 { border-color: var(--red); background: var(--red-light); }
+  .tier .pct {
+    font-size: 36px; font-weight: 800; letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .tier-100 .pct { color: var(--green); }
+  .tier-50 .pct { color: #f59e0b; }
+  .tier-0 .pct { color: var(--red); }
+  .tier .pct.auto { font-size: 28px; }
+  .tier h3 {
+    font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px;
+  }
+  .tier p { color: var(--text-secondary); font-size: 14px; line-height: 1.6; }
+
+  /* 콘텐츠 */
+  .content section {
+    padding: 28px 0; border-bottom: 1px solid var(--border);
+    scroll-margin-top: 80px;
+  }
+  .content section:last-child { border-bottom: none; }
+  .content h2 {
+    font-size: 22px; font-weight: 800; color: var(--text);
+    margin-bottom: 14px; letter-spacing: -0.02em;
+  }
+  .content h2 .num {
+    display: inline-block; min-width: 32px; color: var(--blue); font-weight: 800;
+  }
+  .content h3 {
+    font-size: 16px; font-weight: 700; color: var(--text);
+    margin-top: 18px; margin-bottom: 8px;
+  }
+  .content p { color: var(--text-secondary); margin-bottom: 10px; font-size: 15px; }
+  .content ol, .content ul {
+    margin: 10px 0 14px 24px; color: var(--text-secondary); font-size: 15px;
+  }
+  .content ol { list-style: decimal; }
+  .content ul { list-style: disc; }
+  .content li { margin-bottom: 6px; }
+  .content table {
+    width: 100%; border-collapse: collapse; margin: 14px 0;
+    font-size: 14px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  }
+  .content table th {
+    background: var(--blue-light); color: var(--blue-dark);
+    padding: 12px; text-align: left; font-weight: 700;
+  }
+  .content table td {
+    padding: 12px; border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+  .content table td.center { text-align: center; }
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+  }
+  .badge-green { background: var(--green-light); color: #166534; }
+  .badge-yellow { background: #FFFBEB; color: #B45309; }
+  .badge-red { background: var(--red-light); color: #991B1B; }
+
+  .callout {
+    background: #FFFBEB; border-left: 4px solid var(--yellow);
+    padding: 14px 18px; border-radius: 6px; margin: 14px 0;
+    font-size: 14.5px; color: var(--text);
+  }
+  .callout strong { color: #B45309; }
+
+  .cta {
+    text-align: center; padding: 32px;
+    background: var(--bg-soft); border-radius: 14px; margin-top: 24px;
+  }
+  .cta h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .cta a.btn {
+    display: inline-block; background: var(--blue); color: #fff;
+    padding: 12px 28px; border-radius: 10px; font-weight: 700; font-size: 15px;
+    margin-top: 12px;
+  }
+  .cta a.btn:hover { background: var(--blue-dark); text-decoration: none; }
+
+  footer {
+    background: #1a1a1a; color: #999; padding: 36px 24px; font-size: 13px;
+    text-align: center;
+  }
+  footer a { color: #ccc; margin: 0 10px; }
+  footer a:hover { color: var(--blue); text-decoration: none; }
+  footer .copy { margin-top: 14px; color: #767676; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <a href="/" class="logo">세금<span>N</span>혜택</a>
+    <nav>
+      <a href="/">홈</a>
+      <a href="/terms">이용약관</a>
+      <a href="/privacy">개인정보처리방침</a>
+      <a href="/refund">환불정책</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">계약서급 약속</span>
+    <h1>환불정책</h1>
+    <div class="meta">
+      <span>시행일 2026-04-26</span>
+      <span>최종 개정 2026-04-26</span>
+      <span>버전 v1.0</span>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- 핵심 약속 -->
+  <div class="promise">
+    <span class="label">CORE PROMISE</span>
+    <h2>환급액 <strong>0원</strong>이면 <strong>100% 자동 환불</strong>합니다.</h2>
+    <p>별도 신청 절차 없이, 환급액 확정일로부터 7영업일 이내 결제하신 카드/계좌로 자동 반환됩니다.</p>
+  </div>
+
+  <!-- 4단계 환불 등급 -->
+  <h2 style="font-size:22px; font-weight:800; margin-bottom:6px;">환불 등급 (4단계)</h2>
+  <p style="color:var(--text-secondary); margin-bottom:8px;">신청 시점과 처리 단계에 따라 환불 비율이 달라집니다.</p>
+
+  <div class="tiers">
+    <div class="tier tier-100">
+      <div class="pct">100%</div>
+      <h3>① 신청 후 24시간 이내 취소</h3>
+      <p>이유 불문, 24시간 이내 마음이 바뀌면 수수료 전액을 환불합니다. CODEF API 호출 전이면 즉시 환불됩니다.</p>
+    </div>
+    <div class="tier tier-100">
+      <div class="pct auto">100% <span style="font-size:14px; vertical-align:middle;">자동</span></div>
+      <h3>② 환급액 0원 확정</h3>
+      <p>국세청이 환급액을 0원으로 확정한 경우 별도 신청 없이 자동 환불됩니다 (확정일+7영업일).</p>
+    </div>
+    <div class="tier tier-50">
+      <div class="pct">50%</div>
+      <h3>③ 처리 시작 후 취소</h3>
+      <p>CODEF API 호출 등 실제 처리가 시작된 이후 회원이 자발적으로 취소하는 경우 처리 비용을 공제하고 50%를 환불합니다.</p>
+    </div>
+    <div class="tier tier-0">
+      <div class="pct">불가</div>
+      <h3>④ 환급금 입금 완료 후</h3>
+      <p>국세청 환급금이 회원 계좌로 정상 입금된 이후에는 단순 변심에 의한 환불은 불가합니다. (회사 귀책 사유는 별도)</p>
+    </div>
+  </div>
+
+  <!-- 본문 -->
+  <main class="content">
+
+    <section id="r1">
+      <h2><span class="num">1.</span>환불 사유별 비율 (요약)</h2>
+      <table>
+        <tr>
+          <th>구분</th><th class="center">환불 비율</th><th>비고</th>
+        </tr>
+        <tr>
+          <td>환급액 0원 확정 (자동)</td>
+          <td class="center"><span class="badge badge-green">100%</span></td>
+          <td>국세청 결정에 따른 자동 환불, 별도 신청 불필요</td>
+        </tr>
+        <tr>
+          <td>신청 24시간 이내 취소</td>
+          <td class="center"><span class="badge badge-green">100%</span></td>
+          <td>이유 불문, 단순 변심 포함</td>
+        </tr>
+        <tr>
+          <td>회사 귀책(시스템 오류·환급 누락 등)</td>
+          <td class="center"><span class="badge badge-green">100%</span></td>
+          <td>회사의 고의·과실로 환급이 누락·오처리된 경우</td>
+        </tr>
+        <tr>
+          <td>처리 시작 후 회원 취소</td>
+          <td class="center"><span class="badge badge-yellow">50%</span></td>
+          <td>CODEF API 호출 후 회원의 자발적 취소</td>
+        </tr>
+        <tr>
+          <td>환급금 입금 완료 후 단순 변심</td>
+          <td class="center"><span class="badge badge-red">불가</span></td>
+          <td>회사 귀책이 아닌 한 환불 제한</td>
+        </tr>
+        <tr>
+          <td>회원의 허위 자료 제출로 인한 환급 거절</td>
+          <td class="center"><span class="badge badge-red">불가</span></td>
+          <td>처리 비용 발생, 환불 제한 (이용약관 §8)</td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="r2">
+      <h2><span class="num">2.</span>환불 신청 방법</h2>
+      <ol>
+        <li><strong>이메일 신청.</strong> <a href="mailto:ghdejr11@gmail.com?subject=[세금N혜택] 환불 신청">ghdejr11@gmail.com</a> 으로 다음 정보를 보내주세요.
+          <ul>
+            <li>회원 이름 / 가입 이메일</li>
+            <li>신청 일자 / 주문번호 (있을 경우)</li>
+            <li>환불 사유</li>
+            <li>환불 받을 계좌 정보 (결제와 동일한 카드 환불이 원칙이며, 부득이한 경우 계좌 환불)</li>
+          </ul>
+        </li>
+        <li><strong>접수 확인.</strong> 영업일 기준 1일 이내 접수 확인 메일을 발송합니다.</li>
+        <li><strong>심사·처리.</strong> 환불 사유 확인 후 본 정책에 따라 환불 비율을 산정하고, 영업일 7일 이내 처리합니다.</li>
+        <li><strong>완료 통지.</strong> 환불 완료 후 처리 결과를 메일로 안내합니다.</li>
+      </ol>
+
+      <div class="callout">
+        <strong>자동 환불 대상.</strong> "환급액 0원 확정" 케이스는 별도 신청 없이 자동 처리됩니다. 별도의 메일 발송 없이 결제 수단으로 즉시 반환됩니다.
+      </div>
+    </section>
+
+    <section id="r3">
+      <h2><span class="num">3.</span>환불 처리 기간</h2>
+      <ul>
+        <li><strong>카드 결제 환불</strong> — 회사 처리는 영업일 3일 이내 완료, 카드사 정산까지 통상 5~7영업일 추가 소요</li>
+        <li><strong>계좌 환불</strong> — 회사 처리 후 영업일 1~2일 이내 입금</li>
+        <li><strong>환급액 0원 자동 환불</strong> — 확정일로부터 영업일 7일 이내</li>
+      </ul>
+      <p>회사 시스템 점검·국가 공휴일 등의 사유로 처리 기간이 연장될 수 있으며, 그 경우 회원에게 사전 고지합니다.</p>
+    </section>
+
+    <section id="r4">
+      <h2><span class="num">4.</span>환불이 불가한 경우</h2>
+      <ol>
+        <li>회원이 허위·기재 누락된 자료를 제출하여 환급이 거절된 경우 (이용약관 제8조 위반)</li>
+        <li>본인 인증 절차에서 회원의 귀책 사유로 인증이 실패하여 처리가 불가능한 경우</li>
+        <li>환급금이 회원 계좌로 정상 입금된 후 단순 변심에 의한 환불 신청 (회사 귀책 제외)</li>
+        <li>회원이 본인 명의가 아닌 타인 명의로 신청한 경우</li>
+        <li>이미 동일 사유로 환불을 받은 경우</li>
+      </ol>
+    </section>
+
+    <section id="r5">
+      <h2><span class="num">5.</span>법적 권리와의 관계</h2>
+      <p>본 환불정책은 「전자상거래 등에서의 소비자보호에 관한 법률」, 「약관의 규제에 관한 법률」 등 관계 법령에서 규정한 소비자의 권리(청약 철회권 등)를 침해하지 아니하며, 본 정책과 법령이 충돌하는 경우 회원에게 더 유리한 규정이 우선 적용됩니다.</p>
+      <p>특히 「전자상거래법」 제17조에 따른 청약 철회 기간(통상 7일)은 본 정책의 단계적 환불과 별개로 보장되며, 회사가 디지털콘텐츠로서 별도 고지한 경우 외에는 회원의 청약 철회권이 제한되지 아니합니다.</p>
+    </section>
+
+    <section id="r6">
+      <h2><span class="num">6.</span>분쟁 해결</h2>
+      <p>환불에 관한 분쟁이 발생할 경우 회사와 회원은 우선 상호 협의를 통해 해결합니다. 협의로 해결되지 않는 경우 회원은 한국소비자원, 전자거래분쟁조정위원회 등을 통한 분쟁 조정을 신청할 수 있습니다.</p>
+      <ul>
+        <li>한국소비자원: <strong>1372</strong> · <a href="https://www.kca.go.kr" target="_blank" rel="noopener">www.kca.go.kr</a></li>
+        <li>전자거래분쟁조정위원회: <a href="https://www.ecmc.or.kr" target="_blank" rel="noopener">www.ecmc.or.kr</a></li>
+      </ul>
+    </section>
+
+    <div class="cta">
+      <h3>환불 신청이 필요하신가요?</h3>
+      <p style="color:var(--text-secondary);">아래 버튼을 클릭하여 이메일로 신청해 주세요. 영업일 1일 이내 답변드립니다.</p>
+      <a class="btn" href="mailto:ghdejr11@gmail.com?subject=[세금N혜택] 환불 신청&body=▢ 회원 이름:%0A▢ 가입 이메일:%0A▢ 신청 일자:%0A▢ 주문번호(있을 경우):%0A▢ 환불 사유:%0A▢ 환불 받을 계좌 정보:%0A">📧 환불 신청 메일 보내기</a>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div>
+    <a href="/">홈</a> ·
+    <a href="/terms">이용약관</a> ·
+    <a href="/privacy">개인정보처리방침</a> ·
+    <a href="/refund">환불정책</a> ·
+    <a href="/blog/">블로그</a> ·
+    <a href="mailto:ghdejr11@gmail.com">이메일 문의</a>
+  </div>
+  <div class="copy">
+    © 2026 쿤스튜디오 (사업자번호 552-59-00848) · All rights reserved.<br>
+    한국신용정보원 인증 API(CODEF)를 통해 홈택스 데이터를 안전하게 처리합니다.
+  </div>
+</footer>
+
+</body>
+</html>

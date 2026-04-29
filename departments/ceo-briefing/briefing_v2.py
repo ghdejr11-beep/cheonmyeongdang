@@ -44,6 +44,7 @@ def _safe(fn, default):
 def collect_all():
     from integrations import gumroad, kdp, coupang, play_reporting
     from integrations import play_reviews, trends, product_hunt, dept_activity
+    from integrations import vercel_analytics
 
     # AdMob (sales-collection 부서) — 옵션. import 실패해도 브리핑 정상.
     def _admob_safe():
@@ -70,6 +71,7 @@ def collect_all():
             "play": _safe(play_reporting.daily_summary, {"status": "error"}),
             "admob": _safe(_admob_safe, {"status": "error"}),
             "yt_4ch": _safe(_yt4ch_safe, {"status": "error"}),
+            "vercel": _safe(vercel_analytics.daily_summary, {"status": "error"}),
         },
         "customer_feedback": {
             "play_reviews": _safe(play_reviews.daily_summary, {}),
@@ -156,6 +158,55 @@ def build_admob_section(admob):
         msg += f"  ⚠ AdMob API 인증 필요: {str(err)[:80]}\n"
     else:
         msg += "  (수집 대기 중)\n"
+    msg += "\n"
+    return msg
+
+
+def build_vercel_section(v):
+    """🌐 Vercel 트래픽 / 배포 (3 프로젝트)"""
+    msg = "🌐 <b>Vercel 트래픽 (어제)</b>\n"
+    if not isinstance(v, dict):
+        msg += "  (데이터 없음)\n\n"
+        return msg
+
+    status = v.get("status")
+    totals = v.get("totals", {}) or {}
+    src = v.get("analytics_source", "")
+
+    if status == "no_token":
+        msg += "  🔑 VERCEL_API_TOKEN 미설정 (.secrets 추가 필요)\n\n"
+        return msg
+    if status != "ok":
+        err = v.get("error") or v.get("note") or "수집 실패"
+        msg += f"  ⚠ {str(err)[:100]}\n\n"
+        return msg
+
+    pv = totals.get("pv")
+    uv = totals.get("uv")
+    deploys = totals.get("deployments_24h", 0)
+    n = totals.get("projects_count", 0)
+
+    if pv is None:
+        # API 미지원 → placeholder
+        msg += f"  • PV/UV: 미수집 (Vercel REST API 미지원)\n"
+    else:
+        msg += f"  • PV {pv:,} / UV {uv:,} ({n}개 프로젝트)\n"
+    msg += f"  • 24h 배포: {deploys}건\n"
+
+    for p in v.get("projects", []) or []:
+        slug = p.get("slug", "?")
+        ld = p.get("last_state") or "-"
+        d24 = p.get("deployments_24h", 0)
+        ppv = p.get("pv")
+        line = f"    └ {slug}: 배포 {d24} / 마지막 {ld}"
+        if ppv is not None:
+            line += f" / PV {ppv:,}"
+        if p.get("error"):
+            line += f" ⚠ {str(p['error'])[:40]}"
+        msg += line + "\n"
+
+    if src == "placeholder":
+        msg += "  ℹ️ PV/UV 자동수집은 Drain 또는 GA4 연동 필요\n"
     msg += "\n"
     return msg
 
@@ -430,6 +481,15 @@ def build_message(hour=None):
     msg += build_revenue_section(data["revenue"])
     msg += build_admob_section(data["revenue"].get("admob", {}))
     msg += build_yt_4ch_section(data["revenue"].get("yt_4ch", {}))
+    msg += build_vercel_section(data["revenue"].get("vercel", {}))
+    # 📊 GA4 트래픽 — 09:00 아침 브리핑에만 (다른 시간대는 스킵)
+    if hour == 9:
+        try:
+            from integrations import ga4
+            ga4_data = _safe(ga4.daily_summary, {})
+            msg += ga4.build_ga4_section(ga4_data)
+        except Exception as e:
+            msg += f"📊 <b>GA4 트래픽</b>\n  (모듈 오류: {str(e)[:80]})\n\n"
     # 🛡 가동 상태 (보안부서 uptime monitor)
     try:
         sys.path.insert(0, str(Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\security")))

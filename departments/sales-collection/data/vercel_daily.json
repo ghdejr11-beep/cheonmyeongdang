@@ -1,0 +1,98 @@
+{
+  "2026-04-26": {
+    "date": "2026-04-26",
+    "status": "no_token",
+    "analytics_source": "stub",
+    "note": "VERCEL_API_TOKEN 미설정 — .secrets 에 추가 필요",
+    "projects": {
+      "tax-n-benefit-api": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": "no_token"
+      },
+      "korlens": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": "no_token"
+      },
+      "cheonmyeongdang.com": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": "no_token"
+      }
+    }
+  },
+  "2026-04-27": {
+    "date": "2026-04-27",
+    "status": "no_token",
+    "analytics_source": "stub",
+    "note": "VERCEL_API_TOKEN 미설정 — .secrets 에 추가 필요",
+    "projects": {
+      "tax-n-benefit-api": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": "no_token"
+      },
+      "korlens": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": "no_token"
+      },
+      "cheonmyeongdang.com": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": "no_token"
+      }
+    }
+  },
+  "2026-04-28": {
+    "date": "2026-04-28",
+    "status": "no_token",
+    "analytics_source": "stub",
+    "note": "VERCEL_API_TOKEN 미설정 — .secrets 에 추가 필요",
+    "projects": {
+      "tax-n-benefit-api": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": "no_token"
+      },
+      "korlens": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": "no_token"
+      },
+      "cheonmyeongdang.com": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": "no_token"
+      }
+    }
+  }
+}

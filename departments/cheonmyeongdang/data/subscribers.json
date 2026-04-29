@@ -1,0 +1,22 @@
+{
+  "_schema": {
+    "user_id": "string (unique, generated server-side)",
+    "name": "string (optional)",
+    "email": "string (결제 시 입력)",
+    "phone": "string (optional, 연락 백업용)",
+    "kakao_id": "string (카카오 채널 ID, 본인이 알려줄 수만 있음)",
+    "telegram_chat_id": "string (텔레그램 chat_id, 1:1 발송 가능)",
+    "channel": "telegram | kakao | email (우선 발송 채널)",
+    "birth_date": "YYYY-MM-DD (양력)",
+    "birth_time": "HH:MM (24h, 모름이면 12:00)",
+    "birth_calendar": "solar | lunar",
+    "gender": "M | F",
+    "paid_until": "YYYY-MM-DD (이 날짜 지나면 발송 중단)",
+    "order_id": "string (결제 주문 ID)",
+    "sku_id": "string (subscribe_monthly_9900)",
+    "created_at": "ISO timestamp",
+    "last_sent": "YYYY-MM-DD",
+    "active": "boolean"
+  },
+  "subscribers": []
+}

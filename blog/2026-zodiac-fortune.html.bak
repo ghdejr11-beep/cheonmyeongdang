@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026년 띠별 운세 총정리 - 12간지 연간 흐름과 주의사항 | 천명당</title>
+<meta name="description" content="2026년 병오년(丙午年) 12띠별 종합 운세 총정리. 쥐·소·범·토끼·용·뱀·말·양·원숭이·닭·개·돼지띠 1년 재물·애정·건강·직장운을 한눈에 정리했습니다.">
+<meta name="keywords" content="2026년 띠별 운세, 2026 운세, 병오년 운세, 12간지 운세, 새해 운세, 띠별운세 무료">
+<meta name="author" content="천명당 / 쿤스튜디오">
+<link rel="canonical" href="https://cheonmyeongdang.vercel.app/blog/2026-zodiac-fortune.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026년 띠별 운세 총정리 - 12간지 연간 흐름과 주의사항">
+<meta property="og:description" content="병오년 12띠별 재물·애정·건강·직장운 1년 흐름을 한눈에 정리.">
+<meta property="og:url" content="https://cheonmyeongdang.vercel.app/blog/2026-zodiac-fortune.html">
+<meta property="og:image" content="https://cheonmyeongdang.vercel.app/blog/og/2026-zodiac-fortune.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="천명당 블로그 — 클릭하여 글 읽기">
+<meta name="twitter:image" content="https://cheonmyeongdang.vercel.app/blog/og/2026-zodiac-fortune.png">
+<meta property="og:site_name" content="천명당">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:section" content="운세">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="2026년 띠별 운세 총정리">
+<meta name="twitter:description" content="병오년 12띠별 1년 운세 한눈에 정리">
+
+<!-- JSON-LD Article schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "2026년 띠별 운세 총정리 - 12간지 연간 흐름과 주의사항",
+  "description": "2026년 병오년 12띠별 종합 운세 총정리.",
+  "author": {
+    "@type": "Organization",
+    "name": "천명당",
+    "url": "https://cheonmyeongdang.vercel.app"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "쿤스튜디오",
+    "url": "https://cheonmyeongdang.vercel.app"
+  },
+  "datePublished": "2026-04-28",
+  "dateModified": "2026-04-28",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://cheonmyeongdang.vercel.app/blog/2026-zodiac-fortune.html"
+  },
+  "inLanguage": "ko"
+}
+</script>
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2954177434416880" crossorigin="anonymous"></script>
+
+<style>
+:root{
+  --bg:#080a10; --bg2:#0d1020; --gold:#c9a84c; --gold2:#e8c97a;
+  --text:#e8e0d0; --text2:#9a9080; --border:rgba(201,168,76,0.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR','Pretendard',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.8;font-size:16px;-webkit-text-size-adjust:100%}
+body{background:radial-gradient(ellipse at top,rgba(201,168,76,0.08),transparent 60%),var(--bg);min-height:100vh}
+.container{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--gold);text-decoration:none;font-size:0.9rem;padding:10px 14px;border:1px solid var(--border);border-radius:8px;margin-bottom:24px;transition:all 0.2s}
+.back-link:hover{background:rgba(201,168,76,0.1);border-color:var(--gold)}
+article header{padding:24px 0 16px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.kicker{color:var(--gold);font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+h1{font-size:1.7rem;line-height:1.4;color:var(--gold2);margin-bottom:12px;font-weight:800}
+.meta{color:var(--text2);font-size:0.82rem}
+article h2{color:var(--gold2);font-size:1.25rem;margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+article h3{color:var(--gold);font-size:1.05rem;margin:20px 0 8px}
+article p{margin-bottom:14px;color:var(--text)}
+article ul,article ol{margin:8px 0 16px 20px}
+article li{margin-bottom:6px}
+article strong{color:var(--gold2)}
+.tldr{background:rgba(201,168,76,0.06);border-left:3px solid var(--gold);padding:14px 16px;margin:16px 0;border-radius:0 8px 8px 0}
+.tldr strong{display:block;margin-bottom:4px;color:var(--gold)}
+.zodiac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin:18px 0}
+.zodiac-card{background:rgba(13,16,32,0.6);border:1px solid var(--border);border-radius:10px;padding:12px}
+.zodiac-card .name{color:var(--gold);font-weight:700;margin-bottom:4px}
+.zodiac-card .desc{color:var(--text2);font-size:0.82rem;line-height:1.5}
+.cta-box{background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid var(--gold);border-radius:14px;padding:22px 18px;margin:32px 0;text-align:center}
+.cta-box h3{color:var(--gold2);margin:0 0 10px}
+.cta-box p{color:var(--text);margin:0 0 14px;font-size:0.95rem}
+.btn{display:inline-block;padding:12px 22px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1206;text-decoration:none;border-radius:10px;font-weight:700;margin:4px 4px;font-size:0.95rem}
+.btn-outline{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.adsense-slot{display:block;min-height:90px;margin:24px 0;background:rgba(0,0,0,0.3);border:1px dashed var(--border);border-radius:8px;text-align:center;padding:30px 0;color:var(--text2);font-size:0.8rem}
+footer.page-footer{margin-top:48px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text2);font-size:0.78rem;line-height:1.8}
+footer.page-footer a{color:var(--gold);text-decoration:none;margin:0 8px}
+@media(max-width:520px){h1{font-size:1.45rem}.container{padding:16px 14px 40px}article h2{font-size:1.12rem}}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <a href="/" class="back-link">&larr; 천명당 홈으로</a>
+
+  <article>
+    <header>
+      <div class="kicker">2026 SEASONAL · 운세</div>
+      <h1>2026년 띠별 운세 총정리 — 12간지 연간 흐름과 주의사항</h1>
+      <div class="meta">2026.04.28 · 천명당 콘텐츠팀 · 약 5분 읽기</div>
+    </header>
+
+    <div class="tldr">
+      <strong>핵심 요약</strong>
+      2026년은 병오년(丙午年), 붉은 말의 해입니다. 양(陽)의 기운이 강해 모든 띠가 활동성이 늘지만, 동시에 충돌과 과욕의 위험도 큽니다. 띠별 길흉을 빠르게 살펴보세요.
+    </div>
+
+    <h2>2026년은 어떤 해인가</h2>
+    <p>2026년의 천간(天干)은 <strong>병(丙) — 양화(陽火)</strong>이고, 지지(地支)는 <strong>오(午) — 양화(陽火)</strong>입니다. 화기가 두 번 겹친 강한 화의 해라서 추진력·확장·인기·열정 같은 키워드가 두드러집니다. 반대로 화가 과한 해는 분쟁·소송·이별·심혈관 건강 이슈가 빈번해집니다.</p>
+    <p>띠별로 보면 <strong>오(午)와 합·충 관계</strong>를 가진 띠가 가장 큰 영향을 받습니다. 합이 되는 띠는 인연·재물 기회가 늘고, 충이 되는 띠는 변동이 큽니다.</p>
+
+    <div class="adsense-slot">[AdSense 슬롯 자리 — 검토 통과 후 슬롯 ID 삽입]</div>
+
+    <h2>12띠별 2026년 운세 한눈에</h2>
+
+    <div class="zodiac-grid">
+      <div class="zodiac-card"><div class="name">🐭 쥐띠 (子)</div><div class="desc">자오충(子午沖) — 큰 변동의 해. 이직·이사 신중. 하반기 회복.</div></div>
+      <div class="zodiac-card"><div class="name">🐮 소띠 (丑)</div><div class="desc">실속형 안정운. 재물 흐름 무난. 건강 점검을 권장.</div></div>
+      <div class="zodiac-card"><div class="name">🐯 범띠 (寅)</div><div class="desc">인오합(寅午合) — 인기·기회운 상승. 도전과 확장에 유리.</div></div>
+      <div class="zodiac-card"><div class="name">🐰 토끼띠 (卯)</div><div class="desc">관계운 호전. 단, 감정 기복 주의. 봄·가을 결실.</div></div>
+      <div class="zodiac-card"><div class="name">🐲 용띠 (辰)</div><div class="desc">활동성 증가. 새 사업·프로젝트에 힘 받는 해.</div></div>
+      <div class="zodiac-card"><div class="name">🐍 뱀띠 (巳)</div><div class="desc">사오방합(巳午方合) — 인기·재물 동반 상승. 과욕만 조심.</div></div>
+      <div class="zodiac-card"><div class="name">🐴 말띠 (午)</div><div class="desc">본명년(本命年). 변화의 폭이 가장 큼. 보수적 운영 권장.</div></div>
+      <div class="zodiac-card"><div class="name">🐑 양띠 (未)</div><div class="desc">오미합(午未合) — 인연·결혼·동업운 강함.</div></div>
+      <div class="zodiac-card"><div class="name">🐵 원숭이띠 (申)</div><div class="desc">머리 회전·기획력 발휘 좋음. 직장운 양호.</div></div>
+      <div class="zodiac-card"><div class="name">🐔 닭띠 (酉)</div><div class="desc">재물운 견실. 부동산·투자 결정은 하반기 권장.</div></div>
+      <div class="zodiac-card"><div class="name">🐶 개띠 (戌)</div><div class="desc">인오술삼합(寅午戌三合) — 12띠 중 최고 운세 후보.</div></div>
+      <div class="zodiac-card"><div class="name">🐷 돼지띠 (亥)</div><div class="desc">조정·정리의 해. 인간관계 정리 후 새 출발.</div></div>
+    </div>
+
+    <h2>가장 운이 좋은 3개 띠</h2>
+    <ol>
+      <li><strong>개띠 (戌)</strong> — 인오술 삼합으로 직장·재물·명예 동시 상승. 큰 결정을 미루지 마세요.</li>
+      <li><strong>범띠 (寅)</strong> — 인오 반합. 인기와 기회가 같이 따라옵니다.</li>
+      <li><strong>양띠 (未)</strong> — 오미합. 결혼·동업·합작이 술술 풀리는 해.</li>
+    </ol>
+
+    <h2>주의가 필요한 띠</h2>
+    <ul>
+      <li><strong>쥐띠 (子)</strong> — 자오충으로 이동수·구설수가 많습니다. 큰 계약은 하반기로.</li>
+      <li><strong>말띠 (午)</strong> — 본명년은 변동이 본인에게 직접 닿습니다. 기존 자리를 지키는 전략 권장.</li>
+    </ul>
+
+    <h2>띠별 운세를 더 정확히 보려면</h2>
+    <p>띠별 운세는 12간지 중 <strong>지지 한 글자</strong>만으로 보는 거시적 개관입니다. 실제로 한 사람의 1년 운은 사주의 천간·지지 8글자 전부 그리고 대운·세운의 상호작용으로 결정됩니다. 정확도가 필요하다면 생년·생월·생일·생시까지 보는 사주 풀이가 필요합니다.</p>
+    <p>천명당에서는 무료로 오늘의 운세와 띠별 간단 운세를 매일 업데이트하고, 정밀한 1년 사주풀이는 유료로 제공합니다.</p>
+
+    <div class="cta-box">
+      <h3>지금 무료로 띠별 오늘의 운세 보기</h3>
+      <p>매일 자정에 갱신되는 무료 띠별 운세를 확인하세요.</p>
+      <a class="btn" href="https://cheonmyeongdang.vercel.app/#today-fortune">무료 운세 보기</a>
+      <a class="btn btn-outline" href="https://cheonmyeongdang.vercel.app/pay?utm_source=blog&utm_campaign=2026-zodiac-fortune">정밀 1년 사주풀이 (9,900원~)</a>
+    </div>
+
+    <div class="adsense-slot">[AdSense 슬롯 자리 — 본문 하단]</div>
+
+    <h2>자주 묻는 질문</h2>
+    <h3>Q. 띠 운세와 사주 운세는 뭐가 달라요?</h3>
+    <p>띠 운세는 태어난 해의 지지 1글자만 봅니다. 사주는 태어난 연·월·일·시 4기둥 8글자를 봅니다. 정확도는 사주가 훨씬 높지만, 띠는 빠르게 방향을 가늠할 때 유용합니다.</p>
+    <h3>Q. 본명년에는 무엇을 조심해야 하나요?</h3>
+    <p>본명년(자기 띠 해)에는 큰 결정·계약·이사·결혼 같은 인생 이벤트는 분기를 분산해서 진행하는 게 안전합니다. 빨간색 소품을 지니는 풍수적 처방도 전통적으로 사용됩니다.</p>
+  </article>
+
+  <footer class="page-footer">
+    <div>천명당 — 사주명리 풀이 · 쿤스튜디오 (사업자등록 552-59-00848)</div>
+    <div style="margin-top:6px">
+      <a href="/">홈</a> · <a href="/blog/">블로그</a> · <a href="/privacy.html">개인정보</a> · <a href="/terms.html">이용약관</a>
+    </div>
+    <div style="margin-top:8px;color:#555">© 2026 쿤스튜디오. All rights reserved.</div>
+  </footer>
+</div>
+
+</body>
+</html>

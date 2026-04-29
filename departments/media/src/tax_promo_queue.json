@@ -1,0 +1,343 @@
+{
+  "campaign": "tax_n_benefit_may_2026",
+  "deadline": "2026-05-31",
+  "landing": "https://tax-n-benefit-api.vercel.app",
+  "legal_note": "광고 · 세금N혜택 마케팅",
+  "hashtags": "#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감",
+  "channels": [
+    "bluesky",
+    "discord",
+    "mastodon",
+    "x",
+    "threads",
+    "instagram",
+    "telegram"
+  ],
+  "items": [
+    {
+      "type": "shorts",
+      "id": "shorts1_price",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts1_price.mp4",
+      "caption_x": "삼쩜삼 수수료 20% 너무 비싸지 않나요?\n\n세금N혜택은 9.9%\n환급 30만원이면 약 3만원 수수료로 끝.\n\n5월 31일 종합소득세 마감 임박.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "삼쩜삼 수수료 부담스러우셨죠?\n\n환급액의 20%, 30만원 환급이면 수수료만 6만원입니다.\n세금N혜택은 9.9% — 30만원 환급 시 약 2.97만원.\n절반 이하 비용으로 동일한 환급 서비스를 이용하실 수 있습니다.\n\n프리랜서·N잡러·크리에이터 모두 가능.\n5월 31일 종합소득세 신고 마감까지 D-DAY 카운트다운 중.\n\n무료 환급액 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #수수료비교 #절세",
+      "date": "2026-05-01",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts1_price_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts1_price_cards.zip",
+      "caption_x": "삼쩜삼 수수료 20% 너무 비싸지 않나요?\n\n세금N혜택은 9.9%\n환급 30만원이면 약 3만원 수수료로 끝.\n\n5월 31일 종합소득세 마감 임박.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "삼쩜삼 수수료 부담스러우셨죠?\n\n환급액의 20%, 30만원 환급이면 수수료만 6만원입니다.\n세금N혜택은 9.9% — 30만원 환급 시 약 2.97만원.\n절반 이하 비용으로 동일한 환급 서비스를 이용하실 수 있습니다.\n\n프리랜서·N잡러·크리에이터 모두 가능.\n5월 31일 종합소득세 신고 마감까지 D-DAY 카운트다운 중.\n\n무료 환급액 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #수수료비교 #절세",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts1_price_cards\\slide_1.png",
+      "date": "2026-05-02",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts2_refund",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts2_refund.mp4",
+      "caption_x": "환급 0원 나오면 어떡해요?\n→ 수수료 100% 환불 보장.\n\n조회는 무료, 신고는 9.9%.\n환급 안 나오면 비용 0원.\n\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "\"환급 안 나오면 수수료만 날리는 거 아닌가요?\"\n\n걱정 마세요.\n조회는 100% 무료, 신고 진행은 환급액의 9.9%.\n만약 환급액이 0원으로 산정되면 수수료 100% 환불 보장입니다.\n\n리스크는 진짜 0.\n프리랜서·N잡러라면 안 해 볼 이유가 없죠.\n\n무료 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (수수료 환불 정책은 표준 약관 기준)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #환불보장 #리스크제로",
+      "date": "2026-05-03",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts2_refund_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts2_refund_cards.zip",
+      "caption_x": "환급 0원 나오면 어떡해요?\n→ 수수료 100% 환불 보장.\n\n조회는 무료, 신고는 9.9%.\n환급 안 나오면 비용 0원.\n\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "\"환급 안 나오면 수수료만 날리는 거 아닌가요?\"\n\n걱정 마세요.\n조회는 100% 무료, 신고 진행은 환급액의 9.9%.\n만약 환급액이 0원으로 산정되면 수수료 100% 환불 보장입니다.\n\n리스크는 진짜 0.\n프리랜서·N잡러라면 안 해 볼 이유가 없죠.\n\n무료 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (수수료 환불 정책은 표준 약관 기준)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #환불보장 #리스크제로",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts2_refund_cards\\slide_1.png",
+      "date": "2026-05-04",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts3_deadline",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts3_deadline.mp4",
+      "caption_x": "종소세 마감 5월 31일.\n\n지나면 가산세 추가.\n세금N혜택 = 3영업일 SLA, 지연 시 무료.\n\n지금 시작하면 안전합니다.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "종합소득세 마감일 = 2026년 5월 31일.\n넘기면 무신고 가산세 + 납부지연 가산세가 추가됩니다.\n\n세금N혜택은 3영업일 SLA로 처리합니다.\n만약 영업일 기준 3일을 초과하면 수수료 무료 처리.\n\n시간 없는 N잡러·프리랜서를 위한 빠른 환급 서비스.\n5월 31일 전에 끝내야 합니다.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #5월31일 #마감임박 #SLA",
+      "date": "2026-05-05",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts3_deadline_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts3_deadline_cards.zip",
+      "caption_x": "종소세 마감 5월 31일.\n\n지나면 가산세 추가.\n세금N혜택 = 3영업일 SLA, 지연 시 무료.\n\n지금 시작하면 안전합니다.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "종합소득세 마감일 = 2026년 5월 31일.\n넘기면 무신고 가산세 + 납부지연 가산세가 추가됩니다.\n\n세금N혜택은 3영업일 SLA로 처리합니다.\n만약 영업일 기준 3일을 초과하면 수수료 무료 처리.\n\n시간 없는 N잡러·프리랜서를 위한 빠른 환급 서비스.\n5월 31일 전에 끝내야 합니다.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #5월31일 #마감임박 #SLA",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts3_deadline_cards\\slide_1.png",
+      "date": "2026-05-06",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts4_average",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts4_average.mp4",
+      "caption_x": "프리랜서 종소세 환급 평균 27만원.\n\n원천징수 3.3%가 1년 쌓이면 큰 돈.\n신고 안 하면 그대로 손해.\n\n무료 조회 → tax-n-benefit-api.vercel.app",
+      "caption_long": "프리랜서·N잡러 평균 종소세 환급액 약 27만원 (수입 규모/경비에 따라 차이 있음).\n\n3.3% 원천징수가 1년 동안 쌓인 게 환급 가능한 금액입니다.\n신고 안 하면 그대로 국세청에 남고, 5년 지나면 사라집니다.\n\n무료 조회 1분이면 충분.\n5월 31일 마감 전에 확인하세요.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (환급액은 개인 수입/경비에 따라 다릅니다)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #환급평균 #프리랜서절세",
+      "date": "2026-05-07",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts4_average_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts4_average_cards.zip",
+      "caption_x": "프리랜서 종소세 환급 평균 27만원.\n\n원천징수 3.3%가 1년 쌓이면 큰 돈.\n신고 안 하면 그대로 손해.\n\n무료 조회 → tax-n-benefit-api.vercel.app",
+      "caption_long": "프리랜서·N잡러 평균 종소세 환급액 약 27만원 (수입 규모/경비에 따라 차이 있음).\n\n3.3% 원천징수가 1년 동안 쌓인 게 환급 가능한 금액입니다.\n신고 안 하면 그대로 국세청에 남고, 5년 지나면 사라집니다.\n\n무료 조회 1분이면 충분.\n5월 31일 마감 전에 확인하세요.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (환급액은 개인 수입/경비에 따라 다릅니다)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #환급평균 #프리랜서절세",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts4_average_cards\\slide_1.png",
+      "date": "2026-05-08",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts5_bundle",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts5_bundle.mp4",
+      "caption_x": "기본 환급 + 의료비/통신비/월세 공제까지.\n\n추가 환급 평균 15~50만원.\n안 챙기면 손해.\n\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "기본 종소세 환급 외에 추가로 받을 수 있는 공제 항목들.\n\n• 의료비 세액공제 (총급여 3% 초과분)\n• 통신비 (사업자 등록 시 비용 처리)\n• 월세 세액공제 (총급여 7천만원 이하)\n• 신용카드 사용액 공제\n\n조건/금액별로 추가 환급 평균 15~50만원 가능 (개인차).\n세금N혜택은 이 모든 공제를 한번에 처리해 드립니다.\n\n5월 31일 마감 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (공제 가능 여부는 개인 상황 따라 다름)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #세액공제 #의료비공제 #월세공제",
+      "date": "2026-05-09",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts5_bundle_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts5_bundle_cards.zip",
+      "caption_x": "기본 환급 + 의료비/통신비/월세 공제까지.\n\n추가 환급 평균 15~50만원.\n안 챙기면 손해.\n\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "기본 종소세 환급 외에 추가로 받을 수 있는 공제 항목들.\n\n• 의료비 세액공제 (총급여 3% 초과분)\n• 통신비 (사업자 등록 시 비용 처리)\n• 월세 세액공제 (총급여 7천만원 이하)\n• 신용카드 사용액 공제\n\n조건/금액별로 추가 환급 평균 15~50만원 가능 (개인차).\n세금N혜택은 이 모든 공제를 한번에 처리해 드립니다.\n\n5월 31일 마감 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (공제 가능 여부는 개인 상황 따라 다름)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #세액공제 #의료비공제 #월세공제",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts5_bundle_cards\\slide_1.png",
+      "date": "2026-05-10",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts1_price",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts1_price.mp4",
+      "caption_x": "삼쩜삼 수수료 20% 너무 비싸지 않나요?\n\n세금N혜택은 9.9%\n환급 30만원이면 약 3만원 수수료로 끝.\n\n5월 31일 종합소득세 마감 임박.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "삼쩜삼 수수료 부담스러우셨죠?\n\n환급액의 20%, 30만원 환급이면 수수료만 6만원입니다.\n세금N혜택은 9.9% — 30만원 환급 시 약 2.97만원.\n절반 이하 비용으로 동일한 환급 서비스를 이용하실 수 있습니다.\n\n프리랜서·N잡러·크리에이터 모두 가능.\n5월 31일 종합소득세 신고 마감까지 D-DAY 카운트다운 중.\n\n무료 환급액 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #수수료비교 #절세",
+      "date": "2026-05-11",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts1_price_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts1_price_cards.zip",
+      "caption_x": "삼쩜삼 수수료 20% 너무 비싸지 않나요?\n\n세금N혜택은 9.9%\n환급 30만원이면 약 3만원 수수료로 끝.\n\n5월 31일 종합소득세 마감 임박.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "삼쩜삼 수수료 부담스러우셨죠?\n\n환급액의 20%, 30만원 환급이면 수수료만 6만원입니다.\n세금N혜택은 9.9% — 30만원 환급 시 약 2.97만원.\n절반 이하 비용으로 동일한 환급 서비스를 이용하실 수 있습니다.\n\n프리랜서·N잡러·크리에이터 모두 가능.\n5월 31일 종합소득세 신고 마감까지 D-DAY 카운트다운 중.\n\n무료 환급액 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #수수료비교 #절세",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts1_price_cards\\slide_1.png",
+      "date": "2026-05-12",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts2_refund",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts2_refund.mp4",
+      "caption_x": "환급 0원 나오면 어떡해요?\n→ 수수료 100% 환불 보장.\n\n조회는 무료, 신고는 9.9%.\n환급 안 나오면 비용 0원.\n\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "\"환급 안 나오면 수수료만 날리는 거 아닌가요?\"\n\n걱정 마세요.\n조회는 100% 무료, 신고 진행은 환급액의 9.9%.\n만약 환급액이 0원으로 산정되면 수수료 100% 환불 보장입니다.\n\n리스크는 진짜 0.\n프리랜서·N잡러라면 안 해 볼 이유가 없죠.\n\n무료 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (수수료 환불 정책은 표준 약관 기준)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #환불보장 #리스크제로",
+      "date": "2026-05-13",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts2_refund_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts2_refund_cards.zip",
+      "caption_x": "환급 0원 나오면 어떡해요?\n→ 수수료 100% 환불 보장.\n\n조회는 무료, 신고는 9.9%.\n환급 안 나오면 비용 0원.\n\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "\"환급 안 나오면 수수료만 날리는 거 아닌가요?\"\n\n걱정 마세요.\n조회는 100% 무료, 신고 진행은 환급액의 9.9%.\n만약 환급액이 0원으로 산정되면 수수료 100% 환불 보장입니다.\n\n리스크는 진짜 0.\n프리랜서·N잡러라면 안 해 볼 이유가 없죠.\n\n무료 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (수수료 환불 정책은 표준 약관 기준)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #환불보장 #리스크제로",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts2_refund_cards\\slide_1.png",
+      "date": "2026-05-14",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts3_deadline",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts3_deadline.mp4",
+      "caption_x": "종소세 마감 5월 31일.\n\n지나면 가산세 추가.\n세금N혜택 = 3영업일 SLA, 지연 시 무료.\n\n지금 시작하면 안전합니다.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "종합소득세 마감일 = 2026년 5월 31일.\n넘기면 무신고 가산세 + 납부지연 가산세가 추가됩니다.\n\n세금N혜택은 3영업일 SLA로 처리합니다.\n만약 영업일 기준 3일을 초과하면 수수료 무료 처리.\n\n시간 없는 N잡러·프리랜서를 위한 빠른 환급 서비스.\n5월 31일 전에 끝내야 합니다.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #5월31일 #마감임박 #SLA",
+      "date": "2026-05-15",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts3_deadline_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts3_deadline_cards.zip",
+      "caption_x": "종소세 마감 5월 31일.\n\n지나면 가산세 추가.\n세금N혜택 = 3영업일 SLA, 지연 시 무료.\n\n지금 시작하면 안전합니다.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "종합소득세 마감일 = 2026년 5월 31일.\n넘기면 무신고 가산세 + 납부지연 가산세가 추가됩니다.\n\n세금N혜택은 3영업일 SLA로 처리합니다.\n만약 영업일 기준 3일을 초과하면 수수료 무료 처리.\n\n시간 없는 N잡러·프리랜서를 위한 빠른 환급 서비스.\n5월 31일 전에 끝내야 합니다.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #5월31일 #마감임박 #SLA",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts3_deadline_cards\\slide_1.png",
+      "date": "2026-05-16",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts4_average",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts4_average.mp4",
+      "caption_x": "프리랜서 종소세 환급 평균 27만원.\n\n원천징수 3.3%가 1년 쌓이면 큰 돈.\n신고 안 하면 그대로 손해.\n\n무료 조회 → tax-n-benefit-api.vercel.app",
+      "caption_long": "프리랜서·N잡러 평균 종소세 환급액 약 27만원 (수입 규모/경비에 따라 차이 있음).\n\n3.3% 원천징수가 1년 동안 쌓인 게 환급 가능한 금액입니다.\n신고 안 하면 그대로 국세청에 남고, 5년 지나면 사라집니다.\n\n무료 조회 1분이면 충분.\n5월 31일 마감 전에 확인하세요.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (환급액은 개인 수입/경비에 따라 다릅니다)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #환급평균 #프리랜서절세",
+      "date": "2026-05-17",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts4_average_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts4_average_cards.zip",
+      "caption_x": "프리랜서 종소세 환급 평균 27만원.\n\n원천징수 3.3%가 1년 쌓이면 큰 돈.\n신고 안 하면 그대로 손해.\n\n무료 조회 → tax-n-benefit-api.vercel.app",
+      "caption_long": "프리랜서·N잡러 평균 종소세 환급액 약 27만원 (수입 규모/경비에 따라 차이 있음).\n\n3.3% 원천징수가 1년 동안 쌓인 게 환급 가능한 금액입니다.\n신고 안 하면 그대로 국세청에 남고, 5년 지나면 사라집니다.\n\n무료 조회 1분이면 충분.\n5월 31일 마감 전에 확인하세요.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (환급액은 개인 수입/경비에 따라 다릅니다)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #환급평균 #프리랜서절세",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts4_average_cards\\slide_1.png",
+      "date": "2026-05-18",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts5_bundle",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts5_bundle.mp4",
+      "caption_x": "기본 환급 + 의료비/통신비/월세 공제까지.\n\n추가 환급 평균 15~50만원.\n안 챙기면 손해.\n\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "기본 종소세 환급 외에 추가로 받을 수 있는 공제 항목들.\n\n• 의료비 세액공제 (총급여 3% 초과분)\n• 통신비 (사업자 등록 시 비용 처리)\n• 월세 세액공제 (총급여 7천만원 이하)\n• 신용카드 사용액 공제\n\n조건/금액별로 추가 환급 평균 15~50만원 가능 (개인차).\n세금N혜택은 이 모든 공제를 한번에 처리해 드립니다.\n\n5월 31일 마감 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (공제 가능 여부는 개인 상황 따라 다름)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #세액공제 #의료비공제 #월세공제",
+      "date": "2026-05-19",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts5_bundle_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts5_bundle_cards.zip",
+      "caption_x": "기본 환급 + 의료비/통신비/월세 공제까지.\n\n추가 환급 평균 15~50만원.\n안 챙기면 손해.\n\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "기본 종소세 환급 외에 추가로 받을 수 있는 공제 항목들.\n\n• 의료비 세액공제 (총급여 3% 초과분)\n• 통신비 (사업자 등록 시 비용 처리)\n• 월세 세액공제 (총급여 7천만원 이하)\n• 신용카드 사용액 공제\n\n조건/금액별로 추가 환급 평균 15~50만원 가능 (개인차).\n세금N혜택은 이 모든 공제를 한번에 처리해 드립니다.\n\n5월 31일 마감 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (공제 가능 여부는 개인 상황 따라 다름)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #세액공제 #의료비공제 #월세공제",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts5_bundle_cards\\slide_1.png",
+      "date": "2026-05-20",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts1_price",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts1_price.mp4",
+      "caption_x": "삼쩜삼 수수료 20% 너무 비싸지 않나요?\n\n세금N혜택은 9.9%\n환급 30만원이면 약 3만원 수수료로 끝.\n\n5월 31일 종합소득세 마감 임박.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "삼쩜삼 수수료 부담스러우셨죠?\n\n환급액의 20%, 30만원 환급이면 수수료만 6만원입니다.\n세금N혜택은 9.9% — 30만원 환급 시 약 2.97만원.\n절반 이하 비용으로 동일한 환급 서비스를 이용하실 수 있습니다.\n\n프리랜서·N잡러·크리에이터 모두 가능.\n5월 31일 종합소득세 신고 마감까지 D-DAY 카운트다운 중.\n\n무료 환급액 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #수수료비교 #절세",
+      "date": "2026-05-21",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts1_price_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts1_price_cards.zip",
+      "caption_x": "삼쩜삼 수수료 20% 너무 비싸지 않나요?\n\n세금N혜택은 9.9%\n환급 30만원이면 약 3만원 수수료로 끝.\n\n5월 31일 종합소득세 마감 임박.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "삼쩜삼 수수료 부담스러우셨죠?\n\n환급액의 20%, 30만원 환급이면 수수료만 6만원입니다.\n세금N혜택은 9.9% — 30만원 환급 시 약 2.97만원.\n절반 이하 비용으로 동일한 환급 서비스를 이용하실 수 있습니다.\n\n프리랜서·N잡러·크리에이터 모두 가능.\n5월 31일 종합소득세 신고 마감까지 D-DAY 카운트다운 중.\n\n무료 환급액 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #수수료비교 #절세",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts1_price_cards\\slide_1.png",
+      "date": "2026-05-22",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts2_refund",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts2_refund.mp4",
+      "caption_x": "환급 0원 나오면 어떡해요?\n→ 수수료 100% 환불 보장.\n\n조회는 무료, 신고는 9.9%.\n환급 안 나오면 비용 0원.\n\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "\"환급 안 나오면 수수료만 날리는 거 아닌가요?\"\n\n걱정 마세요.\n조회는 100% 무료, 신고 진행은 환급액의 9.9%.\n만약 환급액이 0원으로 산정되면 수수료 100% 환불 보장입니다.\n\n리스크는 진짜 0.\n프리랜서·N잡러라면 안 해 볼 이유가 없죠.\n\n무료 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (수수료 환불 정책은 표준 약관 기준)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #환불보장 #리스크제로",
+      "date": "2026-05-23",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts2_refund_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts2_refund_cards.zip",
+      "caption_x": "환급 0원 나오면 어떡해요?\n→ 수수료 100% 환불 보장.\n\n조회는 무료, 신고는 9.9%.\n환급 안 나오면 비용 0원.\n\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "\"환급 안 나오면 수수료만 날리는 거 아닌가요?\"\n\n걱정 마세요.\n조회는 100% 무료, 신고 진행은 환급액의 9.9%.\n만약 환급액이 0원으로 산정되면 수수료 100% 환불 보장입니다.\n\n리스크는 진짜 0.\n프리랜서·N잡러라면 안 해 볼 이유가 없죠.\n\n무료 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (수수료 환불 정책은 표준 약관 기준)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #환불보장 #리스크제로",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts2_refund_cards\\slide_1.png",
+      "date": "2026-05-24",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts3_deadline",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts3_deadline.mp4",
+      "caption_x": "종소세 마감 5월 31일.\n\n지나면 가산세 추가.\n세금N혜택 = 3영업일 SLA, 지연 시 무료.\n\n지금 시작하면 안전합니다.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "종합소득세 마감일 = 2026년 5월 31일.\n넘기면 무신고 가산세 + 납부지연 가산세가 추가됩니다.\n\n세금N혜택은 3영업일 SLA로 처리합니다.\n만약 영업일 기준 3일을 초과하면 수수료 무료 처리.\n\n시간 없는 N잡러·프리랜서를 위한 빠른 환급 서비스.\n5월 31일 전에 끝내야 합니다.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #5월31일 #마감임박 #SLA",
+      "date": "2026-05-25",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts3_deadline_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts3_deadline_cards.zip",
+      "caption_x": "종소세 마감 5월 31일.\n\n지나면 가산세 추가.\n세금N혜택 = 3영업일 SLA, 지연 시 무료.\n\n지금 시작하면 안전합니다.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "종합소득세 마감일 = 2026년 5월 31일.\n넘기면 무신고 가산세 + 납부지연 가산세가 추가됩니다.\n\n세금N혜택은 3영업일 SLA로 처리합니다.\n만약 영업일 기준 3일을 초과하면 수수료 무료 처리.\n\n시간 없는 N잡러·프리랜서를 위한 빠른 환급 서비스.\n5월 31일 전에 끝내야 합니다.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #5월31일 #마감임박 #SLA",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts3_deadline_cards\\slide_1.png",
+      "date": "2026-05-26",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts4_average",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts4_average.mp4",
+      "caption_x": "프리랜서 종소세 환급 평균 27만원.\n\n원천징수 3.3%가 1년 쌓이면 큰 돈.\n신고 안 하면 그대로 손해.\n\n무료 조회 → tax-n-benefit-api.vercel.app",
+      "caption_long": "프리랜서·N잡러 평균 종소세 환급액 약 27만원 (수입 규모/경비에 따라 차이 있음).\n\n3.3% 원천징수가 1년 동안 쌓인 게 환급 가능한 금액입니다.\n신고 안 하면 그대로 국세청에 남고, 5년 지나면 사라집니다.\n\n무료 조회 1분이면 충분.\n5월 31일 마감 전에 확인하세요.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (환급액은 개인 수입/경비에 따라 다릅니다)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #환급평균 #프리랜서절세",
+      "date": "2026-05-27",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts4_average_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts4_average_cards.zip",
+      "caption_x": "프리랜서 종소세 환급 평균 27만원.\n\n원천징수 3.3%가 1년 쌓이면 큰 돈.\n신고 안 하면 그대로 손해.\n\n무료 조회 → tax-n-benefit-api.vercel.app",
+      "caption_long": "프리랜서·N잡러 평균 종소세 환급액 약 27만원 (수입 규모/경비에 따라 차이 있음).\n\n3.3% 원천징수가 1년 동안 쌓인 게 환급 가능한 금액입니다.\n신고 안 하면 그대로 국세청에 남고, 5년 지나면 사라집니다.\n\n무료 조회 1분이면 충분.\n5월 31일 마감 전에 확인하세요.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (환급액은 개인 수입/경비에 따라 다릅니다)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #환급평균 #프리랜서절세",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts4_average_cards\\slide_1.png",
+      "date": "2026-05-28",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts5_bundle",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts5_bundle.mp4",
+      "caption_x": "기본 환급 + 의료비/통신비/월세 공제까지.\n\n추가 환급 평균 15~50만원.\n안 챙기면 손해.\n\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "기본 종소세 환급 외에 추가로 받을 수 있는 공제 항목들.\n\n• 의료비 세액공제 (총급여 3% 초과분)\n• 통신비 (사업자 등록 시 비용 처리)\n• 월세 세액공제 (총급여 7천만원 이하)\n• 신용카드 사용액 공제\n\n조건/금액별로 추가 환급 평균 15~50만원 가능 (개인차).\n세금N혜택은 이 모든 공제를 한번에 처리해 드립니다.\n\n5월 31일 마감 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (공제 가능 여부는 개인 상황 따라 다름)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #세액공제 #의료비공제 #월세공제",
+      "date": "2026-05-29",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "cards",
+      "id": "shorts5_bundle_cards",
+      "asset": "D:\\kunstudio-promo\\tax_cards\\shorts5_bundle_cards.zip",
+      "caption_x": "기본 환급 + 의료비/통신비/월세 공제까지.\n\n추가 환급 평균 15~50만원.\n안 챙기면 손해.\n\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "기본 종소세 환급 외에 추가로 받을 수 있는 공제 항목들.\n\n• 의료비 세액공제 (총급여 3% 초과분)\n• 통신비 (사업자 등록 시 비용 처리)\n• 월세 세액공제 (총급여 7천만원 이하)\n• 신용카드 사용액 공제\n\n조건/금액별로 추가 환급 평균 15~50만원 가능 (개인차).\n세금N혜택은 이 모든 공제를 한번에 처리해 드립니다.\n\n5월 31일 마감 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (공제 가능 여부는 개인 상황 따라 다름)\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #세액공제 #의료비공제 #월세공제",
+      "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts5_bundle_cards\\slide_1.png",
+      "date": "2026-05-30",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    },
+    {
+      "type": "shorts",
+      "id": "shorts1_price",
+      "asset": "D:\\kunstudio-promo\\tax_shorts\\shorts1_price.mp4",
+      "caption_x": "삼쩜삼 수수료 20% 너무 비싸지 않나요?\n\n세금N혜택은 9.9%\n환급 30만원이면 약 3만원 수수료로 끝.\n\n5월 31일 종합소득세 마감 임박.\n👉 tax-n-benefit-api.vercel.app",
+      "caption_long": "삼쩜삼 수수료 부담스러우셨죠?\n\n환급액의 20%, 30만원 환급이면 수수료만 6만원입니다.\n세금N혜택은 9.9% — 30만원 환급 시 약 2.97만원.\n절반 이하 비용으로 동일한 환급 서비스를 이용하실 수 있습니다.\n\n프리랜서·N잡러·크리에이터 모두 가능.\n5월 31일 종합소득세 신고 마감까지 D-DAY 카운트다운 중.\n\n무료 환급액 조회 → tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅\n\n#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감 #수수료비교 #절세",
+      "date": "2026-05-31",
+      "scheduled_time": "18:00",
+      "status": "pending"
+    }
+  ]
+}

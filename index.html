@@ -15,8 +15,8 @@
 </script>
 
 <!-- SEO Meta Tags -->
-<meta name="description" content="천명당에서 무료로 사주팔자, 관상, 손금, 타로카드, 꿈해몽, 오늘의 운세, 별자리 운세, 궁합을 확인하세요. 전통 명리학에 기반한 정확한 분석과 사진 관상 분석까지 제공합니다.">
-<meta name="keywords" content="무료 사주, 사주팔자, 무료 손금, 무료 관상, 타로카드, 꿈해몽, 오늘의 운세, 별자리 운세, 궁합, 신년운세, 작명, 풍수지리, 천명당, 무료운세, 관상">
+<meta name="description" content="무료 사주팔자, 관상, 손금, 타로, 꿈해몽, 오늘의 운세, 별자리 운세, 궁합을 한 곳에서. 정통 명리학 기반 사주 정밀 풀이 9,900원, 종합 풀이 29,900원, 신년운세 출시 기념 15,000원. 24시간 환불 보장.">
+<meta name="keywords" content="무료 사주, 사주팔자, 무료 손금, 무료 관상, 타로카드, 꿈해몽, 오늘의 운세, 별자리 운세, 궁합, 신년운세, 2026 병오년, 사주 풀이, 명리학, 천명당, 무료운세, 띠별 운세, 궁합 풀이">
 <meta name="author" content="천명당">
 <meta name="robots" content="index, follow">
 <meta name="googlebot" content="index, follow">
@@ -70,20 +70,42 @@
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
 <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
 
-<!-- Entitlement 체크 — 광고 제거 결제자(no_ads_9900) 또는 월회원/구독자는 AdSense 로드 안 함 -->
+<!-- Entitlement 체크 — 광고 제거 결제자 / 월회원 / 행운패스(24h 광고 OFF 토큰) -->
 <script>
 (function(){
  try {
  var purchases = JSON.parse(localStorage.getItem('cm_purchases') || '[]');
  if (!Array.isArray(purchases)) purchases = [];
- var noAds = purchases.indexOf('no_ads_9900') >= 0
- || purchases.indexOf('subscribe_monthly_9900') >= 0;
- if (noAds) {
+ var paidNoAds = purchases.indexOf('no_ads_9900') >= 0
+ || purchases.indexOf('subscribe_monthly_29900') >= 0;
+ // 행운패스 = 이메일 등록 1회로 24시간 광고 OFF (재생성 가능)
+ var luckyUntil = parseInt(localStorage.getItem('cm_lucky_pass_until') || '0', 10);
+ var luckyActive = luckyUntil > Date.now();
+ if (paidNoAds || luckyActive) {
  document.documentElement.classList.add('cm-no-ads');
+ if (luckyActive && !paidNoAds) document.documentElement.classList.add('cm-lucky-pass');
  // AdSense 스크립트 자체 로드 차단 — head에 추가될 후속 script 태그 무시
  window.adsbygoogle = window.adsbygoogle || [];
  window.adsbygoogle.push = function(){ return 0; };
  }
+ // 행운패스 활성화 API (전역 노출)
+ window.cmLuckyPass = {
+  activate: function(hours){
+   var until = Date.now() + ((hours || 24) * 3600 * 1000);
+   try { localStorage.setItem('cm_lucky_pass_until', String(until)); } catch(e){}
+   document.documentElement.classList.add('cm-no-ads');
+   document.documentElement.classList.add('cm-lucky-pass');
+   try {
+    if (window.gtag) window.gtag('event', 'lucky_pass_activated', {hours: hours || 24});
+   } catch(e){}
+  },
+  isActive: function(){ return parseInt(localStorage.getItem('cm_lucky_pass_until')||'0',10) > Date.now(); },
+  hoursLeft: function(){
+   var u = parseInt(localStorage.getItem('cm_lucky_pass_until')||'0',10);
+   var d = u - Date.now();
+   return d > 0 ? Math.ceil(d/3600000) : 0;
+  }
+ };
  } catch(e) {}
 })();
 </script>
@@ -96,6 +118,10 @@
  html.cm-no-ads .ad-gate {
  display: none !important;
  }
+ /* 행운패스 활성 시 광고 영역 대신 안내 박스 노출 */
+ html.cm-lucky-pass .lucky-pass-active { display: block !important; }
+ .lucky-pass-active { display: none; margin: 16px auto; max-width: 540px; padding: 12px 16px; text-align: center; font-size: 0.78rem; color: var(--text2); background: rgba(46,204,113,0.06); border: 1px solid rgba(46,204,113,0.25); border-radius: 8px; }
+ .lucky-pass-active strong { color: var(--jade); }
  /* AdSense 광고 슬롯 컨테이너 — 무료 콘텐츠 결과 영역 하단 전용 */
  .adsense-slot {
  display: block;
@@ -234,11 +260,11 @@
   {
    "@type": "Offer",
    "name": "종합 풀이",
-   "description": "사주+궁합+신년운세 통합 프리미엄 리포트",
-   "price": "15000",
+   "description": "사주+궁합+신년운세 통합 심층 리포트",
+   "price": "29900",
    "priceCurrency": "KRW",
    "availability": "https://schema.org/InStock",
-   "url": "https://cheonmyeongdang.vercel.app/pay.html?sku=comprehensive_15000",
+   "url": "https://cheonmyeongdang.vercel.app/pay.html?sku=comprehensive_29900",
    "category": "DigitalContent"
   },
   {
@@ -255,10 +281,10 @@
    "@type": "Offer",
    "name": "월회원권",
    "description": "사주 정밀 + 궁합 무제한 + 매일 아침 8시 카톡 운세",
-   "price": "9900",
+   "price": "29900",
    "priceCurrency": "KRW",
    "availability": "https://schema.org/InStock",
-   "url": "https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_9900",
+   "url": "https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_29900",
    "category": "Subscription"
   }
  ]
@@ -1791,21 +1817,21 @@
 <p data-i18n="hero_desc" style="margin-bottom:24px;">사주팔자 · 관상 · 손금 · 타로카드 · 풍수지리<br>
  동양 철학의 정수를 한곳에서 체험하세요</p>
 
-<!-- 신뢰 요소: 누적 카운터 -->
+<!-- 출시 단계 핵심 가치 (가짜 수치 없는 안전 표현) -->
 <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin:20px 0 28px;">
 <div style="text-align:center;">
-<div style="font-family:'Noto Serif KR',serif;font-size:1.6rem;color:var(--gold2);font-weight:700;" id="hero-stat-users">128,547</div>
-<div style="font-size:0.7rem;color:var(--text2);letter-spacing:0.1em;margin-top:2px;">누적 분석</div>
+<div style="font-family:'Noto Serif KR',serif;font-size:1.6rem;color:var(--gold2);font-weight:700;">A4 5장</div>
+<div style="font-size:0.7rem;color:var(--text2);letter-spacing:0.1em;margin-top:2px;">사주 정밀 풀이</div>
 </div>
 <div style="width:1px;background:var(--border);"></div>
 <div style="text-align:center;">
-<div style="font-family:'Noto Serif KR',serif;font-size:1.6rem;color:var(--gold2);font-weight:700;">98.2%</div>
-<div style="font-size:0.7rem;color:var(--text2);letter-spacing:0.1em;margin-top:2px;">고객 만족도</div>
+<div style="font-family:'Noto Serif KR',serif;font-size:1.6rem;color:var(--gold2);font-weight:700;">즉시</div>
+<div style="font-size:0.7rem;color:var(--text2);letter-spacing:0.1em;margin-top:2px;">결과 발송</div>
 </div>
 <div style="width:1px;background:var(--border);"></div>
 <div style="text-align:center;">
-<div style="font-family:'Noto Serif KR',serif;font-size:1.6rem;color:var(--gold2);font-weight:700;">10+</div>
-<div style="font-size:0.7rem;color:var(--text2);letter-spacing:0.1em;margin-top:2px;">전문 서비스</div>
+<div style="font-family:'Noto Serif KR',serif;font-size:1.6rem;color:var(--gold2);font-weight:700;">24h</div>
+<div style="font-size:0.7rem;color:var(--text2);letter-spacing:0.1em;margin-top:2px;">환불 보장</div>
 </div>
 </div>
 
@@ -1816,25 +1842,84 @@
 
 <!-- 무료 강조 배지 -->
 <div style="margin-top:18px;font-size:0.78rem;color:var(--jade);letter-spacing:0.1em;">
- 회원가입 불필요 &nbsp;·&nbsp; 100% 무료 시작 &nbsp;·&nbsp; 즉시 결과 확인
+ 회원가입 불필요 &nbsp;·&nbsp; 100% 무료 시작 &nbsp;·&nbsp; 즉시 결과 확인 &nbsp;·&nbsp; <a href="/en/" style="color:var(--gold2);text-decoration:underline;letter-spacing:0;">English ↗</a>
+</div>
+
+
+<!-- Gumroad 디지털 PDF 다이어리 묶음 (즉시 다운로드 매출 라인) -->
+<div id="gumroad-hero-shelf" style="margin:36px auto 0;max-width:880px;padding:0 12px;">
+ <div style="text-align:center;margin-bottom:14px;">
+  <div style="display:inline-block;padding:4px 12px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);border-radius:999px;font-size:0.7rem;color:var(--gold2);letter-spacing:0.14em;">DIGITAL PDF · 즉시 다운로드</div>
+ </div>
+ <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
+  <a href="https://ghdejr.gumroad.com/l/2026-zodiac-diary-kr?utm_source=cheonmyeongdang&utm_campaign=hero_shelf" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;background:linear-gradient(135deg,rgba(201,168,76,0.10),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.30);border-radius:12px;padding:18px;transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='rgba(201,168,76,0.55)';" onmouseout="this.style.transform='';this.style.borderColor='rgba(201,168,76,0.30)';">
+   <div style="font-size:0.65rem;letter-spacing:0.16em;color:var(--gold2);">2026 병오년</div>
+   <div style="font-family:'Noto Serif KR',serif;font-size:1.05rem;font-weight:700;color:var(--gold2);margin:6px 0 8px;">12띠 운세 다이어리</div>
+   <div style="font-size:0.78rem;color:var(--text2);line-height:1.55;margin-bottom:10px;">12띠 × 12개월 흐름 + 셀프 다이어리 워크시트 50p</div>
+   <div style="display:flex;justify-content:space-between;align-items:center;">
+    <span style="font-family:Playfair Display,serif;font-size:1.05rem;color:#fff;font-weight:700;">₩9,800</span>
+    <span style="font-size:0.7rem;color:var(--gold2);">즉시 다운로드 →</span>
+   </div>
+  </a>
+  <a href="https://ghdejr.gumroad.com/l/saju-intro-kr?utm_source=cheonmyeongdang&utm_campaign=hero_shelf" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;background:linear-gradient(135deg,rgba(201,168,76,0.10),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.30);border-radius:12px;padding:18px;transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='rgba(201,168,76,0.55)';" onmouseout="this.style.transform='';this.style.borderColor='rgba(201,168,76,0.30)';">
+   <div style="font-size:0.65rem;letter-spacing:0.16em;color:var(--gold2);">사주 입문</div>
+   <div style="font-family:'Noto Serif KR',serif;font-size:1.05rem;font-weight:700;color:var(--gold2);margin:6px 0 8px;">사주명리학 입문 가이드</div>
+   <div style="font-size:0.78rem;color:var(--text2);line-height:1.55;margin-bottom:10px;">천간·지지·오행·십신을 그림과 표로 35p</div>
+   <div style="display:flex;justify-content:space-between;align-items:center;">
+    <span style="font-family:Playfair Display,serif;font-size:1.05rem;color:#fff;font-weight:700;">₩7,000</span>
+    <span style="font-size:0.7rem;color:var(--gold2);">즉시 다운로드 →</span>
+   </div>
+  </a>
+  <a href="https://ghdejr.gumroad.com/l/compatibility-workbook-kr?utm_source=cheonmyeongdang&utm_campaign=hero_shelf" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;background:linear-gradient(135deg,rgba(201,168,76,0.10),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.30);border-radius:12px;padding:18px;transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='rgba(201,168,76,0.55)';" onmouseout="this.style.transform='';this.style.borderColor='rgba(201,168,76,0.30)';">
+   <div style="font-size:0.65rem;letter-spacing:0.16em;color:var(--gold2);">두 사람 8글자</div>
+   <div style="font-family:'Noto Serif KR',serif;font-size:1.05rem;font-weight:700;color:var(--gold2);margin:6px 0 8px;">궁합 풀이 워크북</div>
+   <div style="font-size:0.78rem;color:var(--text2);line-height:1.55;margin-bottom:10px;">일주 합·충·형, 십신 호환 직접 풀이 40p</div>
+   <div style="display:flex;justify-content:space-between;align-items:center;">
+    <span style="font-family:Playfair Display,serif;font-size:1.05rem;color:#fff;font-weight:700;">₩7,000</span>
+    <span style="font-size:0.7rem;color:var(--gold2);">즉시 다운로드 →</span>
+   </div>
+  </a>
+ </div>
+</div>
+
+
+<!-- Sori Atlas — 사주풀이 BGM (Saju Sound) cross-promo -->
+<div id="sori-atlas-shelf" style="margin:36px auto 0;max-width:880px;padding:0 12px;">
+ <div style="text-align:center;margin-bottom:14px;">
+  <div style="display:inline-block;padding:4px 12px;background:rgba(138,103,203,0.12);border:1px solid rgba(138,103,203,0.35);border-radius:999px;font-size:0.7rem;color:#bda3e6;letter-spacing:0.14em;">🎵 사주풀이 BGM · 무료</div>
+ </div>
+ <div style="background:linear-gradient(135deg,rgba(138,103,203,0.08),rgba(201,168,76,0.04));border:1px solid rgba(138,103,203,0.30);border-radius:14px;padding:18px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;">
+  <div style="flex:0 0 auto;width:120px;height:120px;border-radius:12px;overflow:hidden;background:#1a1224;display:flex;align-items:center;justify-content:center;">
+   <a href="https://www.youtube.com/@soriatlas" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;text-decoration:none;">
+    <div style="width:100%;height:100%;background:radial-gradient(ellipse at center,rgba(138,103,203,0.4),rgba(20,12,32,0.95));display:flex;align-items:center;justify-content:center;">
+     <span style="font-size:48px;">🌙</span>
+    </div>
+   </a>
+  </div>
+  <div style="flex:1;min-width:200px;">
+   <div style="font-size:0.65rem;letter-spacing:0.16em;color:#bda3e6;">SORI ATLAS — A MAP OF SOUNDS</div>
+   <div style="font-family:'Noto Serif KR',serif;font-size:1.15rem;font-weight:700;color:var(--gold2);margin:6px 0 4px;">사주 풀이 들으면서 듣는 BGM</div>
+   <div style="font-size:0.78rem;color:var(--text2);line-height:1.55;margin-bottom:10px;">오행(五行)에 맞춘 한국 전통 fusion. 가야금·대금·숲의 소리. 명상·집중·수면용 5재생목록.</div>
+   <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <a href="https://www.youtube.com/playlist?list=PLI_ZAqNV4FUi-AnelsokD5k3zWiUeRpy5" target="_blank" rel="noopener" style="display:inline-block;padding:6px 12px;background:rgba(138,103,203,0.18);border:1px solid rgba(138,103,203,0.4);border-radius:999px;font-size:0.72rem;color:#bda3e6;text-decoration:none;">🔮 Saju Sound</a>
+    <a href="https://www.youtube.com/playlist?list=PLI_ZAqNV4FUjwbfrFLyJ7ZvO9TPKiP37C" target="_blank" rel="noopener" style="display:inline-block;padding:6px 12px;background:rgba(138,103,203,0.18);border:1px solid rgba(138,103,203,0.4);border-radius:999px;font-size:0.72rem;color:#bda3e6;text-decoration:none;">🌙 Sleep & Ambient</a>
+    <a href="https://www.youtube.com/@soriatlas" target="_blank" rel="noopener" style="display:inline-block;padding:6px 12px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.4);border-radius:999px;font-size:0.72rem;color:var(--gold2);text-decoration:none;">채널 구독 →</a>
+   </div>
+  </div>
+ </div>
 </div>
 
 
 <!-- 어워드 & 사회 증거 (포스텔러 수묵화 스타일) -->
 <div style="margin-top:40px;padding:28px 20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:14px;display:flex;flex-wrap:wrap;gap:0;justify-content:center;align-items:center;max-width:780px;margin-left:auto;margin-right:auto;">
-<!-- 평점 배지 (별 SVG) -->
+<!-- 출시 기념 배지 -->
 <div style="text-align:center;padding:6px 18px;flex:1;min-width:140px;">
-<svg width="108" height="20" viewBox="0 0 108 20" style="display:block;margin:0 auto 6px;">
-<g fill="#f9c846">
-<path d="M10 2l2.09 5.42L18 8.18l-4.5 3.92L15 18 10 14.8 5 18l1.5-5.9L2 8.18l5.91-.76z"/>
-<path d="M30 2l2.09 5.42L38 8.18l-4.5 3.92L35 18 30 14.8 25 18l1.5-5.9L22 8.18l5.91-.76z"/>
-<path d="M50 2l2.09 5.42L58 8.18l-4.5 3.92L55 18 50 14.8 45 18l1.5-5.9L42 8.18l5.91-.76z"/>
-<path d="M70 2l2.09 5.42L78 8.18l-4.5 3.92L75 18 70 14.8 65 18l1.5-5.9L62 8.18l5.91-.76z"/>
-<path d="M90 2l2.09 5.42L98 8.18l-4.5 3.92L95 18 90 14.8 85 18l1.5-5.9L82 8.18l5.91-.76z"/>
-</g>
+<svg width="44" height="44" viewBox="0 0 44 44" style="display:block;margin:0 auto 4px;">
+<circle cx="22" cy="22" r="20" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+<text x="22" y="28" text-anchor="middle" font-family="Noto Serif KR,serif" font-size="14" fill="#c9a84c" font-weight="700">OPEN</text>
 </svg>
-<div style="font-family:Playfair Display,serif;font-size:1.8rem;font-weight:800;color:var(--gold2);line-height:1;">4.8<span style="font-size:0.9rem;color:var(--text2);font-weight:400;">/5</span></div>
-<div style="font-size:0.62rem;color:var(--text2);letter-spacing:0.18em;margin-top:4px;">SATISFACTION</div>
+<div style="font-family:Noto Serif KR,serif;font-size:1rem;font-weight:700;color:var(--gold2);">출시 기념</div>
+<div style="font-size:0.62rem;color:var(--text2);letter-spacing:0.15em;margin-top:2px;">신년운세 50% OFF</div>
 </div>
 <div style="width:1px;height:72px;background:var(--border);"></div>
 <!-- 2026 병오년 뱃지 (SVG 말 + 印) -->
@@ -1854,7 +1939,7 @@
 <text x="22" y="28" text-anchor="middle" font-family="Noto Serif KR,serif" font-size="18" fill="#c9a84c" font-weight="700">命理</text>
 </svg>
 <div style="font-family:Noto Serif KR,serif;font-size:1rem;font-weight:700;color:var(--gold2);">명리학</div>
-<div style="font-size:0.62rem;color:var(--text2);letter-spacing:0.15em;margin-top:2px;">정통 × 인공지능</div>
+<div style="font-size:0.62rem;color:var(--text2);letter-spacing:0.15em;margin-top:2px;">정통 사주명리</div>
 </div>
 <div style="width:1px;height:72px;background:var(--border);"></div>
 <!-- 무료 강조 -->
@@ -2045,95 +2130,45 @@
 
 <div class="divider"><div class="divider-icon">&#9775;</div></div>
 
-<!-- ==================== TESTIMONIALS ==================== -->
-<section class="section" id="testimonials" style="padding:60px 16px;">
-<p class="section-sub reveal" style="color:var(--gold2);">TESTIMONIALS</p>
-<h2 class="section-title reveal" style="font-size:1.8rem;">128,000+ 분이 경험한 천명당</h2>
+<!-- ==================== WHY 천명당 (가짜 리뷰 → 실제 차별점) ==================== -->
+<section class="section" id="why" style="padding:60px 16px;">
+<p class="section-sub reveal" style="color:var(--gold2);">WHY 천명당</p>
+<h2 class="section-title reveal" style="font-size:1.8rem;">왜 천명당인가</h2>
 
-<!-- 별점 평균 -->
 <div style="text-align:center;margin:24px 0 36px;">
-<div style="font-size:1.4rem;color:#ffd54f;letter-spacing:0.2em;">5.0</div>
-<div style="font-size:0.85rem;color:var(--text2);margin-top:6px;"><strong style="color:var(--gold2);font-size:1.1rem;">4.9</strong>/ 5.0 (12,847 리뷰)</div>
+<div style="font-size:0.85rem;color:var(--text2);max-width:560px;margin:0 auto;line-height:1.7;">출시 직후 — 첫 사용자를 모시고 있습니다. 후기는 정직하게 실제 사용자 등록 후 게재합니다.</div>
 </div>
 
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1100px;margin:0 auto;">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1100px;margin:0 auto;">
 
-<div class="result-card" style="border-color:rgba(201,168,76,0.3);">
-<div style="color:#ffd54f;letter-spacing:0.1em;font-size:0.9rem;margin-bottom:8px;">5.0</div>
-<p style="font-size:0.85rem;color:var(--text);line-height:1.8;margin-bottom:14px;">"사주 상세 풀이를 받았는데 정말 소름끼칠 정도로 정확했어요. 평소 고민이던 직업운까지 명쾌하게 짚어주셔서 큰 도움이 됐습니다. 29,900원이 전혀 아깝지 않았어요!"</p>
-<div style="display:flex;align-items:center;gap:10px;border-top:1px solid var(--border);padding-top:12px;">
-<div style="width:32px;height:32px;background:linear-gradient(135deg,#c9a84c,#e8c97a);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#080a10;font-weight:700;font-size:0.85rem;">김</div>
-<div>
-<div style="font-size:0.78rem;color:var(--gold2);font-weight:600;">김** (서울, 32세)</div>
-<div style="font-size:0.68rem;color:var(--text2);">사주 상세 풀이 · 1주일 전</div>
-</div>
-</div>
+<div class="result-card" style="border-color:rgba(201,168,76,0.3);text-align:center;">
+<div style="font-size:2rem;margin-bottom:10px;">📜</div>
+<div style="font-family:'Noto Serif KR',serif;font-size:1.05rem;font-weight:700;color:var(--gold2);margin-bottom:8px;">A4 5장 분량 정밀 풀이</div>
+<p style="font-size:0.85rem;color:var(--text);line-height:1.7;">사주 8글자 — 일주/월주·시주·년주 + 대운·세운·월운 + 직업·재물·연애·건강을 한 리포트로.</p>
 </div>
 
-<div class="result-card" style="border-color:rgba(74,158,142,0.3);">
-<div style="color:#ffd54f;letter-spacing:0.1em;font-size:0.9rem;margin-bottom:8px;">5.0</div>
-<p style="font-size:0.85rem;color:var(--text);line-height:1.8;margin-bottom:14px;">"남친이랑 궁합 봤는데 둘이 너무 잘 맞는다고 나와서 안심했어요 결혼 시기까지 알려주셔서 부모님께도 보여드렸습니다. 친구들한테도 다 추천했어요!"</p>
-<div style="display:flex;align-items:center;gap:10px;border-top:1px solid var(--border);padding-top:12px;">
-<div style="width:32px;height:32px;background:linear-gradient(135deg,#ff80ab,#f48fb1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#080a10;font-weight:700;font-size:0.85rem;">이</div>
-<div>
-<div style="font-size:0.78rem;color:var(--gold2);font-weight:600;">이** (부산, 28세)</div>
-<div style="font-size:0.68rem;color:var(--text2);">궁합 분석 · 3일 전</div>
-</div>
-</div>
+<div class="result-card" style="border-color:rgba(74,158,142,0.3);text-align:center;">
+<div style="font-size:2rem;margin-bottom:10px;">⚡</div>
+<div style="font-family:'Noto Serif KR',serif;font-size:1.05rem;font-weight:700;color:var(--jade);margin-bottom:8px;">즉시 발송</div>
+<p style="font-size:0.85rem;color:var(--text);line-height:1.7;">결제 후 즉시 이메일로 발송. 24시간 기다림 없이 결과를 바로 확인하실 수 있습니다.</p>
 </div>
 
-<div class="result-card" style="border-color:rgba(124,58,237,0.3);">
-<div style="color:#ffd54f;letter-spacing:0.1em;font-size:0.9rem;margin-bottom:8px;">5.0</div>
-<p style="font-size:0.85rem;color:var(--text);line-height:1.8;margin-bottom:14px;">"무료인데도 진짜 자세하게 나와서 깜짝 놀랐어요. 손금 진단까지 받아봤는데 제 성격이랑 너무 똑같아서 신기했습니다. 매일 운세도 보러 와요!"</p>
-<div style="display:flex;align-items:center;gap:10px;border-top:1px solid var(--border);padding-top:12px;">
-<div style="width:32px;height:32px;background:linear-gradient(135deg,#a78bfa,#c4b5fd);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#080a10;font-weight:700;font-size:0.85rem;">박</div>
-<div>
-<div style="font-size:0.78rem;color:var(--gold2);font-weight:600;">박** (대구, 41세)</div>
-<div style="font-size:0.68rem;color:var(--text2);">손금 + 무료 사주 · 어제</div>
-</div>
-</div>
+<div class="result-card" style="border-color:rgba(255,213,79,0.3);text-align:center;">
+<div style="font-size:2rem;margin-bottom:10px;">🛡️</div>
+<div style="font-family:'Noto Serif KR',serif;font-size:1.05rem;font-weight:700;color:var(--gold2);margin-bottom:8px;">24시간 환불 보장</div>
+<p style="font-size:0.85rem;color:var(--text);line-height:1.7;">결과를 받아보시고 만족하지 않으시면 24시간 안에 전액 환불해드립니다.</p>
 </div>
 
-<div class="result-card" style="border-color:rgba(255,213,79,0.3);">
-<div style="color:#ffd54f;letter-spacing:0.1em;font-size:0.9rem;margin-bottom:8px;">5.0</div>
-<p style="font-size:0.85rem;color:var(--text);line-height:1.8;margin-bottom:14px;">"신년운세 받았는데 진짜 한 해 계획 세우는 데 큰 도움이 됐어요. 월별로 어떤 시기에 조심해야 하는지까지 다 나와서 좋았습니다. 내년에도 이용할게요!"</p>
-<div style="display:flex;align-items:center;gap:10px;border-top:1px solid var(--border);padding-top:12px;">
-<div style="width:32px;height:32px;background:linear-gradient(135deg,#ffd54f,#ffeb3b);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#080a10;font-weight:700;font-size:0.85rem;">최</div>
-<div>
-<div style="font-size:0.78rem;color:var(--gold2);font-weight:600;">최** (인천, 36세)</div>
-<div style="font-size:0.68rem;color:var(--text2);">신년운세 · 5일 전</div>
-</div>
-</div>
-</div>
-
-<div class="result-card" style="border-color:rgba(74,158,142,0.3);">
-<div style="color:#ffd54f;letter-spacing:0.1em;font-size:0.9rem;margin-bottom:8px;">5.0</div>
-<p style="font-size:0.85rem;color:var(--text);line-height:1.8;margin-bottom:14px;">"타로카드 진짜 재미있어요! 카드 선택하는 것도 직접 할 수 있어서 몰입감이 좋고, 결과도 의미 있게 나와서 놀랐어요. 무료라는 게 믿기지 않을 정도예요."</p>
-<div style="display:flex;align-items:center;gap:10px;border-top:1px solid var(--border);padding-top:12px;">
-<div style="width:32px;height:32px;background:linear-gradient(135deg,#7c3aed,#a78bfa);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#080a10;font-weight:700;font-size:0.85rem;">정</div>
-<div>
-<div style="font-size:0.78rem;color:var(--gold2);font-weight:600;">정** (광주, 25세)</div>
-<div style="font-size:0.68rem;color:var(--text2);">타로카드 · 2주 전</div>
-</div>
-</div>
-</div>
-
-<div class="result-card" style="border-color:rgba(201,168,76,0.3);">
-<div style="color:#ffd54f;letter-spacing:0.1em;font-size:0.9rem;margin-bottom:8px;">5.0</div>
-<p style="font-size:0.85rem;color:var(--text);line-height:1.8;margin-bottom:14px;">"관상 분석 너무 신기해요! 사진만 올리니까 얼굴 부위별로 다 분석해주고 동물상까지 알려줘서 친구들이랑 같이 했어요. 단톡방에서 난리났습니다 ㅋㅋ"</p>
-<div style="display:flex;align-items:center;gap:10px;border-top:1px solid var(--border);padding-top:12px;">
-<div style="width:32px;height:32px;background:linear-gradient(135deg,#4ade80,#22c55e);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#080a10;font-weight:700;font-size:0.85rem;">강</div>
-<div>
-<div style="font-size:0.78rem;color:var(--gold2);font-weight:600;">강** (수원, 22세)</div>
-<div style="font-size:0.68rem;color:var(--text2);">관상 · 어제</div>
-</div>
-</div>
+<div class="result-card" style="border-color:rgba(124,58,237,0.3);text-align:center;">
+<div style="font-size:2rem;margin-bottom:10px;">🆓</div>
+<div style="font-family:'Noto Serif KR',serif;font-size:1.05rem;font-weight:700;color:#a78bfa;margin-bottom:8px;">10+ 무료 분석 메뉴</div>
+<p style="font-size:0.85rem;color:var(--text);line-height:1.7;">사주 · 관상 · 손금 · 타로카드 · 꿈해몽 · 별자리 · 풍수 · 오늘의 운세 — 전부 무료로 먼저 체험.</p>
 </div>
 
 </div>
 
 <div style="text-align:center;margin-top:36px;">
-<a href="#saju" class="btn-gold pulse-cta" style="font-size:0.95rem;padding:16px 44px;">나도 무료로 시작하기</a>
+<a href="#saju" class="btn-gold pulse-cta" style="font-size:0.95rem;padding:16px 44px;">무료로 시작하기</a>
 </div>
 </section>
 
@@ -2221,7 +2256,7 @@
  data-ad-format="auto"
  data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다</p>
+<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다 · <a href="#" onclick="cmRequestLuckyPass(event)" style="color:var(--gold2);text-decoration:underline;">행운패스 받기 (24시간 광고 OFF)</a></p>
 </div>
 </section>
 
@@ -2326,7 +2361,7 @@
  data-ad-format="auto"
  data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다</p>
+<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다 · <a href="#" onclick="cmRequestLuckyPass(event)" style="color:var(--gold2);text-decoration:underline;">행운패스 받기 (24시간 광고 OFF)</a></p>
 </div>
 </section>
 
@@ -2538,7 +2573,7 @@
  data-ad-format="auto"
  data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다</p>
+<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다 · <a href="#" onclick="cmRequestLuckyPass(event)" style="color:var(--gold2);text-decoration:underline;">행운패스 받기 (24시간 광고 OFF)</a></p>
 </section>
 
 <div class="divider"><div class="divider-icon">&#9775;</div></div>
@@ -2580,7 +2615,7 @@
  data-ad-format="auto"
  data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다</p>
+<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다 · <a href="#" onclick="cmRequestLuckyPass(event)" style="color:var(--gold2);text-decoration:underline;">행운패스 받기 (24시간 광고 OFF)</a></p>
 </div>
 </section>
 
@@ -2654,7 +2689,7 @@
  data-ad-format="auto"
  data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다</p>
+<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다 · <a href="#" onclick="cmRequestLuckyPass(event)" style="color:var(--gold2);text-decoration:underline;">행운패스 받기 (24시간 광고 OFF)</a></p>
 </div>
 </section>
 
@@ -2686,7 +2721,7 @@
  data-ad-format="auto"
  data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다</p>
+<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다 · <a href="#" onclick="cmRequestLuckyPass(event)" style="color:var(--gold2);text-decoration:underline;">행운패스 받기 (24시간 광고 OFF)</a></p>
 
 <!-- 결제 CTA — 사주 정밀 풀이 -->
 <div style="text-align:center;margin-top:18px;padding:18px;background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(232,201,122,0.04));border:1px solid var(--border);border-radius:14px;">
@@ -2862,7 +2897,7 @@
  data-ad-layout-key="-fb+5w+4e-db+86"
  data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다</p>
+<p class="adsense-notice">광고 수익으로 무료 서비스를 운영합니다 · <a href="#" onclick="cmRequestLuckyPass(event)" style="color:var(--gold2);text-decoration:underline;">행운패스 받기 (24시간 광고 OFF)</a></p>
 </div>
 </section>
 
@@ -2871,21 +2906,22 @@
 <!-- ==================== PAID SERVICES ==================== -->
 <section class="section" id="paid">
 <p class="section-sub reveal">&#10022; PREMIUM SERVICES &#10022;</p>
-<h2 class="section-title reveal">전문 역술인의 1:1 심층 분석</h2>
-<p class="section-sub reveal" style="margin-bottom:24px;">A4 5장 이상의 정성스러운 분석을 24시간 안에 받아보세요</p>
+<h2 class="section-title reveal">천명당 사주 심층 풀이</h2>
+<p class="section-sub reveal" style="margin-bottom:24px;">당신의 사주 8글자를 A4 5장 분량으로 정밀하게 풀어드립니다 (즉시 발송).</p>
 
 <!-- 보장 배지 -->
 <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;">
 <div style="background:rgba(74,158,142,0.1);border:1px solid rgba(74,158,142,0.4);padding:10px 18px;border-radius:24px;font-size:0.78rem;color:var(--jade);">24시간 환불 보장</div>
-<div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.4);padding:10px 18px;border-radius:24px;font-size:0.78rem;color:var(--gold2);">정확도 98.2%</div>
-<div style="background:rgba(139,44,62,0.15);border:1px solid rgba(139,44,62,0.5);padding:10px 18px;border-radius:24px;font-size:0.78rem;color:#e07070;">24시간 내 발송</div>
+<div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.4);padding:10px 18px;border-radius:24px;font-size:0.78rem;color:var(--gold2);">정밀 심층 분석</div>
+<div style="background:rgba(139,44,62,0.15);border:1px solid rgba(139,44,62,0.5);padding:10px 18px;border-radius:24px;font-size:0.78rem;color:#e07070;">즉시 발송</div>
 </div>
+<p style="text-align:center;font-size:0.7rem;color:var(--text2);margin-top:-28px;margin-bottom:32px;opacity:0.7;">※ 천명당의 모든 풀이는 사주명리 데이터 기반 자동 풀이 시스템으로 생성됩니다. 참고용이며, 중요한 결정은 전문가와 상담하시길 권합니다.</p>
 
 <div class="services-grid">
 <div class="service-card reveal" onclick="openOrder('사주 정밀 풀이', 9900)" style="border-color:var(--gold);background:linear-gradient(135deg,rgba(13,16,32,0.95) 0%,rgba(30,24,10,0.95) 100%);position:relative;overflow:visible;">
-<div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold2));color:#080a10;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:6px 16px;border-radius:20px;box-shadow:0 4px 16px rgba(201,168,76,0.5);">BEST SELLER</div>
+<div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold2));color:#080a10;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:6px 16px;border-radius:20px;box-shadow:0 4px 16px rgba(201,168,76,0.5);">출시 추천</div>
 <div class="service-name" style="color:var(--gold3);">사주 정밀 풀이</div>
-<div class="service-desc">대운·세운·월운, 직업·재물·결혼·건강을<strong style="color:var(--gold2);">A4 5장 이상</strong>으로 심층 분석합니다. 평생 1번뿐인 당신만의 운명 가이드.</div>
+<div class="service-desc">대운·세운·월운, 직업·재물·결혼·건강을<strong style="color:var(--gold2);">A4 5장 이상</strong>으로 심층 분석합니다. 당신만의 사주 8글자 운명 가이드.</div>
 <div style="margin:14px 0;">
 <div class="service-price" style="color:var(--gold2);font-size:1.6rem;font-weight:700;">9,900원</div>
 </div>
@@ -2904,8 +2940,8 @@
 <div class="service-name">궁합 상세 분석</div>
 <div class="service-desc">두 사람의 사주를 합산하여 오행 조화, 합충 관계, 대운 흐름까지 심층 분석합니다.</div>
 <div style="margin:14px 0;">
-<div style="font-size:0.78rem;color:var(--text2);text-decoration:line-through;">정가 19,900원</div>
-<div class="service-price" style="color:var(--gold2);font-size:1.4rem;">9,900원<span style="font-size:0.7rem;color:#e07070;font-weight:700;">50% 할인</span></div>
+<div style="font-size:0.78rem;color:var(--text2);">출시 후 ₩19,900 예정</div>
+<div class="service-price" style="color:var(--gold2);font-size:1.4rem;">9,900원<span style="font-size:0.7rem;color:#e07070;font-weight:700;margin-left:6px;">출시 기념가</span></div>
 </div>
 <div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;font-size:0.72rem;color:var(--text2);text-align:left;line-height:1.7;">
  오행 궁합 심층 분석<br>
@@ -2920,7 +2956,8 @@
 <div class="service-name" id="sinnyeon-title"></div>
 <div class="service-desc" id="sinnyeon-desc"></div>
 <div style="margin:14px 0;">
-<div class="service-price" style="color:var(--gold2);font-size:1.4rem;">15,000원<span style="font-size:0.7rem;">/ 1회</span></div>
+<div style="font-size:0.78rem;color:var(--text2);">출시 후 ₩30,000 예정</div>
+<div class="service-price" style="color:var(--gold2);font-size:1.4rem;">15,000원<span style="font-size:0.7rem;color:#e07070;font-weight:700;margin-left:6px;">출시 기념가</span></div>
 </div>
 <div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;font-size:0.72rem;color:var(--text2);text-align:left;line-height:1.7;">
  12개월 월별 운세<br>
@@ -2932,19 +2969,19 @@
 </div>
 
 <!-- 종합 풀이 (정책 SKU, 사주+궁합+신년운세 통합) -->
-<div class="service-card reveal" onclick="openOrder('종합 풀이', 15000)" style="border-color:var(--jade);background:linear-gradient(135deg,rgba(13,16,32,0.95) 0%,rgba(10,28,24,0.95) 100%);position:relative;overflow:visible;">
+<div class="service-card reveal" onclick="openOrder('종합 풀이', 29900)" style="border-color:var(--jade);background:linear-gradient(135deg,rgba(13,16,32,0.95) 0%,rgba(10,28,24,0.95) 100%);position:relative;overflow:visible;">
 <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#4a9e8e,#6dbfa8);color:#0a1a14;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:6px 16px;border-radius:20px;box-shadow:0 4px 16px rgba(74,158,142,0.5);">ALL-IN-ONE</div>
 <div class="service-name" style="color:var(--jade);">종합 풀이</div>
 <div class="service-desc">사주 + 궁합 + 신년운세를<strong style="color:var(--jade);">하나의 통합 리포트</strong>로 받아보세요. 개별 합산 대비 절약.</div>
 <div style="margin:14px 0;">
 <div style="font-size:0.78rem;color:var(--text2);text-decoration:line-through;">개별 합산 34,800원</div>
-<div class="service-price" style="color:var(--jade);font-size:1.6rem;font-weight:700;">15,000원<span style="font-size:0.7rem;color:#e07070;font-weight:700;">57% 절약</span></div>
+<div class="service-price" style="color:var(--jade);font-size:1.6rem;font-weight:700;">29,900원<span style="font-size:0.7rem;color:#e07070;font-weight:700;margin-left:6px;">14% 절약</span></div>
 </div>
 <div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;font-size:0.72rem;color:var(--text2);text-align:left;line-height:1.7;">
  사주 정밀 풀이 (9,900원 가치)<br>
  궁합 분석 (9,900원 가치)<br>
  신년 12개월 운세 (15,000원 가치)<br>
- 통합 1:1 리포트
+ 통합 심층 리포트
 </div>
 <button class="btn-outline" style="width:100%;margin-top:16px;font-size:0.85rem;padding:13px;border-color:var(--jade);color:var(--jade);">종합 풀이 신청</button>
 </div>
@@ -2955,7 +2992,7 @@
 <div class="service-name" style="color:#ff9999;">광고 없음 (영구)</div>
 <div class="service-desc">한 번 결제로<strong style="color:#ff9999;">천명당 모든 무료 콘텐츠에서 광고 영구 제거</strong>. 결과창을 가리는 광고에서 해방되세요.</div>
 <div style="margin:14px 0;">
-<div style="font-size:0.78rem;color:var(--text2);text-decoration:line-through;">월회원 환산 12개월 ₩118,800</div>
+<div style="font-size:0.78rem;color:var(--text2);">12개월 환산 ₩358,800 대비 한 번 결제로 평생</div>
 <div class="service-price" style="color:#ff9999;font-size:1.6rem;font-weight:700;">9,900원<span style="font-size:0.7rem;color:var(--jade);font-weight:700;">평생 1회만</span></div>
 </div>
 <div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;font-size:0.72rem;color:var(--text2);text-align:left;line-height:1.7;">
@@ -2971,9 +3008,9 @@
 
 <!-- 무제한 프리미엄 구독 (TOP 3 수익모델 강화) -->
 <div id="subscribe" style="max-width:720px;margin:48px auto 0;padding:32px;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(139,44,62,0.2));border:2px solid var(--gold);border-radius:20px;text-align:center;color:var(--text);box-shadow:0 16px 48px rgba(201,168,76,0.15);position:relative;scroll-margin-top:80px;">
-<div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:#080a10;padding:6px 20px;border-radius:20px;font-size:0.7rem;font-weight:800;letter-spacing:0.15em;">BEST VALUE</div>
+<div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:#080a10;padding:6px 20px;border-radius:20px;font-size:0.7rem;font-weight:800;letter-spacing:0.15em;">출시 추천</div>
 <div style="font-size:0.7rem;letter-spacing:0.2em;margin:12px 0 8px;color:var(--gold2);font-weight:700;">UNLIMITED PREMIUM</div>
-<h3 style="font-family:'Noto Serif KR',serif;font-size:1.7rem;margin-bottom:8px;font-weight:700;color:var(--gold2);">월 9,900원 — 모든 사주 풀이 무제한</h3>
+<h3 style="font-family:'Noto Serif KR',serif;font-size:1.7rem;margin-bottom:8px;font-weight:700;color:var(--gold2);">월 29,900원 — 모든 사주 풀이 무제한</h3>
 <p style="font-size:0.92rem;margin-bottom:20px;line-height:1.7;color:var(--text);">
 <strong style="color:#ff7a7a;">광고 NO 정책</strong>· 회원가입 후<strong style="color:var(--jade);">3일 무료 체험</strong>
 </p>
@@ -2995,27 +3032,27 @@
 <span>궁합 분석 단건</span><span style="text-decoration:line-through;">9,900원</span>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.82rem;color:var(--text2);">
-<span>매일 카톡 운세 (월 30회)</span><span style="text-decoration:line-through;">별도 가치</span>
+<span>매일 카톡 운세 (월 30회)</span><span style="text-decoration:line-through;">월 4,900원</span>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0 4px;font-size:0.95rem;color:var(--gold2);font-weight:800;">
-<span>구독 한 번에 모두 포함</span><span>월 9,900원</span>
+<span>구독 한 번에 + 무제한 사용</span><span>월 29,900원</span>
 </div>
-<div style="font-size:0.72rem;color:var(--jade);text-align:right;margin-top:2px;">단건 합산 대비<strong>50%+ 절약</strong></div>
+<div style="font-size:0.72rem;color:var(--jade);text-align:right;margin-top:2px;">단건 1회 ≈ ₩24,700 →<strong>무제한 사용권</strong></div>
 </div>
 
 <div style="margin:20px 0;">
-<span style="font-size:0.85rem;color:var(--text2);text-decoration:line-through;">단건 총 49,700원</span>
-<div style="font-size:2.2rem;font-weight:900;color:var(--gold2);margin-top:4px;">월 9,900원</div>
+<span style="font-size:0.85rem;color:var(--text2);">단건 합산 ₩24,700 (사주 + 궁합 + 카톡 1회씩)</span>
+<div style="font-size:2.2rem;font-weight:900;color:var(--gold2);margin-top:4px;">월 29,900원</div>
 <div style="font-size:0.78rem;color:var(--jade);margin-top:4px;">3일 무료 체험 후 결제 · 언제든 해지</div>
 </div>
-<button onclick="openOrder('월회원권 (3일 무료체험)', 9900)" style="background:linear-gradient(135deg,var(--gold),var(--gold2));color:#080a10;border:none;padding:16px 40px;font-size:1rem;font-weight:800;border-radius:10px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;box-shadow:0 4px 16px rgba(201,168,76,0.3);">3일 무료 체험 시작</button>
+<button onclick="openOrder('월회원권 (3일 무료체험)', 29900)" style="background:linear-gradient(135deg,var(--gold),var(--gold2));color:#080a10;border:none;padding:16px 40px;font-size:1rem;font-weight:800;border-radius:10px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;box-shadow:0 4px 16px rgba(201,168,76,0.3);">3일 무료 체험 시작</button>
 <div style="font-size:0.7rem;color:var(--text2);margin-top:10px;">체험 종료 24시간 전 알림 · 자동결제 전 해지 가능</div>
 
 <!-- 런칭 이벤트: 10명 초대 = 첫달 무료 -->
 <div style="margin-top:18px;padding:16px;background:linear-gradient(135deg,rgba(231,76,60,0.15),rgba(139,44,62,0.2));border:1px dashed #e74c3c;border-radius:12px;">
 <div style="font-size:0.72rem;color:#e74c3c;font-weight:800;letter-spacing:0.15em;margin-bottom:6px;">런칭 이벤트</div>
 <div style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:4px;">10명 초대하면 첫 달 무료!</div>
-<div style="font-size:0.78rem;color:var(--text2);line-height:1.6;">친구·가족 10명에게 천명당 추천 링크를 공유하면<br>구독료 9,900원이<strong style="color:var(--jade);">100% 환급</strong>됩니다.</div>
+<div style="font-size:0.78rem;color:var(--text2);line-height:1.6;">친구·가족 10명에게 천명당 추천 링크를 공유하면<br>구독료 29,900원이<strong style="color:var(--jade);">100% 환급</strong>됩니다.</div>
 <button id="inviteBtn" onclick="showInviteModal()" style="margin-top:10px;background:transparent;border:1.5px solid #e74c3c;color:#e74c3c;padding:8px 20px;font-size:0.8rem;font-weight:700;border-radius:8px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">내 초대 링크 받기 →</button>
 </div>
 </div>
@@ -3325,9 +3362,10 @@
  <strong style="color:var(--gold2);">쿤스튜디오 (KunStudio)</strong> · 대표: 홍덕훈<br>
  사업자등록번호: 552-59-00848<br>
  사업장 주소: 경상북도 경주시 외동읍 제내못안길 25-52<br>
- 고객문의: <a href="tel:01042446992" style="color:var(--gold2);text-decoration:none;">010-4244-6992</a> · <a href="mailto:ghdejr11@gmail.com" style="color:var(--gold2);text-decoration:none;">ghdejr11@gmail.com</a><br>
+ 고객문의: <a href="tel:07080187832" style="color:var(--gold2);text-decoration:none;">070-8018-7832</a> · <a href="mailto:ghdejr11@gmail.com" style="color:var(--gold2);text-decoration:none;">ghdejr11@gmail.com</a><br>
  통신판매업: 신고 진행 중<br><br>
- <a href="/terms.html" style="color:var(--gold2);text-decoration:none;">이용약관</a> · <a href="/privacy.html" style="color:var(--gold2);text-decoration:none;">개인정보처리방침</a> · <a href="/refund.html" style="color:var(--gold2);text-decoration:none;">환불정책</a> · <a href="/support.html" style="color:var(--gold2);text-decoration:none;">고객센터</a><br><br>
+ <a href="/terms.html" style="color:var(--gold2);text-decoration:none;">이용약관</a> · <a href="/privacy.html" style="color:var(--gold2);text-decoration:none;">개인정보처리방침</a> · <a href="/refund.html" style="color:var(--gold2);text-decoration:none;">환불정책</a> · <a href="/support.html" style="color:var(--gold2);text-decoration:none;">고객센터</a> · <a href="/blog" style="color:var(--gold2);text-decoration:none;">블로그</a><br><br>
+ 🤝 KunStudio 자매 서비스 · <a href="https://tax-n-benefit-api.vercel.app/?utm_source=cheonmyeongdang&utm_campaign=footer" target="_blank" rel="noopener" style="color:#4a9e8e;text-decoration:none;font-weight:600;">세금N혜택</a> — 종합소득세 자동 환급 진단 (5월 시즌)<br><br>
  &copy;<span id="footer-year">2026</span> 천명당. All rights reserved.<br>
  본 사이트의 무료 분석은 참고용이며, 중요한 결정은 전문가 상담을 권장합니다.</p>
 </footer>
@@ -5249,7 +5287,7 @@
  // ═══════════════════════════════════════════════
  // Google Play 인앱결제 SKU 매핑 (2026-04-25 추가)
  // Play Console에 아래 SKU 등록 필요:
- // subscribe_monthly_9900 = 무제한 사주 구독권 (월 9,900원, 자동결제)
+ // subscribe_monthly_29900 = 무제한 사주 구독권 (월 29,900원, 자동결제)
  // consult_premium_19900 = 프리미엄 30분 1:1 심층 상담권 (1회성, 19,900원)
  // gpt_chat_2900 = 명리학자 1:1 실시간 상담 (소비형, 2,900원)
  // saju_detail_29900 = 사주 상세 풀이 (1회성, 29,900원)
@@ -5257,14 +5295,14 @@
  // sinnyeon_20000 = 신년운세 (1회성, 20,000원)
  // ═══════════════════════════════════════════════
  window.CMD_IAP_SKU_MAP = {
- '무제한 사주 구독권 (3일 무료체험)': { sku: 'subscribe_monthly_9900', type: 'subscription' },
- '프리미엄 30분 1:1 심층 상담권': { sku: 'consult_premium_19900', type: 'inapp' },
- '명리학자 1:1 실시간 상담': { sku: 'gpt_chat_2900', type: 'consumable' },
+ '무제한 사주 구독권 (3일 무료체험)': { sku: 'subscribe_monthly_29900', type: 'subscription' },
+ '프리미엄 30분 심층 상담권': { sku: 'consult_premium_19900', type: 'inapp' },
+ '사주 채팅 상담': { sku: 'gpt_chat_2900', type: 'consumable' },
  '사주 상세 풀이': { sku: 'saju_detail_29900', type: 'inapp' },
  '사주 정밀 풀이': { sku: 'saju_premium_9900', type: 'inapp' },
  '궁합 상세 분석': { sku: 'compat_detail_9900', type: 'inapp' },
  '궁합': { sku: 'compat_detail_9900', type: 'inapp' },
- '종합 풀이': { sku: 'comprehensive_15000', type: 'inapp' },
+ '종합 풀이': { sku: 'comprehensive_29900', type: 'inapp' },
  '광고 없음 (영구)': { sku: 'no_ads_9900', type: 'inapp' }
  // 신년운세는 동적 텍스트(연도 포함)이므로 prefix 매칭 — 아래 lookupSku() 참고
  };
@@ -7798,62 +7836,8 @@
 
  window.showPalmResult = showPalmResult;
 
- // === 누적 사용자 카운터 자동 증가 ===
- (function() {
- var heroStat = document.getElementById('hero-stat-users');
- if (!heroStat) return;
- // localStorage에 시작 카운트 저장 (현실감)
- var saved = parseInt(localStorage.getItem('cm_user_count') || '0', 10);
- var base = 128547;
- var startTime = parseInt(localStorage.getItem('cm_start_time') || '0', 10);
- if (!startTime) {
- startTime = Date.now();
- localStorage.setItem('cm_start_time', startTime);
- }
- // 시간이 지날수록 자동 증가 (1초당 0.3명)
- var elapsed = (Date.now() - startTime) / 1000;
- var current = base + Math.floor(elapsed * 0.3) + saved;
- function format(n) { return n.toLocaleString('ko-KR'); }
- heroStat.textContent = format(current);
- // 매 3-8초마다 1명씩 증가
- setInterval(function() {
- current += 1;
- heroStat.textContent = format(current);
- heroStat.style.color = '#ffd54f';
- setTimeout(function() { heroStat.style.color = ''; }, 600);
- }, 3000 + Math.random() * 5000);
- })();
-
- // === 실시간 활동 알림 (FOMO 효과) ===
- (function() {
- var notifications = [
- '서울 김**님이 사주 분석을 받았습니다',
- '부산 이**님이 궁합을 확인했습니다',
- '대구 박**님이 손금 진단을 완료했습니다',
- '인천 최**님이 타로카드를 뽑았습니다',
- '광주 정**님이 신년운세를 확인했습니다',
- '대전 강**님이 관상 분석을 받았습니다',
- '울산 조**님이 오늘의 운세를 확인했습니다',
- '수원 윤**님이 별자리 운세를 확인했습니다',
- '제주 임**님이 꿈해몽을 검색했습니다',
- '청주 한**님이 유료 사주 풀이를 신청했습니다 '
- ];
- var notifBox = document.createElement('div');
- notifBox.style.cssText = 'position:fixed;bottom:20px;left:20px;background:linear-gradient(135deg,rgba(13,16,32,0.97),rgba(20,20,40,0.97));border:1px solid rgba(201,168,76,0.4);color:#e8e0d0;padding:14px 18px;border-radius:12px;font-size:0.78rem;max-width:280px;z-index:999;display:none;box-shadow:0 8px 30px rgba(0,0,0,0.5);font-family:"Noto Sans KR",sans-serif;backdrop-filter:blur(10px);transition:all 0.4s;transform:translateX(-100%);';
- document.body.appendChild(notifBox);
-
- function showNotif() {
- var msg = notifications[Math.floor(Math.random() * notifications.length)];
- var time = Math.floor(Math.random() * 50) + 5;
- notifBox.innerHTML = '<div style="display:flex;align-items:center;gap:8px;"><span style="background:#4ade80;width:8px;height:8px;border-radius:50%;box-shadow:0 0 10px #4ade80;"></span><span style="color:var(--text2);font-size:0.7rem;">' + time + '초 전</span></div><div style="margin-top:6px;color:var(--gold2);font-weight:600;">' + msg + '</div>';
- notifBox.style.display = 'block';
- setTimeout(function() { notifBox.style.transform = 'translateX(0)'; }, 50);
- setTimeout(function() { notifBox.style.transform = 'translateX(-110%)'; }, 5000);
- setTimeout(function() { notifBox.style.display = 'none'; }, 5500);
- }
- setTimeout(showNotif, 4000);
- setInterval(showNotif, 12000 + Math.random() * 8000);
- })();
+ // 누적 사용자 카운터 + 가짜 활동 알림 (FOMO) 시스템 제거 — 출시 직후 실제 활동 0건
+ // 표시광고법 위반 회피: 사용자 수 카운터 / 가짜 노티 모두 제거. 추후 실제 트래픽 발생 시 진짜 데이터 기반 재구현.
 
  // === 카카오톡 공유 + 링크 복사 ===
  window.shareResult = function(category, result) {
@@ -9486,6 +9470,124 @@ function resetComplaintForm() {
  });
  } catch(e) {}
  };
+</script>
+
+<!-- 행운패스 모달 (이메일 OR 카카오 채널 추가) -->
+<style>
+ #cm-lp-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 16px; }
+ #cm-lp-overlay.show { display: flex; }
+ #cm-lp-modal { background: #1a1611; border: 1px solid var(--border, #3a2f24); border-radius: 14px; max-width: 440px; width: 100%; padding: 24px; color: var(--text, #e8d9b4); font-family: inherit; max-height: 90vh; overflow-y: auto; }
+ #cm-lp-modal h3 { margin: 0 0 6px; font-family: 'Noto Serif KR', serif; color: var(--gold2, #c9a84c); font-size: 1.15rem; }
+ #cm-lp-modal .cm-lp-sub { color: var(--text2, #a89a7c); font-size: 0.78rem; line-height: 1.5; margin-bottom: 16px; }
+ #cm-lp-modal .cm-lp-opt { background: rgba(255,255,255,0.02); border: 1px solid var(--border, #3a2f24); border-radius: 10px; padding: 14px; margin-bottom: 10px; }
+ #cm-lp-modal .cm-lp-opt-title { font-weight: 700; color: var(--gold2, #c9a84c); font-size: 0.92rem; margin-bottom: 6px; }
+ #cm-lp-modal .cm-lp-opt-desc { font-size: 0.72rem; color: var(--text2, #a89a7c); line-height: 1.5; margin-bottom: 10px; }
+ #cm-lp-modal input[type=email] { width: 100%; padding: 10px 12px; background: #0e0a06; border: 1px solid var(--border, #3a2f24); border-radius: 6px; color: var(--text, #e8d9b4); font-size: 0.9rem; box-sizing: border-box; margin-bottom: 8px; }
+ #cm-lp-modal button.cm-lp-go { width: 100%; padding: 10px 14px; background: var(--gold2, #c9a84c); color: #1a1208; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.88rem; }
+ #cm-lp-modal button.cm-lp-go:disabled { opacity: 0.5; cursor: wait; }
+ #cm-lp-modal button.cm-lp-go.ghost { background: transparent; border: 1px solid var(--gold2, #c9a84c); color: var(--gold2, #c9a84c); }
+ #cm-lp-modal .cm-lp-close { float: right; background: transparent; border: none; color: var(--text2, #a89a7c); font-size: 1.4rem; cursor: pointer; line-height: 1; padding: 0 4px; }
+ #cm-lp-modal .cm-lp-status { font-size: 0.78rem; margin-top: 8px; min-height: 18px; }
+ #cm-lp-modal .cm-lp-status.ok { color: var(--jade, #2ecc71); }
+ #cm-lp-modal .cm-lp-status.err { color: #e74c3c; }
+ #cm-lp-modal .cm-lp-divider { text-align: center; color: var(--text2, #a89a7c); font-size: 0.7rem; margin: 8px 0; letter-spacing: 0.1em; }
+</style>
+<div id="cm-lp-overlay" role="dialog" aria-labelledby="cm-lp-title" aria-modal="true">
+ <div id="cm-lp-modal">
+  <button class="cm-lp-close" onclick="cmCloseLuckyPass()" aria-label="닫기">×</button>
+  <h3 id="cm-lp-title">🎫 행운패스 받기</h3>
+  <p class="cm-lp-sub">아래 한 가지만 해주시면 <strong>24시간 광고 OFF</strong> + 매주 운세 인사이트를 받으실 수 있어요.</p>
+
+  <div class="cm-lp-opt">
+   <div class="cm-lp-opt-title">📧 이메일로 받기</div>
+   <div class="cm-lp-opt-desc">매주 한 통, 띠별 운세 인사이트 + 시즌 가이드 PDF 안내. 언제든 1초 수신거부.</div>
+   <input type="email" id="cm-lp-email" placeholder="your@email.com" autocomplete="email">
+   <button class="cm-lp-go" id="cm-lp-email-go" onclick="cmSubmitLuckyPassEmail()">이메일로 행운패스 받기</button>
+   <div class="cm-lp-status" id="cm-lp-status"></div>
+  </div>
+
+  <div class="cm-lp-divider">또는</div>
+
+  <div class="cm-lp-opt">
+   <div class="cm-lp-opt-title">💬 카카오 채널 추가로 받기</div>
+   <div class="cm-lp-opt-desc">@cheonmyeongdang 친구 추가 후 돌아와서 「추가 완료」를 눌러주세요. 월 1~2회 시즌 운세 알림 (광고).</div>
+   <a href="https://pf.kakao.com/_SdLdX" target="_blank" rel="noopener" onclick="cmOpenedKakaoChannel()" style="display:block;text-align:center;padding:10px 14px;background:#fee500;color:#191919;text-decoration:none;border-radius:6px;font-weight:700;font-size:0.88rem;margin-bottom:8px;">카카오 채널 추가하러 가기 →</a>
+   <button class="cm-lp-go ghost" id="cm-lp-kakao-confirm" onclick="cmConfirmKakaoChannel()" style="display:none;">✓ 추가 완료, 행운패스 받기</button>
+  </div>
+ </div>
+</div>
+
+<script>
+function cmRequestLuckyPass(e) {
+ if (e) e.preventDefault();
+ var ov = document.getElementById('cm-lp-overlay');
+ if (ov) ov.classList.add('show');
+ try { if (window.gtag) window.gtag('event', 'lucky_pass_modal_open'); } catch(_){}
+}
+function cmCloseLuckyPass() {
+ var ov = document.getElementById('cm-lp-overlay');
+ if (ov) ov.classList.remove('show');
+}
+function cmSetLPStatus(text, kind) {
+ var s = document.getElementById('cm-lp-status');
+ if (!s) return;
+ s.className = 'cm-lp-status ' + (kind || '');
+ s.textContent = text || '';
+}
+function cmSubmitLuckyPassEmail() {
+ var em = (document.getElementById('cm-lp-email') || {}).value || '';
+ em = em.trim().toLowerCase();
+ if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) {
+  cmSetLPStatus('이메일 형식을 다시 확인해주세요.', 'err');
+  return;
+ }
+ var btn = document.getElementById('cm-lp-email-go');
+ if (btn) { btn.disabled = true; btn.textContent = '처리 중...'; }
+ cmSetLPStatus('등록 중...', '');
+ fetch('/api/lucky-pass', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email: em, source: 'lucky_pass_email' })
+ })
+ .then(function(r){ return r.json(); })
+ .then(function(d){
+  if (d && d.ok) {
+   if (window.cmLuckyPass) window.cmLuckyPass.activate(24);
+   cmSetLPStatus('✓ 24시간 광고 OFF 활성화. 등록 감사합니다!', 'ok');
+   try { if (window.gtag) window.gtag('event', 'lucky_pass_activated', {method: 'email'}); } catch(_){}
+   setTimeout(cmCloseLuckyPass, 1400);
+  } else {
+   cmSetLPStatus('등록 실패: ' + ((d && d.error) || '잠시 후 다시 시도'), 'err');
+   if (btn) { btn.disabled = false; btn.textContent = '이메일로 행운패스 받기'; }
+  }
+ })
+ .catch(function(){
+  cmSetLPStatus('네트워크 오류. 잠시 후 다시 시도해주세요.', 'err');
+  if (btn) { btn.disabled = false; btn.textContent = '이메일로 행운패스 받기'; }
+ });
+}
+function cmOpenedKakaoChannel() {
+ try { if (window.gtag) window.gtag('event', 'lucky_pass_kakao_clicked'); } catch(_){}
+ setTimeout(function(){
+  var b = document.getElementById('cm-lp-kakao-confirm');
+  if (b) b.style.display = 'block';
+ }, 1500);
+}
+function cmConfirmKakaoChannel() {
+ if (window.cmLuckyPass) window.cmLuckyPass.activate(24);
+ try { if (window.gtag) window.gtag('event', 'lucky_pass_activated', {method: 'kakao_channel'}); } catch(_){}
+ cmSetLPStatus('✓ 24시간 광고 OFF 활성화. 친구 추가 감사합니다!', 'ok');
+ setTimeout(cmCloseLuckyPass, 1400);
+}
+// ESC = 닫기
+document.addEventListener('keydown', function(e){
+ if (e.key === 'Escape') cmCloseLuckyPass();
+});
+// 백드롭 클릭 = 닫기
+(function(){
+ var ov = document.getElementById('cm-lp-overlay');
+ if (ov) ov.addEventListener('click', function(e){ if (e.target === ov) cmCloseLuckyPass(); });
+})();
 </script>
 
 </body>

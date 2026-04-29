@@ -1,0 +1,35 @@
+{
+  "book_id": "budget-planner-couples",
+  "title": "Budget Planner Couples",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Money fights are the #1 predictor of divorce. This budget planner is the antidote.\n\nBuilt specifically for couples, this 132-page workbook turns \"the money talk\" from a dreaded fight into a 20-minute monthly ritual you actually look forward to. Whether you're newlyweds, long-married, or moving in for the first time - this is the planner that gets you on the same financial page.\n\nWho it's for:\n- Married, engaged, and cohabiting couples managing joint finances\n- Partners who don't agree on saving vs. spending styles\n- Couples with shared goals: house, baby, debt-free, retirement, travel\n\nWhat's inside:\n- Joint values + goals worksheets: define \"enough\" together before you split a single bill\n- 12 monthly budgets: income, fixed bills, variable categories, sinking funds\n- Bi-weekly money date templates: 5 questions, 20 minutes, zero blame\n- Debt avalanche/snowball trackers and net-worth check-ins\n- His / Hers / Ours columns so personal autonomy stays intact\n\nUse it side-by-side at the kitchen table once a month. Couples who track together stay together - and retire richer.\n\nStop guessing where the paycheck went. Order today and have the money talk you've been avoiding - on paper, on purpose, on the same team.",
+  "keywords": [
+    "budget planner couples",
+    "couples finance",
+    "household budget",
+    "money tracker",
+    "expense journal",
+    "joint finances",
+    "marriage budget"
+  ],
+  "categories": [
+    "BISAC: BUSINESS & ECONOMICS / Personal Finance / Budgeting",
+    "BISAC: FAMILY & RELATIONSHIPS / Marriage & Long-Term Relationships"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 132,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "budget_planner_couples.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

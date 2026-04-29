@@ -1,0 +1,35 @@
+{
+  "book_id": "fishing-log-book",
+  "title": "Fishing Log Book",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Every angler has \"the spot.\" Smart anglers have a logbook.\n\nThis 104-page fishing journal helps you fish smarter, remember more, and turn lucky days into repeatable strategies. Whether you chase bass on a weekend lake, fly-fish quiet rivers, or charter the deep blue, your patterns live in here.\n\nWho it's for:\n- Bass, trout, and panfish anglers\n- Fly fishers, kayak fishers, and ice fishers\n- Charter captains and tournament fishermen\n- Dad-and-kid fishing buddies building a multi-year story\n\nWhat's inside:\n- 100+ structured trip log pages: date, location, weather, water temp, moon phase\n- Tackle and lure breakdowns - what worked, what didn't\n- Catch records: species, length, weight, depth, time, photo space\n- Tide and seasonal pattern reference pages\n- Trip-of-the-year highlights and \"return here\" map sketch pages\n\nCompact 6x9 size fits a tackle box. Scribble in it while the fish stop biting. Read it back two seasons later and notice the bite-window your gut was right about all along.\n\nThe river forgets. The book remembers. Get yours and stack the deck on every trip.",
+  "keywords": [
+    "fishing log",
+    "angler journal",
+    "bass fishing",
+    "fishing diary",
+    "tackle box notebook",
+    "fishing trip planner",
+    "fly fishing"
+  ],
+  "categories": [
+    "BISAC: SPORTS & RECREATION / Fishing",
+    "BISAC: NATURE / Animals / Fish"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 104,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "fishing-log-book.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

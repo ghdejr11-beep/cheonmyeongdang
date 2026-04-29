@@ -1,0 +1,4 @@
+# Google AdSense ads.txt
+# 사용자가 AdSense 가입 후 ca-pub-XXXXXXXXXXXXXXXX 를 발급받으면
+# scripts/adsense_apply.py 실행 시 PLACEHOLDER 자리가 자동 교체됩니다.
+google.com, pub-2954177434416880, DIRECT, f08c47fec0942fa0

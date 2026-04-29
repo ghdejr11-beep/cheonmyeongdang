@@ -1,0 +1,35 @@
+{
+  "book_id": "password-logbook-premium",
+  "title": "Password Logbook Premium",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "The biggest, most generous password keeper on the market - made for serious users.\n\nAt 173 pages, the Password Logbook Premium is the senior-friendly, large-print, large-capacity edition for anyone who has finally given up on app-based password managers and wants a system that just works on paper.\n\nWho it's for:\n- Seniors and adults with low vision who need genuinely large print\n- Heavy users with hundreds of accounts (think: small business + personal + family)\n- Anyone who has been locked out of a password manager and never wants that feeling again\n- Caregivers helping a parent organize their digital life\n\nWhat's inside:\n- A-to-Z alphabetized sections with extra room per letter\n- Large-print fields for site name, username, password, security questions, notes\n- Wi-Fi, router, smart-home, and ISP reference pages\n- Subscription and software license tracker\n- Banking and finance section (kept separate, with a discreet header)\n- Emergency access info so a spouse or executor can step in\n\nBuilt for clarity. Big fields. Soft cover. 6x9 size that fits a desk drawer. No batteries, no updates, no \"please verify your identity to log in.\"\n\nOrder the premium edition and finally have your digital life in one trustworthy place.",
+  "keywords": [
+    "password journal",
+    "password keeper",
+    "internet logbook",
+    "password organizer",
+    "login book",
+    "username password",
+    "secure notebook"
+  ],
+  "categories": [
+    "BISAC: REFERENCE / Personal & Practical Guides",
+    "BISAC: SELF-HELP / Personal Growth"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 173,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "Password_Logbook_Premium_Seniors.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

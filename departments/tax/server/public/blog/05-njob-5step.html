@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S4HPJHT5QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S4HPJHT5QR');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#3282f6">
+<title>N잡러 종소세 신고 5단계 (CODEF API + 9.9% 정액) | 세금N혜택</title>
+<meta name="description" content="본업+부업+크리에이터 수입을 가진 N잡러를 위한 종소세 5단계 자동 신고 워크플로. CODEF API 자료 자동 수집 + 9.9% 정액 + 5월 31일 마감 전 처리 가이드.">
+<meta name="keywords" content="N잡러 종소세, N잡러 세금, 부업 세금 신고, 크리에이터 세금, 유튜브 세금, 사업소득 기타소득, CODEF API, 종소세 5단계, 다중소득 신고, 본업 부업 합산">
+<meta name="author" content="쿤스튜디오">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://tax-n-benefit-api.vercel.app/blog/05-njob-5step">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="세금N혜택">
+<meta property="og:url" content="https://tax-n-benefit-api.vercel.app/blog/05-njob-5step">
+<meta property="og:title" content="N잡러 종소세 신고 5단계 (CODEF API + 9.9% 정액)">
+<meta property="og:description" content="본업+부업+크리에이터 N잡러를 위한 5단계 자동 신고 워크플로.">
+<meta property="og:image" content="https://tax-n-benefit-api.vercel.app/og.png">
+<meta property="article:published_time" content="2026-04-26">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="N잡러 종소세 신고 5단계 (CODEF API + 9.9% 정액)">
+<meta name="twitter:description" content="본업+부업+크리에이터 N잡러를 위한 5단계 자동 신고 워크플로.">
+<meta name="twitter:image" content="https://tax-n-benefit-api.vercel.app/og.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "N잡러 종소세 신고 5단계 (CODEF API + 9.9% 정액)",
+  "description": "본업+부업+크리에이터 수입을 가진 N잡러를 위한 5단계 자동 신고 워크플로.",
+  "image": "https://tax-n-benefit-api.vercel.app/og.png",
+  "datePublished": "2026-04-26",
+  "dateModified": "2026-04-26",
+  "author": { "@type": "Organization", "name": "쿤스튜디오" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "쿤스튜디오",
+    "logo": { "@type": "ImageObject", "url": "https://tax-n-benefit-api.vercel.app/og.png" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://tax-n-benefit-api.vercel.app/blog/05-njob-5step" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "N잡러 종소세 신고 5단계",
+  "description": "본업+부업+크리에이터 수입을 가진 N잡러가 종소세 신고를 5단계로 끝내는 방법.",
+  "totalTime": "PT30M",
+  "step": [
+    { "@type": "HowToStep", "name": "1. 모든 소득 자료 수집", "text": "본업 원천징수, 부업 사업소득, 플랫폼 정산서, 광고/애드센스 수입을 CODEF API 또는 홈택스 미리채움으로 일괄 수집합니다." },
+    { "@type": "HowToStep", "name": "2. 소득 종류별 분류", "text": "근로/사업/기타/배당/금융 소득을 분리해 합산 신고에 반영합니다." },
+    { "@type": "HowToStep", "name": "3. 경비·공제 적용", "text": "사업용 경비, 인적공제, 의료비, 보험료를 입력해 과세표준을 계산합니다." },
+    { "@type": "HowToStep", "name": "4. 검증 후 제출", "text": "산출세액 자동 계산을 확인하고 홈택스로 제출합니다." },
+    { "@type": "HowToStep", "name": "5. 환급 입금 확인", "text": "신고 후 6월 말~7월 초 환급금 자동 입금을 확인합니다." }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "본업 직장인이 부업 수입이 생기면 무조건 종소세 신고해야 하나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "근로소득 외 다른 소득(사업·기타·금융)이 연 300만원을 초과하면 종합소득세 합산 신고 의무가 발생합니다. 이하라도 환급 대상이라면 신고가 유리합니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "유튜브·블로그 광고 수입은 어떻게 신고하나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "구글 애드센스 등 해외 플랫폼 수입은 사업소득 또는 기타소득으로 신고하며, 연간 수입과 지속성에 따라 구분됩니다. 연 1,000만원 이상 또는 사업적으로 운영하면 사업소득, 일회성·소액이면 기타소득입니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "CODEF API가 정확히 무엇인가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "CODEF는 금융결제원이 운영하는 마이데이터 기반 자료 수집 API입니다. 홈택스·NHIS·은행·카드사 자료를 본인 인증 후 한 번에 수집할 수 있어, N잡러처럼 자료가 흩어진 경우 신고 시간을 크게 줄여줍니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "본업 회사에 부업 사실이 알려지나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "종소세 신고 자체로는 회사에 알려지지 않습니다. 다만 건강보험료 추가 부담분이 발생하면 회사 인사팀이 인지할 수 있으므로, 부업 비밀이 중요하면 본인 부담분만 따로 납부하는 방식을 사용합니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "9.9% 정액 환급이 N잡러에게 유리한 이유는?",
+      "acceptedAnswer": { "@type": "Answer", "text": "N잡러는 환급액이 100만원을 넘는 경우가 많습니다. 정률제 대행사는 환급액이 클수록 수수료도 비례해 커지지만, 9.9% 정액은 상한이 명확해 손해를 보지 않습니다." }
+    }
+  ]
+}
+</script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Noto Sans KR',sans-serif;line-height:1.75;color:#191f28;background:#fff}
+.wrap{max-width:720px;margin:0 auto;padding:24px 20px 80px}
+.crumb{font-size:13px;color:#8b95a1;margin-bottom:16px}
+.crumb a{color:#3282f6;text-decoration:none}
+.tag{display:inline-block;font-size:12px;font-weight:700;color:#3282f6;background:#e8f3ff;padding:4px 10px;border-radius:6px;margin-bottom:14px}
+h1{font-size:30px;font-weight:800;letter-spacing:-0.025em;line-height:1.3;margin-bottom:14px}
+.meta{font-size:13px;color:#8b95a1;border-bottom:1px solid #e5e8eb;padding-bottom:18px;margin-bottom:30px}
+h2{font-size:22px;font-weight:800;letter-spacing:-0.02em;margin:38px 0 14px}
+h3{font-size:17px;font-weight:700;margin:22px 0 10px}
+p{margin-bottom:14px;font-size:16px;color:#333d4b}
+ul,ol{margin:0 0 16px 22px}
+li{margin-bottom:6px;font-size:16px;color:#333d4b}
+strong{color:#191f28;font-weight:700}
+.hl{background:linear-gradient(transparent 60%,#fff3cd 60%);padding:0 2px;font-weight:600}
+.box{background:#f9fafb;border:1px solid #e5e8eb;border-radius:12px;padding:18px 20px;margin:20px 0}
+.box.tip{background:#f0f7ff;border-color:#cfe1fb}
+.box.warn{background:#fff5f5;border-color:#ffd4d8}
+.step{background:linear-gradient(135deg,#f0f7ff,#fff);border-left:4px solid #3282f6;padding:16px 18px;margin:18px 0;border-radius:0 12px 12px 0}
+.step .n{display:inline-block;background:#3282f6;color:#fff;font-weight:800;font-size:13px;padding:2px 10px;border-radius:99px;margin-bottom:8px}
+.step h3{margin:6px 0;font-size:18px}
+.cta{margin:32px 0;background:linear-gradient(135deg,#3282f6,#1b64da);color:#fff;border-radius:16px;padding:24px;text-align:center}
+.cta h3{font-size:18px;font-weight:800;margin-bottom:6px;color:#fff}
+.cta p{font-size:14px;opacity:.95;margin-bottom:14px;color:#fff}
+.cta a{display:inline-block;background:#fff;color:#1b64da;font-weight:700;padding:11px 22px;border-radius:10px;text-decoration:none}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+th,td{border:1px solid #e5e8eb;padding:9px 11px;text-align:left}
+th{background:#f9fafb;font-weight:700}
+.related{margin-top:50px;padding-top:24px;border-top:1px solid #e5e8eb}
+.related h3{font-size:16px;margin-bottom:12px}
+.related a{display:block;padding:12px 16px;background:#f9fafb;border-radius:10px;text-decoration:none;color:#191f28;margin-bottom:8px;font-size:14px;font-weight:600}
+.related a:hover{background:#e8f3ff;color:#1b64da}
+footer{margin-top:48px;padding-top:24px;border-top:1px solid #e5e8eb;font-size:12px;color:#8b95a1;text-align:center}
+footer a{color:#4e5968;margin:0 6px;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="crumb"><a href="/">세금N혜택</a> &raquo; <a href="/blog/">블로그</a> &raquo; <span>N잡러 5단계</span></div>
+
+<article>
+<span class="tag">실용 가이드</span>
+<h1>N잡러 종소세 신고 5단계 (CODEF API + 9.9% 정액)</h1>
+<div class="meta">2026.04.26 · 쿤스튜디오 · 약 8분 분량</div>
+
+<p>본업 + 부업 + 크리에이터 + 투자 — 소득이 4~5개로 흩어진 <strong>N잡러</strong>는 종소세 신고가 가장 어렵습니다. 자료가 흩어져 있고, 소득 종류별 처리 방식이 다르고, 누락하면 가산세도 큽니다.</p>
+
+<p>이 글은 N잡러가 <strong>30분 안에 모든 소득을 합산해 신고하고, 환급금까지 받는 5단계 워크플로</strong>입니다. CODEF API와 9.9% 정액 환급 서비스를 활용하는 자동화 방식입니다.</p>
+
+<div class="box warn">
+<h4>먼저 - N잡러 신고 의무 기준</h4>
+<p>근로소득 외 사업·기타·금융 소득이 <strong>연 300만원을 초과</strong>하면 종합소득세 합산 신고 의무가 있습니다. 이하라도 환급 대상이면 신고가 무조건 유리합니다.</p>
+</div>
+
+<h2>N잡러 소득 종류 매트릭스</h2>
+<table>
+<tr><th>유형</th><th>예시</th><th>분류</th></tr>
+<tr><td>본업</td><td>회사 월급</td><td>근로소득</td></tr>
+<tr><td>외주·프리랜서</td><td>디자인·개발 의뢰</td><td>사업소득 (3.3%)</td></tr>
+<tr><td>크리에이터</td><td>유튜브, 블로그 광고</td><td>사업소득 또는 기타소득</td></tr>
+<tr><td>강의·원고료</td><td>일회성 강연·집필</td><td>기타소득 (8.8%)</td></tr>
+<tr><td>플랫폼</td><td>스마트스토어, 클래스101</td><td>사업소득</td></tr>
+<tr><td>주식·예금</td><td>배당금, 이자</td><td>금융소득 (분리과세 또는 합산)</td></tr>
+<tr><td>임대</td><td>월세 수입</td><td>사업소득 (임대)</td></tr>
+</table>
+
+<h2>5단계 워크플로</h2>
+
+<div class="step">
+<span class="n">STEP 1</span>
+<h3>모든 소득 자료 한번에 수집 (5분)</h3>
+<p>흩어진 자료를 일일이 모으는 대신 <strong>CODEF API</strong> 또는 <strong>홈택스 미리채움</strong>으로 일괄 수집.</p>
+<ul>
+<li>홈택스: 원천징수영수증, 사업장 정보, 금융소득</li>
+<li>NHIS: 의료비, 본인부담금 확인서</li>
+<li>은행/카드: 사업용 경비 내역</li>
+<li>플랫폼: 스마트스토어·클래스101 정산서 (직접 다운로드)</li>
+</ul>
+</div>
+
+<div class="step">
+<span class="n">STEP 2</span>
+<h3>소득 종류별 분류 (5분)</h3>
+<p>각 자료를 위 매트릭스대로 분류. 같은 수입이라도 <strong>지속성과 사업성에 따라 사업/기타로 구분</strong>됩니다.</p>
+<ul>
+<li>일회성 강연료 → 기타소득 (8.8% 원천징수)</li>
+<li>매월 발생하는 외주 → 사업소득 (3.3% 원천징수)</li>
+<li>유튜브 광고 - 연 1,000만원 이상이면 사업소득, 이하 + 일회성이면 기타소득</li>
+</ul>
+</div>
+
+<div class="step">
+<span class="n">STEP 3</span>
+<h3>경비·공제 적용 (10분)</h3>
+<p>사업소득 부분은 단순경비율 또는 실제 경비 차감, 그 외에는 인적공제·의료비·보험료 등 적용.</p>
+<ul>
+<li>단순경비율 (수입 7,500만원 미만) - 영수증 없이 자동 차감</li>
+<li>실제 경비 - 사업용 카드, 통신비(업무 비율), 노트북, 사무용품</li>
+<li>인적공제 - 본인 + 부양가족 1인당 150만원</li>
+<li>세액공제 - 의료비, 교육비, 보험료, 기부금</li>
+</ul>
+</div>
+
+<div class="step">
+<span class="n">STEP 4</span>
+<h3>검증 후 제출 (5분)</h3>
+<p>홈택스가 자동으로 산출세액을 계산. <strong>이미 떼인 원천징수액 합계 vs 산출세액</strong>을 비교해 환급/추징을 확인하고 제출.</p>
+<ul>
+<li>원천징수 합 &gt; 산출세액 → <strong>환급</strong></li>
+<li>원천징수 합 &lt; 산출세액 → 추가 납부</li>
+<li>환급 계좌 입력 후 제출</li>
+</ul>
+</div>
+
+<div class="step">
+<span class="n">STEP 5</span>
+<h3>환급 입금 확인 (~6월 말)</h3>
+<p>5월 31일 전에 신고 → 6월 말~7월 초 자동 입금. 환급 처리 상태는 홈택스 '환급금 조회'에서 확인 가능.</p>
+</div>
+
+<h2>N잡러 평균 환급 시뮬레이션</h2>
+<p>본업 4,000만원 + 외주 1,200만원 + 유튜브 광고 600만원 + 강의료 200만원 케이스.</p>
+<table>
+<tr><th>항목</th><th>금액</th></tr>
+<tr><td>총 수입</td><td>6,000만원</td></tr>
+<tr><td>이미 떼인 원천징수 (3.3% + 8.8%)</td><td>약 80만원</td></tr>
+<tr><td>단순경비율 적용 후 소득금액</td><td>4,200만원</td></tr>
+<tr><td>인적공제·세액공제 후 산출세액</td><td>약 50만원</td></tr>
+<tr><td><strong>예상 환급액</strong></td><td><strong>약 30만원</strong></td></tr>
+</table>
+
+<div class="box tip">
+<h4>9.9% 정액이 N잡러에게 특히 유리한 이유</h4>
+<p>N잡러는 환급액이 50만원~수백만원으로 큰 편입니다. 정률제 대행사(10~22%)는 환급액이 커질수록 수수료도 비례해 커지지만, <strong>9.9% 정액은 상한이 명확</strong>해 손해를 보지 않습니다. 100만원 환급 시 약 11만원, 300만원 환급 시 약 36만원 절약.</p>
+</div>
+
+<div class="cta">
+<h3>N잡러 자동 환급 - CODEF로 5분 자료 수집</h3>
+<p>9.9% 정액 + 환급 0원이면 100% 환불 + 3영업일 SLA</p>
+<a href="https://tax-n-benefit-api.vercel.app/">₩9,900 정액 환급 시작 &rarr;</a>
+</div>
+
+<h2>자주 묻는 질문 (FAQ)</h2>
+
+<h3>Q. 본업 직장인이 부업 수입이 생기면 무조건 종소세 신고해야 하나요?</h3>
+<p>근로소득 외 다른 소득(사업·기타·금융)이 <strong>연 300만원을 초과</strong>하면 종합소득세 합산 신고 의무가 발생합니다. 이하라도 환급 대상이라면 신고가 유리합니다.</p>
+
+<h3>Q. 유튜브·블로그 광고 수입은 어떻게 신고하나요?</h3>
+<p>구글 애드센스 등 해외 플랫폼 수입은 <strong>사업소득 또는 기타소득</strong>으로 신고하며, 연간 수입과 지속성에 따라 구분됩니다. 연 1,000만원 이상 또는 사업적으로 운영하면 사업소득, 일회성·소액이면 기타소득입니다.</p>
+
+<h3>Q. CODEF API가 정확히 무엇인가요?</h3>
+<p>CODEF는 <strong>금융결제원이 운영하는 마이데이터 기반 자료 수집 API</strong>입니다. 홈택스·NHIS·은행·카드사 자료를 본인 인증 후 한 번에 수집할 수 있어, N잡러처럼 자료가 흩어진 경우 신고 시간을 크게 줄여줍니다.</p>
+
+<h3>Q. 본업 회사에 부업 사실이 알려지나요?</h3>
+<p>종소세 신고 자체로는 회사에 알려지지 않습니다. 다만 <strong>건강보험료 추가 부담분</strong>이 발생하면 회사 인사팀이 인지할 수 있으므로, 부업 비밀이 중요하면 본인 부담분만 따로 납부하는 방식을 사용합니다.</p>
+
+<h3>Q. 9.9% 정액 환급이 N잡러에게 유리한 이유는?</h3>
+<p>N잡러는 환급액이 100만원을 넘는 경우가 많습니다. 정률제 대행사는 환급액이 클수록 수수료도 비례해 커지지만, <strong>9.9% 정액은 상한이 명확</strong>해 손해를 보지 않습니다.</p>
+
+<div class="related">
+<h3>이 글과 함께 읽으면 좋아요</h3>
+<a href="/blog/01-30min-deadline">종소세 신고 5월 31일 마감 - 30분 안에 끝내는 법 &rarr;</a>
+<a href="/blog/03-fee-compare">삼쩜삼 vs 토스인컴 vs 9.9% 정액 - 정확히 얼마 차이날까 &rarr;</a>
+<a href="/blog/04-bundle-refund">의료비 + 통신비 + 종소세 한번에 환급받는 법 &rarr;</a>
+</div>
+
+</article>
+
+<footer>
+<a href="/">홈</a> &middot; <a href="/blog/">블로그</a> &middot; <a href="/app">환급 시작</a>
+<p style="margin-top:8px">&copy; 2026 쿤스튜디오 (KunStudio) · 552-59-00848</p>
+</footer>
+</div>
+</body>
+</html>

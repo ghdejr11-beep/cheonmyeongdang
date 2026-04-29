@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이전 구매 복원 - 천명당</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080a10;
+    --gold: #c9a84c;
+    --gold2: #e8c97a;
+    --jade: #4a9e8e;
+    --text: #e8e0d0;
+    --text2: #a89880;
+    --border: rgba(201,168,76,0.2);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: radial-gradient(ellipse at top, #1a1040 0%, var(--bg) 70%);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .card {
+    max-width: 460px; width: 100%;
+    background: linear-gradient(135deg, rgba(13,16,32,0.97), rgba(20,20,40,0.97));
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    padding: 40px 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  h1 {
+    font-family: 'Gowun Batang', serif;
+    color: var(--gold2);
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .desc { color: var(--text2); font-size: 0.88rem; line-height: 1.7; text-align: center; margin-bottom: 24px; }
+  label { display: block; color: var(--text2); font-size: 0.78rem; margin-bottom: 6px; letter-spacing: 0.05em; }
+  input[type="email"] {
+    width: 100%;
+    padding: 12px 14px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 0.92rem;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  input[type="email"]:focus { outline: none; border-color: var(--gold); }
+  button {
+    width: 100%;
+    margin-top: 14px;
+    padding: 13px 20px;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: #080a10;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  button:hover:not(:disabled) { transform: translateY(-1px); }
+  .result {
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    display: none;
+  }
+  .result.success { display: block; background: rgba(74,158,142,0.1); border: 1px solid var(--jade); color: var(--text); }
+  .result.fail { display: block; background: rgba(231,76,60,0.1); border: 1px solid #e74c3c; color: #ffd0d0; }
+  .result strong { color: var(--gold2); }
+  .footer {
+    text-align: center; margin-top: 22px; font-size: 0.74rem; color: var(--text2);
+  }
+  .footer a { color: var(--gold2); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>이전 구매 복원</h1>
+  <p class="desc">결제 시 사용하신 이메일을 입력해 주세요.<br>광고 제거 등 권한이 이 기기에도 적용됩니다.</p>
+
+  <label>결제 이메일</label>
+  <input type="email" id="email" placeholder="example@email.com" autocomplete="email">
+  <button id="btn" onclick="restore()">복원하기</button>
+
+  <div id="result" class="result"></div>
+
+  <div class="footer">
+    <a href="/">← 천명당 홈</a> · <a href="/support.html">고객센터</a>
+  </div>
+</div>
+
+<script>
+async function restore() {
+  var email = document.getElementById('email').value.trim();
+  var btn = document.getElementById('btn');
+  var box = document.getElementById('result');
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    box.className = 'result fail';
+    box.innerHTML = '올바른 이메일 주소를 입력해 주세요.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '확인 중...';
+  box.className = 'result';
+  box.style.display = 'none';
+
+  try {
+    var r = await fetch('/api/check-entitlement', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
+    });
+    var data = await r.json();
+    if (!data.ok) {
+      box.className = 'result fail';
+      box.innerHTML = '확인 실패: ' + (data.reason || '서버 오류');
+      return;
+    }
+    if (!data.skus || data.skus.length === 0) {
+      box.className = 'result fail';
+      box.innerHTML = '해당 이메일로 결제 이력이 없습니다.<br>결제 시 사용한 이메일을 확인해 주세요.';
+      return;
+    }
+
+    // localStorage에 entitlement 저장
+    try {
+      localStorage.setItem('cm_purchases', JSON.stringify(data.skus));
+      localStorage.setItem('cm_entitlement_token', data.token || '');
+      localStorage.setItem('cm_entitlement_email', email);
+    } catch(e) {}
+
+    var skuLabels = {
+      'no_ads_9900': '광고 없음 (영구)',
+      'saju_premium_9900': '사주 정밀 풀이',
+      'compat_detail_9900': '궁합',
+      'comprehensive_15000': '종합 풀이',
+      'sinnyeon_15000': '신년운세',
+      'subscribe_monthly_9900': '월회원권'
+    };
+    var labels = data.skus.map(function(s){ return '<strong>· ' + (skuLabels[s] || s) + '</strong>'; }).join('<br>');
+
+    box.className = 'result success';
+    box.innerHTML = '복원 완료. 다음 권한이 이 기기에 적용되었습니다:<br>' + labels +
+      '<br><br>' + (data.skus.indexOf('no_ads_9900') >= 0 ? '광고가 즉시 제거됩니다.' : '') +
+      '<br><a href="/" style="color:var(--gold2);text-decoration:underline;">홈으로 돌아가기 →</a>';
+  } catch (e) {
+    box.className = 'result fail';
+    box.innerHTML = '네트워크 오류: ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '복원하기';
+  }
+}
+
+// Enter 키 지원
+document.getElementById('email').addEventListener('keydown', function(e){
+  if (e.key === 'Enter') restore();
+});
+</script>
+</body>
+</html>

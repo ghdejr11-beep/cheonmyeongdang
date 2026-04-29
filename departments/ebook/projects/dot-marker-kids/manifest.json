@@ -1,0 +1,35 @@
+{
+  "book_id": "dot-marker-kids",
+  "title": "Dot Marker Kids",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Big circles. Big smiles. Toddler-sized fun.\n\nThis dot marker activity book is purpose-built for little hands holding their first bingo daubers. Every page is a small win - building hand-eye coordination, color recognition, counting, and confidence.\n\nWho it's for:\n- Toddlers and preschoolers ages 1-4\n- Homeschool families building early fine-motor skills\n- Daycares, preschools, and Sunday schools\n- Grandparents stocking the activity drawer\n\nWhat's inside:\n- 50+ original dot-marker pages: animals, vehicles, alphabet letters, numbers 1-10, shapes, fruits, weather\n- Big, well-spaced dots sized for standard bingo daubers and Do-A-Dot markers\n- Single-image pages on bright white paper - no clutter, no overwhelm\n- Large 8.5 x 11 inch format so little arms can work without crowding\n- Mix of \"fill the dots\" pages and \"follow the pattern\" pages for gradual difficulty\n\nIndependent play, screen-free quiet time, restaurant rescue, road-trip lifesaver, preschool prep all wrapped into one. Toddlers feel proud when they finish a page - and parents finally get five minutes to drink coffee while it's still hot.\n\nOrder it today and watch your kid choose this book over the iPad.",
+  "keywords": [
+    "dot marker activity book",
+    "do a dot",
+    "toddler activity",
+    "preschool dot",
+    "kids dot painting",
+    "bingo dauber book",
+    "dot art kids"
+  ],
+  "categories": [
+    "BISAC: JUVENILE NONFICTION / Activity Books / Coloring",
+    "BISAC: JUVENILE NONFICTION / Games & Activities / General"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 102,
+  "trim_size": "8.5x11",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "Dot_Marker_Activity_Book_Interior.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

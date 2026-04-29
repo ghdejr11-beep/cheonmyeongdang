@@ -1,0 +1,35 @@
+{
+  "book_id": "caregiver-daily-log",
+  "title": "Caregiver Daily Log",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "When you're caring for a loved one, you can't remember everything. You shouldn't have to. This 112-page caregiver daily log gives you and the rest of the care team a single trusted source of truth.\n\nWho it's for:\n- Family caregivers looking after aging parents\n- Dementia, Alzheimer's, and Parkinson's caregivers\n- Home-health aides and rotating shift caregivers\n- Anyone managing a recovery from surgery, stroke, or chronic illness\n\nWhat's inside:\n- 100+ daily log spreads: meals, fluids, medications (time + dose), bathroom, sleep, mood\n- Vitals tracking: blood pressure, blood sugar, temperature, weight\n- Symptom and behavior notes - critical for dementia care decisions\n- Visitor and shift handoff section so the next caregiver knows exactly where things stand\n- Appointment, prescription, and emergency contact pages up front\n\nBring it to every doctor's appointment. Pass it between siblings, home aides, and respite caregivers. When the doctor asks \"how has she been over the last two weeks?\" - the answer is in your hand.\n\nCompact, durable, and dignified. Caregiving is hard. Remembering shouldn't be one more weight.\n\nOrder one today for the loved one in your care.",
+  "keywords": [
+    "caregiver log",
+    "elderly care journal",
+    "dementia log",
+    "home health journal",
+    "patient daily log",
+    "nursing notebook",
+    "senior care"
+  ],
+  "categories": [
+    "BISAC: FAMILY & RELATIONSHIPS / Eldercare",
+    "BISAC: MEDICAL / Nursing / Long-Term Care"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 112,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "caregiver-daily-log.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

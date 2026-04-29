@@ -1,0 +1,91 @@
+{
+  "campaign": "kunstudio_may2026_3sites",
+  "period": {"start": "2026-05-01", "end": "2026-05-31"},
+  "send_schedule": ["09:00", "19:00"],
+  "channels": ["bluesky", "discord", "mastodon", "x", "threads", "instagram", "telegram"],
+  "rotation_strategy": "round_robin_by_index_mod_3",
+  "sites": [
+    {
+      "key": "cheonmyeongdang",
+      "name": "천명당",
+      "url_base": "https://cheonmyeongdang.vercel.app",
+      "tagline": "무료 사주·관상·손금·꿈해몽·타로",
+      "hashtags": "#사주 #관상 #손금 #꿈해몽 #타로 #천명당"
+    },
+    {
+      "key": "tax_n_benefit",
+      "name": "세금N혜택",
+      "url_base": "https://tax-n-benefit-api.vercel.app",
+      "tagline": "수수료 9.9% + 환급 0원 시 100% 환불",
+      "hashtags": "#종합소득세 #환급 #프리랜서 #N잡러 #5월31일마감"
+    },
+    {
+      "key": "korlens",
+      "name": "KORLENS",
+      "url_base": "https://korlens.vercel.app",
+      "tagline": "한국인이 직접 추천하는 진짜 로컬 픽",
+      "hashtags": "#Korea #Seoul #Travel #LocalGuide #VisitKorea"
+    }
+  ],
+  "utm_template": "?utm_source={channel}&utm_medium=social&utm_campaign=may2026&utm_content={site_key}",
+  "messages": {
+    "cheonmyeongdang": [
+      "오늘 사주 한 번 봐드릴까요? 무료 사주·관상·손금·꿈해몽·타로 한 곳에서. {URL}",
+      "내 손금이 진짜 뭘 의미할까. 1분 무료 손금 분석 받아보세요. {URL}",
+      "꿈에서 본 그 장면, 의미가 따로 있어요. 무료 꿈해몽 검색. {URL}",
+      "관상은 운명을 말합니다. 사진 한 장으로 무료 관상. {URL}",
+      "오늘의 운세 + 사주 + 타로 — 회원가입 없이 바로 무료. {URL}",
+      "내 평생 사주 한 번도 본 적 없다면 오늘이 시작입니다. {URL}",
+      "타로 카드가 오늘 당신에게 전하는 메시지. 무료. {URL}",
+      "올해 결혼운, 직장운, 재물운 — 사주로 한 번에. 무료. {URL}",
+      "남이 본 내 첫인상이 궁금하다면 — 관상 분석 무료 체험. {URL}",
+      "꿈에 뱀이 나왔다면? 똥꿈은 길몽? 무료 꿈해몽 검색. {URL}",
+      "1985년생, 1990년생, 2000년생 — 띠별 운세 한 곳에. {URL}",
+      "오늘 결정 망설여진다면 타로 한 장 뽑아보세요. {URL}",
+      "이별 직후 마음 정리, 타로가 도와드립니다. 무료. {URL}",
+      "면접 전날 오늘의 운세 한 번. 부적도 무료. {URL}",
+      "로또 1등 꿈 해몽 + 오늘의 행운 번호. {URL}",
+      "사주 카페 가기 전 무료로 한 번 — 정확도 비교해보세요. {URL}",
+      "신년 운세 매년 보시는 분 — 매월 무료 갱신 사주 받아가세요. {URL}"
+    ],
+    "tax_n_benefit": [
+      "삼쩜삼 수수료 20% — 세금N혜택은 9.9%. 절반 이하. {URL}",
+      "프리랜서 종소세 평균 환급 27만원. 5월 31일 지나면 손해. {URL}",
+      "환급 0원이면 수수료 0원. 100% 환불 보장 서비스. {URL}",
+      "원천징수 3.3% 1년치 환급 받기. 무료 조회 1분. {URL}",
+      "5월 31일 종소세 마감. 3영업일 SLA 처리. {URL}",
+      "의료비 + 통신비 + 월세까지 한 번에 공제. {URL}",
+      "N잡러라면 환급액이 더 큽니다. 무료 조회 받아보세요. {URL}",
+      "신용카드 공제, 의료비 공제 빠뜨리지 마세요. 무료 진단. {URL}",
+      "크리에이터·강사·과외 — 모두 환급 대상. 1분 진단. {URL}",
+      "수수료 9.9% 약속 — 업계 최저가. 5월 마감 임박. {URL}",
+      "지난해 환급 못 받은 사람 평균 27만원 손해. 올해는 챙기세요. {URL}",
+      "환급금은 5년 지나면 소멸. 지금이 마지막 기회. {URL}",
+      "공제 가능 항목 자동 체크 — 빠뜨리는 금액 0원. {URL}",
+      "프리랜서 첫 종소세도 부담 없이 — 1분 무료 진단. {URL}",
+      "사업자 등록 없는 N잡러도 환급 가능. 확인해보세요. {URL}",
+      "삼쩜삼·트리플3·자비스 비교 후 선택하세요 — 9.9%가 답. {URL}",
+      "환급 신청 후 평균 3영업일 입금. SLA 보장. {URL}"
+    ],
+    "korlens": [
+      "Visiting Seoul? Real local picks, not tourist traps. {URL}",
+      "Where do Koreans actually eat in Seoul? Real recommendations. {URL}",
+      "Skip the touristy spots — get authentic local guides. {URL}",
+      "Hidden cafes, real BBQ, late-night spots — verified by locals. {URL}",
+      "Planning a Korea trip? Get insider picks from real Koreans. {URL}",
+      "Bukchon, Hongdae, Gangnam — what locals actually recommend. {URL}",
+      "Tired of generic travel blogs? Real Korean voices, real picks. {URL}",
+      "First time in Seoul? Start with what locals actually do. {URL}",
+      "Looking for hidden gems beyond Myeongdong? Locals know. {URL}",
+      "Korean food beyond bibimbap — what locals truly love. {URL}",
+      "Solo traveler in Korea? Curated by locals for you. {URL}",
+      "Best Korean BBQ spots — picked by Koreans, not algorithms. {URL}",
+      "Late-night Seoul: bars, food, vibes — real local pick. {URL}",
+      "From Jeju to Busan — local picks across Korea. {URL}",
+      "Cafe hopping Seoul? Locals share their secret spots. {URL}",
+      "Trustworthy travel tips from real Korean residents. {URL}",
+      "Korean fashion, beauty, food — discovered by locals. {URL}"
+    ]
+  },
+  "notes": "각 메시지에서 {URL}은 site.url_base + utm_template로 자동 치환. KORLENS는 영어/일부 일본어, 천명당·세금N혜택은 한국어. 개인정보·본명 절대 삽입 금지. 타사 제품 직접 비교는 'X 대비 Y' 톤으로 사실 기반만."
+}

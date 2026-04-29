@@ -1,0 +1,35 @@
+{
+  "book_id": "perimenopause-symptom-tracker",
+  "title": "Perimenopause Symptom Tracker",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Hot flashes, mood swings, brain fog, sleep that breaks at 3 a.m. - perimenopause is real, and you deserve a doctor who takes it seriously. This 121-page symptom tracker hands you the data to make that happen.\n\nWho it's for:\n- Women in their late 30s, 40s, and early 50s navigating perimenopause\n- Patients preparing for OB/GYN, GP, or HRT specialist visits\n- Anyone tracking the impact of hormone therapy, supplements, or lifestyle changes\n- Daughters and partners supporting someone through midlife transition\n\nWhat's inside:\n- Daily symptom log: hot flashes, sleep, mood, energy, brain fog (1-10 scale)\n- Cycle tracker - because cycles get weird before they end\n- HRT, supplement, and medication log with dose and side-effect notes\n- Weight, BP, and exercise tracking\n- Monthly review pages: \"what got better, what got worse, what's new\"\n- Doctor visit prep pages: questions to ask, symptoms to flag\n- Resource section: 35+ named symptoms most women never knew were perimenopause\n\nYou're not crazy. You're not broken. You're not alone. You're in a hormonal transition that medicine has spent decades dismissing - and you're about to walk into your next appointment with receipts.\n\nOrder today and turn confusion into clarity.",
+  "keywords": [
+    "perimenopause tracker",
+    "menopause journal",
+    "hormone log",
+    "women health",
+    "symptom diary",
+    "hot flash log",
+    "midlife wellness"
+  ],
+  "categories": [
+    "BISAC: HEALTH & FITNESS / Women's Health",
+    "BISAC: SELF-HELP / Aging"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 121,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "perimenopause_symptom_tracker.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

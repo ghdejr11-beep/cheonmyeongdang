@@ -1,0 +1,1767 @@
+{
+  "timestamp": "2026-04-27T00:24:37",
+  "total": 27,
+  "counts": {
+    "PASS": 0,
+    "WARN": 27,
+    "FAIL": 0
+  },
+  "fail_books": [],
+  "detail": [
+    {
+      "book": "adhd-planner",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "129 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.00\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "12 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "ai-prompt-workbook",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "130 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~1.22\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "18 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "ai-side-hustle-en",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 6.25x9.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "31 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~1.47\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "17 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "airbnb-guestbook",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 6.25x9.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "104 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~1.36\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "16 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "blood-pressure-log",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "127 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.31\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "18 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "blood-sugar-tracker",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "123 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~1.86\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "19 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "bold-easy-coloring-animals",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "102 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.72\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "26 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "budget-planner-couples",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "132 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.24\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "22 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "caregiver-daily-log",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 6.25x9.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "112 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.45\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "19 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "cottagecore-coloring",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "102 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.68\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "20 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "dog-health-training-log",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 6.25x9.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "142 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~1.07\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "23 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "dot-marker-kids",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "102 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.51\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "15 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "fishing-log-book",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 6.25x9.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "104 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~1.61\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "16 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "fortune-notebook",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "151 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.65\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "16 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "genz-stress",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "68 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.41\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "11 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "introvert-confidence",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 6.25x9.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "56 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~1.53\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "20 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "math-workbook-grade1",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "101 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.37\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "20 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "meal-prep-planner",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "107 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.37\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "17 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "mental-reset-journal",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "47 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~3.03\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "20 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "password-logbook",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 17.51x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "117 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.84\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "16 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "password-logbook-premium",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "173 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.28\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "24 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "perimenopause-symptom-tracker",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 6.25x9.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "121 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.37\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "29 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "saju-diary",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "393 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.69\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "10 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "sleep-planner",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "105 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.39\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "13 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "spot-difference-seniors",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "57 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.74\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "23 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "yoga-progress-journal",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 6.25x9.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "91 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~1.42\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "21 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    },
+    {
+      "book": "zodiac-mandala-coloring",
+      "overall": "WARN",
+      "cover": [
+        {
+          "name": "표지 금지 키워드",
+          "status": "PASS",
+          "message": "lorem/template/placeholder 없음"
+        },
+        {
+          "name": "표지 dimension",
+          "status": "WARN",
+          "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+        },
+        {
+          "name": "표지 DPI",
+          "status": "WARN",
+          "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+        }
+      ],
+      "interior": [
+        {
+          "name": "본문 페이지 수",
+          "status": "PASS",
+          "message": "126 pages"
+        },
+        {
+          "name": "spine margin",
+          "status": "PASS",
+          "message": "내측 여백 ~2.68\" (>= 0.5\")"
+        }
+      ],
+      "metadata": [
+        {
+          "name": "저자명",
+          "status": "PASS",
+          "message": "'Deokgu Studio'"
+        },
+        {
+          "name": "title 길이",
+          "status": "PASS",
+          "message": "23 chars"
+        },
+        {
+          "name": "description 길이",
+          "status": "PASS",
+          "message": "39 chars"
+        },
+        {
+          "name": "keywords 개수",
+          "status": "PASS",
+          "message": "7 keywords"
+        },
+        {
+          "name": "categories 개수",
+          "status": "PASS",
+          "message": "2 categories"
+        },
+        {
+          "name": "ISBN",
+          "status": "WARN",
+          "message": "manifest에 ISBN 없음 (KDP 자동 ASIN이면 무시)"
+        }
+      ]
+    }
+  ]
+}

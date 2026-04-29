@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S4HPJHT5QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S4HPJHT5QR');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#3282f6">
+<title>개인정보처리방침 | 세금N혜택 — 쿤스튜디오</title>
+<meta name="description" content="세금N혜택 개인정보처리방침. 주민등록번호 비저장 원칙, 256bit AES 암호화, CODEF 인증 API 사용. 한국 개인정보보호법 준수.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tax-n-benefit-api.vercel.app/privacy">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="세금N혜택">
+<meta property="og:url" content="https://tax-n-benefit-api.vercel.app/privacy">
+<meta property="og:title" content="개인정보처리방침 | 세금N혜택">
+<meta property="og:description" content="개인정보보호법 준수 — 주민번호 비저장, 256bit 암호화, CODEF 인증 API.">
+
+<style>
+  :root {
+    --blue: #3282f6;
+    --blue-dark: #1e6fd6;
+    --blue-light: #e8f0ff;
+    --yellow: #FFD93D;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --text: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #767676;
+    --border: #e5e8ec;
+    --bg-soft: #f7f9fc;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Noto Sans KR', sans-serif;
+    color: var(--text); line-height: 1.7; background: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ul, ol { list-style: none; }
+
+  header.top {
+    position: sticky; top: 0; background: #fff; z-index: 50;
+    border-bottom: 1px solid var(--border);
+  }
+  .top-inner {
+    max-width: 960px; margin: 0 auto;
+    padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+  .logo span { color: var(--blue); }
+  .top-inner nav a { color: var(--text-secondary); margin-left: 18px; font-size: 14px; font-weight: 500; }
+  .top-inner nav a:hover { color: var(--blue); text-decoration: none; }
+
+  .hero {
+    background: linear-gradient(135deg, #3282f6 0%, #1e6fd6 100%);
+    color: #fff; padding: 56px 24px;
+  }
+  .hero-inner { max-width: 960px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block; background: rgba(255,255,255,0.2);
+    padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .hero h1 { font-size: 36px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 10px; }
+  .hero .meta { font-size: 14px; opacity: 0.95; }
+  .hero .meta span { margin-right: 16px; }
+
+  .container {
+    max-width: 960px; margin: 0 auto; padding: 40px 24px 80px;
+    display: grid; grid-template-columns: 240px 1fr; gap: 40px;
+  }
+  @media (max-width: 880px) {
+    .container { grid-template-columns: 1fr; gap: 24px; }
+    .toc { position: static !important; }
+  }
+
+  .toc {
+    position: sticky; top: 80px; align-self: start;
+    background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; font-size: 13.5px;
+    max-height: calc(100vh - 110px); overflow-y: auto;
+  }
+  .toc h3 {
+    font-size: 13px; color: var(--text-muted); text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 12px; font-weight: 700;
+  }
+  .toc-search {
+    width: 100%; padding: 8px 12px; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 13px; margin-bottom: 12px;
+    font-family: inherit; outline: none;
+  }
+  .toc-search:focus { border-color: var(--blue); }
+  .toc ul li {
+    padding: 5px 0; border-left: 2px solid transparent; padding-left: 10px;
+    transition: all 0.15s;
+  }
+  .toc ul li:hover { border-left-color: var(--blue); }
+  .toc ul li.hide { display: none; }
+  .toc ul li a { color: var(--text-secondary); display: block; }
+
+  .content section {
+    padding: 24px 0; border-bottom: 1px solid var(--border);
+    scroll-margin-top: 80px;
+  }
+  .content section:last-child { border-bottom: none; }
+  .content h2 {
+    font-size: 22px; font-weight: 800; color: var(--text);
+    margin-bottom: 14px; letter-spacing: -0.02em;
+  }
+  .content h2 .num {
+    display: inline-block; min-width: 32px; color: var(--blue); font-weight: 800;
+  }
+  .content h3 {
+    font-size: 16px; font-weight: 700; color: var(--text);
+    margin-top: 18px; margin-bottom: 8px;
+  }
+  .content p { color: var(--text-secondary); margin-bottom: 10px; font-size: 15px; }
+  .content ol, .content ul {
+    margin: 10px 0 14px 24px; color: var(--text-secondary); font-size: 15px;
+  }
+  .content ol { list-style: decimal; }
+  .content ul { list-style: disc; }
+  .content li { margin-bottom: 6px; }
+  .content table {
+    width: 100%; border-collapse: collapse; margin: 14px 0;
+    font-size: 14px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  }
+  .content table th {
+    background: var(--blue-light); color: var(--blue-dark);
+    padding: 10px 12px; text-align: left; font-weight: 700;
+  }
+  .content table td {
+    padding: 10px 12px; border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+  .content table.compact td, .content table.compact th { padding: 8px 10px; font-size: 13.5px; }
+  .callout {
+    background: #FFFBEB; border-left: 4px solid var(--yellow);
+    padding: 14px 18px; border-radius: 6px; margin: 14px 0;
+    font-size: 14.5px; color: var(--text);
+  }
+  .callout strong { color: #B45309; }
+  .callout-blue {
+    background: var(--blue-light); border-left: 4px solid var(--blue);
+    padding: 14px 18px; border-radius: 6px; margin: 14px 0;
+    font-size: 14.5px; color: var(--text);
+  }
+  .callout-blue strong { color: var(--blue-dark); }
+  .callout-green {
+    background: var(--green-light); border-left: 4px solid var(--green);
+    padding: 14px 18px; border-radius: 6px; margin: 14px 0;
+    font-size: 14.5px; color: var(--text);
+  }
+  .callout-green strong { color: #166534; }
+
+  footer {
+    background: #1a1a1a; color: #999; padding: 36px 24px; font-size: 13px;
+    text-align: center;
+  }
+  footer a { color: #ccc; margin: 0 10px; }
+  footer a:hover { color: var(--blue); text-decoration: none; }
+  footer .copy { margin-top: 14px; color: #767676; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <a href="/" class="logo">세금<span>N</span>혜택</a>
+    <nav>
+      <a href="/">홈</a>
+      <a href="/terms">이용약관</a>
+      <a href="/privacy">개인정보처리방침</a>
+      <a href="/refund">환불정책</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">법적 문서</span>
+    <h1>개인정보처리방침</h1>
+    <div class="meta">
+      <span>시행일 2026-04-26</span>
+      <span>최종 개정 2026-04-26</span>
+      <span>버전 v1.0</span>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <aside class="toc">
+    <h3>목차</h3>
+    <input type="text" class="toc-search" placeholder="항목 검색…" id="tocSearch">
+    <ul id="tocList">
+      <li><a href="#p1">1. 수집·이용 목적</a></li>
+      <li><a href="#p2">2. 수집 항목</a></li>
+      <li><a href="#p3">3. 보유·이용 기간</a></li>
+      <li><a href="#p4">4. 제3자 제공</a></li>
+      <li><a href="#p5">5. 처리 위탁</a></li>
+      <li><a href="#p6">6. 정보주체의 권리</a></li>
+      <li><a href="#p7">7. 안전성 확보 조치</a></li>
+      <li><a href="#p8">8. 개인정보 보호책임자</a></li>
+      <li><a href="#p9">9. 처리방침 변경</a></li>
+      <li><a href="#p10">10. 시행일</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+
+    <div class="callout-green">
+      <strong>핵심 약속.</strong> ① <strong>주민등록번호는 회사 서버에 저장하지 않습니다.</strong> CODEF API 인증 시점에 암호화 채로 즉시 전달·폐기합니다. ② 모든 통신·저장은 <strong>256bit AES 암호화</strong>로 보호됩니다. ③ 회원 탈퇴 시 개인정보는 즉시 파기됩니다(전자상거래법상 5년 보관 의무 항목 제외).
+    </div>
+
+    <section id="p1">
+      <h2><span class="num">1.</span>개인정보 수집 및 이용 목적</h2>
+      <p>쿤스튜디오(이하 "회사")는 「개인정보 보호법」 제15조 및 제17조에 따라 다음의 목적을 위하여 개인정보를 수집·이용합니다. 처리 목적이 변경되는 경우에는 별도의 동의를 받습니다.</p>
+      <table>
+        <tr><th>이용 목적</th><th>세부 내용</th></tr>
+        <tr><td>회원 가입 및 관리</td><td>본인 식별·인증, 회원자격 유지·관리, 부정이용 방지, 각종 고지·통지, 고충 처리</td></tr>
+        <tr><td>서비스 제공</td><td>종합소득세 환급 조회·신청 대행, 의료비·통신비 번들 환급, 절세 컨설팅</td></tr>
+        <tr><td>대금 결제·정산</td><td>수수료 청구, 환급금 입금 확인, 환불 처리</td></tr>
+        <tr><td>고객 상담</td><td>이메일 문의 응대, 분쟁 처리</td></tr>
+        <tr><td>마케팅·광고 (선택)</td><td>신규 서비스 안내, 이벤트 정보 제공 (별도 동의 시에만)</td></tr>
+      </table>
+    </section>
+
+    <section id="p2">
+      <h2><span class="num">2.</span>수집하는 개인정보 항목</h2>
+      <h3>가. 회원가입 시 (필수)</h3>
+      <ul>
+        <li>성명, 이메일, 휴대전화번호, 비밀번호</li>
+        <li>서비스 이용기록, 접속 로그, IP 주소, 쿠키, 기기정보(OS·브라우저)</li>
+      </ul>
+
+      <h3>나. 환급 신청 시 (필수)</h3>
+      <ul>
+        <li><strong>주민등록번호</strong> — CODEF 인증 API 호출 시점에만 일시 사용. <em>회사 서버에 저장하지 않음.</em></li>
+        <li>환급금 수령 계좌 정보(은행명, 계좌번호, 예금주)</li>
+        <li>국세청 홈택스 인증 정보 (CODEF API 경유 임시 처리)</li>
+      </ul>
+
+      <h3>다. 부가 서비스 (선택)</h3>
+      <ul>
+        <li>의료비 사용 내역, 통신비 납부 내역</li>
+        <li>소득증빙 자료(원천징수영수증, 사업소득명세 등)</li>
+      </ul>
+
+      <h3>라. 자동 수집 항목</h3>
+      <ul>
+        <li>접속 IP, 쿠키, 방문 기록, 기기 식별자, 광고 식별자(선택 동의 시)</li>
+      </ul>
+
+      <div class="callout">
+        <strong>주민등록번호 처리 원칙.</strong> 「개인정보 보호법」 제24조의2에 따라 회사는 법령상 근거(국세기본법·소득세법) 및 회원의 명시적 동의가 있는 경우에 한해 주민등록번호를 처리하며, <strong>회사 데이터베이스에는 저장하지 아니하고</strong> CODEF API 호출 즉시 메모리에서 폐기합니다.
+      </div>
+    </section>
+
+    <section id="p3">
+      <h2><span class="num">3.</span>개인정보의 보유 및 이용 기간</h2>
+      <p>회사는 법령에 따른 보존 의무가 있는 경우를 제외하고, 회원 탈퇴 시 개인정보를 <strong>지체 없이 파기</strong>합니다.</p>
+      <table>
+        <tr><th>구분</th><th>보유 기간</th><th>근거 법령</th></tr>
+        <tr><td>회원 정보</td><td>회원 탈퇴 시까지</td><td>이용계약</td></tr>
+        <tr><td>주민등록번호</td><td>저장하지 않음 (즉시 파기)</td><td>개인정보 보호법 §24의2</td></tr>
+        <tr><td>계약·청약철회 기록</td><td>5년</td><td>전자상거래법 §6</td></tr>
+        <tr><td>대금결제·재화공급 기록</td><td>5년</td><td>전자상거래법 §6</td></tr>
+        <tr><td>소비자 불만·분쟁처리 기록</td><td>3년</td><td>전자상거래법 §6</td></tr>
+        <tr><td>표시·광고 기록</td><td>6개월</td><td>전자상거래법 §6</td></tr>
+        <tr><td>접속 로그·접속IP 기록</td><td>3개월</td><td>통신비밀보호법 §15의2</td></tr>
+        <tr><td>전자금융 거래 기록</td><td>5년</td><td>전자금융거래법 §22</td></tr>
+        <tr><td>세금계산서·신고자료</td><td>5년</td><td>국세기본법 §85의3</td></tr>
+      </table>
+    </section>
+
+    <section id="p4">
+      <h2><span class="num">4.</span>개인정보의 제3자 제공</h2>
+      <p>회사는 정보주체의 개인정보를 제1조의 목적 범위 내에서만 처리하며, 정보주체의 동의 또는 법령에 근거한 경우 외에는 외부에 제공하지 않습니다.</p>
+      <table>
+        <tr><th>제공받는 자</th><th>제공 목적</th><th>제공 항목</th><th>보유·이용 기간</th></tr>
+        <tr>
+          <td>한국신용정보원<br>(CODEF)</td>
+          <td>홈택스 인증·데이터 조회 대행</td>
+          <td>성명, 주민등록번호(즉시 폐기), 인증서 정보</td>
+          <td>인증 처리 즉시 폐기</td>
+        </tr>
+        <tr>
+          <td>국세청<br>(홈택스)</td>
+          <td>종합소득세 환급 신청 처리</td>
+          <td>성명, 주민등록번호, 신고 자료, 환급계좌</td>
+          <td>국세기본법에 따른 보존</td>
+        </tr>
+      </table>
+      <p style="margin-top:8px;"><em>회원은 개인정보 제3자 제공에 대한 동의를 거부할 수 있으나, 거부 시 환급 대행 서비스 이용이 제한됩니다.</em></p>
+    </section>
+
+    <section id="p5">
+      <h2><span class="num">5.</span>개인정보 처리 위탁</h2>
+      <p>회사는 원활한 서비스 제공을 위해 다음과 같이 개인정보 처리 업무를 위탁하고 있으며, 위탁 계약 시 「개인정보 보호법」 제26조에 따라 개인정보가 안전하게 관리되도록 필요한 사항을 규정하고 있습니다.</p>
+      <table>
+        <tr><th>수탁자</th><th>위탁 업무</th><th>처리 국가</th><th>이전 근거</th></tr>
+        <tr>
+          <td>Vercel Inc.</td>
+          <td>웹사이트·API 서버 호스팅 (Edge·Serverless)</td>
+          <td>미국</td>
+          <td>표준계약조항(SCC) — 개인정보 보호법 §28의8</td>
+        </tr>
+        <tr>
+          <td>Supabase Inc.</td>
+          <td>데이터베이스(PostgreSQL) 운영, 인증 토큰 저장</td>
+          <td>한국 또는 미국 (회원 가입 리전 선택)</td>
+          <td>표준계약조항(SCC)</td>
+        </tr>
+        <tr>
+          <td>한국신용정보원</td>
+          <td>CODEF 인증 API 운영</td>
+          <td>대한민국</td>
+          <td>국내 위탁</td>
+        </tr>
+        <tr>
+          <td>토스페이먼츠 등<br>(결제 시점에 추가 시 공지)</td>
+          <td>결제 처리, 카드 인증, 매출 정산</td>
+          <td>대한민국</td>
+          <td>국내 위탁</td>
+        </tr>
+      </table>
+      <p style="margin-top:8px;"><em>국외 이전이 발생하는 위탁의 경우 회사는 「개인정보 보호법」 제28조의8에 따라 표준계약조항(SCC)을 체결하여 동등한 수준의 개인정보 보호 조치를 확보합니다.</em></p>
+    </section>
+
+    <section id="p6">
+      <h2><span class="num">6.</span>정보주체의 권리·의무 및 행사 방법</h2>
+      <p>정보주체는 회사에 대해 언제든지 다음 권리를 행사할 수 있습니다.</p>
+      <ol>
+        <li>개인정보 <strong>열람</strong> 요구 (개인정보 보호법 §35)</li>
+        <li>오류 등이 있을 경우 <strong>정정</strong> 요구 (§36)</li>
+        <li><strong>삭제</strong> 요구 (§36) — 다른 법령에서 수집을 명시한 경우 제외</li>
+        <li><strong>처리정지</strong> 요구 (§37)</li>
+        <li>개인정보 처리에 대한 <strong>동의 철회</strong>, 회원 탈퇴</li>
+      </ol>
+      <p>위 권리는 이메일(<a href="mailto:ghdejr11@gmail.com">ghdejr11@gmail.com</a>) 또는 서비스 내 "회원 정보" 메뉴를 통해 행사할 수 있으며, 회사는 정당한 사유가 없는 한 지체 없이 조치합니다.</p>
+      <p>만 14세 미만 아동의 경우 법정대리인이 권리를 대리 행사할 수 있습니다.</p>
+    </section>
+
+    <section id="p7">
+      <h2><span class="num">7.</span>개인정보의 안전성 확보 조치</h2>
+      <p>회사는 「개인정보 보호법」 제29조 및 「개인정보의 안전성 확보조치 기준」(개인정보보호위원회 고시)에 따라 다음의 조치를 시행하고 있습니다.</p>
+
+      <h3>가. 관리적 조치</h3>
+      <ul>
+        <li>개인정보 처리 내부관리계획 수립·시행</li>
+        <li>개인정보 취급자 대상 정기 교육</li>
+        <li>개인정보 처리시스템 접근 권한 최소화</li>
+      </ul>
+
+      <h3>나. 기술적 조치</h3>
+      <ul>
+        <li><strong>전송 구간 암호화</strong> — 전 구간 TLS 1.3 (HTTPS) 적용</li>
+        <li><strong>저장 데이터 암호화</strong> — AES-256 (비밀번호는 단방향 해시)</li>
+        <li><strong>주민등록번호 비저장</strong> — CODEF API 호출 시 메모리에서만 일시 처리, 즉시 폐기</li>
+        <li>개인정보 처리시스템 <strong>접근 통제</strong> (IP 화이트리스트, VPN)</li>
+        <li>관리자 계정 <strong>2단계 인증(2FA)</strong> 의무화</li>
+        <li>해킹 대비 <strong>침입 차단·탐지 시스템(WAF)</strong> 운영</li>
+        <li>개인정보 처리시스템 접속 기록 <strong>최소 1년 이상</strong> 보관</li>
+        <li>백신 프로그램 설치·업데이트</li>
+      </ul>
+
+      <h3>다. 물리적 조치</h3>
+      <ul>
+        <li>전산실·자료보관실의 출입 통제 (수탁자 시설 기준)</li>
+      </ul>
+    </section>
+
+    <section id="p8">
+      <h2><span class="num">8.</span>개인정보 보호책임자</h2>
+      <p>회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만 처리 및 피해 구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p>
+      <table class="compact">
+        <tr><th>구분</th><th>내용</th></tr>
+        <tr><td>성명</td><td>홍덕훈</td></tr>
+        <tr><td>직위</td><td>대표</td></tr>
+        <tr><td>소속</td><td>쿤스튜디오</td></tr>
+        <tr><td>이메일</td><td><a href="mailto:ghdejr11@gmail.com">ghdejr11@gmail.com</a></td></tr>
+        <tr><td>전화</td><td>(추후 등록)</td></tr>
+      </table>
+      <p style="margin-top:10px;">개인정보 침해에 대한 신고나 상담이 필요한 경우 아래 기관에 문의하실 수 있습니다.</p>
+      <ul>
+        <li>개인정보 침해신고센터 (한국인터넷진흥원): <strong>국번없이 118</strong> · <a href="https://privacy.kisa.or.kr" target="_blank" rel="noopener">privacy.kisa.or.kr</a></li>
+        <li>개인정보 분쟁조정위원회: <strong>1833-6972</strong> · <a href="https://www.kopico.go.kr" target="_blank" rel="noopener">www.kopico.go.kr</a></li>
+        <li>대검찰청 사이버수사과: <strong>1301</strong> · <a href="https://www.spo.go.kr" target="_blank" rel="noopener">www.spo.go.kr</a></li>
+        <li>경찰청 사이버수사국: <strong>182</strong> · <a href="https://ecrm.police.go.kr" target="_blank" rel="noopener">ecrm.police.go.kr</a></li>
+      </ul>
+    </section>
+
+    <section id="p9">
+      <h2><span class="num">9.</span>개인정보 처리방침의 변경</h2>
+      <ol>
+        <li>본 개인정보처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경 내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 7일 전부터 공지사항을 통하여 고지합니다.</li>
+        <li>개인정보의 수집·이용·제공 등에 관한 동의 내용을 변경하거나 회원에게 불리한 내용으로 변경하는 경우에는 시행 30일 전부터 고지하고 별도의 동의를 받습니다.</li>
+      </ol>
+    </section>
+
+    <section id="p10">
+      <h2><span class="num">10.</span>시행일</h2>
+      <p>본 개인정보처리방침은 <strong>2026년 4월 26일</strong>부터 시행됩니다.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div>
+    <a href="/">홈</a> ·
+    <a href="/terms">이용약관</a> ·
+    <a href="/privacy">개인정보처리방침</a> ·
+    <a href="/refund">환불정책</a> ·
+    <a href="/blog/">블로그</a> ·
+    <a href="mailto:ghdejr11@gmail.com">이메일 문의</a>
+  </div>
+  <div class="copy">
+    © 2026 쿤스튜디오 (사업자번호 552-59-00848) · All rights reserved.<br>
+    한국신용정보원 인증 API(CODEF)를 통해 홈택스 데이터를 안전하게 처리합니다.
+  </div>
+</footer>
+
+<script>
+(function(){
+  var input = document.getElementById('tocSearch');
+  var items = document.querySelectorAll('#tocList li');
+  if (!input) return;
+  input.addEventListener('input', function(){
+    var q = this.value.trim().toLowerCase();
+    items.forEach(function(li){
+      if (!q) { li.classList.remove('hide'); return; }
+      var text = li.textContent.toLowerCase();
+      if (text.indexOf(q) >= 0) li.classList.remove('hide');
+      else li.classList.add('hide');
+    });
+  });
+})();
+</script>
+</body>
+</html>

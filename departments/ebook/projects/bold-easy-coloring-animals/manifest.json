@@ -1,0 +1,35 @@
+{
+  "book_id": "bold-easy-coloring-animals",
+  "title": "Bold Easy Coloring Animals",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Bold lines. Big shapes. Adorable animals. This easy coloring book is made for the people most coloring books forget - seniors, those with low vision, beginners, and anyone who just wants to color without squinting.\n\nWho it's for:\n- Older adults and seniors looking for relaxing, low-stress activities\n- People with macular degeneration, cataracts, or general low vision\n- Beginners and reluctant colorers\n- Memory care and assisted-living activity coordinators\n\nWhat's inside:\n- 50+ original animal designs: cats, dogs, owls, elephants, bunnies, foxes, sea creatures, and more\n- Thick, bold outlines that stay visible even with tired eyes\n- Wide-open spaces - no tiny details, no frustration\n- One image per page (back side blank) so markers don't bleed through and ruin the next page\n- Large 8.5 x 11 inch format - the canvas your hands deserve\n\nPerfect for therapy sessions, rainy afternoons, hospital stays, group activities at senior centers, or quiet mornings with a cup of tea. Works with crayons, markers, colored pencils, and gel pens.\n\nColoring is proven to lower stress, sharpen focus, and bring small daily joy. This book makes that joy accessible.\n\nAdd to cart and gift one to yourself, a parent, or a friend who could use a calmer hour.",
+  "keywords": [
+    "bold coloring book",
+    "easy coloring animals",
+    "seniors coloring",
+    "thick lines coloring",
+    "stress relief",
+    "adult coloring",
+    "low vision coloring"
+  ],
+  "categories": [
+    "BISAC: GAMES & ACTIVITIES / Coloring Books",
+    "BISAC: SELF-HELP / Aging"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 102,
+  "trim_size": "8.5x11",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "bold_easy_coloring_animals.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

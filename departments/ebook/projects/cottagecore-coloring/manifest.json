@@ -1,0 +1,35 @@
+{
+  "book_id": "cottagecore-coloring",
+  "title": "Cottagecore Coloring",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Slow living, by way of colored pencil. This cottagecore coloring book invites you into a softer, slower world - garden cottages, wildflower meadows, sunlit kitchens, and afternoons that smell like rising bread.\n\nWho it's for:\n- Adults who love the cottagecore aesthetic and slow-living movement\n- Coloring enthusiasts ready to graduate from generic mandalas\n- Anyone using coloring as a quiet ritual for stress relief\n- Gift-givers shopping for tea-and-blanket personalities\n\nWhat's inside:\n- 50+ original cottagecore illustrations: thatched cottages, herb gardens, mushroom forests, vintage kitchens, fox-and-fawn vignettes, summer picnics, autumn orchards\n- Mix of intricate detail pages and softer, calmer scenes - color matched to your mood\n- Large 8.5 x 11 inch format with single-sided pages so markers won't bleed\n- A romantic, hand-illustrated feel that makes finished pages frame-worthy\n\nBrew tea. Open a window. Color one page. The day will feel different.\n\nWhether you're new to adult coloring or you've worn out three pencil sets already, this book is the one you'll keep close to your favorite chair.\n\nAdd it to your cart and bring the countryside home.",
+  "keywords": [
+    "cottagecore coloring",
+    "cozy aesthetic",
+    "countryside coloring",
+    "rustic coloring",
+    "garden coloring",
+    "adult coloring book",
+    "vintage coloring"
+  ],
+  "categories": [
+    "BISAC: GAMES & ACTIVITIES / Coloring Books",
+    "BISAC: ART / Subjects & Themes / Plants & Animals"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 102,
+  "trim_size": "8.5x11",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "cottagecore_coloring.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

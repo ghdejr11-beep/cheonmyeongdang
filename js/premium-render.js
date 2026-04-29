@@ -382,8 +382,47 @@
     el.style.display = 'block';
   }
 
+  // ─── 잠금/해제 헬퍼 (2026-04-27 월회원권 추가) ───
+  // 월회원권 OR 단건 결제 OR 종합 풀이 보유 시 사주 풀이 OK
+  // 외부 호출 예: PremiumRender.shouldRender('saju')
+  function shouldRender(feature) {
+    if (root.CmEntitlement && typeof root.CmEntitlement.canUnlock === 'function') {
+      return root.CmEntitlement.canUnlock(feature || 'saju');
+    }
+    return false;
+  }
+
+  // 잠금 화면 HTML (월회원권 가치 제안 카드)
+  // 정책: 월회원권은 사주/궁합 무제한, 종합 풀이는 별도 결제 필요
+  function lockedHtml(feature) {
+    var f = feature || 'saju';
+    var label = ({ saju: '사주 정밀 풀이', gunghap: '궁합', comprehensive: '종합 풀이' }[f]) || '유료 풀이';
+    var coveredByMonthly = (f !== 'comprehensive'); // 종합 풀이는 월회원 미포함
+
+    var monthlyPitch = coveredByMonthly
+      ? ('월회원권(₩9,900/월)으로 <strong style="color:#e8c97a;">사주·궁합 무제한 + 매일 카톡 운세</strong><br>또는 ' + label + ' 단건 결제(₩9,900)로 이번 한 번만 열람할 수 있습니다.')
+      : ('종합 풀이는 단건 결제(<strong style="color:#e8c97a;">₩15,000</strong>)로만 열람 가능합니다.<br>사주+궁합 묶음 패키지로 <strong style="color:#e8c97a;">24% 할인</strong>된 가격입니다.');
+
+    var ctaButton = coveredByMonthly
+      ? '<button class="btn-gold" onclick="window.openOrder && window.openOrder(\'무제한 사주 구독권 (3일 무료체험)\', 9900)">월회원권 시작 (3일 무료)</button>'
+      : '<button class="btn-gold" onclick="window.openOrder && window.openOrder(\'종합 풀이\', 15000)">종합 풀이 결제 (₩15,000)</button>';
+
+    return [
+      '<div class="premium-section premium-locked" style="text-align:center;padding:32px 20px;">',
+      '<div style="font-size:2.4rem;margin-bottom:12px;">🔒</div>',
+      '<h3 style="font-family:Gowun Batang,serif;color:var(--gold2,#e8c97a);font-size:1.2rem;margin-bottom:14px;">' + label + ' 잠금 해제</h3>',
+      '<p style="color:#a89880;font-size:0.92rem;line-height:1.7;margin-bottom:18px;">',
+      monthlyPitch,
+      '</p>',
+      ctaButton,
+      '</div>'
+    ].join('');
+  }
+
   root.PremiumRender = {
     render: renderPremiumResult,
+    shouldRender: shouldRender,
+    lockedHtml: lockedHtml,
   };
 
 })(typeof self !== 'undefined' ? self : this);

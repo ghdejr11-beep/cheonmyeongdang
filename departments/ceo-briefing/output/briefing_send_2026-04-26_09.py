@@ -105,7 +105,7 @@ msg3 = f"""📺 미디어팀 상세 보고 | {DATE}
 - 텔레그램 자동 홍보 매일 10·20시 가동
 - KORLENS 콘텐츠 통합 완료
 - fal.ai API 발급 완료
-- 쇼츠 편집툴: Submagic Pro $23 + ElevenLabs $5 = $28/월 (트라이얼 후)
+- 음성합성: ElevenLabs $5 결제 완료 (4/27 키 발급) + 대체 후보 보고서 D:\KunStudio_IP\
 - 쿠팡 파트너스 단축링크 교체 TODO 남음
 
 ⚠️ 문제점

@@ -1,0 +1,35 @@
+{
+  "book_id": "fortune-notebook",
+  "title": "Fortune Notebook",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Money flows where attention goes. This 151-page fortune notebook turns abundance from a vague hope into a daily practice you can see, measure, and feel shift over time.\n\nWho it's for:\n- Manifestation and Law-of-Attraction practitioners\n- Lottery players, dreamers, and gratitude-journal believers\n- Anyone rebuilding their relationship with money after debt or scarcity seasons\n- Spiritual journalers ready for something more intentional than a blank notebook\n\nWhat's inside:\n- Daily prompts for gratitude, intention, money-mindset, and luck-noticing\n- Lucky number, dream, and synchronicity logs\n- Wealth visualization pages: define the life you're calling in\n- Weekly review: what came, what shifted, what to release\n- Affirmation library and abundance script templates\n- Year-end reflection: how your fortune actually changed\n\nThis isn't a magic spell. It's the simple, repeatable habit that almost every wealthy person credits when asked. Five minutes a day. Pen on paper. Mind aligned with money.\n\nStart writing the next year of your fortune. Order today.",
+  "keywords": [
+    "fortune notebook",
+    "manifestation journal",
+    "luck journal",
+    "lottery log",
+    "gratitude diary",
+    "money mindset",
+    "abundance journal"
+  ],
+  "categories": [
+    "BISAC: BODY, MIND & SPIRIT / New Thought",
+    "BISAC: SELF-HELP / Personal Growth"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 151,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "fortune_notebook.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

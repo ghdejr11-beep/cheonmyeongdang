@@ -1,0 +1,35 @@
+{
+  "book_id": "math-workbook-grade1",
+  "title": "Math Workbook Grade1",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Confidence with numbers starts here.\n\nThis 101-page first-grade math workbook is everything a 6- to 7-year-old needs to master the foundations of arithmetic - addition, subtraction, place value, simple time and money, and beginner word problems - without tears or screen time.\n\nWho it's for:\n- 1st grade students (ages 6-7) and advanced kindergarteners\n- Homeschool families following a Common Core or classical math sequence\n- Parents supplementing classroom learning at home\n- Tutors and after-school program coordinators\n\nWhat's inside:\n- 100+ pages of carefully sequenced practice: numbers to 100, addition and subtraction within 20, then within 100\n- Place-value drills (tens and ones), comparing numbers, simple skip counting\n- Time-telling, money basics, measurement, and shapes\n- Word problems that build reading-and-math fluency at the same time\n- Weekly review pages and confidence-building \"I can do this\" check-ins\n- Large 8.5 x 11 format with kid-friendly fonts and plenty of writing space\n\nUse it as a school-year supplement, a summer-bridge book, or a daily 15-minute habit. Built so kids can work mostly independently while parents check at the end.\n\nSet your child up to walk into 2nd grade fearless. Order today.",
+  "keywords": [
+    "math workbook grade 1",
+    "first grade math",
+    "addition subtraction",
+    "kids math practice",
+    "homeschool math",
+    "elementary math",
+    "math activity book"
+  ],
+  "categories": [
+    "BISAC: JUVENILE NONFICTION / Mathematics / Arithmetic",
+    "BISAC: EDUCATION / Elementary"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 101,
+  "trim_size": "8.5x11",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "math_workbook_grade1.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

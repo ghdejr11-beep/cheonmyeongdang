@@ -323,6 +323,17 @@
     };
   }
 
+  // ─── 잠금 해제 체크 (2026-04-27 월회원권 추가) ───
+  // 월회원권(monthly_premium) 활성 OR 사주 단건 결제(saju_premium / saju_detail_29900) 보유 시 OK
+  // 실제 잠금 UI 처리는 index.html 측에서 본 함수를 호출해 분기
+  function isSajuUnlocked() {
+    if (root.CmEntitlement && typeof root.CmEntitlement.canUnlockSaju === 'function') {
+      return root.CmEntitlement.canUnlockSaju();
+    }
+    // CmEntitlement 미로드 시 안전한 기본값: false (잠금)
+    return false;
+  }
+
   // ─── 공개 API ───
   root.PremiumSaju = {
     generateReport: generatePremiumReport,
@@ -332,6 +343,8 @@
     generateYearlyDetail: generateYearlyDetail,
     ilganDetail: 일간_심층,
     sipsinDetail: 십신_해석,
+    // 잠금 해제 체크 (월회원권 OR 사주 단건 결제)
+    isUnlocked: isSajuUnlocked,
   };
 
 })(typeof self !== 'undefined' ? self : this);

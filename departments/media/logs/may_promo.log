@@ -1,0 +1,16 @@
+2026-04-27 23:20:16 === run site=tax_n_benefit slot=None dry=False ===
+2026-04-27 23:20:16 [msg] 공제 가능 항목 자동 체크 — 빠뜨리는 금액 0원. {URL}
+2026-04-27 23:20:17 [bluesky] OK
+2026-04-27 23:20:18 [discord] OK
+2026-04-27 23:20:19 [mastodon] OK
+2026-04-27 23:20:20 [x] OK
+2026-04-27 23:20:28 [threads] FAIL
+2026-04-27 23:20:29 [instagram] FAIL
+2026-04-27 23:20:30 [telegram] OK
+2026-04-27 23:29:31 [bluesky] OK
+2026-04-27 23:29:31 [discord] OK
+2026-04-27 23:29:31 [mastodon] OK
+2026-04-27 23:29:32 [x] OK
+2026-04-27 23:29:41 [threads] OK
+2026-04-27 23:29:50 [instagram] OK
+2026-04-27 23:29:51 [telegram] OK

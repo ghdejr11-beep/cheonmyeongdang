@@ -1,0 +1,35 @@
+{
+  "book_id": "adhd-planner",
+  "title": "Adhd Planner",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Built for the ADHD brain - finally a planner that works with your wiring, not against it.\n\nIf traditional planners leave you blank-page-paralyzed by 9 a.m., this 129-page workbook gives you the structure you need without the overwhelm. Every spread is dopamine-friendly, executive-function-aware, and forgiving on the days your brain decides to do its own thing.\n\nWho it's for:\n- Adults living with ADHD, ADD, or suspected neurodivergence\n- Students, freelancers, and parents juggling too many open tabs\n- Anyone who has bought (and abandoned) five planners already\n\nWhat's inside:\n- Daily focus pages with task triage, energy check-in, and a single \"if nothing else\" priority\n- Time-blindness fighters: visual time blocks, pomodoro logs, and transition cues\n- Brain-dump and idea-park sections so racing thoughts have a home\n- Weekly executive-function review: wins, friction points, and one thing to tweak\n- Habit and medication tracker grids you can actually keep up with\n\nUse it on the morning you can't get started, the afternoon your focus crashes, the Sunday you want to reset the week. No rigid date columns to fall behind on - undated pages mean you can pick it up after a missed week without guilt.\n\nPair it with therapy, coaching, or solo work. It's a tool, not a cure - and that's the point.\n\nTap \"Add to Cart\" and start your next 90 days with a planner that finally fits the way you think.",
+  "keywords": [
+    "adhd planner",
+    "adhd journal",
+    "executive function",
+    "neurodivergent planner",
+    "focus tracker",
+    "adhd workbook",
+    "adult adhd"
+  ],
+  "categories": [
+    "BISAC: SELF-HELP / Personal Growth",
+    "BISAC: HEALTH & FITNESS / Diseases & Conditions / Nervous System"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 129,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "ADHD_Planner_Interior.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

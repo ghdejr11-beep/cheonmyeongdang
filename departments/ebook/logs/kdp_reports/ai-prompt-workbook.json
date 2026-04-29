@@ -1,0 +1,37 @@
+{
+  "book_dir": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\ai-prompt-workbook",
+  "timestamp": "2026-04-26T22:47:35",
+  "overall": "FAIL",
+  "cover": [
+    {
+      "name": "표지 금지 키워드",
+      "status": "PASS",
+      "message": "lorem/template/placeholder 없음"
+    },
+    {
+      "name": "표지 dimension",
+      "status": "WARN",
+      "message": "비표준 trim 8.75x11.25 in (허용: 6x9, 8.5x11 등)"
+    },
+    {
+      "name": "표지 DPI",
+      "status": "WARN",
+      "message": "DPI 추정 불가 (이미지 미발견 또는 PyPDF2 백엔드)"
+    }
+  ],
+  "interior": [
+    {
+      "name": "interior.pdf 존재",
+      "status": "FAIL",
+      "message": "*Interior*.pdf 미발견"
+    }
+  ],
+  "metadata": [
+    {
+      "name": "manifest.json 존재",
+      "status": "FAIL",
+      "message": "manifest.json 미발견"
+    }
+  ],
+  "errors": []
+}

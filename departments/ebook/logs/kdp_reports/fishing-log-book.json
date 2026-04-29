@@ -1,0 +1,27 @@
+{
+  "book_dir": "C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\departments\\ebook\\projects\\fishing-log-book",
+  "timestamp": "2026-04-26T22:47:35",
+  "overall": "FAIL",
+  "cover": [
+    {
+      "name": "cover.pdf 존재",
+      "status": "FAIL",
+      "message": "cover*.pdf 미발견"
+    }
+  ],
+  "interior": [
+    {
+      "name": "interior.pdf 존재",
+      "status": "FAIL",
+      "message": "*Interior*.pdf 미발견"
+    }
+  ],
+  "metadata": [
+    {
+      "name": "manifest.json 존재",
+      "status": "FAIL",
+      "message": "manifest.json 미발견"
+    }
+  ],
+  "errors": []
+}

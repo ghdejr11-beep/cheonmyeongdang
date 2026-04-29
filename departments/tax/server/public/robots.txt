@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://tax-n-benefit-api.vercel.app/sitemap.xml

@@ -1,0 +1,35 @@
+{
+  "book_id": "blood-pressure-log",
+  "title": "Blood Pressure Log",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "A simple, doctor-friendly blood pressure log designed for people who actually want to use it - not file it away after a week.\n\nHypertension management lives or dies in the data. This 127-page log makes daily readings effortless, pattern-spotting obvious, and your next doctor visit ten times more productive.\n\nWho it's for:\n- Adults monitoring high or borderline blood pressure at home\n- Heart patients tracking trends between cardiology visits\n- Caregivers logging readings for an aging parent or partner\n- Anyone whose doctor said \"start measuring twice a day and bring me the numbers\"\n\nWhat's inside:\n- 52 weeks of dated grids: AM/PM systolic, diastolic, pulse, and notes\n- Medication tracker so you can correlate doses with readings\n- Mood, sleep, and salt-intake notes - the variables doctors actually ask about\n- Weekly average summary boxes so trends pop off the page\n- Reference pages: BP categories, when to call your doctor, healthy lifestyle reminders\n\nCompact 6x9 format slips into a purse, glove box, or kitchen drawer next to the cuff. Large, clean grids work for older eyes and shaky mornings.\n\nNot medical advice - always follow your physician. But bring this to your next appointment and watch the conversation get sharper.\n\nOrder today and take ownership of the most important number you're not paying enough attention to.",
+  "keywords": [
+    "blood pressure log",
+    "hypertension tracker",
+    "bp diary",
+    "health journal",
+    "daily blood pressure",
+    "heart health",
+    "medical record"
+  ],
+  "categories": [
+    "BISAC: HEALTH & FITNESS / Diseases & Conditions / Cardiovascular",
+    "BISAC: MEDICAL / Reference"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 127,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "blood_pressure_log_book.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

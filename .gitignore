@@ -43,3 +43,9 @@ departments/*/logs/*.json
 departments/*/output/*.json
 !departments/*/logs/.gitkeep
 !departments/*/output/.gitkeep
+
+.vercel
+
+# Secretary OAuth tokens (never commit)
+departments/secretary/token_*.json
+departments/secretary/credentials*.json

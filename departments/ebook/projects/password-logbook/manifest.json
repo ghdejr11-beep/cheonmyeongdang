@@ -1,0 +1,35 @@
+{
+  "book_id": "password-logbook",
+  "title": "Password Logbook",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Stop emailing yourself your own passwords.\n\nThis 117-page password logbook is the offline, hack-proof, mom-can-actually-use-it solution to digital chaos. No subscription. No account to recover. Just an alphabetized book that stays exactly where you put it.\n\nWho it's for:\n- Adults overwhelmed by 100+ online accounts\n- Seniors and parents who don't trust password managers\n- Small-business owners juggling vendor logins\n- Anyone who keeps clicking \"Forgot Password?\" three times a week\n\nWhat's inside:\n- A-to-Z tabbed sections so finding \"Netflix\" takes two seconds\n- Structured fields per entry: website, username, password, security questions, recovery email, notes\n- Multiple entries per letter - real-world capacity, not 5-account toy size\n- Wi-Fi network and modem reset reference page\n- Software license, subscription, and renewal tracker\n- Emergency-info page so a trusted person can step in if needed\n\nCompact 6x9 size. Soft, durable cover. Looks like a journal so it doesn't scream \"my passwords are inside.\" Keep it in a desk drawer, not a laptop bag.\n\nGet yours and stop the password panic - today.",
+  "keywords": [
+    "password journal",
+    "password keeper",
+    "internet logbook",
+    "password organizer",
+    "login book",
+    "username password",
+    "secure notebook"
+  ],
+  "categories": [
+    "BISAC: REFERENCE / Personal & Practical Guides",
+    "BISAC: SELF-HELP / Personal Growth"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 117,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "Password_Logbook_Interior.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

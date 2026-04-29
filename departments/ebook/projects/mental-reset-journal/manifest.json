@@ -1,0 +1,35 @@
+{
+  "book_id": "mental-reset-journal",
+  "title": "Mental Reset Journal",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "When your mind feels like 47 browser tabs and a low battery warning - open this journal.\n\nThe Mental Reset Journal is a 47-page guided notebook designed for the moments you most need it: the anxious morning, the burnt-out afternoon, the 2 a.m. spiral. Short. Honest. Genuinely calming.\n\nWho it's for:\n- Adults dealing with anxiety, low mood, or burnout\n- Therapy clients who need between-session work\n- High-achievers learning that productivity isn't the same as wellness\n- First-time journalers who don't know where to start\n\nWhat's inside:\n- Mental-reset prompts grounded in CBT, ACT, and mindfulness traditions\n- Brain dump and worry-park pages so racing thoughts have a place to land\n- Body scan and grounding exercises in printed step-by-step form\n- Gratitude, self-compassion, and reframe pages - paced gently\n- A 7-day mini-reset structure for harder weeks\n\nKeep it on your nightstand, in your bag, or beside your therapist's couch. When the noise gets loud, pick it up. Five minutes of pen on paper does more than an hour of doomscrolling - and your nervous system already knows it.\n\nOrder your reset today.",
+  "keywords": [
+    "mental reset journal",
+    "mindfulness journal",
+    "anxiety relief",
+    "self-care notebook",
+    "mental health workbook",
+    "guided journal",
+    "wellbeing diary"
+  ],
+  "categories": [
+    "BISAC: SELF-HELP / Mood Disorders / Depression",
+    "BISAC: BODY, MIND & SPIRIT / Mindfulness & Meditation"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 47,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "Mental_Reset_Journal_Interior.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

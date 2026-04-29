@@ -1,0 +1,35 @@
+{
+  "book_id": "ai-prompt-workbook",
+  "title": "AI Prompt Workbook",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Stop typing \"write me something good\" and watch ChatGPT (or Claude, Gemini, or any LLM) actually deliver. This 130-page prompt workbook teaches you to engineer prompts the way professionals do - and gives you the space to practice until it's muscle memory.\n\nWho it's for:\n- Beginners who feel like AI \"never gets what I mean\"\n- Marketers, writers, students, and small-business owners using ChatGPT every day\n- Power users who want a paper system to refine and reuse winning prompts\n\nWhat's inside:\n- A simple, repeatable prompt framework (Role, Context, Task, Format, Constraints)\n- Fill-in templates for 30+ real use cases: emails, blog posts, code, study notes, ad copy, resumes, and more\n- Side-by-side compare pages: weak prompt vs. upgraded prompt vs. final output\n- A personal prompt library you build over time, indexed by goal\n- Iteration loops so you learn to refine, not just retype\n\nUse it during your morning planning, beside your laptop while you work, or on the train when you want to draft prompts offline before pasting them in. Works with ChatGPT, Claude, Gemini, Copilot, and any future model - because the framework is model-agnostic.\n\nBy the last page you won't be \"prompting\" anymore. You'll be directing.\n\nGet your copy and turn AI from a guess-machine into your most reliable assistant.",
+  "keywords": [
+    "ai prompt workbook",
+    "chatgpt prompts",
+    "prompt engineering",
+    "ai for beginners",
+    "prompt journal",
+    "generative ai",
+    "llm prompts"
+  ],
+  "categories": [
+    "BISAC: COMPUTERS / Artificial Intelligence / General",
+    "BISAC: SELF-HELP / Creativity"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 130,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "ai_prompt_workbook.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

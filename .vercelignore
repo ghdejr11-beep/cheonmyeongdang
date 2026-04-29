@@ -1,0 +1,46 @@
+# 배포에서 제외 (Vercel)
+node_modules/
+android/
+departments/
+ebook_system/
+research_competitors/
+hq/
+scripts/
+www/
+
+# Capacitor 관련
+capacitor.config.json
+package.json
+package-lock.json
+
+# 비밀
+.secrets
+.secrets_*
+.env
+.env.*
+**/credentials.json
+**/token.json
+**/client_secret*.json
+
+# 빌드/캐시
+__pycache__/
+*.pyc
+*.pyo
+dist/
+build/
+.kdp_reports/
+
+# 미디어 빌드 산출물
+*.aab
+*.apk
+*.keystore
+*.jks
+
+# 개발 파일
+feature-gen.html
+palm-svg.html
+tetris.html
+
+# OS
+.DS_Store
+Thumbs.db

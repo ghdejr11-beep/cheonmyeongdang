@@ -4,119 +4,120 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>결제 실패 - 천명당</title>
+<meta name="robots" content="noindex, nofollow">
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #080a10;
-    --gold: #c9a84c;
-    --gold2: #e8c97a;
-    --crimson: #8b2c3e;
-    --text: #e8e0d0;
-    --text2: #a89880;
-    --border: rgba(201,168,76,0.2);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background: radial-gradient(ellipse at top, #401020 0%, var(--bg) 70%);
-    color: var(--text);
-    font-family: 'Noto Sans KR', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  .card {
-    max-width: 520px;
-    width: 100%;
-    background: linear-gradient(135deg, rgba(13,16,32,0.97), rgba(40,16,20,0.97));
-    border: 1px solid var(--crimson);
-    border-radius: 20px;
-    padding: 48px 32px;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  }
-  .icon {
-    font-size: 5rem;
-    margin-bottom: 20px;
-  }
-  h1 {
-    font-family: 'Gowun Batang', serif;
-    color: #f87171;
-    font-size: 1.8rem;
-    margin-bottom: 16px;
-  }
-  p {
-    color: var(--text);
-    font-size: 0.95rem;
-    line-height: 1.8;
-    margin-bottom: 24px;
-  }
-  .error-box {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(248,113,113,0.3);
-    border-radius: 12px;
-    padding: 16px;
-    margin: 20px 0;
-    text-align: left;
-    font-size: 0.82rem;
-    color: var(--text2);
-  }
-  .btn {
-    display: inline-block;
-    padding: 14px 36px;
-    background: linear-gradient(135deg, var(--gold), var(--gold2));
-    color: #080a10;
-    font-weight: 700;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    margin: 6px;
-    transition: transform 0.2s;
-  }
-  .btn:hover { transform: translateY(-2px); }
-  .btn-outline {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
+ :root {
+ --bg: #080a10;
+ --gold: #c9a84c;
+ --gold2: #e8c97a;
+ --crimson: #8b2c3e;
+ --text: #e8e0d0;
+ --text2: #a89880;
+ --border: rgba(201,168,76,0.2);
+ }
+ * { margin:0; padding:0; box-sizing:border-box; }
+ body {
+ background: radial-gradient(ellipse at top, #401020 0%, var(--bg) 70%);
+ color: var(--text);
+ font-family: 'Noto Sans KR', sans-serif;
+ min-height: 100vh;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ padding: 20px;
+ }
+ .card {
+ max-width: 520px;
+ width: 100%;
+ background: linear-gradient(135deg, rgba(13,16,32,0.97), rgba(40,16,20,0.97));
+ border: 1px solid var(--crimson);
+ border-radius: 20px;
+ padding: 48px 32px;
+ text-align: center;
+ box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+ }
+ .icon {
+ font-size: 5rem;
+ margin-bottom: 20px;
+ }
+ h1 {
+ font-family: 'Gowun Batang', serif;
+ color: #f87171;
+ font-size: 1.8rem;
+ margin-bottom: 16px;
+ }
+ p {
+ color: var(--text);
+ font-size: 0.95rem;
+ line-height: 1.8;
+ margin-bottom: 24px;
+ }
+ .error-box {
+ background: rgba(0,0,0,0.3);
+ border: 1px solid rgba(248,113,113,0.3);
+ border-radius: 12px;
+ padding: 16px;
+ margin: 20px 0;
+ text-align: left;
+ font-size: 0.82rem;
+ color: var(--text2);
+ }
+ .btn {
+ display: inline-block;
+ padding: 14px 36px;
+ background: linear-gradient(135deg, var(--gold), var(--gold2));
+ color: #080a10;
+ font-weight: 700;
+ text-decoration: none;
+ border-radius: 8px;
+ font-size: 0.9rem;
+ margin: 6px;
+ transition: transform 0.2s;
+ }
+ .btn:hover { transform: translateY(-2px); }
+ .btn-outline {
+ background: transparent;
+ color: var(--text);
+ border: 1px solid var(--border);
+ }
 </style>
 </head>
 <body>
 <div class="card">
-  <div class="icon">❌</div>
-  <h1>결제에 실패했습니다</h1>
-  <p>
-    결제 처리 중 문제가 발생했습니다.<br>
-    다시 시도하시거나 다른 결제 수단을 이용해 주세요.
-  </p>
-  <div class="error-box" id="error-info">
-    <!-- 에러 정보 -->
-  </div>
-  <div>
-    <a href="./#paid" class="btn">🔄 다시 시도하기</a>
-    <a href="./" class="btn btn-outline">🏠 홈으로</a>
-  </div>
+<div class="icon"></div>
+<h1>결제에 실패했습니다</h1>
+<p>
+ 결제 처리 중 문제가 발생했습니다.<br>
+ 다시 시도하시거나 다른 결제 수단을 이용해 주세요.
+</p>
+<div class="error-box" id="error-info">
+<!-- 에러 정보 -->
+</div>
+<div>
+<a href="./#paid" class="btn">다시 시도하기</a>
+<a href="./" class="btn btn-outline">홈으로</a>
+</div>
 </div>
 
 <script>
-  var params = new URLSearchParams(window.location.search);
-  var code = params.get('code');
-  var message = params.get('message');
-  var errBox = document.getElementById('error-info');
+ var params = new URLSearchParams(window.location.search);
+ var code = params.get('code');
+ var message = params.get('message');
+ var errBox = document.getElementById('error-info');
 
-  var msgs = {
-    'PAY_PROCESS_CANCELED': '사용자가 결제를 취소했습니다.',
-    'PAY_PROCESS_ABORTED': '결제 진행 중 오류가 발생했습니다.',
-    'REJECT_CARD_COMPANY': '카드사에서 결제를 거절했습니다.',
-    'INVALID_CARD_NUMBER': '카드 번호가 올바르지 않습니다.',
-    'EXPIRED_CARD': '만료된 카드입니다.',
-    'INSUFFICIENT_FUNDS': '잔액이 부족합니다.'
-  };
+ var msgs = {
+ 'PAY_PROCESS_CANCELED': '사용자가 결제를 취소했습니다.',
+ 'PAY_PROCESS_ABORTED': '결제 진행 중 오류가 발생했습니다.',
+ 'REJECT_CARD_COMPANY': '카드사에서 결제를 거절했습니다.',
+ 'INVALID_CARD_NUMBER': '카드 번호가 올바르지 않습니다.',
+ 'EXPIRED_CARD': '만료된 카드입니다.',
+ 'INSUFFICIENT_FUNDS': '잔액이 부족합니다.'
+ };
 
-  errBox.innerHTML =
-    '<strong style="color:#f87171;">오류 코드:</strong> ' + (code || '알 수 없음') + '<br>' +
-    '<strong style="color:#f87171;">상세:</strong> ' + (msgs[code] || message || '결제 처리 중 오류가 발생했습니다.');
+ errBox.innerHTML =
+ '<strong style="color:#f87171;">오류 코드:</strong>' + (code || '알 수 없음') + '<br>' +
+ '<strong style="color:#f87171;">상세:</strong>' + (msgs[code] || message || '결제 처리 중 오류가 발생했습니다.');
 </script>
 </body>
 </html>

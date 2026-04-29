@@ -1,0 +1,35 @@
+{
+  "book_id": "blood-sugar-tracker",
+  "title": "Blood Sugar Tracker",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Take control of your glucose - one honest reading at a time.\n\nThis 123-page blood sugar tracker turns the daily routine of finger sticks, meal logs, and insulin doses into something you can actually learn from. Built for type 1, type 2, gestational, and prediabetic readers who want to understand their numbers, not just record them.\n\nWho it's for:\n- People newly diagnosed with diabetes who need a simple system\n- Long-term diabetics tired of spreadsheet apps\n- Anyone tracking A1C trends, insulin response, or carb-glucose patterns\n- Caregivers monitoring a family member's diabetes\n\nWhat's inside:\n- 100+ daily logs: fasting, pre/post meal, bedtime readings (mg/dL or mmol/L)\n- Carb count, insulin dose, exercise, and mood columns side-by-side\n- Weekly review pages: averages, highs, lows, and what your body told you\n- Monthly A1C and weight tracker\n- Reference: target ranges, hypo/hyper symptoms, and questions to ask your doctor\n\nTravel-ready 6x9 size. Wide grids for tired eyes and post-meal hands. No app to forget your password to.\n\nYour glucose meter gives you a number. This book turns it into knowledge.\n\nBuy now and bring better data to your next endocrinology visit.",
+  "keywords": [
+    "blood sugar log",
+    "diabetic journal",
+    "glucose tracker",
+    "diabetes log book",
+    "a1c tracker",
+    "insulin journal",
+    "type 2 diabetes"
+  ],
+  "categories": [
+    "BISAC: HEALTH & FITNESS / Diseases & Conditions / Diabetes",
+    "BISAC: MEDICAL / Endocrinology & Metabolism"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 123,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "diabetic_blood_sugar_log.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

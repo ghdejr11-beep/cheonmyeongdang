@@ -1,0 +1,20 @@
+{
+  "_schema": {
+    "code": "string (8자리 unique referral code, CMD prefix)",
+    "owner_phone": "string (초대자 휴대폰 또는 이메일)",
+    "owner_email": "string (선택)",
+    "created_at": "ISO timestamp",
+    "invited": [
+      {
+        "visitor_id": "string (브라우저 UUID + IP/UA hash, 글로벌 unique)",
+        "visited_at": "ISO timestamp",
+        "converted": "boolean (결제 완료 여부)",
+        "converted_at": "ISO timestamp (결제 시각)",
+        "converted_email": "string (결제자 이메일)"
+      }
+    ],
+    "first_month_free_granted": "boolean (10명 달성 후 1회만 true)",
+    "granted_at": "ISO timestamp"
+  },
+  "referrals": []
+}

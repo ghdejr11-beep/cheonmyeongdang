@@ -1,0 +1,46 @@
+{
+  "book_id": "sobriety-90-day-journal",
+  "title": "Sobriety Journal",
+  "subtitle": "90 Days to Clarity - A Daily Recovery Companion for Quitting Alcohol & Drugs",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Ninety days of guided pages for anyone choosing recovery. Daily prompts cover gratitude, triggers, cravings (0-10), mood, sleep, support contact, and one small win. Weekly check-ins surface patterns. Emergency Plan, trigger reference, and support directory live in the back so the book opens to help you in the hardest moments. Designed for adults quitting alcohol or drugs - works alongside AA, SMART Recovery, or solo recovery. Compact 6x9 size fits in a bag. Not medical advice; if physically dependent, consult a doctor or call SAMHSA 1-800-662-HELP.",
+  "keywords": [
+    "sobriety journal",
+    "alcohol recovery workbook",
+    "90 day sobriety journal",
+    "addiction recovery journal",
+    "quit drinking journal",
+    "stop drinking workbook",
+    "AA recovery companion"
+  ],
+  "categories": [
+    "BISAC: SELF-HELP / Substance Abuse & Addictions / Alcohol",
+    "BISAC: SELF-HELP / Substance Abuse & Addictions / Drugs",
+    "BISAC: SELF-HELP / Journaling"
+  ],
+  "isbn": "",
+  "price_usd": 11.99,
+  "page_count": 114,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-27",
+  "interior_pdf": "sobriety_90_day_journal.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "niche_research": {
+    "competition": "medium-high",
+    "demand": "very high - evergreen + Q1 New Year spike",
+    "validated_bestsellers": [
+      "Stop Drinking Journal (B0CXJ669C7)",
+      "Daily Sobriety Journal 60 Day (B088N67NHK)",
+      "Sobriety Journal 90 Days to Clarity by Lia Vallenstein (B0GJTCQJLG)"
+    ],
+    "differentiator": "Built-in Emergency Plan + Slip Log without shame + 30/60/90 milestone reflections"
+  },
+  "todo": [
+    "isbn",
+    "kdp_upload",
+    "review_categories"
+  ]
+}

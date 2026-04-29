@@ -1,0 +1,167 @@
+{
+  "products": [
+    {
+      "id": "silver-bar-100g",
+      "name": "실버바 100g",
+      "category": "투자",
+      "link": "https://link.coupang.com/a/emjC0T",
+      "context_tags": [
+        "투자",
+        "재테크",
+        "실버",
+        "AI 부업 수익 보관",
+        "은",
+        "현물",
+        "자산",
+        "포트폴리오"
+      ],
+      "active": true
+    },
+    {
+      "id": "keyboard-mechanical",
+      "name": "기계식 키보드 (재택근무)",
+      "category": "홈오피스",
+      "link": "",
+      "context_tags": [
+        "키보드",
+        "재택",
+        "홈오피스",
+        "타이핑",
+        "코딩",
+        "생산성",
+        "장비"
+      ],
+      "active": false
+    },
+    {
+      "id": "monitor-dev",
+      "name": "개발용 모니터",
+      "category": "홈오피스",
+      "link": "",
+      "context_tags": [
+        "모니터",
+        "개발",
+        "코딩",
+        "duo monitor",
+        "디스플레이",
+        "개발자 셋업"
+      ],
+      "active": false
+    },
+    {
+      "id": "headphone-bluetooth",
+      "name": "블루투스 헤드폰 (콘텐츠 제작)",
+      "category": "콘텐츠 제작",
+      "link": "",
+      "context_tags": [
+        "헤드폰",
+        "이어폰",
+        "유튜브",
+        "쇼츠",
+        "편집",
+        "녹음",
+        "노이즈캔슬링"
+      ],
+      "active": false
+    },
+    {
+      "id": "desk-home-office",
+      "name": "홈오피스 책상",
+      "category": "홈오피스",
+      "link": "",
+      "context_tags": [
+        "책상",
+        "데스크",
+        "홈오피스",
+        "재택",
+        "워크스테이션"
+      ],
+      "active": false
+    },
+    {
+      "id": "ergonomic-chair",
+      "name": "사무용 의자",
+      "category": "홈오피스",
+      "link": "",
+      "context_tags": [
+        "의자",
+        "체어",
+        "허리",
+        "장시간",
+        "생산성",
+        "자세"
+      ],
+      "active": false
+    },
+    {
+      "id": "ai-book",
+      "name": "AI 자기계발 도서",
+      "category": "도서",
+      "link": "",
+      "context_tags": [
+        "AI",
+        "책",
+        "도서",
+        "자기계발",
+        "ChatGPT",
+        "Claude",
+        "프롬프트"
+      ],
+      "active": false
+    },
+    {
+      "id": "notion-guide-book",
+      "name": "노션 가이드북",
+      "category": "도서",
+      "link": "",
+      "context_tags": [
+        "노션",
+        "Notion",
+        "템플릿",
+        "생산성 책",
+        "OS"
+      ],
+      "active": false
+    },
+    {
+      "id": "digital-notebook",
+      "name": "디지털 노트북",
+      "category": "디지털",
+      "link": "",
+      "context_tags": [
+        "태블릿",
+        "노트북",
+        "아이패드",
+        "필기",
+        "디지털 노트"
+      ],
+      "active": false
+    },
+    {
+      "id": "webcam-streaming",
+      "name": "웹캠 (라이브/콘텐츠)",
+      "category": "콘텐츠 제작",
+      "link": "",
+      "context_tags": [
+        "웹캠",
+        "라이브",
+        "스트리밍",
+        "유튜브",
+        "줌",
+        "화상회의"
+      ],
+      "active": false
+    }
+  ],
+  "settings": {
+    "frequency": "every_5_posts",
+    "frequency_n": 5,
+    "compliance_text": "[광고] 이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."
+  },
+  "_state": {
+    "post_count": 7,
+    "last_inserted_idx": 0,
+    "last_inserted_at": "2026-04-28T09:00:08.035417",
+    "total_inserted": 1
+  }
+}

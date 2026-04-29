@@ -1,0 +1,35 @@
+{
+  "book_id": "airbnb-guestbook",
+  "title": "Airbnb Guestbook",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Turn every stay into a five-star review and a memory worth keeping. This beautifully laid-out 104-page guestbook is built for Airbnb, VRBO, and short-term rental hosts who treat hospitality like a craft.\n\nWho it's for:\n- New and seasoned Airbnb / VRBO hosts\n- Owners of vacation cabins, beach houses, lake homes, and city apartments\n- Property managers running multiple short-term rentals\n\nWhat's inside:\n- Welcome pages with space for your house name, Wi-Fi, and check-out instructions\n- Local recommendations sections: restaurants, coffee, hikes, hidden gems, emergency info\n- 80+ structured guest entry pages: name, hometown, dates, favorite memory, drawing space\n- House rules and \"things you should know\" pages, kept friendly not clinical\n- A keepsake section so the book becomes part of the property's story over the years\n\nUse it as the centerpiece on your coffee table. Guests flip through entries from couples on their honeymoon, families from three states over, and travelers who left thank-you sketches - and they instinctively raise their own bar.\n\nBetter reviews start with a better welcome. Order one for every property you host.",
+  "keywords": [
+    "airbnb guest book",
+    "vacation rental",
+    "vrbo guestbook",
+    "host welcome book",
+    "short term rental",
+    "hospitality journal",
+    "guest log"
+  ],
+  "categories": [
+    "BISAC: HOUSE & HOME / Reference",
+    "BISAC: BUSINESS & ECONOMICS / Industries / Hospitality"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 104,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "airbnb_guest_book.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": false,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

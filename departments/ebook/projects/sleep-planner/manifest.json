@@ -1,0 +1,35 @@
+{
+  "book_id": "sleep-planner",
+  "title": "Sleep Planner",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Better sleep is a system, not a miracle.\n\nThis 105-page sleep planner is the practical, science-aligned tracker that turns \"I don't sleep well\" into a real strategy. Whether you're battling chronic insomnia or just want to wake up feeling human again, this is the offline reset your nervous system has been waiting for.\n\nWho it's for:\n- Adults with insomnia, restless sleep, or shift-work disruption\n- People testing CBT-I, sleep restriction, or stimulus-control techniques\n- Anyone tracking the effect of melatonin, magnesium, alcohol, or screen time\n- Patients preparing for sleep-clinic or doctor visits\n\nWhat's inside:\n- 90-day sleep log: bedtime, wake time, time to fall asleep, awakenings, total hours\n- Sleep quality 1-10, mood at wake, daytime energy crash points\n- Pre-bed routine, caffeine, alcohol, and screen-time check-ins\n- Weekly review: average hours, sleep efficiency, biggest disruptors\n- Bedtime routine builder and 30-day habit reset\n- Reference: sleep hygiene basics, what your circadian rhythm actually needs\n\nMost sleep apps overload you with charts you can't act on. This planner forces clarity - one page, one night, one tweak. Fill it in for 30 days and most readers see a measurable shift.\n\nOrder today and reclaim your mornings, one good night at a time.",
+  "keywords": [
+    "sleep planner",
+    "sleep tracker",
+    "insomnia journal",
+    "sleep diary",
+    "bedtime routine",
+    "rest log",
+    "circadian planner"
+  ],
+  "categories": [
+    "BISAC: HEALTH & FITNESS / Sleep",
+    "BISAC: SELF-HELP / Personal Growth"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 105,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "Sleep_Planner_Interior.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

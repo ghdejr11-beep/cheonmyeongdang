@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S4HPJHT5QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S4HPJHT5QR');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#3282f6">
+<meta name="robots" content="noindex,nofollow">
+<title>결제하기 — 세금N혜택</title>
+<link rel="canonical" href="https://tax-n-benefit-api.vercel.app/payment">
+<style>
+  :root { --blue:#3282f6; --blue-dark:#1b64da; --gray-1:#f9fafb; --gray-2:#e5e8eb; --gray-3:#8b95a1; --gray-4:#4e5968; --text:#191f28; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', sans-serif; color: var(--text); background: var(--gray-1); -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 540px; margin: 0 auto; padding: 24px 20px 80px; }
+  header { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+  header a { color: var(--gray-4); text-decoration: none; font-size: 14px; }
+  header h1 { font-size: 22px; font-weight: 800; flex: 1; text-align: center; margin-right: 40px; }
+  .card { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+  .card h2 { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+  label { display: block; font-size: 13px; color: var(--gray-4); margin-bottom: 6px; font-weight: 600; }
+  input[type=text], input[type=email], input[type=tel] { width: 100%; padding: 14px 16px; border: 1px solid var(--gray-2); border-radius: 10px; font-size: 16px; font-family: inherit; background: #fff; }
+  input:focus { outline: 2px solid var(--blue); border-color: var(--blue); }
+  .row { margin-bottom: 14px; }
+  .calc-box { background: var(--gray-1); border-radius: 12px; padding: 16px; margin-top: 12px; }
+  .calc-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; color: var(--gray-4); }
+  .calc-row.total { border-top: 1px solid var(--gray-2); margin-top: 8px; padding-top: 12px; font-size: 16px; font-weight: 700; color: var(--text); }
+  .calc-row .v { font-feature-settings: 'tnum'; }
+  .pay-summary { background: linear-gradient(135deg, #3282f6 0%, #1b64da 100%); color: #fff; border-radius: 16px; padding: 22px; margin-bottom: 16px; }
+  .pay-summary .label { font-size: 13px; opacity: 0.85; margin-bottom: 6px; }
+  .pay-summary .amount { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; }
+  .pay-summary .desc { font-size: 13px; opacity: 0.85; margin-top: 8px; line-height: 1.5; }
+  .agree { display: flex; align-items: flex-start; gap: 10px; padding: 12px 0; font-size: 14px; color: var(--gray-4); }
+  .agree input { margin-top: 3px; flex-shrink: 0; width: 18px; height: 18px; accent-color: var(--blue); }
+  .agree a { color: var(--blue); text-decoration: underline; }
+  .btn-pay { width: 100%; padding: 16px; background: var(--blue); color: #fff; border: 0; border-radius: 12px; font-size: 17px; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit; }
+  .btn-pay:hover:not(:disabled) { background: var(--blue-dark); }
+  .btn-pay:disabled { background: var(--gray-2); color: var(--gray-3); cursor: not-allowed; }
+  .guarantee { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding: 12px; background: #eef6ff; border-radius: 10px; font-size: 13px; color: var(--blue-dark); }
+  .err { color: #e74c3c; font-size: 13px; margin-top: 6px; }
+  .footer-note { text-align: center; font-size: 12px; color: var(--gray-3); margin-top: 16px; line-height: 1.6; }
+  #payment-method, #agreement { margin-top: 12px; }
+  .loading { text-align: center; color: var(--gray-3); padding: 24px; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a href="/">← 돌아가기</a>
+    <h1>결제하기</h1>
+  </header>
+
+  <div class="pay-summary">
+    <div class="label">환급 신청 보증금 (1회)</div>
+    <div class="amount" id="payAmount">₩9,900</div>
+    <div class="desc">환급 0원 시 100% 환불 보장 · 9.9% 정액 수수료 · 3영업일 SLA</div>
+  </div>
+
+  <div class="card">
+    <h2>1. 환급 예상액 계산 (선택)</h2>
+    <div class="row">
+      <label for="expectedRefund">예상 환급액 (원)</label>
+      <input type="text" id="expectedRefund" placeholder="예: 250000" inputmode="numeric">
+    </div>
+    <div class="calc-box" id="calcBox" style="display:none;">
+      <div class="calc-row"><span>예상 환급액</span><span class="v" id="cRefund">-</span></div>
+      <div class="calc-row"><span>9.9% 정액 수수료</span><span class="v" id="cFee">-</span></div>
+      <div class="calc-row total"><span>실수령액</span><span class="v" id="cNet">-</span></div>
+    </div>
+    <div class="footer-note" style="text-align:left;margin-top:8px;">
+      ※ 결제는 환급 신청 보증금 ₩9,900 (1회)이며, 수수료는 환급 완료 후 별도 정산됩니다.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2. 신청자 정보</h2>
+    <div class="row">
+      <label for="custName">성함</label>
+      <input type="text" id="custName" placeholder="홍길동" autocomplete="name">
+    </div>
+    <div class="row">
+      <label for="custEmail">이메일 (영수증 수신)</label>
+      <input type="email" id="custEmail" placeholder="example@email.com" autocomplete="email">
+    </div>
+    <div class="row">
+      <label for="custPhone">연락처</label>
+      <input type="tel" id="custPhone" placeholder="010-1234-5678" autocomplete="tel">
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>3. 결제 수단</h2>
+    <div id="payment-method"><div class="loading">결제 위젯 로딩 중...</div></div>
+    <div id="agreement"></div>
+    <label class="agree">
+      <input type="checkbox" id="agreeAll">
+      <span>
+        <a href="/terms" target="_blank">이용약관</a>,
+        <a href="/privacy" target="_blank">개인정보처리방침</a>,
+        <a href="/refund" target="_blank">환불정책</a>에 동의합니다.
+      </span>
+    </label>
+    <button class="btn-pay" id="payBtn" disabled>결제하기</button>
+    <div class="err" id="errMsg"></div>
+    <div class="guarantee">
+      🛡️ 환급 0원 시 ₩9,900 100% 환불 · 본인 명의 카드만 결제 가능
+    </div>
+  </div>
+
+  <div class="footer-note">
+    쿤스튜디오 (사업자번호 552-59-00848)<br>
+    문의: ghdejr11@gmail.com
+  </div>
+</div>
+
+<script src="https://js.tosspayments.com/v2/standard"></script>
+<script>
+  const fmtKRW = (n) => '₩' + Number(n || 0).toLocaleString('ko-KR');
+  const $ = (id) => document.getElementById(id);
+
+  const FEE_RATE = 9.9;
+  let widget = null;
+  let payConfig = { clientKey: null, fixedAmount: 9900, env: 'test' };
+
+  // 1) 환급 계산기
+  $('expectedRefund').addEventListener('input', (e) => {
+    const raw = e.target.value.replace(/[^0-9]/g, '');
+    e.target.value = raw ? Number(raw).toLocaleString('ko-KR') : '';
+    const refund = Number(raw || 0);
+    const box = $('calcBox');
+    if (refund <= 0) { box.style.display = 'none'; return; }
+    box.style.display = '';
+    const fee = Math.round(refund * FEE_RATE / 100);
+    const net = refund - fee;
+    $('cRefund').textContent = fmtKRW(refund);
+    $('cFee').textContent = '-' + fmtKRW(fee);
+    $('cNet').textContent = fmtKRW(net);
+  });
+
+  // 2) 결제 설정 로드 + 위젯 초기화
+  async function initPayment() {
+    try {
+      const r = await fetch('/api/payment-config');
+      if (!r.ok) throw new Error('결제 설정 로드 실패 (' + r.status + ')');
+      payConfig = await r.json();
+      $('payAmount').textContent = fmtKRW(payConfig.fixedAmount);
+
+      const tossPayments = TossPayments(payConfig.clientKey);
+      // 비회원 customerKey: 고유 식별자 ANONYMOUS 또는 랜덤값
+      const customerKey = 'cust_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+      widget = tossPayments.widgets({ customerKey });
+
+      await widget.setAmount({ currency: 'KRW', value: payConfig.fixedAmount });
+      await Promise.all([
+        widget.renderPaymentMethods({ selector: '#payment-method', variantKey: 'DEFAULT' }),
+        widget.renderAgreement({ selector: '#agreement', variantKey: 'AGREEMENT' }),
+      ]);
+
+      $('payBtn').disabled = false;
+    } catch (e) {
+      $('payment-method').innerHTML = '<div class="err">' + e.message + ' — 페이지 새로고침 후 다시 시도해주세요.</div>';
+    }
+  }
+
+  // 3) 결제 요청
+  async function requestPay() {
+    const name = $('custName').value.trim();
+    const email = $('custEmail').value.trim();
+    const phone = $('custPhone').value.trim().replace(/[^0-9]/g, '');
+    const errEl = $('errMsg');
+    errEl.textContent = '';
+
+    if (!$('agreeAll').checked) { errEl.textContent = '약관에 동의해주세요.'; return; }
+    if (!name) { errEl.textContent = '성함을 입력해주세요.'; return; }
+    if (!email || email.indexOf('@') === -1) { errEl.textContent = '올바른 이메일을 입력해주세요.'; return; }
+    if (phone.length < 10) { errEl.textContent = '연락처를 정확히 입력해주세요.'; return; }
+    if (!widget) { errEl.textContent = '결제 위젯이 로드되지 않았습니다.'; return; }
+
+    const orderId = 'taxnb_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+    // 예상 환급액을 metadata로 전달 (선택)
+    const expected = Number(($('expectedRefund').value || '').replace(/[^0-9]/g, '') || 0);
+    sessionStorage.setItem('taxnb_order', JSON.stringify({ orderId, name, email, phone, expected }));
+
+    try {
+      await widget.requestPayment({
+        orderId,
+        orderName: '세금N혜택 환급 신청 보증금',
+        successUrl: location.origin + '/payment/success.html',
+        failUrl: location.origin + '/payment/fail.html',
+        customerName: name,
+        customerEmail: email,
+        customerMobilePhone: phone,
+      });
+    } catch (e) {
+      // 사용자가 닫은 경우 등
+      if (e && e.code !== 'USER_CANCEL') {
+        errEl.textContent = e.message || '결제 요청 중 오류가 발생했습니다.';
+      }
+    }
+  }
+
+  $('payBtn').addEventListener('click', requestPay);
+  initPayment();
+</script>
+</body>
+</html>

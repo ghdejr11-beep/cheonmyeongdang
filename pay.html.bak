@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>결제하기 - 천명당</title>
+<meta name="description" content="천명당 사주·관상·손금·꿈해몽·궁합 정밀 풀이 결제 페이지. 토스페이먼츠 안전결제.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://js.tosspayments.com/v2/standard"></script>
+<style>
+  :root {
+    --bg: #080a10;
+    --card: rgba(13,16,32,0.97);
+    --gold: #c9a84c;
+    --gold2: #e8c97a;
+    --jade: #4a9e8e;
+    --text: #e8e0d0;
+    --text2: #a89880;
+    --border: rgba(201,168,76,0.2);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: radial-gradient(ellipse at top, #1a1040 0%, var(--bg) 70%);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 40px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 28px; }
+  header h1 {
+    font-family: 'Gowun Batang', serif;
+    color: var(--gold2);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+  header .sub { color: var(--text2); font-size: 0.9rem; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 18px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  }
+  .card h2 {
+    font-family: 'Gowun Batang', serif;
+    color: var(--gold2);
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sku-list { display: grid; gap: 10px; }
+  .sku {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.18s;
+    background: rgba(0,0,0,0.2);
+  }
+  .sku:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+  .sku.selected {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.12);
+    box-shadow: 0 0 0 2px rgba(201,168,76,0.18);
+  }
+  .sku-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .sku-name { font-weight: 600; color: var(--text); font-size: 0.98rem; }
+  .sku-price { color: var(--gold2); font-weight: 700; font-size: 1.05rem; white-space: nowrap; }
+  .sku-desc { color: var(--text2); font-size: 0.82rem; margin-top: 4px; line-height: 1.5; }
+  .sku-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(74,158,142,0.18);
+    color: var(--jade);
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .form-row { margin-bottom: 14px; }
+  .form-row label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text2);
+    margin-bottom: 6px;
+  }
+  .form-row input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,0.3);
+    color: var(--text);
+    font-size: 0.95rem;
+    font-family: inherit;
+  }
+  .form-row input:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .summary {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    font-size: 1rem;
+  }
+  .summary.total {
+    border-top: 1px solid var(--border);
+    margin-top: 10px;
+    padding-top: 16px;
+    font-size: 1.15rem;
+  }
+  .summary.total .v { color: var(--gold2); font-weight: 700; }
+  .pay-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: #080a10;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: transform 0.18s;
+  }
+  .pay-btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .footnote {
+    color: var(--text2);
+    font-size: 0.78rem;
+    text-align: center;
+    margin-top: 16px;
+    line-height: 1.7;
+  }
+  .footnote a { color: var(--gold2); text-decoration: none; }
+  .agreement {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text2);
+    font-size: 0.85rem;
+    margin: 12px 0;
+  }
+  .toss-widget { margin-top: 14px; }
+  #payment-method, #agreement { min-height: 0; }
+  .loading {
+    text-align: center;
+    color: var(--text2);
+    padding: 30px;
+    font-size: 0.9rem;
+  }
+  .biz-info {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--text2);
+    font-size: 0.74rem;
+    line-height: 1.7;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .biz-info strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>천명당 결제</h1>
+    <div class="sub">토스페이먼츠 안전결제 · 카드/계좌이체/간편결제 지원</div>
+  </header>
+
+  <!-- 1. 상품 선택 -->
+  <div class="card">
+    <h2>1. 상품 선택</h2>
+    <div class="sku-list" id="sku-list">
+      <div class="loading">상품을 불러오는 중...</div>
+    </div>
+  </div>
+
+  <!-- 2. 주문자 정보 -->
+  <div class="card">
+    <h2>2. 주문자 정보</h2>
+    <div class="form-row">
+      <label for="customer-name">이름</label>
+      <input type="text" id="customer-name" placeholder="홍길동" autocomplete="name">
+    </div>
+    <div class="form-row">
+      <label for="customer-email">이메일 (결과 수령용)</label>
+      <input type="email" id="customer-email" placeholder="example@email.com" autocomplete="email">
+    </div>
+    <div class="form-row">
+      <label for="customer-phone">휴대폰 번호</label>
+      <input type="tel" id="customer-phone" placeholder="010-0000-0000" autocomplete="tel">
+    </div>
+  </div>
+
+  <!-- 2-B. 월회원 전용: 사주 정보 (subscribe_monthly_9900 선택 시 표시) -->
+  <div class="card" id="fortune-card" style="display:none;">
+    <h2>월회원 일일 운세 발송 정보</h2>
+    <div style="color:var(--text2);font-size:0.85rem;margin-bottom:14px;line-height:1.6;">
+      매일 오전 8시 본인 사주 기반 <strong style="color:var(--gold2)">오늘의 운세</strong>를
+      텔레그램으로 보내드립니다. 정확한 풀이를 위해 아래 정보를 입력해 주세요.
+    </div>
+    <div class="form-row">
+      <label for="fortune-birth-date">생년월일</label>
+      <input type="date" id="fortune-birth-date" min="1920-01-01" max="2025-12-31">
+    </div>
+    <div class="form-row">
+      <label for="fortune-birth-time">출생 시각 (모르면 12:00)</label>
+      <input type="time" id="fortune-birth-time" value="12:00">
+    </div>
+    <div class="form-row">
+      <label>음/양력</label>
+      <select id="fortune-calendar" style="width:100%;padding:12px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(0,0,0,0.3);color:var(--text);font-size:0.95rem;font-family:inherit;">
+        <option value="solar">양력</option>
+        <option value="lunar">음력</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>성별</label>
+      <select id="fortune-gender" style="width:100%;padding:12px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(0,0,0,0.3);color:var(--text);font-size:0.95rem;font-family:inherit;">
+        <option value="">선택</option>
+        <option value="M">남성</option>
+        <option value="F">여성</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="fortune-phone">휴대폰 번호 (카카오 알림톡 수신용)</label>
+      <input type="tel" id="fortune-phone" placeholder="010-1234-5678" inputmode="tel">
+      <div style="color:var(--text2);font-size:0.78rem;margin-top:6px;line-height:1.5;">
+        매일 아침 8시 카카오 알림톡으로 오늘의 운세를 받습니다 (천명당 채널 @cheonmyeongdang).<br>
+        카카오톡을 안 쓰시면 텔레그램으로 받을 수 있습니다 ↓
+      </div>
+    </div>
+    <div class="form-row">
+      <label for="fortune-tg-chat">텔레그램 chat_id (선택)</label>
+      <input type="text" id="fortune-tg-chat" placeholder="비워두면 카톡으로만 발송" inputmode="numeric">
+      <div style="color:var(--text2);font-size:0.78rem;margin-top:6px;line-height:1.5;">
+        텔레그램에서 <a href="https://t.me/cheonmyeongdang_bot" target="_blank" style="color:var(--gold2)">@cheonmyeongdang_bot</a> /start → 받은 chat_id 입력
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 결제수단 (토스 위젯) -->
+  <div class="card">
+    <h2>3. 결제 수단</h2>
+    <div id="payment-method" class="toss-widget"></div>
+    <div id="agreement" class="toss-widget"></div>
+  </div>
+
+  <!-- 4. 결제 -->
+  <div class="card">
+    <h2>4. 결제 요약</h2>
+    <div class="summary"><span>상품</span><span id="sum-name">-</span></div>
+    <div class="summary"><span>금액</span><span id="sum-amount">0원</span></div>
+    <div class="summary total"><span>총 결제 금액</span><span class="v" id="sum-total">0원</span></div>
+    <button class="pay-btn" id="pay-btn" disabled>상품을 선택해 주세요</button>
+    <div class="footnote">
+      결제 진행 시 <a href="./terms.html">이용약관</a>과
+      <a href="./privacy.html">개인정보처리방침</a>에 동의한 것으로 간주됩니다.<br>
+      결제는 토스페이먼츠를 통해 안전하게 처리됩니다.
+    </div>
+  </div>
+
+  <!-- 5. Cross-sell — Gumroad PDF 3종 -->
+  <div class="card" style="border-color:rgba(232,201,122,0.35);background:linear-gradient(135deg,rgba(201,168,76,0.05),rgba(232,201,122,0.02));">
+    <h2 style="display:flex;align-items:center;gap:8px;">
+      <span style="font-size:0.65rem;background:var(--gold);color:#080a10;padding:2px 8px;border-radius:999px;font-weight:800;letter-spacing:0.1em;">PDF</span>
+      함께 보면 좋은 자료
+    </h2>
+    <p style="color:var(--text2);font-size:0.82rem;margin-bottom:12px;">결제하신 풀이를 더 깊이 이해할 수 있는 가이드입니다 — 즉시 다운로드.</p>
+
+    <a href="https://ghdejr.gumroad.com/l/saju-intro-kr?utm_source=cheonmyeongdang_pay&amp;utm_campaign=crosssell_intro" target="_blank" rel="noopener" style="display:flex;gap:14px;padding:13px;background:rgba(0,0,0,0.25);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:inherit;align-items:flex-start;margin-bottom:8px;">
+      <div style="flex-shrink:0;width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-family:'Noto Serif KR',serif;font-weight:700;color:#080a10;font-size:0.78rem;">入門</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:var(--gold2);font-weight:700;font-size:0.92rem;">사주명리학 입문 가이드 (35p)</div>
+        <div style="color:var(--text2);font-size:0.74rem;line-height:1.5;margin-top:2px;">천간·지지·오행·일간 기초 + 천명당 결과 활용 팁</div>
+        <div style="font-size:0.82rem;margin-top:4px;"><span style="color:var(--gold2);font-weight:800;">$5</span> <span style="color:var(--text2);font-size:0.72rem;">(≈ ₩7,000) →</span></div>
+      </div>
+    </a>
+
+    <a href="https://ghdejr.gumroad.com/l/2026-zodiac-diary-kr?utm_source=cheonmyeongdang_pay&amp;utm_campaign=crosssell_diary" target="_blank" rel="noopener" style="display:flex;gap:14px;padding:13px;background:rgba(0,0,0,0.25);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:inherit;align-items:flex-start;margin-bottom:8px;">
+      <div style="flex-shrink:0;width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#c9a84c,#e07070);display:flex;align-items:center;justify-content:center;font-family:'Noto Serif KR',serif;font-weight:700;color:#080a10;font-size:0.78rem;">丙午</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:var(--gold2);font-weight:700;font-size:0.92rem;">2026 띠별 운세 다이어리 (55p)</div>
+        <div style="color:var(--text2);font-size:0.74rem;line-height:1.5;margin-top:2px;">12띠 1년 흐름 + 월별 다이어리 워크시트 12장</div>
+        <div style="font-size:0.82rem;margin-top:4px;"><span style="color:var(--gold2);font-weight:800;">$7</span> <span style="color:var(--text2);font-size:0.72rem;">(≈ ₩9,800) →</span></div>
+      </div>
+    </a>
+
+    <a href="https://ghdejr.gumroad.com/l/compatibility-workbook-kr?utm_source=cheonmyeongdang_pay&amp;utm_campaign=crosssell_compat" target="_blank" rel="noopener" style="display:flex;gap:14px;padding:13px;background:rgba(0,0,0,0.25);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:inherit;align-items:flex-start;">
+      <div style="flex-shrink:0;width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#e8c97a,#a89880);display:flex;align-items:center;justify-content:center;font-family:'Noto Serif KR',serif;font-weight:700;color:#080a10;font-size:0.78rem;">合</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:var(--gold2);font-weight:700;font-size:0.92rem;">궁합 풀이 워크북 (40p)</div>
+        <div style="color:var(--text2);font-size:0.74rem;line-height:1.5;margin-top:2px;">오행 5요소 + 18 일간 케이스 + 갈등 시그널 30 체크</div>
+        <div style="font-size:0.82rem;margin-top:4px;"><span style="color:var(--gold2);font-weight:800;">$5</span> <span style="color:var(--text2);font-size:0.72rem;">(≈ ₩7,000) →</span></div>
+      </div>
+    </a>
+
+    <div style="font-size:0.7rem;color:var(--text2);margin-top:10px;text-align:center;">결제는 Gumroad에서 별도로 진행됩니다 (이메일로 PDF 발송).</div>
+  </div>
+
+  <div class="biz-info">
+    <strong>쿤스튜디오</strong> · 대표 홍덕훈 · 사업자등록번호 552-59-00848<br>
+    문의: ghdejr11@gmail.com<br>
+    호스팅: Vercel · 결제대행: 토스페이먼츠
+  </div>
+</div>
+
+<script>
+(function() {
+  var state = {
+    config: null,
+    selectedSku: null,
+    widgets: null,
+    paymentReady: false,
+  };
+
+  var $list = document.getElementById('sku-list');
+  var $sumName = document.getElementById('sum-name');
+  var $sumAmount = document.getElementById('sum-amount');
+  var $sumTotal = document.getElementById('sum-total');
+  var $payBtn = document.getElementById('pay-btn');
+  var $name = document.getElementById('customer-name');
+  var $email = document.getElementById('customer-email');
+  var $phone = document.getElementById('customer-phone');
+
+  function fmt(n) { return Number(n).toLocaleString('ko-KR') + '원'; }
+
+  function generateOrderId() {
+    return 'cmd_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+  }
+
+  function loadSavedUser() {
+    try {
+      var u = JSON.parse(localStorage.getItem('cm_user_info') || '{}');
+      if (u.name) $name.value = u.name;
+      if (u.email) $email.value = u.email;
+      if (u.phone) $phone.value = u.phone;
+    } catch(e) {}
+  }
+
+  function saveUser() {
+    try {
+      localStorage.setItem('cm_user_info', JSON.stringify({
+        name: $name.value.trim(),
+        email: $email.value.trim(),
+        phone: $phone.value.trim(),
+      }));
+    } catch(e) {}
+  }
+
+  // ─── 월회원 권한 매트릭스 안내 (2026-04-27 정책) ───────────────────
+  var SKU_POLICY_NOTE = {
+    'subscribe_monthly_9900':
+      '✅ 사주 정밀 풀이 + 궁합 무료 · 매일 카톡 운세<br>' +
+      '⚠️ 종합 풀이(₩15,000)는 <strong>별도 결제</strong>',
+    'monthly_premium':
+      '✅ 사주 정밀 풀이 + 궁합 무료 · 매일 카톡 운세<br>' +
+      '⚠️ 종합 풀이(₩15,000)는 <strong>별도 결제</strong>',
+    'comprehensive_reading':
+      '⚠️ <strong>월회원도 별도 결제 필요</strong> (1회성 상품)',
+  };
+
+  function renderSkus(skus) {
+    $list.innerHTML = '';
+    skus.forEach(function(sku) {
+      var div = document.createElement('div');
+      div.className = 'sku';
+      div.dataset.skuId = sku.id;
+      var typeBadge = sku.type === 'subscription' ? '<span class="sku-badge">월구독</span>' : '';
+      var policyNote = SKU_POLICY_NOTE[sku.id]
+        ? '<div class="sku-policy" style="margin-top:6px;font-size:0.78rem;line-height:1.55;color:var(--gold2);background:rgba(201,168,76,0.06);border-left:2px solid var(--gold);padding:6px 8px;border-radius:4px;">' + SKU_POLICY_NOTE[sku.id] + '</div>'
+        : '';
+      div.innerHTML =
+        '<div class="sku-row">' +
+          '<div class="sku-name">' + escapeHtml(sku.name) + typeBadge + '</div>' +
+          '<div class="sku-price">' + fmt(sku.amount) + '</div>' +
+        '</div>' +
+        '<div class="sku-desc">' + escapeHtml(sku.desc || '') + '</div>' +
+        policyNote;
+      div.addEventListener('click', function() { selectSku(sku); });
+      $list.appendChild(div);
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+    });
+  }
+
+  function selectSku(sku) {
+    state.selectedSku = sku;
+    Array.prototype.forEach.call(document.querySelectorAll('.sku'), function(el) {
+      el.classList.toggle('selected', el.dataset.skuId === sku.id);
+    });
+    $sumName.textContent = sku.name;
+    $sumAmount.textContent = fmt(sku.amount);
+    $sumTotal.textContent = fmt(sku.amount);
+    $payBtn.textContent = fmt(sku.amount) + ' 결제하기';
+    updateWidgetAmount(sku.amount);
+    // 월회원 SKU 선택 시 사주 정보 입력 카드 표시
+    var fortuneCard = document.getElementById('fortune-card');
+    if (fortuneCard) {
+      fortuneCard.style.display = (sku.id === 'subscribe_monthly_9900') ? 'block' : 'none';
+    }
+    updatePayButton();
+  }
+
+  function getFortuneFields() {
+    return {
+      birth_date: (document.getElementById('fortune-birth-date') || {}).value || '',
+      birth_time: (document.getElementById('fortune-birth-time') || {}).value || '12:00',
+      birth_calendar: (document.getElementById('fortune-calendar') || {}).value || 'solar',
+      gender: (document.getElementById('fortune-gender') || {}).value || '',
+      telegram_chat_id: (document.getElementById('fortune-tg-chat') || {}).value || '',
+      channel: 'telegram',
+    };
+  }
+
+  function isMonthlyValid() {
+    var f = getFortuneFields();
+    return !!(f.birth_date && f.gender && f.telegram_chat_id);
+  }
+
+  function updatePayButton() {
+    var sku = state.selectedSku;
+    var monthly = sku && sku.id === 'subscribe_monthly_9900';
+    var monthlyOk = !monthly || isMonthlyValid();
+    var ok = !!(sku && state.paymentReady && $email.value.trim() && monthlyOk);
+    $payBtn.disabled = !ok;
+    if (!sku) {
+      $payBtn.textContent = '상품을 선택해 주세요';
+    } else if (!$email.value.trim()) {
+      $payBtn.textContent = '이메일을 입력해 주세요';
+    } else if (monthly && !monthlyOk) {
+      $payBtn.textContent = '월회원 정보를 모두 입력해 주세요';
+    } else if (!state.paymentReady) {
+      $payBtn.textContent = '결제 수단을 불러오는 중...';
+    } else {
+      $payBtn.textContent = fmt(sku.amount) + ' 결제하기';
+    }
+  }
+
+  function updateWidgetAmount(amount) {
+    if (!state.widgets) return;
+    try {
+      state.widgets.setAmount({ currency: 'KRW', value: Number(amount) });
+    } catch(e) { console.warn('setAmount failed', e); }
+  }
+
+  async function initWidgets(clientKey) {
+    try {
+      // v2 standard SDK
+      var tossPayments = TossPayments(clientKey);
+      // 비회원 결제 — ANONYMOUS
+      var widgets = tossPayments.widgets({ customerKey: TossPayments.ANONYMOUS });
+      state.widgets = widgets;
+
+      // 초기 금액 (선택 전엔 1원 placeholder — 선택 후 setAmount)
+      await widgets.setAmount({ currency: 'KRW', value: 1 });
+
+      await Promise.all([
+        widgets.renderPaymentMethods({ selector: '#payment-method', variantKey: 'DEFAULT' }),
+        widgets.renderAgreement({ selector: '#agreement', variantKey: 'AGREEMENT' }),
+      ]);
+
+      state.paymentReady = true;
+      updatePayButton();
+    } catch (err) {
+      console.error('위젯 초기화 실패:', err);
+      document.getElementById('payment-method').innerHTML =
+        '<div style="color:#f87171;padding:16px;font-size:0.85rem;">결제 위젯 로딩 실패: ' + (err.message || err) + '</div>';
+    }
+  }
+
+  async function handlePay() {
+    if (!state.selectedSku || !state.widgets) return;
+    saveUser();
+    var sku = state.selectedSku;
+    var orderId = generateOrderId();
+    var orderData = {
+      orderId: orderId,
+      skuId: sku.id,
+      serviceName: sku.name,
+      price: sku.amount,
+      name: $name.value.trim(),
+      email: $email.value.trim(),
+      phone: $phone.value.trim(),
+      createdAt: new Date().toISOString(),
+      status: 'pending',
+    };
+    // 월회원 추가 정보 — success.html에서 /api/subscribe-fortune 호출 시 사용
+    if (sku.id === 'subscribe_monthly_9900') {
+      var f = getFortuneFields();
+      orderData.fortune = f;
+    }
+    try {
+      localStorage.setItem('cm_current_order', JSON.stringify(orderData));
+      var orders = JSON.parse(localStorage.getItem('cm_orders') || '[]');
+      orders.push(orderData);
+      localStorage.setItem('cm_orders', JSON.stringify(orders));
+    } catch(e) {}
+
+    try {
+      await state.widgets.requestPayment({
+        orderId: orderId,
+        orderName: sku.name,
+        successUrl: window.location.origin + '/success.html?skuId=' + encodeURIComponent(sku.id),
+        failUrl: window.location.origin + '/fail.html',
+        customerEmail: $email.value.trim() || undefined,
+        customerName: $name.value.trim() || undefined,
+        customerMobilePhone: ($phone.value || '').replace(/[^0-9]/g, '') || undefined,
+      });
+    } catch (err) {
+      console.error('결제 요청 실패:', err);
+      alert('결제 요청 실패: ' + (err.message || err));
+    }
+  }
+
+  // URL param ?sku=xxx 로 직접 선택 가능
+  function autoSelectFromQuery(skus) {
+    var q = new URLSearchParams(window.location.search);
+    var skuId = q.get('sku');
+    if (!skuId) return;
+    var found = skus.find(function(s) { return s.id === skuId; });
+    if (found) selectSku(found);
+  }
+
+  async function bootstrap() {
+    loadSavedUser();
+    try {
+      var resp = await fetch('/api/payment-config', { headers: { 'Accept': 'application/json' } });
+      if (!resp.ok) throw new Error('config status ' + resp.status);
+      var config = await resp.json();
+      state.config = config;
+      if (!config.clientKey) throw new Error('clientKey 미설정');
+      renderSkus(config.skus || []);
+      autoSelectFromQuery(config.skus || []);
+      await initWidgets(config.clientKey);
+    } catch (err) {
+      console.error('초기화 실패:', err);
+      $list.innerHTML = '<div class="loading" style="color:#f87171;">결제 설정을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.<br><small>' + (err.message || err) + '</small></div>';
+    }
+  }
+
+  $payBtn.addEventListener('click', handlePay);
+  [$name, $email, $phone].forEach(function(el) {
+    el.addEventListener('input', updatePayButton);
+  });
+  // 월회원 입력 필드 변경 감지
+  ['fortune-birth-date','fortune-birth-time','fortune-calendar','fortune-gender','fortune-tg-chat'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', updatePayButton);
+      el.addEventListener('change', updatePayButton);
+    }
+  });
+
+  bootstrap();
+})();
+</script>
+</body>
+</html>

@@ -1,58 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/</loc>
-    <lastmod>2026-04-06</lastmod>
+    <loc>https://cheonmyeongdang.vercel.app/</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/#saju</loc>
+    <loc>https://cheonmyeongdang.vercel.app/#today-fortune</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/#daily</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/#saju</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/#compat</loc>
+    <loc>https://cheonmyeongdang.vercel.app/#compat</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/#gwansang</loc>
+    <loc>https://cheonmyeongdang.vercel.app/#gwansang</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/#fengshui</loc>
+    <loc>https://cheonmyeongdang.vercel.app/#palm</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/#tarot</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/#zodiac</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/#ddi</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/#dream</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/#fengshui</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/#palm</loc>
+    <loc>https://cheonmyeongdang.vercel.app/#paid</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/privacy.html</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/terms.html</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/support.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/pay.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/blog/</loc>
+    <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/#tarot</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://cheonmyeongdang.vercel.app/blog/2026-zodiac-fortune.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/#daily</loc>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <loc>https://cheonmyeongdang.vercel.app/blog/dream-snake-meaning.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/#zodiac</loc>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <loc>https://cheonmyeongdang.vercel.app/blog/how-to-check-compatibility.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/#dream</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://cheonmyeongdang.vercel.app/blog/gwansang-basics.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/#paid</loc>
+    <loc>https://cheonmyeongdang.vercel.app/blog/saju-beginner-guide.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/blog/parent-saju-mothers-day.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/blog/family-fortune-2026.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/blog/marriage-saju-spring.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/blog/childrens-day-fortune.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/blog/family-conflict-saju.html</loc>
+    <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

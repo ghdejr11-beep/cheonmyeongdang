@@ -1,0 +1,35 @@
+{
+  "book_id": "meal-prep-planner",
+  "title": "Meal Prep Planner",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Eat better, spend less, and reclaim your evenings. This 107-page meal prep planner makes weekly meal planning, grocery shopping, and Sunday cooking the smoothest part of your week.\n\nWho it's for:\n- Busy professionals and parents who keep ordering takeout because the week ran them over\n- Fitness, keto, paleo, vegetarian, and macro-tracking eaters\n- Couples and families who want one shared system for food\n- Anyone trying to cut grocery bills without sacrificing nutrition\n\nWhat's inside:\n- 52 weekly meal-plan spreads: breakfast, lunch, dinner, snacks for 7 days\n- Pull-out grocery lists organized by store section (produce, protein, pantry, dairy, frozen)\n- Pantry inventory and freezer-stash logs - never re-buy what you already have\n- Recipe-keeper pages so the favorites that work get reused\n- Macros, calories, and budget columns where you want them\n- Weekly reflection: what worked, what got wasted, what to keep next week\n\nPin it on the kitchen wall. Bring it to the grocery store. Watch your food spend drop and your weeknight stress disappear.\n\nOrder today and make the next four weeks of dinners decisions you've already made.",
+  "keywords": [
+    "meal prep planner",
+    "weekly meal planner",
+    "grocery list",
+    "food journal",
+    "meal planning notebook",
+    "kitchen organizer",
+    "diet planner"
+  ],
+  "categories": [
+    "BISAC: COOKING / Methods / Quick & Easy",
+    "BISAC: HEALTH & FITNESS / Nutrition"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 107,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "meal_prep_planner.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

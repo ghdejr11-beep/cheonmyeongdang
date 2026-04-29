@@ -1,0 +1,35 @@
+{
+  "book_id": "yoga-progress-journal",
+  "title": "Yoga Progress Journal",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Your yoga practice deserves more than a sticky mat and good intentions.\n\nThis 91-page yoga progress journal helps you track poses, breath, body sensations, and growth over time - turning your practice from a series of classes into a real, evolving discipline you can see.\n\nWho it's for:\n- Beginner yogis building consistency\n- Intermediate practitioners working toward arm balances, inversions, or splits\n- Yoga teachers in training (200/500 hour) documenting their own practice\n- Studios and teachers gifting students a deeper learning tool\n\nWhat's inside:\n- Daily session pages: style (vinyasa, yin, hatha, ashtanga), duration, focus\n- Pose tracker with progress notes: how it felt, where the edge was, what changed\n- Breath, mood, and body-scan check-ins (pre and post practice)\n- Goal-pose worksheets for poses you're working toward\n- Weekly and monthly reflections - the pattern only shows up over time\n- Mantra, intention, and gratitude pages woven through\n\nYoga isn't about flexibility - it's about awareness. This journal gives that awareness somewhere to land. Six months in, you won't recognize your old self.\n\nOrder your copy and roll out your mat with intention starting today.",
+  "keywords": [
+    "yoga journal",
+    "yoga progress tracker",
+    "asana log",
+    "yoga practice book",
+    "mindfulness journal",
+    "yoga workbook",
+    "yoga planner"
+  ],
+  "categories": [
+    "BISAC: HEALTH & FITNESS / Yoga",
+    "BISAC: BODY, MIND & SPIRIT / Mindfulness & Meditation"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 91,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "yoga_progress_journal.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

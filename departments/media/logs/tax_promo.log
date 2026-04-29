@@ -1,0 +1,58 @@
+2026-04-27 01:32:45 test-img → D:\kunstudio-promo\tax_assets\test_img.jpg (92716 bytes)
+2026-04-27 01:33:05 [TTS] OK test_tts.mp3 (46437 bytes)
+2026-04-27 01:33:05 test-tts → D:\kunstudio-promo\tax_assets\test_tts.mp3
+2026-04-27 01:33:09 [shorts] === shorts1_price 시작 ===
+2026-04-27 01:34:15 [shorts][img0] scene_00.jpg
+2026-04-27 01:35:45 [shorts][img1] scene_01.jpg
+2026-04-27 01:37:15 [shorts][img2] scene_02.jpg
+2026-04-27 01:38:45 [shorts][img3] scene_03.jpg
+2026-04-27 01:40:15 [shorts][img4] scene_04.jpg
+2026-04-27 01:40:17 [TTS] OK narration.mp3 (218636 bytes)
+2026-04-27 01:40:17 [shorts] ffmpeg encoding…
+2026-04-27 01:40:25 [shorts] DONE shorts1_price.mp4 (1435 KB)
+2026-04-27 01:40:25 [cards] DONE shorts1_price_cards.zip (182 KB, 6 slides)
+2026-04-27 01:40:29 === build 시작 ===
+2026-04-27 01:40:29 [shorts] skip exists: shorts1_price.mp4
+2026-04-27 01:40:29 [cards] skip exists: shorts1_price_cards.zip
+2026-04-27 01:40:29 [shorts] === shorts2_refund 시작 ===
+2026-04-27 01:40:33 [queue] DONE C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\src\tax_promo_queue.json (31 items)
+2026-04-27 01:41:45 [shorts][img0] scene_00.jpg
+2026-04-27 01:43:15 [shorts][img1] scene_01.jpg
+2026-04-27 01:44:45 [shorts][img2] scene_02.jpg
+2026-04-27 01:46:15 [shorts][img3] scene_03.jpg
+2026-04-27 01:47:45 [shorts][img4] scene_04.jpg
+2026-04-27 01:47:46 [TTS] OK narration.mp3 (134626 bytes)
+2026-04-27 01:47:47 [shorts] ffmpeg encoding…
+2026-04-27 01:47:54 [shorts] DONE shorts2_refund.mp4 (1306 KB)
+2026-04-27 01:47:54 [cards] DONE shorts2_refund_cards.zip (162 KB, 6 slides)
+2026-04-27 01:47:54 [shorts] === shorts3_deadline 시작 ===
+2026-04-27 01:49:15 [shorts][img0] scene_00.jpg
+2026-04-27 01:50:45 [shorts][img1] scene_01.jpg
+2026-04-27 01:52:15 [shorts][img2] scene_02.jpg
+2026-04-27 01:53:45 [shorts][img3] scene_03.jpg
+2026-04-27 01:55:15 [shorts][img4] scene_04.jpg
+2026-04-27 01:55:17 [TTS] OK narration.mp3 (145911 bytes)
+2026-04-27 01:55:17 [shorts] ffmpeg encoding…
+2026-04-27 01:55:24 [shorts] DONE shorts3_deadline.mp4 (1410 KB)
+2026-04-27 01:55:25 [cards] DONE shorts3_deadline_cards.zip (166 KB, 6 slides)
+2026-04-27 01:55:25 [shorts] === shorts4_average 시작 ===
+2026-04-27 01:56:45 [shorts][img0] scene_00.jpg
+2026-04-27 01:58:15 [shorts][img1] scene_01.jpg
+2026-04-27 01:59:45 [shorts][img2] scene_02.jpg
+2026-04-27 02:01:15 [shorts][img3] scene_03.jpg
+2026-04-27 02:02:45 [shorts][img4] scene_04.jpg
+2026-04-27 02:02:47 [TTS] OK narration.mp3 (140896 bytes)
+2026-04-27 02:02:47 [shorts] ffmpeg encoding…
+2026-04-27 02:02:54 [shorts] DONE shorts4_average.mp4 (1425 KB)
+2026-04-27 02:02:55 [cards] DONE shorts4_average_cards.zip (171 KB, 6 slides)
+2026-04-27 02:02:55 [shorts] === shorts5_bundle 시작 ===
+2026-04-27 02:04:15 [shorts][img0] scene_00.jpg
+2026-04-27 02:05:46 [shorts][img1] scene_01.jpg
+2026-04-27 02:07:16 [shorts][img2] scene_02.jpg
+2026-04-27 02:08:46 [shorts][img3] scene_03.jpg
+2026-04-27 02:10:15 [shorts][img4] scene_04.jpg
+2026-04-27 02:10:17 [TTS] OK narration.mp3 (143822 bytes)
+2026-04-27 02:10:17 [shorts] ffmpeg encoding…
+2026-04-27 02:10:25 [shorts] DONE shorts5_bundle.mp4 (1383 KB)
+2026-04-27 02:10:25 [cards] DONE shorts5_bundle_cards.zip (158 KB, 6 slides)
+2026-04-27 02:10:25 === build 완료 ===

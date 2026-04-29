@@ -1,0 +1,64 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-26",
+  "description": "KunStudio 게임별 마스코트 색상 + 표정 룰",
+  "mascots": {
+    "golden_bear": {
+      "game": "Bubble Pop Blast",
+      "package": "com.kunstudio.bubblepop",
+      "primary": "#F4C430",
+      "secondary": "#FFFFFF",
+      "outline": "#1A1A1A",
+      "accent": "#FF6B35",
+      "emotions": {
+        "idle": "기본 황금곰 + 평온한 표정 (눈 = 작은 검은 점, 입 = 작은 미소)",
+        "cheer": "눈 = 위로 휜 호 (^^), 입 = 큰 호 (∪), 양손 위로",
+        "sad": "눈 = 아래로 처진 호 (vv), 입 = 거꾸로 호 (∩), 어깨 처짐",
+        "surprised": "눈 = 동그라미, 입 = 작은 O"
+      },
+      "animations": {
+        "bounce": "y축 -8px to +8px, 2.4s ease-in-out infinite",
+        "tilt": "rotation -5deg to +5deg, 3s ease infinite"
+      }
+    },
+    "big_eye_character": {
+      "game": "Stack Builder",
+      "package": "com.kunstudio.stackbuilder",
+      "primary": "#FFE15D",
+      "secondary": "#000000",
+      "outline": "#000000",
+      "accent": "#FF7B7B",
+      "emotions": {
+        "happy": "기본 미소 + 동공 추적 (마우스/터치 위치 따라)",
+        "surprised": "실수 드롭 시 눈 = 작은 점, 입 = 'o'",
+        "excited": "PERFECT 시 눈 = 별 모양, 입 = 와이드 입 + 분홍 혀",
+        "sad": "게임 오버 시 눈 = 처진 호, 입 = 거꾸로 호"
+      },
+      "animations": {
+        "pupil_track": "마우스 위치 → 동공 ±3px 이동",
+        "blink": "8초마다 0.15초 깜빡"
+      }
+    },
+    "round_gem_faces": {
+      "game": "Gem Cascade",
+      "package": "com.kunstudio.gemcascade",
+      "description": "6보석 모두 둥근 형태, 5% 확률로 표정 표시",
+      "gems": [
+        {"name": "red_candy", "color": "#E74C3C", "probability_face": 0.05},
+        {"name": "blue_sapphire", "color": "#3498DB", "probability_face": 0.05},
+        {"name": "green_emerald", "color": "#2ECC71", "probability_face": 0.05},
+        {"name": "yellow_star", "color": "#F1C40F", "probability_face": 0.05},
+        {"name": "purple_diamond", "color": "#9B59B6", "probability_face": 0.05},
+        {"name": "orange_citrus", "color": "#FF6B35", "probability_face": 0.05}
+      ],
+      "face_style": "눈 = 두 검은 점, 입 = 작은 미소, 양 볼 = 분홍 동그라미"
+    }
+  },
+  "global_rules": {
+    "outline_thickness": "2px (모바일 가시성)",
+    "max_emotions_per_mascot": 4,
+    "transition_duration_ms": 200,
+    "no_pixel_art": true,
+    "no_emoji_in_game_text": true
+  }
+}

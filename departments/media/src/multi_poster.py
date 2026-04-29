@@ -151,9 +151,9 @@ def _is_local_path(p):
     return os.path.exists(p)
 
 
-def _upload_catbox(filepath):
-    """catbox.moe 익명 업로드 (no auth, 무료, 영구).
-    multipart/form-data 직접 구성 (urllib만 사용, 의존성 X).
+def _upload_catbox_like(filepath, endpoint, extra_fields=None):
+    """공통 catbox/litterbox 업로드 헬퍼.
+    extra_fields: dict (예: {'time': '24h'} for litterbox)
     """
     try:
         import mimetypes, uuid
@@ -165,6 +165,9 @@ def _upload_catbox(filepath):
         body = []
         body.append(f'--{boundary}\r\n'.encode())
         body.append(b'Content-Disposition: form-data; name="reqtype"\r\n\r\nfileupload\r\n')
+        for k, v in (extra_fields or {}).items():
+            body.append(f'--{boundary}\r\n'.encode())
+            body.append(f'Content-Disposition: form-data; name="{k}"\r\n\r\n{v}\r\n'.encode())
         body.append(f'--{boundary}\r\n'.encode())
         body.append(f'Content-Disposition: form-data; name="fileToUpload"; filename="{os.path.basename(filepath)}"\r\n'.encode())
         body.append(f'Content-Type: {mime}\r\n\r\n'.encode())
@@ -172,7 +175,7 @@ def _upload_catbox(filepath):
         body.append(f'\r\n--{boundary}--\r\n'.encode())
         payload = b''.join(body)
         req = urllib.request.Request(
-            'https://catbox.moe/user/api.php',
+            endpoint,
             data=payload,
             headers={
                 'Content-Type': f'multipart/form-data; boundary={boundary}',
@@ -182,11 +185,27 @@ def _upload_catbox(filepath):
         )
         with urllib.request.urlopen(req, timeout=30) as r:
             url = r.read().decode('utf-8').strip()
-        if url.startswith('https://') and ('catbox' in url or 'litterbox' in url):
+        if url.startswith('https://') and ('catbox' in url or 'litterbox' in url or 'litter' in url):
             return True, url
-        return False, f'catbox unexpected: {url[:200]}'
+        return False, f'unexpected: {url[:200]}'
     except Exception as e:
-        return False, f'catbox error: {type(e).__name__}: {e}'
+        return False, f'{type(e).__name__}: {e}'
+
+
+def _upload_litterbox(filepath, time='24h'):
+    """litterbox.catbox.moe — 임시(최대 72h), 다른 CDN(litter.catbox.moe).
+    files.catbox.moe DNS 차단/불안정한 환경에서 1차 추천.
+    """
+    return _upload_catbox_like(
+        filepath,
+        'https://litterbox.catbox.moe/resources/internals/api.php',
+        extra_fields={'time': time},
+    )
+
+
+def _upload_catbox(filepath):
+    """catbox.moe 익명 업로드 (영구). files.catbox.moe CDN 사용 (일부 환경 DNS 불안정)."""
+    return _upload_catbox_like(filepath, 'https://catbox.moe/user/api.php')
 
 
 def _upload_imgbb(filepath, env=None):
@@ -218,20 +237,29 @@ def _upload_imgbb(filepath, env=None):
 def host_image(filepath_or_url, env=None):
     """이미지 → public URL.
     - URL 입력 시 그대로 반환 (검증 X)
-    - 로컬 파일 → catbox 1차 → imgbb 2차 폴백
+    - 로컬 파일 → litterbox 1차 (24h, 안정 CDN) → catbox 2차 → imgbb 3차 폴백
+
+    files.catbox.moe DNS 불안정으로 IG fetcher가 500 OAuthException(code 1) 반환 사례 발생 →
+    litter.catbox.moe(litterbox)를 1차로 사용. IG는 즉시 ingest 하므로 24h temp 충분.
     """
     if not filepath_or_url:
         return False, 'empty input'
     if not _is_local_path(filepath_or_url):
         return True, filepath_or_url  # 이미 URL
-    # 로컬 파일 → 호스팅
+
+    # 1차: litterbox (DNS 안정)
+    ok0, url0 = _upload_litterbox(filepath_or_url, time='24h')
+    if ok0:
+        return True, url0
+    # 2차: catbox 영구 (DNS 가능 시)
     ok, url = _upload_catbox(filepath_or_url)
     if ok:
         return True, url
+    # 3차: imgbb (API key 필요)
     ok2, url2 = _upload_imgbb(filepath_or_url, env)
     if ok2:
         return True, url2
-    return False, f'host_image fail (catbox: {url}, imgbb: {url2})'
+    return False, f'host_image fail (litterbox: {url0}, catbox: {url}, imgbb: {url2})'
 
 
 def _validate_ig_image_url(url, timeout=8):
@@ -375,18 +403,41 @@ def post_reddit(title, text, subreddit, env=None):
 
 
 # ───────── 통합 ─────────
-def send_all_direct(content, reddit_title=None, reddit_subreddit='test', image_url=None):
+def send_all_direct(content, reddit_title=None, reddit_subreddit='test', image_url=None,
+                    skip_coupang=False):
     """연결된 모든 직접 API 채널에 발행. 키 없으면 그 채널만 skip.
-    image_url 제공 시 Instagram에도 포스팅 (이미지 없으면 IG skip)."""
+    image_url 제공 시 Instagram에도 포스팅 (이미지 없으면 IG skip).
+
+    쿠팡 파트너스 자동 삽입 (5회당 1회):
+      - skip_coupang=True 면 비활성화 (쿠팡 자체 홍보 등 중복 방지)
+      - 채널별 글자수 한도 고려 — inject_per_channel()로 채널별 다른 길이
+    """
     env = _load_secrets()
+
+    # 쿠팡 자동 삽입 (5회당 1회) — coupang_products.json의 카운터 기반
+    coupang_texts = None
+    if not skip_coupang:
+        try:
+            import coupang_inject
+            coupang_texts = coupang_inject.inject_per_channel(
+                content,
+                channels=('bluesky', 'discord', 'mastodon', 'x', 'threads', 'instagram'),
+            )
+        except Exception as e:
+            print(f'[coupang_inject] skip ({type(e).__name__}: {e})')
+            coupang_texts = None
+
+    def _t(ch):
+        return coupang_texts[ch] if coupang_texts else content
+
     results = {}
     for name, fn in [
-        ('bluesky', lambda: post_bluesky(content, env)),
-        ('discord', lambda: post_discord(content, env)),
-        ('mastodon', lambda: post_mastodon(content, env)),
-        ('x', lambda: post_x(content, env)),
-        ('threads', lambda: post_threads(content, env)),
-        ('instagram', lambda: post_instagram(content, image_url, env)),
+        ('bluesky', lambda: post_bluesky(_t('bluesky'), env)),
+        ('discord', lambda: post_discord(_t('discord'), env)),
+        ('mastodon', lambda: post_mastodon(_t('mastodon'), env)),
+        ('x', lambda: post_x(_t('x'), env)),
+        ('threads', lambda: post_threads(_t('threads'), env)),
+        ('instagram', lambda: post_instagram(_t('instagram'), image_url, env)),
     ]:
         try:
             ok, _ = fn()

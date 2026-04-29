@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S4HPJHT5QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S4HPJHT5QR');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#3282f6">
+<meta name="robots" content="noindex,nofollow">
+<title>결제 완료 — 세금N혜택</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', sans-serif; background: #f9fafb; color: #191f28; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 540px; margin: 0 auto; padding: 24px 20px 80px; }
+  .hero { text-align: center; padding: 40px 20px; }
+  .icon { width: 84px; height: 84px; margin: 0 auto 20px; background: #3282f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 42px; font-weight: 800; }
+  .icon.fail { background: #e74c3c; }
+  h1 { font-size: 24px; font-weight: 800; margin-bottom: 10px; }
+  p.sub { color: #4e5968; font-size: 15px; line-height: 1.6; }
+  .card { background: #fff; border-radius: 16px; padding: 24px; margin-top: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+  .card h2 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+  .row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; }
+  .row .l { color: #8b95a1; }
+  .row .v { color: #191f28; font-weight: 600; font-feature-settings: 'tnum'; text-align: right; word-break: break-all; max-width: 60%; }
+  .next { background: #eef6ff; border-radius: 12px; padding: 16px; margin-top: 14px; font-size: 14px; color: #1b64da; line-height: 1.6; }
+  .btns { display: flex; gap: 10px; margin-top: 24px; }
+  .btn { flex: 1; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; text-align: center; text-decoration: none; border: 0; font-family: inherit; }
+  .btn-primary { background: #3282f6; color: #fff; }
+  .btn-secondary { background: #fff; color: #4e5968; border: 1px solid #e5e8eb; }
+  .loading { text-align: center; padding: 60px 20px; color: #8b95a1; }
+  .err { color: #e74c3c; }
+</style>
+</head>
+<body>
+<div class="wrap" id="root">
+  <div class="loading">결제 승인 중입니다...</div>
+</div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const fmtKRW = (n) => '₩' + Number(n || 0).toLocaleString('ko-KR');
+
+  function renderSuccess(data, order) {
+    const root = document.getElementById('root');
+    root.innerHTML = `
+      <div class="hero">
+        <div class="icon">✓</div>
+        <h1>결제가 완료되었습니다</h1>
+        <p class="sub">환급 신청이 정상적으로 접수되었어요.<br>3영업일 이내 처리 결과를 안내드립니다.</p>
+      </div>
+      <div class="card">
+        <h2>주문 정보</h2>
+        <div class="row"><span class="l">주문번호</span><span class="v">${data.orderId || '-'}</span></div>
+        <div class="row"><span class="l">상품명</span><span class="v">${data.orderName || '세금N혜택 환급 신청'}</span></div>
+        <div class="row"><span class="l">결제금액</span><span class="v">${fmtKRW(data.amount)}</span></div>
+        <div class="row"><span class="l">결제수단</span><span class="v">${data.method || '-'}</span></div>
+        <div class="row"><span class="l">승인일시</span><span class="v">${data.approvedAt ? new Date(data.approvedAt).toLocaleString('ko-KR') : '-'}</span></div>
+        ${order && order.email ? `<div class="row"><span class="l">신청자</span><span class="v">${order.name || ''} (${order.email})</span></div>` : ''}
+      </div>
+      <div class="next">
+        ✅ <strong>다음 단계</strong>: 영업일 기준 3일 이내 홈택스 환급 조회 결과를 이메일로 안내드립니다.<br>
+        문의: <a href="mailto:ghdejr11@gmail.com" style="color:#1b64da;">ghdejr11@gmail.com</a>
+      </div>
+      <div class="btns">
+        ${data.receiptUrl ? `<a class="btn btn-secondary" href="${data.receiptUrl}" target="_blank">영수증 보기</a>` : ''}
+        <a class="btn btn-primary" href="/">홈으로</a>
+      </div>
+    `;
+  }
+
+  function renderError(msg) {
+    document.getElementById('root').innerHTML = `
+      <div class="hero">
+        <div class="icon fail">!</div>
+        <h1>결제 승인 실패</h1>
+        <p class="sub err">${msg || '결제 승인 중 오류가 발생했습니다.'}</p>
+      </div>
+      <div class="card">
+        <p style="font-size:14px;color:#4e5968;line-height:1.6;">
+          결제는 완료되었으나 서버 검증에 실패했습니다.<br>
+          이미 결제된 경우 자동 환불 처리되니 안심하세요.<br>
+          문의: <a href="mailto:ghdejr11@gmail.com" style="color:#1b64da;">ghdejr11@gmail.com</a>
+        </p>
+      </div>
+      <div class="btns">
+        <a class="btn btn-secondary" href="/">홈으로</a>
+        <a class="btn btn-primary" href="/payment.html">다시 시도</a>
+      </div>
+    `;
+  }
+
+  async function confirm() {
+    const url = new URL(location.href);
+    const paymentKey = url.searchParams.get('paymentKey');
+    const orderId = url.searchParams.get('orderId');
+    const amount = url.searchParams.get('amount');
+    if (!paymentKey || !orderId || !amount) {
+      renderError('필수 파라미터 누락 (paymentKey, orderId, amount)');
+      return;
+    }
+
+    let order = null;
+    try { order = JSON.parse(sessionStorage.getItem('taxnb_order') || 'null'); } catch (e) {}
+
+    try {
+      const r = await fetch('/api/confirm-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ paymentKey, orderId, amount: Number(amount) }),
+      });
+      const data = await r.json();
+      if (!r.ok || !data.success) {
+        renderError(data.error || ('승인 실패 (HTTP ' + r.status + ')'));
+        return;
+      }
+      sessionStorage.removeItem('taxnb_order');
+      renderSuccess(data, order);
+    } catch (e) {
+      renderError(e.message);
+    }
+  }
+
+  confirm();
+</script>
+</body>
+</html>

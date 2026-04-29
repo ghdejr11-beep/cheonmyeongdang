@@ -1,0 +1,24 @@
+{
+  "used": {
+    "tax_n_benefit": [
+      12
+    ]
+  },
+  "history": [
+    {
+      "ts": "2026-04-27T23:20:30.406519",
+      "site": "tax_n_benefit",
+      "slot": null,
+      "msg": "공제 가능 항목 자동 체크 — 빠뜨리는 금액 0원. {URL}",
+      "results": {
+        "bluesky": true,
+        "discord": true,
+        "mastodon": true,
+        "x": true,
+        "threads": false,
+        "instagram": false,
+        "telegram": true
+      }
+    }
+  ]
+}

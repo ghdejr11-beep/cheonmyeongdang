@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S4HPJHT5QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S4HPJHT5QR');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#3282f6">
+<meta name="robots" content="noindex,nofollow">
+<title>결제 실패 — 세금N혜택</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', sans-serif; background: #f9fafb; color: #191f28; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 540px; margin: 0 auto; padding: 24px 20px 80px; }
+  .hero { text-align: center; padding: 40px 20px; }
+  .icon { width: 84px; height: 84px; margin: 0 auto 20px; background: #e74c3c; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 48px; font-weight: 800; }
+  h1 { font-size: 24px; font-weight: 800; margin-bottom: 10px; }
+  p.sub { color: #4e5968; font-size: 15px; line-height: 1.6; }
+  .card { background: #fff; border-radius: 16px; padding: 24px; margin-top: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+  .card h2 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+  .row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; }
+  .row .l { color: #8b95a1; }
+  .row .v { color: #191f28; font-weight: 600; word-break: break-all; max-width: 60%; text-align: right; }
+  .btns { display: flex; gap: 10px; margin-top: 24px; }
+  .btn { flex: 1; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; text-align: center; text-decoration: none; border: 0; font-family: inherit; }
+  .btn-primary { background: #3282f6; color: #fff; }
+  .btn-secondary { background: #fff; color: #4e5968; border: 1px solid #e5e8eb; }
+  .help { background: #fff5f5; border-radius: 12px; padding: 16px; margin-top: 14px; font-size: 13px; color: #c0392b; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="icon">!</div>
+    <h1>결제에 실패했어요</h1>
+    <p class="sub">결제가 완료되지 않았습니다.<br>잠시 후 다시 시도해주세요.</p>
+  </div>
+  <div class="card">
+    <h2>실패 정보</h2>
+    <div class="row"><span class="l">사유</span><span class="v" id="msg">-</span></div>
+    <div class="row"><span class="l">에러코드</span><span class="v" id="code">-</span></div>
+    <div class="row"><span class="l">주문번호</span><span class="v" id="oid">-</span></div>
+  </div>
+  <div class="help">
+    💡 <strong>자주 발생하는 원인</strong><br>
+    • 카드 한도 초과 / 정지 카드<br>
+    • 본인 명의가 아닌 카드 결제 시도<br>
+    • 통신 일시 장애<br>
+    문의: <a href="mailto:ghdejr11@gmail.com" style="color:#c0392b;">ghdejr11@gmail.com</a>
+  </div>
+  <div class="btns">
+    <a class="btn btn-secondary" href="/">홈으로</a>
+    <a class="btn btn-primary" href="/payment.html">다시 시도</a>
+  </div>
+</div>
+
+<script>
+  const url = new URL(location.href);
+  const code = url.searchParams.get('code') || '-';
+  const message = url.searchParams.get('message') || '결제가 취소되었거나 실패했습니다.';
+  const oid = url.searchParams.get('orderId') || '-';
+  document.getElementById('msg').textContent = message;
+  document.getElementById('code').textContent = code;
+  document.getElementById('oid').textContent = oid;
+</script>
+</body>
+</html>

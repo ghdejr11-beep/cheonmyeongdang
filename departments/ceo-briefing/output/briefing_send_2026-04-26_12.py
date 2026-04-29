@@ -106,7 +106,7 @@ msg3 = f"""📺 미디어팀 상세 보고 | {DATE} {TIME}
 - 텔레그램 자동 홍보 매일 10·20시 가동
 - 어제 38건 편집 (yt_3ch_daily.log, register_yt_3ch_tasks.bat 등)
 - fal.ai API 발급 완료
-- 쇼츠 편집툴: Submagic Pro $23 + ElevenLabs $5 = $28/월 (트라이얼 후)
+- 음성합성: ElevenLabs $5 결제 완료 (4/27 키 발급)
 
 ⚠️ 문제점
 - X Tweet 발송 유료 ($100/월) 미가입

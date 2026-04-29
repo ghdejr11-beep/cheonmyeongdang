@@ -1,0 +1,35 @@
+{
+  "book_id": "genz-stress",
+  "title": "Genz Stress",
+  "subtitle": "",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "School, jobs, climate dread, social media, situationships, rent. No wonder you're tired.\n\nThe Gen Z Stress Workbook is a research-backed, 68-page hands-on guide built for young adults staring down a world that didn't come with instructions. No \"just meditate, sweetie\" advice. Real tools that fit between classes, shifts, and TikTok scrolls.\n\nWho it's for:\n- High school and college students\n- Early-career 20-somethings navigating burnout\n- Anyone whose anxiety spikes the moment notifications turn on\n- Therapists looking for a workbook to hand clients between sessions\n\nWhat's inside:\n- A self-assessment to map your specific stress signature\n- 7 evidence-based techniques: cognitive reframing, somatic grounding, boundary scripts, sleep repair, social-media detoxes, financial-anxiety triage, friendship audit\n- Fill-in worksheets - this is a workbook, not a lecture\n- A 4-week reset plan you can actually finish\n- Crisis-line and resource page in the back, no stigma\n\nIf you've cycled through wellness apps that all sound the same, this is the offline reset your brain has been begging for.\n\nGet your copy and take back the next month of your life.",
+  "keywords": [
+    "gen z stress",
+    "anxiety workbook",
+    "young adult mental health",
+    "teen stress",
+    "burnout journal",
+    "self-care workbook",
+    "college stress"
+  ],
+  "categories": [
+    "BISAC: SELF-HELP / Stress Management",
+    "BISAC: YOUNG ADULT NONFICTION / Health & Daily Living"
+  ],
+  "isbn": "",
+  "price_usd": 9.99,
+  "page_count": 68,
+  "trim_size": "6x9",
+  "publication_date": "2026-04-26",
+  "interior_pdf": "GenZ_Stress_Workbook.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": false,
+  "published": false,
+  "todo": [
+    "isbn",
+    "review_keywords",
+    "review_categories"
+  ]
+}

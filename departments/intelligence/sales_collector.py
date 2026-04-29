@@ -103,12 +103,18 @@ def prompt_input():
 
 
 def fetch_vercel_analytics(project_id: str):
-    """Vercel Web Analytics (v2 API) — 실제 구현은 project ID 필요"""
-    if not VERCEL_TOKEN:
-        return None
-    # TODO: 실제 Vercel Analytics API 연동
-    # https://vercel.com/docs/analytics/api
-    return None
+    """Vercel 트래픽/배포 — ceo-briefing/integrations/vercel_analytics 위임.
+
+    ⚠️ Vercel Web Analytics PV/UV 는 공식 REST API 미지원 (2026-04 기준).
+    배포 통계만 자동, PV/UV 는 Drain JSON 또는 GA4 fallback.
+    """
+    try:
+        sys.path.insert(0, os.path.join(ROOT, 'departments/ceo-briefing'))
+        from integrations import vercel_analytics  # type: ignore
+        snap = vercel_analytics.fetch_vercel_daily(project_ids=[project_id])
+        return snap.get("projects", {}).get(project_id)
+    except Exception as e:
+        return {"error": f"{type(e).__name__}: {str(e)[:160]}"}
 
 
 def build_report(for_date: str = None):
