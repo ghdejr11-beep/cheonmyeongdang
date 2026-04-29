@@ -191,6 +191,126 @@
 }
 </script>
 
+<!-- Structured Data: Service (사주명리 정밀 풀이 디지털 서비스) -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Service",
+ "name": "사주명리 정밀 풀이",
+ "serviceType": "디지털 콘텐츠 (사주명리 분석)",
+ "category": "Lifestyle / Astrology",
+ "areaServed": {"@type": "Country", "name": "South Korea"},
+ "availableLanguage": "ko",
+ "provider": {
+  "@type": "Organization",
+  "name": "쿤스튜디오",
+  "alternateName": "KunStudio",
+  "url": "https://cheonmyeongdang.vercel.app/",
+  "logo": "https://cheonmyeongdang.vercel.app/app_icon_512.png"
+ },
+ "url": "https://cheonmyeongdang.vercel.app/",
+ "description": "전통 명리학 기반의 사주팔자 정밀 분석 + 궁합/신년운세 통합 디지털 리포트. 즉시 다운로드 형태의 디지털 콘텐츠.",
+ "offers": [
+  {
+   "@type": "Offer",
+   "name": "사주 정밀 풀이",
+   "description": "명리학 기반 정밀 사주 분석 리포트",
+   "price": "9900",
+   "priceCurrency": "KRW",
+   "availability": "https://schema.org/InStock",
+   "url": "https://cheonmyeongdang.vercel.app/pay.html?sku=saju_premium_9900",
+   "category": "DigitalContent"
+  },
+  {
+   "@type": "Offer",
+   "name": "궁합",
+   "description": "두 사주의 합/충/오행 균형 정밀 분석",
+   "price": "9900",
+   "priceCurrency": "KRW",
+   "availability": "https://schema.org/InStock",
+   "url": "https://cheonmyeongdang.vercel.app/pay.html?sku=compat_detail_9900",
+   "category": "DigitalContent"
+  },
+  {
+   "@type": "Offer",
+   "name": "종합 풀이",
+   "description": "사주+궁합+신년운세 통합 프리미엄 리포트",
+   "price": "15000",
+   "priceCurrency": "KRW",
+   "availability": "https://schema.org/InStock",
+   "url": "https://cheonmyeongdang.vercel.app/pay.html?sku=comprehensive_15000",
+   "category": "DigitalContent"
+  },
+  {
+   "@type": "Offer",
+   "name": "신년운세 (연간)",
+   "description": "12개월 월별 운세 + 신살 연간 리포트",
+   "price": "15000",
+   "priceCurrency": "KRW",
+   "availability": "https://schema.org/InStock",
+   "url": "https://cheonmyeongdang.vercel.app/pay.html?sku=sinnyeon_15000",
+   "category": "DigitalContent"
+  },
+  {
+   "@type": "Offer",
+   "name": "월회원권",
+   "description": "사주 정밀 + 궁합 무제한 + 매일 아침 8시 카톡 운세",
+   "price": "9900",
+   "priceCurrency": "KRW",
+   "availability": "https://schema.org/InStock",
+   "url": "https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_9900",
+   "category": "Subscription"
+  }
+ ]
+}
+</script>
+
+<!-- Structured Data: FAQPage (홈 FAQ 섹션 질문 3개) -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "inLanguage": "ko-KR",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "환불은 어떻게 하나요?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "결제 후 24시간 이내 결과 미수령 시 전액 환불 가능합니다. 이메일(ghdejr11@gmail.com)로 주문번호와 함께 문의해주세요."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "분석 결과가 맞지 않는 것 같아요.",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "사주 분석은 전통 명리학에 기반한 참고용 해석입니다. 보다 상세한 분석을 원하시면 유료 정밀 풀이 서비스를 이용해주세요."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "개인정보는 안전한가요?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "사진은 서버에 저장되지 않으며, 입력된 생년월일은 브라우저에서만 처리됩니다. 결제 시 수집한 정보는 7일 이내 자동 파기됩니다."
+   }
+  }
+ ]
+}
+</script>
+
+<!-- Structured Data: BreadcrumbList (홈) -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {"@type": "ListItem", "position": 1, "name": "홈", "item": "https://cheonmyeongdang.vercel.app/"}
+ ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
@@ -3202,7 +3322,13 @@
 <div class="logo-f">天命堂</div>
 <p>CHEONMYEONGDANG<br>
  사주명리 | 관상 | 풍수지리 | 손금<br><br>
- &copy;<span id="footer-year">2026</span>천명당. All rights reserved.<br>
+ <strong style="color:var(--gold2);">쿤스튜디오 (KunStudio)</strong> · 대표: 홍덕훈<br>
+ 사업자등록번호: 552-59-00848<br>
+ 사업장 주소: 경상북도 경주시 외동읍 제내못안길 25-52<br>
+ 고객문의: <a href="tel:01042446992" style="color:var(--gold2);text-decoration:none;">010-4244-6992</a> · <a href="mailto:ghdejr11@gmail.com" style="color:var(--gold2);text-decoration:none;">ghdejr11@gmail.com</a><br>
+ 통신판매업: 신고 진행 중<br><br>
+ <a href="/terms.html" style="color:var(--gold2);text-decoration:none;">이용약관</a> · <a href="/privacy.html" style="color:var(--gold2);text-decoration:none;">개인정보처리방침</a> · <a href="/refund.html" style="color:var(--gold2);text-decoration:none;">환불정책</a> · <a href="/support.html" style="color:var(--gold2);text-decoration:none;">고객센터</a><br><br>
+ &copy;<span id="footer-year">2026</span> 천명당. All rights reserved.<br>
  본 사이트의 무료 분석은 참고용이며, 중요한 결정은 전문가 상담을 권장합니다.</p>
 </footer>
 
@@ -6851,7 +6977,10 @@
  { name: '임신 발견', icon: '&#129330;', meaning: '임신을 발견하는 꿈은 새로운 시작과 창조의 에너지를 상징합니다. 실제 임신이 아니더라도, 당신 내면에서 새로운 아이디어나 프로젝트가 싹트고 있음을 의미합니다. 이는 오랜 준비 끝에 결실을 맺을 시기가 왔음을 알리는 길몽입니다. 사업, 학업, 창작 활동 등에서 중요한 성과를 기대할 수 있으며, 관계에서도 새로운 단계로 발전할 가능성이 높습니다. 다만 새로운 것을 키워내려면 인내와 책임감이 필요함을 기억하세요.', luck: '길', advice: '새로운 계획을 구체화할 시기입니다. 주변의 지지를 받으며 차근차근 준비하세요.', lotto: [3, 7, 14, 21, 28, 42] },
  { name: '치아 빠짐', icon: '&#129463;', meaning: '치아가 빠지는 꿈은 상실과 변화에 대한 불안을 나타냅니다. 가족이나 가까운 사람과의 관계 변화, 경제적 손실, 또는 자신감 저하를 암시할 수 있습니다. 특히 앞니가 빠지면 체면이나 대인관계의 문제, 어금니는 경제적 기반의 흔들림을 의미합니다. 하지만 이는 낡은 것이 떨어져 나가고 새것이 자라날 준비 과정이기도 합니다. 이 시기에는 건강 관리와 재정 점검이 필요하며, 변화를 두려워하지 말고 받아들이는 자세가 중요합니다.', luck: '흉', advice: '건강 검진을 받고, 가족과 소통하며, 급한 결정은 미루는 것이 좋습니다.', lotto: [5, 13, 19, 26, 33, 40] },
  { name: '합격 통지', icon: '&#127881;', meaning: '합격 통지를 받는 꿈은 노력의 결실과 인정을 상징하는 매우 길한 꿈입니다. 실제 시험이나 면접을 앞둔 경우 긍정적인 결과를 암시하며, 그렇지 않더라도 당신의 능력이 인정받을 시기가 왔음을 의미합니다. 승진, 계약 성사, 프로젝트 성공 등 중요한 성취를 이룰 가능성이 높습니다. 자신감을 가지고 도전하세요. 이 꿈은 당신이 충분히 준비되었으며, 그동안의 노력이 헛되지 않았음을 알려줍니다. 주변 사람들에게도 좋은 소식이 있을 수 있습니다.', luck: '길', advice: '자신감을 갖고 기회를 적극 활용하세요. 감사한 마음을 표현하는 것도 잊지 마세요.', lotto: [8, 16, 23, 29, 36, 44] },
- ]
+ 
+        { name: '이혼', icon: '&#128148;', meaning: '이혼하는 꿈은 실제 이혼과는 무관하게 분리와 독립, 새로운 출발을 상징합니다. 현재의 관계나 상황에서 벗어나 자유로워지고 싶은 무의식의 욕구를 나타냅니다. 이는 오래된 습관이나 생각의 틀을 깨고 변화를 추구하는 심리 상태를 반영합니다. 때로는 자아 정체성을 재정립하고, 의존적인 관계에서 독립적인 존재로 성장하려는 내면의 준비 과정입니다. 두려움보다는 성장의 기회로 받아들이세요.', luck: '평', advice: '현재 관계를 재점검하고, 진정한 자신의 모습을 찾아가는 시간을 가지세요.', lotto: [3, 11, 19, 27, 33, 41] },
+        { name: '비행기 추락', icon: '&#9992;', meaning: '비행기가 추락하는 꿈은 높은 목표나 야심이 좌절될까 봐 두려워하는 불안감을 표현합니다. 현재 진행 중인 계획이나 프로젝트에 대한 통제력 상실의 공포, 또는 과도한 스트레스 상태를 나타냅니다. 하지만 이 꿈은 동시에 비현실적인 기대를 내려놓고 현실적인 접근이 필요하다는 메시지이기도 합니다. 추락 후 생존하는 꿈이라면 역경을 극복할 내적 힘이 있음을 의미합니다. 지나친 완벽주의를 경계하세요.', luck: '흉', advice: '목표를 재점검하고 단계별로 착실히 진행하세요. 무리한 도전보다 안정을 우선하세요.', lotto: [2, 15, 23, 31, 38, 44] },
+      ]
  },
  body: {
  label: '신체꿈',
@@ -6958,7 +7087,9 @@
  
  { name: '소주', icon: '&#127866;', meaning: '소주를 마시는 꿈은 감정의 해소와 솔직함을 나타냅니다. 맑은 소주잔은 복잡했던 마음이 정리되고 진실된 대화가 이루어질 신호입니다. 누군가와 함께 소주를 나눈다면 그 사람과의 관계가 더욱 깊어지거나 오해가 풀릴 가능성이 높습니다. 다만 과하게 취하는 꿈이라면 현실에서 감정 조절이 필요함을 경고하는 것입니다. 적당히 마시는 꿈은 스트레스 해소와 새로운 시작의 의미를 담고 있습니다.', luck: '평', advice: '억눌렀던 감정을 건강한 방식으로 표현하세요. 진솔한 대화가 관계 개선의 열쇠입니다.', lotto: [3, 12, 19, 27, 33, 41] },
  { name: '짜장면', icon: '&#127837;', meaning: '짜장면을 먹는 꿈은 위안과 안정, 향수를 상징합니다. 검은 짜장소스는 복잡해 보이지만 결국 조화로운 맛을 내듯, 현재의 어려운 상황들이 하나로 잘 정리될 것을 암시합니다. 배달 온 짜장면이라면 예상치 못한 도움이나 행운이 찾아올 징조이며, 직접 만들어 먹는다면 스스로 문제를 해결할 능력이 있음을 보여줍니다. 면발이 길고 끊어지지 않는다면 재물운과 인연운이 좋은 신호입니다.', luck: '길', advice: '익숙한 것에서 힘을 얻으세요. 복잡한 일도 차근차근 풀어가면 좋은 결과가 따릅니다.', lotto: [5, 11, 18, 25, 32, 44] },
- ]
+ 
+        { name: '생선회', icon: '&#127843;', meaning: '싱싱한 생선회는 신선한 기회와 즉각적인 이익을 상징하는 길몽입니다. 투명하고 윤기 나는 회는 순수한 의도로 시작한 일이 빠르게 성과를 내거나 예상치 못한 재물운이 들어올 징조입니다. 회를 먹는 꿈은 영양분을 흡수하듯 지혜와 정보를 얻어 성장하는 시기를 의미하며, 특히 큰 물고기의 회는 큰 성공을 암시합니다. 신선도가 중요한 음식인 만큼 타이밍을 놓치지 않는 것이 관건입니다.', luck: '길', advice: '찾아온 기회를 망설이지 말고 과감하게 잡으세요. 신속한 결단이 성공의 열쇠입니다.', lotto: [5, 12, 19, 26, 38, 44] },
+      ]
  },
  place: {
  label: '장소꿈',

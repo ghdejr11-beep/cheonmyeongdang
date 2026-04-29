@@ -162,8 +162,12 @@
 
 <script>
  // URL 파라미터에서 결제 정보 추출
+ // - 토스: ?paymentKey=...&orderId=...&amount=...&provider=toss
+ // - 포트원 V2: ?paymentId=...&txId=...&orderId=...&amount=...&provider=portone-...
+ //   (포트원은 redirect 시 paymentId 쿼리를 자동 추가 — txId는 PG 트랜잭션ID)
  var params = new URLSearchParams(window.location.search);
- var paymentKey = params.get('paymentKey');
+ var provider = params.get('provider') || 'toss';
+ var paymentKey = params.get('paymentKey') || params.get('paymentId') || '';
  var orderId = params.get('orderId');
  var amount = params.get('amount');
  var skuId = params.get('skuId') || '';
@@ -442,7 +446,9 @@
  method: 'POST',
  headers: { 'Content-Type': 'application/json' },
  body: JSON.stringify({
+ provider: provider,
  paymentKey: paymentKey,
+ paymentId: paymentKey,
  orderId: orderId,
  amount: Number(amount),
  skuId: resolvedSkuId,
