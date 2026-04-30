@@ -215,7 +215,7 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
 </div>
 </div>
 
-<!-- 2-B. 월회원 전용: 사주 정보 (subscribe_monthly_9900 선택 시 표시) -->
+<!-- 2-B. 월회원 전용: 사주 정보 (subscribe_monthly_29900 선택 시 표시) -->
 <div class="card" id="fortune-card" style="display:none;">
 <h2>월회원 일일 운세 발송 정보</h2>
 <div style="color:var(--text2);font-size:0.85rem;margin-bottom:14px;line-height:1.6;">
@@ -274,6 +274,18 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
 <h2>4. 결제 요약</h2>
 <div class="summary"><span>상품</span><span id="sum-name">-</span></div>
 <div class="summary"><span>금액</span><span id="sum-amount">0원</span></div>
+
+<!-- 쿠폰 코드 입력 -->
+<div style="margin:14px 0;padding:12px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.25);border-radius:8px;">
+  <div style="font-size:0.78rem;color:#c9a84c;letter-spacing:0.1em;margin-bottom:8px;font-weight:600;">🎟️ 쿠폰 코드</div>
+  <div style="display:flex;gap:6px;">
+    <input type="text" id="coupon-code" placeholder="예: LAUNCH2026" style="flex:1;padding:10px 12px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:#e8e0d0;font-size:0.88rem;font-family:monospace;letter-spacing:0.05em;text-transform:uppercase;">
+    <button type="button" id="coupon-apply" onclick="applyCoupon()" style="padding:10px 16px;background:transparent;border:1px solid #c9a84c;color:#c9a84c;border-radius:6px;font-size:0.82rem;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">적용</button>
+  </div>
+  <div id="coupon-status" style="font-size:0.74rem;margin-top:8px;min-height:14px;"></div>
+</div>
+
+<div class="summary" id="coupon-discount-row" style="display:none;color:#4ade80;"><span>쿠폰 할인</span><span id="coupon-discount">-0원</span></div>
 <div class="summary total"><span>총 결제 금액</span><span class="v" id="sum-total">0원</span></div>
 <button class="pay-btn" id="pay-btn" disabled>상품을 선택해 주세요</button>
 <div class="footnote">
@@ -335,6 +347,7 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
  selectedSku: null,
  widgets: null,
  paymentReady: false,
+ coupon: null,
  };
 
  var $list = document.getElementById('sku-list');
@@ -373,7 +386,7 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
 
  // ─── 월회원 권한 매트릭스 안내 (2026-04-27 정책) ───────────────────
  var SKU_POLICY_NOTE = {
- 'subscribe_monthly_9900':
+ 'subscribe_monthly_29900':
  ' 사주 정밀 풀이 + 궁합 무료 · 매일 카톡 운세<br>' +
  ' 종합 풀이(₩15,000)는<strong>별도 결제</strong>',
  'monthly_premium':
@@ -414,6 +427,14 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
  function selectSku(sku) {
  var prevSkuId = state.selectedSku && state.selectedSku.id;
  state.selectedSku = sku;
+ // 쿠폰 reset (SKU 변경 시 다시 적용 필요)
+ state.coupon = null;
+ var $cs = document.getElementById('coupon-status');
+ var $cd = document.getElementById('coupon-discount-row');
+ if ($cs) { $cs.textContent = ''; $cs.style.color = ''; }
+ if ($cd) { $cd.style.display = 'none'; }
+ var $cc = document.getElementById('coupon-code');
+ if ($cc) $cc.value = '';
  Array.prototype.forEach.call(document.querySelectorAll('.sku'), function(el) {
  el.classList.toggle('selected', el.dataset.skuId === sku.id);
  });
@@ -425,7 +446,7 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
  // 월회원 SKU 선택 시 사주 정보 입력 카드 표시
  var fortuneCard = document.getElementById('fortune-card');
  if (fortuneCard) {
- fortuneCard.style.display = (sku.id === 'subscribe_monthly_9900') ? 'block' : 'none';
+ fortuneCard.style.display = (sku.id === 'subscribe_monthly_29900') ? 'block' : 'none';
  }
  updatePayButton();
  // GA4 funnel: SKU 변경/선택 시 begin_checkout 이벤트 발사
@@ -475,9 +496,78 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
  return !!(f.birth_date && f.gender && f.telegram_chat_id);
  }
 
+ // ─── 쿠폰 적용 ───
+ function getFinalAmount() {
+   var sku = state.selectedSku;
+   if (!sku) return 0;
+   var base = sku.amount;
+   if (state.coupon && state.coupon.discount_amount) {
+     return Math.max(0, base - state.coupon.discount_amount);
+   }
+   return base;
+ }
+
+ window.applyCoupon = function() {
+   var $cc = document.getElementById('coupon-code');
+   var $cs = document.getElementById('coupon-status');
+   var $cd = document.getElementById('coupon-discount-row');
+   var $cdAmount = document.getElementById('coupon-discount');
+   if (!$cc || !$cs) return;
+   var code = ($cc.value || '').trim().toUpperCase();
+   if (!code) { $cs.textContent = '쿠폰 코드를 입력해주세요.'; $cs.style.color = '#e07070'; return; }
+   var sku = state.selectedSku;
+   if (!sku) { $cs.textContent = '먼저 상품을 선택해주세요.'; $cs.style.color = '#e07070'; return; }
+   var emailVal = ($email.value || '').trim().toLowerCase();
+   $cs.textContent = '확인 중...'; $cs.style.color = '#9a9080';
+   fetch('/api/coupon-validate', {
+     method: 'POST',
+     headers: { 'Content-Type': 'application/json' },
+     body: JSON.stringify({ code: code, email: emailVal, sku: sku.id, amount: sku.amount }),
+   })
+   .then(function(r){ return r.json().then(function(j){ return { status: r.status, body: j }; }); })
+   .then(function(res) {
+     if (res.body && res.body.ok) {
+       state.coupon = res.body;
+       $cs.textContent = '✓ ' + (res.body.description || '쿠폰 적용됨') + ' (-' + fmt(res.body.discount_amount) + ')';
+       $cs.style.color = '#4ade80';
+       if ($cd && $cdAmount) {
+         $cd.style.display = '';
+         $cdAmount.textContent = '-' + fmt(res.body.discount_amount);
+       }
+       var finalAmt = getFinalAmount();
+       $sumTotal.textContent = fmt(finalAmt);
+       $payBtn.textContent = fmt(finalAmt) + ' 결제하기';
+       updateWidgetAmount(finalAmt);
+       try { if (window.gtag) window.gtag('event', 'coupon_applied', {coupon: code, discount: res.body.discount_amount}); } catch(_){}
+     } else {
+       state.coupon = null;
+       var err = (res.body && res.body.error) || 'invalid';
+       var msg = {
+         invalid_code: '존재하지 않는 쿠폰 코드입니다.',
+         expired: '만료된 쿠폰입니다.',
+         already_used: '이미 사용한 쿠폰입니다.',
+         not_vip: 'VIP 등급(3회 이상 결제) 전용 쿠폰입니다.',
+         not_new_customer: '신규 가입자 전용 쿠폰입니다.',
+         sku_not_eligible: '이 상품에는 사용할 수 없는 쿠폰입니다.',
+         amount_too_low: '쿠폰 사용 최소 금액 미달입니다.',
+       }[err] || ('쿠폰 사용 실패: ' + err);
+       $cs.textContent = msg;
+       $cs.style.color = '#e07070';
+       if ($cd) $cd.style.display = 'none';
+       $sumTotal.textContent = fmt(sku.amount);
+       $payBtn.textContent = fmt(sku.amount) + ' 결제하기';
+       updateWidgetAmount(sku.amount);
+     }
+   })
+   .catch(function() {
+     $cs.textContent = '네트워크 오류 — 잠시 후 다시 시도해주세요.';
+     $cs.style.color = '#e07070';
+   });
+ };
+
  function updatePayButton() {
  var sku = state.selectedSku;
- var monthly = sku && sku.id === 'subscribe_monthly_9900';
+ var monthly = sku && sku.id === 'subscribe_monthly_29900';
  var monthlyOk = !monthly || isMonthlyValid();
  // 토스만 위젯 ready를 요구. 포트원/빌게이트는 SDK 로드만 되면 OK.
  var provider = sku ? getPaymentProvider(sku.id) : 'toss';
@@ -563,19 +653,23 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
  }
 
  function buildOrderData(sku, orderId) {
+ var finalAmt = getFinalAmount();
  var orderData = {
  orderId: orderId,
  skuId: sku.id,
  serviceName: sku.name,
  price: sku.amount,
- amount: sku.amount,
+ amount: finalAmt,
+ originalAmount: sku.amount,
+ couponCode: state.coupon ? state.coupon.code : null,
+ couponDiscount: state.coupon ? state.coupon.discount_amount : 0,
  name: $name.value.trim(),
  email: $email.value.trim(),
  phone: $phone.value.trim(),
  createdAt: new Date().toISOString(),
  status: 'pending',
  };
- if (sku.id === 'subscribe_monthly_9900') {
+ if (sku.id === 'subscribe_monthly_29900') {
  orderData.fortune = getFortuneFields();
  }
  return orderData;
@@ -620,12 +714,13 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
  'channel-key-XXXX';
  var payMethod = providerKey === 'portone-kakaopay' ? 'EASY_PAY' : 'CARD';
 
+ var portoneFinalAmt = getFinalAmount();
  var requestPayload = {
  storeId: storeId,
  channelKey: channelKey,
  paymentId: orderId,
  orderName: sku.name,
- totalAmount: Number(sku.amount),
+ totalAmount: Number(portoneFinalAmt),
  currency: 'KRW',
  payMethod: payMethod,
  customer: {
@@ -653,7 +748,7 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
  var qs =
  '?paymentId=' + encodeURIComponent(response.paymentId) +
  '&orderId=' + encodeURIComponent(orderId) +
- '&amount=' + encodeURIComponent(sku.amount) +
+ '&amount=' + encodeURIComponent(portoneFinalAmt) +
  '&skuId=' + encodeURIComponent(sku.id) +
  '&provider=' + encodeURIComponent(providerKey);
  window.location.href = window.location.origin + '/success.html' + qs;

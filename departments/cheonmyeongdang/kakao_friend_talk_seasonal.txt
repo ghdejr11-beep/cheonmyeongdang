@@ -1,0 +1,77 @@
+[카카오 친구톡 — 시즌 광고 (광고형, 채널 친구 한정)]
+
+## 친구톡 vs 알림톡
+- 알림톡 = 정보성, 검수 까다로움, 광고 X
+- 친구톡 = 채널 친구만 받음, 광고 OK, 동의 1회로 발송 가능
+- 천명당 카카오 채널 @cheonmyeongdang 친구가 받음
+
+## 발송 빈도 (안전 기준)
+- 월 1~2회 한정 (스팸 방지)
+- 발송 시간: 평일 11~17시 권장
+- 광고 표기 의무: "(광고)" 머리말 + "수신거부" 발송번호/링크 필수
+
+## 본문 템플릿 1 — 시즌 다이어리 (4월 말 / 5월 / 12월 신년)
+
+(광고)
+
+#{name}님, 안녕하세요. 천명당입니다.
+
+5월은 부부의 날·어버이날·어린이날이 모인 가정의 달.
+가족 12띠 흐름을 한 권에 모은 「2026 띠별 운세 다이어리」가 출시됐습니다.
+
+📔 12띠 × 12개월 흐름 + 매월 셀프 워크시트 50p
+즉시 다운로드 PDF · ₩9,800
+
+▶ https://ghdejr.gumroad.com/l/2026-zodiac-diary-kr?utm_source=kakao_friend&utm_campaign=may_seasonal
+
+수신거부: 천명당 채널 차단
+
+## 본문 템플릿 2 — 사주 입문자
+
+(광고)
+
+#{name}님, 천명당의 무료 사주를 봤지만 결과가 어렵게 느껴지셨나요?
+
+「사주명리학 입문 가이드」가 도와드립니다.
+천간·지지·오행·십신을 그림과 표로 35p 정리.
+
+📔 즉시 다운로드 PDF · ₩7,000
+▶ https://ghdejr.gumroad.com/l/saju-intro-kr?utm_source=kakao_friend&utm_campaign=intro
+
+수신거부: 천명당 채널 차단
+
+## 본문 템플릿 3 — 결혼/연애 시즌
+
+(광고)
+
+#{name}님, 「띠 궁합」으로는 보이지 않는 진짜 호환을 8글자(사주)로 풀어보세요.
+
+📔 궁합 풀이 워크북 — 일주 합·충·형 + 십신 호환 직접 풀이 40p
+즉시 다운로드 PDF · ₩7,000
+▶ https://ghdejr.gumroad.com/l/compatibility-workbook-kr?utm_source=kakao_friend&utm_campaign=compat
+
+수신거부: 천명당 채널 차단
+
+## 발송 코드 (Solapi friend_talk)
+```python
+# departments/cheonmyeongdang/kakao_friend_talk_send.py (v3 통과 후 작성)
+from solapi import SolapiMessageService
+service = SolapiMessageService(api_key, api_secret)
+res = service.send_one({
+    "to": phone,
+    "from": "발신번호",
+    "type": "CTA",  # 친구톡 (Channel Talk Advertising)
+    "kakaoOptions": {
+        "pfId": "PF_ID_천명당",
+        "templateId": "template_id_v4",  # 친구톡 템플릿 ID
+        "buttons": [{"buttonName": "지금 받기", "buttonType": "WL", "linkMo": URL, "linkPc": URL}],
+        "disableSms": True,  # SMS 폴백 OFF (친구톡은 SMS 폴백 비추천)
+    }
+})
+```
+
+## 검수 가이드
+- 친구톡 템플릿도 솔라피 검수 필요 (1~3 영업일)
+- 광고 표기 "(광고)" + 수신거부 안내 필수
+- 가격 표기 OK, 다운로드 링크 OK
+- 비속어/허위 표현 X
