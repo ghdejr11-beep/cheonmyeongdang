@@ -221,3 +221,137 @@
 2026-04-29 04:06:36,579 [INFO] upload wealth_blueprint ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'swnkT4gKs-U', 'url': 'https://www.youtube.com/watch?v=swnkT4gKs-U', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
 2026-04-29 04:06:36,579 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'swnkT4gKs-U', 'url': 'https://www.youtube.com/watch?v=swnkT4gKs-U', ')
 2026-04-29 04:06:36,579 [INFO] === Wealth Blueprint done ===
+2026-04-29 14:00:02,342 [INFO] === Whisper Atlas | topic=fireplace | hours=[1.0, 3.0, 8.0] | dry_run=False ===
+2026-04-29 14:00:02,343 [INFO]   image: Warm cozy stone fireplace with soft glowing fire, dark cabin...
+2026-04-29 14:00:02,344 [INFO]   audio: synth brown noise (5min, vol=0.55)
+2026-04-29 14:00:02,346 [INFO]   audio: mix primary + pink
+2026-04-29 14:00:05,947 [INFO]   reuse loop_1h.mp3
+2026-04-29 14:00:05,947 [INFO]   render mp4 → fireplace_1h.mp4
+2026-04-29 14:06:31,429 [INFO]     size: 128.9 MB
+2026-04-29 14:07:51,631 [INFO] upload whisper_atlas ok=True resp={'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET 
+2026-04-29 14:07:51,631 [INFO]   upload ok=True ({'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long )
+2026-04-29 14:07:51,632 [INFO]   reuse loop_3h.mp3
+2026-04-29 14:07:51,633 [INFO]   render mp4 → fireplace_3h.mp4
+2026-04-29 14:27:47,885 [INFO]     size: 386.5 MB
+2026-04-29 14:28:50,737 [INFO] upload whisper_atlas ok=False resp=error: <urlopen error EOF occurred in violation of protocol (_ssl.c:2427)>
+2026-04-29 14:28:50,738 [INFO]   upload ok=False (error: <urlopen error EOF occurred in violation of protocol (_ssl.c:2427)>)
+2026-04-29 14:28:50,739 [INFO]   reuse loop_8h.mp3
+2026-04-29 14:28:50,740 [INFO]   render mp4 → fireplace_8h.mp4
+2026-04-29 16:00:02,057 [INFO] === Wealth Blueprint | quote=Warren Buffett theme=mindset dry_run=False ===
+2026-04-29 16:00:05,133 [INFO]   script: 1079 chars
+2026-04-29 16:00:08,351 [INFO] === Whisper Atlas | topic=fireplace | hours=[1.0, 3.0, 8.0] | dry_run=False ===
+2026-04-29 16:00:08,351 [INFO]   image: Warm cozy stone fireplace with soft glowing fire, dark cabin...
+2026-04-29 16:00:08,353 [INFO]   audio: synth brown noise (5min, vol=0.55)
+2026-04-29 16:00:08,353 [INFO]   audio: mix primary + pink
+2026-04-29 16:00:08,488 [INFO] === Wealth Blueprint | quote=Warren Buffett theme=mindset dry_run=False ===
+2026-04-29 16:00:10,267 [INFO]   voice: edge-tts → mindset_2026-04-29.mp3
+2026-04-29 16:00:10,268 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-04-29 16:00:10,272 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-04-29 16:00:10,273 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-04-29 16:00:10,274 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-04-29 16:00:10,275 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-04-29 16:00:10,778 [INFO]   reuse loop_1h.mp3
+2026-04-29 16:00:10,779 [INFO]   render mp4 → fireplace_1h.mp4
+2026-04-29 16:00:11,684 [INFO]   script: 818 chars
+2026-04-29 16:00:14,235 [INFO]   clip 1/5 548KB
+2026-04-29 16:00:19,227 [INFO]   voice: edge-tts → mindset_2026-04-29.mp3
+2026-04-29 16:00:19,228 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-04-29 16:00:19,229 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-04-29 16:00:19,230 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-04-29 16:00:19,232 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-04-29 16:00:19,233 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-04-29 16:00:19,358 [INFO]   clip 2/5 595KB
+2026-04-29 16:00:25,912 [INFO]   clip 1/5 548KB
+2026-04-29 16:00:26,919 [INFO]   clip 3/5 592KB
+2026-04-29 16:00:32,892 [INFO]   clip 2/5 595KB
+2026-04-29 16:00:33,879 [INFO]   clip 4/5 525KB
+2026-04-29 16:00:40,088 [INFO]   clip 3/5 592KB
+2026-04-29 16:00:41,094 [INFO]   clip 5/5 540KB
+2026-04-29 16:00:41,101 [INFO]   render → mindset_2026-04-29.mp4
+2026-04-29 16:00:43,526 [INFO]   size: 2.10 MB
+2026-04-29 16:00:45,708 [INFO]   clip 4/5 525KB
+2026-04-29 16:00:50,615 [INFO]   clip 5/5 540KB
+2026-04-29 16:00:50,619 [INFO]   render → mindset_2026-04-29.mp4
+2026-04-29 16:00:53,367 [INFO]   size: 3.38 MB
+2026-04-29 16:00:58,672 [INFO] upload wealth_blueprint ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'yVXv0V1Xwkk', 'url': 'https://www.youtube.com/watch?v=yVXv0V1Xwkk', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-04-29 16:00:58,674 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'yVXv0V1Xwkk', 'url': 'https://www.youtube.com/watch?v=yVXv0V1Xwkk', ')
+2026-04-29 16:00:58,674 [INFO] === Wealth Blueprint done ===
+2026-04-29 16:01:07,502 [INFO] upload wealth_blueprint ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'hiTrVF9VdKk', 'url': 'https://www.youtube.com/watch?v=hiTrVF9VdKk', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-04-29 16:01:07,502 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'hiTrVF9VdKk', 'url': 'https://www.youtube.com/watch?v=hiTrVF9VdKk', ')
+2026-04-29 16:01:07,503 [INFO] === Wealth Blueprint done ===
+2026-04-29 16:06:29,950 [INFO]     size: 128.9 MB
+2026-04-29 16:07:06,769 [INFO] upload whisper_atlas ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'dCeg27VcfOY', 'url': 'https://www.youtube.com/watch?v=dCeg27VcfOY', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-04-29 16:07:06,769 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'dCeg27VcfOY', 'url': 'https://www.youtube.com/wat)
+2026-04-29 16:07:06,770 [INFO]   reuse loop_3h.mp3
+2026-04-29 16:07:06,771 [INFO]   render mp4 → fireplace_3h.mp4
+2026-04-29 16:27:45,362 [INFO]     size: 386.5 MB
+2026-04-29 16:28:48,512 [INFO] upload whisper_atlas ok=False resp=error: <urlopen error EOF occurred in violation of protocol (_ssl.c:2427)>
+2026-04-29 16:28:48,512 [INFO]   upload ok=False (error: <urlopen error EOF occurred in violation of protocol (_ssl.c:2427)>)
+2026-04-29 16:28:48,513 [INFO]   reuse loop_8h.mp3
+2026-04-29 16:28:48,513 [INFO]   render mp4 → fireplace_8h.mp4
+2026-04-30 02:00:02,196 [INFO] === Whisper Atlas | topic=stream_creek | hours=[1.0, 3.0, 8.0] | dry_run=False ===
+2026-04-30 02:00:02,197 [INFO]   image: Gentle forest creek with mossy stones, soft sunlight through...
+2026-04-30 02:00:04,061 [INFO]   audio: synth pink noise (5min, vol=0.5)
+2026-04-30 02:00:05,939 [INFO]   loop audio → 1.0h
+2026-04-30 02:00:27,124 [INFO]   render mp4 → stream_creek_1h.mp4
+2026-04-30 02:05:28,849 [INFO]     size: 138.1 MB
+2026-04-30 02:06:31,158 [INFO] upload whisper_atlas ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'zG6PhNJqaso', 'url': 'https://www.youtube.com/watch?v=zG6PhNJqaso', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-04-30 02:06:31,158 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'zG6PhNJqaso', 'url': 'https://www.youtube.com/wat)
+2026-04-30 02:06:31,159 [INFO]   loop audio → 3.0h
+2026-04-30 02:07:35,704 [INFO]   render mp4 → stream_creek_3h.mp4
+2026-04-30 02:22:39,698 [INFO]     size: 414.0 MB
+2026-04-30 02:23:42,547 [INFO] upload whisper_atlas ok=False resp=error: <urlopen error EOF occurred in violation of protocol (_ssl.c:2427)>
+2026-04-30 02:23:42,547 [INFO]   upload ok=False (error: <urlopen error EOF occurred in violation of protocol (_ssl.c:2427)>)
+2026-04-30 02:23:42,548 [INFO]   loop audio → 8.0h
+2026-04-30 02:26:35,654 [INFO]   render mp4 → stream_creek_8h.mp4
+2026-04-30 04:00:02,212 [INFO] === Wealth Blueprint | quote=Jocko Willink theme=discipline dry_run=False ===
+2026-04-30 04:00:05,923 [INFO]   script: 992 chars
+2026-04-30 04:00:10,995 [INFO]   voice: edge-tts → discipline_2026-04-30.mp3
+2026-04-30 04:00:10,995 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-04-30 04:00:12,442 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-04-30 04:01:42,469 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-04-30 04:03:12,211 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-04-30 04:04:42,474 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-04-30 04:06:16,086 [INFO]   clip 1/5 576KB
+2026-04-30 04:06:17,841 [INFO]   clip 2/5 636KB
+2026-04-30 04:06:19,562 [INFO]   clip 3/5 496KB
+2026-04-30 04:06:21,242 [INFO]   clip 4/5 495KB
+2026-04-30 04:06:22,919 [INFO]   clip 5/5 472KB
+2026-04-30 04:06:22,920 [INFO]   render → discipline_2026-04-30.mp4
+2026-04-30 04:06:24,087 [INFO]   size: 3.25 MB
+2026-04-30 04:07:21,462 [INFO] upload wealth_blueprint ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'n-imCzDxtEk', 'url': 'https://www.youtube.com/watch?v=n-imCzDxtEk', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-04-30 04:07:21,463 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'n-imCzDxtEk', 'url': 'https://www.youtube.com/watch?v=n-imCzDxtEk', ')
+2026-04-30 04:07:21,463 [INFO] === Wealth Blueprint done ===
+2026-04-30 14:00:02,037 [INFO] === Whisper Atlas | topic=stream_creek | hours=[1.0, 3.0, 8.0] | dry_run=False ===
+2026-04-30 14:00:02,038 [INFO]   image: Gentle forest creek with mossy stones, soft sunlight through...
+2026-04-30 14:00:02,040 [INFO]   audio: synth pink noise (5min, vol=0.5)
+2026-04-30 14:00:02,252 [INFO]   reuse loop_1h.mp3
+2026-04-30 14:00:02,252 [INFO]   render mp4 → stream_creek_1h.mp4
+2026-04-30 14:05:50,617 [INFO]     size: 138.1 MB
+2026-04-30 14:06:25,991 [INFO] upload whisper_atlas attempt 1/3 ok=True resp={'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET 
+2026-04-30 14:06:25,991 [INFO]   upload ok=True ({'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long )
+2026-04-30 14:06:25,992 [INFO]   reuse loop_3h.mp3
+2026-04-30 14:06:25,993 [INFO]   render mp4 → stream_creek_3h.mp4
+2026-04-30 14:23:27,933 [INFO]     size: 414.0 MB
+2026-04-30 14:24:39,096 [INFO] upload whisper_atlas attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'DgW2z7rCpKg', 'url': 'https://www.youtube.com/watch?v=DgW2z7rCpKg', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-04-30 14:24:39,096 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'DgW2z7rCpKg', 'url': 'https://www.youtube.com/wat)
+2026-04-30 14:24:39,104 [INFO]   reuse loop_8h.mp3
+2026-04-30 14:24:39,107 [INFO]   render mp4 → stream_creek_8h.mp4
+2026-04-30 16:00:02,272 [INFO] === Wealth Blueprint | quote=Jocko Willink theme=discipline dry_run=False ===
+2026-04-30 16:00:05,951 [INFO]   script: 932 chars
+2026-04-30 16:00:11,406 [INFO]   voice: edge-tts → discipline_2026-04-30.mp3
+2026-04-30 16:00:11,406 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-04-30 16:00:11,428 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-04-30 16:00:11,429 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-04-30 16:00:11,430 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-04-30 16:00:11,430 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-04-30 16:00:13,202 [INFO]   clip 1/5 576KB
+2026-04-30 16:00:15,038 [INFO]   clip 2/5 636KB
+2026-04-30 16:00:16,853 [INFO]   clip 3/5 496KB
+2026-04-30 16:00:18,660 [INFO]   clip 4/5 495KB
+2026-04-30 16:00:20,475 [INFO]   clip 5/5 472KB
+2026-04-30 16:00:20,475 [INFO]   render → discipline_2026-04-30.mp4
+2026-04-30 16:00:21,673 [INFO]   size: 3.25 MB
+2026-04-30 16:00:32,252 [INFO] upload wealth_blueprint attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'yp1pvY-M3OY', 'url': 'https://www.youtube.com/watch?v=yp1pvY-M3OY', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-04-30 16:00:32,253 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'yp1pvY-M3OY', 'url': 'https://www.youtube.com/watch?v=yp1pvY-M3OY', ')
+2026-04-30 16:00:32,253 [INFO] === Wealth Blueprint done ===

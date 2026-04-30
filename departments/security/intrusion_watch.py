@@ -50,10 +50,29 @@ VERCEL_PROJECTS = [
 
 # 이상 감지 임계치 (5분 구간)
 THRESHOLDS = {
-    'response_time_ms': 3000,   # 평균 응답 3초 초과
+    'response_time_ms': 3000,   # 평균 응답 3초 초과 (일반 페이지)
     'error_rate': 0.30,         # 30% 이상 에러
     'consecutive_fails': 3,     # 연속 3회 실패
 }
+
+# 서비스별 임계값 오버라이드 — LLM/AI 호출 endpoint는 느린 게 정상
+SLOW_OVERRIDES = {
+    'AI': 12000,        # AI 챗봇 응답: Claude/GPT 호출 시 2~10초 정상
+    '챗봇': 12000,
+    'chat': 12000,
+    'gpt': 12000,
+    'claude': 12000,
+    'chatbot': 12000,
+}
+
+
+def _slow_threshold_for(service_name: str) -> int:
+    """서비스 이름에 LLM/AI 키워드가 들어가면 더 높은 임계값 사용."""
+    s = (service_name or '').lower()
+    for kw, override in SLOW_OVERRIDES.items():
+        if kw.lower() in s:
+            return override
+    return THRESHOLDS['response_time_ms']
 
 
 def send_telegram_urgent(text):
@@ -150,12 +169,13 @@ def detect_anomalies(by_service: dict) -> list:
                 'type': 'error_rate',
                 'msg': f"에러율 {error_rate*100:.0f}% ({fails}/{total})",
             })
-        if avg_ms >= THRESHOLDS['response_time_ms']:
+        slow_threshold = _slow_threshold_for(svc)
+        if avg_ms >= slow_threshold:
             alerts.append({
                 'service': svc,
                 'severity': 'medium',
                 'type': 'slow',
-                'msg': f"평균 응답 {int(avg_ms)}ms (DDoS 의심)",
+                'msg': f"평균 응답 {int(avg_ms)}ms (임계값 {slow_threshold}ms 초과 — DDoS 의심)",
             })
         if max_consec >= THRESHOLDS['consecutive_fails']:
             alerts.append({
@@ -186,6 +206,77 @@ def save_state(state):
         json.dump(state, f, ensure_ascii=False, indent=2)
 
 
+# ─── 자동 방어 모듈 ─────────────────────────────
+def _service_to_vercel_project(svc: str) -> str | None:
+    """서비스 이름 → Vercel 프로젝트 이름 매핑."""
+    s = (svc or '').lower()
+    if 'korlens' in s:
+        return 'korlens'
+    if 'tax' in s or '세금' in s:
+        return 'tax-n-benefit-api'
+    if 'cheon' in s or '천명' in s:
+        return 'cheonmyeongdang'
+    return None
+
+
+def _vercel_redeploy(project_name: str, team_slug: str = 'kunstudio') -> tuple[bool, str]:
+    """Vercel API로 production 재배포 트리거. 최신 배포의 git source를 새 배포로."""
+    if not VERCEL_TOKEN:
+        return False, 'no token'
+    try:
+        # 1. 최신 production 배포 조회
+        list_url = f'https://api.vercel.com/v6/deployments?app={project_name}&limit=1&target=production&teamId={team_slug}'
+        r = requests.get(list_url, headers={'Authorization': f'Bearer {VERCEL_TOKEN}'}, timeout=10)
+        if r.status_code != 200:
+            return False, f'list: {r.status_code}'
+        depls = r.json().get('deployments', [])
+        if not depls:
+            return False, 'no prev deployment'
+        prev = depls[0]
+        prev_id = prev.get('uid')
+        # 2. 같은 git commit으로 재배포 (rollback이 아니라 같은 코드 새 deploy)
+        redeploy_url = f'https://api.vercel.com/v13/deployments?teamId={team_slug}'
+        payload = {
+            'name': project_name,
+            'deploymentId': prev_id,
+            'target': 'production',
+        }
+        r2 = requests.post(redeploy_url, headers={'Authorization': f'Bearer {VERCEL_TOKEN}', 'Content-Type': 'application/json'}, json=payload, timeout=15)
+        if r2.status_code in (200, 201):
+            new_id = r2.json().get('id', '?')
+            return True, f'new deploy {new_id[:20]}'
+        return False, f'redeploy: {r2.status_code} {r2.text[:200]}'
+    except Exception as e:
+        return False, f'exception: {str(e)[:100]}'
+
+
+def auto_defend(alert: dict) -> str:
+    """알림 type별 자동 방어 조치. 결과 메시지 반환."""
+    svc = alert.get('service', '')
+    atype = alert.get('type', '')
+    severity = alert.get('severity', '')
+
+    if atype == 'slow':
+        # 응답 느림 — false positive 가능성. 자동 방어 X (캐시 강화는 코드 변경 필요)
+        return '관찰만 (slow는 false positive 가능)'
+
+    if atype == 'error_rate':
+        # 에러율 30%+ → Vercel WAF rate limit 강화 권장 (수동), 자동 redeploy 시도 X
+        return 'Vercel WAF rate limit 활성화 권장 (수동 5분)'
+
+    if atype in ('outage', '5xx'):
+        # 자동 재배포 시도
+        proj = _service_to_vercel_project(svc)
+        if not proj:
+            return f'프로젝트 매핑 없음 ({svc})'
+        ok, msg = _vercel_redeploy(proj)
+        if ok:
+            return f'✅ 자동 재배포 트리거 ({proj}: {msg})'
+        return f'❌ 자동 재배포 실패 ({proj}: {msg})'
+
+    return '액션 없음'
+
+
 def run(debug=False):
     by_svc = parse_health_log(window_minutes=5)
     if debug:
@@ -198,11 +289,21 @@ def run(debug=False):
 
     if new_alerts:
         lines = ['🚨 <b>침입·이상 탐지 ALERT</b>', '']
+        # 자동 방어 액션 실행 + 보고
+        defense_lines = []
         for a in new_alerts:
             icon = {'critical': '🔴', 'high': '🟠', 'medium': '🟡'}.get(a['severity'], '⚪')
             lines.append(f"{icon} [{a['service']}] {a['msg']}")
+            # 자동 방어 — critical/high 만 자동 액션, medium은 관찰만
+            if a['severity'] in ('critical', 'high'):
+                action_result = auto_defend(a)
+                defense_lines.append(f"🛡️ [{a['service']}] {action_result}")
+        if defense_lines:
+            lines.append('')
+            lines.append('<b>자동 방어 액션:</b>')
+            lines.extend(defense_lines)
         lines.append('')
-        lines.append('👉 즉시 Vercel 대시보드·로그 확인 바랍니다.')
+        lines.append('👉 추가 조치 필요 시 Vercel 대시보드·로그 확인.')
         send_telegram_urgent('\n'.join(lines))
 
     state['last_alerts'] = alerts
