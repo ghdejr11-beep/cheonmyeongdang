@@ -265,14 +265,60 @@ def concat_clips_with_audio(clips: list[Path], audio: Path, dest_mp4: Path) -> P
     return dest_mp4
 
 
+# ───────── Gumroad affiliate footer (auto-injected into descriptions) ─────────
+GUMROAD_FOOTER_BY_CHANNEL = {
+    "whisper_atlas": (
+        "\n\n📥 Sleep & Mindfulness Resources:\n"
+        "Saju Diary — 12-month Korean self-knowledge workbook\n"
+        "→ https://ghdejr.gumroad.com/l/qcjtu?utm_source=youtube&utm_campaign=whisper_atlas\n"
+        "(Educational journal, not a fortune-telling product.)\n\n"
+        "🎵 Pair with: Sori Atlas — Sleep & Ambient playlist\n"
+        "→ https://www.youtube.com/playlist?list=PLI_ZAqNV4FUjwbfrFLyJ7ZvO9TPKiP37C"
+    ),
+    "wealth_blueprint": (
+        "\n\n📥 Resources mentioned (Educational only — not financial advice):\n"
+        "Saju Diary — 12-month Korean four-pillars workbook\n"
+        "→ https://ghdejr.gumroad.com/l/qcjtu?utm_source=youtube&utm_campaign=wealth_blueprint\n\n"
+        "🎵 Background music: Sori Atlas — Lofi Study playlist\n"
+        "→ https://www.youtube.com/playlist?list=PLI_ZAqNV4FUgUP5FJ6CN-BC5RAvI7sEt7"
+    ),
+    "inner_archetypes": (
+        "\n\n📥 Personality & self-knowledge resources:\n"
+        "Saju Diary — Korean four-pillars 12-month workbook\n"
+        "→ https://ghdejr.gumroad.com/l/qcjtu?utm_source=youtube&utm_campaign=inner_archetypes\n"
+        "(Personality models are lenses, not diagnoses.)\n\n"
+        "🎵 Reflective BGM: Sori Atlas — Lofi & Ambient\n"
+        "→ https://www.youtube.com/@soriatlas"
+    ),
+    # healing_sleep_realm 폐기됨 (2026-04-29) — Sori Atlas의 "Sleep & Ambient" 재생목록으로 통합
+    # Sori Atlas는 D:\scripts\suno_yt_pipeline.py로 자체 footer 처리
+}
+
+def _add_gumroad_footer(description: str, channel_key: str) -> str:
+    """Append channel-specific Gumroad affiliate footer (idempotent)."""
+    footer = GUMROAD_FOOTER_BY_CHANNEL.get(channel_key, "")
+    if not footer or "ghdejr.gumroad.com" in (description or ""):
+        return description
+    # YouTube description hard limit ~5000 chars
+    combined = (description or "").rstrip() + footer
+    return combined[:4900]
+
+
 # ───────── upload-post 통합 ─────────
 def upload_to_channel(video_path: Path, channel_key: str,
                        title: str, description: str,
-                       dry_run: bool = False) -> tuple[bool, str]:
-    """upload_post_client.post_to_channel 래퍼. dry_run 이면 호출 X."""
+                       dry_run: bool = False,
+                       max_retry: int = 3) -> tuple[bool, str]:
+    """upload_post_client.post_to_channel 래퍼.
+
+    SSL EOF / 타임아웃 등 일시적 네트워크 에러 시 max_retry 만큼 재시도.
+    description 에 채널별 Gumroad 어필리에이트 footer 자동 삽입.
+    """
+    import time as _time
     log = get_logger()
     if channel_key not in CHANNEL_KEYS:
         return False, f"unknown channel_key={channel_key}"
+    description = _add_gumroad_footer(description, channel_key)
     if dry_run:
         log.info(f"[DRY-RUN] would upload {video_path.name} → {channel_key} ({title[:60]!r})")
         return True, "dry-run"
@@ -281,10 +327,30 @@ def upload_to_channel(video_path: Path, channel_key: str,
         from upload_post_client import post_to_channel  # type: ignore
     except Exception as e:
         return False, f"import upload_post_client failed: {e}"
-    ok, resp = post_to_channel(str(video_path), channel_key,
-                                title=title[:100], description=description)
-    log.info(f"upload {channel_key} ok={ok} resp={str(resp)[:200]}")
-    return ok, str(resp)[:400]
+
+    last_resp = ""
+    for attempt in range(1, max_retry + 1):
+        ok, resp = post_to_channel(str(video_path), channel_key,
+                                    title=title[:100], description=description)
+        last_resp = str(resp)[:400]
+        log.info(f"upload {channel_key} attempt {attempt}/{max_retry} ok={ok} resp={last_resp[:200]}")
+        if ok:
+            return True, last_resp
+        # 비동기 백그라운드 처리 응답이면 재시도 X (실제론 OK)
+        if "Upload initiated successfully in background" in last_resp:
+            log.info(f"[INFO] {channel_key} 비동기 백그라운드 업로드 — OK 처리")
+            return True, last_resp
+        # SSL EOF / timeout 등 retryable 에러는 재시도
+        retryable = any(s in last_resp for s in [
+            "_ssl.c", "EOF occurred", "timed out", "Connection reset",
+            "BadStatusLine", "RemoteDisconnected", "503", "502", "429",
+        ])
+        if not retryable or attempt >= max_retry:
+            break
+        wait = 10 * attempt  # 10s, 20s, 30s
+        log.info(f"  retryable error, waiting {wait}s before retry")
+        _time.sleep(wait)
+    return False, last_resp
 
 
 # ───────── self-test ─────────

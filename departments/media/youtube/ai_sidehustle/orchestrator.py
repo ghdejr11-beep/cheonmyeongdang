@@ -222,6 +222,10 @@ Return only the spoken script."""
 #Shorts #AI #SideHustle #MakeMoneyOnline #ChatGPT #ClaudeAI
 
 ⚠️ This is for educational purposes only, not financial advice. Your results will vary.
+
+📥 Resources mentioned (educational only):
+Saju Diary — Korean four-pillars 12-month workbook
+→ https://ghdejr.gumroad.com/l/qcjtu?utm_source=youtube&utm_campaign=ai_sidehustle
 """
     vid = None
     try:
