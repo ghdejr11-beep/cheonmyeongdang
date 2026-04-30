@@ -75,16 +75,34 @@ def process_ticket(ticket):
         return
 
     if clf == 'auto_fix':
-        # Claude Agent가 실제 수정 PR 생성
-        # claude-code CLI 설치 시 subprocess로 호출
+        # Claude Agent가 실제 수정 PR 생성 (claude CLI subprocess 호출)
         send_telegram(
             f'🔧 티켓 {tid} 자동수정 시작\n'
             f'제목: {ticket["title"]}\n'
             f'Claude Agent가 분석·수정 PR을 만들 예정'
         )
-        # TODO: `claude -p "티켓 {tid} 분석 후 해당 수정 커밋"` 호출
-        # 실제 실행은 Claude Agent SDK 연동 후
-        ticket['status'] = 'auto_fix_queued'
+        try:
+            import subprocess, shutil
+            claude_bin = shutil.which('claude') or 'claude'
+            prompt = (
+                f"고객 티켓 #{tid}: {ticket['title']}\n"
+                f"내용: {ticket.get('content','')[:1000]}\n\n"
+                f"이 티켓을 분석해서 실제 코드/문서 수정이 필요하면 적절한 변경을 만들고 "
+                f"새 브랜치(autofix/ticket-{tid})에 커밋한 뒤 PR을 생성하세요. "
+                f"수정이 필요 없으면 분석 결과만 보고하세요."
+            )
+            # 비동기 spawn — 응답 안 기다림 (긴 작업)
+            subprocess.Popen(
+                [claude_bin, '-p', prompt],
+                cwd=r'C:\Users\hdh02\Desktop\cheonmyeongdang',
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                creationflags=getattr(subprocess, 'CREATE_NEW_PROCESS_GROUP', 0),
+            )
+            ticket['status'] = 'auto_fix_running'
+            ticket['claude_invoked_at'] = datetime.datetime.now().isoformat()
+        except Exception as e:
+            send_telegram(f'⚠️ 티켓 {tid} claude CLI 호출 실패: {str(e)[:200]}')
+            ticket['status'] = 'auto_fix_failed'
         return
 
     if clf == 'needs_approval':
