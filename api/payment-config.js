@@ -8,8 +8,11 @@
  * 응답: { clientKey, env, skus: [{ id, name, amount }, ...] }
  */
 
-// 천명당 SKU 카탈로그 — 가격 정책 확정 (2026-04-27)
+// 천명당 SKU 카탈로그 — 가격 정책 확정 (2026-04-30 웹 기준 통일)
 // 무료 4종(오늘운세/관상/손금/꿈해몽)은 결제 불필요 → 결제 페이지에 노출 X
+//
+// 가격 정책 출처: departments/cheonmyeongdang/sku_pricing.md
+// CEO 지시 (2026-04-30): 웹 가격 ₩29,900을 정식 가격으로 채택 → 앱 Play Console도 ₩29,900으로 인상 필요
 const SKU_CATALOG = [
   {
     id: 'saju_premium_9900',
@@ -26,10 +29,10 @@ const SKU_CATALOG = [
     type: 'inapp',
   },
   {
-    id: 'comprehensive_15000',
+    id: 'comprehensive_29900',
     name: '종합 풀이',
-    amount: 15000,
-    desc: '사주+궁합+신년운세 통합 프리미엄 리포트 (개별 합산 대비 절약)',
+    amount: 29900,
+    desc: '사주+궁합+신년운세 통합 심층 리포트 (개별 합산 대비 절약 + 12개월 운세)',
     type: 'inapp',
   },
   {
@@ -40,9 +43,9 @@ const SKU_CATALOG = [
     type: 'inapp',
   },
   {
-    id: 'subscribe_monthly_9900',
+    id: 'subscribe_monthly_29900',
     name: '월회원권',
-    amount: 9900,
+    amount: 29900,
     desc: '사주 정밀 + 궁합 무제한 + 매일 아침 8시 카톡 운세 (종합/신년운세는 별도)',
     type: 'subscription',
   },
@@ -88,7 +91,7 @@ module.exports = (req, res) => {
   };
 
   // SKU별 provider 강제 (예: 월구독은 카카오페이, 단건은 KCN — 환경변수 JSON)
-  // CMD_SKU_PROVIDER_OVERRIDE='{"subscribe_monthly_9900":"portone-kakaopay"}'
+  // CMD_SKU_PROVIDER_OVERRIDE='{"subscribe_monthly_29900":"portone-kakaopay"}'
   let skuProviderOverride = {};
   try {
     if (process.env.CMD_SKU_PROVIDER_OVERRIDE) {

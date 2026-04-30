@@ -29,9 +29,9 @@ const { appendPurchase } = require('./_purchase-store');
 const SKU_DELIVERY_NOTE = {
   saju_premium_9900: '사주 정밀 풀이 결과는 앱/웹에서 즉시 확인하실 수 있습니다.',
   compat_detail_9900: '궁합 분석 결과는 앱/웹에서 즉시 확인하실 수 있습니다.',
-  comprehensive_15000: '종합 풀이(사주+궁합+신년운세) 리포트는 앱/웹에서 즉시 확인하실 수 있습니다.',
+  comprehensive_29900: '종합 풀이(사주+궁합+신년운세) 리포트는 앱/웹에서 즉시 확인하실 수 있습니다.',
   sinnyeon_15000: '신년운세 12개월 리포트는 앱/웹에서 즉시 확인하실 수 있습니다.',
-  subscribe_monthly_9900:
+  subscribe_monthly_29900:
     '월회원권 구독이 시작되었습니다. 내일 오전 8시부터 매일 카카오 알림톡(또는 텔레그램)으로 오늘의 운세를 받으실 수 있습니다.',
 };
 

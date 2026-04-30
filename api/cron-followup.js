@@ -11,8 +11,8 @@
  *   1) GitHub Gist에서 결제 데이터 로드
  *   2) 코호트별 paid_at 윈도우 필터:
  *      - D+3 : "정밀 풀이 활용 5팁 + 월회원권 3일 무료 체험" (LTV +30%)
- *      - D+7 : "활용 1주 — 종합 풀이 ₩15,000 업셀" (LTV +20%)
- *      - D+14: "매일 카톡 운세 — 월회원권 ₩9,900 / 신년운세 ₩15,000" (LTV +15%)
+ *      - D+7 : "활용 1주 — 종합 풀이 ₩29,900 업셀" (LTV +20%)
+ *      - D+14: "매일 카톡 운세 — 월회원권 ₩29,900 / 신년운세 ₩15,000" (LTV +15%)
  *   3) 각 코호트마다 followup_sent / followup_d7_sent / followup_d14_sent 별도 마킹
  *   4) refunded=true 항목은 모든 코호트에서 자동 제외 (LTV +5% winback은 refund-confirm에서 처리)
  *
@@ -88,7 +88,7 @@ function buildD3Html({ customerName, skuName, orderId }) {
         <h2 style="font-family:'Gowun Batang',serif;color:#e8c97a;font-size:20px;margin:8px 0;font-weight:700;">월회원권 — 첫 3일 무료 체험</h2>
         <p style="color:#e8e0d0;font-size:14px;line-height:1.7;margin:10px 0 16px;"><strong style="color:#e8c97a;">매일 아침 8시</strong> 오늘의 운세 카톡 발송<br><strong style="color:#e8c97a;">사주·궁합 무제한</strong> 풀이<br>새로운 일·사람·결정마다 그날그날 풀어보기</p>
         <div style="font-size:13px;color:#a89880;margin-bottom:16px;">월 <span style="text-decoration:line-through;">₩9,900</span> → <strong style="color:#e8c97a;font-size:18px;">3일 무료 후 자동결제 (언제든 해지)</strong></div>
-        <a href="https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_9900&utm_source=email_d3&utm_campaign=upsell_monthly&utm_content=d3" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#c9a84c,#e8c97a);color:#080a10;font-weight:800;text-decoration:none;border-radius:8px;font-size:15px;letter-spacing:0.05em;">🎁 무료로 시작하기</a>
+        <a href="https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_29900&utm_source=email_d3&utm_campaign=upsell_monthly&utm_content=d3" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#c9a84c,#e8c97a);color:#080a10;font-weight:800;text-decoration:none;border-radius:8px;font-size:15px;letter-spacing:0.05em;">🎁 무료로 시작하기</a>
         <div style="font-size:11px;color:#7a6f5a;margin-top:12px;line-height:1.6;">* 3일 안에 해지하면 ₩0 · 카드 부담 없습니다</div>
       </div>
       <div style="background:rgba(254,229,0,0.05);border:1px solid rgba(254,229,0,0.3);border-radius:12px;padding:18px;text-align:center;margin:18px 0;">
@@ -121,8 +121,8 @@ function buildD3Text({ customerName, skuName, orderId }) {
     '─── 월회원권 — 첫 3일 무료 체험 ───',
     '· 매일 아침 8시 오늘의 운세 카톡 발송',
     '· 사주·궁합 무제한 풀이',
-    '· 월 ₩9,900 (3일 안에 해지하면 ₩0)',
-    '시작하기: https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_9900&utm_source=email_d3&utm_campaign=upsell_monthly',
+    '· 월 ₩29,900 (3일 안에 해지하면 ₩0)',
+    '시작하기: https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_29900&utm_source=email_d3&utm_campaign=upsell_monthly',
     '',
     '카카오톡 채널 친구추가: http://pf.kakao.com/_xnxnxnK',
     '',
@@ -134,7 +134,7 @@ function buildD3Text({ customerName, skuName, orderId }) {
 }
 
 // ───────────────────────────── D+7 템플릿 ─────────────────────────────
-// 종합 풀이 ₩15,000 업셀 (단건 합산 ₩34,800 → ₩15,000)
+// 종합 풀이 ₩29,900 업셀 (단건 합산 ₩34,800 → ₩29,900)
 function buildD7Html({ customerName, skuName, orderId }) {
   const safeName = String(customerName || '').replace(/[<>&"']/g, '');
   const greet = safeName ? `${safeName}님,` : '안녕하세요,';
@@ -175,10 +175,10 @@ function buildD7Html({ customerName, skuName, orderId }) {
         </div>`).join('')}
       </div>
 
-      <!-- 종합 풀이 ₩15,000 업셀 -->
+      <!-- 종합 풀이 ₩29,900 업셀 -->
       <div style="background:linear-gradient(135deg,#1a1530,#251a3a);border:2px solid #e8c97a;border-radius:14px;padding:24px 20px;margin:24px 0;text-align:center;">
         <div style="display:inline-block;font-size:11px;background:#e8c97a;color:#080a10;padding:4px 12px;border-radius:999px;font-weight:800;letter-spacing:0.12em;margin-bottom:10px;">📜 통합 리포트</div>
-        <h2 style="font-family:'Gowun Batang',serif;color:#e8c97a;font-size:22px;margin:8px 0;font-weight:700;">종합 풀이 — ₩15,000</h2>
+        <h2 style="font-family:'Gowun Batang',serif;color:#e8c97a;font-size:22px;margin:8px 0;font-weight:700;">종합 풀이 — ₩29,900</h2>
         <p style="color:#e8e0d0;font-size:14px;line-height:1.7;margin:10px 0 14px;">사주 정밀 + 궁합 + 신년운세<br><strong style="color:#e8c97a;">3가지를 한 번에 + 통합 해석 추가</strong></p>
 
         <div style="background:rgba(0,0,0,0.4);border-radius:8px;padding:14px;margin:14px 0;text-align:left;">
@@ -195,12 +195,12 @@ function buildD7Html({ customerName, skuName, orderId }) {
             <span>단건 합산</span><span style="text-decoration:line-through;">₩34,800</span>
           </div>
           <div style="display:flex;justify-content:space-between;font-size:16px;color:#e8c97a;font-weight:800;padding:4px 0;">
-            <span>종합 풀이</span><span>₩15,000</span>
+            <span>종합 풀이</span><span>₩29,900</span>
           </div>
-          <div style="text-align:center;font-size:12px;color:#c9a84c;margin-top:8px;">→ <strong>₩19,800 절약 (57% off)</strong></div>
+          <div style="text-align:center;font-size:12px;color:#c9a84c;margin-top:8px;">→ <strong>₩4,900 절약 (14% off)</strong></div>
         </div>
 
-        <a href="https://cheonmyeongdang.vercel.app/pay.html?sku=comprehensive_15000&utm_source=email_d7&utm_campaign=upsell_comprehensive&utm_content=d7"
+        <a href="https://cheonmyeongdang.vercel.app/pay.html?sku=comprehensive_29900&utm_source=email_d7&utm_campaign=upsell_comprehensive&utm_content=d7"
            style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#c9a84c,#e8c97a);color:#080a10;font-weight:800;text-decoration:none;border-radius:8px;font-size:15px;letter-spacing:0.05em;margin-top:8px;">📜 종합 풀이 보기</a>
         <div style="font-size:11px;color:#7a6f5a;margin-top:12px;line-height:1.6;">* 사주+궁합+신년운세 통합 해석으로 단건보다 깊이 있는 통찰을 드립니다</div>
       </div>
@@ -234,11 +234,11 @@ function buildD7Text({ customerName, skuName, orderId }) {
     '4. 격국(格局) — 본인의 사회적 그릇',
     '5. 대운 전환점 — 인생의 변곡 시기 메모',
     '',
-    '─── 종합 풀이 — ₩15,000 ───',
+    '─── 종합 풀이 — ₩29,900 ───',
     '· 사주 정밀(₩9,900) + 궁합(₩9,900) + 신년운세(₩15,000)',
     '· 단건 합산 ₩34,800 → ₩15,000 (₩19,800 절약, 57% off)',
     '· 3가지 통합 해석 — 단건보다 깊이 있는 통찰',
-    '바로가기: https://cheonmyeongdang.vercel.app/pay.html?sku=comprehensive_15000&utm_source=email_d7&utm_campaign=upsell_comprehensive',
+    '바로가기: https://cheonmyeongdang.vercel.app/pay.html?sku=comprehensive_29900&utm_source=email_d7&utm_campaign=upsell_comprehensive',
     '',
     '카카오톡 채널 친구추가: http://pf.kakao.com/_xnxnxnK',
     '',
@@ -250,7 +250,7 @@ function buildD7Text({ customerName, skuName, orderId }) {
 }
 
 // ───────────────────────────── D+14 템플릿 ─────────────────────────────
-// 월회원권 ₩9,900 / 신년운세 ₩15,000 시즈널 양자택일
+// 월회원권 ₩29,900 / 신년운세 ₩15,000 시즈널 양자택일
 function buildD14Html({ customerName, skuName, orderId }) {
   const safeName = String(customerName || '').replace(/[<>&"']/g, '');
   const greet = safeName ? `${safeName}님,` : '안녕하세요,';
@@ -276,9 +276,9 @@ function buildD14Html({ customerName, skuName, orderId }) {
       <div style="background:linear-gradient(135deg,#1a1530,#251a3a);border:2px solid #e8c97a;border-radius:14px;padding:22px 18px;margin:18px 0;">
         <div style="text-align:center;">
           <div style="display:inline-block;font-size:11px;background:#e8c97a;color:#080a10;padding:4px 12px;border-radius:999px;font-weight:800;letter-spacing:0.12em;margin-bottom:10px;">⭐ 추천 · 매일 활용형</div>
-          <h2 style="font-family:'Gowun Batang',serif;color:#e8c97a;font-size:20px;margin:6px 0;font-weight:700;">월회원권 — ₩9,900 / 월</h2>
+          <h2 style="font-family:'Gowun Batang',serif;color:#e8c97a;font-size:20px;margin:6px 0;font-weight:700;">월회원권 — ₩29,900 / 월</h2>
           <p style="color:#e8e0d0;font-size:13px;line-height:1.7;margin:8px 0 14px;">매일 아침 8시 오늘의 운세 카톡<br>사주 정밀 + 궁합 <strong style="color:#e8c97a;">무제한 풀이</strong><br>새로운 사람·결정마다 그날그날 풀어보기</p>
-          <a href="https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_9900&utm_source=email_d14&utm_campaign=upsell_monthly_or_sinnyeon&utm_content=d14_monthly"
+          <a href="https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_29900&utm_source=email_d14&utm_campaign=upsell_monthly_or_sinnyeon&utm_content=d14_monthly"
              style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#c9a84c,#e8c97a);color:#080a10;font-weight:800;text-decoration:none;border-radius:8px;font-size:14px;">월회원 시작 (3일 무료)</a>
           <div style="font-size:11px;color:#7a6f5a;margin-top:10px;">* 3일 안에 해지하면 ₩0</div>
         </div>
@@ -335,11 +335,11 @@ function buildD14Text({ customerName, skuName, orderId }) {
     '한 번의 풀이는 큰 그림이지만, 매일의 작은 선택은 그날의 운세에 달려있습니다.',
     '',
     '─── 두 가지 길 ───',
-    '[1] 월회원권 — ₩9,900 / 월',
+    '[1] 월회원권 — ₩29,900 / 월',
     '· 매일 아침 8시 오늘의 운세 카톡',
     '· 사주 정밀 + 궁합 무제한 풀이',
     '· 3일 무료 후 자동결제 (3일 안에 해지하면 ₩0)',
-    '시작하기: https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_9900&utm_source=email_d14&utm_campaign=upsell_monthly_or_sinnyeon',
+    '시작하기: https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_29900&utm_source=email_d14&utm_campaign=upsell_monthly_or_sinnyeon',
     '',
     '[2] 신년운세 — ₩15,000 (단건)',
     '· 12개월 월별 운세 + 신살 연간 리포트',
@@ -363,6 +363,108 @@ function buildD14Text({ customerName, skuName, orderId }) {
   ].join('\n');
 }
 
+// ─── D+30 (한 달 점검) 메일 빌더 ───
+function buildD30Html({ customerName, skuName, orderId }) {
+  const safeName = String(customerName || '').replace(/[<>&"']/g, '');
+  const greet = safeName ? `${safeName}님,` : '안녕하세요,';
+  return `<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>천명당 — 한 달 점검</title></head>
+<body style="margin:0;padding:0;background:#080a10;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;color:#e8e0d0;">
+  <div style="max-width:600px;margin:0 auto;padding:24px 16px;">
+    <div style="text-align:center;padding:28px 16px 20px;">
+      <div style="font-family:'Gowun Batang',serif;font-size:28px;font-weight:700;color:#e8c97a;letter-spacing:0.05em;margin-bottom:6px;">天命堂</div>
+      <div style="font-size:13px;color:#a89880;letter-spacing:0.18em;">CHEONMYEONGDANG</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#0d1020,#141428);border:1px solid #c9a84c;border-radius:16px;padding:32px 24px;margin-bottom:18px;">
+      <h1 style="font-family:'Gowun Batang',serif;color:#e8c97a;font-size:22px;margin:0 0 12px;font-weight:700;">${greet}<br>한 달 — 어떻게 지내셨나요?</h1>
+      <p style="color:#e8e0d0;font-size:15px;line-height:1.7;">한 달 전 <strong style="color:#e8c97a;">${skuName}</strong>을 받아보셨습니다. 다음 한 달이 어떻게 흐를지 먼저 살펴보세요.</p>
+      <div style="background:rgba(0,0,0,0.4);border-radius:10px;padding:18px;margin:18px 0;">
+        <div style="font-size:11px;color:#c9a84c;letter-spacing:0.18em;font-weight:700;margin-bottom:10px;">다음 달 — 미리 알아두면 좋은 3가지</div>
+        <ul style="color:#a89880;font-size:14px;line-height:1.8;padding-left:18px;margin:0;">
+          <li><strong style="color:#e8c97a;">세운 변동</strong> — 본인 사주 일간과 다음 달 천간의 관계 확인</li>
+          <li><strong style="color:#e8c97a;">월운 길흉일</strong> — 중요 결정·계약일은 길일에 맞추기</li>
+          <li><strong style="color:#e8c97a;">건강·관계 주의일</strong> — 일주 충·형 일자 미리 메모</li>
+        </ul>
+      </div>
+      <div style="background:linear-gradient(135deg,#1a1530,#251a3a);border:2px solid #e8c97a;border-radius:14px;padding:24px;margin:20px 0;text-align:center;">
+        <h2 style="color:#e8c97a;font-size:20px;margin:0 0 8px;">월회원권으로 매일 새 운세 받기</h2>
+        <p style="color:#e8e0d0;font-size:14px;line-height:1.7;">월 ₩29,900 — 사주 정밀 + 궁합 + 매일 카톡 운세 무제한.<br>3일 무료 체험 후 결제, 언제든 해지.</p>
+        <a href="https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_29900&utm_source=email_d30&utm_campaign=upsell_monthly&utm_content=d30" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#c9a84c,#e8c97a);color:#080a10;font-weight:800;text-decoration:none;border-radius:8px;font-size:15px;margin-top:8px;">3일 무료 체험 시작</a>
+      </div>
+      <p style="color:#7a6f5a;font-size:11px;text-align:center;margin-top:16px;">* 본 메일은 한 달 전 결제 고객님께만 발송됩니다 · 주문번호: ${orderId}</p>
+    </div>
+    <div style="text-align:center;color:#7a6f5a;font-size:11px;line-height:1.6;padding:12px;">쿤스튜디오 · 사업자등록번호 552-59-00848<br><a href="https://cheonmyeongdang.vercel.app" style="color:#7a6f5a;">cheonmyeongdang.vercel.app</a></div>
+  </div></body></html>`;
+}
+function buildD30Text({ customerName, skuName, orderId }) {
+  const greet = customerName ? `${customerName}님,` : '안녕하세요,';
+  return [
+    greet,
+    `한 달 전 ${skuName}을 받아보셨습니다. 다음 한 달 흐름을 먼저 살펴보세요.`,
+    '',
+    '다음 달 — 미리 알아두면 좋은 3가지:',
+    '· 세운 변동 (사주 일간 × 다음 달 천간 관계)',
+    '· 월운 길흉일 (중요 결정·계약일)',
+    '· 건강·관계 주의일 (일주 충·형 일자)',
+    '',
+    '─── 월회원권 — ₩29,900 / 월 ───',
+    '· 사주 정밀 + 궁합 + 매일 카톡 운세 무제한',
+    '· 3일 무료 체험 후 결제, 언제든 해지',
+    `시작하기: https://cheonmyeongdang.vercel.app/pay.html?sku=subscribe_monthly_29900&utm_source=email_d30&utm_campaign=upsell_monthly`,
+    '',
+    `주문번호: ${orderId}`,
+    '쿤스튜디오 · 사업자등록번호 552-59-00848 · ghdejr11@gmail.com',
+  ].join('\n');
+}
+
+// ─── D+60 (두 달 — 신년운세 시즌 안내) 메일 빌더 ───
+function buildD60Html({ customerName, skuName, orderId }) {
+  const safeName = String(customerName || '').replace(/[<>&"']/g, '');
+  const greet = safeName ? `${safeName}님,` : '안녕하세요,';
+  return `<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>천명당 — 두 달 후</title></head>
+<body style="margin:0;padding:0;background:#080a10;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;color:#e8e0d0;">
+  <div style="max-width:600px;margin:0 auto;padding:24px 16px;">
+    <div style="text-align:center;padding:28px 16px 20px;">
+      <div style="font-family:'Gowun Batang',serif;font-size:28px;font-weight:700;color:#e8c97a;letter-spacing:0.05em;margin-bottom:6px;">天命堂</div>
+      <div style="font-size:13px;color:#a89880;letter-spacing:0.18em;">CHEONMYEONGDANG</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#0d1020,#141428);border:1px solid #c9a84c;border-radius:16px;padding:32px 24px;margin-bottom:18px;">
+      <h1 style="font-family:'Gowun Batang',serif;color:#e8c97a;font-size:22px;margin:0 0 12px;font-weight:700;">${greet}<br>두 달 — 재구매 ₩2,000 할인 쿠폰</h1>
+      <p style="color:#e8e0d0;font-size:15px;line-height:1.7;">두 달 전 <strong style="color:#e8c97a;">${skuName}</strong> 받아보신 후 잘 지내고 계신가요? 천명당 단골 고객님께 드리는 감사의 쿠폰입니다.</p>
+      <div style="background:linear-gradient(135deg,#1a3530,#102520);border:2px dashed #4a9e8e;border-radius:14px;padding:24px;margin:20px 0;text-align:center;">
+        <div style="font-size:12px;color:#4a9e8e;letter-spacing:0.18em;font-weight:800;margin-bottom:8px;">RETURNING CUSTOMER COUPON</div>
+        <h2 style="color:#6dbfa8;font-size:24px;margin:6px 0;font-family:'Gowun Batang',serif;">₩2,000 할인</h2>
+        <p style="color:#e8e0d0;font-size:13px;margin:8px 0 14px;">신년운세 ₩15,000 → ₩13,000<br>종합 풀이 ₩29,900 → ₩27,900</p>
+        <div style="background:rgba(0,0,0,0.4);padding:8px 16px;border-radius:6px;display:inline-block;font-family:monospace;color:#e8c97a;font-size:14px;letter-spacing:0.1em;">코드: WELCOME2K</div>
+        <p style="color:#7a6f5a;font-size:11px;margin-top:10px;">* 결제 페이지에서 쿠폰 코드 입력 (적용 30일 이내)</p>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0;">
+        <a href="https://cheonmyeongdang.vercel.app/pay.html?sku=sinnyeon_15000&coupon=WELCOME2K&utm_source=email_d60&utm_campaign=returning_coupon" style="padding:12px 24px;background:#c9a84c;color:#080a10;font-weight:700;text-decoration:none;border-radius:8px;font-size:14px;">신년운세 보기</a>
+        <a href="https://cheonmyeongdang.vercel.app/pay.html?sku=comprehensive_29900&coupon=WELCOME2K&utm_source=email_d60&utm_campaign=returning_coupon" style="padding:12px 24px;background:#4a9e8e;color:#fff;font-weight:700;text-decoration:none;border-radius:8px;font-size:14px;">종합 풀이 보기</a>
+      </div>
+      <p style="color:#7a6f5a;font-size:11px;text-align:center;margin-top:16px;">* 두 달 전 결제 고객 한정 · 주문번호: ${orderId}</p>
+    </div>
+    <div style="text-align:center;color:#7a6f5a;font-size:11px;line-height:1.6;padding:12px;">쿤스튜디오 · 사업자등록번호 552-59-00848<br><a href="https://cheonmyeongdang.vercel.app" style="color:#7a6f5a;">cheonmyeongdang.vercel.app</a></div>
+  </div></body></html>`;
+}
+function buildD60Text({ customerName, skuName, orderId }) {
+  const greet = customerName ? `${customerName}님,` : '안녕하세요,';
+  return [
+    greet,
+    `두 달 전 ${skuName} 받아보신 후 잘 지내고 계신가요?`,
+    '',
+    '단골 고객님 감사 쿠폰: ₩2,000 할인',
+    '· 신년운세 ₩15,000 → ₩13,000',
+    '· 종합 풀이 ₩29,900 → ₩27,900',
+    '쿠폰 코드: WELCOME2K (30일 이내 결제 페이지에서 적용)',
+    '',
+    `신년운세: https://cheonmyeongdang.vercel.app/pay.html?sku=sinnyeon_15000&coupon=WELCOME2K&utm_source=email_d60`,
+    `종합 풀이: https://cheonmyeongdang.vercel.app/pay.html?sku=comprehensive_29900&coupon=WELCOME2K&utm_source=email_d60`,
+    '',
+    `주문번호: ${orderId}`,
+    '쿤스튜디오 · 사업자등록번호 552-59-00848 · ghdejr11@gmail.com',
+  ].join('\n');
+}
+
 // ─── 코호트별 메일 빌더 매핑 ───
 const COHORTS = {
   3: {
@@ -379,7 +481,7 @@ const COHORTS = {
     storeKey: 'followup_d7_sent',
     storeKeyHook: 'd7',
     subject: ({ customerName }) =>
-      `[천명당] ${customerName ? customerName + '님 ' : ''}1주일 점검 — 종합 풀이 ₩15,000 (₩19,800 절약)`,
+      `[천명당] ${customerName ? customerName + '님 ' : ''}1주일 점검 — 종합 풀이 ₩29,900 (₩4,900 절약)`,
     html: buildD7Html,
     text: buildD7Text,
   },
@@ -388,9 +490,27 @@ const COHORTS = {
     storeKey: 'followup_d14_sent',
     storeKeyHook: 'd14',
     subject: ({ customerName }) =>
-      `[천명당] ${customerName ? customerName + '님 ' : ''}매일 새 운세 — 월회원 ₩9,900 / 신년운세 ₩15,000`,
+      `[천명당] ${customerName ? customerName + '님 ' : ''}매일 새 운세 — 월회원 ₩29,900 / 신년운세 ₩15,000`,
     html: buildD14Html,
     text: buildD14Text,
+  },
+  30: {
+    daysAgo: 30,
+    storeKey: 'followup_d30_sent',
+    storeKeyHook: 'd30',
+    subject: ({ customerName }) =>
+      `[천명당] ${customerName ? customerName + '님 ' : ''}한 달 점검 — 다음 달 운세 미리보기`,
+    html: buildD30Html,
+    text: buildD30Text,
+  },
+  60: {
+    daysAgo: 60,
+    storeKey: 'followup_d60_sent',
+    storeKeyHook: 'd60',
+    subject: ({ customerName }) =>
+      `[천명당] ${customerName ? customerName + '님 ' : ''}₩2,000 재구매 쿠폰 (코드: WELCOME2K)`,
+    html: buildD60Html,
+    text: buildD60Text,
   },
 };
 
