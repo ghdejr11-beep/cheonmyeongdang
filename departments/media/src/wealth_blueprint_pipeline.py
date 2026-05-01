@@ -36,6 +36,54 @@ from yt_channel_common import (  # type: ignore
 
 CHANNEL_KEY = "wealth_blueprint"
 
+# Standard auto-affiliate block (shared with D:\scripts\wealth_update_descriptions.py)
+_AFF_JSON_PATH = Path(r"D:\scripts\wealth_affiliates.json")
+_AFF_START = "[[AFFILIATES_AUTO_START_v1]]"
+_AFF_END = "[[AFFILIATES_AUTO_END_v1]]"
+
+
+def _append_wealth_affiliate_block(description: str, title: str, theme: str) -> str:
+    """Append the canonical Wealth Blueprint affiliate block to a description.
+    Reads D:\\scripts\\wealth_affiliates.json so the pool is always in sync with
+    the bulk updater. Idempotent — won't double-stack if the block is already there."""
+    if _AFF_START in (description or "") and _AFF_END in (description or ""):
+        return description
+    if not _AFF_JSON_PATH.exists():
+        return description  # graceful no-op if pool not deployed
+    try:
+        aff = json.loads(_AFF_JSON_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return description
+    keys = aff["theme_to_links"].get(theme) or aff["theme_to_links"]["default"]
+    links = [{"key": k, **aff["links"][k]} for k in keys[:5] if k in aff["links"]]
+    lines = [
+        "",
+        _AFF_START,
+        "━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+        "📥 RESOURCES MENTIONED (재테크 도구 모음)",
+        "",
+    ]
+    for i, l in enumerate(links, 1):
+        tagline = l.get("tagline_ko") or l.get("tagline_en", "")
+        lines.append(f"[{i}] {l['label']}")
+        lines.append(f"   → {l['url']}")
+        if tagline:
+            lines.append(f"   {tagline}")
+        lines.append("")
+    lines.extend([
+        "━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+        "⚠️ AFFILIATE DISCLOSURE / 어필리에이트 고지",
+        "",
+        "EN: " + aff["affiliate_disclaimer_en"],
+        "",
+        "KO: " + aff["affiliate_disclaimer_ko"],
+        "",
+        "━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+        " ".join(aff["default_tags"]),
+        _AFF_END,
+    ])
+    return ((description or "").rstrip() + "\n" + "\n".join(lines))[:4900]
+
 # Public-domain & widely-quoted single-line aphorisms (fair-use 짧은 인용)
 # 투자 권유 표현 0%, 마인드셋·습관 한정.
 QUOTES = [
@@ -254,11 +302,14 @@ def run(dry_run: bool = False) -> Path:
         f"{q['en']}\n— {q['author']}\n\n"
         f"한국어: {q['ko']}\n— {q['author']}\n\n"
         "Daily mindset reset. One quote, one minute, one habit.\n\n"
-        "#Shorts #Mindset #Habits #SelfImprovement #Wealth #DailyHabits "
-        "#Motivation #JamesClear #Naval\n\n"
         "DISCLAIMER: Educational content only. Not financial, legal, medical, or "
         "tax advice. Your results will vary."
     )
+
+    # Append the standard auto-affiliate block (matches D:\scripts\wealth_update_descriptions.py
+    # so newly uploaded videos get the same 5-link section without needing a re-run later).
+    description = _append_wealth_affiliate_block(description, title=title, theme=q.get("theme", "default"))
+
     ok, resp = upload_to_channel(out, CHANNEL_KEY, title, description, dry_run=dry_run)
     log.info(f"  upload ok={ok} ({resp[:140]})")
     log.info(f"=== Wealth Blueprint done ===")
