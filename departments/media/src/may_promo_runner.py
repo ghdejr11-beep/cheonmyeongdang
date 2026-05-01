@@ -64,7 +64,14 @@ def load_secrets() -> dict:
 
 
 def load_messages() -> dict:
-    return json.loads(MSG_FILE.read_text(encoding="utf-8"))
+    try:
+        return json.loads(MSG_FILE.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        print(f"[WARN] MSG_FILE 없음: {MSG_FILE}")
+        return {}
+    except json.JSONDecodeError as e:
+        print(f"[WARN] MSG_FILE JSON 파싱 실패: {e}")
+        return {}
 
 
 def load_state() -> dict:

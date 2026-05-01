@@ -7,10 +7,14 @@
 
 import os
 import requests
-import tweepy
 import random
 import datetime
 import sys
+# tweepy는 X(트위터) 게시 시에만 import (없어도 다른 채널은 정상 작동)
+try:
+    import tweepy
+except ImportError:
+    tweepy = None
 
 # ─── .secrets에서 자격증명 로드 (하드코딩 금지) ───
 _ROOT = os.path.expanduser('~/Desktop/cheonmyeongdang')

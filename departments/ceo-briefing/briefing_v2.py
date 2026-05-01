@@ -28,8 +28,8 @@ def _load_secrets():
     return env
 
 ENV = _load_secrets()
-TG_TOKEN = ENV["TELEGRAM_BOT_TOKEN"]
-TG_CHAT = ENV["TELEGRAM_CHAT_ID"]
+TG_TOKEN = ENV.get("TELEGRAM_BOT_TOKEN", "")
+TG_CHAT = ENV.get("TELEGRAM_CHAT_ID", "")
 
 
 def _safe(fn, default):
@@ -212,8 +212,8 @@ def build_vercel_section(v):
 
 
 def build_yt_4ch_section(yt):
-    """📺 YouTube 4채널 (Healing Sleep Realm / Whisper Atlas / Wealth Blueprint / Inner Archetypes)"""
-    msg = "📺 <b>YouTube 4채널 (어제)</b>\n"
+    """📺 YouTube 5채널 (Whisper Atlas / Wealth Blueprint / Inner Archetypes / AI SideHustle / Sori Atlas)"""
+    msg = "📺 <b>YouTube 5채널 (어제)</b>\n"
     if not isinstance(yt, dict):
         msg += "  (데이터 없음)\n\n"
         return msg

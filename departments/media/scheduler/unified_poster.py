@@ -124,7 +124,7 @@ def post_instagram(post: dict) -> dict:
     try:
         # 1) 미디어 컨테이너 생성
         r1 = requests.post(
-            f'https://graph.facebook.com/v18.0/{IG_USER_ID}/media',
+            f'https://graph.instagram.com/v21.0/{IG_USER_ID}/media',
             data={'image_url': post['image_url'], 'caption': caption[:2200],
                   'access_token': IG_LONG_TOKEN},
             timeout=30,
@@ -135,7 +135,7 @@ def post_instagram(post: dict) -> dict:
             return {'ok': False, 'error': f'container failed: {d}'}
         # 2) publish
         r2 = requests.post(
-            f'https://graph.facebook.com/v18.0/{IG_USER_ID}/media_publish',
+            f'https://graph.instagram.com/v21.0/{IG_USER_ID}/media_publish',
             data={'creation_id': container, 'access_token': IG_LONG_TOKEN},
             timeout=30,
         )

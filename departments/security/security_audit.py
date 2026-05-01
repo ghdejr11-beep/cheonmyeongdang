@@ -46,7 +46,7 @@ PROJECTS = [
     {'key': 'tax', 'name': '💰 세금N혜택', 'path': f'{HOME}/Desktop/cheonmyeongdang/departments/tax/server', 'type': 'node'},
     {'key': 'hexdrop', 'name': '🎮 HexDrop', 'path': f'{HOME}/Desktop/hexdrop', 'type': 'generic'},
     {'key': 'cheonmyeongdang', 'name': '🔮 천명당', 'path': f'{HOME}/Desktop/cheonmyeongdang', 'type': 'mixed'},
-    {'key': 'ebook', 'name': '📖 전자책', 'path': f'{HOME}/Desktop/cheonmyeongdang_ebook', 'type': 'python'},
+    {'key': 'ebook', 'name': '📖 전자책', 'path': f'{HOME}/Desktop/cheonmyeongdang/departments/ebook', 'type': 'python'},
 ]
 
 # 시크릿 탐지 정규식 (고위험)
