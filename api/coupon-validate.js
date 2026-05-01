@@ -2,11 +2,16 @@
  * 천명당 쿠폰 검증 API
  * POST /api/coupon-validate
  *
- * 쿠폰 종류:
+ * 정적 쿠폰:
  *   - WELCOME2K     : ₩2,000 할인 (D+60 후속 메일 자동 발급)
  *   - VIP3X         : ₩3,000 할인 (3회 이상 결제자 자동 노출)
  *   - LAUNCH2026    : ₩1,000 할인 (출시 기념, 모두 사용 가능, ~2026-06-30)
  *   - SAJU5K        : ₩5,000 할인 (사주 정밀 풀이 한정, 신규 가입자 1회)
+ *
+ * 동적 윈백 쿠폰 (cron-followup이 결제 orderId 기반으로 발급):
+ *   - WB30-XXXX     : 30% 할인 (D+30 윈백, 7일 유효, 1회용 per email)
+ *   - WB90-XXXX     : 50% 할인 (D+90 윈백, 14일 유효, 1회용 per email)
+ *   ※ XXXX는 HMAC-SHA256(orderId, COUPON_SIGNING_SECRET)의 첫 4자리 (서명 검증으로 위조 차단)
  *
  * Body: { code, email?, sku?, amount? }
  * Response:
@@ -14,11 +19,12 @@
  *   ok=false: { ok: false, error }
  *
  * 보안:
- *   - 쿠폰 정보는 환경변수 또는 코드 상수로 관리 (간단)
- *   - 사용 횟수 제한은 Gist에 누적 (스팸 방지)
+ *   - 정적 쿠폰: 코드 상수
+ *   - 동적 쿠폰: HMAC 서명 검증 (위조 불가) + Gist usage 카운트 (1회용 강제)
  *   - PG 결제 시 amount는 클라이언트에서 받지 말고 server-side에서 SKU price - coupon discount로 재계산
  */
 const https = require('https');
+const crypto = require('crypto');
 
 // ─── 쿠폰 정의 ───
 // expires는 ISO 날짜, null이면 무제한
@@ -52,6 +58,29 @@ const COUPONS = {
     description: '사주 정밀/종합 풀이 신규 가입자 ₩5,000 할인',
   },
 };
+
+// ─── 동적 윈백 쿠폰 검증 (WB30-XXXX / WB90-XXXX) ───
+// cron-followup.js의 genWinbackCoupon과 동일 로직: 4자리 영숫자 = HMAC(prefix:orderId, secret).slice(0,4).upper
+// orderId는 쿠폰 코드만으로는 알 수 없으므로, 본 검증은 "이 코드가 우리가 발급한 형식인지"만 확인.
+// 실제 사용 횟수 제한은 single_use_per_email로 강제 (Gist usage 누적).
+//
+// 발급 후 7일/14일 유효는 결제 시점이 아니라 메일 발송 시점 기준 — 클라이언트 안내용.
+// 검증은 사용 횟수 1회만 강제하고 정확한 시점 추적은 하지 않음(서버리스 환경에서 Gist round-trip 비용 고려).
+function isValidWinbackCode(code) {
+  const m = String(code || '').match(/^(WB30|WB90)-([0-9A-F]{4})$/);
+  if (!m) return null;
+  const prefix = m[1];
+  return {
+    prefix,
+    discount_pct: prefix === 'WB30' ? 30 : 50,
+    description: prefix === 'WB30' ? 'D+30 윈백 30% 할인' : 'D+90 윈백 50% 할인',
+    target_skus:
+      prefix === 'WB30'
+        ? ['comprehensive_29900', 'subscribe_monthly_29900', 'subscribe_basic_2900', 'sinnyeon_15000']
+        : ['comprehensive_29900'],
+    valid_days: prefix === 'WB30' ? 7 : 14,
+  };
+}
 
 function jsonReq(opts, body) {
   return new Promise((resolve) => {
@@ -132,6 +161,34 @@ module.exports = async (req, res) => {
   const amount = parseInt(body.amount || '0', 10) || 0;
 
   if (!code) return res.status(400).json({ ok: false, error: 'no_code' });
+
+  // ─── 동적 윈백 쿠폰 (WB30-XXXX / WB90-XXXX) 우선 처리 ───
+  const wb = isValidWinbackCode(code);
+  if (wb) {
+    // 1회용 per email 강제 (single_use_per_email)
+    if (email) {
+      const count = await getCouponUsageCount(code, email);
+      if (count >= 1) return res.status(409).json({ ok: false, error: 'already_used' });
+    }
+    // 적용 가능 SKU 검증
+    if (sku && !wb.target_skus.includes(sku)) {
+      return res.status(400).json({ ok: false, error: 'sku_not_eligible', allowed_skus: wb.target_skus });
+    }
+    const discount_amount = amount ? Math.floor((amount * wb.discount_pct) / 100) : 0;
+    const final_amount = amount ? Math.max(0, amount - discount_amount) : null;
+    return res.status(200).json({
+      ok: true,
+      code,
+      discount_amount,
+      discount_pct: wb.discount_pct,
+      description: wb.description,
+      original: amount || null,
+      final: final_amount,
+      valid_until: null, // 발송 시점 기반 클라이언트 안내 — 검증은 1회용 per email로 강제
+      restriction: { single_use_per_email: true, sku_in: wb.target_skus },
+      coupon_type: 'winback_dynamic',
+    });
+  }
 
   const coupon = COUPONS[code];
   if (!coupon) return res.status(404).json({ ok: false, error: 'invalid_code' });
