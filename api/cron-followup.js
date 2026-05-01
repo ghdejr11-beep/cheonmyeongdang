@@ -6,6 +6,14 @@
  * GET /api/cron-followup?test=1&days=90      — D+90 win-back 템플릿 테스트
  * GET /api/cron-followup?days=30             — D+30 코호트만 cron 처리 (개별 디버그용)
  * GET /api/cron-followup?dry=1               — 발송 안하고 대상자만 미리보기
+ * GET /api/cron-followup?test=1&days=30&season=eobonal   — D+30 5월 어버이날 시즌 메일 테스트
+ * GET /api/cron-followup?test=1&days=30&season=jongsose  — D+30 5월 종소세 시즌 메일 테스트
+ *
+ * 5월 시즌 (2026):
+ *   - 어버이날 (5/8) — paid_at 5/1~5/7 코호트 D+30 도달 시 어버이날 LP cross-link + 카네이션 카드 5종 + KDP "어버이날 감사 편지 100선"
+ *   - 종소세 (5/31) — paid_at 5/1~5/24 코호트 D+30 도달 시 종소세 LP cross-link + 체크리스트 SKU + KDP "종소세 셀프 신고 가이드"
+ *   - 두 시즌 동시 매칭 시 어버이날 우선 (D-Day 임박 + 클릭률 우위, getSeasonalCampaign() priority)
+ *   - 시즌 외 D+30 코호트는 기존 일반 winback 그대로 유지 (영향 없음)
  *
  * 흐름:
  *   1) GitHub Gist에서 결제 데이터 로드
@@ -54,6 +62,55 @@ function fmtKstYmd(date) {
   const m = String(kst.getUTCMonth() + 1).padStart(2, '0');
   const d = String(kst.getUTCDate()).padStart(2, '0');
   return `${y}-${m}-${d}`;
+}
+
+// ─── 5월 시즌 캠페인 분기 ───────────────────────────────────────────
+// D+30 winback 발송 시점에 가입일 기준 시즌 매칭. 두 시즌 동시 매칭 시 어버이날 우선
+// (D-Day 임박 + 클릭률 우위). 시즌 코호트는 일반 winback 분기보다 훨씬 강한 후크.
+//
+// 어버이날 (5/8) — 5월 1~7일 paid_at: D+30~D+37 도달 시 어버이날 메일
+// 종소세  (5/31) — 5월 1~24일 paid_at: D+30~D+미정 도달 시 종소세 메일 (단, 어버이날 미해당분만)
+//
+// 매년 시즌 갱신: SEASONAL_CAMPAIGNS 배열에 새 객체 추가, 만료 객체는 archived=true 마킹
+const SEASONAL_CAMPAIGNS = [
+  {
+    id: 'eobonal_2026',
+    priority: 1, // 낮을수록 우선
+    // paid_at 윈도우 (KST 자정 경계 대신 UTC 기준 날짜 — 발송 시점 ±1일 오차 허용)
+    paidStart: '2026-05-01',
+    paidEnd: '2026-05-07', // inclusive
+    eventDate: '2026-05-08', // 어버이날
+    archived: false,
+  },
+  {
+    id: 'jongsose_2026',
+    priority: 2,
+    paidStart: '2026-05-01',
+    paidEnd: '2026-05-24', // 종소세 신고 마감 5/31 기준 D-7
+    eventDate: '2026-05-31',
+    archived: false,
+  },
+];
+
+function getSeasonalCampaign(signupDate) {
+  if (!signupDate) return null;
+  const ymd = fmtKstYmd(signupDate);
+  const matched = SEASONAL_CAMPAIGNS
+    .filter((c) => !c.archived)
+    .filter((c) => ymd >= c.paidStart && ymd <= c.paidEnd)
+    .sort((a, b) => a.priority - b.priority);
+  return matched[0] ? matched[0].id : null;
+}
+
+function daysUntil(targetYmd) {
+  // 오늘(KST) 대비 남은 일수 — D-Day 음수 시 0 반환 (지난 시즌)
+  const now = new Date();
+  const todayYmd = fmtKstYmd(now);
+  const [y1, m1, d1] = todayYmd.split('-').map(Number);
+  const [y2, m2, d2] = targetYmd.split('-').map(Number);
+  const t1 = Date.UTC(y1, m1 - 1, d1);
+  const t2 = Date.UTC(y2, m2 - 1, d2);
+  return Math.max(0, Math.round((t2 - t1) / (24 * 60 * 60 * 1000)));
 }
 
 // ─── 공통 푸터 ───
@@ -586,6 +643,265 @@ function buildD30Text({ customerName, skuName, skuId, orderId, couponCode, valid
   ].join('\n');
 }
 
+// ─────────────────────────────────────────────────────────────────────────
+// ─── 5월 시즌 D+30 메일 — 어버이날 ───
+// ─────────────────────────────────────────────────────────────────────────
+// 일반 D+30 winback 쿠폰(WB30-XXXX, 30%)은 그대로 유지하고, 본문 상단에 어버이날 시즌 후크
+// 추가. 결제 LP는 /eobonal (MD 전용 LP) cross-link, KDP "어버이날 감사 편지 100선" cross-link.
+function buildD30EobonalHtml({ customerName, skuName, skuId, orderId, couponCode, validUntil }) {
+  const safeName = String(customerName || '').replace(/[<>&"']/g, '');
+  const greet = safeName ? `${safeName}님,` : '안녕하세요,';
+  const code = couponCode || 'WB30-XXXX';
+  const validStr = validUntil || '';
+  const offer = getD30Offer(skuId);
+  const discountedPrice = Math.floor(offer.target_price * 0.7);
+  const savings = offer.target_price - discountedPrice;
+  const payUrl = `https://cheonmyeongdang.vercel.app/pay.html?sku=${offer.target_sku}&coupon=${code}&utm_source=email_d30&utm_campaign=winback_d30_eobonal&utm_content=${skuId || 'unknown'}`;
+  const eobonalLpUrl = `https://cheonmyeongdang.vercel.app/eobonal?utm_source=email_d30&utm_campaign=eobonal_2026`;
+  const eobonalSajuUrl = `https://cheonmyeongdang.vercel.app/pay.html?sku=saju_premium_9900&utm_source=email_d30&utm_campaign=eobonal_2026&utm_content=parents_saju_free_after_pay`;
+  const kdpUrl = `https://www.amazon.com/dp/eobonal-letter-100`;
+  const kdpKrUrl = `https://www.amazon.com/dp/eobonal-letter-100?tag=cheonmyeongdang-22&utm_source=email_d30`;
+  const dDay = daysUntil('2026-05-08');
+  const dDayLabel = dDay === 0 ? '오늘' : `D-${dDay}`;
+
+  return `<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>천명당 — 어버이날 ${dDayLabel} · 부모님 사주 풀이 + 카드 5종</title></head>
+<body style="margin:0;padding:0;background:#080a10;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',Roboto,sans-serif;color:#e8e0d0;">
+  <div style="max-width:600px;margin:0 auto;padding:24px 16px;">
+    <div style="text-align:center;padding:28px 16px 20px;">
+      <div style="font-family:'Gowun Batang',serif;font-size:28px;font-weight:700;color:#e8c97a;letter-spacing:0.05em;margin-bottom:6px;">天命堂</div>
+      <div style="font-size:13px;color:#a89880;letter-spacing:0.18em;">CHEONMYEONGDANG</div>
+    </div>
+
+    <!-- 시즌 후크 박스 — 어버이날 -->
+    <div style="background:linear-gradient(135deg,#3a1a2e,#2a0f1f);border:2px solid #ff7b9c;border-radius:16px;padding:24px;margin-bottom:18px;text-align:center;">
+      <div style="font-size:42px;margin-bottom:6px;">🌷</div>
+      <div style="font-size:11px;color:#ff7b9c;letter-spacing:0.18em;font-weight:800;margin-bottom:8px;">어버이날 ${dDayLabel} · 5월 8일</div>
+      <h1 style="font-family:'Gowun Batang',serif;color:#ffd6e0;font-size:22px;margin:6px 0 12px;font-weight:700;">${greet}<br>부모님 사주 풀이 + 카네이션 카드 5종</h1>
+      <p style="color:#e8e0d0;font-size:14px;line-height:1.7;margin:8px 0 16px;">올해 어버이날, 부모님께 평생 한 번 받아볼<br><strong style="color:#ffd6e0;">사주 정밀 풀이</strong>를 선물로 보내드릴 수 있어요.</p>
+      <a href="${eobonalLpUrl}" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#ff7b9c,#ffaec0);color:#080a10;font-weight:800;text-decoration:none;border-radius:10px;font-size:15px;">어버이날 페이지 보기 →</a>
+      <p style="color:#a89880;font-size:11px;margin-top:10px;line-height:1.5;">* 결제 후 즉시 PDF 발송 · 부모님 생년월시만 입력</p>
+    </div>
+
+    <!-- 카네이션 카드 5종 무료 다운로드 -->
+    <div style="background:linear-gradient(135deg,#0d1020,#141428);border:1px solid rgba(255,123,156,0.3);border-radius:14px;padding:22px;margin-bottom:18px;">
+      <div style="font-size:11px;color:#ff7b9c;letter-spacing:0.18em;font-weight:700;margin-bottom:10px;text-align:center;">🎁 무료 선물</div>
+      <h2 style="font-family:'Gowun Batang',serif;color:#ffd6e0;font-size:18px;margin:0 0 12px;font-weight:700;text-align:center;">카네이션 카드 PDF 5종</h2>
+      <p style="color:#e8e0d0;font-size:13px;line-height:1.7;margin:0 0 14px;text-align:center;">손글씨 폰트 5종 + 인쇄용 A4 / 모바일용 정사각형. 어버이날 LP에서 이메일 입력 시 즉시 다운로드.</p>
+      <div style="text-align:center;">
+        <a href="${eobonalLpUrl}#freebies" style="display:inline-block;padding:10px 24px;background:transparent;color:#ffd6e0;border:1px solid #ff7b9c;text-decoration:none;border-radius:8px;font-size:13px;font-weight:700;">카드 5종 받기</a>
+      </div>
+    </div>
+
+    <!-- KDP cross-link -->
+    <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:16px 18px;margin-bottom:18px;">
+      <div style="font-size:11px;color:#c9a84c;letter-spacing:0.18em;font-weight:700;margin-bottom:8px;">📖 함께 읽으면 좋은 책</div>
+      <p style="color:#e8e0d0;font-size:13px;line-height:1.7;margin:0 0 8px;"><strong style="color:#e8c97a;">"어버이날 감사 편지 100선"</strong> — 짧은 글이라도 부모님 마음에 와닿는 100가지 표현 모음</p>
+      <a href="${kdpUrl}" style="color:#c9a84c;font-size:12px;text-decoration:underline;" target="_blank" rel="noopener">Amazon Kindle (English)</a> ·
+      <a href="${kdpKrUrl}" style="color:#c9a84c;font-size:12px;text-decoration:underline;" target="_blank" rel="noopener">Amazon (한국어판)</a>
+    </div>
+
+    <!-- 일반 D+30 winback 쿠폰 (그대로 유지) -->
+    <div style="background:linear-gradient(135deg,#0d1020,#141428);border:1px solid #c9a84c;border-radius:16px;padding:28px 22px;margin-bottom:18px;">
+      <div style="text-align:center;margin-bottom:18px;">
+        <div style="font-size:32px;margin-bottom:6px;">🎁</div>
+        <h2 style="font-family:'Gowun Batang',serif;color:#e8c97a;font-size:18px;margin:0 0 8px;font-weight:700;">본인용 — 30일 윈백 30% 쿠폰</h2>
+        <p style="color:#a89880;font-size:13px;line-height:1.6;margin:0;">30일 전 <strong style="color:#e8c97a;">${skuName}</strong>을 받아보셨습니다. 부모님 선물과 별개로, 본인용 쿠폰도 함께 보내드립니다.</p>
+      </div>
+      <div style="background:linear-gradient(135deg,#1a3530,#102520);border:2px dashed #e8c97a;border-radius:12px;padding:18px;text-align:center;">
+        <div style="font-size:11px;color:#e8c97a;letter-spacing:0.18em;font-weight:800;margin-bottom:4px;">⭐ WINBACK · 30% OFF</div>
+        <p style="color:#e8e0d0;font-size:13px;margin:8px 0 12px;">${offer.target_name} <span style="text-decoration:line-through;color:#a89880;">₩${offer.target_price.toLocaleString('ko-KR')}</span> → <strong style="color:#e8c97a;">₩${discountedPrice.toLocaleString('ko-KR')}</strong></p>
+        <div style="background:rgba(0,0,0,0.5);padding:10px 18px;border-radius:6px;display:inline-block;font-family:Menlo,monospace;color:#e8c97a;font-size:16px;letter-spacing:0.12em;font-weight:700;">${code}</div>
+        <p style="color:#a89880;font-size:11px;margin-top:8px;">${validStr ? validStr + '까지 유효' : '발급 후 7일 이내'}</p>
+      </div>
+      <div style="text-align:center;margin-top:14px;">
+        <a href="${payUrl}" style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#c9a84c,#e8c97a);color:#080a10;font-weight:800;text-decoration:none;border-radius:8px;font-size:14px;">${offer.cta} →</a>
+      </div>
+    </div>
+
+    <!-- 면책 -->
+    <div style="background:rgba(0,0,0,0.25);border-radius:8px;padding:12px;margin:14px 0;">
+      <p style="color:#7a6f5a;font-size:10px;line-height:1.7;margin:0;">⚠ <strong>면책:</strong> 천명당 풀이는 명리학·통계 기반의 <strong>재미·교양 목적</strong> 콘텐츠입니다. 의료·법률·금융 결정은 해당 분야 전문가와 상담하세요.</p>
+    </div>
+
+    <p style="color:#5a5044;font-size:11px;text-align:center;margin-top:14px;">결제 주문번호: <span style="font-family:Menlo,monospace;">${orderId}</span></p>
+    ${FOOTER_HTML()}
+  </div>
+</body></html>`;
+}
+
+function buildD30EobonalText({ customerName, skuName, skuId, orderId, couponCode, validUntil }) {
+  const greet = customerName ? `${customerName}님,` : '안녕하세요,';
+  const code = couponCode || 'WB30-XXXX';
+  const offer = getD30Offer(skuId);
+  const discountedPrice = Math.floor(offer.target_price * 0.7);
+  const savings = offer.target_price - discountedPrice;
+  const payUrl = `https://cheonmyeongdang.vercel.app/pay.html?sku=${offer.target_sku}&coupon=${code}&utm_source=email_d30&utm_campaign=winback_d30_eobonal`;
+  const eobonalLpUrl = `https://cheonmyeongdang.vercel.app/eobonal?utm_source=email_d30&utm_campaign=eobonal_2026`;
+  const dDay = daysUntil('2026-05-08');
+  const dDayLabel = dDay === 0 ? '오늘' : `D-${dDay}`;
+
+  return [
+    `천명당 (天命堂) — 어버이날 ${dDayLabel} · 부모님 사주 풀이 + 카드 5종`,
+    '',
+    greet,
+    `5월 8일 어버이날까지 ${dDayLabel}. 부모님께 사주 정밀 풀이를 선물로 보낼 수 있는 페이지를 안내드립니다.`,
+    '',
+    '─── 🌷 어버이날 페이지 ───',
+    `· 부모님 사주 풀이 (생년월시만 입력 → PDF 즉시 발송)`,
+    `· 카네이션 카드 PDF 5종 무료 다운로드`,
+    `· 페이지: ${eobonalLpUrl}`,
+    '',
+    '─── 📖 함께 읽으면 좋은 책 ───',
+    '· "어버이날 감사 편지 100선" (Amazon Kindle / 한국어판)',
+    '· https://www.amazon.com/dp/eobonal-letter-100',
+    '',
+    '─── ⭐ 본인용 — 30일 윈백 30% 쿠폰 ───',
+    `· ${offer.target_name}: ₩${offer.target_price.toLocaleString('ko-KR')} → ₩${discountedPrice.toLocaleString('ko-KR')}`,
+    `· 쿠폰 코드: ${code} (${validUntil ? validUntil + '까지' : '7일 이내'})`,
+    `· 적용 결제: ${payUrl}`,
+    '',
+    '※ 면책: 천명당 풀이는 명리학·통계 기반 재미·교양 콘텐츠입니다.',
+    '   의료·법률·금융 결정은 해당 분야 전문가와 상담하세요.',
+    '',
+    `주문번호: ${orderId}`,
+    '쿤스튜디오 · 사업자등록번호 552-59-00848 · ghdejr11@gmail.com',
+  ].join('\n');
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// ─── 5월 시즌 D+30 메일 — 종소세 환급 ───
+// ─────────────────────────────────────────────────────────────────────────
+// 환급 평균액은 국세청 공식 통계 (2024년 종합소득세 신고 환급 평균 약 ₩48만원, 출처: 국세청).
+// 광고 카피 "세무사 대체" / "100% 환급" / "강요" 금지 → "참고 자료, 정확한 신고는 홈택스/세무사" 면책.
+function buildD30JongsoseHtml({ customerName, skuName, skuId, orderId, couponCode, validUntil }) {
+  const safeName = String(customerName || '').replace(/[<>&"']/g, '');
+  const greet = safeName ? `${safeName}님,` : '안녕하세요,';
+  const code = couponCode || 'WB30-XXXX';
+  const validStr = validUntil || '';
+  const offer = getD30Offer(skuId);
+  const discountedPrice = Math.floor(offer.target_price * 0.7);
+  const payUrl = `https://cheonmyeongdang.vercel.app/pay.html?sku=${offer.target_sku}&coupon=${code}&utm_source=email_d30&utm_campaign=winback_d30_jongsose&utm_content=${skuId || 'unknown'}`;
+  const jongsoseLpUrl = `https://cheonmyeongdang.vercel.app/jongsose?utm_source=email_d30&utm_campaign=jongsose_2026`;
+  const jongsoseSkuUrl = `https://cheonmyeongdang.vercel.app/pay.html?sku=jongsose_checklist_9900&utm_source=email_d30&utm_campaign=jongsose_2026`;
+  const kdpUrl = `https://www.amazon.com/dp/jongsose-self-guide`;
+  const dDay = daysUntil('2026-05-31');
+  const dDayLabel = dDay === 0 ? '오늘 마감' : `D-${dDay}`;
+
+  return `<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>천명당 — 종소세 ${dDayLabel} · 셀프 신고 12분 가이드</title></head>
+<body style="margin:0;padding:0;background:#080a10;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',Roboto,sans-serif;color:#e8e0d0;">
+  <div style="max-width:600px;margin:0 auto;padding:24px 16px;">
+    <div style="text-align:center;padding:28px 16px 20px;">
+      <div style="font-family:'Gowun Batang',serif;font-size:28px;font-weight:700;color:#e8c97a;letter-spacing:0.05em;margin-bottom:6px;">天命堂</div>
+      <div style="font-size:13px;color:#a89880;letter-spacing:0.18em;">CHEONMYEONGDANG</div>
+    </div>
+
+    <!-- 시즌 후크 박스 — 종소세 -->
+    <div style="background:linear-gradient(135deg,#1a2e3a,#0f1f2a);border:2px solid #6dbfe8;border-radius:16px;padding:24px;margin-bottom:18px;text-align:center;">
+      <div style="font-size:42px;margin-bottom:6px;">📋</div>
+      <div style="font-size:11px;color:#6dbfe8;letter-spacing:0.18em;font-weight:800;margin-bottom:8px;">종소세 신고 ${dDayLabel} · 5월 31일 마감</div>
+      <h1 style="font-family:'Gowun Batang',serif;color:#d6ecff;font-size:22px;margin:6px 0 12px;font-weight:700;">${greet}<br>종소세 셀프 신고 12분 가이드</h1>
+      <p style="color:#e8e0d0;font-size:14px;line-height:1.7;margin:8px 0 8px;">2024년 종합소득세 신고 평균 환급액은 <strong style="color:#d6ecff;">약 ₩48만원</strong> 수준입니다.<br><span style="color:#a89880;font-size:12px;">(출처: 국세청 2024년 종합소득세 신고 통계)</span></p>
+      <p style="color:#e8e0d0;font-size:14px;line-height:1.7;margin:14px 0 16px;">홈택스 화면을 따라가는 <strong style="color:#d6ecff;">12분 셀프 신고 체크리스트</strong>로 누락 항목을 점검할 수 있습니다.</p>
+      <a href="${jongsoseLpUrl}" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#6dbfe8,#a8d8f0);color:#080a10;font-weight:800;text-decoration:none;border-radius:10px;font-size:15px;">셀프 신고 가이드 보기 →</a>
+      <p style="color:#a89880;font-size:11px;margin-top:10px;line-height:1.5;">* 참고 자료 · 정확한 신고는 홈택스 또는 세무사 상담을 권장합니다</p>
+    </div>
+
+    <!-- 종소세 SKU 9900 -->
+    <div style="background:linear-gradient(135deg,#0d1020,#141428);border:1px solid rgba(109,191,232,0.3);border-radius:14px;padding:22px;margin-bottom:18px;">
+      <div style="font-size:11px;color:#6dbfe8;letter-spacing:0.18em;font-weight:700;margin-bottom:10px;text-align:center;">📋 셀프 신고 체크리스트</div>
+      <h2 style="font-family:'Gowun Batang',serif;color:#d6ecff;font-size:18px;margin:0 0 12px;font-weight:700;text-align:center;">종소세 신고 체크리스트 ₩9,900</h2>
+      <ul style="color:#e8e0d0;font-size:13px;line-height:1.8;padding-left:20px;margin:0 0 14px;">
+        <li>홈택스 화면별 입력 순서 PDF (12장)</li>
+        <li>업종별 누락 빈도 TOP 10 항목</li>
+        <li>경비 인정 한도표 (프리랜서·사업자별)</li>
+        <li>가산세·납부 일정 캘린더</li>
+      </ul>
+      <div style="text-align:center;">
+        <a href="${jongsoseSkuUrl}" style="display:inline-block;padding:10px 24px;background:transparent;color:#d6ecff;border:1px solid #6dbfe8;text-decoration:none;border-radius:8px;font-size:13px;font-weight:700;">체크리스트 받기</a>
+      </div>
+    </div>
+
+    <!-- KDP cross-link -->
+    <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:16px 18px;margin-bottom:18px;">
+      <div style="font-size:11px;color:#c9a84c;letter-spacing:0.18em;font-weight:700;margin-bottom:8px;">📖 함께 읽으면 좋은 책</div>
+      <p style="color:#e8e0d0;font-size:13px;line-height:1.7;margin:0 0 8px;"><strong style="color:#e8c97a;">"종소세 셀프 신고 가이드"</strong> — 프리랜서·1인 사업자가 자주 놓치는 항목 정리</p>
+      <a href="${kdpUrl}" style="color:#c9a84c;font-size:12px;text-decoration:underline;" target="_blank" rel="noopener">Amazon Kindle 보기</a>
+    </div>
+
+    <!-- 일반 D+30 winback 쿠폰 (그대로 유지) -->
+    <div style="background:linear-gradient(135deg,#0d1020,#141428);border:1px solid #c9a84c;border-radius:16px;padding:28px 22px;margin-bottom:18px;">
+      <div style="text-align:center;margin-bottom:18px;">
+        <div style="font-size:32px;margin-bottom:6px;">🎁</div>
+        <h2 style="font-family:'Gowun Batang',serif;color:#e8c97a;font-size:18px;margin:0 0 8px;font-weight:700;">사주 — 30일 윈백 30% 쿠폰</h2>
+        <p style="color:#a89880;font-size:13px;line-height:1.6;margin:0;">30일 전 <strong style="color:#e8c97a;">${skuName}</strong>을 받아보셨습니다. 종소세 시즌과 별개로, 사주 풀이 30% 쿠폰도 함께 보내드립니다.</p>
+      </div>
+      <div style="background:linear-gradient(135deg,#1a3530,#102520);border:2px dashed #e8c97a;border-radius:12px;padding:18px;text-align:center;">
+        <div style="font-size:11px;color:#e8c97a;letter-spacing:0.18em;font-weight:800;margin-bottom:4px;">⭐ WINBACK · 30% OFF</div>
+        <p style="color:#e8e0d0;font-size:13px;margin:8px 0 12px;">${offer.target_name} <span style="text-decoration:line-through;color:#a89880;">₩${offer.target_price.toLocaleString('ko-KR')}</span> → <strong style="color:#e8c97a;">₩${discountedPrice.toLocaleString('ko-KR')}</strong></p>
+        <div style="background:rgba(0,0,0,0.5);padding:10px 18px;border-radius:6px;display:inline-block;font-family:Menlo,monospace;color:#e8c97a;font-size:16px;letter-spacing:0.12em;font-weight:700;">${code}</div>
+        <p style="color:#a89880;font-size:11px;margin-top:8px;">${validStr ? validStr + '까지 유효' : '발급 후 7일 이내'}</p>
+      </div>
+      <div style="text-align:center;margin-top:14px;">
+        <a href="${payUrl}" style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#c9a84c,#e8c97a);color:#080a10;font-weight:800;text-decoration:none;border-radius:8px;font-size:14px;">${offer.cta} →</a>
+      </div>
+    </div>
+
+    <!-- 면책 (세무사법) -->
+    <div style="background:rgba(0,0,0,0.25);border-radius:8px;padding:14px;margin:14px 0;">
+      <p style="color:#7a6f5a;font-size:10px;line-height:1.7;margin:0;">⚠ <strong>면책:</strong> 본 메일·체크리스트·가이드는 <strong>참고 자료</strong>로 제공되며, 개별 신고에 대한 세무 자문이 아닙니다. 정확한 신고는 <strong>국세청 홈택스</strong> 또는 <strong>세무사</strong> 상담을 권장합니다. 천명당 풀이는 명리학·통계 기반 재미·교양 콘텐츠입니다.</p>
+    </div>
+
+    <p style="color:#5a5044;font-size:11px;text-align:center;margin-top:14px;">결제 주문번호: <span style="font-family:Menlo,monospace;">${orderId}</span></p>
+    ${FOOTER_HTML()}
+  </div>
+</body></html>`;
+}
+
+function buildD30JongsoseText({ customerName, skuName, skuId, orderId, couponCode, validUntil }) {
+  const greet = customerName ? `${customerName}님,` : '안녕하세요,';
+  const code = couponCode || 'WB30-XXXX';
+  const offer = getD30Offer(skuId);
+  const discountedPrice = Math.floor(offer.target_price * 0.7);
+  const payUrl = `https://cheonmyeongdang.vercel.app/pay.html?sku=${offer.target_sku}&coupon=${code}&utm_source=email_d30&utm_campaign=winback_d30_jongsose`;
+  const jongsoseLpUrl = `https://cheonmyeongdang.vercel.app/jongsose?utm_source=email_d30&utm_campaign=jongsose_2026`;
+  const dDay = daysUntil('2026-05-31');
+  const dDayLabel = dDay === 0 ? '오늘 마감' : `D-${dDay}`;
+
+  return [
+    `천명당 (天命堂) — 종소세 ${dDayLabel} · 셀프 신고 12분 가이드`,
+    '',
+    greet,
+    `5월 31일 종합소득세 신고 마감까지 ${dDayLabel}.`,
+    '',
+    '─── 📋 종소세 시즌 안내 ───',
+    '· 2024년 종합소득세 신고 평균 환급액 약 ₩48만원 (출처: 국세청)',
+    '· 홈택스 화면별 입력 순서 12분 셀프 신고 체크리스트',
+    `· 페이지: ${jongsoseLpUrl}`,
+    '',
+    '─── 📖 함께 읽으면 좋은 책 ───',
+    '· "종소세 셀프 신고 가이드" (Amazon Kindle)',
+    '· https://www.amazon.com/dp/jongsose-self-guide',
+    '',
+    '─── ⭐ 사주 — 30일 윈백 30% 쿠폰 ───',
+    `· ${offer.target_name}: ₩${offer.target_price.toLocaleString('ko-KR')} → ₩${discountedPrice.toLocaleString('ko-KR')}`,
+    `· 쿠폰 코드: ${code} (${validUntil ? validUntil + '까지' : '7일 이내'})`,
+    `· 적용 결제: ${payUrl}`,
+    '',
+    '※ 면책: 본 메일·가이드는 참고 자료이며, 개별 신고에 대한 세무 자문이 아닙니다.',
+    '   정확한 신고는 국세청 홈택스 또는 세무사 상담을 권장합니다.',
+    '   천명당 풀이는 명리학·통계 기반 재미·교양 콘텐츠입니다.',
+    '',
+    `주문번호: ${orderId}`,
+    '쿤스튜디오 · 사업자등록번호 552-59-00848 · ghdejr11@gmail.com',
+  ].join('\n');
+}
+
 // ─── D+90 (장기 휴면 win-back) — 50% 할인 + 마지막 안내 ───
 function buildD90Html({ customerName, skuName, orderId, couponCode, validUntil }) {
   const safeName = String(customerName || '').replace(/[<>&"']/g, '');
@@ -914,7 +1230,7 @@ async function sendViaSmtp({ from, to, subject, html, text, user, pass }) {
 }
 
 // ─── 단일 후속 메일 발송 (코호트 분기) ───
-async function sendFollowupEmail({ to, customerName, skuName, skuId, orderId, days }) {
+async function sendFollowupEmail({ to, customerName, skuName, skuId, orderId, days, paid_at }) {
   const cohort = COHORTS[days] || COHORTS[3];
   const fromName = '천명당';
   const fromAddr = (process.env.GMAIL_FROM || 'ghdejr11@gmail.com').trim();
@@ -931,9 +1247,26 @@ async function sendFollowupEmail({ to, customerName, skuName, skuId, orderId, da
   }
 
   const tplArgs = { customerName, skuName, skuId, orderId, couponCode, validUntil };
-  const subject = cohort.subject({ customerName });
-  const html = cohort.html(tplArgs);
-  const text = cohort.text(tplArgs);
+
+  // ─── D+30: 5월 시즌 캠페인 매칭 (어버이날 우선 → 종소세) ───
+  // 일반 winback 쿠폰(WB30-XXXX, 30%)은 그대로 유지하면서 본문 상단에 시즌 후크 추가
+  let subject, html, text;
+  const seasonal = days === 30 ? getSeasonalCampaign(paid_at) : null;
+  if (seasonal === 'eobonal_2026') {
+    const dDay = daysUntil('2026-05-08');
+    const dDayLabel = dDay === 0 ? '오늘' : `D-${dDay}`;
+    subject = `[천명당] ${customerName ? customerName + '님 ' : ''}부모님 사주 풀이 무료 + 어버이날 카드 5종 (어버이날 ${dDayLabel})`;
+    html = buildD30EobonalHtml(tplArgs);
+    text = buildD30EobonalText(tplArgs);
+  } else if (seasonal === 'jongsose_2026') {
+    subject = `[천명당] ${customerName ? customerName + '님 ' : ''}종소세 환급 평균 ₩48만 — 셀프 신고 12분 가이드`;
+    html = buildD30JongsoseHtml(tplArgs);
+    text = buildD30JongsoseText(tplArgs);
+  } else {
+    subject = cohort.subject({ customerName });
+    html = cohort.html(tplArgs);
+    text = cohort.text(tplArgs);
+  }
 
   // 우선순위 1: SMTP App Password
   const appPass = (process.env.GMAIL_APP_PASSWORD || '').trim();
@@ -967,6 +1300,13 @@ async function processCohort({ days, isTest, isDryRun, results }) {
 
   let targets = [];
   if (isTest) {
+    // 테스트 paid_at — ?season=eobonal|jongsose 시 시즌 윈도우 내 날짜로 강제 (시즌 분기 검증)
+    let testPaidAt = new Date().toISOString();
+    if (results._seasonOverride === 'eobonal') {
+      testPaidAt = new Date('2026-05-03T00:00:00+09:00').toISOString(); // 어버이날 윈도우
+    } else if (results._seasonOverride === 'jongsose') {
+      testPaidAt = new Date('2026-05-15T00:00:00+09:00').toISOString(); // 종소세 윈도우 (어버이날 X)
+    }
     targets = [
       {
         orderId: `cmd_test_d${days}_` + Date.now(),
@@ -974,7 +1314,7 @@ async function processCohort({ days, isTest, isDryRun, results }) {
         customerName: '홍덕훈',
         skuId: 'saju_premium_9900',
         skuName: '사주 정밀 풀이 (테스트)',
-        paid_at: new Date().toISOString(),
+        paid_at: testPaidAt,
       },
     ];
   } else {
@@ -1018,6 +1358,7 @@ async function processCohort({ days, isTest, isDryRun, results }) {
         skuName: t.skuName,
         skuId: t.skuId,
         orderId: t.orderId,
+        paid_at: t.paid_at,
         days,
       });
       cohortResults.push({ orderId: t.orderId, ...r });
@@ -1054,6 +1395,8 @@ module.exports = async (req, res) => {
   const url = req.url || '';
   const isTest = /[?&]test=1/.test(url);
   const isDryRun = /[?&]dry=1/.test(url);
+  const seasonMatch = url.match(/[?&]season=([a-z_]+)/);
+  const seasonOverride = seasonMatch ? seasonMatch[1] : null; // test 모드 한정 — eobonal | jongsose
 
   // ?days=3|7|14 → 해당 코호트만 처리. 미지정시 전체 (3, 7, 14)
   const daysMatch = url.match(/[?&]days=(\d+)/);
@@ -1078,6 +1421,8 @@ module.exports = async (req, res) => {
       explicitDays && COHORTS[explicitDays] ? [explicitDays] : [3, 7, 14, 30, 90];
 
     const results = [];
+    // 시즌 오버라이드는 results._seasonOverride로 processCohort에 전달 (test 모드 한정)
+    if (isTest && seasonOverride) results._seasonOverride = seasonOverride;
     for (const d of cohortsToRun) {
       await processCohort({ days: d, isTest, isDryRun, results });
     }
