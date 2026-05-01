@@ -39,6 +39,17 @@ from yt_channel_common import (  # type: ignore
 
 CHANNEL_KEY = "whisper_atlas"
 
+# Standard auto-affiliate block (shared with D:\scripts\whisper_update_descriptions.py
+# so newly uploaded videos already carry the same 5-link section without waiting
+# for the weekly bulk re-scan).
+sys.path.insert(0, r"D:\scripts")
+try:
+    from yt_affiliate_lib import append_affiliate_block as _append_affiliate_block  # type: ignore
+    _AFF_JSON = Path(r"D:\scripts\whisper_affiliates.json")
+except Exception:
+    _append_affiliate_block = None  # graceful no-op
+    _AFF_JSON = None
+
 # 7개 토픽 (요일 로테이션)
 TOPICS = [
     {
@@ -171,6 +182,14 @@ def run(hours_list: list[float], force_topic: str | None = None,
             f"Tags: {', '.join('#'+t.replace(' ','') for t in topic['tags'])}\n\n"
             "DISCLAIMER: This video is for relaxation only and is not medical advice."
         )
+        # Append canonical affiliate block (matches D:\scripts\whisper_update_descriptions.py
+        # so newly uploaded videos ship with the rich 5-link block immediately).
+        if _append_affiliate_block and _AFF_JSON and _AFF_JSON.exists():
+            try:
+                desc = _append_affiliate_block(desc, title, topic.get("tags", []), _AFF_JSON)
+            except Exception as e:
+                log.info(f"  [WARN] affiliate block append failed: {e}")
+
         ok, resp = upload_to_channel(out_mp4, CHANNEL_KEY, title, desc, dry_run=dry_run)
         log.info(f"  upload ok={ok} ({resp[:120]})")
 

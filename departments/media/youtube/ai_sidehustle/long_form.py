@@ -167,10 +167,22 @@ This long-form video explores the topic in depth — practical tactics, numbers,
 🎯 Chapter list in video.
 🔔 Subscribe for weekly deep-dives.
 
-⚠️ Educational content only, not financial advice. Your results will vary.
+⚠️ Educational content only, not financial advice. Your results will vary."""
 
-#AI #SideHustle #MakeMoneyOnline #ClaudeAI #ChatGPT #PassiveIncome #Entrepreneurship
-"""
+    # Append canonical AI-themed affiliate block (matches D:\scripts\ai_sidehustle_update_descriptions.py).
+    try:
+        sys.path.insert(0, r"D:\scripts")
+        from yt_affiliate_lib import append_affiliate_block as _append_affiliate_block
+        from pathlib import Path as _Path
+        _aff_json = _Path(r"D:\scripts\ai_sidehustle_affiliates.json")
+        if _aff_json.exists():
+            description = _append_affiliate_block(
+                description, title,
+                ["AI", "long form", "side hustle", "make money", "Claude", "ChatGPT", "entrepreneurship", "deep dive"],
+                _aff_json,
+            )
+    except Exception as _e:
+        print(f"  ⚠️ AI affiliate block append skipped: {_e}")
     try:
         vid = upload_video(
             video_path=out,
