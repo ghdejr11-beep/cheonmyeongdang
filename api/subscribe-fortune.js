@@ -85,9 +85,14 @@ module.exports = async (req, res) => {
     channel, telegram_chat_id, kakao_id,
   } = body;
 
-  // 필수 검증
-  if (!orderId || skuId !== 'subscribe_monthly_9900') {
-    return res.status(400).json({ success: false, error: '월회원 SKU만 등록 가능' });
+  // 필수 검증 — 정기결제 SKU 화이트리스트 (legacy + 신규 2종)
+  const ALLOWED_SUBSCRIPTION_SKUS = [
+    'subscribe_monthly_9900',
+    'subscribe_monthly_29900',
+    'subscribe_basic_2900',
+  ];
+  if (!orderId || !ALLOWED_SUBSCRIPTION_SKUS.includes(skuId)) {
+    return res.status(400).json({ success: false, error: '정기결제 SKU만 등록 가능' });
   }
   if (!birth_date || !gender) {
     return res.status(400).json({ success: false, error: '생년월일·성별 필수' });

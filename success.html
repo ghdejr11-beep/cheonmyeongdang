@@ -222,9 +222,12 @@
  var serviceName = orderData.serviceName || '';
  var isSubscription = (
  resolvedSkuId === 'subscribe_monthly_9900' ||
+ resolvedSkuId === 'subscribe_monthly_29900' ||
+ resolvedSkuId === 'subscribe_basic_2900' ||
  resolvedSkuId === 'monthly_premium' ||
  serviceName.indexOf('월회원') !== -1 ||
- serviceName.indexOf('구독') !== -1
+ serviceName.indexOf('구독') !== -1 ||
+ serviceName.indexOf('정기') !== -1
  );
  var isComprehensive = !isSubscription && (
  resolvedSkuId === 'comprehensive_reading' ||
