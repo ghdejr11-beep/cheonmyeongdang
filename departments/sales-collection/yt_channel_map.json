@@ -1,45 +1,59 @@
 {
-  "_comment": "4채널 매핑. channel_id 비어있으면 yt_dashboard.py --resolve 로 자동 해상도. handle 은 @kunstudio_xxx 형식 추정 (실제 채널 검색 시 title 매칭).",
+  "_comment": "5채널 매핑 (2026-05-01 수정). 이전 맵의 ID는 모두 동명이인의 다른 사람 채널을 가리키고 있었음 — kunstudio Brand Account 소유 채널로 전부 교체. healing_sleep_realm 폐기 (Sori Atlas 'Sleep & Ambient' 재생목록으로 통합).",
   "channels": [
     {
-      "key": "healing_sleep_realm",
-      "title": "Healing Sleep Realm",
-      "handle": "",
+      "key": "sori_atlas",
+      "title": "Sori Atlas",
+      "handle": "@soriatlas",
       "channel_id": "UCXAo8cXhyXIRa_8bjNdBh9w",
       "search_terms": [
-        "Healing Sleep Realm"
+        "Sori Atlas"
       ],
-      "category": "sleep_meditation"
+      "category": "music_ambient"
     },
     {
       "key": "whisper_atlas",
       "title": "Whisper Atlas",
-      "handle": "",
-      "channel_id": "UCbySuORbU6r4zvaX1fj8urg",
+      "handle": "@kunstudiokr",
+      "channel_id": "UCjWwRPygY08bYH_vgaDV7ww",
       "search_terms": [
-        "Whisper Atlas"
+        "Whisper Atlas",
+        "kunstudiokr"
       ],
       "category": "asmr"
     },
     {
       "key": "wealth_blueprint",
       "title": "Wealth Blueprint",
-      "handle": "",
-      "channel_id": "UClmNlmBKu9P60wTIws1ATtA",
+      "handle": "@wealthblueprint2",
+      "channel_id": "UC7G9_Y47IMQUaqKOBSg33TA",
       "search_terms": [
-        "Wealth Blueprint"
+        "Wealth Blueprint",
+        "wealthblueprint2"
       ],
       "category": "finance_education"
     },
     {
       "key": "inner_archetypes",
       "title": "Inner Archetypes",
-      "handle": "",
-      "channel_id": "UCkk4_C8ZK0aREtW9n0CDNiA",
+      "handle": "@innerarchetypes-y4y",
+      "channel_id": "UCmAMBy0V6TXR_R5qoSrbbtQ",
       "search_terms": [
-        "Inner Archetypes"
+        "Inner Archetypes",
+        "innerarchetypes-y4y"
       ],
       "category": "psychology_spiritual"
+    },
+    {
+      "key": "ai_sidehustle",
+      "title": "AI Side Hustle",
+      "handle": "",
+      "channel_id": "UC7G9_Y47IMQUaqKOBSg33TA",
+      "search_terms": [
+        "AI Side Hustle"
+      ],
+      "category": "ai_business",
+      "_note": "ai_sidehustle와 wealth_blueprint는 동일 채널의 서로 다른 콘텐츠 series (subset)"
     }
   ]
 }
