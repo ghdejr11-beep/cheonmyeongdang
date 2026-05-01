@@ -221,12 +221,24 @@ Return only the spoken script."""
 
 #Shorts #AI #SideHustle #MakeMoneyOnline #ChatGPT #ClaudeAI
 
-⚠️ This is for educational purposes only, not financial advice. Your results will vary.
+⚠️ This is for educational purposes only, not financial advice. Your results will vary."""
 
-📥 Resources mentioned (educational only):
-Saju Diary — Korean four-pillars 12-month workbook
-→ https://ghdejr.gumroad.com/l/qcjtu?utm_source=youtube&utm_campaign=ai_sidehustle
-"""
+    # Append canonical AI-themed affiliate block (matches D:\scripts\ai_sidehustle_update_descriptions.py
+    # so newly uploaded AI Side Hustle videos already ship with the rich 5-link block — KunStudio
+    # Mega Bundle / AI Saju Prompt Pack / Saju Workbook / Gumroad / Toss).
+    try:
+        sys.path.insert(0, r"D:\scripts")
+        from yt_affiliate_lib import append_affiliate_block as _append_affiliate_block
+        from pathlib import Path as _Path
+        _aff_json = _Path(r"D:\scripts\ai_sidehustle_affiliates.json")
+        if _aff_json.exists():
+            description = _append_affiliate_block(
+                description, title,
+                ["AI", "side hustle", "make money", "ChatGPT", "Claude", "faceless", "shorts", "passive income"],
+                _aff_json,
+            )
+    except Exception as _e:
+        print(f"  ⚠️ AI affiliate block append skipped: {_e}")
     vid = None
     try:
         vid = upload_video(
