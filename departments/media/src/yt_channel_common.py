@@ -191,6 +191,15 @@ def make_static_video(image: Path, audio: Path, dest_mp4: Path,
     """단일 이미지 + 오디오 → mp4. (Whisper Atlas long-form 용)
 
     resolution: "WxH" 포맷 (예: "1920x1080"). 내부적으로 scale 의 ':' 포맷으로 변환.
+
+    SSL EOF 방지 최적화 (2026-05-01):
+      - 정적 이미지 + 노이즈는 비주얼 변화 0% → 초저비트레이트로 충분
+      - 이전: -crf 28, ~1Mbps × 8h ≈ 800MB → SSL EOF 빈발
+      - 이후: -b:v 80k -maxrate 150k, ~80kbps × 8h ≈ 80MB (10배 ↓)
+      - -preset medium (slower는 8h 영상에 1+시간 걸림 → medium 으로 균형)
+      - -r 1 + -g 600 (정적 이미지는 1fps 면 충분, 키프레임 10분에 1번)
+      - 오디오 96k (192k → 96k, 노이즈는 차이 없음)
+      - +faststart (스트리밍 시작 빠름, 업로드 완료 시점 안정)
     """
     if "x" in resolution:
         w, h = resolution.lower().split("x")
@@ -198,15 +207,20 @@ def make_static_video(image: Path, audio: Path, dest_mp4: Path,
         w, h = "1920", "1080"
     cmd = [
         FFMPEG, "-y",
-        "-loop", "1", "-i", str(image),
+        "-loop", "1", "-r", "1", "-i", str(image),
         "-i", str(audio),
         "-vf", (
             f"scale={w}:{h}:force_original_aspect_ratio=decrease,"
             f"pad={w}:{h}:(ow-iw)/2:(oh-ih)/2,setsar=1"
         ),
-        "-c:v", "libx264", "-tune", "stillimage", "-preset", "veryfast", "-crf", "28",
-        "-c:a", "aac", "-b:a", "192k",
+        "-c:v", "libx264", "-tune", "stillimage",
+        "-preset", "medium",
+        "-b:v", "80k", "-maxrate", "150k", "-bufsize", "300k",
+        "-g", "600", "-keyint_min", "600",
+        "-r", "1",
+        "-c:a", "aac", "-b:a", "96k",
         "-pix_fmt", "yuv420p",
+        "-movflags", "+faststart",
         "-shortest",
         str(dest_mp4),
     ]
