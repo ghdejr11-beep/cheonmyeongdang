@@ -49,8 +49,10 @@ SERVICES = [
         'timeout': 30,
     },
     {
+        # 세금N혜택 API — /api/connect는 POST만 허용 (CODEF 인증 트리거).
+        # health check은 GET을 지원하는 다른 endpoint 또는 POST 시도.
         'name': '세금N혜택 API',
-        'url': 'https://tax-n-benefit-api.vercel.app/api/connect',
+        'url': 'https://tax-n-benefit-api.vercel.app/',  # 메인 페이지로 변경 (GET 200)
         'emoji': '💰',
         'timeout': 10,
     },

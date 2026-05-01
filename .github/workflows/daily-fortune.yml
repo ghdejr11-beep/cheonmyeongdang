@@ -25,15 +25,15 @@ jobs:
       - name: Generate today's fortune content
         run: |
           mkdir -p daily
-          node << 'EOF'
+          cat > /tmp/gen-fortune.js << 'JSEOF'
           const fs = require('fs');
           const today = new Date();
           const KST = new Date(today.getTime() + 9 * 60 * 60 * 1000);
           const yyyy = KST.getUTCFullYear();
           const mm = String(KST.getUTCMonth() + 1).padStart(2, '0');
           const dd = String(KST.getUTCDate()).padStart(2, '0');
-          const dateStr = `${yyyy}-${mm}-${dd}`;
-          const dateKr = `${yyyy}년 ${parseInt(mm)}월 ${parseInt(dd)}일`;
+          const dateStr = yyyy + '-' + mm + '-' + dd;
+          const dateKr = yyyy + '년 ' + parseInt(mm) + '월 ' + parseInt(dd) + '일';
 
           const cheongan = ['갑','을','병','정','무','기','경','신','임','계'];
           const jiji = ['자','축','인','묘','진','사','오','미','신','유','술','해'];
@@ -57,6 +57,7 @@ jobs:
           const luckyDirection = directions[Math.floor(r(2) * directions.length)];
           const luckyNumber = Math.floor(r(3) * 9) + 1;
           const luckyElement = elements[Math.floor(r(4) * elements.length)];
+          const elementHanja = {'목':'木','화':'火','토':'土','금':'金','수':'水'};
 
           const ddiList = ['쥐','소','호랑이','토끼','용','뱀','말','양','원숭이','닭','개','돼지'];
           const ddiFortunes = {};
@@ -104,7 +105,7 @@ jobs:
             <div class="lucky-item">🎨 <strong>${luckyColor}</strong></div>
             <div class="lucky-item">🧭 <strong>${luckyDirection}쪽</strong></div>
             <div class="lucky-item">🔢 <strong>${luckyNumber}</strong></div>
-            <div class="lucky-item">${luckyElement === '목' ? '🌿' : luckyElement === '화' ? '🔥' : luckyElement === '토' ? '🌍' : luckyElement === '금' ? '⚪' : '💧'} <strong>${luckyElement}(${{'목':'木','화':'火','토':'土','금':'金','수':'水'}[luckyElement]})</strong></div>
+            <div class="lucky-item">${luckyElement === '목' ? '🌿' : luckyElement === '화' ? '🔥' : luckyElement === '토' ? '🌍' : luckyElement === '금' ? '⚪' : '💧'} <strong>${luckyElement}(${elementHanja[luckyElement]})</strong></div>
           </div>
 
           <h2 style="color:#e8c97a;text-align:center;margin:30px 0 20px;">12띠별 운세</h2>
@@ -125,26 +126,28 @@ jobs:
           </body>
           </html>`;
 
-          fs.writeFileSync(`daily/${dateStr}.html`, html);
+          fs.writeFileSync('daily/' + dateStr + '.html', html);
           console.log('Generated:', dateStr);
-          EOF
+          JSEOF
+          node /tmp/gen-fortune.js
 
       - name: Update sitemap
         run: |
-          node << 'EOF'
+          cat > /tmp/sitemap.js << 'JSEOF'
           const fs = require('fs');
           const path = require('path');
-          if (!fs.existsSync('daily')) return;
+          if (!fs.existsSync('daily')) process.exit(0);
           const files = fs.readdirSync('daily').filter(f => f.endsWith('.html')).sort().reverse();
           let urls = '';
           files.slice(0, 30).forEach(f => {
             const date = f.replace('.html','');
-            urls += `  <url>\n    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/daily/${f}</loc>\n    <lastmod>${date}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n`;
+            urls += '  <url>\n    <loc>https://ghdejr11-beep.github.io/cheonmyeongdang/daily/' + f + '</loc>\n    <lastmod>' + date + '</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n';
           });
           let sitemap = fs.readFileSync('sitemap.xml','utf8');
           sitemap = sitemap.replace(/<\/urlset>/, urls + '</urlset>');
           fs.writeFileSync('sitemap.xml', sitemap);
-          EOF
+          JSEOF
+          node /tmp/sitemap.js
 
       - name: Commit and push
         run: |
