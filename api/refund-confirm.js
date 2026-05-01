@@ -29,7 +29,7 @@
 const https = require('https');
 const crypto = require('crypto');
 const querystring = require('querystring');
-const { markRefunded } = require('./_purchase-store');
+const { markRefunded } = require('../lib/purchase-store');
 
 // ─── Toss API 헬퍼 ───
 function tossGetPayment(secretKey, paymentKey) {

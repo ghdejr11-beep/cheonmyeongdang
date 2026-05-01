@@ -25,8 +25,8 @@
  *   - CORS open (*)
  */
 const { lookupSku } = require('./payment-config');
-const { listPurchasesByEmail } = require('./_purchase-store');
-const { analyzeCompat } = require('./_compat-engine');
+const { listPurchasesByEmail } = require('../lib/purchase-store');
+const { analyzeCompat } = require('../lib/compat-engine');
 
 // ─── SKU ID (payment-config.js와 동기화) ──────────────────
 const COMPAT_SKU = 'compat_detail_9900';
