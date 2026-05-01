@@ -11,7 +11,7 @@
  * 클라이언트는 응답의 skus를 localStorage에 저장 후 광고 차단 등에 사용.
  * 비밀번호 0, 회원가입 0, 마찰 최소화.
  */
-const { listPurchasesByEmail } = require('./_purchase-store');
+const { listPurchasesByEmail } = require('../lib/purchase-store');
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');

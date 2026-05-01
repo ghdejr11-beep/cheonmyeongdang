@@ -23,7 +23,7 @@
 const https = require('https');
 const querystring = require('querystring');
 const { lookupSku } = require('./payment-config');
-const { appendPurchase } = require('./_purchase-store');
+const { appendPurchase } = require('../lib/purchase-store');
 
 // ─── SKU 메타 (이메일 본문 컨텍스트) ───
 const SKU_DELIVERY_NOTE = {

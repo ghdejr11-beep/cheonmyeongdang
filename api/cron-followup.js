@@ -30,7 +30,7 @@ const querystring = require('querystring');
 const {
   listFollowupTargets,
   markFollowupSent,
-} = require('./_purchase-store');
+} = require('../lib/purchase-store');
 
 // ─── 공통 푸터 ───
 function FOOTER_HTML() {
