@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>궁합 정밀 분석 - 천명당</title>
+<meta name="description" content="두 사람의 사주를 명리학(合·冲·오행균형)으로 정밀 분석. 일간 궁합 + 합/충 + 오행 보완 + 6개 영역별 점수.">
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-90Y8GPVX1F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-90Y8GPVX1F');
+</script>
+
+<style>
+:root {
+  --bg: #080a10;
+  --card: rgba(13,16,32,0.97);
+  --gold: #c9a84c;
+  --gold2: #e8c97a;
+  --jade: #4a9e8e;
+  --rose: #d4a0a0;
+  --crimson: #e07070;
+  --text: #e8e0d0;
+  --text2: #a89880;
+  --border: rgba(201,168,76,0.2);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: radial-gradient(ellipse at top, #1a1040 0%, var(--bg) 70%);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  min-height: 100vh;
+  padding: 24px 16px 60px;
+  -webkit-tap-highlight-color: transparent;
+}
+.wrap { max-width: 720px; margin: 0 auto; }
+header { text-align: center; margin-bottom: 28px; }
+header h1 {
+  font-family: 'Gowun Batang', serif;
+  color: var(--gold2);
+  font-size: 1.75rem;
+  margin-bottom: 8px;
+}
+header .sub { color: var(--text2); font-size: 0.86rem; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.card h2 {
+  font-family: 'Gowun Batang', serif;
+  color: var(--gold2);
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.person-block {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.person-label {
+  font-size: 0.78rem;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.form-row { margin-bottom: 12px; }
+.form-row label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text2);
+  margin-bottom: 5px;
+}
+.form-row input,
+.form-row select {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.3);
+  color: var(--text);
+  font-size: 0.94rem;
+  font-family: inherit;
+}
+.form-row input:focus, .form-row select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.gender-row { display: flex; gap: 8px; }
+.gender-btn {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(0,0,0,0.2);
+  cursor: pointer;
+  font-size: 0.88rem;
+  user-select: none;
+  transition: all 0.18s;
+}
+.gender-btn.selected {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.14);
+  color: var(--gold2);
+  font-weight: 700;
+}
+.gender-btn input { display: none; }
+.btn-analyze {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: #080a10;
+  border: none;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.18s;
+}
+.btn-analyze:hover:not(:disabled) { transform: translateY(-2px); }
+.btn-analyze:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-pay {
+  display: inline-block;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: #080a10;
+  border: none;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+}
+.hidden { display: none !important; }
+
+/* ─── 결과 섹션 스타일 ─── */
+.score-hero {
+  text-align: center;
+  padding: 36px 20px;
+  border-radius: 18px;
+  background: radial-gradient(circle at center, rgba(212,160,160,0.18), rgba(15,15,20,0.95));
+  border: 1px solid rgba(212,160,160,0.35);
+  margin-bottom: 18px;
+}
+.score-hero .label {
+  font-size: 0.7rem;
+  color: var(--rose);
+  letter-spacing: 0.25em;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.score-hero .pair {
+  font-family: 'Noto Serif KR', serif;
+  color: var(--gold2);
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+.score-hero .num {
+  font-size: 5.2rem;
+  font-weight: 900;
+  line-height: 1;
+  font-family: 'Playfair Display', 'Gowun Batang', serif;
+  text-shadow: 0 2px 24px rgba(212,160,160,0.45);
+}
+.score-hero .unit {
+  font-size: 1.3rem;
+  color: var(--text2);
+  margin-left: 4px;
+}
+.score-hero .headline {
+  margin-top: 14px;
+  font-family: 'Noto Serif KR', serif;
+  color: var(--gold2);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.score-tile {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 10px;
+  text-align: center;
+}
+.score-tile .label { font-size: 0.7rem; color: var(--text2); }
+.score-tile .value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--gold2);
+  margin: 4px 0 2px;
+  font-family: 'Gowun Batang', serif;
+}
+
+.elem-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.82rem;
+  margin-bottom: 7px;
+}
+.elem-row .a, .elem-row .b { color: var(--text2); }
+.elem-row .a { text-align: right; }
+.elem-bar {
+  position: relative;
+  height: 18px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 9px;
+  overflow: hidden;
+}
+.elem-bar .a-fill, .elem-bar .b-fill {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+.elem-bar .center {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255,255,255,0.18);
+}
+.elem-bar .name {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  margin: 2px 4px 2px 0;
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 600;
+}
+.tag-hap {
+  background: rgba(74,158,142,0.15);
+  border: 1px solid rgba(74,158,142,0.4);
+  color: #7fc8b6;
+}
+.tag-chung {
+  background: rgba(224,112,112,0.12);
+  border: 1px solid rgba(224,112,112,0.4);
+  color: #ff9999;
+}
+
+.note-list { padding-left: 18px; line-height: 1.85; font-size: 0.92rem; }
+.note-list li { margin-bottom: 6px; }
+
+.upsell {
+  background: linear-gradient(135deg, rgba(201,168,76,0.10), rgba(232,201,122,0.04));
+  border: 1px solid var(--gold);
+  text-align: center;
+  padding: 24px 20px;
+}
+.upsell .price {
+  color: var(--gold2);
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 8px 0 14px;
+  font-family: 'Gowun Batang', serif;
+}
+
+.error-banner {
+  background: rgba(224,112,112,0.12);
+  border: 1px solid rgba(224,112,112,0.4);
+  color: #ff9999;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text2);
+}
+.loading-spinner {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(201,168,76,0.2);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 12px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.footnote {
+  color: var(--text2);
+  font-size: 0.74rem;
+  text-align: center;
+  margin-top: 24px;
+  line-height: 1.7;
+}
+.footnote a { color: var(--gold2); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>궁합 정밀 분석</h1>
+<div class="sub">두 사주의 합/충/오행 균형을 명리학으로 풀어드립니다</div>
+</header>
+
+<!-- 1. 입력 폼 -->
+<div class="card" id="form-card">
+<h2>두 사람의 정보</h2>
+
+<div class="person-block">
+<div class="person-label">본인</div>
+<div class="form-row">
+<label for="a-name">이름 (선택)</label>
+<input type="text" id="a-name" placeholder="본인" autocomplete="given-name">
+</div>
+<div class="form-row">
+<label for="a-birth">생년월일 (양력)</label>
+<input type="date" id="a-birth" min="1920-01-01" max="2025-12-31">
+</div>
+<div class="form-row">
+<label for="a-hour">출생 시각 (모르면 빈 칸)</label>
+<select id="a-hour">
+<option value="-1">모름</option>
+<option value="0">자시 (23:00~01:00)</option>
+<option value="2">축시 (01:00~03:00)</option>
+<option value="4">인시 (03:00~05:00)</option>
+<option value="6">묘시 (05:00~07:00)</option>
+<option value="8">진시 (07:00~09:00)</option>
+<option value="10">사시 (09:00~11:00)</option>
+<option value="12">오시 (11:00~13:00)</option>
+<option value="14">미시 (13:00~15:00)</option>
+<option value="16">신시 (15:00~17:00)</option>
+<option value="18">유시 (17:00~19:00)</option>
+<option value="20">술시 (19:00~21:00)</option>
+<option value="22">해시 (21:00~23:00)</option>
+</select>
+</div>
+<div class="form-row">
+<label>성별</label>
+<div class="gender-row">
+<label class="gender-btn selected" data-g="M"><input type="radio" name="a-gender" value="M" checked>남성</label>
+<label class="gender-btn" data-g="F"><input type="radio" name="a-gender" value="F">여성</label>
+</div>
+</div>
+</div>
+
+<div class="person-block">
+<div class="person-label">상대방</div>
+<div class="form-row">
+<label for="b-name">이름 (선택)</label>
+<input type="text" id="b-name" placeholder="상대방">
+</div>
+<div class="form-row">
+<label for="b-birth">생년월일 (양력)</label>
+<input type="date" id="b-birth" min="1920-01-01" max="2025-12-31">
+</div>
+<div class="form-row">
+<label for="b-hour">출생 시각 (모르면 빈 칸)</label>
+<select id="b-hour">
+<option value="-1">모름</option>
+<option value="0">자시 (23:00~01:00)</option>
+<option value="2">축시 (01:00~03:00)</option>
+<option value="4">인시 (03:00~05:00)</option>
+<option value="6">묘시 (05:00~07:00)</option>
+<option value="8">진시 (07:00~09:00)</option>
+<option value="10">사시 (09:00~11:00)</option>
+<option value="12">오시 (11:00~13:00)</option>
+<option value="14">미시 (13:00~15:00)</option>
+<option value="16">신시 (15:00~17:00)</option>
+<option value="18">유시 (17:00~19:00)</option>
+<option value="20">술시 (19:00~21:00)</option>
+<option value="22">해시 (21:00~23:00)</option>
+</select>
+</div>
+<div class="form-row">
+<label>성별</label>
+<div class="gender-row">
+<label class="gender-btn" data-g="M"><input type="radio" name="b-gender" value="M">남성</label>
+<label class="gender-btn selected" data-g="F"><input type="radio" name="b-gender" value="F" checked>여성</label>
+</div>
+</div>
+</div>
+
+<div class="form-row" style="margin-top:18px;">
+<label for="user-email">결제 이메일 (잠금 해제용)</label>
+<input type="email" id="user-email" placeholder="결제하신 이메일을 입력해 주세요">
+<div style="font-size:0.74rem;color:var(--text2);margin-top:4px;line-height:1.5;">
+미결제 시 점수 미리보기만 보이며, 결제 후 입력하면 풀 분석이 잠금 해제됩니다.
+</div>
+</div>
+
+<button class="btn-analyze" id="btn-analyze" type="button">궁합 분석 시작</button>
+</div>
+
+<!-- 2. 로딩 -->
+<div class="card hidden" id="loading-card">
+<div class="loading">
+<div class="loading-spinner"></div>
+<div>두 사주를 풀이하고 있습니다...</div>
+</div>
+</div>
+
+<!-- 3. 결과 -->
+<div id="result-area"></div>
+
+<div class="footnote">
+명리학 기반 정밀 분석 · 결과는 참고용으로만 활용해 주세요.<br>
+<a href="./pay.html?sku=compat_detail_9900">결제하기</a> · <a href="./">천명당 홈으로</a>
+</div>
+</div>
+
+<script>
+(function() {
+'use strict';
+
+// ─── 성별 버튼 토글 ──────────────────────
+document.querySelectorAll('.gender-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var name = btn.querySelector('input').name;
+    document.querySelectorAll('.gender-btn').forEach(function(b) {
+      if (b.querySelector('input').name === name) b.classList.remove('selected');
+    });
+    btn.classList.add('selected');
+    btn.querySelector('input').checked = true;
+  });
+});
+
+// ─── localStorage prefill ───────────────
+function loadPrefill() {
+  try {
+    var u = JSON.parse(localStorage.getItem('cm_user_info') || '{}');
+    if (u.email) document.getElementById('user-email').value = u.email;
+    if (u.birth) document.getElementById('a-birth').value = u.birth;
+    if (u.hour && u.hour !== '-1') document.getElementById('a-hour').value = u.hour;
+    if (u.gender) {
+      document.querySelectorAll('input[name="a-gender"]').forEach(function(r) {
+        r.checked = (r.value === u.gender);
+        var p = r.closest('.gender-btn');
+        if (p) p.classList.toggle('selected', r.checked);
+      });
+    }
+    if (u.name) document.getElementById('a-name').value = u.name;
+    // 궁합 섹션에서 입력한 상대 정보가 있으면 prefill
+    var c = JSON.parse(localStorage.getItem('cm_compat_partner') || '{}');
+    if (c.birth) document.getElementById('b-birth').value = c.birth;
+    if (c.hour && c.hour !== '-1') document.getElementById('b-hour').value = c.hour;
+    if (c.gender) {
+      document.querySelectorAll('input[name="b-gender"]').forEach(function(r) {
+        r.checked = (r.value === c.gender);
+        var p = r.closest('.gender-btn');
+        if (p) p.classList.toggle('selected', r.checked);
+      });
+    }
+    if (c.name) document.getElementById('b-name').value = c.name;
+  } catch (e) {}
+}
+
+// URL ?email=... ?paid=1 등 파라미터 처리
+function loadQueryParams() {
+  var qs = new URLSearchParams(window.location.search);
+  var em = qs.get('email');
+  if (em) document.getElementById('user-email').value = em;
+  // 결제 직후 success.html에서 redirect 시 자동 분석 실행
+  if (qs.get('auto') === '1') {
+    setTimeout(runAnalysis, 200);
+  }
+}
+
+loadPrefill();
+loadQueryParams();
+
+// ─── 분석 호출 ──────────────────────────
+function getSelectedGender(name) {
+  var sel = document.querySelector('input[name="' + name + '"]:checked');
+  return sel ? sel.value : 'M';
+}
+
+function getPersonInput(prefix) {
+  var birth = document.getElementById(prefix + '-birth').value;
+  if (!birth) return null;
+  var parts = birth.split('-');
+  return {
+    name: document.getElementById(prefix + '-name').value.trim(),
+    year: parseInt(parts[0], 10),
+    month: parseInt(parts[1], 10),
+    day: parseInt(parts[2], 10),
+    hour: parseInt(document.getElementById(prefix + '-hour').value, 10),
+    gender: getSelectedGender(prefix + '-gender'),
+  };
+}
+
+function showError(msg) {
+  var area = document.getElementById('result-area');
+  area.innerHTML = '<div class="card"><div class="error-banner">' + escapeHtml(msg) + '</div></div>';
+}
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+
+async function runAnalysis() {
+  var pA = getPersonInput('a');
+  var pB = getPersonInput('b');
+  if (!pA) { showError('본인의 생년월일을 입력해 주세요'); return; }
+  if (!pB) { showError('상대방의 생년월일을 입력해 주세요'); return; }
+
+  var email = document.getElementById('user-email').value.trim().toLowerCase();
+  // 상대 정보 캐시 (재방문 시 prefill)
+  try {
+    localStorage.setItem('cm_compat_partner', JSON.stringify({
+      birth: document.getElementById('b-birth').value,
+      hour: document.getElementById('b-hour').value,
+      gender: pB.gender,
+      name: pB.name,
+    }));
+  } catch (e) {}
+
+  document.getElementById('form-card').classList.add('hidden');
+  document.getElementById('loading-card').classList.remove('hidden');
+  document.getElementById('result-area').innerHTML = '';
+
+  // GA4 event
+  try {
+    if (typeof gtag === 'function') {
+      gtag('event', 'compat_analyze_start', { has_email: !!email });
+    }
+  } catch (_) {}
+
+  var payload = {
+    personA: { year: pA.year, month: pA.month, day: pA.day, hour: pA.hour, gender: pA.gender },
+    personB: { year: pB.year, month: pB.month, day: pB.day, hour: pB.hour, gender: pB.gender },
+  };
+  if (email) payload.email = email;
+  else payload.preview = true;
+
+  try {
+    var resp = await fetch('/api/compat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    var data = await resp.json();
+    document.getElementById('loading-card').classList.add('hidden');
+
+    if (resp.status === 402 || (data && data.needsPayment)) {
+      renderPaywall(data, pA, pB);
+      return;
+    }
+    if (!resp.ok || !data || !data.ok) {
+      showError((data && data.error) || ('서버 오류 (' + resp.status + ')'));
+      document.getElementById('form-card').classList.remove('hidden');
+      return;
+    }
+    if (data.paid && data.result) {
+      renderFullResult(data.result, pA, pB);
+    } else if (data.preview) {
+      renderPreviewOnly(data, pA, pB);
+    }
+  } catch (err) {
+    document.getElementById('loading-card').classList.add('hidden');
+    document.getElementById('form-card').classList.remove('hidden');
+    showError('네트워크 오류: ' + (err.message || err));
+  }
+}
+
+document.getElementById('btn-analyze').addEventListener('click', runAnalysis);
+
+// ─── 렌더링 ─────────────────────────────
+var ELEM_COLORS = { '목':'#4caf50', '화':'#ef5350', '토':'#ffb74d', '금':'#bdbdbd', '수':'#42a5f5' };
+
+function renderScoreHero(scores, headline, nameA, nameB) {
+  var s = scores.overall;
+  var color = s >= 85 ? '#ff8c42' : s >= 70 ? '#f9c846' : s >= 55 ? '#c9a84c' : '#8a7d4f';
+  var html = '<div class="score-hero">';
+  html += '<div class="label">COMPATIBILITY SCORE</div>';
+  html += '<div class="pair">' + escapeHtml(nameA) + ' <span style="color:var(--text2)">&times;</span> ' + escapeHtml(nameB) + '</div>';
+  html += '<div><span class="num" style="color:' + color + '">' + s + '</span><span class="unit">점</span></div>';
+  html += '<div class="headline">' + escapeHtml(headline) + '</div>';
+  html += '</div>';
+  return html;
+}
+
+function renderScoreGrid(scores) {
+  var html = '<div class="score-grid">';
+  html += '<div class="score-tile"><div class="label">일간 궁합</div><div class="value">' + scores.ilgan + '</div></div>';
+  html += '<div class="score-tile"><div class="label">합/충 작용</div><div class="value">' + scores.interaction + '</div></div>';
+  html += '<div class="score-tile"><div class="label">오행 균형</div><div class="value">' + scores.balance + '</div></div>';
+  html += '</div>';
+  return html;
+}
+
+function renderIlganBlock(persons, ilganNotes) {
+  var html = '<div class="card">';
+  html += '<h2>일간(日干) 분석</h2>';
+  html += '<div style="display:flex;gap:16px;justify-content:space-around;margin-bottom:16px;flex-wrap:wrap;">';
+  ['A','B'].forEach(function(k) {
+    var p = persons[k];
+    html += '<div style="text-align:center;flex:1;min-width:120px;">';
+    html += '<div style="font-size:0.74rem;color:var(--text2);">' + (k === 'A' ? '본인' : '상대방') + '</div>';
+    html += '<div style="font-family:Noto Serif KR,serif;font-size:2rem;color:var(--gold2);margin:6px 0;">' + p.ilgan.hanja + '</div>';
+    html += '<div style="font-size:0.84rem;color:var(--gold2);">' + p.ilgan.kr + '(' + p.ilgan.element + '·' + p.ilgan.yinyang + ')</div>';
+    html += '<div style="font-size:0.7rem;color:var(--text2);margin-top:4px;">' + p.saju + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '<ul class="note-list">';
+  ilganNotes.forEach(function(n) { html += '<li>' + escapeHtml(n) + '</li>'; });
+  html += '</ul>';
+  html += '</div>';
+  return html;
+}
+
+function renderInteractions(stem, branch) {
+  var html = '<div class="card">';
+  html += '<h2>합(合) · 충(冲) 분석</h2>';
+  // 합
+  if (stem.hap.length || branch.hap.length) {
+    html += '<div style="margin-bottom:14px;">';
+    html += '<div style="font-size:0.84rem;color:var(--jade);font-weight:700;margin-bottom:8px;">길한 합 (' + (stem.hap.length + branch.hap.length) + '건)</div>';
+    stem.hap.forEach(function(h) {
+      html += '<span class="tag tag-hap">' + h.from + '+' + h.to + ' → ' + h.elementHanja + ' (' + h.name + ')</span>';
+    });
+    branch.hap.forEach(function(h) {
+      html += '<span class="tag tag-hap">' + h.from + '+' + h.to + ' → ' + h.elementHanja + ' (' + h.name + ')</span>';
+    });
+    html += '</div>';
+  }
+  // 충
+  if (stem.chung.length || branch.chung.length) {
+    html += '<div>';
+    html += '<div style="font-size:0.84rem;color:var(--crimson);font-weight:700;margin-bottom:8px;">충 작용 (' + (stem.chung.length + branch.chung.length) + '건)</div>';
+    stem.chung.forEach(function(c) {
+      html += '<span class="tag tag-chung">' + c.from + '↔' + c.to + ' (' + c.name + (c.severity === 'half' ? ' 반흉' : '') + ')</span>';
+    });
+    branch.chung.forEach(function(c) {
+      html += '<span class="tag tag-chung">' + c.from + '↔' + c.to + ' (' + c.name + ')</span>';
+    });
+    html += '</div>';
+  }
+  if (!stem.hap.length && !branch.hap.length && !stem.chung.length && !branch.chung.length) {
+    html += '<p style="color:var(--text2);font-size:0.88rem;">두 사주 사이에 큰 합·충 작용은 없습니다. 안정적이고 평이한 관계입니다.</p>';
+  }
+  html += '</div>';
+  return html;
+}
+
+function renderBalance(balance, nameA, nameB) {
+  var html = '<div class="card">';
+  html += '<h2>오행 균형 비교</h2>';
+  html += '<div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text2);margin-bottom:8px;">';
+  html += '<span>← ' + escapeHtml(nameA) + '</span><span>' + escapeHtml(nameB) + ' →</span></div>';
+  ['목','화','토','금','수'].forEach(function(oh) {
+    var aCount = balance.aOnly[oh] || 0;
+    var bCount = balance.bOnly[oh] || 0;
+    var max = 8; // 한 사람 최대 8자
+    var aPct = Math.round(aCount / max * 50); // 막대는 좌우 50%까지
+    var bPct = Math.round(bCount / max * 50);
+    var color = ELEM_COLORS[oh];
+    html += '<div class="elem-row">';
+    html += '<div class="a">' + aCount + '</div>';
+    html += '<div class="elem-bar">';
+    html += '<div class="a-fill" style="right:50%;width:' + aPct + '%;background:linear-gradient(to left,' + color + ',' + color + 'aa);"></div>';
+    html += '<div class="b-fill" style="left:50%;width:' + bPct + '%;background:linear-gradient(to right,' + color + 'aa,' + color + ');"></div>';
+    html += '<div class="center"></div>';
+    html += '<div class="name" style="color:' + color + '">' + oh + '</div>';
+    html += '</div>';
+    html += '<div class="b">' + bCount + '</div>';
+    html += '</div>';
+  });
+  html += '<div style="margin-top:14px;padding:12px;background:rgba(0,0,0,0.25);border-radius:8px;font-size:0.86rem;line-height:1.7;">';
+  html += '균형 점수: <strong style="color:var(--gold2);">' + balance.balanceScore + '점</strong> · ';
+  html += '두 분 합산 우세 오행: <strong style="color:var(--gold2);">' + balance.dominantElement + '</strong> · ';
+  html += '약한 오행: <strong style="color:var(--gold2);">' + balance.weakestElement + '</strong>';
+  if (balance.complementAByB > 0 || balance.complementBByA > 0) {
+    html += '<br>오행 보완: ' + escapeHtml(nameB) + '님이 ' + balance.complementAByB + '곳, ' + escapeHtml(nameA) + '님이 ' + balance.complementBByA + '곳';
+  }
+  html += '</div>';
+  html += '</div>';
+  return html;
+}
+
+function renderSummary(summary) {
+  var html = '<div class="card" style="border-color:var(--rose);">';
+  html += '<h2 style="color:var(--rose);">종합 코멘트 · 추천 행동</h2>';
+  if (summary.advice && summary.advice.length) {
+    html += '<ul class="note-list">';
+    summary.advice.forEach(function(t) { html += '<li>' + escapeHtml(t) + '</li>'; });
+    html += '</ul>';
+  }
+  html += '<h2 style="color:var(--rose);margin-top:16px;border-top:1px solid var(--border);padding-top:14px;">주의사항</h2>';
+  html += '<ul class="note-list">';
+  summary.cautions.forEach(function(t) { html += '<li>' + escapeHtml(t) + '</li>'; });
+  html += '</ul>';
+  html += '</div>';
+  return html;
+}
+
+function renderFullResult(result, inputA, inputB) {
+  var nameA = inputA.name || '본인';
+  var nameB = inputB.name || '상대방';
+  // server result.personA/B에 ilgan 객체가 들어있음
+  var persons = { A: result.personA, B: result.personB };
+
+  var html = '';
+  html += renderScoreHero(result.scores, result.summary.headline, nameA, nameB);
+  html += renderScoreGrid(result.scores);
+  html += renderIlganBlock(persons, result.ilganAnalysis.notes);
+  html += renderInteractions(result.stemInteractions, result.branchInteractions);
+  html += renderBalance(result.elementBalance, nameA, nameB);
+  html += renderSummary(result.summary);
+
+  // 다른 사람과 분석하기 버튼
+  html += '<div style="text-align:center;margin-top:18px;">';
+  html += '<button class="btn-pay" onclick="location.reload()" style="background:transparent;border:1px solid var(--gold);color:var(--gold2);">다른 사람과 분석하기</button>';
+  html += '</div>';
+
+  document.getElementById('result-area').innerHTML = html;
+  document.getElementById('result-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // GA4 — 결제 후 풀 결과 도달
+  try {
+    if (typeof gtag === 'function') {
+      gtag('event', 'compat_full_result', {
+        score: result.scores.overall,
+        ilgan: result.scores.ilgan,
+      });
+    }
+  } catch (_) {}
+}
+
+function renderPreviewOnly(data, inputA, inputB) {
+  var nameA = inputA.name || '본인';
+  var nameB = inputB.name || '상대방';
+  var sku = data.sku || { id: 'compat_detail_9900', name: '궁합', amount: 9900 };
+  var p = data.preview;
+
+  var html = '';
+  html += renderScoreHero(p.scores, p.headline, nameA, nameB);
+  html += renderScoreGrid(p.scores);
+
+  // upsell
+  html += '<div class="card upsell">';
+  html += '<div style="font-size:0.78rem;color:var(--gold);letter-spacing:0.18em;font-weight:800;">PREMIUM UNLOCK</div>';
+  html += '<h2 style="color:var(--gold2);border:none;padding:0;margin:8px 0 6px;font-size:1.15rem;">상세 분석을 잠금 해제하세요</h2>';
+  html += '<p style="color:var(--text2);font-size:0.88rem;line-height:1.7;">합·충 12종, 일간 궁합 노트, 오행 균형 차트, 6개 영역별 코멘트 + 주의사항 풀 리포트</p>';
+  html += '<div class="price">₩' + sku.amount.toLocaleString('ko-KR') + '</div>';
+  html += '<a class="btn-pay" href="/pay.html?sku=' + sku.id + '">' + sku.name + ' 결제하기</a>';
+  html += '<div style="margin-top:14px;font-size:0.76rem;color:var(--text2);">결제 후 같은 이메일을 위 폼에 입력하면 즉시 잠금 해제됩니다</div>';
+  html += '</div>';
+
+  // 다시 입력
+  html += '<div style="text-align:center;margin-top:18px;">';
+  html += '<button class="btn-pay" onclick="location.reload()" style="background:transparent;border:1px solid var(--gold);color:var(--gold2);">다른 사람과 분석하기</button>';
+  html += '</div>';
+
+  document.getElementById('result-area').innerHTML = html;
+  document.getElementById('result-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  try {
+    if (typeof gtag === 'function') {
+      gtag('event', 'compat_preview_view', { score: p.scores.overall });
+    }
+  } catch (_) {}
+}
+
+function renderPaywall(data, inputA, inputB) {
+  // 402 응답: preview + 결제 안내
+  if (data && data.preview) {
+    renderPreviewOnly({ preview: data.preview, sku: data.sku }, inputA, inputB);
+    return;
+  }
+  var sku = (data && data.sku) || { id: 'compat_detail_9900', name: '궁합', amount: 9900 };
+  var html = '<div class="card upsell">';
+  html += '<h2 style="border:none;padding:0;color:var(--gold2);">결제가 필요합니다</h2>';
+  html += '<p style="color:var(--text2);margin-top:10px;">' + escapeHtml((data && data.error) || '궁합 상세 분석은 ₩9,900 결제 후 이용 가능합니다') + '</p>';
+  html += '<div class="price">₩' + sku.amount.toLocaleString('ko-KR') + '</div>';
+  html += '<a class="btn-pay" href="/pay.html?sku=' + sku.id + '">' + sku.name + ' 결제하기</a>';
+  html += '</div>';
+  document.getElementById('result-area').innerHTML = html;
+  document.getElementById('form-card').classList.remove('hidden');
+}
+
+})();
+</script>
+</body>
+</html>
