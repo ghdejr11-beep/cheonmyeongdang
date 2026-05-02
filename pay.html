@@ -402,7 +402,7 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
  var div = document.createElement('div');
  div.className = 'sku';
  div.dataset.skuId = sku.id;
- var typeBadge = sku.type === 'subscription' ? '<span class="sku-badge">월구독</span>' : '';
+ var typeBadge = sku.type === 'subscription' ? '<span class="sku-badge">월구독</span>' : (sku.type === 'ebook' ? '<span class="sku-badge" style="background:rgba(74,158,142,0.18);color:#7fc8b6;">📘 PDF 즉시</span>' : '');
  var policyNote = SKU_POLICY_NOTE[sku.id]
  ? '<div class="sku-policy" style="margin-top:6px;font-size:0.78rem;line-height:1.55;color:var(--gold2);background:rgba(201,168,76,0.06);border-left:2px solid var(--gold);padding:6px 8px;border-radius:4px;">' + SKU_POLICY_NOTE[sku.id] + '</div>'
  : '';
