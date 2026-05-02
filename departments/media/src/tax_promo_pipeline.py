@@ -58,8 +58,27 @@ LOG_FILE = LOG_DIR / "tax_promo.log"
 FFMPEG = r"C:\Users\hdh02\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.1-full_build\bin\ffmpeg.exe"
 
 LANDING = "https://tax-n-benefit-api.vercel.app"
-HASHTAGS_BASE = "#종합소득세 #종소세 #환급 #삼쩜삼 #토스인컴 #프리랜서 #N잡러 #5월마감"
+HASHTAGS_BASE = "#종합소득세 #종소세 #환급 #프리랜서 #N잡러 #5월마감"
 LEGAL_NOTE = "광고 · 세금N혜택 마케팅"
+
+# 광고/홍보에 거론 금지 — 시비/소송 RISK (사용자 규칙 5/1)
+# 본인 제품(천명당/세금N혜택 등)은 OK. 타사 실명만 차단.
+FORBIDDEN_BRANDS = (
+    "삼쩜삼", "자비스", "트리플3", "쎈택스", "토스인컴",
+    "Samsung", "BTS", "Squid Game",
+)
+
+
+def assert_no_forbidden(text: str, label: str = "content") -> None:
+    """발행 직전 호출. 금지어 발견 시 raise → schtask 중단."""
+    if not text:
+        return
+    found = [b for b in FORBIDDEN_BRANDS if b in text]
+    if found:
+        raise RuntimeError(
+            f"[GUARD] forbidden brand in {label}: {found}. "
+            f"see CLAUDE.md feedback_no_specific_company_names rule."
+        )
 
 
 # ───────── secrets ─────────
@@ -94,8 +113,8 @@ def log(msg: str) -> None:
 CONTENT = [
     {
         "id": "shorts1_price",
-        "title": "삼쩜삼 수수료 20%? 9.9%로 절반에 끝내세요",
-        "hook": "삼쩜삼 수수료\n환급액의 20%",
+        "title": "타 환급 서비스 수수료 20%? 9.9%로 절반에 끝내세요",
+        "hook": "타 환급 서비스 수수료\n환급액의 20%",
         "body_lines": [
             "환급 30만원이면",
             "수수료만 6만원",
@@ -108,14 +127,14 @@ CONTENT = [
         ],
         "cta": "tax-n-benefit-api.vercel.app",
         "scenes": [
-            {"prompt": "korean money won banknotes flying mid-air, dramatic blue lighting, photorealistic, 9:16, vertical composition", "subtitle": "삼쩜삼 수수료 20%"},
+            {"prompt": "korean money won banknotes flying mid-air, dramatic blue lighting, photorealistic, 9:16, vertical composition", "subtitle": "타 환급 서비스 수수료 20%"},
             {"prompt": "korean freelancer surprised face looking at smartphone, expressive shock, kdrama style, 9:16 vertical", "subtitle": "환급 30만원이면 6만원"},
             {"prompt": "minimal infographic comparing 20% vs 9.9% percentage chart, clean white background, korean fintech style, 9:16", "subtitle": "세금N혜택은 9.9%"},
             {"prompt": "korean smartphone screen showing tax refund app interface, modern UI, blue accent, 9:16 vertical", "subtitle": "30만원이면 2.97만원"},
             {"prompt": "happy korean person holding cash celebrating savings, warm sunlight, candid style, 9:16 vertical", "subtitle": "절반 이하의 비용"},
         ],
-        "caption_x": "삼쩜삼 수수료 20% 너무 비싸지 않나요?\n\n세금N혜택은 9.9%\n환급 30만원이면 약 3만원 수수료로 끝.\n\n5월 31일 종합소득세 마감 임박.\n👉 tax-n-benefit-api.vercel.app",
-        "caption_long": "삼쩜삼 수수료 부담스러우셨죠?\n\n환급액의 20%, 30만원 환급이면 수수료만 6만원입니다.\n세금N혜택은 9.9% — 30만원 환급 시 약 2.97만원.\n절반 이하 비용으로 동일한 환급 서비스를 이용하실 수 있습니다.\n\n프리랜서·N잡러·크리에이터 모두 가능.\n5월 31일 종합소득세 신고 마감까지 D-DAY 카운트다운 중.\n\n무료 환급액 조회 → tax-n-benefit-api.vercel.app\n\n" + LEGAL_NOTE + "\n\n" + HASHTAGS_BASE + " #수수료비교 #절세",
+        "caption_x": "타 환급 서비스 수수료 20% 너무 비싸지 않나요?\n\n세금N혜택은 9.9%\n환급 30만원이면 약 3만원 수수료로 끝.\n\n5월 31일 종합소득세 마감 임박.\n👉 tax-n-benefit-api.vercel.app",
+        "caption_long": "타 환급 서비스 수수료 부담스러우셨죠?\n\n환급액의 20%, 30만원 환급이면 수수료만 6만원입니다.\n세금N혜택은 9.9% — 30만원 환급 시 약 2.97만원.\n절반 이하 비용으로 동일한 환급 서비스를 이용하실 수 있습니다.\n\n프리랜서·N잡러·크리에이터 모두 가능.\n5월 31일 종합소득세 신고 마감까지 D-DAY 카운트다운 중.\n\n무료 환급액 조회 → tax-n-benefit-api.vercel.app\n\n" + LEGAL_NOTE + "\n\n" + HASHTAGS_BASE + " #수수료비교 #절세",
     },
     {
         "id": "shorts2_refund",
@@ -722,6 +741,9 @@ def post_today() -> dict:
         return {"error": str(e)}
 
     text = target["caption_long"]
+    # GUARD: 금지된 타사 실명 발견 시 발행 차단 (사용자 규칙 5/1)
+    assert_no_forbidden(text, label=f"caption_long({target['id']})")
+    assert_no_forbidden(target.get("caption_x", ""), label=f"caption_x({target['id']})")
     img_url = None
     if target["type"] == "cards":
         # 카드뉴스 첫 슬라이드를 IG 이미지로 사용
