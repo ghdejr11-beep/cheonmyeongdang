@@ -185,15 +185,32 @@
  // - 토스: ?paymentKey=...&orderId=...&amount=...&provider=toss
  // - 포트원 V2: ?paymentId=...&txId=...&orderId=...&amount=...&provider=portone-...
  //   (포트원은 redirect 시 paymentId 쿼리를 자동 추가 — txId는 PG 트랜잭션ID)
+ // - PayPal: ?orderID=...&sku=...&provider=paypal&payerEmail=...
+ //   (PayPal은 클라이언트에서 capture 후 서버측 GET orders/{id}로 위변조 검증)
  var params = new URLSearchParams(window.location.search);
  var provider = params.get('provider') || 'toss';
- var paymentKey = params.get('paymentKey') || params.get('paymentId') || '';
- var orderId = params.get('orderId');
- var amount = params.get('amount');
- var skuId = params.get('skuId') || '';
 
  // localStorage에서 주문 정보 로드
  var orderData = JSON.parse(localStorage.getItem('cm_current_order') || '{}');
+
+ var paymentKey, orderId, amount, skuId;
+ if (provider === 'paypal') {
+   // PayPal: orderID 단일 식별자, KRW amount는 localStorage에서 보강
+   var paypalOrderId = params.get('orderID') || '';
+   paymentKey = paypalOrderId;
+   orderId = paypalOrderId;
+   amount = orderData.amount ? String(orderData.amount) : '';
+   skuId = params.get('sku') || orderData.skuId || '';
+   // payerEmail을 customerEmail 로 사용 (orderData.email이 비어있을 때)
+   if (!orderData.email && params.get('payerEmail')) {
+     orderData.email = params.get('payerEmail');
+   }
+ } else {
+   paymentKey = params.get('paymentKey') || params.get('paymentId') || '';
+   orderId = params.get('orderId');
+   amount = params.get('amount');
+   skuId = params.get('skuId') || '';
+ }
 
  // GA4 purchase 이벤트 (캠페인별 ROI 추적) — 중복 방지
  try {
