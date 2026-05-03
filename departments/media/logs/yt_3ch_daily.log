@@ -396,3 +396,63 @@
 2026-05-01 06:00:20,753 [INFO]   script: 7015 chars (~1078 words)
 2026-05-01 06:02:39,159 [INFO]   voice: edge-tts → mbti_entj.mp3
 2026-05-01 06:02:39,160 [INFO]   image 1/6: ENTJ Commander archetype mood, abstract symbolic figure...
+2026-05-02 04:00:02,306 [INFO] === Wealth Blueprint | quote=Richard Feynman theme=mindset dry_run=False ===
+2026-05-02 04:00:05,968 [INFO]   script: 1033 chars
+2026-05-02 04:00:10,587 [INFO]   voice: edge-tts → mindset_2026-05-02.mp3
+2026-05-02 04:00:10,588 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-05-02 04:00:12,244 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-05-02 04:01:42,219 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-05-02 04:03:12,110 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-05-02 04:04:42,029 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-05-02 04:06:15,413 [INFO]   clip 1/5 602KB
+2026-05-02 04:06:17,074 [INFO]   clip 2/5 538KB
+2026-05-02 04:06:18,716 [INFO]   clip 3/5 515KB
+2026-05-02 04:06:20,348 [INFO]   clip 4/5 537KB
+2026-05-02 04:06:22,018 [INFO]   clip 5/5 578KB
+2026-05-02 04:06:22,018 [INFO]   render → mindset_2026-05-02.mp4
+2026-05-02 04:06:23,221 [INFO]   size: 3.37 MB
+2026-05-02 04:06:32,361 [INFO] upload wealth_blueprint attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'y45gOMJgSVE', 'url': 'https://www.youtube.com/watch?v=y45gOMJgSVE', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-02 04:06:32,361 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'y45gOMJgSVE', 'url': 'https://www.youtube.com/watch?v=y45gOMJgSVE', ')
+2026-05-02 04:06:32,362 [INFO] === Wealth Blueprint done ===
+2026-05-02 16:00:02,788 [INFO] === Wealth Blueprint | quote=Richard Feynman theme=mindset dry_run=False ===
+2026-05-02 16:00:06,551 [INFO]   script: 1042 chars
+2026-05-02 16:00:13,163 [INFO]   voice: edge-tts → mindset_2026-05-02.mp3
+2026-05-02 16:00:13,164 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-05-02 16:00:13,165 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-05-02 16:00:13,166 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-05-02 16:00:13,167 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-05-02 16:00:13,168 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-05-02 16:00:16,529 [INFO]   clip 1/5 602KB
+2026-05-02 16:00:19,196 [INFO]   clip 2/5 538KB
+2026-05-02 16:00:21,902 [INFO]   clip 3/5 515KB
+2026-05-02 16:00:24,606 [INFO]   clip 4/5 537KB
+2026-05-02 16:00:27,049 [INFO]   clip 5/5 578KB
+2026-05-02 16:00:27,050 [INFO]   render → mindset_2026-05-02.mp4
+2026-05-02 16:00:28,454 [INFO]   size: 3.39 MB
+2026-05-02 16:00:48,368 [INFO] upload wealth_blueprint attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'Msnniia8Q2Y', 'url': 'https://www.youtube.com/watch?v=Msnniia8Q2Y', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-02 16:00:48,368 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'Msnniia8Q2Y', 'url': 'https://www.youtube.com/watch?v=Msnniia8Q2Y', ')
+2026-05-02 16:00:48,369 [INFO] === Wealth Blueprint done ===
+2026-05-03 04:00:02,470 [INFO] === Wealth Blueprint | quote=John C. Maxwell theme=habits dry_run=False ===
+2026-05-03 04:00:05,658 [INFO]   script: 930 chars
+2026-05-03 04:00:10,911 [INFO]   voice: edge-tts → habits_2026-05-03.mp3
+2026-05-03 04:00:10,912 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-05-03 04:00:12,613 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-05-03 04:01:41,968 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-05-03 04:03:12,106 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-05-03 04:04:42,273 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-05-03 04:06:14,810 [INFO]   clip 1/5 553KB
+2026-05-03 04:06:16,661 [INFO]   clip 2/5 541KB
+2026-05-03 04:06:18,518 [INFO]   clip 3/5 520KB
+2026-05-03 04:06:20,376 [INFO]   clip 4/5 540KB
+2026-05-03 04:06:22,210 [INFO]   clip 5/5 446KB
+2026-05-03 04:06:22,210 [INFO]   render → habits_2026-05-03.mp4
+2026-05-03 04:06:23,406 [INFO]   size: 3.17 MB
+2026-05-03 04:06:31,501 [INFO] upload wealth_blueprint attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'cO3Bf9A3KsQ', 'url': 'https://www.youtube.com/watch?v=cO3Bf9A3KsQ', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-03 04:06:31,502 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'cO3Bf9A3KsQ', 'url': 'https://www.youtube.com/watch?v=cO3Bf9A3KsQ', ')
+2026-05-03 04:06:31,502 [INFO] === Wealth Blueprint done ===
+2026-05-03 08:30:40,311 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'QZ2FtUGcvl0', 'url': 'https://www.youtube.com/watch?v=QZ2FtUGcvl0', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-03 08:32:10,087 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'l95Dno3HpCw', 'url': 'https://www.youtube.com/watch?v=l95Dno3HpCw', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-03 08:33:37,691 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'unqv8jjfh2I', 'url': 'https://www.youtube.com/watch?v=unqv8jjfh2I', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-03 08:35:09,357 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': '9vklRB_PUIU', 'url': 'https://www.youtube.com/watch?v=9vklRB_PUIU', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-03 08:36:39,733 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'gKPN4Auj8WY', 'url': 'https://www.youtube.com/watch?v=gKPN4Auj8WY', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-03 08:38:10,011 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'QL1m-H90QXc', 'url': 'https://www.youtube.com/watch?v=QL1m-H90QXc', 'video_was_transcoded': False, 'changes': [], 'prevalidation_

@@ -89,5 +89,31 @@
     "net_usd": 0.0,
     "by_product": {},
     "by_currency": {}
+  },
+  "2026-05-01": {
+    "date": "2026-05-01",
+    "status": "ok",
+    "total_sales_count": 0,
+    "total_amount_cents": 0,
+    "total_amount_usd": 0.0,
+    "refund_count": 0,
+    "refund_amount_cents": 0,
+    "refund_amount_usd": 0.0,
+    "net_usd": 0.0,
+    "by_product": {},
+    "by_currency": {}
+  },
+  "2026-05-02": {
+    "date": "2026-05-02",
+    "status": "ok",
+    "total_sales_count": 0,
+    "total_amount_cents": 0,
+    "total_amount_usd": 0.0,
+    "refund_count": 0,
+    "refund_amount_cents": 0,
+    "refund_amount_usd": 0.0,
+    "net_usd": 0.0,
+    "by_product": {},
+    "by_currency": {}
   }
 }

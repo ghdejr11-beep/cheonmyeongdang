@@ -11,6 +11,7 @@
     # {'bluesky': True, 'discord': True, 'mastodon': True, 'reddit': False}
 """
 import os
+import re
 import json
 import urllib.request
 import urllib.error
@@ -29,6 +30,19 @@ def _load_secrets():
                 k, v = line.strip().split('=', 1)
                 env[k] = v
     return env
+
+
+def redact_phone(text):
+    """SNS/외부 자동 송출 전 사용자 전화번호 마스킹.
+
+    070-8018-7832 → 070-****-****
+    010-4244-6992 → 010-****-****
+    구분자(- . space) 모두 대응. 고객 입력 전화번호는 영향 없음 (정확히 두 번호만 매칭)."""
+    if not text:
+        return text
+    text = re.sub(r'070[\s\-\.]?8018[\s\-\.]?7832', '070-****-****', text)
+    text = re.sub(r'010[\s\-\.]?4244[\s\-\.]?6992', '010-****-****', text)
+    return text
 
 
 def _http(method, url, headers=None, body=None, timeout=20):
@@ -60,6 +74,7 @@ def _http(method, url, headers=None, body=None, timeout=20):
 
 # ───────── Bluesky ─────────
 def post_bluesky(text, env=None):
+    text = redact_phone(text)
     env = env or _load_secrets()
     handle = env.get('BLUESKY_HANDLE', '').strip()
     pw = env.get('BLUESKY_APP_PASSWORD', '').strip()
@@ -89,6 +104,7 @@ def post_bluesky(text, env=None):
 
 # ───────── Discord webhook ─────────
 def post_discord(text, env=None):
+    text = redact_phone(text)
     env = env or _load_secrets()
     url = env.get('DISCORD_WEBHOOK_URL', '').strip()
     if not url:
@@ -99,6 +115,7 @@ def post_discord(text, env=None):
 
 # ───────── Mastodon ─────────
 def post_mastodon(text, env=None):
+    text = redact_phone(text)
     env = env or _load_secrets()
     base = env.get('MASTODON_URL', '').rstrip('/')
     token = env.get('MASTODON_TOKEN', '').strip()
@@ -118,6 +135,7 @@ def post_threads(text, env=None):
     if not tok:
         return False, 'no THREADS_ACCESS_TOKEN'
 
+    text = redact_phone(text)
     s1, r1 = _http('POST', 'https://graph.threads.net/v1.0/me/threads',
                    body=urllib.parse.urlencode({
                        'media_type': 'TEXT',
@@ -296,6 +314,7 @@ def post_instagram(text, image_url=None, env=None, max_retry=2):
         return False, 'no IG_USER_ID/ACCESS_TOKEN'
     if not image_url:
         return False, 'IG requires image_url (skipped)'
+    text = redact_phone(text)
 
     # 1) 로컬 파일이면 자동 호스팅
     ok_host, hosted_url = host_image(image_url, env)
@@ -356,6 +375,7 @@ def post_x(text, env=None):
     ats = env.get('X_ACCESS_SECRET', '').strip() or env.get('X_ACCESS_TOKEN_SECRET', '').strip()
     if not all([ck, cs, at, ats]):
         return False, 'no X_* keys'
+    text = redact_phone(text)
     try:
         import tweepy
     except ImportError:
@@ -377,6 +397,8 @@ def post_reddit(title, text, subreddit, env=None):
     pw = env.get('REDDIT_PASSWORD', '').strip()
     if not all([cid, csec, user, pw]):
         return False, 'no REDDIT_* keys'
+    title = redact_phone(title)
+    text = redact_phone(text)
 
     auth_raw = f'{cid}:{csec}'
     import base64

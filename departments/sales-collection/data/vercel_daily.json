@@ -166,5 +166,73 @@
         "error": "HTTP 404: {\"error\":{\"code\":\"not_found\",\"message\":\"Project not found\"}}"
       }
     }
+  },
+  "2026-05-01": {
+    "date": "2026-05-01",
+    "status": "ok",
+    "analytics_source": "placeholder",
+    "note": "Vercel Web Analytics 는 공식 REST API 미지원 — PV/UV 는 placeholder. Drain 설정 시 VERCEL_ANALYTICS_DRAIN_PATH 로 자동 주입",
+    "projects": {
+      "tax-n-benefit-api": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": null
+      },
+      "korlens": {
+        "deployments_24h": 2,
+        "last_deployment": {
+          "state": "READY",
+          "created_at": "2026-05-01T08:20:51.940000+00:00",
+          "url": "korlens-gfo5nzf4k-kunstudio.vercel.app"
+        },
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": null
+      },
+      "cheonmyeongdang.com": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": "HTTP 404: {\"error\":{\"code\":\"not_found\",\"message\":\"Project not found\"}}"
+      }
+    }
+  },
+  "2026-05-02": {
+    "date": "2026-05-02",
+    "status": "ok",
+    "analytics_source": "placeholder",
+    "note": "Vercel Web Analytics 는 공식 REST API 미지원 — PV/UV 는 placeholder. Drain 설정 시 VERCEL_ANALYTICS_DRAIN_PATH 로 자동 주입",
+    "projects": {
+      "tax-n-benefit-api": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": null
+      },
+      "korlens": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": null
+      },
+      "cheonmyeongdang.com": {
+        "deployments_24h": 0,
+        "last_deployment": null,
+        "pv": null,
+        "uv": null,
+        "top_pages": [],
+        "error": "HTTP 404: {\"error\":{\"code\":\"not_found\",\"message\":\"Project not found\"}}"
+      }
+    }
   }
 }

@@ -33,7 +33,16 @@
       "first_slide": "D:\\kunstudio-promo\\tax_assets\\shorts1_price_cards\\slide_1.png",
       "date": "2026-05-02",
       "scheduled_time": "18:00",
-      "status": "pending"
+      "status": "posted",
+      "posted_at": "2026-05-02T18:00:26.507063",
+      "results": {
+        "bluesky": true,
+        "discord": true,
+        "mastodon": true,
+        "x": false,
+        "threads": true,
+        "instagram": true
+      }
     },
     {
       "type": "shorts",

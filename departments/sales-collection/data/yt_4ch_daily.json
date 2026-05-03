@@ -1101,6 +1101,528 @@
         "yesterday_subs_gained_all": 0,
         "revenue_estimate_usd_all": 0.07
       }
+    },
+    {
+      "date": "2026-05-02",
+      "channels": {
+        "sori_atlas": {
+          "status": "ok",
+          "title": "Sori Atlas",
+          "channel_id": "UCXAo8cXhyXIRa_8bjNdBh9w",
+          "subscriber_count": 4,
+          "view_count_total": 2879,
+          "video_count": 14,
+          "yesterday_views_diff": 0,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "봄 대나무 바람 — Saju Sound: Wood 木 (Spring Forest) #Shorts",
+              "video_id": "tdFlJS29NHI",
+              "view_count": 870,
+              "like_count": 9,
+              "comment_count": 0
+            },
+            {
+              "title": "Window Rain Delta — Sleep Ambient #Shorts",
+              "video_id": "mutNzFEX-0E",
+              "view_count": 714,
+              "like_count": 3,
+              "comment_count": 0
+            },
+            {
+              "title": "Neon Static Alley — Synthwave Drive #Shorts",
+              "video_id": "2vH245KnN2M",
+              "view_count": 393,
+              "like_count": 7,
+              "comment_count": 0
+            },
+            {
+              "title": "별빛 흐려진 밤 — Late Night Hangul #Shorts",
+              "video_id": "xBCqzJdm4kU",
+              "view_count": 348,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "Tokyo Rainback — Lofi Focus 25min #Shorts",
+              "video_id": "z0Nmvbjx3No",
+              "view_count": 303,
+              "like_count": 1,
+              "comment_count": 0
+            }
+          ],
+          "revenue_estimate_usd": 0.0,
+          "revenue_source": "cpm_estimate($2.0/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.0
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUCXAo8cXhyXIRa_8bjNdBh9w&startDate=2026-05-01&endDa"
+          }
+        },
+        "whisper_atlas": {
+          "status": "ok",
+          "title": "K-Wisdom",
+          "channel_id": "UCjWwRPygY08bYH_vgaDV7ww",
+          "subscriber_count": 0,
+          "view_count_total": 0,
+          "video_count": 0,
+          "yesterday_views_diff": 0,
+          "yesterday_subs_diff": 0,
+          "top_videos": [],
+          "revenue_estimate_usd": 0.0,
+          "revenue_source": "cpm_estimate($1.2/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.0
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUCjWwRPygY08bYH_vgaDV7ww&startDate=2026-05-01&endDa"
+          }
+        },
+        "wealth_blueprint": {
+          "status": "ok",
+          "title": "Wealth Blueprint",
+          "channel_id": "UC7G9_Y47IMQUaqKOBSg33TA",
+          "subscriber_count": 0,
+          "view_count_total": 465,
+          "video_count": 11,
+          "yesterday_views_diff": 0,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "Compound interest is the eighth wonder of the world. | Albert Einstein (attribut",
+              "video_id": "uD2poNjo940",
+              "view_count": 129,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "If you do not find a way to make money while you sleep, you will work until you ",
+              "video_id": "swnkT4gKs-U",
+              "view_count": 94,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "The first principle is that you must not fool yourself, and you are the easiest ",
+              "video_id": "y45gOMJgSVE",
+              "view_count": 92,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "Seek wealth, not money or status. Wealth is assets that earn while you sleep. | ",
+              "video_id": "h3gk2OrIi7I",
+              "view_count": 86,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "Discipline equals freedom. | Jocko Willink #Shorts",
+              "video_id": "n-imCzDxtEk",
+              "view_count": 68,
+              "like_count": 0,
+              "comment_count": 0
+            }
+          ],
+          "revenue_estimate_usd": 0.0,
+          "revenue_source": "cpm_estimate($5.0/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.0
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUC7G9_Y47IMQUaqKOBSg33TA&startDate=2026-05-01&endDa"
+          }
+        },
+        "inner_archetypes": {
+          "status": "ok",
+          "title": "Inner Archetypes",
+          "channel_id": "UCmAMBy0V6TXR_R5qoSrbbtQ",
+          "subscriber_count": 0,
+          "view_count_total": 0,
+          "video_count": 5,
+          "yesterday_views_diff": 0,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "The Lover — Deep Dive | Jungian Archetypes",
+              "video_id": "ruJx9i6q-X8",
+              "view_count": 0,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "Type 9 The Peacemaker — Deep Dive | Enneagram",
+              "video_id": "FwqIPG4_0BQ",
+              "view_count": 0,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "ENTJ Commander — Deep Dive | MBTI",
+              "video_id": "wdrKqvUDee0",
+              "view_count": 0,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "The Lover — Deep Dive | Jungian Archetypes",
+              "video_id": "L8gcoaIivaM",
+              "view_count": 0,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "Type 9 The Peacemaker — Deep Dive | Enneagram",
+              "video_id": "BNdfS3lVc78",
+              "view_count": 0,
+              "like_count": 0,
+              "comment_count": 0
+            }
+          ],
+          "revenue_estimate_usd": 0.0,
+          "revenue_source": "cpm_estimate($2.0/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.0
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUCmAMBy0V6TXR_R5qoSrbbtQ&startDate=2026-05-01&endDa"
+          }
+        },
+        "ai_sidehustle": {
+          "status": "ok",
+          "title": "Wealth Blueprint",
+          "channel_id": "UC7G9_Y47IMQUaqKOBSg33TA",
+          "subscriber_count": 0,
+          "view_count_total": 465,
+          "video_count": 11,
+          "yesterday_views_diff": 0,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "Compound interest is the eighth wonder of the world. | Albert Einstein (attribut",
+              "video_id": "uD2poNjo940",
+              "view_count": 129,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "If you do not find a way to make money while you sleep, you will work until you ",
+              "video_id": "swnkT4gKs-U",
+              "view_count": 94,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "The first principle is that you must not fool yourself, and you are the easiest ",
+              "video_id": "y45gOMJgSVE",
+              "view_count": 92,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "Seek wealth, not money or status. Wealth is assets that earn while you sleep. | ",
+              "video_id": "h3gk2OrIi7I",
+              "view_count": 86,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "Discipline equals freedom. | Jocko Willink #Shorts",
+              "video_id": "n-imCzDxtEk",
+              "view_count": 68,
+              "like_count": 0,
+              "comment_count": 0
+            }
+          ],
+          "revenue_estimate_usd": 0.0,
+          "revenue_source": "cpm_estimate($2.0/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.0
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUC7G9_Y47IMQUaqKOBSg33TA&startDate=2026-05-01&endDa"
+          }
+        }
+      },
+      "totals": {
+        "view_count_total_all": 3809,
+        "subscriber_count_all": 4,
+        "yesterday_views_all": 0,
+        "yesterday_subs_gained_all": 0,
+        "revenue_estimate_usd_all": 0.0
+      }
+    },
+    {
+      "date": "2026-05-03",
+      "channels": {
+        "sori_atlas": {
+          "status": "ok",
+          "title": "Sori Atlas",
+          "channel_id": "UCXAo8cXhyXIRa_8bjNdBh9w",
+          "subscriber_count": 4,
+          "view_count_total": 2910,
+          "video_count": 14,
+          "yesterday_views_diff": 31,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "봄 대나무 바람 — Saju Sound: Wood 木 (Spring Forest) #Shorts",
+              "video_id": "tdFlJS29NHI",
+              "view_count": 876,
+              "like_count": 9,
+              "comment_count": 0
+            },
+            {
+              "title": "Window Rain Delta — Sleep Ambient #Shorts",
+              "video_id": "mutNzFEX-0E",
+              "view_count": 712,
+              "like_count": 3,
+              "comment_count": 0
+            },
+            {
+              "title": "Neon Static Alley — Synthwave Drive #Shorts",
+              "video_id": "2vH245KnN2M",
+              "view_count": 394,
+              "like_count": 7,
+              "comment_count": 0
+            },
+            {
+              "title": "별빛 흐려진 밤 — Late Night Hangul #Shorts",
+              "video_id": "xBCqzJdm4kU",
+              "view_count": 348,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "Tokyo Rainback — Lofi Focus 25min #Shorts",
+              "video_id": "z0Nmvbjx3No",
+              "view_count": 304,
+              "like_count": 1,
+              "comment_count": 0
+            }
+          ],
+          "revenue_estimate_usd": 0.06,
+          "revenue_source": "cpm_estimate($2.0/1k)",
+          "revenue_low_high": [
+            0.03,
+            0.09
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUCXAo8cXhyXIRa_8bjNdBh9w&startDate=2026-05-02&endDa"
+          }
+        },
+        "whisper_atlas": {
+          "status": "ok",
+          "title": "K-Wisdom",
+          "channel_id": "UCjWwRPygY08bYH_vgaDV7ww",
+          "subscriber_count": 0,
+          "view_count_total": 0,
+          "video_count": 0,
+          "yesterday_views_diff": 0,
+          "yesterday_subs_diff": 0,
+          "top_videos": [],
+          "revenue_estimate_usd": 0.0,
+          "revenue_source": "cpm_estimate($1.2/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.0
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUCjWwRPygY08bYH_vgaDV7ww&startDate=2026-05-02&endDa"
+          }
+        },
+        "wealth_blueprint": {
+          "status": "ok",
+          "title": "Wealth Blueprint",
+          "channel_id": "UC7G9_Y47IMQUaqKOBSg33TA",
+          "subscriber_count": 0,
+          "view_count_total": 567,
+          "video_count": 12,
+          "yesterday_views_diff": 102,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "Compound interest is the eighth wonder of the world. | Albert Einstein (attribut",
+              "video_id": "uD2poNjo940",
+              "view_count": 129,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "If you do not find a way to make money while you sleep, you will work until you ",
+              "video_id": "swnkT4gKs-U",
+              "view_count": 94,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "The first principle is that you must not fool yourself, and you are the easiest ",
+              "video_id": "y45gOMJgSVE",
+              "view_count": 91,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "Seek wealth, not money or status. Wealth is assets that earn while you sleep. | ",
+              "video_id": "h3gk2OrIi7I",
+              "view_count": 86,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "Discipline equals freedom. | Jocko Willink #Shorts",
+              "video_id": "n-imCzDxtEk",
+              "view_count": 68,
+              "like_count": 0,
+              "comment_count": 0
+            }
+          ],
+          "revenue_estimate_usd": 0.51,
+          "revenue_source": "cpm_estimate($5.0/1k)",
+          "revenue_low_high": [
+            0.26,
+            0.77
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUC7G9_Y47IMQUaqKOBSg33TA&startDate=2026-05-02&endDa"
+          }
+        },
+        "inner_archetypes": {
+          "status": "ok",
+          "title": "Inner Archetypes",
+          "channel_id": "UCmAMBy0V6TXR_R5qoSrbbtQ",
+          "subscriber_count": 0,
+          "view_count_total": 0,
+          "video_count": 13,
+          "yesterday_views_diff": 0,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "ESTP Entrepreneur — the shadow no one warns you about #Shorts",
+              "video_id": "l95Dno3HpCw",
+              "view_count": 92,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "INTP Logician — the shadow no one warns you about #Shorts",
+              "video_id": "QZ2FtUGcvl0",
+              "view_count": 70,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "ISFJ Defender — the shadow no one warns you about #Shorts",
+              "video_id": "unqv8jjfh2I",
+              "view_count": 55,
+              "like_count": 1,
+              "comment_count": 0
+            },
+            {
+              "title": "ENTJ Commander — Deep Dive | MBTI",
+              "video_id": "wdrKqvUDee0",
+              "view_count": 1,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "ENFP Campaigner — the shadow no one warns you about #Shorts",
+              "video_id": "QL1m-H90QXc",
+              "view_count": 0,
+              "like_count": 0,
+              "comment_count": 0
+            }
+          ],
+          "revenue_estimate_usd": 0.0,
+          "revenue_source": "cpm_estimate($2.0/1k)",
+          "revenue_low_high": [
+            0.0,
+            0.0
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUCmAMBy0V6TXR_R5qoSrbbtQ&startDate=2026-05-02&endDa"
+          }
+        },
+        "ai_sidehustle": {
+          "status": "ok",
+          "title": "Wealth Blueprint",
+          "channel_id": "UC7G9_Y47IMQUaqKOBSg33TA",
+          "subscriber_count": 0,
+          "view_count_total": 567,
+          "video_count": 12,
+          "yesterday_views_diff": 102,
+          "yesterday_subs_diff": 0,
+          "top_videos": [
+            {
+              "title": "Compound interest is the eighth wonder of the world. | Albert Einstein (attribut",
+              "video_id": "uD2poNjo940",
+              "view_count": 129,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "If you do not find a way to make money while you sleep, you will work until you ",
+              "video_id": "swnkT4gKs-U",
+              "view_count": 94,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "The first principle is that you must not fool yourself, and you are the easiest ",
+              "video_id": "y45gOMJgSVE",
+              "view_count": 91,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "Seek wealth, not money or status. Wealth is assets that earn while you sleep. | ",
+              "video_id": "h3gk2OrIi7I",
+              "view_count": 86,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "Discipline equals freedom. | Jocko Willink #Shorts",
+              "video_id": "n-imCzDxtEk",
+              "view_count": 68,
+              "like_count": 0,
+              "comment_count": 0
+            }
+          ],
+          "revenue_estimate_usd": 0.2,
+          "revenue_source": "cpm_estimate($2.0/1k)",
+          "revenue_low_high": [
+            0.1,
+            0.31
+          ],
+          "analytics_full": {
+            "status": "ypp_not_joined",
+            "error": "<HttpError 403 when requesting https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DUC7G9_Y47IMQUaqKOBSg33TA&startDate=2026-05-02&endDa"
+          }
+        }
+      },
+      "totals": {
+        "view_count_total_all": 4044,
+        "subscriber_count_all": 4,
+        "yesterday_views_all": 235,
+        "yesterday_subs_gained_all": 0,
+        "revenue_estimate_usd_all": 0.78
+      }
     }
   ]
 }
