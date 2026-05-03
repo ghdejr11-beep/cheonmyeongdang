@@ -514,6 +514,11 @@ module.exports = (req, res) => {
   const paypalEnv = (process.env.PAYPAL_ENV || 'sandbox').trim(); // sandbox or production
   const paypalEnabled = paypalClientId !== '';
 
+  // PayPal Subscription Plan IDs (recurring SaaS) — Vercel env에 추가 시 즉시 활성화
+  // 사용자 액션: PayPal Business → Subscriptions → Create plan → Plan ID 받아 vercel env add
+  // PAYPAL_PLAN_ID_AI_OS=P-XXXXXXXX (AI Productivity OS $99/월)
+  const paypalPlanIdAiOs = (process.env.PAYPAL_PLAN_ID_AI_OS || '').trim();
+
   return res.status(200).json({
     // 토스 (기존 흐름 유지)
     clientKey,
@@ -530,6 +535,8 @@ module.exports = (req, res) => {
     paypalClientId,
     paypalEnv,
     paypalEnabled,
+    // PayPal Subscription Plan IDs (recurring SaaS)
+    paypalPlanIdAiOs,
   });
 };
 

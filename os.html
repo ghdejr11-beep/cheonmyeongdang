@@ -99,9 +99,36 @@
   <div class="price-box">
     <div class="price">$99<span class="period">/mo</span></div>
     <p style="color:#cbd5e1;margin:0.5rem 0">Cancel anytime. First 100 subscribers locked at launch price.</p>
-    <a class="cta" href="/pay?sku=subscribe_ai_productivity_os_9900">Start $99/mo</a>
+    <div id="paypal-subscribe-button" style="margin:1rem auto;max-width:340px;min-height:50px"></div>
+    <a class="cta" id="legacy-cta" href="/pay?sku=subscribe_ai_productivity_os_9900">Start $99/mo (alternative)</a>
     <p style="color:#fbbf24;margin-top:1rem;font-size:0.9rem">After 100: $129/mo standard rate</p>
   </div>
+
+  <script>
+    // PayPal Subscriptions — auto-render when PAYPAL_PLAN_ID + PAYPAL_CLIENT_ID는 /api/payment-config 응답에서 받음
+    fetch('/api/payment-config').then(r => r.json()).then(cfg => {
+      var planId = cfg.paypalPlanIdAiOs;
+      var clientId = cfg.paypalClientId;
+      if (!planId || !clientId) return;  // not configured yet — fallback CTA stays
+      var s = document.createElement('script');
+      s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(clientId) + '&vault=true&intent=subscription';
+      s.setAttribute('data-sdk-integration-source', 'button-factory');
+      s.onload = function() {
+        if (!window.paypal || !window.paypal.Buttons) return;
+        document.getElementById('legacy-cta').style.display = 'none';
+        window.paypal.Buttons({
+          style: { shape: 'pill', color: 'gold', layout: 'vertical', label: 'subscribe' },
+          createSubscription: function(data, actions) {
+            return actions.subscription.create({ plan_id: planId });
+          },
+          onApprove: function(data) {
+            window.location.href = '/success.html?subscription_id=' + encodeURIComponent(data.subscriptionID || '') + '&sku=subscribe_ai_productivity_os_9900';
+          },
+        }).render('#paypal-subscribe-button');
+      };
+      document.body.appendChild(s);
+    }).catch(function() {});
+  </script>
 
   <h2>Cancellation & refund</h2>
   <p>Cancel anytime from your account dashboard. Full refund if cancelled within 14 days of first charge. No questions asked.</p>
