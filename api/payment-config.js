@@ -159,6 +159,59 @@ const SKU_CATALOG = [
     type: 'global_subscription',
     lang: 'en',
   },
+  // ─── 5/3 자동 생성 디지털 상품 5종 (PDF) — Sprint #1 + #2 ─────────
+  // ReportLab 자동 생성. /pdfs/ 정적 호스팅. type:'ebook' → success.html 다운로드 분기.
+  // Gumroad cross-listing 자동 (gumroad_api_auto_list.py).
+  {
+    id: 'ebook_saju_birth_en_9900',
+    name: 'Korean Saju Birth Chart Reading (English)',
+    amount: 9900,
+    desc: 'Korean four-pillar astrology personalized analysis framework in English. 10 stems + 12 branches + 5 elements + career/relationship compatibility. Cultural/entertainment content.',
+    type: 'ebook',
+    pdfPath: '/pdfs/saju_birth_chart_en.pdf',
+    pages: 7,
+    lang: 'en',
+  },
+  {
+    id: 'ebook_kwisdom_wallart_12900',
+    name: 'Korean Wisdom Wall Art Bundle (12 posters)',
+    amount: 12900,
+    desc: '12 Korean proverb posters with English translations, A4/Letter printable. Print at home or local shop. Korean tradition wisdom decoded.',
+    type: 'ebook',
+    pdfPath: '/pdfs/kwisdom_wall_art.pdf',
+    pages: 13,
+    lang: 'en',
+  },
+  {
+    id: 'ebook_kwisdom_planner_14900',
+    name: 'K-Wisdom Daily Planner 2026 (Undated 365-day)',
+    amount: 14900,
+    desc: 'Korean longevity rituals + Saju daily mood + monthly Korean cultural calendar + weekly reflection (Joseon scholar style). Print and start any month.',
+    type: 'ebook',
+    pdfPath: '/pdfs/kwisdom_daily_planner_2026.pdf',
+    pages: 30,
+    lang: 'en',
+  },
+  {
+    id: 'ebook_korean_tax_en_9900',
+    name: 'Korean Tax Smart Guide for Foreigners 2026',
+    amount: 9900,
+    desc: '2026 Korean tax filing guide for foreign residents. Income brackets, foreign engineer deductions, treaty benefits, hometax step-by-step. Information only — not tax representation.',
+    type: 'ebook',
+    pdfPath: '/pdfs/korean_tax_foreigners.pdf',
+    pages: 10,
+    lang: 'en',
+  },
+  {
+    id: 'ebook_korean_recipe_7900',
+    name: 'Korean Recipe Meal Planner (30 dishes)',
+    amount: 7900,
+    desc: '30 traditional Korean recipes with English ingredients + weekly meal planner template + banchan diversity tracker. Korean longevity meal philosophy.',
+    type: 'ebook',
+    pdfPath: '/pdfs/korean_recipe_planner.pdf',
+    pages: 4,
+    lang: 'en',
+  },
 ];
 
 module.exports = (req, res) => {
