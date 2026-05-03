@@ -184,6 +184,58 @@ async function handleTrack(req, res, body) {
   });
 }
 
+// ─── action=newsletter 핸들러 (K-Wisdom Daily 구독) ───
+if (!global.__cmdNewsletterSubs) global.__cmdNewsletterSubs = new Map();
+const newsletterSubs = global.__cmdNewsletterSubs;
+
+async function handleNewsletter(req, res, body) {
+  const email = (body.email || '').toString().trim().toLowerCase();
+  const source = (body.source || 'unknown').toString().slice(0, 60);
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ success: false, error: 'Invalid email' });
+  }
+
+  // Idempotent — 중복 구독 방지
+  const existing = newsletterSubs.get(email);
+  if (existing) {
+    return res.status(200).json({
+      success: true,
+      duplicate: true,
+      subscribed_at: existing.subscribed_at,
+    });
+  }
+
+  const record = {
+    email,
+    source,
+    subscribed_at: new Date().toISOString(),
+    confirmed: false,
+  };
+  newsletterSubs.set(email, record);
+
+  // 텔레그램 알림 (신규 구독자)
+  const tgToken = (process.env.TELEGRAM_BOT_TOKEN || '').trim();
+  const adminChat = (process.env.TELEGRAM_CHAT_ID || '').trim();
+  if (tgToken && adminChat) {
+    const totalSubs = newsletterSubs.size;
+    const msg =
+      `📬 <b>K-Wisdom Newsletter 신규 구독</b>\n` +
+      `email: ${email}\n` +
+      `source: ${source}\n` +
+      `누적: ${totalSubs}명\n` +
+      `시각: ${record.subscribed_at}`;
+    sendTelegram(tgToken, adminChat, msg);
+  }
+
+  return res.status(200).json({
+    success: true,
+    duplicate: false,
+    subscribed_at: record.subscribed_at,
+    total_subs: newsletterSubs.size,
+  });
+}
+
 // ─── 라우터 ───
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -203,10 +255,11 @@ module.exports = async (req, res) => {
 
   if (action === 'link') return handleLink(req, res, body);
   if (action === 'track') return handleTrack(req, res, body);
+  if (action === 'newsletter') return handleNewsletter(req, res, body);
 
   return res.status(400).json({
     success: false,
-    error: 'action required (link or track)',
+    error: 'action required (link, track, or newsletter)',
     usage: '/api/invite?action=link  or  /api/invite?action=track',
   });
 };
