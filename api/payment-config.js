@@ -177,6 +177,12 @@ module.exports = (req, res) => {
     skuProviderOverride = {};
   }
 
+  // PayPal (글로벌 결제) — PG 라이브키 통과 전 즉시 활성화 가능 채널
+  // PAYPAL_CLIENT_ID 환경변수 등록 시 pay.html에 PayPal Smart Buttons 자동 노출
+  const paypalClientId = (process.env.PAYPAL_CLIENT_ID || '').trim();
+  const paypalEnv = (process.env.PAYPAL_ENV || 'sandbox').trim(); // sandbox or production
+  const paypalEnabled = paypalClientId !== '';
+
   return res.status(200).json({
     // 토스 (기존 흐름 유지)
     clientKey,
@@ -189,6 +195,10 @@ module.exports = (req, res) => {
     portoneChannelKey,
     portoneChannelKeys,
     skuProviderOverride,
+    // PayPal (글로벌)
+    paypalClientId,
+    paypalEnv,
+    paypalEnabled,
   });
 };
 
