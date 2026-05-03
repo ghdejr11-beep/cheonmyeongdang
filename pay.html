@@ -15,14 +15,61 @@
 <!-- PayPal Smart Buttons (글로벌 결제) — Client ID 동적 주입 (cfg.paypalClientId) -->
 <script id="paypal-sdk-loader">
 (function() {
- // PayPal SDK는 cfg 로드 후 동적 주입 (window.PAYPAL_LOADED flag로 1회만)
+ var KRW_PER_USD = 1380; // 환율 (대략, 실시간 API로 업그레이드 가능)
+
  window.loadPayPalSDK = function(clientId, env) {
  if (window.PAYPAL_LOADED || !clientId) return;
  var s = document.createElement('script');
  s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(clientId)
  + '&currency=USD&intent=capture&components=buttons';
- s.onload = function() { window.PAYPAL_LOADED = true; if (window.renderPayPalButton) window.renderPayPalButton(); };
+ s.onload = function() {
+ window.PAYPAL_LOADED = true;
+ if (window.renderPayPalButton) window.renderPayPalButton();
+ };
  document.head.appendChild(s);
+ };
+
+ window.renderPayPalButton = function() {
+ if (!window.paypal || !window.paypal.Buttons) return;
+ var container = document.getElementById('paypal-button-container');
+ if (!container) return;
+ container.innerHTML = '';
+ paypal.Buttons({
+ style: { layout: 'vertical', shape: 'rect', label: 'paypal', height: 45 },
+ createOrder: function(data, actions) {
+ var sku = (window.state && window.state.selectedSku) || null;
+ if (!sku) {
+ alert('Please select a product first / 상품을 먼저 선택해주세요');
+ return;
+ }
+ var krw = (typeof window.getFinalAmount === 'function')
+ ? window.getFinalAmount()
+ : sku.amount;
+ var usd = (krw / KRW_PER_USD).toFixed(2);
+ if (parseFloat(usd) < 0.5) usd = '0.50'; // PayPal min
+ return actions.order.create({
+ purchase_units: [{
+ amount: { value: usd, currency_code: 'USD' },
+ description: (sku.name || 'Cheonmyeongdang') + ' (KunStudio)',
+ custom_id: sku.id
+ }]
+ });
+ },
+ onApprove: function(data, actions) {
+ return actions.order.capture().then(function(details) {
+ var sku = (window.state && window.state.selectedSku) || {};
+ var qs = '?orderID=' + encodeURIComponent(data.orderID)
+ + '&sku=' + encodeURIComponent(sku.id || '')
+ + '&provider=paypal'
+ + '&payerEmail=' + encodeURIComponent((details.payer && details.payer.email_address) || '');
+ window.location.href = '/success.html' + qs;
+ });
+ },
+ onError: function(err) {
+ console.error('PayPal error:', err);
+ alert('Payment failed. Please try again. / 결제 실패. 다시 시도해주세요.');
+ }
+ }).render('#paypal-button-container');
  };
 })();
 </script>
@@ -302,10 +349,17 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
 <div class="summary" id="coupon-discount-row" style="display:none;color:#4ade80;"><span>쿠폰 할인</span><span id="coupon-discount">-0원</span></div>
 <div class="summary total"><span>총 결제 금액</span><span class="v" id="sum-total">0원</span></div>
 <button class="pay-btn" id="pay-btn" disabled>상품을 선택해 주세요</button>
+
+<!-- PayPal Smart Buttons (글로벌 결제) — cfg.paypalEnabled 시 자동 노출 -->
+<div id="paypal-section" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid rgba(232,201,122,0.2);">
+ <div style="font-size:12px;color:#a89880;margin-bottom:8px;text-align:center;">또는 글로벌 카드/PayPal 결제 (USD 자동 환산)</div>
+ <div id="paypal-button-container"></div>
+</div>
+
 <div class="footnote">
  결제 진행 시<a href="./terms.html">이용약관</a>과
 <a href="./privacy.html">개인정보처리방침</a>에 동의한 것으로 간주됩니다.<br>
- 결제는 토스페이먼츠를 통해 안전하게 처리됩니다.
+ 결제는 토스페이먼츠 또는 PayPal을 통해 안전하게 처리됩니다.
 </div>
 </div>
 
@@ -363,6 +417,8 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
  paymentReady: false,
  coupon: null,
  };
+ // PayPal Smart Buttons 외부 IIFE에서 접근 가능하도록 window 노출
+ window.state = state;
 
  var $list = document.getElementById('sku-list');
  var $sumName = document.getElementById('sum-name');
@@ -520,6 +576,8 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
    }
    return base;
  }
+ // PayPal Smart Buttons에서 접근 가능
+ window.getFinalAmount = getFinalAmount;
 
  window.applyCoupon = function() {
    var $cc = document.getElementById('coupon-code');
@@ -821,6 +879,12 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
  renderSkus(config.skus || []);
  autoSelectFromQuery(config.skus || []);
  await initWidgets(config.clientKey);
+ // PayPal 글로벌 결제 활성화 (cfg에 paypalEnabled true 시)
+ if (config.paypalEnabled && config.paypalClientId && window.loadPayPalSDK) {
+ window.loadPayPalSDK(config.paypalClientId, config.paypalEnv || 'production');
+ var paypalSection = document.getElementById('paypal-section');
+ if (paypalSection) paypalSection.style.display = 'block';
+ }
  } catch (err) {
  console.error('초기화 실패:', err);
  $list.innerHTML = '<div class="loading" style="color:#f87171;">결제 설정을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.<br><small>' + (err.message || err) + '</small></div>';
