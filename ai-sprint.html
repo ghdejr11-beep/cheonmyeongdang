@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Automation Sprint — 5일 ₩2,990,000 | KunStudio</title>
+<meta name="description" content="한국 1인 사업자/SME를 위한 AI 자동화 Sprint. 5일 동안 SNS·메일·매출보고·고객응답 자동화 완성. Fixed scope ₩2,990,000.">
+<meta property="og:title" content="AI Automation Sprint 5일 ₩2,990,000 — KunStudio">
+<meta property="og:description" content="반복 업무 주 20시간+ 자동화. SNS/메일/매출보고/고객응답 5개 deliverable 보장.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cheonmyeongdang.vercel.app/ai-sprint">
+<style>
+  :root {
+    --bg: #080a10;
+    --card: rgba(13,16,32,0.97);
+    --gold: #c9a84c;
+    --gold2: #e8c97a;
+    --jade: #4a9e8e;
+    --text: #e8e0d0;
+    --text2: #a89880;
+    --border: rgba(201,168,76,0.2);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: radial-gradient(ellipse at top, #1a1040 0%, var(--bg) 70%);
+    color: var(--text);
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 32px 20px 60px; }
+  header { text-align: center; margin-bottom: 40px; }
+  .badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid var(--border);
+    color: var(--gold2);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-size: 2.2rem;
+    color: var(--gold2);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .sub {
+    color: var(--text2);
+    font-size: 1.05rem;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 22px;
+  }
+  h2 {
+    color: var(--gold2);
+    font-size: 1.4rem;
+    margin-bottom: 18px;
+  }
+  .outcomes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .outcome {
+    background: rgba(74,158,142,0.08);
+    border: 1px solid rgba(74,158,142,0.25);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .outcome strong { color: var(--jade); display: block; margin-bottom: 6px; }
+  .outcome p { color: var(--text2); font-size: 0.92rem; }
+  .deliverables { list-style: none; }
+  .deliverables li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .deliverables li:last-child { border-bottom: none; }
+  .num {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    background: var(--gold);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  .pricing {
+    text-align: center;
+    padding: 32px 24px;
+    border: 2px solid var(--gold);
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(74,158,142,0.05));
+  }
+  .price { font-size: 2.4rem; color: var(--gold2); font-weight: 700; }
+  .price-sub { color: var(--text2); margin: 8px 0 16px; }
+  .cta {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: #000;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    margin: 8px 6px;
+    font-size: 1rem;
+  }
+  .cta.secondary {
+    background: transparent;
+    color: var(--gold2);
+    border: 1.5px solid var(--gold);
+  }
+  .faq dt {
+    color: var(--gold2);
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 4px;
+  }
+  .faq dd {
+    color: var(--text2);
+    font-size: 0.94rem;
+  }
+  .disclaimer {
+    background: rgba(255,200,80,0.05);
+    border: 1px solid rgba(255,200,80,0.2);
+    color: var(--text2);
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-top: 14px;
+  }
+  footer {
+    text-align: center;
+    color: var(--text2);
+    font-size: 0.85rem;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="badge">5월 마감 5건 한정</span>
+  <h1>AI Automation Sprint<br><span style="font-size:1.4rem;color:var(--text);">5일 동안 반복업무 주 20시간+ 자동화</span></h1>
+  <p class="sub">한국 1인 사업자·소상공인·SME를 위한 정형화 AI 자동화 패키지. SNS 발행·메일 응대·매출 보고·고객 문의를 5일 내 자동화하고 운영을 넘겨드립니다.</p>
+</header>
+
+<div class="card">
+  <h2>이 Sprint가 해결하는 것</h2>
+  <div class="outcomes">
+    <div class="outcome">
+      <strong>매일 반복 업무 ↓ 80%</strong>
+      <p>SNS 5채널 발행, 매출 집계, 메일 회신을 사람 1명 분량 자동 처리.</p>
+    </div>
+    <div class="outcome">
+      <strong>운영비 0 추가</strong>
+      <p>본인 PC + 무료 API + Gmail/Slack 등 기존 도구만으로 구축.</p>
+    </div>
+    <div class="outcome">
+      <strong>5일 후 즉시 가동</strong>
+      <p>설치·연동·테스트·인계 모두 5일 안에 완료. Day 6부터 자동.</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>5일 Sprint Deliverable (Fixed Scope)</h2>
+  <ol class="deliverables">
+    <li><span class="num">1</span><div><strong>매출 일일 자동 집계 + 텔레그램 알림</strong><br>
+      <span style="color:var(--text2);font-size:0.92rem;">PG/Gumroad/Ko-fi 등 결제 채널 → 매일 09:30 텔레그램으로 어제 매출/고객 수/유입원 자동 보고.</span></div></li>
+    <li><span class="num">2</span><div><strong>SNS 4채널 자동 발행 (X/Threads/Instagram/Bluesky 中 4개)</strong><br>
+      <span style="color:var(--text2);font-size:0.92rem;">콘텐츠 풀 작성 + 일별 자동 포스팅 (Postiz/Upload-Post API). 광고문구·해시태그 자동.</span></div></li>
+    <li><span class="num">3</span><div><strong>고객 메일 자동 분류 + 1차 응대</strong><br>
+      <span style="color:var(--text2);font-size:0.92rem;">Gmail OAuth → 환불/문의/스팸 자동 분류 + 환불·환영·FAQ 1차 답변 템플릿 자동 발송.</span></div></li>
+    <li><span class="num">4</span><div><strong>웹훅 기반 결제 후속 메일 (D+0/D+3/D+7/D+30)</strong><br>
+      <span style="color:var(--text2);font-size:0.92rem;">결제 → 즉시 영수증 + 3일 후 활용 가이드 + 7일 후 후기 요청 + 30일 winback. LTV +20-30% 목표.</span></div></li>
+    <li><span class="num">5</span><div><strong>SEO 블로그 자동 생성 (주 3편)</strong><br>
+      <span style="color:var(--text2);font-size:0.92rem;">키워드 풀 입력 → AI 글 작성 + 이미지 생성 + 자동 게시 (WordPress/Vercel 등). 6개월 누적 트래픽 자산화.</span></div></li>
+  </ol>
+</div>
+
+<div class="card pricing">
+  <div class="price">₩2,990,000</div>
+  <div class="price-sub">5일 Sprint · 5 deliverable · 1개월 사후 지원</div>
+  <a href="https://t.me/kunstudio_bot?start=ai_sprint" class="cta">텔레그램으로 신청</a>
+  <a href="mailto:ghdejr11@gmail.com?subject=AI%20Automation%20Sprint%20문의" class="cta secondary">이메일 문의</a>
+  <p style="color:var(--text2);font-size:0.82rem;margin-top:14px;">착수금 50% (₩1,495,000) → 5일 완료 후 잔금 50%</p>
+</div>
+
+<div class="card">
+  <h2>FAQ</h2>
+  <dl class="faq">
+    <dt>Q. 5일 안에 정말 다 됩니까?</dt>
+    <dd>네. KunStudio 자체 운영 중인 70+ 자동화 schtask 인프라를 표준화한 패키지입니다. 5개 deliverable은 사전 검증된 모듈이며, 5일 = (Day 1: 인프라 셋업 / Day 2-4: 5개 모듈 구현 + 연동 / Day 5: 통합 테스트 + 인계).</dd>
+    <dt>Q. 운영비는 얼마나 듭니까?</dt>
+    <dd>대부분 무료 tier (Gmail/Telegram/Vercel/Pollinations). API 유료 사용 시 월 ₩30,000~₩100,000 예상 (OpenAI/ElevenLabs 등 — 사용자 명의 결제).</dd>
+    <dt>Q. 기존 시스템과 연동되나요?</dt>
+    <dd>네. Notion/Slack/Gmail/Google Sheet/Postiz/Toss/Stripe/Gumroad/Ko-fi/Naver Smartstore 연동 기본 지원.</dd>
+    <dt>Q. 5일 후에 망가지면?</dt>
+    <dd>1개월 사후 지원 포함. 그 이후 매월 ₩300,000 유지보수 옵션 (선택).</dd>
+    <dt>Q. 환불 정책은?</dt>
+    <dd>Day 1 시작 전: 100% 환불. Day 1 시작 후: 진행분 차감 후 환불. Day 5 완료 후 환불 X.</dd>
+  </dl>
+</div>
+
+<div class="disclaimer">
+  <strong>⚠️ Fixed Scope · 결과 보장 X</strong><br>
+  본 Sprint는 위 5개 deliverable을 완성하여 인계하는 패키지입니다. <strong>특정 매출/수익/고객 수 증가는 보장하지 않습니다.</strong> 사후 운영·콘텐츠·광고 효율은 사용자 의사결정에 따라 결과가 달라집니다. 본 서비스는 세무·법률·재무 자문이 아닌 SW 자동화 구축 서비스입니다.
+</div>
+
+<footer>
+  KunStudio · 사업자 552-59-00848 · 경상북도 경주시<br>
+  © 2026 KunStudio. All rights reserved.
+</footer>
+</div>
+</body>
+</html>

@@ -142,6 +142,23 @@ const SKU_CATALOG = [
     pages: 28,
     season: '5/1~31',
   },
+  // ─── K-Saju AI 영문판 (글로벌, USD 표기지만 KRW 환산 결제) ───
+  {
+    id: 'saju_single_en_999',
+    name: 'K-Saju AI — Single Reading (English)',
+    amount: 13800, // ~$10 USD @ KRW_PER_USD 1380
+    desc: 'Korean four-pillar astrology personalized reading in English. Email delivery within 24 hours. Cultural/entertainment content.',
+    type: 'global',
+    lang: 'en',
+  },
+  {
+    id: 'saju_premium_en_1900',
+    name: 'K-Saju AI — Premium Monthly (English)',
+    amount: 26220, // ~$19 USD @ 1380
+    desc: 'Unlimited Korean Saju readings + monthly forecasts in English. Cancel anytime. Cultural/entertainment content.',
+    type: 'global_subscription',
+    lang: 'en',
+  },
 ];
 
 module.exports = (req, res) => {

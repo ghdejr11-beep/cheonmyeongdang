@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K-Wisdom Daily — Korean Wisdom for Modern Life | Free Newsletter</title>
+<meta name="description" content="5,000 years of Korean philosophy decoded for modern life. Daily 5-min reads on Saju, Korean tax, longevity rituals, and cultural wisdom. Free newsletter.">
+<meta property="og:title" content="K-Wisdom Daily — Free Newsletter">
+<meta property="og:description" content="Korean astrology, tax tips for foreigners, longevity rituals, and modern wisdom. Delivered weekly.">
+<meta property="og:url" content="https://cheonmyeongdang.vercel.app/newsletter">
+<style>
+  :root {
+    --bg: #080a10;
+    --card: rgba(13,16,32,0.97);
+    --gold: #c9a84c;
+    --gold2: #e8c97a;
+    --jade: #4a9e8e;
+    --text: #e8e0d0;
+    --text2: #a89880;
+    --border: rgba(201,168,76,0.2);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: radial-gradient(ellipse at top, #1a1040 0%, var(--bg) 70%);
+    color: var(--text);
+    font-family: 'Inter', 'Pretendard', -apple-system, sans-serif;
+    min-height: 100vh;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 32px 20px 60px; }
+  header { text-align: center; margin-bottom: 36px; }
+  h1 {
+    font-size: 2.4rem;
+    color: var(--gold2);
+    margin-bottom: 12px;
+    font-family: 'Gowun Batang', 'Pretendard', serif;
+  }
+  .tagline { color: var(--text2); font-size: 1.05rem; margin-bottom: 6px; }
+  .meta { color: var(--text2); font-size: 0.85rem; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 22px;
+  }
+  h2 { color: var(--gold2); font-size: 1.3rem; margin-bottom: 14px; }
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .pillar {
+    background: rgba(74,158,142,0.06);
+    border: 1px solid rgba(74,158,142,0.2);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .pillar strong { color: var(--jade); display: block; margin-bottom: 4px; font-size: 0.95rem; }
+  .pillar p { color: var(--text2); font-size: 0.86rem; }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  input[type="email"] {
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  input[type="email"]:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  button {
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: #000;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  button:disabled { opacity: 0.6; cursor: not-allowed; }
+  .privacy {
+    color: var(--text2);
+    font-size: 0.82rem;
+    margin-top: 8px;
+  }
+  .feedback {
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-size: 0.92rem;
+    display: none;
+  }
+  .feedback.success { background: rgba(74,158,142,0.15); color: var(--jade); display: block; }
+  .feedback.error { background: rgba(220,80,80,0.15); color: #f08080; display: block; }
+  .preview {
+    background: rgba(0,0,0,0.3);
+    border-left: 3px solid var(--gold);
+    padding: 14px 18px;
+    margin: 12px 0;
+    color: var(--text2);
+    font-style: italic;
+    font-size: 0.94rem;
+  }
+  .preview strong { color: var(--gold2); font-style: normal; display: block; margin-bottom: 4px; }
+  footer { text-align: center; color: var(--text2); font-size: 0.85rem; margin-top: 32px; }
+  footer a { color: var(--gold2); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>K-Wisdom Daily</h1>
+  <p class="tagline">5,000 years of Korean wisdom · decoded for modern life</p>
+  <p class="meta">Free · weekly · 5-minute reads · unsubscribe anytime</p>
+</header>
+
+<div class="card">
+  <h2>5 Pillars of K-Wisdom</h2>
+  <div class="pillars">
+    <div class="pillar"><strong>🔮 Saju (Korean Astrology)</strong><p>The four-pillar system that goes deeper than zodiac signs.</p></div>
+    <div class="pillar"><strong>💼 Korean Tax for Foreigners</strong><p>Legal savings most expats miss in Korean tax law.</p></div>
+    <div class="pillar"><strong>🌱 Health & Longevity</strong><p>Daily rituals behind Korea's top-5 life expectancy.</p></div>
+    <div class="pillar"><strong>📚 Wisdom for Modern Life</strong><p>Confucian, Buddhist, and folk wisdom applied to today.</p></div>
+    <div class="pillar"><strong>🎬 K-Drama / K-Pop Saju</strong><p>Reading the four pillars of K-celebrities and characters.</p></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Recent Issue Preview</h2>
+  <div class="preview">
+    <strong>Why Koreans Live to 90 — 5 Daily Rituals That Actually Work</strong>
+    Korea ranks top-5 globally for life expectancy and lowest in OECD for obesity and heart disease. The answer is not one magic food — it is a stack of small daily rituals: morning warm-water-then-soybean-paste-soup, banchan diversity (5+ side dishes per meal), 30-minute walks after meals (식후산책)…
+  </div>
+  <div class="preview">
+    <strong>Korean Buddhist Mindfulness — Templestay Lessons in 10 Minutes</strong>
+    The Korean templestay (템플스테이) program distills 1,500 years of Korean Seon (Zen) Buddhism into a portable practice. Three core lessons: 108-bow morning ritual (humility through movement), barugongyang silent meal (gratitude through restraint), and walking meditation in pine forests…
+  </div>
+</div>
+
+<div class="card">
+  <h2>Subscribe (Free)</h2>
+  <form id="subscribe-form">
+    <input type="email" id="email-input" placeholder="your@email.com" required>
+    <button type="submit" id="submit-btn">Subscribe — Get next issue Sunday</button>
+    <p class="privacy">No spam. Unsubscribe with one click. Email used only for newsletter delivery.</p>
+  </form>
+  <div id="feedback" class="feedback"></div>
+</div>
+
+<div class="card">
+  <h2>Why subscribe?</h2>
+  <p style="color:var(--text2);">Most "Korea content" sticks to surface-level K-pop and food. K-Wisdom Daily goes underneath: the Confucian ethics behind Korean work culture, the four-pillar astrology that Korean families still consult before marriage, the tax loopholes legal residents miss, the longevity rituals nobody writes about in English. <strong style="color:var(--text);">5 minutes a week, decade-long compounding.</strong></p>
+  <p style="color:var(--text2);margin-top:12px;font-size:0.88rem;">Not medical, legal, or financial advice. Korean astrology and traditional practices presented as cultural heritage and entertainment.</p>
+</div>
+
+<footer>
+  <p>K-Wisdom Daily · A KunStudio publication</p>
+  <p style="margin-top:6px;"><a href="/">cheonmyeongdang.vercel.app</a> · <a href="https://www.youtube.com/@kwisdom_kr">YouTube K-Wisdom</a></p>
+</footer>
+</div>
+
+<script>
+document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const email = document.getElementById('email-input').value.trim();
+  const btn = document.getElementById('submit-btn');
+  const fb = document.getElementById('feedback');
+  if (!email || !email.includes('@')) {
+    fb.className = 'feedback error';
+    fb.textContent = 'Please enter a valid email address.';
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Subscribing...';
+  fb.className = 'feedback';
+  fb.textContent = '';
+  try {
+    const r = await fetch('/api/invite?action=newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, source: 'newsletter_page' }),
+    });
+    const j = await r.json();
+    if (j && j.success) {
+      fb.className = 'feedback success';
+      fb.textContent = '✅ Subscribed! Welcome email arriving in your inbox.';
+      btn.textContent = 'Subscribed ✓';
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', 'newsletter_signup', { source: 'newsletter_page' });
+        }
+      } catch(e) {}
+    } else {
+      fb.className = 'feedback error';
+      fb.textContent = (j && j.error) || 'Subscription failed. Please try again.';
+      btn.disabled = false;
+      btn.textContent = 'Subscribe — Get next issue Sunday';
+    }
+  } catch(err) {
+    fb.className = 'feedback error';
+    fb.textContent = 'Network error. Please check your connection.';
+    btn.disabled = false;
+    btn.textContent = 'Subscribe — Get next issue Sunday';
+  }
+});
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-90Y8GPVX1F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-90Y8GPVX1F');
+</script>
+</body>
+</html>
