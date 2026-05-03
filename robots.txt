@@ -1,60 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /pay.html
-Disallow: /success.html
-Disallow: /fail.html
-Disallow: /restore.html
 Disallow: /api/
-Disallow: /hq/
-Disallow: /departments/
-Disallow: /research_competitors/
-Disallow: /scripts/
+Disallow: /pdfs/
 Disallow: /node_modules/
 
-# Sitemap
 Sitemap: https://cheonmyeongdang.vercel.app/sitemap.xml
-
-# Block AI scrapers (optional)
-User-agent: GPTBot
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: anthropic-ai
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
-# Allow search engines
-User-agent: Googlebot
-Allow: /
-Disallow: /pay.html
-Disallow: /success.html
-Disallow: /fail.html
-Disallow: /restore.html
-Disallow: /api/
-
-User-agent: Bingbot
-Allow: /
-Disallow: /pay.html
-Disallow: /api/
-
-User-agent: Yeti
-Allow: /
-Disallow: /pay.html
-Disallow: /api/
-
-User-agent: NaverBot
-Allow: /
-Disallow: /pay.html
-Disallow: /api/
-
-User-agent: Daum
-Allow: /
-Disallow: /pay.html
-Disallow: /api/
