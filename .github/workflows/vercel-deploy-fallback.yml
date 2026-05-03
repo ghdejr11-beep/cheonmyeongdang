@@ -1,0 +1,50 @@
+name: Vercel Deploy Fallback
+
+# 백업 자동 배포 — Vercel ↔ GitHub 정식 연결이 끊겨도 main 푸시마다 강제 배포.
+# 정식 연결 복구 후에도 두 경로가 충돌하지 않음 (Vercel은 동일 sha 중복 배포 dedupe).
+#
+# 사용 전 1회만 설정 필요:
+#   1) https://vercel.com/account/tokens 에서 토큰 발급 (이미 있으면 재사용)
+#   2) GitHub repo Settings → Secrets and variables → Actions → New repository secret
+#      VERCEL_TOKEN          = 발급한 토큰
+#      VERCEL_ORG_ID         = team_i3kpucMMHcSP1emQMiASHRMR
+#      VERCEL_PROJECT_ID     = prj_DzMpoENL9x6CARaZCZsuCmWjFzzi
+#   3) main 푸시 시 자동으로 production 배포
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # 수동 트리거 보험
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Pull Vercel project info
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy to production
+        run: |
+          DEPLOY_URL=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          echo "Deployed to: $DEPLOY_URL"
+          echo "DEPLOY_URL=$DEPLOY_URL" >> $GITHUB_ENV
+
+      - name: Verify SKU count after deploy
+        run: |
+          sleep 10
+          SKUS=$(curl -s https://cheonmyeongdang.vercel.app/api/payment-config | python3 -c "import json,sys; print(len(json.load(sys.stdin)['skus']))")
+          echo "Production SKU count: $SKUS"
+          if [ "$SKUS" -lt "8" ]; then
+            echo "::warning::Expected ≥8 SKUs but got $SKUS — deploy may not have rolled live yet"
+          fi

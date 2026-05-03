@@ -10,7 +10,9 @@
     }
   },
   "rewrites": [
-    { "source": "/", "destination": "/index.html" }
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/api/invite-link", "destination": "/api/invite?action=link" },
+    { "source": "/api/invite-track", "destination": "/api/invite?action=track" }
   ],
   "crons": [
     { "path": "/api/cron-followup", "schedule": "0 0 * * *" }

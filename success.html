@@ -116,6 +116,15 @@
 <div class="receipt" id="receipt">
 <!-- 영수증 정보 -->
 </div>
+
+<!-- PDF 이북 다운로드 섹션 (ebook_* SKU 결제 시 동적 표시) -->
+<div id="ebook-download" style="display:none;margin:18px 0;padding:20px;background:linear-gradient(135deg,rgba(74,158,142,0.16),rgba(74,158,142,0.04));border:1px solid var(--jade);border-radius:14px;text-align:left;">
+<div style="font-size:0.72rem;color:var(--jade);letter-spacing:0.18em;font-weight:800;margin-bottom:10px;">📘 PDF 이북 즉시 다운로드</div>
+<p style="color:var(--text2);font-size:0.82rem;line-height:1.6;margin-bottom:14px;">결제가 확인되었습니다. 아래 버튼을 누르면 PDF 파일이 즉시 다운로드됩니다.<br><small style="color:var(--text2);font-size:0.74rem;">※ 영구 소장용 — 이메일에도 동일 링크가 발송됩니다.</small></p>
+<a id="ebook-download-link" href="#" download class="btn" style="display:block;text-align:center;margin-bottom:6px;">📥 PDF 즉시 다운로드 →</a>
+<div id="ebook-download-meta" style="margin-top:8px;font-size:0.72rem;color:var(--text2);text-align:center;"></div>
+</div>
+
 <a href="./" class="btn" id="back-btn">천명당으로 돌아가기</a>
 
 <!-- 다른 기기 복원 안내 -->
@@ -244,6 +253,14 @@
  resolvedSkuId === 'compat_detail_9900' ||
  serviceName.indexOf('궁합') !== -1
  );
+ // ─── 5월 가정의달 PDF 이북 4종 분기 (ebook_* SKU) ───
+ var EBOOK_PDFS = {
+ 'ebook_eobo_letter_6900':   { path: '/pdfs/eobo_letter.pdf',    name: '어버이날 감사 편지 100선', pages: 79 },
+ 'ebook_eorin_mission_9900': { path: '/pdfs/eorin_mission.pdf',  name: '어린이날 가족 미션북',    pages: 56 },
+ 'ebook_family_diary_7900':  { path: '/pdfs/family_diary.pdf',   name: '5월 가정의달 다이어리',    pages: 39 },
+ 'ebook_jongsose_guide_12900': { path: '/pdfs/jongsose_guide.pdf', name: '종소세 셀프 신고 가이드', pages: 28 },
+ };
+ var isEbook = !!EBOOK_PDFS[resolvedSkuId];
 
  // ─── 메시지/아이콘 분기 + 구매 기록 ───
  if (isSubscription) {
@@ -300,6 +317,27 @@
  var emailParam = encodeURIComponent((orderData.email || '').trim().toLowerCase());
  document.getElementById('back-btn').href = '/compat.html?email=' + emailParam + '&auto=1';
  recordCmPurchase(resolvedSkuId || 'compat_detail_9900');
+ } else if (isEbook) {
+ // ─── PDF 이북 4종 (어버이날/어린이날/다이어리/종소세) ───
+ var meta = EBOOK_PDFS[resolvedSkuId];
+ document.getElementById('icon').textContent = '📘';
+ document.getElementById('title').textContent = 'PDF 이북 다운로드 준비 완료';
+ document.getElementById('message').innerHTML =
+ '<strong style="color:var(--gold2);">' + meta.name + '</strong> (' + meta.pages + 'p) 결제가 완료되었습니다.<br>' +
+ '아래 다운로드 버튼 또는 이메일 링크로 즉시 받으실 수 있습니다.<br>' +
+ '<small style="color:var(--text2);font-size:0.82rem;">※ 영구 소장용 — 다운로드 횟수 제한 없음.</small>';
+ document.getElementById('back-btn').textContent = '천명당으로 돌아가기';
+ // 다운로드 섹션 활성화
+ var dlBox = document.getElementById('ebook-download');
+ var dlLink = document.getElementById('ebook-download-link');
+ var dlMeta = document.getElementById('ebook-download-meta');
+ if (dlBox && dlLink) {
+ dlBox.style.display = 'block';
+ dlLink.href = meta.path;
+ dlLink.setAttribute('download', meta.path.split('/').pop());
+ if (dlMeta) dlMeta.textContent = meta.name + ' · PDF ' + meta.pages + 'p · 영구 다운로드';
+ }
+ recordCmPurchase(resolvedSkuId);
  }
 
  // ─── 천명당 SKU cross-sell 동적 생성 (LTV funnel) ───

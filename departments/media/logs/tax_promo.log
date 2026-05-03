@@ -56,3 +56,5 @@
 2026-04-27 02:10:25 [shorts] DONE shorts5_bundle.mp4 (1383 KB)
 2026-04-27 02:10:25 [cards] DONE shorts5_bundle_cards.zip (158 KB, 6 slides)
 2026-04-27 02:10:25 === build 완료 ===
+2026-05-02 18:00:02 [post] cards shorts1_price_cards
+2026-05-02 18:00:26 [post] results: {'bluesky': True, 'discord': True, 'mastodon': True, 'x': False, 'threads': True, 'instagram': True}

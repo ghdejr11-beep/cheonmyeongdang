@@ -255,7 +255,7 @@ def build_script(job: dict, env: dict, log) -> str:
         "  - Do NOT exceed 110 words."
     )
     import urllib.request
-    for model in ("claude-haiku-4-5-20251001", "claude-sonnet-4-5-20250929"):
+    for model in ("claude-haiku-4-5", "claude-sonnet-4-6"):
         try:
             req = urllib.request.Request(
                 "https://api.anthropic.com/v1/messages",

@@ -75,7 +75,10 @@ def send_telegram(text):
 
 def log(msg):
     line = f'[{datetime.now().isoformat(timespec="seconds")}] {msg}'
-    print(line)
+    try:
+        print(line)
+    except UnicodeEncodeError:
+        print(line.encode('ascii', 'replace').decode('ascii'))
     with open(LOG_FILE, 'a', encoding='utf-8') as f:
         f.write(line + '\n')
 

@@ -31,7 +31,13 @@ DEFAULT_TOKEN_OUT = Path(
     r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets_admob_token.json"
 )
 SECRETS_PATH = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
-ADMOB_API_SCOPES = ["https://www.googleapis.com/auth/admob.readonly"]
+ADMOB_API_SCOPES = [
+    "https://www.googleapis.com/auth/admob.readonly",
+    # monetization scope: 광고 단위 자동 생성/수정/삭제용 (2026-05-01 추가)
+    "https://www.googleapis.com/auth/admob.monetization",
+    # report scope: networkReport / mediationReport 호출용
+    "https://www.googleapis.com/auth/admob.report",
+]
 
 
 def _load_env():

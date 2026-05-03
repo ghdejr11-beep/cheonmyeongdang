@@ -33,7 +33,20 @@ const SKU_DELIVERY_NOTE = {
   sinnyeon_15000: '신년운세 12개월 리포트는 앱/웹에서 즉시 확인하실 수 있습니다.',
   subscribe_monthly_29900:
     '월회원권 구독이 시작되었습니다. 내일 오전 8시부터 매일 카카오 알림톡(또는 텔레그램)으로 오늘의 운세를 받으실 수 있습니다.',
+  ebook_eobo_letter_6900: 'PDF 이북(79p)은 아래 다운로드 링크에서 즉시 받으실 수 있습니다. 영구 소장용 — 다운로드 횟수 제한 없음.',
+  ebook_eorin_mission_9900: 'PDF 이북(56p)은 아래 다운로드 링크에서 즉시 받으실 수 있습니다. 영구 소장용 — 다운로드 횟수 제한 없음.',
+  ebook_family_diary_7900: 'PDF 이북(39p)은 아래 다운로드 링크에서 즉시 받으실 수 있습니다. 영구 소장용 — 다운로드 횟수 제한 없음.',
+  ebook_jongsose_guide_12900: 'PDF 이북(28p)은 아래 다운로드 링크에서 즉시 받으실 수 있습니다. 영구 소장용 — 다운로드 횟수 제한 없음.',
 };
+
+// ─── 이북 PDF 다운로드 메타 (ebook_* SKU) ───
+const EBOOK_PDF_META = {
+  ebook_eobo_letter_6900:    { path: '/pdfs/eobo_letter.pdf',    pages: 79 },
+  ebook_eorin_mission_9900:  { path: '/pdfs/eorin_mission.pdf',  pages: 56 },
+  ebook_family_diary_7900:   { path: '/pdfs/family_diary.pdf',   pages: 39 },
+  ebook_jongsose_guide_12900:{ path: '/pdfs/jongsose_guide.pdf', pages: 28 },
+};
+const SITE_BASE = 'https://cheonmyeongdang.vercel.app';
 
 // ─── HTML 이메일 템플릿 ───
 function buildHtml({ orderId, amount, sku, customerName, payDate, method }) {
@@ -43,6 +56,8 @@ function buildHtml({ orderId, amount, sku, customerName, payDate, method }) {
     SKU_DELIVERY_NOTE[sku.id] ||
     '결과는 24시간 이내 회원 이메일로 발송됩니다.';
   const isSubscription = sku.type === 'subscription';
+  const ebookMeta = EBOOK_PDF_META[sku.id] || null;
+  const ebookDownloadUrl = ebookMeta ? SITE_BASE + ebookMeta.path : null;
   const nextRenewal = isSubscription
     ? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('ko-KR')
     : null;
@@ -108,6 +123,14 @@ function buildHtml({ orderId, amount, sku, customerName, payDate, method }) {
           </tr>` : ''}
         </table>
       </div>
+
+      ${ebookDownloadUrl ? `<!-- PDF 이북 다운로드 -->
+      <div style="background:rgba(74,158,142,0.12);border:1px solid #4a9e8e;border-radius:12px;padding:18px 20px;margin:18px 0;text-align:center;">
+        <div style="font-size:11px;color:#4a9e8e;letter-spacing:0.18em;font-weight:800;margin-bottom:8px;">📘 PDF 이북 다운로드</div>
+        <p style="color:#e8e0d0;font-size:13px;line-height:1.6;margin:0 0 12px;">${sku.name} (${ebookMeta.pages}p)</p>
+        <a href="${ebookDownloadUrl}" style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#4a9e8e,#7fc8b6);color:#080a10;font-weight:700;text-decoration:none;border-radius:8px;font-size:14px;">📥 PDF 즉시 다운로드 →</a>
+        <div style="margin-top:8px;font-size:11px;color:#a89880;">영구 소장용 · 다운로드 횟수 제한 없음</div>
+      </div>` : ''}
 
       <div style="text-align:center;margin:24px 0 8px;">
         <a href="https://cheonmyeongdang.vercel.app/" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#c9a84c,#e8c97a);color:#080a10;font-weight:700;text-decoration:none;border-radius:8px;font-size:15px;">
@@ -193,6 +216,10 @@ function buildHtml({ orderId, amount, sku, customerName, payDate, method }) {
 function buildText({ orderId, amount, sku, customerName, payDate, method }) {
   const amountFmt = Number(amount).toLocaleString('ko-KR') + '원';
   const isSubscription = sku.type === 'subscription';
+  const ebookMeta = EBOOK_PDF_META[sku.id] || null;
+  const ebookLine = ebookMeta
+    ? ['', '─── PDF 이북 다운로드 ───', `${sku.name} (${ebookMeta.pages}p)`, `${SITE_BASE}${ebookMeta.path}`, '영구 소장용 · 다운로드 횟수 제한 없음']
+    : [];
   return [
     '천명당 (天命堂) — 결제 영수증',
     '',
@@ -206,6 +233,7 @@ function buildText({ orderId, amount, sku, customerName, payDate, method }) {
     `결제일: ${payDate}`,
     '',
     SKU_DELIVERY_NOTE[sku.id] || '결과는 24시간 이내 발송됩니다.',
+    ...ebookLine,
     '',
     '─── 함께 보면 좋은 자료 ───',
     '· 사주명리학 입문 가이드 (35p, $5)',

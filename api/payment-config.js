@@ -98,6 +98,50 @@ const SKU_CATALOG = [
     desc: '부모님 사주 정밀 + 부모-자녀 궁합 + 신년운세 + AI 챗봇 30회 + 카네이션 카드 PDF 5종 + 감사 편지 100선 e-book 묶음. 5월 한정.',
     type: 'inapp',
   },
+  // ─── 5월 가정의달 PDF 이북 4종 ─────────────────────────────────
+  // KDP 동시 발간 + 천명당 도메인 직접 다운로드. type:'ebook' → success.html에서 다운로드 섹션 분기.
+  // pdfPath는 /pdfs/{slug}.pdf — Vercel 정적 호스팅. 결제 후 success.html이 SKU 보고 다운로드 링크 생성.
+  // 광고 카피 검수: "100% 환급"/"세무사 대체"/특정 업체·연예인·IP 거론 0건.
+  {
+    id: 'ebook_eobo_letter_6900',
+    name: '어버이날 감사 편지 100선',
+    amount: 6900,
+    desc: '부모님께 드릴 손편지 100가지 — 막막한 한 줄을 채워드리는 템플릿집 (PDF 79p).',
+    type: 'ebook',
+    pdfPath: '/pdfs/eobo_letter.pdf',
+    pages: 79,
+    season: '5/8',
+  },
+  {
+    id: 'ebook_eorin_mission_9900',
+    name: '어린이날 가족 미션북',
+    amount: 9900,
+    desc: '5월 5일, 부모와 아이가 함께 푸는 30일 미션북 (PDF 56p).',
+    type: 'ebook',
+    pdfPath: '/pdfs/eorin_mission.pdf',
+    pages: 56,
+    season: '5/5',
+  },
+  {
+    id: 'ebook_family_diary_7900',
+    name: '5월 가정의달 다이어리',
+    amount: 7900,
+    desc: '어버이날·어린이날·가족모임 — 5월 한 달 가족 일정 정리 다이어리 (PDF 39p).',
+    type: 'ebook',
+    pdfPath: '/pdfs/family_diary.pdf',
+    pages: 39,
+    season: '5/1~31',
+  },
+  {
+    id: 'ebook_jongsose_guide_12900',
+    name: '종소세 셀프 신고 가이드',
+    amount: 12900,
+    desc: '프리랜서·N잡러 5월 31일 마감 종소세 단계별 가이드 (PDF 28p). 신고 대행 X — 본인 직접 홈택스 입력 보조.',
+    type: 'ebook',
+    pdfPath: '/pdfs/jongsose_guide.pdf',
+    pages: 28,
+    season: '5/1~31',
+  },
 ];
 
 module.exports = (req, res) => {
@@ -143,6 +187,12 @@ module.exports = (req, res) => {
     skuProviderOverride = {};
   }
 
+  // PayPal (글로벌 결제) — PG 라이브키 통과 전 즉시 활성화 가능 채널
+  // PAYPAL_CLIENT_ID 환경변수 등록 시 pay.html에 PayPal Smart Buttons 자동 노출
+  const paypalClientId = (process.env.PAYPAL_CLIENT_ID || '').trim();
+  const paypalEnv = (process.env.PAYPAL_ENV || 'sandbox').trim(); // sandbox or production
+  const paypalEnabled = paypalClientId !== '';
+
   return res.status(200).json({
     // 토스 (기존 흐름 유지)
     clientKey,
@@ -155,6 +205,10 @@ module.exports = (req, res) => {
     portoneChannelKey,
     portoneChannelKeys,
     skuProviderOverride,
+    // PayPal (글로벌)
+    paypalClientId,
+    paypalEnv,
+    paypalEnabled,
   });
 };
 

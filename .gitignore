@@ -49,3 +49,12 @@ departments/*/output/*.json
 # Secretary OAuth tokens (never commit)
 departments/secretary/token_*.json
 departments/secretary/credentials*.json
+
+# Auto-generated logs/state (added 2026-05-01)
+departments/media/logs/*.log
+departments/intelligence/data/health_*.{txt,json}
+departments/sales-collection/data/admob_daily.json
+departments/sales-collection/data/yt_*_daily.json
+departments/media/src/*_state.json
+departments/media/src/seasonal_state.json
+departments/media/src/tax_promo_queue.json
