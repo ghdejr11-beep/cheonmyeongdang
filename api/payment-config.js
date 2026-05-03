@@ -366,6 +366,42 @@ const SKU_CATALOG = [
     pages: 5,
     lang: 'en',
   },
+  // ─── 5/3 MEGA BUNDLE — 100일 가속 매출 path ──────────────────
+  // 20 PDF + 10 audiobook + 20 SEO blog = catalog 전체 묶음 launch.
+  // 정상가 $200+, launch $97 (50% off). Limited time first 100 buyers.
+  {
+    id: 'bundle_kunstudio_mega_9700',
+    name: '🔥 KunStudio Mega Bundle — 20 EBOOKs + Bonuses (LAUNCH)',
+    amount: 9700, // ~$70 KRW (~$70 USD with conversion)
+    desc: 'ALL 20 KunStudio EBOOKs (AI Prompts, Solo Entrepreneur Stack, Time Block Mastery, Mindfulness, AI Side Hustle, Korean Saju + 15 more). Worth $200+ separately. Launch price $70 first 100 buyers only. Includes audiobook companions when available.',
+    type: 'bundle',
+    pdfPaths: [
+      '/pdfs/ai_prompts_library_100.pdf',
+      '/pdfs/time_block_mastery.pdf',
+      '/pdfs/solo_entrepreneur_stack_2026.pdf',
+      '/pdfs/mindfulness_5min_daily.pdf',
+      '/pdfs/ai_side_hustle_blueprint.pdf',
+      '/pdfs/saju_birth_chart_en.pdf',
+      '/pdfs/kwisdom_wall_art.pdf',
+      '/pdfs/kwisdom_daily_planner_2026.pdf',
+      '/pdfs/korean_tax_foreigners.pdf',
+      '/pdfs/korean_recipe_planner.pdf',
+      '/pdfs/k_beauty_skincare.pdf',
+      '/pdfs/korean_workout_plan.pdf',
+      '/pdfs/korean_coffee_culture.pdf',
+      '/pdfs/kdrama_saju_decoder.pdf',
+      '/pdfs/korean_travel_phrases.pdf',
+      '/pdfs/korean_wedding_guide.pdf',
+      '/pdfs/korean_business_etiquette.pdf',
+      '/pdfs/korean_kpop_saju_vol2.pdf',
+      '/pdfs/korean_funeral_etiquette.pdf',
+      '/pdfs/korean_drinking_culture.pdf',
+    ],
+    pages: 100,
+    lang: 'en',
+    launch_limit: 100,
+    original_price_krw: 200000,
+  },
 ];
 
 module.exports = (req, res) => {
