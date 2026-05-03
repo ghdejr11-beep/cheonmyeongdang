@@ -93,6 +93,82 @@ function portoneGetPayment(apiSecret, paymentId) {
   });
 }
 
+/**
+ * PayPal OAuth2 access token (client_credentials)
+ * Docs: https://developer.paypal.com/api/rest/authentication/
+ */
+function paypalAccessToken(clientId, secret, env) {
+  const hostname = env === 'sandbox' ? 'api-m.sandbox.paypal.com' : 'api-m.paypal.com';
+  const auth = Buffer.from(clientId + ':' + secret).toString('base64');
+  const data = 'grant_type=client_credentials';
+  return new Promise((resolve, reject) => {
+    const req = https.request(
+      {
+        hostname,
+        port: 443,
+        path: '/v1/oauth2/token',
+        method: 'POST',
+        headers: {
+          Authorization: 'Basic ' + auth,
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': Buffer.byteLength(data),
+        },
+      },
+      (res) => {
+        let buf = '';
+        res.on('data', (c) => (buf += c));
+        res.on('end', () => {
+          try {
+            const json = JSON.parse(buf);
+            resolve({ status: res.statusCode, body: json });
+          } catch (e) {
+            resolve({ status: res.statusCode, body: { error: 'PARSE_ERROR', raw: buf } });
+          }
+        });
+      }
+    );
+    req.on('error', reject);
+    req.write(data);
+    req.end();
+  });
+}
+
+/**
+ * PayPal GET order — capture 후 status === 'COMPLETED' 확인 + amount 검증
+ * Docs: https://developer.paypal.com/docs/api/orders/v2/#orders_get
+ */
+function paypalGetOrder(accessToken, orderId, env) {
+  const hostname = env === 'sandbox' ? 'api-m.sandbox.paypal.com' : 'api-m.paypal.com';
+  return new Promise((resolve, reject) => {
+    const req = https.request(
+      {
+        hostname,
+        port: 443,
+        path: '/v2/checkout/orders/' + encodeURIComponent(orderId),
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + accessToken,
+          'Content-Type': 'application/json',
+        },
+      },
+      (res) => {
+        let buf = '';
+        res.on('data', (c) => (buf += c));
+        res.on('end', () => {
+          try {
+            const json = JSON.parse(buf);
+            resolve({ status: res.statusCode, body: json });
+          } catch (e) {
+            resolve({ status: res.statusCode, body: { error: 'PARSE_ERROR', raw: buf } });
+          }
+        });
+      }
+    );
+    req.on('error', reject);
+    req.end();
+  });
+}
+
 function sendTelegram(token, chatId, text) {
   return new Promise((resolve) => {
     const data = JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' });
@@ -136,9 +212,10 @@ module.exports = async (req, res) => {
   }
   body = body || {};
 
-  // provider: 'toss' (기본/현재) | 'portone-kcn' | 'portone-kakaopay'
+  // provider: 'toss' (기본/현재) | 'portone-kcn' | 'portone-kakaopay' | 'paypal'
   const provider = (body.provider || 'toss').toString();
   const isPortOne = provider === 'portone-kcn' || provider === 'portone-kakaopay' || provider === 'portone';
+  const isPaypal = provider === 'paypal';
 
   const { paymentKey, orderId, amount, skuId, customerEmail, invitedBy_code, visitor_id } = body;
   // 포트원은 paymentId 필드도 허용 (paymentKey가 없을 때)
@@ -169,7 +246,61 @@ module.exports = async (req, res) => {
   let normalizedApprovedAt;
 
   try {
-    if (isPortOne) {
+    if (isPaypal) {
+      // PayPal Smart Buttons (글로벌) — 클라이언트 capture 후 서버측 위변조 검증
+      const paypalClientId = (process.env.PAYPAL_CLIENT_ID || '').trim();
+      const paypalSecret = (process.env.PAYPAL_CLIENT_SECRET || '').trim();
+      const paypalEnv = (process.env.PAYPAL_ENV || 'production').trim();
+      if (!paypalClientId || !paypalSecret) {
+        return res
+          .status(500)
+          .json({ success: false, error: 'PAYPAL_CLIENT_ID/PAYPAL_CLIENT_SECRET 미설정' });
+      }
+      const tokResp = await paypalAccessToken(paypalClientId, paypalSecret, paypalEnv);
+      const accessToken = tokResp.body && tokResp.body.access_token;
+      if (tokResp.status !== 200 || !accessToken) {
+        return res.status(502).json({
+          success: false,
+          error: 'PayPal OAuth 실패',
+          raw: tokResp.body,
+        });
+      }
+      const ordResp = await paypalGetOrder(accessToken, paymentId, paypalEnv);
+      const ord = ordResp.body || {};
+      if (ordResp.status !== 200 || ord.status !== 'COMPLETED') {
+        return res.status(400).json({
+          success: false,
+          error: 'PayPal 결제 미완료/검증 실패',
+          paypalStatus: ord.status,
+          raw: ord,
+        });
+      }
+      // 금액 검증 — PayPal USD vs SKU KRW 환산 (pay.html과 동일 환율 1380)
+      const KRW_PER_USD = 1380;
+      const expectedUsdRaw = sku.amount / KRW_PER_USD;
+      const expectedUsd = Math.max(Number(expectedUsdRaw.toFixed(2)), 0.5);
+      const pgUnit = (ord.purchase_units && ord.purchase_units[0]) || {};
+      const captures = (pgUnit.payments && pgUnit.payments.captures) || [];
+      const cap = captures[0] || {};
+      const pgUsd = Number(
+        (cap.amount && cap.amount.value) || (pgUnit.amount && pgUnit.amount.value) || 0
+      );
+      // 환율 변동 5% 허용 — 변동분이 더 크게 떨어진 경우만 거절
+      if (pgUsd < expectedUsd * 0.95) {
+        return res.status(400).json({
+          success: false,
+          error: 'PayPal 금액 불일치 (5% 허용범위 초과)',
+          expectedUsd,
+          paidUsd: pgUsd,
+        });
+      }
+      normalizedBody = ord;
+      normalizedMethod = 'paypal';
+      const selfLink = ((cap.links || []).find((l) => l && l.rel === 'self') || {}).href;
+      normalizedReceiptUrl = selfLink || null;
+      normalizedApprovedAt =
+        cap.create_time || ord.create_time || new Date().toISOString();
+    } else if (isPortOne) {
       // 포트원 V2: 결제 조회로 위변조 검증 (서버 결제승인은 SDK가 PG로 직접 진행)
       const portoneSecret = (process.env.PORTONE_API_SECRET || '').trim();
       if (!portoneSecret) {
