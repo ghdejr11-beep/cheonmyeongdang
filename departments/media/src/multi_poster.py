@@ -366,6 +366,59 @@ def post_instagram(text, image_url=None, env=None, max_retry=2):
     return False, last_err2
 
 
+# ───────── Facebook — Meta Graph API page feed ─────────
+def post_facebook(text, image_url=None, env=None):
+    """Facebook Page에 메시지 발행 (Meta Graph API).
+
+    필수 환경변수 (.secrets):
+      FB_PAGE_ID         — Facebook Page numeric ID
+      FB_PAGE_TOKEN      — Long-lived Page Access Token
+
+    토큰 발급:
+      1. https://developers.facebook.com/apps/976006964814691/ → Tools → Graph API Explorer
+      2. Get Page Access Token (User Access Token → Page 선택 → /me/accounts)
+      3. https://developers.facebook.com/tools/debug/accesstoken/ 에서 long-lived 변환 (60일)
+
+    Args:
+        text: post 텍스트
+        image_url: 이미지 첨부 (선택). HTTPS URL only.
+        env: secrets dict (옵션, None이면 자동 로드)
+
+    Returns:
+        (True, response_dict) | (False, error_message)
+    """
+    env = env or _load_secrets()
+    page_id = env.get('FB_PAGE_ID', '').strip()
+    token = env.get('FB_PAGE_TOKEN', '').strip()
+    if not page_id or not token:
+        return False, 'no FB_PAGE_ID/FB_PAGE_TOKEN (set in .secrets — see post_facebook docstring for token generation)'
+    text = redact_phone(text)
+
+    if image_url:
+        # photo upload + caption
+        ok_host, hosted_url = host_image(image_url, env) if _is_local_path(image_url) else (True, image_url)
+        if not ok_host:
+            return False, hosted_url
+        s, r = _http('POST', f'https://graph.facebook.com/v21.0/{page_id}/photos',
+                     body=urllib.parse.urlencode({
+                         'url': hosted_url,
+                         'caption': text[:5000],
+                         'access_token': token,
+                     }),
+                     headers={'Content-Type': 'application/x-www-form-urlencoded'})
+    else:
+        # plain message feed post
+        s, r = _http('POST', f'https://graph.facebook.com/v21.0/{page_id}/feed',
+                     body=urllib.parse.urlencode({
+                         'message': text[:5000],
+                         'access_token': token,
+                     }),
+                     headers={'Content-Type': 'application/x-www-form-urlencoded'})
+    if s == 200 and isinstance(r, dict) and ('id' in r or 'post_id' in r):
+        return True, r
+    return False, f'fb post fail: {s} {r}'
+
+
 # ───────── X (Twitter) — tweepy OAuth 1.0a ─────────
 def post_x(text, env=None):
     env = env or _load_secrets()
@@ -460,6 +513,7 @@ def send_all_direct(content, reddit_title=None, reddit_subreddit='test', image_u
         ('x', lambda: post_x(_t('x'), env)),
         ('threads', lambda: post_threads(_t('threads'), env)),
         ('instagram', lambda: post_instagram(_t('instagram'), image_url, env)),
+        ('facebook', lambda: post_facebook(_t('bluesky'), image_url, env)),
     ]:
         try:
             ok, _ = fn()
