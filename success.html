@@ -270,12 +270,20 @@
  resolvedSkuId === 'compat_detail_9900' ||
  serviceName.indexOf('궁합') !== -1
  );
- // ─── 5월 가정의달 PDF 이북 4종 분기 (ebook_* SKU) ───
+ // ─── PDF 이북 분기 (ebook_* SKU) ───
+ // 5월 가정의달 4종 + 5/3 자동 생성 5종 (영문판 K-Wisdom 시리즈)
  var EBOOK_PDFS = {
+ // 5월 한정 (한국)
  'ebook_eobo_letter_6900':   { path: '/pdfs/eobo_letter.pdf',    name: '어버이날 감사 편지 100선', pages: 79 },
  'ebook_eorin_mission_9900': { path: '/pdfs/eorin_mission.pdf',  name: '어린이날 가족 미션북',    pages: 56 },
  'ebook_family_diary_7900':  { path: '/pdfs/family_diary.pdf',   name: '5월 가정의달 다이어리',    pages: 39 },
  'ebook_jongsose_guide_12900': { path: '/pdfs/jongsose_guide.pdf', name: '종소세 셀프 신고 가이드', pages: 28 },
+ // 5/3 자동 생성 K-Wisdom 영문판 (글로벌)
+ 'ebook_saju_birth_en_9900':    { path: '/pdfs/saju_birth_chart_en.pdf',         name: 'Korean Saju Birth Chart Reading',     pages: 7 },
+ 'ebook_kwisdom_wallart_12900': { path: '/pdfs/kwisdom_wall_art.pdf',             name: 'Korean Wisdom Wall Art Bundle',       pages: 13 },
+ 'ebook_kwisdom_planner_14900': { path: '/pdfs/kwisdom_daily_planner_2026.pdf',   name: 'K-Wisdom Daily Planner 2026',         pages: 30 },
+ 'ebook_korean_tax_en_9900':    { path: '/pdfs/korean_tax_foreigners.pdf',        name: 'Korean Tax Smart Guide for Foreigners', pages: 10 },
+ 'ebook_korean_recipe_7900':    { path: '/pdfs/korean_recipe_planner.pdf',        name: 'Korean Recipe Meal Planner',          pages: 4 },
  };
  var isEbook = !!EBOOK_PDFS[resolvedSkuId];
 
