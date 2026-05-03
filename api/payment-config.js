@@ -402,6 +402,67 @@ const SKU_CATALOG = [
     launch_limit: 100,
     original_price_krw: 200000,
   },
+  // ─── 70일 $750K 가속 — High-ticket / Recurring / B2B ───────────
+  // 70-day timeline: AOV 강화 없이는 도달 불가능. 5 SKU는 catalog 매출 multiplier.
+  // Phase 1 (Day 1-14): Lifetime $497 + Cohort $297 (early adopter price)
+  // Phase 2 (Day 15-40): Monthly SaaS $99 + B2B audit $1997
+  // Phase 3 (Day 41-70): White-label $2997 (passive reseller revenue)
+  {
+    id: 'kunstudio_lifetime_69700',
+    name: '🌟 KunStudio Lifetime — All Current + Future EBOOKs Forever',
+    amount: 69700, // ~$497 USD
+    desc: 'ALL 20 current EBOOKs + every future EBOOK we publish (10+ per month). Audiobook companions included. Priority email support. Best for builders who want lifetime access without recurring fees. Worth $5,000+ over 1 year.',
+    type: 'bundle',
+    pdfPaths: 'all_current_plus_future',
+    lang: 'en',
+    tier: 'lifetime',
+    launch_limit: 50, // first 50 buyers only at this price
+    original_price_krw: 700000,
+  },
+  {
+    id: 'cohort_ai_solo_founder_29700',
+    name: '🚀 AI Solo Founder Sprint — 4-Week Cohort',
+    amount: 29700, // ~$297 USD
+    desc: '4-week intensive cohort: ship your first AI-powered product or hit $1K MRR. Daily action plan, async Slack support, 4 weekly group calls (recorded), AI prompt library, founder template kit. Limited to 30 founders per cohort. Next start: 2026-05-13.',
+    type: 'cohort',
+    lang: 'en',
+    tier: 'cohort',
+    cohort_start: '2026-05-13',
+    cohort_capacity: 30,
+    duration_weeks: 4,
+  },
+  {
+    id: 'subscribe_ai_productivity_os_9900',
+    name: '⚡ AI Productivity OS — Monthly Subscription',
+    amount: 9900, // ~$99 USD/mo (₩9,900 launch — should be ₩129,000 at production for $99 USD parity)
+    desc: 'Monthly access to: 200+ AI prompts (updated weekly), 12 productivity templates, GPT-Custom-Builder workflows, weekly office hours. Cancel anytime. $99/mo standard. Launch price for first 100 subscribers ₩9,900/mo locked forever.',
+    type: 'subscription',
+    lang: 'en',
+    tier: 'recurring',
+    billing_cycle: 'monthly',
+    launch_limit: 100,
+  },
+  {
+    id: 'b2b_ai_audit_199700',
+    name: '🏢 AI Operations Audit — B2B Productized Service',
+    amount: 199700, // ~$1,997 USD
+    desc: '7-day AI operations audit for SMB owners (5-50 employees). Deliverables: (1) 30-page audit report — what to automate, (2) Top 10 AI tool stack for your industry, (3) ROI calculation for each automation, (4) 60-min strategy call with founder. Save 20+ hours/week. Engagement starts within 48hrs of payment.',
+    type: 'service',
+    lang: 'en',
+    tier: 'b2b',
+    delivery_days: 7,
+  },
+  {
+    id: 'whitelabel_ebook_license_299700',
+    name: '💎 White-Label EBOOK License — Resale Rights',
+    amount: 299700, // ~$2,997 USD
+    desc: 'Resale rights to 5 KunStudio EBOOKs of your choice. Rebrand with your logo, sell on your site, keep 100% of revenue. Lifetime license. Includes editable Canva templates + sales page templates. Limit: 25 licenses per EBOOK across all customers (scarcity preserved).',
+    type: 'license',
+    lang: 'en',
+    tier: 'wl',
+    license_quantity: 5,
+    rebrand_allowed: true,
+  },
 ];
 
 module.exports = (req, res) => {
