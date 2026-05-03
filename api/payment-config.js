@@ -314,6 +314,58 @@ const SKU_CATALOG = [
     pages: 5,
     lang: 'en',
   },
+  // ─── 5/3 글로벌 mass market 5종 (catalog 32 → 37) ─────────────
+  // Korea-specific 제거. 영문권 mass market 검증 niche.
+  {
+    id: 'ebook_ai_prompts_100_9900',
+    name: 'AI Prompts Library: 100 Best Prompts for Solo Entrepreneurs',
+    amount: 9900,
+    desc: '100 ChatGPT/Claude/Gemini prompts for sales copy, content, customer service, email, product dev, operations. Tested. Copy-paste ready. $1K-5K/month bestseller niche on Amazon KDP.',
+    type: 'ebook',
+    pdfPath: '/pdfs/ai_prompts_library_100.pdf',
+    pages: 4,
+    lang: 'en',
+  },
+  {
+    id: 'ebook_time_block_7900',
+    name: 'Time Block Mastery: The 21-Day System',
+    amount: 7900,
+    desc: 'Reclaim 15+ hours/week with the productivity system used by Cal Newport, Elon Musk. 21-day plan with audit, themed days, deep work blocks, common pitfalls.',
+    type: 'ebook',
+    pdfPath: '/pdfs/time_block_mastery.pdf',
+    pages: 5,
+    lang: 'en',
+  },
+  {
+    id: 'ebook_solo_entrepreneur_11900',
+    name: 'Solo Entrepreneur Stack 2026',
+    amount: 11900,
+    desc: 'The complete tools, workflows, numbers behind $10K-100K MRR one-person businesses. 36% startups now solo, 77% first-year profitable. Modern AI-powered stack ($50-400/mo).',
+    type: 'ebook',
+    pdfPath: '/pdfs/solo_entrepreneur_stack_2026.pdf',
+    pages: 6,
+    lang: 'en',
+  },
+  {
+    id: 'ebook_mindfulness_5min_5900',
+    name: 'Mindfulness for Busy People: 5-Minute Daily Practice',
+    amount: 5900,
+    desc: '5-minute daily practices backed by Stanford and Harvard research. 4-7-8 breathing, body scan, single-tasking, 3 gratitudes. 80% benefit of 30-min sessions.',
+    type: 'ebook',
+    pdfPath: '/pdfs/mindfulness_5min_daily.pdf',
+    pages: 5,
+    lang: 'en',
+  },
+  {
+    id: 'ebook_ai_side_hustle_14900',
+    name: 'AI Side Hustle Blueprint: $0 → $10K/month',
+    amount: 14900,
+    desc: '12 proven AI-powered side hustles with real numbers and timelines. Faceless YouTube, Notion templates, AI audiobooks, niche newsletters, productized services. Year 1: $30K, Year 3: $400K math.',
+    type: 'ebook',
+    pdfPath: '/pdfs/ai_side_hustle_blueprint.pdf',
+    pages: 5,
+    lang: 'en',
+  },
 ];
 
 module.exports = (req, res) => {
