@@ -9,13 +9,16 @@
   if (window.__cmBgmInit) return;
   window.__cmBgmInit = true;
 
-  var SRC = '/assets/cm_jingle.mp3';
+  // 2개 버전 — 접속 시 랜덤 선택 (사용자 매번 다른 분위기 경험)
+  var SRCS = ['/assets/cm_jingle_v1.mp3', '/assets/cm_jingle_v2.mp3'];
+  var SRC = SRCS[Math.floor(Math.random() * SRCS.length)];
   var KEY_ON = 'cm_bgm_on';
   var KEY_TIME = 'cm_bgm_time';
 
   var audio = document.createElement('audio');
   audio.id = 'cm-bgm';
   audio.src = SRC;
+  audio.dataset.version = SRC.match(/v(\d+)/)[1];
   audio.loop = true;
   audio.preload = 'metadata';
   audio.volume = 0.35;
