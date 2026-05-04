@@ -13,6 +13,7 @@
  gtag('js', new Date());
  gtag('config', 'G-90Y8GPVX1F');
 </script>
+<script src="/js/cm-events.js" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
  :root {
@@ -237,6 +238,18 @@
  sessionStorage.setItem(sentKey, '1');
  }
  } catch(e) { console.warn('GA4 purchase event skipped:', e); }
+
+ // Supabase 통합 이벤트 (cm-events.js) — pay_success
+ try {
+ if (window.cm && orderId) {
+ window.cm.event('pay_success', {
+ sku: skuId || orderData.skuId || 'unknown',
+ amount_krw: parseInt(amount, 10) || (orderData.amount || 0),
+ gateway: provider,
+ order_id: orderId,
+ });
+ }
+ } catch(e) {}
 
  // 단건 구매 기록 (cm_purchases 배열에 추가) — entitlement 체크용
  function recordCmPurchase(skuId) {
