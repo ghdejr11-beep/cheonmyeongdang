@@ -21,7 +21,7 @@
  if (window.PAYPAL_LOADED || !clientId) return;
  var s = document.createElement('script');
  s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(clientId)
- + '&currency=USD&intent=capture&components=buttons';
+ + '&currency=USD&intent=capture&components=buttons&enable-funding=card&disable-funding=credit,paylater';
  s.onload = function() {
  window.PAYPAL_LOADED = true;
  if (window.renderPayPalButton) window.renderPayPalButton();
