@@ -489,6 +489,7 @@ module.exports = (req, res) => {
   // PORTONE_CHANNEL_KEY_KAKAOPAY: 카카오페이 채널 키
   //
   // PG 통과 시 vercel env에 4줄(STORE_ID + 3 channel key) 등록만 하면 즉시 가동.
+  // 2026-05-04: PortOne 테스트 모드 활성화. STORE_ID + KCN(merchantest9) + KakaoPay(TC0ONETIME) + API Secret 등록 완료.
   const provider = (process.env.CMD_PAYMENT_PROVIDER || 'toss').trim();
   const portoneStoreId = (process.env.PORTONE_STORE_ID || 'store-XXXX').trim();
   const portoneChannelKey = (process.env.PORTONE_CHANNEL_KEY || 'channel-key-XXXX').trim();
