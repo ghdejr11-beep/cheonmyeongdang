@@ -3,23 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KunStudio — Choose Your Path | EBOOKs / Cohort / SaaS / B2B / Lifetime</title>
-<meta name="description" content="Pick the level that fits: $70 Mega Bundle, $297 4-week cohort, $99/mo AI Productivity OS, $497 Lifetime, $1,997 B2B AI Audit, $2,997 White-Label EBOOK license.">
-<meta property="og:title" content="KunStudio — Solo Founder Path: $70 to $2,997">
-<meta property="og:description" content="From $70 EBOOK bundle to $2,997 white-label resale rights. Pick your level.">
+<title>KunStudio — Mega Bundle $70 or Lifetime $497 | Choose Your Path</title>
+<meta name="description" content="2 simple choices: $70 Mega Bundle (20 EBOOKs + audiobooks) or $497 Lifetime (every future EBOOK forever). No subscriptions, no live calls — instant download.">
+<meta property="og:title" content="KunStudio — Mega Bundle or Lifetime">
+<meta property="og:description" content="$70 today or $497 forever. Instant download. No subscription.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "KunStudio Solo Founder Tiers",
-  "description": "6 product tiers from $70 EBOOK bundle to $2,997 white-label license for solo founders.",
+  "name": "KunStudio Bundles",
+  "description": "Choose between Mega Bundle ($70) and Lifetime ($497).",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "item": {"@type": "Product", "name": "KunStudio Mega Bundle", "description": "20 EBOOKs + 15 audiobooks. Lifetime download.", "url": "https://cheonmyeongdang.vercel.app/bundle", "offers": {"@type": "Offer", "price": "70", "priceCurrency": "USD", "availability": "https://schema.org/InStock"}}},
-    {"@type": "ListItem", "position": 2, "item": {"@type": "Product", "name": "AI Solo Founder Sprint", "description": "4-week cohort. Goal: ship a product or hit $1K MRR.", "url": "https://cheonmyeongdang.vercel.app/cohort", "offers": {"@type": "Offer", "price": "297", "priceCurrency": "USD", "availability": "https://schema.org/LimitedAvailability"}}},
-    {"@type": "ListItem", "position": 3, "item": {"@type": "Product", "name": "AI Productivity OS", "description": "200+ AI prompts updated weekly, 12 templates, weekly office hours.", "url": "https://cheonmyeongdang.vercel.app/os", "offers": {"@type": "Offer", "price": "99", "priceCurrency": "USD", "priceValidUntil": "2026-12-31", "availability": "https://schema.org/InStock"}}},
-    {"@type": "ListItem", "position": 4, "item": {"@type": "Product", "name": "KunStudio Lifetime", "description": "All current EBOOKs + every future EBOOK forever.", "url": "https://cheonmyeongdang.vercel.app/tiers#lifetime", "offers": {"@type": "Offer", "price": "497", "priceCurrency": "USD", "availability": "https://schema.org/LimitedAvailability"}}},
-    {"@type": "ListItem", "position": 5, "item": {"@type": "Product", "name": "AI Operations Audit", "description": "7-day B2B audit for SMB owners. 30-page report + 60-min strategy call.", "url": "https://cheonmyeongdang.vercel.app/audit", "offers": {"@type": "Offer", "price": "1997", "priceCurrency": "USD", "availability": "https://schema.org/InStock"}}},
-    {"@type": "ListItem", "position": 6, "item": {"@type": "Product", "name": "White-Label EBOOK License", "description": "Resale rights to 5 EBOOKs. Lifetime license, rebrand allowed.", "url": "https://cheonmyeongdang.vercel.app/tiers#whitelabel", "offers": {"@type": "Offer", "price": "2997", "priceCurrency": "USD", "availability": "https://schema.org/LimitedAvailability"}}}
+    {"@type": "ListItem", "position": 2, "item": {"@type": "Product", "name": "KunStudio Lifetime", "description": "All current EBOOKs + every future EBOOK forever. 50 launch buyers only.", "url": "https://cheonmyeongdang.vercel.app/pay?sku=kunstudio_lifetime_69700", "offers": {"@type": "Offer", "price": "497", "priceCurrency": "USD", "availability": "https://schema.org/LimitedAvailability"}}}
   ]
 }
 </script>
@@ -32,35 +28,31 @@
   .hero h1{font-size:2.5rem;margin-bottom:1rem;background:linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
   .hero p{font-size:1.1rem;color:#9ca3af;max-width:680px;margin:0 auto}
   .urgency{background:#dc2626;color:#fff;padding:0.75rem;text-align:center;font-weight:700;font-size:0.95rem}
-  .container{max-width:1200px;margin:0 auto;padding:3rem 2rem}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
+  .container{max-width:900px;margin:0 auto;padding:3rem 2rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:2rem}
   .tier{background:#111827;border:1px solid #1f2937;border-radius:14px;padding:2rem 1.5rem;position:relative;transition:transform 0.2s,border-color 0.2s}
   .tier:hover{transform:translateY(-4px);border-color:#60a5fa}
-  .tier.recommended{border-color:#a78bfa;border-width:2px}
+  .tier.lifetime{border-color:#a78bfa;border-width:2px}
   .badge{position:absolute;top:-12px;right:1.5rem;background:#a78bfa;color:#fff;padding:0.25rem 0.75rem;border-radius:6px;font-size:0.75rem;font-weight:700;text-transform:uppercase}
-  .tier h2{font-size:1.4rem;margin-bottom:0.5rem}
-  .tier .price{font-size:2.5rem;font-weight:800;margin:0.5rem 0;color:#60a5fa}
+  .tier h2{font-size:1.5rem;margin-bottom:0.5rem}
+  .tier .price{font-size:2.8rem;font-weight:800;margin:0.5rem 0;color:#60a5fa}
   .tier .price .currency{font-size:1rem;color:#9ca3af;font-weight:500}
-  .tier .price .period{font-size:0.9rem;color:#9ca3af;font-weight:500}
   .tier .original{text-decoration:line-through;color:#6b7280;font-size:1rem;margin-right:0.5rem}
   .tier ul{list-style:none;margin:1.5rem 0;padding:0}
-  .tier li{padding:0.4rem 0;color:#d1d5db;font-size:0.92rem;display:flex;gap:0.5rem}
+  .tier li{padding:0.4rem 0;color:#d1d5db;font-size:0.95rem;display:flex;gap:0.5rem}
   .tier li::before{content:"✓";color:#34d399;font-weight:700;flex-shrink:0}
-  .tier .cta{display:block;text-align:center;background:#2563eb;color:#fff;padding:0.85rem 1.5rem;border-radius:8px;font-weight:700;text-decoration:none;margin-top:1rem;transition:background 0.2s}
+  .tier .cta{display:block;text-align:center;background:#2563eb;color:#fff;padding:0.95rem 1.5rem;border-radius:8px;font-weight:700;text-decoration:none;margin-top:1rem;transition:background 0.2s;font-size:1.05rem}
   .tier .cta:hover{background:#1d4ed8}
   .tier.lifetime .cta{background:linear-gradient(90deg,#a78bfa,#f472b6)}
-  .tier.b2b .cta{background:#10b981}
-  .tier.wl .cta{background:#f59e0b}
-  .tier .scarcity{font-size:0.8rem;color:#fbbf24;margin-top:0.5rem;font-weight:600;text-align:center}
+  .tier .scarcity{font-size:0.85rem;color:#fbbf24;margin-top:0.5rem;font-weight:600;text-align:center}
   .tier .audience{font-size:0.82rem;color:#a78bfa;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem}
-  .calc{background:#111827;border-radius:12px;padding:2rem;margin:3rem 0;border:1px solid #1f2937}
-  .calc h3{font-size:1.4rem;margin-bottom:1rem;color:#60a5fa}
-  .calc table{width:100%;border-collapse:collapse;margin-top:1rem}
-  .calc th,.calc td{padding:0.75rem;border-bottom:1px solid #1f2937;text-align:left}
-  .calc th{color:#9ca3af;font-weight:500;font-size:0.85rem;text-transform:uppercase}
-  .calc tr:last-child td{border:0;font-weight:700;color:#34d399}
+  .vs{background:#111827;border-radius:12px;padding:2rem;margin:3rem 0;border:1px solid #1f2937}
+  .vs h3{font-size:1.4rem;margin-bottom:1rem;color:#60a5fa}
+  .vs table{width:100%;border-collapse:collapse;margin-top:1rem}
+  .vs th,.vs td{padding:0.75rem;border-bottom:1px solid #1f2937;text-align:left}
+  .vs th{color:#9ca3af;font-weight:500;font-size:0.85rem;text-transform:uppercase}
   .footer{padding:3rem 2rem;text-align:center;color:#6b7280;font-size:0.9rem;border-top:1px solid #1f2937}
-  @media (max-width:640px){.hero h1{font-size:1.8rem}.tier .price{font-size:2rem}}
+  @media (max-width:640px){.hero h1{font-size:1.8rem}.tier .price{font-size:2.2rem}}
 </style>
 </head>
 <body>
@@ -70,137 +62,72 @@
   <a href="/bundle">Mega Bundle</a>
   <a href="/tiers">Tiers</a>
   <a href="/blog">Blog</a>
+  <a href="/partners">Affiliate</a>
 </nav>
 
 <section class="hero">
-  <h1>Pick Your Path to $10K MRR</h1>
-  <p>From $70 Mega Bundle to $2,997 White-Label license — every tier is built for solo founders ready to ship. Choose the level that matches your timeline and capital.</p>
+  <h1>2 Choices. Both Instant Delivery.</h1>
+  <p>No subscriptions. No live calls. No waiting for delivery. Pay once, download immediately, keep forever.</p>
 </section>
 
 <div class="container">
   <div class="grid">
 
     <div class="tier">
-      <div class="audience">Starter</div>
+      <div class="audience">Today</div>
       <h2>Mega Bundle</h2>
-      <p style="color:#9ca3af;font-size:0.9rem">20 EBOOKs + audiobooks. Best entry point.</p>
+      <p style="color:#9ca3af;font-size:0.95rem">20 EBOOKs + 15 audiobooks. Best entry point.</p>
       <div class="price"><span class="original">$200</span><span class="currency">$</span>70</div>
       <ul>
         <li>20 PDF EBOOKs (AI, Solo Entrepreneur, Mindfulness, Korean Saju, K-Beauty, K-Pop, etc)</li>
-        <li>15 audiobook companions (English narration)</li>
-        <li>Lifetime download access</li>
-        <li>1 hour total study → $1,300/yr saved on courses</li>
+        <li>15 audiobook companions (English narration, MP3)</li>
+        <li>Lifetime download access (one-time payment)</li>
+        <li>1 hour total study → ~$1,300/yr saved on courses</li>
+        <li>Instant delivery after payment</li>
       </ul>
       <a class="cta" href="/bundle">Get Bundle — $70</a>
-      <div class="scarcity">First 100 buyers only</div>
-    </div>
-
-    <div class="tier recommended">
-      <div class="badge">Most Popular</div>
-      <div class="audience">Builder</div>
-      <h2>AI Solo Founder Sprint</h2>
-      <p style="color:#9ca3af;font-size:0.9rem">4-week cohort. Ship a product or hit $1K MRR.</p>
-      <div class="price"><span class="currency">$</span>297</div>
-      <ul>
-        <li>4 weekly group calls (recorded, 90 min)</li>
-        <li>Daily action plan (28 days)</li>
-        <li>Async Slack support, founder community</li>
-        <li>AI prompt library (200+ proven prompts)</li>
-        <li>Founder template kit (legal/financial/marketing)</li>
-        <li>30 founder cohort cap — accountability built-in</li>
-      </ul>
-      <a class="cta" href="/pay?sku=cohort_ai_solo_founder_29700">Join Cohort — $297</a>
-      <div class="scarcity">Next start: 2026-05-13 — only 30 seats</div>
-    </div>
-
-    <div class="tier">
-      <div class="audience">Recurring</div>
-      <h2>AI Productivity OS</h2>
-      <p style="color:#9ca3af;font-size:0.9rem">Updated weekly. Cancel anytime.</p>
-      <div class="price"><span class="currency">$</span>99<span class="period">/mo</span></div>
-      <ul>
-        <li>200+ AI prompts (updated weekly)</li>
-        <li>12 productivity templates (Notion, Airtable, Sheets)</li>
-        <li>GPT-Custom-Builder workflows</li>
-        <li>Weekly office hours (Q&A live, 60 min)</li>
-        <li>Cancel anytime</li>
-      </ul>
-      <a class="cta" href="/pay?sku=subscribe_ai_productivity_os_9900">Start $99/mo</a>
-      <div class="scarcity">First 100 subscribers locked at launch price</div>
+      <div class="scarcity">First 100 buyers at this price</div>
     </div>
 
     <div class="tier lifetime">
+      <div class="badge">Best Value</div>
       <div class="audience">Forever</div>
       <h2>KunStudio Lifetime</h2>
-      <p style="color:#9ca3af;font-size:0.9rem">Every current + future EBOOK. Forever.</p>
+      <p style="color:#9ca3af;font-size:0.95rem">Every current + future EBOOK. Forever.</p>
       <div class="price"><span class="original">$997</span><span class="currency">$</span>497</div>
       <ul>
         <li>20 current EBOOKs + ALL future releases</li>
         <li>Audiobook companions included</li>
-        <li>10+ new EBOOKs monthly added free</li>
+        <li>10+ new EBOOKs added monthly (free for you)</li>
         <li>Priority email support</li>
         <li>1-year ROI: $5,000+ saved (if buying separately)</li>
+        <li>One-time payment, lifetime access</li>
       </ul>
       <a class="cta" href="/pay?sku=kunstudio_lifetime_69700">Lock Lifetime — $497</a>
       <div class="scarcity">First 50 buyers only — then $997</div>
     </div>
 
-    <div class="tier b2b">
-      <div class="audience">B2B</div>
-      <h2>AI Operations Audit</h2>
-      <p style="color:#9ca3af;font-size:0.9rem">For SMB owners (5-50 employees).</p>
-      <div class="price"><span class="currency">$</span>1,997</div>
-      <ul>
-        <li>30-page AI audit report (custom)</li>
-        <li>Top 10 AI tool stack for your industry</li>
-        <li>ROI calculation per automation</li>
-        <li>60-min strategy call with founder</li>
-        <li>7-day delivery from payment</li>
-        <li>Save 20+ hours/week typical outcome</li>
-      </ul>
-      <a class="cta" href="/pay?sku=b2b_ai_audit_199700">Book Audit — $1,997</a>
-      <div class="scarcity">Engagement starts in 48hrs</div>
-    </div>
-
-    <div class="tier wl">
-      <div class="audience">Reseller</div>
-      <h2>White-Label EBOOK License</h2>
-      <p style="color:#9ca3af;font-size:0.9rem">Resell as your own brand. Keep 100%.</p>
-      <div class="price"><span class="currency">$</span>2,997</div>
-      <ul>
-        <li>Resale rights to 5 EBOOKs (your pick)</li>
-        <li>Rebrand with your logo & name</li>
-        <li>Editable Canva source files</li>
-        <li>Sales page templates included</li>
-        <li>Lifetime license (no royalty)</li>
-        <li>Limit: 25 licenses per EBOOK total (scarcity preserved)</li>
-      </ul>
-      <a class="cta" href="/pay?sku=whitelabel_ebook_license_299700">License Now — $2,997</a>
-      <div class="scarcity">25 licenses per EBOOK total cap</div>
-    </div>
-
   </div>
 
-  <div class="calc">
-    <h3>📊 70-Day Path to $750K — Realistic Mix</h3>
-    <p style="color:#9ca3af">Based on solo SaaS founder benchmark + verified solo case studies. Aggressive but math-checked.</p>
+  <div class="vs">
+    <h3>📊 Why these 2 options only?</h3>
+    <p style="color:#d1d5db;margin-bottom:1rem">We removed subscriptions, cohorts, B2B audits, and licensing tiers because they require live involvement. Our model is now: write great EBOOKs → publish → ship to you instantly. No bottleneck, no delays.</p>
     <table>
-      <tr><th>Tier</th><th>Price</th><th>Sales target (70d)</th><th>Revenue</th></tr>
-      <tr><td>Mega Bundle</td><td>$70</td><td>1,500</td><td>$105,000</td></tr>
-      <tr><td>Cohort Sprint</td><td>$297</td><td>500</td><td>$148,500</td></tr>
-      <tr><td>Lifetime</td><td>$497</td><td>300</td><td>$149,100</td></tr>
-      <tr><td>AI Productivity OS</td><td>$99/mo × 60d avg</td><td>1,000</td><td>$200,000</td></tr>
-      <tr><td>B2B Audit</td><td>$1,997</td><td>75</td><td>$149,775</td></tr>
-      <tr><td>White-label</td><td>$2,997</td><td>~10</td><td>$29,970</td></tr>
-      <tr><td>Total</td><td>—</td><td>—</td><td>$782,345</td></tr>
+      <tr><th></th><th>Mega Bundle</th><th>Lifetime</th></tr>
+      <tr><td>Today's EBOOKs</td><td>20</td><td>20</td></tr>
+      <tr><td>Future EBOOKs</td><td>—</td><td>All forever</td></tr>
+      <tr><td>Price</td><td>$70</td><td>$497</td></tr>
+      <tr><td>1-year value</td><td>~$1,300</td><td>~$5,000+</td></tr>
+      <tr><td>Recurring fees</td><td>None</td><td>None</td></tr>
+      <tr><td>Delivery</td><td>Instant</td><td>Instant + new each month</td></tr>
     </table>
   </div>
 
 </div>
 
 <footer class="footer">
-  <p>KunStudio © 2026 · Built by 1 founder, 38 SKUs, 70-day mission</p>
-  <p style="margin-top:0.5rem"><a href="/privacy" style="color:#60a5fa">Privacy</a> · <a href="/terms" style="color:#60a5fa">Terms</a> · <a href="mailto:ghdejr11@gmail.com" style="color:#60a5fa">Contact</a></p>
+  <p>KunStudio © 2026 · Solo founder, passive products only</p>
+  <p style="margin-top:0.5rem"><a href="/privacy" style="color:#60a5fa">Privacy</a> · <a href="/terms" style="color:#60a5fa">Terms</a> · <a href="/partners" style="color:#60a5fa">Affiliate</a> · <a href="mailto:ghdejr11@gmail.com" style="color:#60a5fa">Contact</a></p>
 </footer>
 
 </body>
