@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "purpose": "Affiliate-only cold outreach (30% rev-share, no cash). English-speaking K-culture creators.",
+    "model": "rev-share affiliate, no upfront fee",
+    "products": ["Korean Saju Birth Chart $9.99", "K-Beauty Skincare $7.99", "Mega Bundle $70", "Lifetime $497"],
+    "commission": 0.3,
+    "created": "2026-05-04"
+  },
+  "targets": [
+    {"niche": "k-pop reaction", "channel": "YouTube", "name_pattern": "[KPOP REACTION YOUTUBER 50K-500K subs]", "email_hint": "business email in About / linktree", "value_prop": "Saju compatibility for kpop idols (BTS/BLACKPINK members) — fan engagement"},
+    {"niche": "k-beauty review", "channel": "YouTube", "name_pattern": "[KBEAUTY YOUTUBER 10K-200K]", "email_hint": "About → business contact", "value_prop": "K-Beauty 10-step skincare ebook companion"},
+    {"niche": "korea travel vlog", "channel": "YouTube", "name_pattern": "[KOREA EXPAT YOUTUBER 5K-100K]", "email_hint": "instagram bio", "value_prop": "Korea travel itinerary ebook + hidden gems"},
+    {"niche": "korean language learning", "channel": "YouTube/TikTok", "name_pattern": "[KOREAN TEACHER 10K-300K]", "email_hint": "kakao/email in About", "value_prop": "Korean cultural context ebook for learners"},
+    {"niche": "k-drama reactor", "channel": "YouTube", "name_pattern": "[KDRAMA REACTION 20K-500K]", "email_hint": "About business inquiries", "value_prop": "K-Drama character Saju Decoder ebook"},
+    {"niche": "k-pop saju astrologer (TikTok)", "channel": "TikTok", "name_pattern": "[KPOP ASTRO TIKTOK 10K-200K]", "email_hint": "linktree", "value_prop": "Korean Saju ebook + 30% per sale"},
+    {"niche": "korean food / cooking", "channel": "YouTube", "name_pattern": "[KOREAN FOOD CREATOR 5K-100K]", "email_hint": "About business email", "value_prop": "Korean Recipe Meal Planner ebook"},
+    {"niche": "expat life korea", "channel": "Substack/YouTube", "name_pattern": "[EXPAT WRITER 1K-50K]", "email_hint": "Substack email", "value_prop": "Korean business etiquette ebook for B2B audience"}
+  ],
+  "_note": "Use Claude API + YouTube/TikTok search to populate actual creator names + emails. Run targets_finder.py to enrich. Manual review before send recommended."
+}
