@@ -1,0 +1,10 @@
+{
+  "e948b83d8a2462b13337403f20bd2a71": {
+    "title": "YouTube OAuth/uploader 오류",
+    "severity": "critical",
+    "first_seen": "2026-05-04T18:24:20.004146",
+    "last_seen": "2026-05-04T18:24:20.004146",
+    "resolved": true,
+    "message": "already fixed"
+  }
+}

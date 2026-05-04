@@ -1,0 +1,6 @@
+[18:24:19] === telegram_watch start ===
+[18:24:19] scanned text len: 214992
+[18:24:20] detected 1 new issue(s)
+[18:24:20]   [critical] YouTube OAuth/uploader 오류 :: name 'os' is not defined
+[18:24:20]     handler -> ok=True msg=already fixed
+[18:24:20] === done ===
