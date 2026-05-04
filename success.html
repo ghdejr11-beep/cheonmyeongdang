@@ -102,11 +102,18 @@
  transition: transform 0.2s;
  }
  .btn:hover { transform: translateY(-2px); }
+ .btn:focus-visible { outline: 2px solid var(--gold2); outline-offset: 3px; }
+ @media (prefers-reduced-motion: reduce) {
+ .card, .icon { animation: none !important; }
+ .btn { transition: none; }
+ .btn:hover { transform: none; }
+ }
 </style>
 </head>
 <body>
+<main role="main">
 <div class="card">
-<div class="icon" id="icon"></div>
+<div class="icon" id="icon" aria-hidden="true"></div>
 <h1 id="title">결제가 완료되었습니다</h1>
 <p id="message">
  소중한 주문 감사드립니다.<br>
@@ -597,5 +604,6 @@
  .catch(function(err) { console.warn('승인/등록 호출 에러:', err); });
  })();
 </script>
+</main>
 </body>
 </html>

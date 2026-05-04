@@ -36,10 +36,21 @@
  padding: 48px 32px;
  text-align: center;
  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+ animation: slideUp 0.6s ease forwards;
+ }
+ @keyframes slideUp {
+ from { opacity: 0; transform: translateY(30px); }
+ to { opacity: 1; transform: translateY(0); }
  }
  .icon {
  font-size: 5rem;
  margin-bottom: 20px;
+ animation: pop 0.6s ease;
+ }
+ @keyframes pop {
+ 0% { transform: scale(0); }
+ 60% { transform: scale(1.15); }
+ 100% { transform: scale(1); }
  }
  h1 {
  font-family: 'Gowun Batang', serif;
@@ -76,29 +87,53 @@
  transition: transform 0.2s;
  }
  .btn:hover { transform: translateY(-2px); }
+ .btn:focus-visible { outline: 2px solid var(--gold2); outline-offset: 3px; }
  .btn-outline {
  background: transparent;
  color: var(--text);
  border: 1px solid var(--border);
  }
+ .help-box {
+ margin-top: 18px;
+ padding: 14px;
+ background: rgba(201,168,76,0.06);
+ border: 1px solid var(--border);
+ border-radius: 10px;
+ text-align: left;
+ font-size: 0.78rem;
+ color: var(--text2);
+ line-height: 1.6;
+ }
+ .help-box a { color: var(--gold2); text-decoration: underline; }
+ @media (prefers-reduced-motion: reduce) {
+ .card, .icon { animation: none !important; }
+ .btn { transition: none; }
+ .btn:hover { transform: none; }
+ }
 </style>
 </head>
 <body>
+<main role="main">
 <div class="card">
-<div class="icon"></div>
+<div class="icon" aria-hidden="true"></div>
 <h1>결제에 실패했습니다</h1>
 <p>
  결제 처리 중 문제가 발생했습니다.<br>
  다시 시도하시거나 다른 결제 수단을 이용해 주세요.
 </p>
-<div class="error-box" id="error-info">
+<div class="error-box" id="error-info" aria-live="polite">
 <!-- 에러 정보 -->
 </div>
 <div>
 <a href="./#paid" class="btn">다시 시도하기</a>
 <a href="./" class="btn btn-outline">홈으로</a>
 </div>
+<div class="help-box">
+<strong style="color:var(--gold2);">계속 실패하시나요?</strong><br>
+<a href="mailto:ghdejr11@gmail.com?subject=결제%20문제%20문의">ghdejr11@gmail.com</a>로 주문번호와 함께 문의 주세요. 영업일 24시간 내 답변드립니다.
 </div>
+</div>
+</main>
 
 <script>
  var params = new URLSearchParams(window.location.search);
