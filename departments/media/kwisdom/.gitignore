@@ -1,0 +1,4 @@
+fill_log.txt
+gen_thumbs.log
+*.bak
+__pycache__/

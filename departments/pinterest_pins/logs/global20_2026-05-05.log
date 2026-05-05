@@ -1,0 +1,84 @@
+[21:18:17] === saju-compatibility-soulmate-birth-year ===
+[21:18:17]   fetching pollinations...
+[21:18:18]   raw -> saju-compatibility-soulmate-birth-year_raw.jpg (119KB)
+[21:18:19]   overlay -> saju-compatibility-soulmate-birth-year.png (1685KB)
+[21:18:21] === saju-vs-western-astrology-differences ===
+[21:18:21]   fetching pollinations...
+[21:19:48]   raw -> saju-vs-western-astrology-differences_raw.jpg (129KB)
+[21:19:49]   overlay -> saju-vs-western-astrology-differences.png (1724KB)
+[21:19:51] === korean-zodiac-animal-career-path ===
+[21:19:51]   fetching pollinations...
+[21:21:18]   raw -> korean-zodiac-animal-career-path_raw.jpg (148KB)
+[21:21:19]   overlay -> korean-zodiac-animal-career-path.png (2143KB)
+[21:21:21] === saju-four-pillars-beginner-guide-2026 ===
+[21:21:21]   fetching pollinations...
+[21:22:48]   raw -> saju-four-pillars-beginner-guide-2026_raw.jpg (130KB)
+[21:22:49]   overlay -> saju-four-pillars-beginner-guide-2026.png (1845KB)
+[21:22:51] === lucky-color-direction-korean-element ===
+[21:22:51]   fetching pollinations...
+[21:22:51]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:51] === seoul-hidden-cafes-locals-secret ===
+[21:22:51]   fetching pollinations...
+[21:22:52]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:52] === busan-vs-jeju-korean-beach-guide ===
+[21:22:52]   fetching pollinations...
+[21:22:52]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:52] === korea-7-day-itinerary-1000-budget ===
+[21:22:52]   fetching pollinations...
+[21:22:53]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:53] === kdrama-filming-locations-visit-korea ===
+[21:22:53]   fetching pollinations...
+[21:22:53]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:53] === korean-convenience-store-tier-list ===
+[21:22:53]   fetching pollinations...
+[21:22:54]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:54] === k-culture-mega-bundle-5-pdfs ===
+[21:22:54]   fetching pollinations...
+[21:22:55]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:55] === korean-tea-ceremony-chatgpt-prompts ===
+[21:22:55]   fetching pollinations...
+[21:22:55]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:55] === kpop-fan-compatibility-chart-zodiac ===
+[21:22:55]   fetching pollinations...
+[21:22:56]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:56] === hangul-aesthetic-notion-templates-10 ===
+[21:22:56]   fetching pollinations...
+[21:22:56]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:56] === travel-korea-like-local-top-50 ===
+[21:22:56]   fetching pollinations...
+[21:22:57]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:57] === saju-diary-12-month-self-discovery ===
+[21:22:57]   fetching pollinations...
+[21:22:57]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:57] === daily-saju-reflection-bilingual-workbook ===
+[21:22:57]   fetching pollinations...
+[21:22:58]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:58] === year-of-snake-2026-saju-diary-preview ===
+[21:22:58]   fetching pollinations...
+[21:22:58]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:58] === korean-tax-refund-2026-may-31-deadline ===
+[21:22:58]   fetching pollinations...
+[21:22:59]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:59] === korea-9pct-tax-filing-vs-30pct-fee ===
+[21:22:59]   fetching pollinations...
+[21:22:59]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:22:59] DONE: added 4 pins, failed 16, queue total = 10
+[21:22:59] FAILED slugs: ['lucky-color-direction-korean-element', 'seoul-hidden-cafes-locals-secret', 'busan-vs-jeju-korean-beach-guide', 'korea-7-day-itinerary-1000-budget', 'kdrama-filming-locations-visit-korea', 'korean-convenience-store-tier-list', 'k-culture-mega-bundle-5-pdfs', 'korean-tea-ceremony-chatgpt-prompts', 'kpop-fan-compatibility-chart-zodiac', 'hangul-aesthetic-notion-templates-10', 'travel-korea-like-local-top-50', 'saju-diary-12-month-self-discovery', 'daily-saju-reflection-bilingual-workbook', 'year-of-snake-2026-saju-diary-preview', 'korean-tax-refund-2026-may-31-deadline', 'korea-9pct-tax-filing-vs-30pct-fee']
+[21:24:27] SKIP saju-compatibility-soulmate-birth-year (already in queue)
+[21:24:27] SKIP saju-vs-western-astrology-differences (already in queue)
+[21:24:27] SKIP korean-zodiac-animal-career-path (already in queue)
+[21:24:27] SKIP saju-four-pillars-beginner-guide-2026 (already in queue)
+[21:24:27] === lucky-color-direction-korean-element ===
+[21:24:27]   fetching pollinations...
+[21:24:27]   429 rate-limited, sleeping 15s (attempt 1/6)
+[21:24:43]   429 rate-limited, sleeping 30s (attempt 2/6)
+[21:25:14]   429 rate-limited, sleeping 60s (attempt 3/6)
+[21:26:15]   429 rate-limited, sleeping 120s (attempt 4/6)
+[21:28:15]   429 rate-limited, sleeping 120s (attempt 5/6)
+[21:30:16]   POLLINATIONS FAIL: HTTPError: HTTP Error 429: Too Many Requests
+[21:30:16] === seoul-hidden-cafes-locals-secret ===
+[21:30:16]   fetching pollinations...
+[21:30:16]   429 rate-limited, sleeping 15s (attempt 1/6)
+[21:30:32]   429 rate-limited, sleeping 30s (attempt 2/6)
+[21:31:02]   429 rate-limited, sleeping 60s (attempt 3/6)
+[21:32:03]   429 rate-limited, sleeping 120s (attempt 4/6)
