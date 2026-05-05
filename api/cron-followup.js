@@ -1421,10 +1421,21 @@ module.exports = async (req, res) => {
       explicitDays && COHORTS[explicitDays] ? [explicitDays] : [3, 7, 14, 30, 90];
 
     const results = [];
+    const cohortFails = [];
     // 시즌 오버라이드는 results._seasonOverride로 processCohort에 전달 (test 모드 한정)
     if (isTest && seasonOverride) results._seasonOverride = seasonOverride;
+    // ─── fail-safe: 한 cohort 실패해도 다른 cohort 계속 처리 ───
+    // 이전 동작: 첫 cohort에서 throw 시 다른 cohort 미처리 → 알림 unreliable.
+    // 수정: 각 cohort 독립 try/catch + 실패는 cohortFails 배열에 적재.
     for (const d of cohortsToRun) {
-      await processCohort({ days: d, isTest, isDryRun, results });
+      try {
+        await processCohort({ days: d, isTest, isDryRun, results });
+      } catch (cohortErr) {
+        console.error(`[cron-followup] D+${d} 코호트 실패:`, cohortErr);
+        cohortFails.push({ days: d, error: cohortErr.message || String(cohortErr) });
+        // 실패한 cohort는 results에도 기록 (대시보드에서 가시화)
+        results.push({ days: d, sent: 0, attempted: 0, error: cohortErr.message });
+      }
     }
 
     const totalSent = results.reduce((sum, r) => sum + (r.sent || 0), 0);
@@ -1433,15 +1444,16 @@ module.exports = async (req, res) => {
       0
     );
 
-    return res.status(200).json({
+    return res.status(cohortFails.length === cohortsToRun.length ? 500 : 200).json({
       mode: isTest ? 'test' : isDryRun ? 'dry-run' : 'cron',
       cohorts: cohortsToRun,
       total_attempted: totalAttempted,
       total_sent: totalSent,
+      cohort_failures: cohortFails,
       details: results,
     });
   } catch (err) {
-    console.error('[cron-followup] 오류:', err);
+    console.error('[cron-followup] 치명 오류:', err);
     return res.status(500).json({ error: err.message });
   }
 };
