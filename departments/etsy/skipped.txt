@@ -1,0 +1,5 @@
+Items skipped (Korean content / missing assets):
+
+- ai-prompt-workbook: Korean content - skip for global Etsy
+- fortune-notebook: Korean content - skip for global Etsy
+- saju-diary: Korean content - skip for global Etsy
