@@ -121,8 +121,14 @@ def pick_slot_jobs(slot_indices: list[int]) -> list[dict]:
     day_in_cycle = ((day_of_month - 1) % 30) + 1  # 1~30
     cycle_seed = (today.year * 10000 + today.month * 100 + day_in_cycle)
 
-    theme_key = daily_themes[str(day_in_cycle)]
-    theme_tpl = theme_templates[theme_key]
+    base_theme_key = daily_themes[str(day_in_cycle)]
+
+    # 슬롯별 테마 다양화: day theme가 base, slot 인덱스로 다른 테마 6개 회전
+    # (기존: 6슬롯 모두 단일 테마 → 매출 다양성/시청자 흥미 떨어짐)
+    theme_rotation = [
+        "core_motivation", "shadow_warning", "money_pattern",
+        "career_fit", "love_compatibility", "growth_practice",
+    ]
 
     # 결정적 셔플 — 중복 없이 슬롯별 type 선택.
     # day별 시드로 16 type을 셔플한 뒤, slot 인덱스로 슬라이스.
@@ -138,12 +144,21 @@ def pick_slot_jobs(slot_indices: list[int]) -> list[dict]:
     for slot in slot_indices:
         type_key = shuffled_keys[slot % len(shuffled_keys)]
         type_meta = types[type_key]
+
+        # 슬롯별 테마: day별로 시작점을 회전시켜 같은 슬롯이 매일 다른 테마
+        theme_offset = (cycle_seed + slot) % len(theme_rotation)
+        slot_theme_key = theme_rotation[theme_offset]
+        # day가 comparison_vs인 날은 일부 슬롯에 비교 강제 (기존 호환)
+        if base_theme_key == "comparison_vs" and slot % 2 == 0:
+            slot_theme_key = "comparison_vs"
+        theme_tpl = theme_templates[slot_theme_key]
+
         # 비교 모드용 보조 해시 (같은 type이라도 rival/dim 다르게)
         h = int(
             hashlib.sha1(f"{cycle_seed}_{slot}".encode()).hexdigest(), 16
         )
 
-        is_comparison = theme_key == "comparison_vs"
+        is_comparison = slot_theme_key == "comparison_vs"
         rival_key = None
         rival_meta = None
         dim_obj = None
@@ -158,7 +173,7 @@ def pick_slot_jobs(slot_indices: list[int]) -> list[dict]:
             "day_in_cycle": day_in_cycle,
             "type_key": type_key,
             "type_meta": type_meta,
-            "theme_key": theme_key,
+            "theme_key": slot_theme_key,
             "theme_tpl": theme_tpl,
             "rival_key": rival_key,
             "rival_meta": rival_meta,

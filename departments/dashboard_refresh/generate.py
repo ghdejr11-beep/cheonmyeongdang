@@ -112,35 +112,46 @@ def render_html():
 <html lang="ko"><head><meta charset="UTF-8">
 <title>쿤스튜디오 대시보드 · 자동 갱신</title>
 <meta http-equiv="refresh" content="3600">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+:root{{--bg:#faf9f5;--bg-card:#ffffff;--bg-subtle:#f3f1ea;--text:#141413;--text-mute:#6b6962;--border:#e8e6dc;--accent:#d97757;--accent-soft:#f5e6dd;--blue:#6a9bcc;--blue-soft:#e3edf6;--green:#788c5d;--green-soft:#e6ebda;--warn:#c79d52;--warn-soft:#f7eed8;--rust:#c75c4d;--rust-soft:#f5dfdb}}
 *{{box-sizing:border-box;margin:0;padding:0}}
-body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans KR',sans-serif;background:#0a0e1a;color:#e8eaed;padding:24px;line-height:1.55}}
-header{{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;border-bottom:1px solid #1f2937;padding-bottom:14px;flex-wrap:wrap;gap:12px}}
-h1{{font-size:1.5rem;background:linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}}
-.meta{{color:#9ca3af;font-size:0.84rem}}
-.live-dot{{display:inline-block;width:9px;height:9px;background:#34d399;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}}
-@keyframes pulse{{0%,100%{{opacity:1}}50%{{opacity:0.4}}}}
-.kpi{{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin:18px 0}}
-.kpi-card{{background:linear-gradient(135deg,rgba(30,30,60,0.85),rgba(15,15,30,0.85));border:1px solid #1f2937;border-radius:12px;padding:16px;text-align:center}}
-.kpi-num{{font-size:2rem;font-weight:700;color:#60a5fa;line-height:1}}
-.kpi-label{{font-size:0.7rem;color:#9ca3af;letter-spacing:0.04em;text-transform:uppercase;margin-top:6px}}
-.section{{margin:22px 0}}
-h2{{font-size:1.05rem;color:#e8c97a;margin-bottom:10px;padding-left:8px;border-left:3px solid #c9a84c}}
-.grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}}
-.card{{background:#111827;border:1px solid #1f2937;border-radius:10px;padding:12px}}
-.card h3{{font-size:0.92rem;margin-bottom:6px;color:#e8eaed}}
-.card .row{{display:flex;justify-content:space-between;font-size:0.78rem;margin:3px 0;color:#d1d5db}}
-.card .row b{{color:#a78bfa}}
-.badge{{display:inline-block;padding:2px 8px;border-radius:99px;font-size:0.68rem;font-weight:600}}
-.b-live{{background:rgba(52,211,153,0.15);color:#34d399}}
-.b-test{{background:rgba(96,165,250,0.18);color:#60a5fa}}
-.b-pend{{background:rgba(248,113,113,0.15);color:#f87171}}
-.b-draft{{background:rgba(251,191,36,0.15);color:#fbbf24}}
-table{{width:100%;border-collapse:collapse;font-size:0.8rem}}
-th,td{{padding:6px 9px;border-bottom:1px solid #1f2937;text-align:left}}
-th{{color:#9ca3af;font-weight:500;font-size:0.7rem;text-transform:uppercase}}
-.note{{margin-top:14px;padding:10px 14px;background:rgba(96,165,250,0.06);border-left:3px solid #60a5fa;border-radius:6px;font-size:0.82rem;color:#d1d5db}}
-footer{{margin-top:26px;padding-top:14px;border-top:1px solid #1f2937;color:#6b7280;font-size:0.76rem;text-align:center}}
+html,body{{font-family:'Lora',Georgia,'Noto Sans KR',serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}}
+body{{max-width:1180px;margin:0 auto;padding:40px 28px 60px}}
+h1,h2,h3{{font-family:'Poppins',Arial,'Noto Sans KR',sans-serif;font-weight:600;letter-spacing:-0.01em}}
+header{{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-bottom:22px;margin-bottom:36px;border-bottom:1px solid var(--border)}}
+h1{{font-size:1.85rem;color:var(--text);display:flex;align-items:center;gap:10px}}
+.live-dot{{display:inline-block;width:10px;height:10px;background:var(--accent);border-radius:50%;animation:pulse 2.4s ease-in-out infinite}}
+@keyframes pulse{{0%,100%{{opacity:1;transform:scale(1)}}50%{{opacity:0.55;transform:scale(0.85)}}}}
+.meta{{color:var(--text-mute);font-size:0.85rem;font-family:'Lora',Georgia,serif}}
+.kpi{{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-bottom:40px}}
+.kpi-card{{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:22px 16px 18px;text-align:center;transition:transform 0.2s ease,box-shadow 0.2s ease}}
+.kpi-card:hover{{transform:translateY(-2px);box-shadow:0 6px 18px -8px rgba(20,20,19,0.12)}}
+.kpi-num{{font-family:'Poppins',Arial,sans-serif;font-size:2.4rem;font-weight:600;color:var(--accent);line-height:1;letter-spacing:-0.02em}}
+.kpi-label{{font-family:'Poppins',Arial,sans-serif;font-size:0.72rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.08em;margin-top:10px}}
+.section{{margin:32px 0}}
+h2{{font-size:1.15rem;color:var(--text);margin-bottom:16px;padding-left:12px;border-left:3px solid var(--accent)}}
+.grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}}
+.card{{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:16px 18px}}
+.card h3{{font-size:0.95rem;font-weight:500;margin-bottom:8px;color:var(--text)}}
+.card .row{{display:flex;justify-content:space-between;align-items:center;font-size:0.84rem;margin:4px 0;color:var(--text-mute);font-family:'Lora',Georgia,serif}}
+.card .row b{{color:var(--accent);font-weight:600;font-family:'Poppins',Arial,sans-serif}}
+.badge{{display:inline-block;padding:3px 10px;border-radius:999px;font-size:0.7rem;font-weight:600;font-family:'Poppins',Arial,sans-serif;letter-spacing:0.02em}}
+.b-live{{background:var(--green-soft);color:var(--green)}}
+.b-test{{background:var(--blue-soft);color:var(--blue)}}
+.b-pend{{background:var(--rust-soft);color:var(--rust)}}
+.b-draft{{background:var(--warn-soft);color:var(--warn)}}
+table{{width:100%;border-collapse:separate;border-spacing:0;font-size:0.88rem;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;overflow:hidden}}
+th,td{{padding:12px 16px;text-align:left;border-bottom:1px solid var(--border)}}
+tr:last-child td{{border-bottom:none}}
+th{{font-family:'Poppins',Arial,sans-serif;color:var(--text-mute);font-weight:500;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;background:var(--bg-subtle)}}
+td{{color:var(--text);font-family:'Lora',Georgia,serif}}
+tbody tr:hover{{background:var(--bg-subtle)}}
+.note{{margin-top:18px;padding:14px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:8px;font-size:0.88rem;color:var(--text);line-height:1.65}}
+footer{{margin-top:48px;padding-top:22px;border-top:1px solid var(--border);color:var(--text-mute);font-size:0.78rem;text-align:center;font-family:'Lora',Georgia,serif}}
+@media (max-width:600px){{body{{padding:24px 16px 40px}}h1{{font-size:1.4rem}}.kpi-num{{font-size:2rem}}th,td{{padding:10px 12px;font-size:0.8rem}}}}
 </style></head>
 <body>
 
