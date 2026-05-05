@@ -53,6 +53,8 @@ THRESHOLDS = {
     'response_time_ms': 3000,   # 평균 응답 3초 초과 (일반 페이지)
     'error_rate': 0.30,         # 30% 이상 에러
     'consecutive_fails': 3,     # 연속 3회 실패
+    'min_sample_size': 5,       # 5개 미만 sample은 alert X (1/1 = 100% false positive 방지)
+    'dns_failure_skip': True,   # DNS 해상도 실패는 5xx로 분류 X (로컬 DNS 캐시 이슈)
 }
 
 # 서비스별 임계값 오버라이드 — LLM/AI 호출 endpoint는 느린 게 정상
@@ -162,6 +164,9 @@ def detect_anomalies(by_service: dict) -> list:
         # 5xx 발생
         server_errors = sum(1 for s in samples if s['status'] >= 500)
 
+        # min_sample_size 미달이면 alert 차단 (1/1 = 100% false positive 방지)
+        if total < THRESHOLDS.get('min_sample_size', 5):
+            continue
         if error_rate >= THRESHOLDS['error_rate']:
             alerts.append({
                 'service': svc,
