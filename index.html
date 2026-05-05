@@ -2390,7 +2390,7 @@
 </div>
 <div id="gs-photo-preview" style="display:none;">
 <div class="gs-photo-preview-wrap" id="gs-preview-wrap">
-<img id="gs-preview-img" src="" alt="업로드된 사진">
+<img id="gs-preview-img" src="" alt="업로드된 사진" loading="lazy" decoding="async">
 <canvas id="gs-landmark-canvas"></canvas>
 </div>
 <button class="btn-gold" style="width:100%;max-width:500px;display:block;margin:24px auto 16px;" onclick="document.getElementById('gs-file-input').click();">다른 사진으로 분석하기</button>
@@ -2509,11 +2509,11 @@
 <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;justify-content:center;">
 <div style="text-align:center;">
 <div style="font-size:0.78rem;color:#90caf9;margin-bottom:6px;font-weight:700;">&#128218; 손금 안내도</div>
-<picture><source srcset="palm-canva.webp" type="image/webp"><img src="palm-canva.png" style="width:240px;border-radius:10px;border:2px solid #90caf9;"></picture>
+<picture><source srcset="palm-canva.webp" type="image/webp"><img src="palm-canva.png" style="width:240px;border-radius:10px;border:2px solid #90caf9;" loading="lazy" decoding="async"></picture>
 </div>
 <div style="text-align:center;">
 <div style="font-size:0.78rem;color:var(--gold2);margin-bottom:6px;font-weight:700;">&#9995; 내 손바닥</div>
-<img id="palm-uploaded-img" style="width:240px;border-radius:10px;border:2px solid var(--gold);">
+<img id="palm-uploaded-img" style="width:240px;border-radius:10px;border:2px solid var(--gold);" loading="lazy" decoding="async">
 </div>
 </div>
 <p style="margin-top:18px;font-size:0.82rem;color:var(--text2);line-height:1.7;">
@@ -2634,51 +2634,51 @@
 
 <div class="section-inner">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;max-width:700px;margin:0 auto 24px;" id="zodiac-grid">
-<div class="zodiac-card" data-sign="0" data-element="fire" onclick="selectZodiac(0)"><img class="zodiac-bg" src="images/zodiac/00.svg" alt="">
+<div class="zodiac-card" data-sign="0" data-element="fire" onclick="selectZodiac(0)"><img class="zodiac-bg" src="images/zodiac/00.svg" alt="" loading="lazy" decoding="async">
 <div class="zodiac-emoji"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10 Q10 6 14 6 Q16 6 16 10 V22 M22 10 Q22 6 18 6 Q16 6 16 10"/></svg></div>
 <div class="zodiac-name">양자리</div><div class="zodiac-date">3/21-4/19</div><div class="zodiac-element">火</div>
 </div>
-<div class="zodiac-card" data-sign="1" data-element="earth" onclick="selectZodiac(1)"><img class="zodiac-bg" src="images/zodiac/01.svg" alt="">
+<div class="zodiac-card" data-sign="1" data-element="earth" onclick="selectZodiac(1)"><img class="zodiac-bg" src="images/zodiac/01.svg" alt="" loading="lazy" decoding="async">
 <div class="zodiac-emoji"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="20" r="6"/><path d="M6 8 Q10 4 16 8 Q22 4 26 8"/></svg></div>
 <div class="zodiac-name">황소자리</div><div class="zodiac-date">4/20-5/20</div><div class="zodiac-element">土</div>
 </div>
-<div class="zodiac-card" data-sign="2" data-element="air" onclick="selectZodiac(2)"><img class="zodiac-bg" src="images/zodiac/02.svg" alt="">
+<div class="zodiac-card" data-sign="2" data-element="air" onclick="selectZodiac(2)"><img class="zodiac-bg" src="images/zodiac/02.svg" alt="" loading="lazy" decoding="async">
 <div class="zodiac-emoji"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6 H14 M10 6 V26 M8 26 H14 M18 6 H24 M21 6 V26 M18 26 H24"/></svg></div>
 <div class="zodiac-name">쌍둥이자리</div><div class="zodiac-date">5/21-6/21</div><div class="zodiac-element">風</div>
 </div>
-<div class="zodiac-card" data-sign="3" data-element="water" onclick="selectZodiac(3)"><img class="zodiac-bg" src="images/zodiac/03.svg" alt="">
+<div class="zodiac-card" data-sign="3" data-element="water" onclick="selectZodiac(3)"><img class="zodiac-bg" src="images/zodiac/03.svg" alt="" loading="lazy" decoding="async">
 <div class="zodiac-emoji"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="11" r="3"/><path d="M6 11 Q6 5 18 6"/><circle cx="22" cy="21" r="3"/><path d="M26 21 Q26 27 14 26"/></svg></div>
 <div class="zodiac-name">게자리</div><div class="zodiac-date">6/22-7/22</div><div class="zodiac-element">水</div>
 </div>
-<div class="zodiac-card" data-sign="4" data-element="fire" onclick="selectZodiac(4)"><img class="zodiac-bg" src="images/zodiac/04.svg" alt="">
+<div class="zodiac-card" data-sign="4" data-element="fire" onclick="selectZodiac(4)"><img class="zodiac-bg" src="images/zodiac/04.svg" alt="" loading="lazy" decoding="async">
 <div class="zodiac-emoji"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 17 Q10 22 15 25 Q22 27 24 22 Q26 16 20 14"/></svg></div>
 <div class="zodiac-name">사자자리</div><div class="zodiac-date">7/23-8/22</div><div class="zodiac-element">火</div>
 </div>
-<div class="zodiac-card" data-sign="5" data-element="earth" onclick="selectZodiac(5)"><img class="zodiac-bg" src="images/zodiac/05.svg" alt="">
+<div class="zodiac-card" data-sign="5" data-element="earth" onclick="selectZodiac(5)"><img class="zodiac-bg" src="images/zodiac/05.svg" alt="" loading="lazy" decoding="async">
 <div class="zodiac-emoji"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 26 V8 Q6 6 9 6 Q12 6 12 10 V26 M12 10 Q12 6 15 6 Q18 6 18 10 V26 M18 10 Q18 6 21 6 Q24 6 24 12 V22 Q24 28 20 26 Q22 24 20 22"/></svg></div>
 <div class="zodiac-name">처녀자리</div><div class="zodiac-date">8/23-9/22</div><div class="zodiac-element">土</div>
 </div>
-<div class="zodiac-card" data-sign="6" data-element="air" onclick="selectZodiac(6)"><img class="zodiac-bg" src="images/zodiac/06.svg" alt="">
+<div class="zodiac-card" data-sign="6" data-element="air" onclick="selectZodiac(6)"><img class="zodiac-bg" src="images/zodiac/06.svg" alt="" loading="lazy" decoding="async">
 <div class="zodiac-emoji"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="24" x2="26" y2="24"/><path d="M10 18 Q10 12 16 12 Q22 12 22 18 H10"/><line x1="16" y1="12" x2="16" y2="8"/></svg></div>
 <div class="zodiac-name">천칭자리</div><div class="zodiac-date">9/23-10/22</div><div class="zodiac-element">風</div>
 </div>
-<div class="zodiac-card" data-sign="7" data-element="water" onclick="selectZodiac(7)"><img class="zodiac-bg" src="images/zodiac/07.svg" alt="">
+<div class="zodiac-card" data-sign="7" data-element="water" onclick="selectZodiac(7)"><img class="zodiac-bg" src="images/zodiac/07.svg" alt="" loading="lazy" decoding="async">
 <div class="zodiac-emoji"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 V10 Q4 6 8 6 Q12 6 12 10 V20 M12 10 Q12 6 16 6 Q20 6 20 10 V20 M20 10 Q20 6 24 6 Q26 6 26 10 V26 L22 22 M26 26 L30 22"/></svg></div>
 <div class="zodiac-name">전갈자리</div><div class="zodiac-date">10/23-11/21</div><div class="zodiac-element">水</div>
 </div>
-<div class="zodiac-card" data-sign="8" data-element="fire" onclick="selectZodiac(8)"><img class="zodiac-bg" src="images/zodiac/08.svg" alt="">
+<div class="zodiac-card" data-sign="8" data-element="fire" onclick="selectZodiac(8)"><img class="zodiac-bg" src="images/zodiac/08.svg" alt="" loading="lazy" decoding="async">
 <div class="zodiac-emoji"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="26" x2="26" y2="6"/><path d="M26 6 L20 6 M26 6 L26 12"/><line x1="10" y1="18" x2="18" y2="10"/></svg></div>
 <div class="zodiac-name">사수자리</div><div class="zodiac-date">11/22-12/21</div><div class="zodiac-element">火</div>
 </div>
-<div class="zodiac-card" data-sign="9" data-element="earth" onclick="selectZodiac(9)"><img class="zodiac-bg" src="images/zodiac/09.svg" alt="">
+<div class="zodiac-card" data-sign="9" data-element="earth" onclick="selectZodiac(9)"><img class="zodiac-bg" src="images/zodiac/09.svg" alt="" loading="lazy" decoding="async">
 <div class="zodiac-emoji"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10 Q8 6 12 8 L14 14 Q16 20 20 18 Q24 16 24 22 Q24 26 20 24 Q26 22 22 18"/></svg></div>
 <div class="zodiac-name">염소자리</div><div class="zodiac-date">12/22-1/19</div><div class="zodiac-element">土</div>
 </div>
-<div class="zodiac-card" data-sign="10" data-element="air" onclick="selectZodiac(10)"><img class="zodiac-bg" src="images/zodiac/10.svg" alt="">
+<div class="zodiac-card" data-sign="10" data-element="air" onclick="selectZodiac(10)"><img class="zodiac-bg" src="images/zodiac/10.svg" alt="" loading="lazy" decoding="async">
 <div class="zodiac-emoji"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 L8 8 L12 12 L16 8 L20 12 L24 8 L28 12 M4 22 L8 18 L12 22 L16 18 L20 22 L24 18 L28 22"/></svg></div>
 <div class="zodiac-name">물병자리</div><div class="zodiac-date">1/20-2/18</div><div class="zodiac-element">風</div>
 </div>
-<div class="zodiac-card" data-sign="11" data-element="water" onclick="selectZodiac(11)"><img class="zodiac-bg" src="images/zodiac/11.svg" alt="">
+<div class="zodiac-card" data-sign="11" data-element="water" onclick="selectZodiac(11)"><img class="zodiac-bg" src="images/zodiac/11.svg" alt="" loading="lazy" decoding="async">
 <div class="zodiac-emoji"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8 Q10 16 6 24 M26 8 Q22 16 26 24"/><line x1="10" y1="16" x2="22" y2="16"/></svg></div>
 <div class="zodiac-name">물고기자리</div><div class="zodiac-date">2/19-3/20</div><div class="zodiac-element">水</div>
 </div>
@@ -6734,7 +6734,7 @@
  const dataUrl = canvas.toDataURL('image/png');
  container.innerHTML = '<div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:12px;text-align:center;">' +
  '<div style="font-size:0.85rem;color:var(--jade);margin-bottom:12px;">&#128231; 아래 이미지를 길게 눌러 저장하거나, 캡처해서 인스타·카톡에 공유하세요</div>' +
- '<img src="' + dataUrl + '" style="max-width:360px;width:100%;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);" alt="오늘의 운세 공유카드">' +
+ '<img src="' + dataUrl + '" style="max-width:360px;width:100%;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);" alt="오늘의 운세 공유카드" loading="lazy" decoding="async">' +
  '<div style="margin-top:12px;">' +
  '<a href="' + dataUrl + '" download="cheonmyeongdang_fortune_' + today.toISOString().slice(0,10) + '.png" style="display:inline-block;background:var(--jade);color:#1a1a1a;padding:10px 20px;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.85rem;">&#128229; 이미지 다운로드</a>' +
  '</div>' +
@@ -7153,6 +7153,10 @@
         { name: '귀 먹음', icon: '&#128066;', meaning: '귀가 들리지 않는 꿈은 주변의 중요한 신호나 조언을 놓치고 있다는 무의식의 경고입니다. 현재 당신이 듣기 싫은 진실이나 불편한 충고를 회피하려는 심리 상태를 반영합니다. 직장이나 가정에서 소통의 단절을 경험하고 있거나, 자신만의 생각에 갇혀 타인의 의견을 수용하지 못하는 상황을 의미하기도 합니다. 이는 관계 개선의 신호이자 경청의 필요성을 일깨우는 꿈입니다.', luck: '흉', advice: '가까운 사람의 말에 귀 기울이고, 열린 마음으로 대화하세요. 소통이 문제 해결의 시작입니다.', lotto: [7, 12, 19, 28, 33, 41] },
         { name: '목소리 상실', icon: '&#128172;', meaning: '목소리가 나오지 않는 꿈은 자기표현의 억압과 답답함을 상징합니다. 중요한 순간에 자신의 의견을 제대로 전달하지 못하는 현실의 좌절감이 반영된 것입니다. 직장에서의 부당한 대우, 가족 내 의견 무시, 혹은 자신감 부족으로 인한 침묵이 쌓여 있는 상태입니다. 동시에 말해야 할 때와 침묵해야 할 때를 구분하라는 지혜의 메시지이기도 합니다. 용기를 내어 목소리를 낼 준비를 하세요.', luck: '평', advice: '작은 일부터 의견을 표현하는 연습을 시작하세요. 당신의 목소리는 충분히 가치 있습니다.', lotto: [5, 14, 23, 29, 37, 44] },
         { name: '피부 짓무름', icon: '&#129656;', meaning: '피부병이나 피부가 짓무르는 꿈은 내면의 스트레스와 감정적 상처가 표면으로 드러나는 신호입니다. 억눌렀던 불안, 수치심, 분노가 더 이상 숨겨지지 않고 외부로 표출되는 상태를 의미합니다. 대인관계에서의 상처나 자존감 저하가 누적되어 심리적 면역력이 약해진 때입니다. 하지만 이는 치유의 시작이기도 합니다. 문제를 인식했다는 것은 회복으로 가는 첫걸음이며, 자신을 돌보아야 할 시기임을 알려줍니다.', luck: '흉', advice: '휴식과 자기돌봄에 집중하세요. 마음의 상처도 시간과 관심으로 아물 수 있습니다.', lotto: [3, 11, 20, 26, 35, 42] },
+      
+        { name: '목소리상실', icon: '&#128483;', meaning: '목소리를 잃는 꿈은 자신의 의견이나 감정을 표현하지 못하는 답답한 현실을 반영합니다. 직장이나 가정에서 자신의 생각을 말하고 싶지만 억눌려 있거나, 중요한 순간에 자신을 드러내지 못하는 두려움을 나타냅니다. 하지만 이는 일시적인 침묵의 시기일 뿐, 곧 당신의 목소리가 더 크고 명확하게 전달될 준비 과정입니다. 지금은 내면의 생각을 정리하고 진정으로 하고 싶은 말이 무엇인지 깊이 성찰하는 시간으로 활용하세요.', luck: '평', advice: '작은 대화부터 시작해 자신의 의견을 조금씩 표현하는 연습을 해보세요. 글쓰기도 좋은 방법입니다.', lotto: [7, 14, 21, 28, 35, 42] },
+        { name: '살갗부상', icon: '&#129658;', meaning: '피부나 살에 상처가 생기는 꿈은 외부로부터 받은 정신적 상처나 자존감의 손상을 상징합니다. 타인의 말이나 행동으로 인해 마음이 다쳤거나, 스스로에 대한 실망감이 표면으로 드러난 것입니다. 상처는 아프지만 반드시 회복되며, 그 과정에서 더 단단해질 수 있습니다. 피부는 우리 몸의 가장 바깥층으로, 외부와 만나는 경계입니다. 지금 당신은 자신을 보호하는 방법을 배우고 있으며, 치유 후에는 더욱 건강한 경계를 세울 수 있을 것입니다.', luck: '흉', advice: '상처받은 마음을 인정하고 충분히 쉬어가세요. 신뢰하는 사람과 이야기 나누는 것도 치유에 도움이 됩니다.', lotto: [3, 11, 19, 27, 33, 41] },
+        { name: '눈먼꿈', icon: '&#128064;', meaning: '눈이 보이지 않게 되는 꿈은 현재 상황에 대한 통찰력 부족이나 방향성을 잃은 불안감을 나타냅니다. 중요한 결정을 앞두고 있지만 명확한 판단을 내리기 어렵거나, 진실을 보지 못하고 있다는 무의식의 경고일 수 있습니다. 그러나 눈을 감으면 다른 감각이 더욱 예민해지듯, 이 꿈은 직관과 내면의 소리에 귀 기울일 시간임을 알려줍니다. 보이는 것에만 의존하지 말고, 느낌과 경험을 통해 길을 찾을 수 있는 지혜가 당신 안에 있습니다.', luck: '평', advice: '성급한 판단을 피하고 시간을 두고 천천히 상황을 살펴보세요. 믿을 만한 조언자의 도움을 구하는 것도 좋습니다.', lotto: [5, 12, 23, 29, 36, 44] },
       ]
  },
  people: {
@@ -8794,7 +8798,7 @@ window.generateGwansangShareCard = function(score, animalType) {
  var dataUrl = canvas.toDataURL('image/png');
  container.innerHTML = '<div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:12px;text-align:center;">' +
  '<div style="font-size:0.85rem;color:#d4a0a0;margin-bottom:12px;">이미지를 저장해 인스타·카톡에 공유하세요</div>' +
- '<img src="' + dataUrl + '" style="max-width:360px;width:100%;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);">' +
+ '<img src="' + dataUrl + '" style="max-width:360px;width:100%;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);" loading="lazy" decoding="async">' +
  '<div style="margin-top:12px;"><a href="' + dataUrl + '" download="cheonmyeongdang_face_score_' + score + '.png" style="display:inline-block;background:#d4a0a0;color:#1a1a1a;padding:10px 20px;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.85rem;">이미지 다운로드</a></div>' +
  '</div>';
  container.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -9051,7 +9055,7 @@ window.shareGwansangResult = function(platform) {
  html += '<div class="tarot-pick-inner">';
  html += '<div class="tarot-pick-back">&#9775;</div>';
  html += '<div class="tarot-pick-front">';
- html += card.emoji; //<picture><source srcset="images/tarot/XX.webp" type="image/webp"><img src="images/tarot/XX.jpg"></picture>
+ html += card.emoji; //<picture><source srcset="images/tarot/XX.webp" type="image/webp"><img src="images/tarot/XX.jpg" loading="lazy" decoding="async"></picture>
  html += '<div class="tpf-name">' + card.name + '</div>';
  html += '<div class="tpf-pos" data-slot="' + i + '"></div>'; // 포지션 라벨 클릭 후 채워짐
  html += '</div>';

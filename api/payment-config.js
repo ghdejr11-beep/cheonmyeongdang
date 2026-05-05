@@ -57,6 +57,13 @@ const SKU_CATALOG = [
     type: 'subscription',
   },
   {
+    id: 'subscribe_annual_249000',
+    name: '연간회원권 (1회 결제, 30% 할인)',
+    amount: 249000,
+    desc: '월회원권을 1년치 한 번에 결제 — 매월 ₩29,900 × 12 = ₩358,800 → ₩249,000 (30% 절약). 구독 갱신 X, 1년 후 자동 만료. "구독 fatigue" 없는 1회 결제.',
+    type: 'inapp',
+  },
+  {
     id: 'ai_chatbot_pack_4900',
     name: 'AI 사주 챗봇 30회',
     amount: 4900,
