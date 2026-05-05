@@ -47,6 +47,8 @@
  : sku.amount;
  var usd = (krw / KRW_PER_USD).toFixed(2);
  if (parseFloat(usd) < 0.5) usd = '0.50'; // PayPal min
+ // GA4 funnel: start_checkout (PayPal popup 열림 직전)
+ try { if (typeof window.cmTrackStartCheckout === 'function') window.cmTrackStartCheckout(sku.id, krw, 'paypal'); } catch(_){}
  return actions.order.create({
  purchase_units: [{
  amount: { value: usd, currency_code: 'USD' },
@@ -82,6 +84,8 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
 </script>
+<!-- 천명당 통합 분석 (Clarity + Vercel + 표준 funnel) -->
+<script src="/js/cm-analytics.js" defer></script>
 
 <style>
  :root {
