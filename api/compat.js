@@ -24,9 +24,207 @@
  *   - PII는 응답에 포함하지 않음 (날짜·성별만 echo)
  *   - CORS open (*)
  */
+const https = require('https');
 const { lookupSku } = require('./payment-config');
 const { listPurchasesByEmail } = require('../lib/purchase-store');
 const { analyzeCompat } = require('../lib/compat-engine');
+const SajuEngine = require('../js/saju-engine.js');
+
+// ────────────────────────────────────────────────────────────
+// RapidAPI Saju Reading 모드 (액션 라우팅: ?action=rapidapi-saju)
+// rewrite 매핑: /api/saju-rapid → /api/compat?action=rapidapi-saju
+// 입력: { birth_year, birth_month, birth_day, birth_hour, gender }
+// 응답: { pillars, elements, summary, lucky_color, lucky_direction, advice }
+// 인증: X-RapidAPI-Proxy-Secret 헤더 검증 (RapidAPI 표준)
+// ────────────────────────────────────────────────────────────
+
+// 오행 → lucky color/direction 매핑
+const ELEMENT_TO_COLOR = {
+  '목': 'green', '화': 'red', '토': 'yellow',
+  '금': 'white', '수': 'black/blue',
+};
+const ELEMENT_TO_DIRECTION = {
+  '목': 'East', '화': 'South', '토': 'Center',
+  '금': 'West', '수': 'North',
+};
+
+// Claude API 호출 (선택적 — ANTHROPIC_API_KEY 있을 때만)
+function callClaude(apiKey, prompt) {
+  return new Promise(function (resolve) {
+    var data = JSON.stringify({
+      model: 'claude-sonnet-4-5-20250929',
+      max_tokens: 1500,
+      messages: [{ role: 'user', content: prompt }],
+    });
+    var req = https.request({
+      hostname: 'api.anthropic.com',
+      port: 443,
+      path: '/v1/messages',
+      method: 'POST',
+      headers: {
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(data),
+      },
+    }, function (resp) {
+      var buf = '';
+      resp.on('data', function (c) { buf += c; });
+      resp.on('end', function () {
+        try {
+          var j = JSON.parse(buf);
+          if (j && j.content && j.content[0] && j.content[0].text) {
+            resolve(j.content[0].text);
+          } else {
+            resolve(null);
+          }
+        } catch (e) { resolve(null); }
+      });
+    });
+    req.on('error', function () { resolve(null); });
+    // 2.5s timeout — RapidAPI 3s SLA 보장
+    req.setTimeout(2500, function () { req.destroy(); resolve(null); });
+    req.write(data);
+    req.end();
+  });
+}
+
+// fallback 어드바이스 (Claude 미응답 시) — Korean culture 일반화 (특정 인물/IP 추측 X)
+function buildFallbackAdvice(dayElementKr, dominantElementKr) {
+  var bridge = {
+    '목': 'embrace growth, study, and consistent learning',
+    '화': 'channel passion, leadership, and visible action',
+    '토': 'cultivate stability, trust, and long-term planning',
+    '금': 'pursue precision, discipline, and clear boundaries',
+    '수': 'value adaptability, intuition, and quiet observation',
+  };
+  return 'Your day stem element is ' + dayElementKr + ' and your chart leans toward ' + dominantElementKr + '. To align with your natural flow, ' + (bridge[dayElementKr] || 'follow balanced action') + '. Pay extra attention to relationships that mirror complementary elements rather than opposing ones.';
+}
+
+async function handleRapidApiSaju(req, res) {
+  // 1) RapidAPI proxy secret 검증
+  var expectedSecret = process.env.RAPIDAPI_PROXY_SECRET || '';
+  var incomingSecret = req.headers['x-rapidapi-proxy-secret'] || '';
+  if (expectedSecret && incomingSecret !== expectedSecret) {
+    return res.status(401).json({
+      ok: false,
+      error: 'Unauthorized — this endpoint is served via RapidAPI only. Subscribe at rapidapi.com',
+    });
+  }
+
+  // 2) body 파싱
+  var body = req.body;
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); } catch (e) { body = {}; }
+  }
+  body = body || {};
+
+  var year = Number(body.birth_year);
+  var month = Number(body.birth_month);
+  var day = Number(body.birth_day);
+  var hour = body.birth_hour == null ? -1 : Number(body.birth_hour);
+  var gender = (body.gender === 'F' || body.gender === 'M') ? body.gender : 'M';
+
+  if (!year || year < 1920 || year > 2050) {
+    return res.status(400).json({ ok: false, error: 'birth_year must be 1920-2050' });
+  }
+  if (!month || month < 1 || month > 12) {
+    return res.status(400).json({ ok: false, error: 'birth_month must be 1-12' });
+  }
+  if (!day || day < 1 || day > 31) {
+    return res.status(400).json({ ok: false, error: 'birth_day must be 1-31' });
+  }
+  if (hour !== -1 && (hour < 0 || hour > 23)) {
+    return res.status(400).json({ ok: false, error: 'birth_hour must be 0-23 or omitted' });
+  }
+
+  // 3) 사주 분석 (saju-engine.js)
+  var sajuRaw;
+  try {
+    sajuRaw = SajuEngine.analyzeSaju(year, month, day, hour, gender);
+  } catch (e) {
+    return res.status(500).json({ ok: false, error: 'Saju calculation failed: ' + e.message });
+  }
+
+  // 4) 영문 응답 빌드
+  var pillars = [];
+  ['년주', '월주', '일주', '시주'].forEach(function (k) {
+    var p = sajuRaw[k] || (sajuRaw.사주 && sajuRaw.사주[k]);
+    if (!p && sajuRaw.사주) p = sajuRaw.사주[k];
+    if (!p) return;
+    var stemKr = (SajuEngine.constants.천간 || [])[p.stem] || '';
+    var stemHj = (SajuEngine.constants.천간_한자 || [])[p.stem] || '';
+    var branchKr = (SajuEngine.constants.지지 || [])[p.branch] || '';
+    var branchHj = (SajuEngine.constants.지지_한자 || [])[p.branch] || '';
+    var pillarLabel = { '년주': 'year', '월주': 'month', '일주': 'day', '시주': 'hour' }[k];
+    pillars.push({
+      pillar: pillarLabel,
+      stem_kr: stemKr,
+      stem_hanja: stemHj,
+      branch_kr: branchKr,
+      branch_hanja: branchHj,
+    });
+  });
+
+  // 오행 카운트 추출 (사주 객체 또는 elements 키)
+  var elementCount = sajuRaw.오행 || sajuRaw.elements || {};
+  var elements = ['목', '화', '토', '금', '수'].map(function (el) {
+    return {
+      element_kr: el,
+      element_en: { '목': 'Wood', '화': 'Fire', '토': 'Earth', '금': 'Metal', '수': 'Water' }[el],
+      count: Number(elementCount[el] || 0),
+    };
+  });
+
+  // dominant element + day stem element
+  var sortedEl = elements.slice().sort(function (a, b) { return b.count - a.count; });
+  var dominantElementKr = sortedEl[0].element_kr;
+  var dayPillar = sajuRaw.사주 && sajuRaw.사주['일주'];
+  var dayStemIdx = dayPillar ? dayPillar.stem : 0;
+  var STEM_ELEMENT = ['목', '목', '화', '화', '토', '토', '금', '금', '수', '수'];
+  var dayElementKr = STEM_ELEMENT[dayStemIdx] || '목';
+
+  var luckyColor = ELEMENT_TO_COLOR[dayElementKr] || 'green';
+  var luckyDirection = ELEMENT_TO_DIRECTION[dayElementKr] || 'East';
+
+  // summary 헤드라인 (간단 포맷)
+  var summary = 'Day stem ' + (SajuEngine.constants.천간_한자 || [])[dayStemIdx] +
+    ' (' + dayElementKr + '/' + ({ '목': 'Wood', '화': 'Fire', '토': 'Earth', '금': 'Metal', '수': 'Water' }[dayElementKr]) + '). ' +
+    'Dominant element: ' + dominantElementKr + ' (' + ({ '목': 'Wood', '화': 'Fire', '토': 'Earth', '금': 'Metal', '수': 'Water' }[dominantElementKr]) + ').';
+
+  // 5) Claude AI insight (선택) — 환경변수 있을 때만, fallback 보장
+  var advice = buildFallbackAdvice(dayElementKr, dominantElementKr);
+  var anthropicKey = process.env.ANTHROPIC_API_KEY || '';
+  if (anthropicKey) {
+    var prompt = 'You are a Korean Saju (Bazi/Four Pillars) expert. Given a day stem element of ' + dayElementKr +
+      ' (' + ({ '목': 'Wood', '화': 'Fire', '토': 'Earth', '금': 'Metal', '수': 'Water' }[dayElementKr]) + ') ' +
+      'and a dominant chart element of ' + dominantElementKr + ', write a concise 3-sentence English advice ' +
+      'in second person ("you") covering: (1) personality strength, (2) 2026 year theme, (3) one practical action. ' +
+      'Use Korean culture references in general terms only. No proper names. Output plain text, no markdown.';
+    try {
+      var aiText = await callClaude(anthropicKey, prompt);
+      if (aiText && typeof aiText === 'string' && aiText.length > 30) {
+        advice = aiText.trim();
+      }
+    } catch (e) { /* fallback advice 사용 */ }
+  }
+
+  return res.status(200).json({
+    ok: true,
+    pillars: pillars,
+    elements: elements,
+    summary: summary,
+    lucky_color: luckyColor,
+    lucky_direction: luckyDirection,
+    advice: advice,
+    meta: {
+      day_stem_element: dayElementKr,
+      dominant_element: dominantElementKr,
+      gender: gender,
+      birth: { year: year, month: month, day: day, hour: hour === -1 ? null : hour },
+    },
+  });
+}
 
 // ─── SKU ID (payment-config.js와 동기화) ──────────────────
 const COMPAT_SKU = 'compat_detail_9900';
@@ -100,9 +298,16 @@ async function checkEntitlement(email, orderId) {
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-RapidAPI-Proxy-Secret, X-RapidAPI-Key, X-RapidAPI-Host');
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'POST only' });
+
+  // ─── RapidAPI Saju Reading 액션 라우팅 ───
+  // /api/saju-rapid → /api/compat?action=rapidapi-saju (vercel.json rewrite)
+  var action = (req.query && req.query.action) || '';
+  if (action === 'rapidapi-saju') {
+    return handleRapidApiSaju(req, res);
+  }
 
   // body 파싱
   var body = req.body;

@@ -1,0 +1,208 @@
+openapi: 3.0.3
+info:
+  title: Korean Saju (Bazi) Reading API
+  description: >
+    Authentic Korean Saju / Chinese Bazi (Four Pillars of Destiny) reading API.
+    Computes the 4 pillars (year/month/day/hour stems and branches) using lunar
+    calendar conversion, classical solar-term boundaries, and the 60-Ganji cycle,
+    then derives Five Element (Wood/Fire/Earth/Metal/Water) distribution, day-stem
+    personality, lucky color and lucky direction. Optional Claude AI insight
+    delivers a 3-sentence English advice paragraph blending traditional Korean
+    metaphysics with modern second-person guidance.
+  version: 1.0.0
+  contact:
+    name: KunStudio (cheonmyeongdang)
+    url: https://cheonmyeongdang.vercel.app
+  license:
+    name: Proprietary
+servers:
+  - url: https://cheonmyeongdang.vercel.app
+    description: Production
+paths:
+  /saju/reading:
+    post:
+      summary: Generate a Korean Saju (4 Pillars + 5 Elements + AI insight) reading
+      description: >
+        Submits a solar-calendar birth date (year/month/day, optional hour) and
+        gender; returns full 4-pillar chart, 5-element distribution, lucky color
+        and direction, plus an English AI-generated personality and yearly advice
+        paragraph. Response time under 3 seconds. Authentic classical Korean Saju
+        algorithm (no random or AI-only outputs).
+      operationId: getSajuReading
+      security:
+        - RapidAPIProxySecret: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SajuRequest'
+            examples:
+              standard:
+                summary: Standard request with birth hour
+                value:
+                  birth_year: 1990
+                  birth_month: 5
+                  birth_day: 15
+                  birth_hour: 14
+                  gender: F
+              hour_unknown:
+                summary: Request without known birth hour
+                value:
+                  birth_year: 1985
+                  birth_month: 11
+                  birth_day: 3
+                  birth_hour: -1
+                  gender: M
+      responses:
+        '200':
+          description: Successful Saju reading
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SajuResponse'
+        '400':
+          description: Invalid input (year out of range, month/day invalid, etc.)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized (missing or invalid X-RapidAPI-Proxy-Secret)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded (Free tier 100 req/day; upgrade for more)
+        '500':
+          description: Internal calculation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    RapidAPIProxySecret:
+      type: apiKey
+      in: header
+      name: X-RapidAPI-Proxy-Secret
+      description: Injected automatically by the RapidAPI gateway; do not set manually.
+  schemas:
+    SajuRequest:
+      type: object
+      required: [birth_year, birth_month, birth_day, gender]
+      properties:
+        birth_year:
+          type: integer
+          minimum: 1920
+          maximum: 2050
+          example: 1990
+          description: Solar (Gregorian) calendar year of birth.
+        birth_month:
+          type: integer
+          minimum: 1
+          maximum: 12
+          example: 5
+        birth_day:
+          type: integer
+          minimum: 1
+          maximum: 31
+          example: 15
+        birth_hour:
+          type: integer
+          minimum: -1
+          maximum: 23
+          default: -1
+          example: 14
+          description: 24-hour clock (0-23). Use -1 if unknown (hour pillar omitted).
+        gender:
+          type: string
+          enum: [M, F]
+          example: F
+          description: M = male, F = female. Required for daeun (10-year cycle) direction.
+    SajuResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          example: true
+        pillars:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pillar'
+          description: 4 pillars (year/month/day/hour). Hour pillar omitted if birth_hour = -1.
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Element'
+          description: 5-element (Wood/Fire/Earth/Metal/Water) distribution counts.
+        summary:
+          type: string
+          example: "Day stem 庚 (금/Metal). Dominant element: 토 (Earth)."
+        lucky_color:
+          type: string
+          example: "white"
+        lucky_direction:
+          type: string
+          example: "West"
+        advice:
+          type: string
+          example: "You carry a refined sense of structure and clear judgment..."
+        meta:
+          type: object
+          properties:
+            day_stem_element:
+              type: string
+              example: "금"
+            dominant_element:
+              type: string
+              example: "토"
+            gender:
+              type: string
+            birth:
+              type: object
+              properties:
+                year: { type: integer }
+                month: { type: integer }
+                day: { type: integer }
+                hour: { type: integer, nullable: true }
+    Pillar:
+      type: object
+      properties:
+        pillar:
+          type: string
+          enum: [year, month, day, hour]
+        stem_kr:
+          type: string
+          example: "경"
+        stem_hanja:
+          type: string
+          example: "庚"
+        branch_kr:
+          type: string
+          example: "오"
+        branch_hanja:
+          type: string
+          example: "午"
+    Element:
+      type: object
+      properties:
+        element_kr:
+          type: string
+          example: "목"
+        element_en:
+          type: string
+          enum: [Wood, Fire, Earth, Metal, Water]
+        count:
+          type: integer
+          example: 2
+    ErrorResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: "birth_year must be 1920-2050"

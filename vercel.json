@@ -12,7 +12,9 @@
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
     { "source": "/api/invite-link", "destination": "/api/invite?action=link" },
-    { "source": "/api/invite-track", "destination": "/api/invite?action=track" }
+    { "source": "/api/invite-track", "destination": "/api/invite?action=track" },
+    { "source": "/api/saju-rapid", "destination": "/api/compat?action=rapidapi-saju" },
+    { "source": "/saju/reading", "destination": "/api/compat?action=rapidapi-saju" }
   ],
   "crons": [
     { "path": "/api/cron-followup", "schedule": "0 0 * * *" }
