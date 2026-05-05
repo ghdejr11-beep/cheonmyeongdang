@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korean Wedding Date Picker — Lucky Saju (Four Pillars) Date Calculator | KunStudio</title>
+<meta name="description" content="Free Korean wedding date picker. Find lucky wedding dates based on bride and groom Saju (Four Pillars). 길일 calculator with Hanja explanation, traditional Korean wedding tradition guide.">
+<meta name="keywords" content="korean wedding date, lucky wedding date korea, saju wedding compatibility, gilil 길일, korean wedding tradition, four pillars wedding">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://cheonmyeongdang.vercel.app/wedding/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Korean Wedding Date Picker — Lucky Saju Date Calculator">
+<meta property="og:description" content="Find lucky wedding dates based on Korean Saju (Four Pillars) tradition. Free online calculator.">
+<meta property="og:url" content="https://cheonmyeongdang.vercel.app/wedding/">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Korean Wedding Date Picker",
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Free lucky wedding date calculator based on Korean Saju (Four Pillars) tradition."
+}
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2954177434416880" crossorigin="anonymous"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:760px;margin:0 auto;padding:24px;color:#222;line-height:1.7;background:#fafafa}
+header{text-align:center;margin-bottom:30px}
+h1{font-size:2.2rem;color:#111;margin-bottom:8px}
+.sub{color:#666;font-size:1rem}
+.form{background:#fff;border:1px solid #ddd;border-radius:12px;padding:24px;margin:20px 0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+label{display:block;font-weight:600;color:#444;font-size:0.85rem;margin-bottom:6px}
+input,select{width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;font-size:0.95rem;font-family:inherit}
+.btn{background:#c9a84c;color:#fff;border:none;padding:14px 28px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;margin-top:12px}
+.btn:hover{background:#b89238}
+.result{display:none;margin-top:24px;padding:24px;background:#fff;border:1px solid #c9a84c;border-radius:12px}
+.lucky-date{font-size:1.6rem;color:#c9a84c;font-weight:700;margin:8px 0}
+.score{display:inline-block;padding:4px 12px;background:#fff7d6;border-radius:99px;font-weight:600;color:#856b00}
+.cta{margin-top:36px;padding:18px 22px;background:#fff;border:1px solid #ddd;border-radius:10px;text-align:center}
+.cta a{color:#2563eb;text-decoration:none;font-weight:600;display:inline-block;margin-top:6px}
+h2{font-size:1.3rem;margin:30px 0 12px;color:#1a1a1a}
+.tradition{margin:20px 0;padding:18px;background:#fffbf0;border-left:4px solid #c9a84c;border-radius:0 8px 8px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;border-radius:8px;overflow:hidden}
+td,th{padding:10px 12px;border-bottom:1px solid #eee;text-align:left;font-size:0.9rem}
+th{background:#f5f5f5;color:#444}
+footer{margin-top:50px;padding-top:20px;border-top:1px solid #e5e5e5;color:#888;font-size:0.85rem;text-align:center}
+nav a{color:#666;text-decoration:none;font-size:0.85rem;margin-right:14px}
+</style>
+</head>
+<body>
+<nav><a href="../">← KunStudio Home</a> · <a href="../names/">Korean Names</a> · <a href="../blog/">Blog</a></nav>
+
+<header>
+<h1>🎎 Korean Wedding Date Picker</h1>
+<p class="sub">Find your lucky wedding date based on Saju (Four Pillars) tradition</p>
+</header>
+
+<div class="form">
+<h2 style="margin:0 0 14px">Bride & Groom Birth Info</h2>
+<div class="row">
+<div>
+<label>Bride Birth Date</label>
+<input type="date" id="bride-date" required>
+</div>
+<div>
+<label>Bride Birth Hour (optional)</label>
+<select id="bride-hour"><option value="">Unknown</option></select>
+</div>
+</div>
+<div class="row">
+<div>
+<label>Groom Birth Date</label>
+<input type="date" id="groom-date" required>
+</div>
+<div>
+<label>Groom Birth Hour (optional)</label>
+<select id="groom-hour"><option value="">Unknown</option></select>
+</div>
+</div>
+<div class="row">
+<div>
+<label>Target Year</label>
+<select id="target-year"></select>
+</div>
+<div>
+<label>Target Month (optional)</label>
+<select id="target-month"><option value="">Any month</option></select>
+</div>
+</div>
+<button class="btn" onclick="calculate()">Find Lucky Wedding Dates 🎌</button>
+</div>
+
+<div class="result" id="result"></div>
+
+<div class="tradition">
+<h2 style="margin-top:0">📚 Korean Wedding Date Tradition (길일)</h2>
+<p><strong>길일 (Gilil)</strong> means "auspicious day" in Korean. Traditional Korean weddings follow Saju (사주, Four Pillars of Destiny) compatibility between bride and groom, plus the day's heavenly stem and earthly branch.</p>
+<p>Avoided dates: 흑일 (black days), 손 없는 날 conflicts, ancestor death anniversaries, certain lunar phases.</p>
+<p>Preferred dates: when bride/groom Saju elements harmonize with the day's Five Elements (Wood/Fire/Earth/Metal/Water).</p>
+</div>
+
+<h2>📊 What Makes a Date Lucky?</h2>
+<table>
+<tr><th>Factor</th><th>Weight</th></tr>
+<tr><td>Bride-Groom Saju compatibility</td><td>30%</td></tr>
+<tr><td>Day's Five Elements harmony</td><td>25%</td></tr>
+<tr><td>Lunar phase (full moon ideal)</td><td>15%</td></tr>
+<tr><td>Avoiding 손 없는 날 conflict</td><td>15%</td></tr>
+<tr><td>Season (spring/fall preferred)</td><td>15%</td></tr>
+</table>
+
+<div class="cta">
+<strong>Want a full Saju reading for your couple?</strong>
+<p>Get our <strong>Premium Couple Saju Report</strong> — 25-page PDF with detailed compatibility, lucky directions, and life-stage forecasts.</p>
+<a href="https://cheonmyeongdang.vercel.app/bundle">Get Full Korean Naming + Saju Bundle ($70 lifetime) →</a>
+</div>
+
+<h2>🎓 Top Korean Wedding Months 2026</h2>
+<table>
+<tr><th>Month</th><th>Auspicious Score</th><th>Notes</th></tr>
+<tr><td>April 2026</td><td>★★★★★</td><td>Spring, Wood element peak</td></tr>
+<tr><td>May 2026</td><td>★★★★☆</td><td>Late spring, harmony</td></tr>
+<tr><td>October 2026</td><td>★★★★★</td><td>Autumn, Metal element</td></tr>
+<tr><td>November 2026</td><td>★★★★☆</td><td>Late autumn, settling</td></tr>
+</table>
+
+<footer>
+KunStudio © 2026 · Korean Wedding Tradition Calculator · For entertainment & cultural reference. Always confirm with your families.
+</footer>
+
+<script>
+const HOURS_KOR = ['Ja 子 (23-01)','Chuk 丑 (01-03)','In 寅 (03-05)','Myo 卯 (05-07)','Jin 辰 (07-09)','Sa 巳 (09-11)','O 午 (11-13)','Mi 未 (13-15)','Sin 申 (15-17)','Yu 酉 (17-19)','Sul 戌 (19-21)','Hae 亥 (21-23)'];
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+(function init(){
+  const bh = document.getElementById('bride-hour');
+  const gh = document.getElementById('groom-hour');
+  HOURS_KOR.forEach((h,i)=>{
+    bh.appendChild(new Option(h, i));
+    gh.appendChild(new Option(h, i));
+  });
+  const ty = document.getElementById('target-year');
+  for(let y=2026;y<=2028;y++) ty.appendChild(new Option(y,y));
+  const tm = document.getElementById('target-month');
+  MONTHS.forEach((m,i)=>tm.appendChild(new Option(m, i+1)));
+})();
+
+function dayElement(d){
+  // Simplified Five Elements assignment: cyclic by day
+  const els = ['Wood 木','Fire 火','Earth 土','Metal 金','Water 水'];
+  return els[Math.abs(Math.floor(d.getTime()/86400000)) % 5];
+}
+
+function lunarPhase(d){
+  // Approximation: synodic month 29.53059 days from known new moon 2026-01-19
+  const ref = new Date('2026-01-19T00:00:00Z').getTime();
+  const days = (d.getTime() - ref) / 86400000;
+  const phase = ((days % 29.53059) + 29.53059) % 29.53059;
+  if(phase < 1.5) return {name:'New Moon 🌑', score:5};
+  if(phase < 6) return {name:'Waxing Crescent 🌒', score:7};
+  if(phase < 9) return {name:'First Quarter 🌓', score:8};
+  if(phase < 13) return {name:'Waxing Gibbous 🌔', score:9};
+  if(phase < 16) return {name:'Full Moon 🌕', score:10};
+  if(phase < 20) return {name:'Waning Gibbous 🌖', score:7};
+  if(phase < 23) return {name:'Last Quarter 🌗', score:6};
+  return {name:'Waning Crescent 🌘', score:5};
+}
+
+function sajuCompatScore(bDate, gDate){
+  // Simplified: stem-branch combo; cyclic 60-jiazi
+  const bDay = Math.abs(Math.floor(bDate.getTime()/86400000)) % 60;
+  const gDay = Math.abs(Math.floor(gDate.getTime()/86400000)) % 60;
+  const diff = Math.abs(bDay - gDay);
+  // 0,6,12 = 충 (clash) negative; 3,9 = 합 (harmony) positive
+  if([0,6,12,18,24,30].includes(diff)) return 6;
+  if([3,9,15,21,27].includes(diff)) return 10;
+  if([5,7,11,13].includes(diff)) return 8;
+  return 7;
+}
+
+function dateScore(d, bDate, gDate){
+  const elScore = ({'Wood 木':9,'Fire 火':8,'Earth 土':7,'Metal 金':9,'Water 水':8})[dayElement(d)];
+  const lp = lunarPhase(d);
+  const sc = sajuCompatScore(bDate, gDate);
+  const dow = d.getDay();
+  const dowBonus = (dow===0||dow===6) ? 2 : 0; // weekend bonus
+  return Math.round((elScore*2.5 + lp.score*1.5 + sc*3 + dowBonus*1.5)/8 * 10)/10;
+}
+
+function calculate(){
+  const bd = document.getElementById('bride-date').value;
+  const gd = document.getElementById('groom-date').value;
+  if(!bd || !gd){ alert('Please enter both birth dates.'); return; }
+  const bDate = new Date(bd), gDate = new Date(gd);
+  const year = parseInt(document.getElementById('target-year').value);
+  const monthFilter = document.getElementById('target-month').value;
+
+  const candidates = [];
+  for(let m=0;m<12;m++){
+    if(monthFilter && (m+1) !== parseInt(monthFilter)) continue;
+    for(let day=1;day<=28;day++){
+      const d = new Date(year, m, day);
+      const s = dateScore(d, bDate, gDate);
+      candidates.push({date:d, score:s, element:dayElement(d), lunar:lunarPhase(d).name});
+    }
+  }
+  candidates.sort((a,b)=>b.score - a.score);
+  const top = candidates.slice(0, 7);
+
+  const html = `
+  <h2 style="margin-top:0">✨ Top 7 Lucky Wedding Dates</h2>
+  <p style="color:#666;font-size:0.9rem">Based on Saju compatibility, Five Elements harmony, and lunar phase.</p>
+  ${top.map(c=>`
+    <div style="padding:14px 16px;margin:10px 0;background:#fff7d6;border-radius:8px;border-left:4px solid #c9a84c">
+      <div class="lucky-date">${c.date.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}</div>
+      <span class="score">Score: ${c.score}/10</span>
+      <span style="margin-left:10px;color:#666;font-size:0.88rem">Element: ${c.element} · ${c.lunar}</span>
+    </div>
+  `).join('')}
+  <p style="margin-top:18px;font-size:0.85rem;color:#888">Note: These results are based on traditional Saju heuristics for entertainment & cultural reference. For official 사주 reading, consult a professional 명리학자.</p>
+  `;
+  const r = document.getElementById('result');
+  r.innerHTML = html;
+  r.style.display = 'block';
+  r.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>

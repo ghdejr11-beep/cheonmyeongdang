@@ -1,0 +1,904 @@
+{
+  "names": [
+    {
+      "romanized": "Ji-hoo",
+      "hangul": "지후",
+      "hanja": "智厚",
+      "gender": "male",
+      "meaning_short": "Wisdom and generosity",
+      "meaning_long": "지(智) means wisdom and intellect; 후(厚) means generosity and depth of character. Together: a child of wise heart and generous spirit.",
+      "popularity_2026": "rising",
+      "famous_examples": "Common in modern K-drama leads",
+      "kpop_match": "BTS Jin (similar feel)",
+      "saju_meaning": "Strong wood element, balanced yang energy",
+      "pronunciation_guide": "JEE-hoo (rhymes with 'see-who')",
+      "personality_traits": [
+        "intelligent",
+        "warm",
+        "trustworthy"
+      ]
+    },
+    {
+      "romanized": "Seo-yeon",
+      "hangul": "서연",
+      "hanja": "瑞娟",
+      "gender": "female",
+      "meaning_short": "Auspicious beauty",
+      "meaning_long": "서(瑞) means auspicious and felicitous; 연(娟) means beautiful and graceful. Together: a girl blessed with elegant beauty and good fortune.",
+      "popularity_2026": "top_10",
+      "famous_examples": "Actress Seo Ye-ji, popular among millennials",
+      "kpop_match": "Red Velvet Irene (elegant vibe)",
+      "saju_meaning": "Water element, strong yin energy for harmony",
+      "pronunciation_guide": "SUH-yawn (like 'sir' + 'yawn')",
+      "personality_traits": [
+        "graceful",
+        "fortunate",
+        "charming"
+      ]
+    },
+    {
+      "romanized": "Min-jun",
+      "hangul": "민준",
+      "hanja": "敏俊",
+      "gender": "male",
+      "meaning_short": "Quick and handsome",
+      "meaning_long": "민(敏) means quick-witted and sharp; 준(俊) means handsome and talented. Together: a boy of sharp mind and attractive character.",
+      "popularity_2026": "top_5",
+      "famous_examples": "Most popular Korean boy name 2010s",
+      "kpop_match": "EXO Suho (leader qualities)",
+      "saju_meaning": "Metal element, strong yang for leadership",
+      "pronunciation_guide": "MIN-joon (like 'min' + 'June')",
+      "personality_traits": [
+        "clever",
+        "handsome",
+        "capable"
+      ]
+    },
+    {
+      "romanized": "Ha-eun",
+      "hangul": "하은",
+      "hanja": "夏恩",
+      "gender": "female",
+      "meaning_short": "Summer grace",
+      "meaning_long": "하(夏) means summer and vitality; 은(恩) means grace and kindness. Together: a girl radiating warmth and gracious charm.",
+      "popularity_2026": "rising",
+      "famous_examples": "Popular among 2020s generation",
+      "kpop_match": "IVE Wonyoung (bright image)",
+      "saju_meaning": "Fire element, balanced energy for warmth",
+      "pronunciation_guide": "HA-uhn (like 'ha' + 'earn')",
+      "personality_traits": [
+        "bright",
+        "kind",
+        "energetic"
+      ]
+    },
+    {
+      "romanized": "Tae-yang",
+      "hangul": "태양",
+      "hanja": "太陽",
+      "gender": "male",
+      "meaning_short": "The sun",
+      "meaning_long": "태(太) means great and supreme; 양(陽) means sun and positive energy. Together: a boy shining like the great sun itself.",
+      "popularity_2026": "stable",
+      "famous_examples": "BIGBANG Taeyang (stage name origin)",
+      "kpop_match": "BIGBANG Taeyang (namesake)",
+      "saju_meaning": "Pure yang fire element, charismatic leader",
+      "pronunciation_guide": "TAE-yahng (like 'tie' + 'young')",
+      "personality_traits": [
+        "charismatic",
+        "bright",
+        "strong"
+      ]
+    },
+    {
+      "romanized": "Yoo-na",
+      "hangul": "유나",
+      "hanja": "柔娜",
+      "gender": "female",
+      "meaning_short": "Gentle grace",
+      "meaning_long": "유(柔) means gentle and soft; 나(娜) means graceful and elegant. Together: a girl of tender heart and graceful presence.",
+      "popularity_2026": "top_20",
+      "famous_examples": "SNSD Yoona, actress icon",
+      "kpop_match": "SNSD Yoona (namesake)",
+      "saju_meaning": "Water element, harmonious yin energy",
+      "pronunciation_guide": "YOO-nah (like 'you' + 'nah')",
+      "personality_traits": [
+        "gentle",
+        "elegant",
+        "beloved"
+      ]
+    },
+    {
+      "romanized": "Jae-won",
+      "hangul": "재원",
+      "hanja": "在元",
+      "gender": "male",
+      "meaning_short": "Present and origin",
+      "meaning_long": "재(在) means to exist and be present; 원(元) means origin and beginning. Together: a boy who is foundational and present.",
+      "popularity_2026": "rising",
+      "famous_examples": "Common in business families",
+      "kpop_match": "NCT Jaehyun (sophisticated feel)",
+      "saju_meaning": "Earth element, grounding yang energy",
+      "pronunciation_guide": "JAE-won (like 'jay' + 'one')",
+      "personality_traits": [
+        "grounded",
+        "original",
+        "steady"
+      ]
+    },
+    {
+      "romanized": "Ae-ri",
+      "hangul": "애리",
+      "hanja": "愛理",
+      "gender": "female",
+      "meaning_short": "Love and reason",
+      "meaning_long": "애(愛) means love and affection; 리(理) means reason and logic. Together: a girl who balances heart and mind perfectly.",
+      "popularity_2026": "modern_trendy",
+      "famous_examples": "Rising among Gen Z parents",
+      "kpop_match": "aespa Giselle (modern vibe)",
+      "saju_meaning": "Balanced water-metal elements",
+      "pronunciation_guide": "AE-ree (like 'air' + 'ree')",
+      "personality_traits": [
+        "loving",
+        "logical",
+        "balanced"
+      ]
+    },
+    {
+      "romanized": "Hyun-woo",
+      "hangul": "현우",
+      "hanja": "賢祐",
+      "gender": "male",
+      "meaning_short": "Wise protection",
+      "meaning_long": "현(賢) means wise and virtuous; 우(祐) means protection and blessing. Together: a boy of wisdom who protects others.",
+      "popularity_2026": "top_15",
+      "famous_examples": "Actor Hyun Bin (similar name)",
+      "kpop_match": "MONSTA X Shownu (protective leader)",
+      "saju_meaning": "Strong earth element, guardian energy",
+      "pronunciation_guide": "HYUN-woo (like 'hewn' + 'woo')",
+      "personality_traits": [
+        "wise",
+        "protective",
+        "reliable"
+      ]
+    },
+    {
+      "romanized": "Da-eun",
+      "hangul": "다은",
+      "hanja": "多恩",
+      "gender": "female",
+      "meaning_short": "Many blessings",
+      "meaning_long": "다(多) means many and abundant; 은(恩) means grace and blessing. Together: a girl blessed with abundant grace.",
+      "popularity_2026": "top_10",
+      "famous_examples": "Popular throughout 2010-2020s",
+      "kpop_match": "TWICE Dahyun (similar sound)",
+      "saju_meaning": "Water element, abundant yin energy",
+      "pronunciation_guide": "DA-uhn (like 'dah' + 'earn')",
+      "personality_traits": [
+        "blessed",
+        "abundant",
+        "gracious"
+      ]
+    },
+    {
+      "romanized": "Sung-min",
+      "hangul": "성민",
+      "hanja": "成民",
+      "gender": "male",
+      "meaning_short": "Accomplished people",
+      "meaning_long": "성(成) means accomplish and succeed; 민(民) means people and citizen. Together: a boy who achieves for the community.",
+      "popularity_2026": "classic_stable",
+      "famous_examples": "Super Junior Sungmin",
+      "kpop_match": "Super Junior Sungmin (namesake)",
+      "saju_meaning": "Earth element, community-focused yang",
+      "pronunciation_guide": "SUNG-min (like 'sung' + 'min')",
+      "personality_traits": [
+        "accomplished",
+        "social",
+        "leader"
+      ]
+    },
+    {
+      "romanized": "Chae-won",
+      "hangul": "채원",
+      "hanja": "采園",
+      "gender": "female",
+      "meaning_short": "Colorful garden",
+      "meaning_long": "채(采) means color and brilliance; 원(園) means garden and sanctuary. Together: a girl like a vibrant, beautiful garden.",
+      "popularity_2026": "rising",
+      "famous_examples": "LE SSERAFIM Chaewon, IZONE alumni",
+      "kpop_match": "LE SSERAFIM Chaewon (namesake)",
+      "saju_meaning": "Wood element, creative yin energy",
+      "pronunciation_guide": "CHAE-won (like 'chay' + 'one')",
+      "personality_traits": [
+        "vibrant",
+        "creative",
+        "nurturing"
+      ]
+    },
+    {
+      "romanized": "Dong-hyun",
+      "hangul": "동현",
+      "hanja": "東賢",
+      "gender": "male",
+      "meaning_short": "Eastern wisdom",
+      "meaning_long": "동(東) means east and rising sun; 현(賢) means wise and virtuous. Together: a boy of wisdom from the rising sun.",
+      "popularity_2026": "traditional_strong",
+      "famous_examples": "Common in traditional families",
+      "kpop_match": "BOYFRIEND Donghyun",
+      "saju_meaning": "Wood element, morning yang energy",
+      "pronunciation_guide": "DONG-hyun (like 'dong' + 'hewn')",
+      "personality_traits": [
+        "wise",
+        "traditional",
+        "rising"
+      ]
+    },
+    {
+      "romanized": "Ye-jin",
+      "hangul": "예진",
+      "hanja": "藝眞",
+      "gender": "female",
+      "meaning_short": "Artistic truth",
+      "meaning_long": "예(藝) means art and talent; 진(眞) means truth and genuine. Together: a girl of genuine artistic talent.",
+      "popularity_2026": "top_20",
+      "famous_examples": "Actress Son Ye-jin (Crash Landing on You)",
+      "kpop_match": "ITZY Yeji (similar sound)",
+      "saju_meaning": "Metal element, artistic yin clarity",
+      "pronunciation_guide": "YEH-jin (like 'yeah' + 'gin')",
+      "personality_traits": [
+        "artistic",
+        "genuine",
+        "talented"
+      ]
+    },
+    {
+      "romanized": "Joon-seo",
+      "hangul": "준서",
+      "hanja": "俊瑞",
+      "gender": "male",
+      "meaning_short": "Handsome and auspicious",
+      "meaning_long": "준(俊) means handsome and talented; 서(瑞) means auspicious and fortunate. Together: a boy blessed with talent and good fortune.",
+      "popularity_2026": "top_3",
+      "famous_examples": "Top name charts 2015-2025",
+      "kpop_match": "SEVENTEEN Jun (similar feel)",
+      "saju_meaning": "Balanced metal-water, fortunate yang",
+      "pronunciation_guide": "JOON-suh (like 'June' + 'sir')",
+      "personality_traits": [
+        "talented",
+        "fortunate",
+        "attractive"
+      ]
+    },
+    {
+      "romanized": "Ji-woo",
+      "hangul": "지우",
+      "hanja": "智優",
+      "gender": "unisex",
+      "meaning_short": "Wisdom and excellence",
+      "meaning_long": "지(智) means wisdom and intelligence; 우(優) means excellence and superiority. Together: a child of wise excellence.",
+      "popularity_2026": "top_5",
+      "famous_examples": "Actress Kim Ji-woo, rising unisex name",
+      "kpop_match": "BLACKPINK Jisoo (similar sound)",
+      "saju_meaning": "Balanced elements, harmonious energy",
+      "pronunciation_guide": "JEE-woo (like 'gee' + 'woo')",
+      "personality_traits": [
+        "intelligent",
+        "excellent",
+        "balanced"
+      ]
+    },
+    {
+      "romanized": "Su-bin",
+      "hangul": "수빈",
+      "hanja": "秀彬",
+      "gender": "unisex",
+      "meaning_short": "Elegant refinement",
+      "meaning_long": "수(秀) means elegant and excellent; 빈(彬) means refined and cultured. Together: a child of elegant sophistication.",
+      "popularity_2026": "rising",
+      "famous_examples": "TXT Soobin, actress Han Su-bin",
+      "kpop_match": "TXT Soobin (namesake)",
+      "saju_meaning": "Wood element, refined balanced energy",
+      "pronunciation_guide": "SOO-bin (like 'sue' + 'bin')",
+      "personality_traits": [
+        "elegant",
+        "refined",
+        "cultured"
+      ]
+    },
+    {
+      "romanized": "Kyung-soo",
+      "hangul": "경수",
+      "hanja": "敬秀",
+      "gender": "male",
+      "meaning_short": "Respectful excellence",
+      "meaning_long": "경(敬) means respect and reverence; 수(秀) means excellence and beauty. Together: a boy of respectful and excellent character.",
+      "popularity_2026": "classic_stable",
+      "famous_examples": "EXO D.O. (Do Kyung-soo)",
+      "kpop_match": "EXO D.O. (namesake)",
+      "saju_meaning": "Earth element, respectful yang energy",
+      "pronunciation_guide": "KYUNG-soo (like 'young' with K + 'sue')",
+      "personality_traits": [
+        "respectful",
+        "excellent",
+        "humble"
+      ]
+    },
+    {
+      "romanized": "Eun-ji",
+      "hangul": "은지",
+      "hanja": "恩智",
+      "gender": "female",
+      "meaning_short": "Grace and wisdom",
+      "meaning_long": "은(恩) means grace and kindness; 지(智) means wisdom and intelligence. Together: a girl of gracious wisdom.",
+      "popularity_2026": "top_15",
+      "famous_examples": "Apink Eunji, actress Jung Eun-ji",
+      "kpop_match": "Apink Eunji (namesake)",
+      "saju_meaning": "Water-wood balance, wise yin energy",
+      "pronunciation_guide": "EUN-jee (like 'earn' + 'gee')",
+      "personality_traits": [
+        "gracious",
+        "wise",
+        "kind"
+      ]
+    },
+    {
+      "romanized": "Woo-jin",
+      "hangul": "우진",
+      "hanja": "宇眞",
+      "gender": "male",
+      "meaning_short": "Universe truth",
+      "meaning_long": "우(宇) means universe and space; 진(眞) means truth and genuine. Together: a boy of universal truth and authenticity.",
+      "popularity_2026": "rising",
+      "famous_examples": "Actor Kim Woo-jin, popular millennial name",
+      "kpop_match": "Stray Kids Woojin (former member)",
+      "saju_meaning": "Metal element, expansive yang energy",
+      "pronunciation_guide": "WOO-jin (like 'woo' + 'gin')",
+      "personality_traits": [
+        "genuine",
+        "expansive",
+        "authentic"
+      ]
+    },
+    {
+      "romanized": "Na-eun",
+      "hangul": "나은",
+      "hanja": "娜恩",
+      "gender": "female",
+      "meaning_short": "Graceful blessing",
+      "meaning_long": "나(娜) means graceful and elegant; 은(恩) means blessing and grace. Together: a girl doubly blessed with elegance.",
+      "popularity_2026": "top_20",
+      "famous_examples": "Apink Naeun, actress Son Na-eun",
+      "kpop_match": "Apink Naeun (namesake)",
+      "saju_meaning": "Water element, gentle yin blessing",
+      "pronunciation_guide": "NAH-uhn (like 'nah' + 'earn')",
+      "personality_traits": [
+        "graceful",
+        "blessed",
+        "elegant"
+      ]
+    },
+    {
+      "romanized": "Tae-hyun",
+      "hangul": "태현",
+      "hanja": "泰賢",
+      "gender": "male",
+      "meaning_short": "Great wisdom",
+      "meaning_long": "태(泰) means great and peaceful; 현(賢) means wise and virtuous. Together: a boy of great wisdom and peace.",
+      "popularity_2026": "stable",
+      "famous_examples": "BIGBANG Taeyang, TXT Taehyun",
+      "kpop_match": "TXT Taehyun (namesake)",
+      "saju_meaning": "Earth element, peaceful yang wisdom",
+      "pronunciation_guide": "TAE-hyun (like 'tie' + 'hewn')",
+      "personality_traits": [
+        "wise",
+        "peaceful",
+        "great"
+      ]
+    },
+    {
+      "romanized": "Bo-ra",
+      "hangul": "보라",
+      "hanja": "寶羅",
+      "gender": "female",
+      "meaning_short": "Precious treasure",
+      "meaning_long": "보(寶) means treasure and precious; 라(羅) means silk and luxury. Together: a girl as precious as silk treasure.",
+      "popularity_2026": "modern_unique",
+      "famous_examples": "SISTAR Bora, actress Yoon Bo-ra",
+      "kpop_match": "SISTAR Bora (namesake)",
+      "saju_meaning": "Metal element, precious yin energy",
+      "pronunciation_guide": "BOH-rah (like 'bore' + 'rah')",
+      "personality_traits": [
+        "precious",
+        "luxurious",
+        "treasured"
+      ]
+    },
+    {
+      "romanized": "Sang-woo",
+      "hangul": "상우",
+      "hanja": "相祐",
+      "gender": "male",
+      "meaning_short": "Mutual protection",
+      "meaning_long": "상(相) means mutual and together; 우(祐) means protection and blessing. Together: a boy who protects and blesses others.",
+      "popularity_2026": "classic_stable",
+      "famous_examples": "Common in traditional families",
+      "kpop_match": "Actor Lee Sang-woo",
+      "saju_meaning": "Earth element, protective yang energy",
+      "pronunciation_guide": "SAHNG-woo (like 'song' + 'woo')",
+      "personality_traits": [
+        "protective",
+        "cooperative",
+        "blessed"
+      ]
+    },
+    {
+      "romanized": "Mi-na",
+      "hangul": "미나",
+      "hanja": "美娜",
+      "gender": "female",
+      "meaning_short": "Beautiful grace",
+      "meaning_long": "미(美) means beautiful and lovely; 나(娜) means graceful and elegant. Together: a girl of beautiful elegance.",
+      "popularity_2026": "classic_steady",
+      "famous_examples": "TWICE Mina, classic Korean name",
+      "kpop_match": "TWICE Mina (namesake)",
+      "saju_meaning": "Water element, classical yin beauty",
+      "pronunciation_guide": "MEE-nah (like 'me' + 'nah')",
+      "personality_traits": [
+        "beautiful",
+        "graceful",
+        "classic"
+      ]
+    },
+    {
+      "romanized": "Chan-woo",
+      "hangul": "찬우",
+      "hanja": "燦祐",
+      "gender": "male",
+      "meaning_short": "Brilliant protection",
+      "meaning_long": "찬(燦) means brilliant and shining; 우(祐) means protection and divine help. Together: a boy who shines while protecting.",
+      "popularity_2026": "rising",
+      "famous_examples": "iKON Chanwoo, actor Jung Chan-woo",
+      "kpop_match": "iKON Chanwoo (namesake)",
+      "saju_meaning": "Fire element, brilliant yang energy",
+      "pronunciation_guide": "CHAHN-woo (like 'con' + 'woo')",
+      "personality_traits": [
+        "brilliant",
+        "protective",
+        "shining"
+      ]
+    },
+    {
+      "romanized": "Hye-won",
+      "hangul": "혜원",
+      "hanja": "惠園",
+      "gender": "female",
+      "meaning_short": "Grace garden",
+      "meaning_long": "혜(惠) means grace and favor; 원(園) means garden and sanctuary. Together: a girl like a graceful garden sanctuary.",
+      "popularity_2026": "stable",
+      "famous_examples": "IZ*ONE Hyewon, actress Kang Hye-won",
+      "kpop_match": "IZ*ONE Hyewon (namesake)",
+      "saju_meaning": "Wood element, nurturing yin grace",
+      "pronunciation_guide": "HYE-won (like 'hay' + 'one')",
+      "personality_traits": [
+        "graceful",
+        "nurturing",
+        "peaceful"
+      ]
+    },
+    {
+      "romanized": "Jin-woo",
+      "hangul": "진우",
+      "hanja": "眞祐",
+      "gender": "male",
+      "meaning_short": "True protection",
+      "meaning_long": "진(眞) means true and genuine; 우(祐) means protection and blessing. Together: a boy of genuine protective nature.",
+      "popularity_2026": "top_10",
+      "famous_examples": "WINNER Jinwoo, popular modern name",
+      "kpop_match": "WINNER Jinwoo (namesake)",
+      "saju_meaning": "Metal element, authentic yang energy",
+      "pronunciation_guide": "JIN-woo (like 'gin' + 'woo')",
+      "personality_traits": [
+        "genuine",
+        "protective",
+        "true"
+      ]
+    },
+    {
+      "romanized": "So-yeon",
+      "hangul": "소연",
+      "hanja": "昭娟",
+      "gender": "female",
+      "meaning_short": "Bright beauty",
+      "meaning_long": "소(昭) means bright and clear; 연(娟) means beautiful and graceful. Together: a girl of bright and clear beauty.",
+      "popularity_2026": "top_15",
+      "famous_examples": "(G)I-DLE Soyeon, leader energy",
+      "kpop_match": "(G)I-DLE Soyeon (namesake)",
+      "saju_meaning": "Fire element, bright yin leadership",
+      "pronunciation_guide": "SOH-yawn (like 'so' + 'yawn')",
+      "personality_traits": [
+        "bright",
+        "beautiful",
+        "clear"
+      ]
+    },
+    {
+      "romanized": "Young-jae",
+      "hangul": "영재",
+      "hanja": "英才",
+      "gender": "male",
+      "meaning_short": "Talented hero",
+      "meaning_long": "영(英) means hero and flower; 재(才) means talent and ability. Together: a boy of heroic talent and ability.",
+      "popularity_2026": "stable",
+      "famous_examples": "GOT7 Youngjae, BAP Youngjae",
+      "kpop_match": "GOT7 Youngjae (namesake)",
+      "saju_meaning": "Wood element, talented yang energy",
+      "pronunciation_guide": "YOUNG-jae (like 'young' + 'jay')",
+      "personality_traits": [
+        "talented",
+        "heroic",
+        "capable"
+      ]
+    },
+    {
+      "romanized": "Ah-in",
+      "hangul": "아인",
+      "hanja": "雅仁",
+      "gender": "unisex",
+      "meaning_short": "Elegant humanity",
+      "meaning_long": "아(雅) means elegant and refined; 인(仁) means humanity and benevolence. Together: a child of elegant kindness.",
+      "popularity_2026": "modern_rising",
+      "famous_examples": "Actor Yoo Ah-in, modern trendy",
+      "kpop_match": "Unique modern vibe",
+      "saju_meaning": "Balanced elements, humane energy",
+      "pronunciation_guide": "AH-in (like 'ah' + 'in')",
+      "personality_traits": [
+        "elegant",
+        "kind",
+        "humane"
+      ]
+    },
+    {
+      "romanized": "Seung-ho",
+      "hangul": "승호",
+      "hanja": "承浩",
+      "gender": "male",
+      "meaning_short": "Inherit greatness",
+      "meaning_long": "승(承) means inherit and succeed; 호(浩) means great and vast. Together: a boy who inherits and achieves greatness.",
+      "popularity_2026": "traditional_strong",
+      "famous_examples": "Actor Yoo Seung-ho, child star",
+      "kpop_match": "VICTON Seungwoo (similar)",
+      "saju_meaning": "Water element, expansive yang legacy",
+      "pronunciation_guide": "SEUNG-ho (like 'sung' + 'ho')",
+      "personality_traits": [
+        "great",
+        "legacy",
+        "vast"
+      ]
+    },
+    {
+      "romanized": "Yeon-woo",
+      "hangul": "연우",
+      "hanja": "娟祐",
+      "gender": "unisex",
+      "meaning_short": "Beautiful blessing",
+      "meaning_long": "연(娟) means beautiful and graceful; 우(祐) means blessing and protection. Together: a child beautifully blessed.",
+      "popularity_2026": "rising",
+      "famous_examples": "MOMOLAND Yeonwoo, rising unisex",
+      "kpop_match": "MOMOLAND Yeonwoo (namesake)",
+      "saju_meaning": "Water element, blessed balanced energy",
+      "pronunciation_guide": "YAWN-woo (like 'yawn' + 'woo')",
+      "personality_traits": [
+        "beautiful",
+        "blessed",
+        "graceful"
+      ]
+    },
+    {
+      "romanized": "Jae-hyun",
+      "hangul": "재현",
+      "hanja": "在賢",
+      "gender": "male",
+      "meaning_short": "Present wisdom",
+      "meaning_long": "재(在) means present and exist; 현(賢) means wise and virtuous. Together: a boy of present wisdom and virtue.",
+      "popularity_2026": "top_10",
+      "famous_examples": "NCT Jaehyun, actor Lee Jae-hyun",
+      "kpop_match": "NCT Jaehyun (namesake)",
+      "saju_meaning": "Earth element, grounded yang wisdom",
+      "pronunciation_guide": "JAE-hyun (like 'jay' + 'hewn')",
+      "personality_traits": [
+        "wise",
+        "present",
+        "virtuous"
+      ]
+    },
+    {
+      "romanized": "Ye-eun",
+      "hangul": "예은",
+      "hanja": "藝恩",
+      "gender": "female",
+      "meaning_short": "Artistic grace",
+      "meaning_long": "예(藝) means art and skill; 은(恩) means grace and blessing. Together: a girl blessed with artistic grace.",
+      "popularity_2026": "top_20",
+      "famous_examples": "Wonder Girls Yeeun, actress Han Ye-eun",
+      "kpop_match": "Wonder Girls Yeeun (namesake)",
+      "saju_meaning": "Metal element, artistic yin blessing",
+      "pronunciation_guide": "YEH-uhn (like 'yeah' + 'earn')",
+      "personality_traits": [
+        "artistic",
+        "graceful",
+        "blessed"
+      ]
+    },
+    {
+      "romanized": "Si-woo",
+      "hangul": "시우",
+      "hanja": "時祐",
+      "gender": "male",
+      "meaning_short": "Time blessing",
+      "meaning_long": "시(時) means time and season; 우(祐) means blessing and protection. Together: a boy blessed at the right time.",
+      "popularity_2026": "top_5",
+      "famous_examples": "Actor Yoo Si-woo, top millennial name",
+      "kpop_match": "Modern K-drama lead vibe",
+      "saju_meaning": "Water element, timely yang blessing",
+      "pronunciation_guide": "SEE-woo (like 'see' + 'woo')",
+      "personality_traits": [
+        "timely",
+        "blessed",
+        "fortunate"
+      ]
+    },
+    {
+      "romanized": "Ga-eun",
+      "hangul": "가은",
+      "hanja": "佳恩",
+      "gender": "female",
+      "meaning_short": "Good grace",
+      "meaning_long": "가(佳) means good and beautiful; 은(恩) means grace and kindness. Together: a girl of good grace and beauty.",
+      "popularity_2026": "rising",
+      "famous_examples": "Popular among Gen Z names",
+      "kpop_match": "Modern fresh idol vibe",
+      "saju_meaning": "Water element, good yin energy",
+      "pronunciation_guide": "GAH-uhn (like 'ga' + 'earn')",
+      "personality_traits": [
+        "good",
+        "graceful",
+        "beautiful"
+      ]
+    },
+    {
+      "romanized": "Ho-seok",
+      "hangul": "호석",
+      "hanja": "浩碩",
+      "gender": "male",
+      "meaning_short": "Great abundance",
+      "meaning_long": "호(浩) means great and vast; 석(碩) means large and abundant. Together: a boy of vast greatness and abundance.",
+      "popularity_2026": "stable",
+      "famous_examples": "BTS J-Hope (Jung Ho-seok)",
+      "kpop_match": "BTS J-Hope (namesake)",
+      "saju_meaning": "Earth-water, abundant yang energy",
+      "pronunciation_guide": "HO-suk (like 'ho' + 'suck')",
+      "personality_traits": [
+        "great",
+        "abundant",
+        "hopeful"
+      ]
+    },
+    {
+      "romanized": "Soo-ah",
+      "hangul": "수아",
+      "hanja": "秀雅",
+      "gender": "female",
+      "meaning_short": "Excellent elegance",
+      "meaning_long": "수(秀) means excellent and outstanding; 아(雅) means elegant and refined. Together: a girl of excellent elegance.",
+      "popularity_2026": "rising",
+      "famous_examples": "(G)I-DLE Shuhua (similar), actress Bae Soo-ah",
+      "kpop_match": "Dreamcatcher Siyeon (elegant vibe)",
+      "saju_meaning": "Wood element, refined yin excellence",
+      "pronunciation_guide": "SOO-ah (like 'sue' + 'ah')",
+      "personality_traits": [
+        "excellent",
+        "elegant",
+        "refined"
+      ]
+    },
+    {
+      "romanized": "Byung-ho",
+      "hangul": "병호",
+      "hanja": "炳浩",
+      "gender": "male",
+      "meaning_short": "Bright greatness",
+      "meaning_long": "병(炳) means bright and clear; 호(浩) means great and vast. Together: a boy of bright and vast greatness.",
+      "popularity_2026": "traditional_steady",
+      "famous_examples": "Classic Korean name, common Gen X",
+      "kpop_match": "Traditional strong leader vibe",
+      "saju_meaning": "Fire-water balance, bright yang",
+      "pronunciation_guide": "BYUNG-ho (like 'bee-young' + 'ho')",
+      "personality_traits": [
+        "bright",
+        "great",
+        "vast"
+      ]
+    },
+    {
+      "romanized": "Hae-won",
+      "hangul": "해원",
+      "hanja": "海園",
+      "gender": "female",
+      "meaning_short": "Ocean garden",
+      "meaning_long": "해(海) means ocean and sea; 원(園) means garden and park. Together: a girl like an ocean garden, vast and beautiful.",
+      "popularity_2026": "modern_unique",
+      "famous_examples": "NMIXX Haewon, fresh modern name",
+      "kpop_match": "NMIXX Haewon (namesake)",
+      "saju_meaning": "Water-wood, flowing yin creativity",
+      "pronunciation_guide": "HAE-won (like 'hay' + 'one')",
+      "personality_traits": [
+        "vast",
+        "beautiful",
+        "flowing"
+      ]
+    },
+    {
+      "romanized": "Kang-min",
+      "hangul": "강민",
+      "hanja": "剛民",
+      "gender": "male",
+      "meaning_short": "Strong people",
+      "meaning_long": "강(剛) means strong and firm; 민(民) means people and citizens. Together: a boy strong for his community.",
+      "popularity_2026": "stable",
+      "famous_examples": "Actor Lee Kang-min, traditional name",
+      "kpop_match": "VERIVERY Kangmin",
+      "saju_meaning": "Metal element, strong yang leadership",
+      "pronunciation_guide": "KAHNG-min (like 'kong' + 'min')",
+      "personality_traits": [
+        "strong",
+        "community",
+        "firm"
+      ]
+    },
+    {
+      "romanized": "Ra-on",
+      "hangul": "라온",
+      "hanja": "樂溫",
+      "gender": "unisex",
+      "meaning_short": "Joyful warmth",
+      "meaning_long": "라(樂) means joy and happiness; 온(溫) means warm and gentle. Together: a child bringing joyful warmth.",
+      "popularity_2026": "modern_trendy",
+      "famous_examples": "Modern pure Korean name trend",
+      "kpop_match": "Fresh modern idol vibe",
+      "saju_meaning": "Fire element, joyful balanced energy",
+      "pronunciation_guide": "RAH-on (like 'ra' + 'on')",
+      "personality_traits": [
+        "joyful",
+        "warm",
+        "happy"
+      ]
+    },
+    {
+      "romanized": "Dong-wook",
+      "hangul": "동욱",
+      "hanja": "東旭",
+      "gender": "male",
+      "meaning_short": "Eastern sunrise",
+      "meaning_long": "동(東) means east and rising; 욱(旭) means sunrise and bright. Together: a boy like the bright eastern sunrise.",
+      "popularity_2026": "classic_stable",
+      "famous_examples": "Actor Lee Dong-wook, classic name",
+      "kpop_match": "Actor Lee Dong-wook vibe",
+      "saju_meaning": "Fire-wood, rising yang energy",
+      "pronunciation_guide": "DONG-ook (like 'dong' + 'book')",
+      "personality_traits": [
+        "bright",
+        "rising",
+        "new"
+      ]
+    },
+    {
+      "romanized": "Yu-jin",
+      "hangul": "유진",
+      "hanja": "有眞",
+      "gender": "unisex",
+      "meaning_short": "Possessing truth",
+      "meaning_long": "유(有) means to have and possess; 진(眞) means truth and genuine. Together: a child possessing genuine truth.",
+      "popularity_2026": "top_15",
+      "famous_examples": "IVE Yujin, CLC Yujin, unisex popular",
+      "kpop_match": "IVE Yujin (namesake)",
+      "saju_meaning": "Metal element, genuine balanced energy",
+      "pronunciation_guide": "YOO-jin (like 'you' + 'gin')",
+      "personality_traits": [
+        "genuine",
+        "truthful",
+        "authentic"
+      ]
+    },
+    {
+      "romanized": "Hwan-hee",
+      "hangul": "환희",
+      "hanja": "歡喜",
+      "gender": "unisex",
+      "meaning_short": "Joy and delight",
+      "meaning_long": "환(歡) means joy and cheerful; 희(喜) means delight and happiness. Together: a child of pure joy and delight.",
+      "popularity_2026": "modern_unique",
+      "famous_examples": "UP10TION Hwanhee, joyful name",
+      "kpop_match": "UP10TION Hwanhee (namesake)",
+      "saju_meaning": "Fire element, joyful balanced yang",
+      "pronunciation_guide": "HWAN-hee (like 'wan' + 'hee')",
+      "personality_traits": [
+        "joyful",
+        "happy",
+        "delightful"
+      ]
+    },
+    {
+      "romanized": "Se-young",
+      "hangul": "세영",
+      "hanja": "世英",
+      "gender": "unisex",
+      "meaning_short": "World hero",
+      "meaning_long": "세(世) means world and generation; 영(英) means hero and flower. Together: a child who is a hero to the world.",
+      "popularity_2026": "rising",
+      "famous_examples": "Actress Lee Se-young, unisex modern",
+      "kpop_match": "Modern versatile vibe",
+      "saju_meaning": "Wood element, heroic balanced energy",
+      "pronunciation_guide": "SEH-young (like 'say' + 'young')",
+      "personality_traits": [
+        "heroic",
+        "worldly",
+        "leader"
+      ]
+    },
+    {
+      "romanized": "In-ha",
+      "hangul": "인하",
+      "hanja": "仁夏",
+      "gender": "unisex",
+      "meaning_short": "Kind summer",
+      "meaning_long": "인(仁) means kindness and humanity; 하(夏) means summer and bright. Together: a child of kind warmth like summer.",
+      "popularity_2026": "modern_rising",
+      "famous_examples": "Rising unisex trend name",
+      "kpop_match": "Fresh summer concept vibe",
+      "saju_meaning": "Fire element, warm balanced humanity",
+      "pronunciation_guide": "IN-ha (like 'in' + 'ha')",
+      "personality_traits": [
+        "kind",
+        "warm",
+        "bright"
+      ]
+    },
+    {
+      "romanized": "Bit-na",
+      "hangul": "빛나",
+      "hanja": "N/A",
+      "gender": "female",
+      "meaning_short": "To shine",
+      "meaning_long": "Pure Korean name meaning 'to shine' or 'shining.' A girl who illuminates the world with her presence.",
+      "popularity_2026": "modern_trendy",
+      "famous_examples": "Pure Korean name trend, no hanja",
+      "kpop_match": "Bright idol concept vibe",
+      "saju_meaning": "Fire element, radiant yin energy",
+      "pronunciation_guide": "BIT-nah (like 'bit' + 'nah')",
+      "personality_traits": [
+        "shining",
+        "bright",
+        "radiant"
+      ]
+    },
+    {
+      "romanized": "Ha-neul",
+      "hangul": "하늘",
+      "hanja": "N/A",
+      "gender": "unisex",
+      "meaning_short": "Sky/Heaven",
+      "meaning_long": "Pure Korean word meaning 'sky' or 'heaven.' A child as vast and limitless as the sky above.",
+      "popularity_2026": "modern_popular",
+      "famous_examples": "Popular pure Korean unisex name",
+      "kpop_match": "Ethereal concept vibe",
+      "saju_meaning": "Air element, limitless balanced energy",
+      "pronunciation_guide": "HA-neul (like 'ha' + 'knurl')",
+      "personality_traits": [
+        "limitless",
+        "free",
+        "vast"
+      ]
+    }
+  ]
+}
