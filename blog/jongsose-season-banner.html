@@ -1,0 +1,80 @@
+<!--
+  Jongsose 2026 Season Banner Component
+  Usage: Copy <div class="jongsose-banner"> snippet into any blog post.
+  D-day auto-calculates from JS (deadline 2026-05-31).
+  Style is self-contained.
+-->
+<style>
+.jongsose-banner{
+  background:linear-gradient(135deg,rgba(232,95,95,0.15),rgba(201,168,76,0.1));
+  border:1.5px solid rgba(232,95,95,0.4);
+  border-radius:12px;
+  padding:14px 18px;
+  margin:20px 0 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;flex-wrap:wrap;
+  font-family:'Noto Sans KR','Pretendard','Inter',-apple-system,sans-serif;
+}
+.jongsose-banner .jb-label{font-size:0.78rem;color:#e85f5f;font-weight:700;letter-spacing:1px;}
+.jongsose-banner .jb-text{font-size:0.95rem;color:#e8e0d0;}
+.jongsose-banner .jb-dday{
+  background:#e85f5f;color:#fff;padding:6px 12px;
+  border-radius:6px;font-weight:700;font-size:0.85rem;
+}
+.jongsose-banner .jb-cta{
+  background:linear-gradient(135deg,#c9a84c,#e8c97a);
+  color:#000;padding:8px 16px;border-radius:6px;
+  text-decoration:none;font-weight:700;font-size:0.85rem;
+}
+</style>
+
+<!-- Korean variant -->
+<div class="jongsose-banner" id="jongsose-banner-ko" style="display:none;">
+  <div>
+    <div class="jb-label">5월 종합소득세 시즌</div>
+    <div class="jb-text">신고 마감 2026-05-31</div>
+  </div>
+  <div class="jb-dday" id="jongsose-dday-ko">D-?</div>
+  <a href="https://tax-n-benefit-api.vercel.app" class="jb-cta">30분 신고 →</a>
+</div>
+
+<!-- English variant -->
+<div class="jongsose-banner" id="jongsose-banner-en" style="display:none;">
+  <div>
+    <div class="jb-label">May Tax Season — Korea</div>
+    <div class="jb-text">Filing deadline: May 31, 2026</div>
+  </div>
+  <div class="jb-dday" id="jongsose-dday-en">D-?</div>
+  <a href="https://tax-n-benefit-api.vercel.app" class="jb-cta">File in 30min →</a>
+</div>
+
+<script>
+(function(){
+  // Auto D-day calc — deadline 2026-05-31 23:59:59 KST
+  var deadline = new Date('2026-05-31T23:59:59+09:00');
+  var now = new Date();
+  var diff = Math.ceil((deadline - now) / (1000 * 60 * 60 * 24));
+  var label = diff > 0 ? ('D-' + diff) : (diff === 0 ? 'D-DAY' : 'D+' + Math.abs(diff));
+  // Show banner only during May (and a buffer week before/after)
+  var month = now.getMonth() + 1; // 1-12
+  var year = now.getFullYear();
+  var inSeason = (year === 2026 && month >= 4 && month <= 6);
+  if (inSeason) {
+    var lang = document.documentElement.lang || 'ko';
+    var idSuffix = lang.startsWith('en') ? 'en' : 'ko';
+    var banner = document.getElementById('jongsose-banner-' + idSuffix);
+    var ddayEl = document.getElementById('jongsose-dday-' + idSuffix);
+    if (banner) banner.style.display = 'flex';
+    if (ddayEl) ddayEl.textContent = label;
+  }
+})();
+</script>
+
+<!--
+  Embed instructions:
+  1. Copy the entire file into the <body> where the banner should appear (top of article recommended).
+  2. The banner auto-shows only during 2026-04 ~ 2026-06 (tax season).
+  3. D-day calculates from KST (2026-05-31 23:59:59).
+  4. Korean / English variants auto-pick from <html lang="...">.
+  5. CTA links to tax-n-benefit-api.vercel.app — change href to override.
+-->
