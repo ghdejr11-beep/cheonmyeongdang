@@ -53,6 +53,23 @@ def send(chat_id, text):
     })
 
 
+INBOX_FILE = os.path.join(ROOT, 'departments/telegram_inbox/data/telegram_inbox.jsonl')
+
+
+def save_inbox(msg):
+    """Save non-command messages so next Claude session can read them."""
+    os.makedirs(os.path.dirname(INBOX_FILE), exist_ok=True)
+    record = {
+        "update_id": msg.get("message_id"),
+        "text": msg.get("text", ""),
+        "from_username": (msg.get("from") or {}).get("username") or (msg.get("from") or {}).get("first_name", "user"),
+        "datetime": __import__("datetime").datetime.fromtimestamp(msg.get("date", 0)).isoformat(),
+        "processed": False,
+    }
+    with open(INBOX_FILE, 'a', encoding='utf-8') as f:
+        f.write(json.dumps(record, ensure_ascii=False) + '\n')
+
+
 def handle(msg):
     chat_id = msg['chat']['id']
     if chat_id != ALLOWED_CHAT:
@@ -60,6 +77,12 @@ def handle(msg):
 
     text = msg.get('text', '').strip()
     if not text.startswith('/'):
+        # Non-command (자연어) → save to inbox for next Claude session
+        try:
+            save_inbox(msg)
+            send(chat_id, f'✅ 받았어요: "{text[:60]}{"..." if len(text)>60 else ""}"\n다음 Claude 세션에서 처리할게요.')
+        except Exception as e:
+            send(chat_id, f'⚠️ 저장 실패: {e}')
         return
 
     parts = text.split()
