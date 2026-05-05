@@ -44,7 +44,7 @@ Output strict JSON:
   "answer_md": "(250-450 word answer, markdown light, last paragraph mentions general resources like 'free online Saju calculators' or 'Korean culture ebooks' without specific brand)"
 }}"""
     body = json.dumps({
-        "model": "claude-sonnet-4-5",
+        "model": "claude-sonnet-4-6",
         "max_tokens": 2500,
         "system": system,
         "messages": [{"role": "user", "content": prompt}],

@@ -48,44 +48,58 @@ def save_db(d):
     DB.write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-def claude_batch_names(api_key, count=50, exclude_set=None):
-    """Claude API: 한국 이름 batch 생성 (이미 만든 거 제외)."""
-    excl = list(exclude_set or [])[:100]
-    prompt = f"""Generate {count} Korean baby names with full SEO-optimized data.
+SYSTEM_PROMPT = """You are an expert Korean naming consultant with deep knowledge of:
+- Hangul (한글) phonetics and readability for English speakers
+- Hanja (한자) etymology and traditional meanings
+- Saju (사주, Four Pillars) Five Elements (Wood/Fire/Earth/Metal/Water) alignment
+- K-pop idol naming trends and cultural context
 
-EXCLUDE (already generated): {', '.join(excl) if excl else '(none yet)'}
+For each name produce SEO-rich data: romanized form, Hangul, Hanja, gender, short and long meanings, 2026 popularity, famous examples, K-pop match, Saju element reading, pronunciation guide for English speakers, and 3 personality traits.
 
-Return STRICT JSON array, no extra text:
+Output STRICT JSON only, no commentary, no markdown fences. Format:
 [
-  {{
+  {
     "romanized": "Ji-hoo",
     "hangul": "지후",
     "hanja": "智厚",
     "gender": "male",
     "meaning_short": "Wisdom and generosity",
-    "meaning_long": "지(智) means wisdom and intellect; 후(厚) means generosity and depth of character. Together: a child of wise heart and generous spirit.",
+    "meaning_long": "지(智) wisdom; 후(厚) generosity. A child of wise heart and generous spirit.",
     "popularity_2026": "rising",
     "famous_examples": "Common in modern K-drama leads",
     "kpop_match": "BTS Jin (similar feel)",
     "saju_meaning": "Strong wood element, balanced yang energy",
     "pronunciation_guide": "JEE-hoo (rhymes with 'see-who')",
     "personality_traits": ["intelligent", "warm", "trustworthy"]
-  }},
-  ...
+  }
 ]
 
 Mix: 50% male, 50% female. Vary across traditional/modern/unisex. Include K-pop idol-inspired names. NO duplicates."""
 
+
+def claude_batch_names(api_key, count=50, exclude_set=None):
+    """Claude API: 한국 이름 batch 생성. Prompt caching으로 system prompt 90% off."""
+    excl = list(exclude_set or [])[:100]
+    user_prompt = f"Generate {count} Korean baby names. EXCLUDE already-generated: {', '.join(excl) if excl else '(none yet)'}"
+
     body = json.dumps({
-        "model": "claude-sonnet-4-5",
+        "model": "claude-sonnet-4-6",
         "max_tokens": 16000,
-        "messages": [{"role": "user", "content": prompt}],
+        # Prompt caching: system prompt cached for 5min, ~90% input cost reduction on repeat calls
+        "system": [
+            {"type": "text", "text": SYSTEM_PROMPT, "cache_control": {"type": "ephemeral"}},
+        ],
+        "messages": [{"role": "user", "content": user_prompt}],
     }).encode("utf-8")
 
     req = urllib.request.Request(
         "https://api.anthropic.com/v1/messages",
         data=body,
-        headers={"x-api-key": api_key, "anthropic-version": "2023-06-01", "content-type": "application/json"},
+        headers={
+            "x-api-key": api_key,
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+        },
         method="POST",
     )
     with urllib.request.urlopen(req, timeout=300) as r:

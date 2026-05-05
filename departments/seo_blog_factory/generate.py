@@ -119,9 +119,10 @@ Output format (strict JSON, no extra text):
 }}"""
 
     body = json.dumps({
-        "model": "claude-sonnet-4-5",
+        "model": "claude-sonnet-4-6",
         "max_tokens": 8000,
-        "system": system,
+        # Prompt caching: system cached 5min → 5 daily blogs share cache (~90% input cost off)
+        "system": [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
         "messages": [{"role": "user", "content": prompt}],
     }).encode("utf-8")
 
