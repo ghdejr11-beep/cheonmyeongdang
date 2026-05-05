@@ -25,7 +25,7 @@ def _key():
     raise RuntimeError("ANTHROPIC_API_KEY 없음 (env 또는 .secrets)")
 
 
-def generate(prompt, system="You are a YouTube script writer.", model="claude-sonnet-4-5-20250929", max_tokens=3000):
+def generate(prompt, system="You are a YouTube script writer.", model="claude-sonnet-4-6", max_tokens=3000):
     key = _key()
     req = urllib.request.Request(
         "https://api.anthropic.com/v1/messages",

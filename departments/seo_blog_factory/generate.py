@@ -119,7 +119,7 @@ Output format (strict JSON, no extra text):
 }}"""
 
     body = json.dumps({
-        "model": "claude-sonnet-4-5",
+        "model": "claude-sonnet-4-6",
         "max_tokens": 8000,
         "system": system,
         "messages": [{"role": "user", "content": prompt}],

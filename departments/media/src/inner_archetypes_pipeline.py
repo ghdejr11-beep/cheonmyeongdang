@@ -113,7 +113,7 @@ def claude_long_script(kind: str, label: str, env: dict, log) -> str | None:
         "- Plain spoken English, no markdown, no emojis.\n"
         "- Do NOT include stage directions."
     )
-    for model in ("claude-haiku-4-5-20251001", "claude-sonnet-4-5-20250929"):
+    for model in ("claude-haiku-4-5-20251001", "claude-sonnet-4-6"):
         try:
             req = urllib.request.Request(
                 "https://api.anthropic.com/v1/messages",

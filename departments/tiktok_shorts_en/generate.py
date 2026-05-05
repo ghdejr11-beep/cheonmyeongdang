@@ -64,7 +64,7 @@ def load_queue():
 def claude_extract_hooks(api_key, title, kw):
     """Claude API: SEO 글의 hook 6줄 (slide당 1줄) 추출."""
     body = json.dumps({
-        "model": "claude-sonnet-4-5",
+        "model": "claude-sonnet-4-6",
         "max_tokens": 1500,
         "system": "Generate 6 punchy English text overlays for a TikTok video about Korean culture. Each line ~6-12 words, hook style, gen Z voice, NO hashtags, NO emojis, attention-grabbing.",
         "messages": [{"role": "user", "content":

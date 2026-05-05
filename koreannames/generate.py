@@ -77,7 +77,7 @@ Return STRICT JSON array, no extra text:
 Mix: 50% male, 50% female. Vary across traditional/modern/unisex. Include K-pop idol-inspired names. NO duplicates."""
 
     body = json.dumps({
-        "model": "claude-sonnet-4-5",
+        "model": "claude-sonnet-4-6",
         "max_tokens": 16000,
         "messages": [{"role": "user", "content": prompt}],
     }).encode("utf-8")

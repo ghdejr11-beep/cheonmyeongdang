@@ -143,7 +143,7 @@ def claude_haiku_or_sonnet(prompt: str, env: dict, log) -> str | None:
     if not key:
         log.info("  no ANTHROPIC_API_KEY → skipping Claude, using fallback script")
         return None
-    for model in ("claude-haiku-4-5-20251001", "claude-sonnet-4-5-20250929"):
+    for model in ("claude-haiku-4-5-20251001", "claude-sonnet-4-6"):
         try:
             req = urllib.request.Request(
                 "https://api.anthropic.com/v1/messages",
