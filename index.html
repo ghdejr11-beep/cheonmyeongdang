@@ -3789,6 +3789,75 @@ async function redeemCoupon(ev){
  return '<div class="result-card"><h4>' + loveTitle + '</h4><p style="line-height:1.8;">' + loveReading + '</p></div>';
  }
 
+ // ─── 성별 특화 해석 카드들 (남/여 십신 의미 차이) ───
+ // 남자: 정재=처재(아내), 편재=애인/유동자산, 관성=자식/직장상사
+ // 여자: 정관=남편, 편관=남자인연/사회운, 식상=자식/표현력, 비겁=형제/경쟁자
+ function buildGenderJobMoneyCard(r, uctx) {
+   var isMale = uctx.gender === 'M';
+   var sipsin = r.십신 || [];
+   var has = function(name) { return sipsin.some(function(s){ return (s.천간 && s.천간.십신 === name) || (s.지지 && s.지지.십신 === name); }); };
+   var hasJeongJae = has('정재'), hasPyeonJae = has('편재');
+   var hasJeongGwan = has('정관'), hasPyeonGwan = has('편관');
+   var label = isMale ? '남자' : '여자';
+   var text = '';
+   if (isMale) {
+     text += '<strong style="color:var(--gold2)">남자분의 사주</strong>에서 ';
+     if (hasJeongJae && hasJeongGwan) text += '<strong>정재(처재·고정수입)</strong>와<strong>정관(직장·명예)</strong>이 모두 자리 잡아 안정적인 가장 사주입니다. 정직한 노동·고정수입 직종이 맞고, 결혼 후 재물이 더 모입니다. ';
+     else if (hasPyeonJae && !hasJeongJae) text += '<strong>편재(유동재산)</strong>가 있어 사업·투자·영업으로 큰돈을 만들 가능성이 큽니다. 다만 고정직 회사원보다 자율적 환경에서 능력을 발휘합니다. ';
+     else if (hasJeongGwan && !hasPyeonGwan) text += '<strong>정관</strong>이 또렷해 조직 내 승진·공직·전문직(법조·의료·공무)이 잘 맞습니다. 상사·연장자와의 관계가 운을 좌우합니다. ';
+     else if (hasPyeonGwan) text += '<strong>편관(권력·도전)</strong>이 강해 경쟁·창업·해외/현장 직업이 어울립니다. 안일한 자리에서는 답답함을 느낍니다. ';
+     else text += '재성·관성이 약해 본인의 전문기술·기예로 승부하는 사주입니다. 자영업·전문직 단독 활동이 적합합니다. ';
+     text += '<br><br>재물 흐름은<strong>' + (hasJeongJae ? '꾸준한 누적형' : hasPyeonJae ? '굵직한 한방형' : '기술·노하우 자산형') + '</strong>입니다.';
+   } else {
+     text += '<strong style="color:var(--gold2)">여자분의 사주</strong>에서 ';
+     if (hasJeongGwan && hasJeongJae) text += '<strong>정관(남편복)</strong>과<strong>정재(재물복)</strong>이 모두 있어 가정과 일이 모두 안정되는 사주입니다. 결혼 후 재물·사회적 위치 모두 상승합니다. ';
+     else if (hasJeongGwan && !hasPyeonGwan) text += '<strong>정관(남편복)</strong>이 또렷해 안정적이고 책임감 있는 배우자를 만날 가능성이 높습니다. 직업적으로는 안정 직종(공무·교사·금융·의료) 적합. ';
+     else if (hasPyeonGwan && !hasJeongGwan) text += '<strong>편관(사회운·도전)</strong>이 강해 사회 활동·리더십이 두드러집니다. 다만 결혼은 신중한 선택이 필요하며, 본인의 커리어가 가정보다 앞설 수 있습니다. ';
+     else if (hasJeongJae || hasPyeonJae) text += '재성이 살아 본인이 직접 재물을 일구는 사주입니다. 사업·투자·전문직(예술·연구·창업)에 적합하며 경제적 자립이 쉽습니다. ';
+     else text += '관성·재성이 약해 자기 표현·기예·창의력으로 승부하는 사주입니다. 프리랜서·예술·교육 분야가 잘 맞습니다. ';
+     text += '<br><br>재물·직업 흐름은<strong>' + (hasJeongGwan && hasJeongJae ? '결혼 + 커리어 동반 상승형' : hasPyeonGwan ? '독립 커리어 우선형' : (hasJeongJae||hasPyeonJae) ? '직접 재물 주도형' : '창의·기예 자립형') + '</strong>입니다.';
+   }
+   return '<div class="result-card" style="border-color:var(--jade);"><h4>💰 ' + label + ' 직업 · 재물운</h4><p style="line-height:1.85;">' + text + '</p></div>';
+ }
+
+ function buildGenderChildCard(r, uctx) {
+   var isMale = uctx.gender === 'M';
+   var sipsin = r.십신 || [];
+   var has = function(name) { return sipsin.some(function(s){ return (s.천간 && s.천간.십신 === name) || (s.지지 && s.지지.십신 === name); }); };
+   var label = isMale ? '남자' : '여자';
+   var text = '';
+   if (isMale) {
+     // 남자에게 자식은 관성 (정관·편관)
+     var hasGwan = has('정관') || has('편관');
+     text += '<strong style="color:var(--gold2)">남자분의 사주</strong>에서 자녀운은<strong>관성(정관·편관)</strong>으로 봅니다. ';
+     if (hasGwan) text += '관성이 살아 있어 자녀와의 인연이 깊고, 자녀가 부모의 명예·사회적 지위를 높여줍니다. 자녀 교육에 적극 투자하면 큰 결실을 봅니다.';
+     else text += '관성이 약해 자녀와의 인연이 늦거나 적을 수 있습니다. 자녀 수보다는 한 자녀에게 깊이 있게 다가가는 관계가 본인 사주에 맞습니다.';
+   } else {
+     // 여자에게 자식은 식상 (식신·상관)
+     var hasSikSang = has('식신') || has('상관');
+     text += '<strong style="color:var(--gold2)">여자분의 사주</strong>에서 자녀운은<strong>식상(식신·상관)</strong>으로 봅니다. ';
+     if (hasSikSang) text += '식상이 살아 있어 자녀를 통한 기쁨과 표현이 풍부한 사주입니다. 자녀가 본인의 창의력·표현력의 결실이 됩니다. 임신·출산 시기는 식상이 강해지는 운에 맞추면 더 좋습니다.';
+     else text += '식상이 약해 자녀와의 인연이 늦거나 한 자녀에게 집중되는 경향이 있습니다. 본인의 표현·창작 활동이 활발해질 때 자녀 인연도 함께 깊어집니다.';
+   }
+   if (uctx.children >0) {
+     var n = uctx.children >= 3 ? '3명 이상' : uctx.children + '명';
+     text += '<br><br>현재 자녀 ' + n + ' 으로서, 자녀의 사주와 본인의 대운이 만나는 시기에 가족 운이 크게 상승합니다.';
+   }
+   return '<div class="result-card"><h4>👶 ' + label + ' 자녀운</h4><p style="line-height:1.85;">' + text + '</p></div>';
+ }
+
+ function buildDaeunGenderHeader(r, uctx) {
+   var isMale = uctx.gender === 'M';
+   var dir = r.대운 && r.대운.direction;
+   var startAge = r.대운 && r.대운.startAge;
+   var explain = isMale
+     ? '남자분은 양년(陽年) ' + (dir === '순행' ? '순행' : '역행') + ', 음년(陰年) ' + (dir === '순행' ? '역행' : '순행') + ' — 본 사주는<strong>' + dir + '</strong>입니다.'
+     : '여자분은 양년(陽年) ' + (dir === '순행' ? '순행' : '역행') + ', 음년(陰年) ' + (dir === '순행' ? '역행' : '순행') + ' — 본 사주는<strong>' + dir + '</strong>입니다.';
+   return '<p style="color:var(--text2);font-size:0.85rem;margin-bottom:8px;line-height:1.7;">' +
+     '※<strong style="color:var(--gold2)">' + (isMale?'남자':'여자') + '의 대운은 ' + dir + ' (' + startAge + '세 시작)</strong>으로 흐릅니다. 같은 생년월일이라도<strong>성별에 따라 대운이 정반대 방향</strong>으로 흐릅니다. ' + explain +
+     '</p>';
+ }
+
  function renderSajuResult(r) {
  const el = document.getElementById('saju-result');
  el.classList.remove('hidden');
@@ -3888,8 +3957,9 @@ async function redeemCoupon(ev){
  interHTML = `<div class="result-card"><h4>합/충/형/파/해</h4><ul>${allInter.map(i =>'<li>' + i.description + '</li>').join('')}</ul></div>`;
  }
 
- // Daeun
- let daeunHTML = '<div class="result-card"><h4>대운 흐름 (' + r.대운.direction + ')</h4><div class="daeun-scroll"><div class="daeun-table">';
+ // Daeun (성별 헤더 포함 — 같은 생년월일이라도 남/여 대운 방향 반대 강조)
+ const daeunGenderHeader = buildDaeunGenderHeader(r, uctx);
+ let daeunHTML = '<div class="result-card"><h4>📊 대운 흐름 (' + r.대운.direction + ', ' + r.대운.startAge + '세 시작)</h4>' + daeunGenderHeader + '<div class="daeun-scroll"><div class="daeun-table">';
  r.대운.pillars.forEach(dp =>{
  daeunHTML += `<div class="daeun-item">
 <div class="age">${dp.startAge}~${dp.endAge}세</div>
@@ -3899,6 +3969,10 @@ async function redeemCoupon(ev){
 </div>`;
  });
  daeunHTML += '</div></div></div>';
+
+ // 성별 특화 카드 (직업·재물 + 자녀운)
+ const genderJobMoneyHTML = buildGenderJobMoneyCard(r, uctx);
+ const genderChildHTML = buildGenderChildCard(r, uctx);
 
  // Build final HTML
  el.innerHTML = `
@@ -4007,6 +4081,10 @@ async function redeemCoupon(ev){
 
 <!-- 연애/결혼운 분석 (기혼/미혼 맥락 반영) -->
  ${buildLoveCard(r, uctx, isMarried, isDivorced)}
+
+<!-- ⭐ 성별 특화 카드 (남/여 십신 의미 차이) -->
+ ${genderJobMoneyHTML}
+ ${genderChildHTML}
 
 <!-- Interactions -->
  ${interHTML}
