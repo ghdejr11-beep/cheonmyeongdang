@@ -4397,6 +4397,18 @@ async function redeemCoupon(ev){
    </div>
  `}
 
+<!-- 🤖 AI 사주 Q&A 챗 (점신 1:1 대체) -->
+<div class="result-card ai-chat-card" id="ai-chat-card" style="border:1.5px solid var(--gold);background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(74,158,142,0.06));">
+<h4 style="color:var(--gold2);">🤖 AI 사주 Q&A — 24시간 무제한</h4>
+<p style="font-size:0.85rem;color:var(--text2);margin-bottom:14px;">본인 사주에 대해 자연어로 물어보세요. 명리학 기반 즉답.<br><span style="font-size:0.78rem;color:var(--jade);">예: "이번 주에 이직해도 될까요?", "결혼 적령기는 언제?", "올해 재물운은?"</span></p>
+<div id="ai-chat-history" style="max-height:340px;overflow-y:auto;margin-bottom:12px;padding:0 4px;"></div>
+<div style="display:flex;gap:8px;align-items:stretch;">
+<input id="ai-chat-input" type="text" maxlength="500" placeholder="예: 이번 주에 이직해도 될까요?" style="flex:1;padding:10px 12px;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:0.9rem;" onkeydown="if(event.key==='Enter'){askSajuAI();}">
+<button onclick="askSajuAI()" id="ai-chat-btn" class="btn-gold" style="padding:10px 18px;font-size:0.85rem;white-space:nowrap;">질문하기</button>
+</div>
+<p id="ai-chat-status" style="font-size:0.75rem;color:var(--text2);margin-top:10px;text-align:center;">${isPremium ? '✅ 프리미엄 회원 — 무제한 Q&A 가능' : '무료 시범 1회 / ₩29,900 결제 시 무제한'}</p>
+</div>
+
 <!-- Interactions -->
  ${interHTML}
 
@@ -4429,6 +4441,137 @@ async function redeemCoupon(ev){
  // Apply ad gate
  setTimeout(() =>{ showAdGate('saju'); }, 300);
  }
+
+ // ============================================================
+ // 🤖 AI 사주 Q&A 챗 (Claude Haiku via /api/check-entitlement?mode=ask_saju)
+ // ============================================================
+ window.askSajuAI = async function() {
+   const input = document.getElementById('ai-chat-input');
+   const history = document.getElementById('ai-chat-history');
+   const btn = document.getElementById('ai-chat-btn');
+   const statusEl = document.getElementById('ai-chat-status');
+   if (!input || !history || !btn) return;
+
+   const question = (input.value || '').trim();
+   if (!question) { input.focus(); return; }
+   if (question.length > 500) {
+     statusEl.textContent = '⚠️ 질문이 너무 깁니다 (500자 제한)';
+     statusEl.style.color = 'var(--crimson)';
+     return;
+   }
+
+   // 사주 데이터 추출 (window._lastSajuResult에서)
+   const r = window._lastSajuResult;
+   if (!r) {
+     statusEl.textContent = '⚠️ 먼저 사주 분석을 실행해 주세요';
+     statusEl.style.color = 'var(--crimson)';
+     return;
+   }
+   const sajuData = {
+     summary: (r.사주 && r.사주.summary) || '',
+     day_stem: (r.기본정보 && r.기본정보.일간 && r.기본정보.일간.글자) || '',
+     element: (r.기본정보 && r.기본정보.일간 && r.기본정보.일간.오행) || '',
+     yongshin: (r.용신 && r.용신.용신) || '',
+     gangyak: (r.용신 && r.용신.일간강약) || '',
+     daeun: (r.대운 && r.대운.pillars && r.대운.pillars[3]) ? `${r.대운.pillars[3].간지}(${r.대운.pillars[3].startAge}~${r.대운.pillars[3].endAge}세)` : '',
+     gender: (r._userContext && r._userContext.gender) || '',
+     sipsin: (Array.isArray(r.십신)) ? r.십신.slice(0,4).map(s => `${s.위치}:${s.천간 && s.천간.십신 || ''}`) : [],
+   };
+
+   // 이메일 + 무료 시범 사용 여부
+   let email = '';
+   try {
+     const ui = JSON.parse(localStorage.getItem('cm_user_info') || '{}');
+     email = (ui.email || localStorage.getItem('cm_premium_email') || '').trim();
+   } catch(e) {}
+
+   const isPremiumLocal = window._cmEntitlementVerified === true;
+   const freeUsed = !isPremiumLocal && (localStorage.getItem('cm_ai_free_used') === '1');
+
+   if (freeUsed) {
+     statusEl.innerHTML = '🔒 무료 시범 1회를 사용했습니다. <a href="#premium" onclick="document.getElementById(\'premium\')&&document.getElementById(\'premium\').scrollIntoView({behavior:\'smooth\'});return false;" style="color:var(--gold);">₩29,900 결제 →</a>';
+     statusEl.style.color = 'var(--text2)';
+     return;
+   }
+
+   // 사용자 질문을 history에 즉시 표시
+   const qDiv = document.createElement('div');
+   qDiv.style.cssText = 'margin-bottom:10px;padding:10px 12px;background:rgba(74,158,142,0.10);border-left:3px solid var(--jade);border-radius:6px;';
+   qDiv.innerHTML = '<div style="font-size:0.72rem;color:var(--jade);margin-bottom:4px;font-weight:600;">나</div><div style="color:var(--text);font-size:0.88rem;line-height:1.6;"></div>';
+   qDiv.querySelector('div:nth-child(2)').textContent = question;
+   history.appendChild(qDiv);
+
+   // 로딩 인디케이터
+   const loadingDiv = document.createElement('div');
+   loadingDiv.style.cssText = 'margin-bottom:10px;padding:10px 12px;background:rgba(201,168,76,0.08);border-left:3px solid var(--gold);border-radius:6px;color:var(--text2);font-size:0.85rem;';
+   loadingDiv.innerHTML = '<div style="font-size:0.72rem;color:var(--gold2);margin-bottom:4px;font-weight:600;">🤖 AI 명리학자</div><div>분석 중... (5~10초)</div>';
+   history.appendChild(loadingDiv);
+   history.scrollTop = history.scrollHeight;
+
+   input.value = '';
+   btn.disabled = true;
+   btn.textContent = '분석 중...';
+   statusEl.textContent = '';
+
+   try {
+     const resp = await fetch('/api/check-entitlement', {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({
+         mode: 'ask_saju',
+         email: email || '',
+         question,
+         saju_data: sajuData,
+         free_used: freeUsed,
+       }),
+     });
+     const d = await resp.json();
+     loadingDiv.remove();
+
+     if (resp.ok && d && d.ok && d.answer) {
+       const aDiv = document.createElement('div');
+       aDiv.style.cssText = 'margin-bottom:10px;padding:10px 12px;background:rgba(201,168,76,0.08);border-left:3px solid var(--gold);border-radius:6px;';
+       aDiv.innerHTML = '<div style="font-size:0.72rem;color:var(--gold2);margin-bottom:4px;font-weight:600;">🤖 AI 명리학자</div><div style="color:var(--text);font-size:0.88rem;line-height:1.7;white-space:pre-wrap;"></div>';
+       aDiv.querySelector('div:nth-child(2)').textContent = d.answer;
+       history.appendChild(aDiv);
+       history.scrollTop = history.scrollHeight;
+
+       // 무료 시범 1회 소진 처리
+       if (!d.is_premium) {
+         try { localStorage.setItem('cm_ai_free_used', '1'); } catch(e) {}
+         statusEl.innerHTML = '🔒 무료 시범 1회를 사용했습니다. <a href="#premium" onclick="document.getElementById(\'premium\')&&document.getElementById(\'premium\').scrollIntoView({behavior:\'smooth\'});return false;" style="color:var(--gold);">₩29,900 결제 →</a>';
+         statusEl.style.color = 'var(--text2)';
+       } else {
+         statusEl.textContent = '✅ 프리미엄 회원 — 추가 질문 가능';
+         statusEl.style.color = 'var(--jade)';
+       }
+     } else {
+       const reason = (d && d.reason) || 'unknown';
+       const message = (d && d.message) || '답변 생성에 실패했습니다.';
+       const errDiv = document.createElement('div');
+       errDiv.style.cssText = 'margin-bottom:10px;padding:10px 12px;background:rgba(217,99,87,0.10);border-left:3px solid var(--crimson);border-radius:6px;color:var(--text);font-size:0.85rem;';
+       if (reason === 'locked') {
+         errDiv.innerHTML = '🔒 ' + message + ' <a href="#premium" onclick="document.getElementById(\'premium\')&&document.getElementById(\'premium\').scrollIntoView({behavior:\'smooth\'});return false;" style="color:var(--gold);">결제 →</a>';
+       } else if (reason === 'rate_limit') {
+         errDiv.textContent = '⏳ ' + message;
+       } else {
+         errDiv.textContent = '⚠️ ' + message;
+       }
+       history.appendChild(errDiv);
+       history.scrollTop = history.scrollHeight;
+     }
+   } catch (e) {
+     loadingDiv.remove();
+     const errDiv = document.createElement('div');
+     errDiv.style.cssText = 'margin-bottom:10px;padding:10px 12px;background:rgba(217,99,87,0.10);border-left:3px solid var(--crimson);border-radius:6px;color:var(--text);font-size:0.85rem;';
+     errDiv.textContent = '⚠️ 네트워크 오류: ' + (e.message || e);
+     history.appendChild(errDiv);
+   } finally {
+     btn.disabled = false;
+     btn.textContent = '질문하기';
+     input.focus();
+   }
+ };
 
  // ============================================================
  // COMPATIBILITY
