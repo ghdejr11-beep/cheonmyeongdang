@@ -1,14 +1,24 @@
 #!/usr/bin/env python3
 """크티 프롬프트팩 9종 자동 홍보 (텔레그램 + X)"""
-import requests, tweepy, random, time, sys
+import os, requests, tweepy, random, time, sys
 
-TG_BOT_TOKEN = "8650272218:AAHIYmOVfqzMzr-hcOqWsfW6mftByoEd_SA"
-TG_CHAT_ID = "8556067663"
+# Load secrets from project-root .secrets (never inline tokens — see
+# memory feedback_subagent_secret_handling.md).
+_ROOT = os.path.expanduser('~/Desktop/cheonmyeongdang')
+_SECRETS_PATH = os.path.join(_ROOT, '.secrets')
+if os.path.exists(_SECRETS_PATH):
+    for _line in open(_SECRETS_PATH, encoding='utf-8'):
+        if '=' in _line and not _line.strip().startswith('#'):
+            _k, _v = _line.strip().split('=', 1)
+            os.environ.setdefault(_k, _v)
 
-X_API_KEY = "OuiD2yU5PpfOBUhld8meu1V8j"
-X_API_SECRET = "7iPtvynNpluEIs5DyVi67Kl704O7aAm5fdouD4aADv99kQcxfK"
-X_ACCESS_TOKEN = "2042656247892029440-cxKtgeWT1O6FefZKU3fcvwosSXNoId"
-X_ACCESS_SECRET = "f87fAg8KtK0UAh86xvHucUNxwydHj7Ph1eZxr2Ab54fvF"
+TG_BOT_TOKEN = os.environ['TELEGRAM_BOT_TOKEN'] if 'TELEGRAM_BOT_TOKEN' in os.environ else os.environ.get('TG_BOT_TOKEN', '')
+TG_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID') or os.environ.get('TG_CHAT_ID', '')
+
+X_API_KEY = os.environ['X_API_KEY']
+X_API_SECRET = os.environ['X_API_SECRET']
+X_ACCESS_TOKEN = os.environ['X_ACCESS_TOKEN']
+X_ACCESS_SECRET = os.environ['X_ACCESS_SECRET']
 
 CTEE_STORE = "https://ctee.kr/@ghdejr11"
 COUPANG_LINK = "https://link.coupang.com/a/emjC0T&subId=cteeshop01"
