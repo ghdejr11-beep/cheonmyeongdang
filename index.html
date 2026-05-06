@@ -3862,6 +3862,94 @@ async function redeemCoupon(ev){
    return '<div class="result-card"><h4>👶 ' + label + ' 자녀운</h4><p style="line-height:1.85;">' + text + '</p></div>';
  }
 
+ // ─── 프리미엄 헬퍼 1: 일간 10간 톤 (정통성 강화 — dayStem 분기) ───
+ function getDayStemTone(dayStem) {
+   var tones = {
+     '갑': '갑목(甲木) — 큰 나무처럼 위로 뻗어 나가는 리더형. 우직하고 정도(正道)를 추구하며, 한번 정한 목표는 끝까지 밀고 갑니다.',
+     '을': '을목(乙木) — 부드러운 풀·넝쿨처럼 섬세하고 적응력이 뛰어남. 굽힐 줄 아는 지혜로 어떤 환경에서도 살아남습니다.',
+     '병': '병화(丙火) — 태양처럼 강렬하게 빛나는 표현형. 열정·발산·낙천성이 강하고, 사람을 끌어당기는 힘이 있습니다.',
+     '정': '정화(丁火) — 등불·촛불처럼 섬세한 빛. 따뜻하고 배려심 깊으며, 묵묵히 곁을 지키는 정성이 강점입니다.',
+     '무': '무토(戊土) — 큰 산처럼 중후하고 포용력이 큰 신뢰형. 한번 신뢰를 얻으면 무겁게 책임을 지는 큰 그릇입니다.',
+     '기': '기토(己土) — 옥토(沃土)처럼 실용·관리·기획에 강한 실속형. 사람과 자원을 잘 배합해 결실을 만듭니다.',
+     '경': '경금(庚金) — 강철·도끼처럼 강직하고 추진력이 강한 결단형. 의리가 강하고 한번 결심하면 직진합니다.',
+     '신': '신금(辛金) — 보석·세공된 금처럼 세련되고 예리한 감각형. 미적 감각·디테일·완성도에서 두각을 나타냅니다.',
+     '임': '임수(壬水) — 바다·큰 강처럼 폭넓고 유동적인 사고형. 사람·정보·기회를 폭넓게 받아들이며 변화에 능합니다.',
+     '계': '계수(癸水) — 빗물·이슬처럼 깊은 지혜와 직관형. 조용히 본질을 꿰뚫고, 음(陰)의 깊이로 사람을 움직입니다.'
+   };
+   return tones[dayStem] || '';
+ }
+
+ // ─── 프리미엄 헬퍼 2: 일주 12운성 (배우자궁 안정성) ───
+ function getDayJiUnseong(r) {
+   var unseong12 = r.운성12 || [];
+   var dayU = unseong12.find(function(u){ return u.위치 === '일주'; });
+   if (!dayU) return { 운성: '', 안정성: '' };
+   var name = dayU.운성;
+   var stability;
+   if (['건록','제왕','관대'].indexOf(name) >= 0) stability = '안정·왕성 (배우자궁 튼튼)';
+   else if (['장생','목욕','양','태'].indexOf(name) >= 0) stability = '유동·성장 (배우자와 함께 자라는 형)';
+   else if (['쇠','병','사','묘'].indexOf(name) >= 0) stability = '약·정리 (배우자 인연 신중·만혼 권장)';
+   else stability = '전환·중립 (배우자 인연이 늦거나 굴곡 있음)';
+   return { 운성: name, 안정성: stability };
+ }
+
+ // ─── 프리미엄 헬퍼 3: 신살 3종 (도화·역마·공망) ───
+ function getShinsalSummary(r) {
+   var saju = r.사주 || {};
+   var dayBranch = saju.일주 ? saju.일주.branch : null;
+   var yearBranch = saju.년주 ? saju.년주.branch : null;
+   // 도화: 자(0)·오(6)·묘(3)·유(9) — 일지 또는 년지에 있으면 도화 기운
+   var domestic = [0, 3, 6, 9];
+   // 역마: 인(2)·신(8)·사(5)·해(11)
+   var travel = [2, 5, 8, 11];
+   var hasDohwa = (dayBranch !== null && domestic.indexOf(dayBranch) >= 0) ||
+                  (yearBranch !== null && domestic.indexOf(yearBranch) >= 0);
+   var hasYeokma = (dayBranch !== null && travel.indexOf(dayBranch) >= 0) ||
+                   (yearBranch !== null && travel.indexOf(yearBranch) >= 0);
+   // 공망(空亡): 일주 60갑자 그룹별 매핑
+   // 갑자(0~9):戌亥, 갑술(10~19):申酉, 갑신(20~29):午未, 갑오(30~39):辰巳, 갑진(40~49):寅卯, 갑인(50~59):子丑
+   var gongmangBranches = ['술해', '신유', '오미', '진사', '인묘', '자축'];
+   var sixtyIdx = saju.일주 ? saju.일주.sixtyIdx : null;
+   var gongmang = '';
+   if (sixtyIdx !== null && sixtyIdx !== undefined) {
+     gongmang = gongmangBranches[Math.floor(sixtyIdx / 10)] || '';
+   }
+   return { 도화: hasDohwa, 역마: hasYeokma, 공망: gongmang };
+ }
+
+ // ─── 프리미엄 헬퍼 4: 신강·신약 1차 판단 (월령 + 통근 + 투출) ───
+ function getDayMasterStrength(r) {
+   var saju = r.사주 || {};
+   if (!saju.일주 || !saju.월주) return { score: 0, judgment: '중화' };
+   // 천간 0-9 → 오행 (목0,화1,토2,금3,수4): 갑을=목, 병정=화, 무기=토, 경신=금, 임계=수
+   var stemElement = function(idx) { return Math.floor(idx / 2); };
+   // 지지 오행: 인묘=목, 사오=화, 진술축미=토, 신유=금, 자해=수
+   var branchEl = {0:4, 1:2, 2:0, 3:0, 4:2, 5:1, 6:1, 7:2, 8:3, 9:3, 10:2, 11:4};
+   var dayStemEl = stemElement(saju.일주.stem);
+   var monthBranchEl = branchEl[saju.월주.branch];
+   var score = 0;
+   // 득령(得令): 월지가 일간과 같은 오행이거나 일간을 생하는 오행이면 +2
+   var generatesDay = (monthBranchEl + 1) % 5 === dayStemEl;
+   if (monthBranchEl === dayStemEl || generatesDay) score += 2;
+   // 통근(通根): 4지지 중 일간 오행과 같으면 +1, 일간을 생하는 지지면 +0.5
+   ['년주','월주','일주','시주'].forEach(function(p) {
+     if (!saju[p]) return;
+     var bel = branchEl[saju[p].branch];
+     if (bel === dayStemEl) score += 1;
+     else if ((bel + 1) % 5 === dayStemEl) score += 0.5;
+   });
+   // 투출(透出): 일간 외 천간 중 같은 오행이면 +1
+   ['년주','월주','시주'].forEach(function(p) {
+     if (!saju[p]) return;
+     if (stemElement(saju[p].stem) === dayStemEl) score += 1;
+   });
+   var judgment;
+   if (score >= 5) judgment = '신강';
+   else if (score >= 3) judgment = '중화';
+   else judgment = '신약';
+   return { score: Math.round(score * 10) / 10, judgment: judgment };
+ }
+
  // ─── 프리미엄 깊이 있는 남/여 명리학 해석 카드들 (entitlement 보유자만) ───
  function buildPremiumGenderCards(r, uctx) {
    var isMale = uctx.gender === 'M';
@@ -3873,6 +3961,11 @@ async function redeemCoupon(ev){
    var dayYinYang = r.기본정보 && r.기본정보.일간 ? r.기본정보.일간.음양 : '';
    var direction = r.대운 && r.대운.direction;
    var startAge = r.대운 && r.대운.startAge;
+   // 정통 명리 4가지 헬퍼 호출 (일간 톤 / 12운성 / 신살 / 신강·신약)
+   var dayTone = getDayStemTone(dayStem);
+   var dayJi = getDayJiUnseong(r);
+   var shinsal = getShinsalSummary(r);
+   var dms = getDayMasterStrength(r);
    var html = '';
 
    // 1) 배우자 상세 분석 (남자=정재 안주인, 여자=정관 가장)
@@ -3893,6 +3986,11 @@ async function redeemCoupon(ev){
      else if (count(['편관']) >= 1) spouseAnalysis += '정관 없고 편관 — 카리스마 있는 남성에게 끌리지만 결혼 생활은 굴곡 있을 수 있음. 본인 커리어가 안정된 후 결혼이 유리. ';
      else spouseAnalysis += '관성 약 — 본인이 가정의 중심이 되는 사주. 가정 내 리더십을 발휘하며, 배우자보다 본인 커리어가 앞설 수 있음. ';
    }
+   // 일간 톤 + 일주 12운성 + 신살(도화/공망) 추가
+   if (dayTone) spouseAnalysis += '<br><br><strong style="color:var(--gold2)">일간 톤</strong>: ' + dayTone + ' ';
+   if (dayJi.운성) spouseAnalysis += '<br><strong style="color:var(--gold2)">일지 12운성</strong>: ' + dayJi.운성 + ' → 배우자궁 ' + dayJi.안정성 + '. ';
+   if (shinsal.도화) spouseAnalysis += '<br><strong style="color:var(--gold2)">도화살(桃花)</strong> 보유 — 이성에게 매력 발산이 강한 사주. 인연 기회가 많지만 깊은 한 인연을 선택하는 안목이 핵심. ';
+   if (shinsal.공망) spouseAnalysis += '<br><strong style="color:var(--gold2)">일주 공망</strong>: ' + shinsal.공망 + ' — 공망지에 해당하는 운(대운/세운)에 결혼·이별 변동이 집중됩니다. ';
    html += '<div class="result-card" style="border-color:var(--gold);background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(74,158,142,0.04));"><h4>💑 ' + label + ' 배우자운 정밀 분석</h4><p style="line-height:1.85;">' + spouseAnalysis + '</p></div>';
 
    // 2) 자녀 임신/출산 시기 (여자) 또는 자녀 양육 (남자)
@@ -3915,6 +4013,8 @@ async function redeemCoupon(ev){
      else childAnalysis += '식상 약 — 자녀 인연이 늦거나(30대 중반 이후), 자녀 1명에게 집중. 임신은 식상 강해지는 운(대운/세운)에 맞추는 것이 유리합니다.';
      childAnalysis += '<br><br><strong>임신·출산 가장 좋은 시기</strong>: 본인 대운에서 식상이 들어오는 ' + (startAge + 10) + '~' + (startAge + 30) + '세 사이.';
    }
+   // 공망이 시지에 해당하면 자녀궁 약 — 추가 경고
+   if (shinsal.공망) childAnalysis += '<br><br><strong style="color:var(--gold2)">일주 공망: ' + shinsal.공망 + '</strong> — 시지가 공망에 닿는 시기에는 자녀와의 거리가 멀어질 수 있습니다. 정성을 기울이는 시기로 받아들이면 됩니다.';
    html += '<div class="result-card"><h4>👶 ' + label + ' 자녀운 깊이 분석' + (isMale?' (양육)':' (임신·출산)') + '</h4><p style="line-height:1.85;">' + childAnalysis + '</p></div>';
 
    // 3) 형제·자매·동료 (비겁 — 남자/여자 다름)
@@ -3955,6 +4055,10 @@ async function redeemCoupon(ev){
      else careerHtml += '관성·재성 약 — 자기표현·기예 자립형. 프리랜서·전문직 적합. ';
    }
    careerHtml += '<br><br><strong>대운 ' + direction + '</strong> — ' + (direction==='순행' ? '인생 후반(40~70대)에 운기가 강해짐. 조기 은퇴보다 노년 활동 길어짐.' : '인생 전반(20~40대)에 운기가 빠르게 발현. 조기 성공형, 30대 중반에 1차 정점.');
+   // 일간 톤 + 신강·신약 + 역마살
+   if (dayTone) careerHtml += '<br><br><strong style="color:var(--gold2)">일간 톤</strong>: ' + dayTone;
+   careerHtml += '<br><strong style="color:var(--gold2)">신강·신약</strong>: ' + dms.judgment + ' (점수 ' + dms.score + ') — ' + (dms.judgment === '신강' ? '재성·관성으로 에너지를 쓰는 직업(사업·관리·도전 분야)에서 능력이 발현됩니다.' : dms.judgment === '신약' ? '인성·비겁으로 보강되는 직업(학문·자격·전문직·팀워크 기반)이 안정적입니다.' : '재성·관성·식상이 균형을 이루는 직업이면 어떤 분야든 흡수가 빠릅니다.');
+   if (shinsal.역마) careerHtml += '<br><strong style="color:var(--gold2)">역마살(驛馬)</strong> 보유 — 이동·해외·변화가 많은 직종(영업·무역·물류·여행·콘텐츠·해외 진출)에서 운이 풀립니다.';
    html += '<div class="result-card"><h4>💼 ' + label + ' 직업·승진·사업 시기</h4><p style="line-height:1.85;">' + careerHtml + '</p></div>';
 
    // 6) 결혼 적령기 (성별 + 십신 + 대운)
@@ -3969,12 +4073,24 @@ async function redeemCoupon(ev){
    }
    html += '<div class="result-card"><h4>💍 ' + label + ' 결혼 적령기</h4><p style="line-height:1.85;">' + weddingHtml + '</p></div>';
 
-   // 7) 인생 황금기 (대운 + 일간 강약)
-   var goldenAge = startAge + 40; // 4번째 대운 = 보통 인생 정점
-   var goldenHtml = '<strong>인생 황금기 (4번째 대운)</strong>: 약<strong>' + (goldenAge - 5) + '~' + (goldenAge + 5) + '세</strong>. ';
-   goldenHtml += '이 시기에 본인 십신(' + (count(['정인','편인']) > count(['식신','상관']) ? '인성 강' : count(['식신','상관']) > count(['정관','편관']) ? '식상 강' : count(['정관','편관']) > count(['정재','편재']) ? '관성 강' : '재성 강') + ')의 능력이 최대로 발현됩니다. ';
-   if (isMale) goldenHtml += '남자는 이 시기에 사회적 정점·재물 정점·가장 역할 정점이 한꺼번에 옵니다.';
-   else goldenHtml += '여자는 이 시기에 가정·자녀·본인 커리어 모두 안정되는 시기. 본인의 내면이 가장 단단해지는 시기.';
+   // 7) 인생 황금기 (대운 + 신강·신약 분기)
+   //   신강 → 4번째 대운 (재성·관성을 쓰는 시기): startAge + 40
+   //   신약 → 3번째 대운 (인성·비겁으로 보강되는 시기): startAge + 30
+   //   중화 → 4번째 대운 startAge + 40
+   var goldenOffset = (dms.judgment === '신약') ? 30 : 40;
+   var daeunOrder = (dms.judgment === '신약') ? '3번째' : '4번째';
+   var goldenAge = startAge + goldenOffset;
+   var goldenHtml = '<strong>인생 황금기 (' + daeunOrder + ' 대운)</strong>: 약<strong>' + (goldenAge - 5) + '~' + (goldenAge + 5) + '세</strong>. ';
+   goldenHtml += '<strong style="color:var(--gold2)">신강·신약</strong>: ' + dms.judgment + ' (점수 ' + dms.score + ') — ';
+   goldenHtml += (dms.judgment === '신강')
+     ? '신강 사주는 본인의 에너지를 외부로 쓰는 재성·관성 운에서 정점에 도달합니다. 재물·명예가 함께 들어오는 시기.'
+     : (dms.judgment === '신약')
+       ? '신약 사주는 인성·비겁으로 본인을 보강해주는 운에서 정점에 도달합니다. 다소 이른 황금기지만 깊이 있는 성취가 가능.'
+       : '중화 사주는 어느 한쪽으로 치우치지 않고 4번째 대운에서 균형 잡힌 정점이 옵니다. 가장 안정된 황금기.';
+   goldenHtml += '<br><br>이 시기에 본인 십신(' + (count(['정인','편인']) > count(['식신','상관']) ? '인성 강' : count(['식신','상관']) > count(['정관','편관']) ? '식상 강' : count(['정관','편관']) > count(['정재','편재']) ? '관성 강' : '재성 강') + ')의 능력이 최대로 발현됩니다. ';
+   if (dayTone) goldenHtml += '<br><strong style="color:var(--gold2)">일간 톤</strong>: ' + dayTone;
+   if (isMale) goldenHtml += '<br><br>남자는 이 시기에 사회적 정점·재물 정점·가장 역할 정점이 한꺼번에 옵니다.';
+   else goldenHtml += '<br><br>여자는 이 시기에 가정·자녀·본인 커리어 모두 안정되는 시기. 본인의 내면이 가장 단단해지는 시기.';
    html += '<div class="result-card" style="border-color:var(--gold);"><h4>⭐ ' + label + ' 인생 황금기</h4><p style="line-height:1.85;">' + goldenHtml + '</p></div>';
 
    return html;
