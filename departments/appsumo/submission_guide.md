@@ -56,7 +56,7 @@ After invite arrives:
    - Features → Bullet list
    - Comparison table → "Why us" section (Markdown table renders)
    - FAQ → FAQ section
-3. **Demo video**: upload 30–90 second screencast of `cheonmyeongdang.vercel.app/en` showing one full reading flow. If no video ready, upload a 60-second Loom or paste a placeholder note "Video uploading next week" — AppSumo accepts text-only listings during review, but video lifts approval rate ~2x.
+3. **Demo video**: **OPTIONAL for first submission** (2026-05-06 audit confirmed). AppSumo accepts text-only listings during initial review — submit listing without video, record a 60-sec Loom of `cheonmyeongdang.vercel.app/en` only AFTER AppSumo deal-team responds (typical 5-14 days). This unblocks the user from a recording session. If video ready, upload 30–90 sec screencast (lifts approval rate ~2x but not gating). **Recommended path: skip video on first submit, add when AppSumo asks.**
 4. **Screenshots** (5 required): use existing storefront screenshots from `departments/cheonmyeongdang/` if present; otherwise capture from live site.
 5. **Refund policy**: tick "AppSumo 60-day standard".
 6. Click **Submit for Review**.
@@ -113,6 +113,15 @@ These actions require the user — auto-execution is blocked by AppSumo identity
 - [ ] User: open https://appsumo.com/partners/list-your-product/ and submit partner form (5 min)
 - [ ] User: confirm partner-portal invite email and connect PayPal (5 min)
 - [ ] User: paste `cheonmyeongdang_lifetime_deal.md` into Listing Editor and Submit (10 min)
-- [ ] (Optional) User: record 60-sec demo video before clicking Submit (10 min)
+- [ ] **DEFERRED** (post-approval): record 60-sec demo video — only when AppSumo deal-team requests it. Removes blocking dependency on first submit.
 - [ ] Auto: monitor partner-portal email replies, draft responses for review feedback
 - [ ] +4 weeks: submit `ai_sidehustle_kit_lifetime_deal.md`
+
+---
+
+## Audit 2026-05-06 — Status
+
+- Both listing markdowns ready (no edits needed — pricing/comparison/FAQ all verified)
+- Demo video TODO **removed as blocker** — submit listing now, record video only if AppSumo asks
+- User time reduced: **first submit = 20 min** (was 25 min with video)
+- AI Side Hustle Kit submission: same flow, defer to +4 weeks per AppSumo staggered-launch preference
