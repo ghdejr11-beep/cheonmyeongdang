@@ -877,8 +877,38 @@ gtag('config', 'G-90Y8GPVX1F', { send_page_view: true });
  if (found) selectSku(found);
  }
 
+ // entitlement 검사 — 인플루언서 쿠폰/기존 결제 보유 시 결제 스킵
+ async function checkEntitlementAndShortcut() {
+   try {
+     var q = new URLSearchParams(window.location.search);
+     var skuId = q.get('sku');
+     if (!skuId) return false;
+     // localStorage 캐시 우선 (즉시 응답)
+     var cached = JSON.parse(localStorage.getItem('cm_purchases') || '[]');
+     if (Array.isArray(cached) && cached.indexOf(skuId) >= 0) {
+       var email = localStorage.getItem('cm_premium_email') || localStorage.getItem('cm_entitlement_email') || '';
+       window.location.href = '/success.html?sku=' + encodeURIComponent(skuId) + '&email=' + encodeURIComponent(email) + '&via=entitlement';
+       return true;
+     }
+     // 서버 검증 (이메일 있으면)
+     var pEmail = localStorage.getItem('cm_premium_email') || '';
+     if (!pEmail) return false;
+     var r = await fetch('/api/check-entitlement', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email: pEmail }) });
+     var d = await r.json();
+     if (d && d.ok && Array.isArray(d.skus) && d.skus.indexOf(skuId) >= 0) {
+       localStorage.setItem('cm_purchases', JSON.stringify(d.skus));
+       window.location.href = '/success.html?sku=' + encodeURIComponent(skuId) + '&email=' + encodeURIComponent(pEmail) + '&via=entitlement';
+       return true;
+     }
+   } catch(e) {}
+   return false;
+ }
+
  async function bootstrap() {
  loadSavedUser();
+ // entitlement shortcut: 이미 권한 있으면 결제 안 보여주고 success.html로 직행
+ var skipped = await checkEntitlementAndShortcut();
+ if (skipped) return;
  try {
  var resp = await fetch('/api/payment-config', { headers: { 'Accept': 'application/json' } });
  if (!resp.ok) throw new Error('config status ' + resp.status);

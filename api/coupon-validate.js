@@ -25,6 +25,7 @@
  */
 const https = require('https');
 const crypto = require('crypto');
+const { appendPurchase } = require('../lib/purchase-store');
 
 // ─── 쿠폰 정의 ───
 // expires는 ISO 날짜, null이면 무제한
@@ -252,13 +253,51 @@ module.exports = async (req, res) => {
             debug: { status: recordResult.status, body: recordResult.body_excerpt, err: recordResult.error },
           });
         }
+
+        // ─── entitlement 등록 (purchases.json에 synthetic 결제 기록 추가) ───
+        // 기존 check-entitlement.js 인프라 통과시켜 30일 무료 access 부여.
+        // skuId 3종 등록 (saju_premium_9900 + comprehensive_29900 + subscribe_monthly_29900)
+        // → 종합풀이/사주정밀/월회원 모두 무료 access.
+        const orderId = `infl_${code}_${Date.now()}`;
+        const grantedSkus = ['saju_premium_9900', 'comprehensive_29900', 'subscribe_monthly_29900'];
+        let purchaseResults = [];
+        for (const sku of grantedSkus) {
+          try {
+            const r = await appendPurchase({
+              orderId: `${orderId}_${sku}`,
+              paymentKey: `coupon_${code}`,
+              customerEmail: email,
+              customerName: '[인플루언서 무료]',
+              skuId: sku,
+              skuName: `[인플루언서 30일 무료] ${sku}`,
+              amount: 0,
+              method: '쿠폰',
+              paid_at: new Date().toISOString(),
+              valid_until: validUntil,
+              followup_sent: true, // 후속 메일 스킵 (이미 무료 알림 보냄)
+              refunded: false,
+              source: 'influencer_coupon',
+              coupon_code: code,
+            });
+            purchaseResults.push({ sku, ok: r.ok, reason: r.reason || null });
+          } catch (e) {
+            purchaseResults.push({ sku, ok: false, reason: String(e && e.message || e) });
+          }
+        }
+        const entitlement_ok = purchaseResults.every(p => p.ok);
+
         return res.status(200).json({
           ok: true, code, mode: 'redeemed',
           coupon_type: 'influencer_30d',
           description: '인플루언서 30일 무료 구독권',
           granted_email: email,
+          granted_skus: grantedSkus,
           valid_until: validUntil,
-          message: '✅ 쿠폰이 적용되었습니다. 30일 무료 구독이 활성화됐습니다.',
+          entitlement_ok,
+          entitlement_debug: entitlement_ok ? null : purchaseResults,
+          message: entitlement_ok
+            ? '✅ 쿠폰 적용 완료. 30일 무료 구독이 활성화되었습니다. 메인 페이지에서 사주 입력 → 종합 풀이 결과 무료로 받으세요.'
+            : '✅ 쿠폰은 적용되었으나 일부 권한 등록에 실패했습니다. 고객센터로 문의해주세요.',
         });
       }
       // validate 모드 (preview): 사용 가능 여부만 반환
