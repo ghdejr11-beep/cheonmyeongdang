@@ -1,0 +1,10 @@
+{
+  "_meta": {
+    "purpose": "Send log for global_50_2026_05_06.json campaign",
+    "created": "2026-05-06",
+    "campaign_codes_range": "KSAJU-00031 to KSAJU-00080",
+    "languages": ["ko", "en", "ja", "zh"],
+    "first_batch_status": "PENDING — all 50 candidates are email-unverified. No emails sent. 50 personalized drafts written to drafts_global_2026_05_06/ for manual contact-form/DM transmission."
+  },
+  "sent": []
+}
