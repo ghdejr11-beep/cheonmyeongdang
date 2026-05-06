@@ -24,8 +24,184 @@
  *   - PG 결제 시 amount는 클라이언트에서 받지 말고 server-side에서 SKU price - coupon discount로 재계산
  */
 const https = require('https');
+const querystring = require('querystring');
 const crypto = require('crypto');
 const { appendPurchase } = require('../lib/purchase-store');
+
+// ─── Magic-link redeem 토큰 (인플루언서 쿠폰 이메일 검증용) ───
+// 토큰 = HMAC-SHA256(`${email}|${code}|${ts}`, INFLU_COUPON_SECRET).hex.slice(0,16)
+// 유효시간: 30분 (ts 검증)
+const MAGIC_LINK_TTL_MS = 30 * 60 * 1000;
+const MAGIC_LINK_BASE = 'https://cheonmyeongdang.vercel.app/?coupon_redeem=true';
+
+function buildMagicLinkToken(email, code, ts, secret) {
+  const payload = `${String(email || '').toLowerCase()}|${String(code || '').toUpperCase()}|${ts}`;
+  return crypto.createHmac('sha256', secret).update(payload).digest('hex').slice(0, 16);
+}
+
+function verifyMagicLinkToken(email, code, ts, token, secret) {
+  if (!secret || !token || !ts) return { ok: false, reason: 'missing_params' };
+  const tsNum = parseInt(ts, 10);
+  if (!Number.isFinite(tsNum)) return { ok: false, reason: 'invalid_ts' };
+  if (Date.now() - tsNum > MAGIC_LINK_TTL_MS) return { ok: false, reason: 'expired' };
+  if (Date.now() - tsNum < -60 * 1000) return { ok: false, reason: 'future_ts' }; // clock skew 1min
+  const expected = buildMagicLinkToken(email, code, tsNum, secret);
+  // timing-safe compare
+  const a = Buffer.from(expected);
+  const b = Buffer.from(String(token));
+  if (a.length !== b.length) return { ok: false, reason: 'bad_token' };
+  if (!crypto.timingSafeEqual(a, b)) return { ok: false, reason: 'bad_token' };
+  return { ok: true };
+}
+
+// ─── 매직링크 메일 발송 (Gmail SMTP App Password 또는 OAuth2 fallback — send-receipt.js와 동일 인프라) ───
+function _refreshGmailAccessToken({ clientId, clientSecret, refreshToken }) {
+  return new Promise((resolve, reject) => {
+    const data = querystring.stringify({
+      client_id: clientId, client_secret: clientSecret,
+      refresh_token: refreshToken, grant_type: 'refresh_token',
+    });
+    const req = https.request({
+      hostname: 'oauth2.googleapis.com', port: 443, path: '/token', method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(data),
+      },
+    }, (res) => {
+      let buf = ''; res.on('data', (c) => (buf += c));
+      res.on('end', () => {
+        try {
+          const j = JSON.parse(buf);
+          if (j.access_token) resolve(j.access_token);
+          else reject(new Error('OAuth refresh 실패: ' + buf));
+        } catch (e) { reject(new Error('OAuth 응답 파싱 실패')); }
+      });
+    });
+    req.on('error', reject); req.write(data); req.end();
+  });
+}
+
+function _buildRawMessage({ from, to, subject, html, text }) {
+  const boundary = '__cmd_magiclink_' + Date.now() + '__';
+  const encSubject = '=?UTF-8?B?' + Buffer.from(subject, 'utf-8').toString('base64') + '?=';
+  const lines = [
+    `From: ${from}`,
+    `To: ${to}`,
+    `Subject: ${encSubject}`,
+    'MIME-Version: 1.0',
+    `Content-Type: multipart/alternative; boundary="${boundary}"`,
+    '',
+    `--${boundary}`,
+    'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: 7bit',
+    '',
+    text || '',
+    '',
+    `--${boundary}`,
+    'Content-Type: text/html; charset=UTF-8',
+    'Content-Transfer-Encoding: 7bit',
+    '',
+    html,
+    '',
+    `--${boundary}--`,
+    '',
+  ];
+  return Buffer.from(lines.join('\r\n'), 'utf-8')
+    .toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function _sendViaGmailApi({ accessToken, raw }) {
+  return new Promise((resolve, reject) => {
+    const data = JSON.stringify({ raw });
+    const req = https.request({
+      hostname: 'gmail.googleapis.com', port: 443,
+      path: '/gmail/v1/users/me/messages/send', method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(data),
+      },
+    }, (res) => {
+      let buf = ''; res.on('data', (c) => (buf += c));
+      res.on('end', () => {
+        try {
+          const j = JSON.parse(buf);
+          if (res.statusCode >= 200 && res.statusCode < 300 && j.id) resolve({ id: j.id });
+          else reject(new Error('Gmail API ' + res.statusCode + ': ' + buf.slice(0, 200)));
+        } catch (e) { reject(new Error('Gmail API 파싱 실패')); }
+      });
+    });
+    req.on('error', reject); req.write(data); req.end();
+  });
+}
+
+async function _sendViaSmtp({ from, to, subject, html, text, user, pass }) {
+  let nodemailer;
+  try { nodemailer = require('nodemailer'); }
+  catch (e) { throw new Error('nodemailer_unavailable'); }
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com', port: 465, secure: true,
+    auth: { user, pass },
+  });
+  const info = await transporter.sendMail({ from, to, subject, html, text });
+  return { id: info.messageId };
+}
+
+async function sendMagicLinkEmail(toEmail, magicUrl, code) {
+  const fromAddr = (process.env.GMAIL_FROM || 'ghdejr11@gmail.com').trim();
+  const from = `천명당 <${fromAddr}>`;
+  const subject = '[천명당] 인플루언서 쿠폰 활성화 링크';
+  const safeUrl = String(magicUrl).replace(/[<>&"']/g, '');
+  const html = `<!DOCTYPE html><html><body style="margin:0;background:#080a10;font-family:-apple-system,'Noto Sans KR',sans-serif;color:#e8e0d0;">
+<div style="max-width:560px;margin:0 auto;padding:32px 16px;">
+  <div style="text-align:center;padding:20px 0;">
+    <div style="font-family:'Gowun Batang',serif;font-size:26px;color:#e8c97a;letter-spacing:0.05em;">天命堂</div>
+  </div>
+  <div style="background:linear-gradient(135deg,#0d1020,#141428);border:1px solid #c9a84c;border-radius:16px;padding:32px 24px;">
+    <h1 style="color:#e8c97a;font-size:20px;margin:0 0 16px;">쿠폰 활성화 링크</h1>
+    <p style="color:#e8e0d0;font-size:14px;line-height:1.7;margin:0 0 18px;">
+      안녕하세요. 인플루언서 쿠폰 <strong style="color:#e8c97a;">${String(code).replace(/[<>&"']/g,'')}</strong> 적용을 위해 본인 이메일 인증이 필요합니다.<br>
+      아래 버튼을 클릭하여 30일 무료 구독을 활성화해 주세요. (30분 이내 유효)
+    </p>
+    <div style="text-align:center;margin:24px 0;">
+      <a href="${safeUrl}" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#c9a84c,#e8c97a);color:#080a10;font-weight:700;text-decoration:none;border-radius:8px;font-size:15px;">쿠폰 활성화 →</a>
+    </div>
+    <p style="color:#a89880;font-size:11px;line-height:1.6;margin:16px 0 0;">
+      본인이 요청하지 않았다면 이 메일을 무시하세요. 링크는 30분 후 자동 만료됩니다.
+    </p>
+  </div>
+  <div style="text-align:center;color:#7a6f5a;font-size:11px;line-height:1.8;padding:16px;">
+    쿤스튜디오 · 사업자 552-59-00848 · ghdejr11@gmail.com
+  </div>
+</div></body></html>`;
+  const text = `천명당 — 쿠폰 활성화 링크\n\n쿠폰 ${code} 적용을 위해 아래 링크를 클릭해 주세요 (30분 유효):\n\n${magicUrl}\n\n본인이 요청하지 않았다면 무시하세요.`;
+
+  // 1) SMTP App Password 우선
+  const appPass = (process.env.GMAIL_APP_PASSWORD || '').trim();
+  if (appPass) {
+    try {
+      const r = await _sendViaSmtp({ from, to: toEmail, subject, html, text, user: fromAddr, pass: appPass });
+      return { ok: true, method: 'smtp', messageId: r.id };
+    } catch (err) {
+      console.error('[magic-link] SMTP 실패, OAuth2로 fallback:', err.message);
+    }
+  }
+  // 2) OAuth2
+  const clientId = (process.env.GMAIL_OAUTH_CLIENT_ID || '').trim();
+  const clientSecret = (process.env.GMAIL_OAUTH_CLIENT_SECRET || '').trim();
+  const refreshToken = (process.env.GMAIL_OAUTH_REFRESH_TOKEN || '').trim();
+  if (clientId && clientSecret && refreshToken) {
+    try {
+      const accessToken = await _refreshGmailAccessToken({ clientId, clientSecret, refreshToken });
+      const raw = _buildRawMessage({ from, to: toEmail, subject, html, text });
+      const r = await _sendViaGmailApi({ accessToken, raw });
+      return { ok: true, method: 'gmail-oauth', messageId: r.id };
+    } catch (err) {
+      return { ok: false, reason: 'oauth_send_failed: ' + err.message };
+    }
+  }
+  return { ok: false, reason: 'no_gmail_credentials' };
+}
 
 // ─── 쿠폰 정의 ───
 // expires는 ISO 날짜, null이면 무제한
@@ -148,7 +324,13 @@ async function readGist(gistId, token, filename) {
   });
   try {
     const file = res.body && res.body.files && res.body.files[filename];
-    return file && file.content ? JSON.parse(file.content) : null;
+    const parsed = file && file.content ? JSON.parse(file.content) : null;
+    if (parsed && typeof parsed === 'object') {
+      // race-condition 검증용 메타데이터 — etag/updated_at 보존 (Gist API 응답 기반)
+      Object.defineProperty(parsed, '__etag', { value: res.body && res.body.history && res.body.history[0] && res.body.history[0].version || null, enumerable: false });
+      Object.defineProperty(parsed, '__updated_at', { value: res.body && res.body.updated_at || null, enumerable: false });
+    }
+    return parsed;
   } catch (e) { return null; }
 }
 
@@ -190,13 +372,42 @@ async function recordCouponUsage(code, email, type, validUntil) {
   const ghToken = (process.env.GITHUB_TOKEN || '').trim();
   const gistId = ((process.env.GIST_COUPON_USAGE_ID || process.env.GIST_ID) || '').trim();
   if (!ghToken || !gistId) return { ok: false, error: 'no_token_or_gist' };
+
+  // ─── Race-condition 방어 (옵션 B) ───
+  // 1) 0~150ms 랜덤 지연 → 동시 도달 요청 분산
+  // 2) 첫 readGist에 이미 동일 code 존재 시 → 즉시 false (이미 사용됨)
+  // 3) PATCH 완료 후 200ms 대기 → 재read하여 race 검증
+  // 4) 같은 code의 record가 2개 이상이면 → redeemed_at 가장 빠른 것이 winner
+  //    - 자신이 winner 아니면 → 자신의 record 제거(PATCH) + already_used 반환
+  const myRedeemedAt = new Date().toISOString();
+  const myRecord = {
+    code,
+    email: (email || '').toLowerCase(),
+    type,
+    valid_until: validUntil || null,
+    redeemed_at: myRedeemedAt,
+  };
+
+  // (1) jitter
+  await new Promise((r) => setTimeout(r, Math.floor(Math.random() * 150)));
+
+  // (2) pre-check: 첫 readGist
   const existing = (await readGist(gistId, ghToken, 'coupon_usage.json')) || { usages: [] };
   if (!Array.isArray(existing.usages)) existing.usages = [];
-  existing.usages.push({
-    code, email: (email || '').toLowerCase(), type, valid_until: validUntil || null,
-    redeemed_at: new Date().toISOString(),
-  });
-  // PATCH /gists/{id} with updated file content
+  const alreadyUsed = existing.usages.find((u) => u && u.code === code);
+  if (alreadyUsed) {
+    return {
+      ok: false,
+      status: 409,
+      error: 'already_used',
+      body_excerpt: `pre-check: code ${code} already used by ${alreadyUsed.email || 'unknown'} at ${alreadyUsed.redeemed_at || 'unknown'}`,
+      already_used: true,
+      existing_record: alreadyUsed,
+    };
+  }
+
+  // (3) PATCH (push my record)
+  existing.usages.push(myRecord);
   const patch = await jsonReq({
     hostname: 'api.github.com', port: 443,
     path: `/gists/${gistId}`, method: 'PATCH',
@@ -204,7 +415,142 @@ async function recordCouponUsage(code, email, type, validUntil) {
   }, {
     files: { 'coupon_usage.json': { content: JSON.stringify(existing, null, 2) } },
   });
-  return { ok: patch.ok, status: patch.status, body_excerpt: patch.body ? JSON.stringify(patch.body).slice(0, 200) : (patch.raw || '').slice(0, 200) };
+  if (!patch.ok) {
+    return { ok: false, status: patch.status, body_excerpt: patch.body ? JSON.stringify(patch.body).slice(0, 200) : (patch.raw || '').slice(0, 200) };
+  }
+
+  // (4) Double-check after PATCH: 200ms wait + re-read
+  // GitHub Gist PATCH semantics: "last-writer-wins" — 전체 파일 content를 replace.
+  // 다중 동시 PATCH 시 각 writer가 비어있는 existing 보고 push → 마지막 PATCH가
+  // 이전 PATCH 모두 덮어씀 → 마지막 writer 1명만 store에 남는다.
+  // 따라서 verify-after-PATCH에서 "내 record가 살아남았는가"로 winner 판정.
+  await new Promise((r) => setTimeout(r, 200));
+  const verify = (await readGist(gistId, ghToken, 'coupon_usage.json')) || { usages: [] };
+  if (!Array.isArray(verify.usages)) verify.usages = [];
+  const sameCodeRecords = verify.usages.filter((u) => u && u.code === code);
+
+  const myRecordExists = sameCodeRecords.some(
+    (u) => u.redeemed_at === myRedeemedAt && (u.email || '') === (email || '').toLowerCase()
+  );
+
+  if (!myRecordExists) {
+    // 내 PATCH가 다른 writer의 PATCH로 덮어씀 ("last-writer-wins" overwrite)
+    // 같은 code의 다른 record가 살아있으면 → race lost (이미 사용됨)
+    // 같은 code 없이 다른 code들만 살아있으면 → 다른 code redeem이 내 PATCH 덮은 것 → retry
+    if (sameCodeRecords.length > 0) {
+      const survivor = sameCodeRecords[0];
+      return {
+        ok: false,
+        status: 409,
+        error: 'already_used',
+        race_detected: true,
+        i_am_loser: true,
+        body_excerpt: `race lost: my record overwritten by same-code winner. survivor=${survivor.email} at ${survivor.redeemed_at}`,
+        existing_record: survivor,
+      };
+    }
+    // 같은 code가 store에 없음 = 다른 코드 redeem 또는 외부 작업이 내 PATCH를 덮음
+    // → retry: verify에 내 record 추가하고 한 번 더 PATCH
+    verify.usages.push(myRecord);
+    const retryPatch = await jsonReq({
+      hostname: 'api.github.com', port: 443,
+      path: `/gists/${gistId}`, method: 'PATCH',
+      headers: { Authorization: `Bearer ${ghToken}`, 'User-Agent': 'cheonmyeongdang-coupon', 'Accept': 'application/vnd.github+json' },
+    }, {
+      files: { 'coupon_usage.json': { content: JSON.stringify(verify, null, 2) } },
+    });
+    if (!retryPatch.ok) {
+      return { ok: false, status: retryPatch.status, body_excerpt: 'retry PATCH failed: ' + ((retryPatch.body ? JSON.stringify(retryPatch.body).slice(0, 200) : (retryPatch.raw || '').slice(0, 200))) };
+    }
+    // retry 후 재검증
+    await new Promise((r) => setTimeout(r, 200));
+    const reverify = (await readGist(gistId, ghToken, 'coupon_usage.json')) || { usages: [] };
+    if (!Array.isArray(reverify.usages)) reverify.usages = [];
+    const reSameCode = reverify.usages.filter((u) => u && u.code === code);
+    const reMyExists = reSameCode.some(
+      (u) => u.redeemed_at === myRedeemedAt && (u.email || '') === (email || '').toLowerCase()
+    );
+    if (reMyExists && reSameCode.length === 1) {
+      return { ok: true, status: retryPatch.status, retried: true, body_excerpt: 'retry success' };
+    }
+    if (!reMyExists && reSameCode.length > 0) {
+      // 재시도 중에도 동일 코드 다른 record가 들어옴 → loser
+      return {
+        ok: false,
+        status: 409,
+        error: 'already_used',
+        race_detected: true,
+        i_am_loser: true,
+        retried: true,
+        body_excerpt: 'race lost on retry',
+        existing_record: reSameCode[0],
+      };
+    }
+    // 알 수 없는 상태 — 보수적으로 ok 반환 (내 record가 살아있음)
+    return { ok: true, status: retryPatch.status, retried: true, body_excerpt: 'retry uncertain but myRecord present' };
+  }
+
+  // 내 record가 살아남음.
+  // (이론상 거의 발생하지 않지만) 같은 code의 다른 record가 함께 살아있으면(서로 다른 위치 push) cleanup.
+  if (sameCodeRecords.length > 1) {
+    // tie-breaker: redeemed_at 가장 빠른 것이 winner
+    const sorted = sameCodeRecords.slice().sort((a, b) => {
+      const ta = a.redeemed_at || '';
+      const tb = b.redeemed_at || '';
+      if (ta !== tb) return ta < tb ? -1 : 1;
+      return (a.email || '').localeCompare(b.email || '');
+    });
+    const winner = sorted[0];
+    const iAmWinner = winner.redeemed_at === myRedeemedAt && (winner.email || '') === (email || '').toLowerCase();
+
+    if (iAmWinner) {
+      const cleaned = verify.usages.filter((u) => {
+        if (!u || u.code !== code) return true;
+        return u.redeemed_at === winner.redeemed_at && (u.email || '') === (winner.email || '');
+      });
+      verify.usages = cleaned;
+      const cleanupPatch = await jsonReq({
+        hostname: 'api.github.com', port: 443,
+        path: `/gists/${gistId}`, method: 'PATCH',
+        headers: { Authorization: `Bearer ${ghToken}`, 'User-Agent': 'cheonmyeongdang-coupon', 'Accept': 'application/vnd.github+json' },
+      }, {
+        files: { 'coupon_usage.json': { content: JSON.stringify(verify, null, 2) } },
+      });
+      return {
+        ok: true,
+        status: patch.status,
+        race_detected: true,
+        cleanup_ok: cleanupPatch.ok,
+        losers_removed: sameCodeRecords.length - 1,
+        body_excerpt: `race winner=${email}, removed ${sameCodeRecords.length - 1} losers (cleanup ${cleanupPatch.ok ? 'ok' : 'failed'})`,
+      };
+    } else {
+      const cleaned = verify.usages.filter((u) => {
+        if (!u || u.code !== code) return true;
+        return !(u.redeemed_at === myRedeemedAt && (u.email || '') === (email || '').toLowerCase());
+      });
+      verify.usages = cleaned;
+      await jsonReq({
+        hostname: 'api.github.com', port: 443,
+        path: `/gists/${gistId}`, method: 'PATCH',
+        headers: { Authorization: `Bearer ${ghToken}`, 'User-Agent': 'cheonmyeongdang-coupon', 'Accept': 'application/vnd.github+json' },
+      }, {
+        files: { 'coupon_usage.json': { content: JSON.stringify(verify, null, 2) } },
+      });
+      return {
+        ok: false,
+        status: 409,
+        error: 'already_used',
+        race_detected: true,
+        i_am_loser: true,
+        body_excerpt: `race lost: winner=${winner.email} at ${winner.redeemed_at}, my=${email} at ${myRedeemedAt}`,
+        existing_record: winner,
+      };
+    }
+  }
+
+  // 정상 케이스: 내 record만 살아있음
+  return { ok: true, status: patch.status, body_excerpt: patch.body ? JSON.stringify(patch.body).slice(0, 200) : (patch.raw || '').slice(0, 200) };
 }
 
 module.exports = async (req, res) => {
@@ -241,8 +587,49 @@ module.exports = async (req, res) => {
           redeemed_at: used.redeemed_at,
         });
       }
-      if (mode === 'redeem') {
+      // ─── mode='redeem_request': 이메일 받음 → magic-link 토큰 생성 → 메일 발송 (entitlement 부여 X) ───
+      if (mode === 'redeem_request') {
         if (!email) return res.status(400).json({ ok: false, error: 'email_required_for_redeem' });
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          return res.status(400).json({ ok: false, error: 'invalid_email_format' });
+        }
+        const secret = (process.env.INFLU_COUPON_SECRET || '').trim();
+        if (!secret) return res.status(500).json({ ok: false, error: 'server_misconfigured' });
+        const ts = Date.now();
+        const token = buildMagicLinkToken(email, code, ts, secret);
+        const magicUrl = `${MAGIC_LINK_BASE}&code=${encodeURIComponent(code)}&email=${encodeURIComponent(email)}&token=${token}&ts=${ts}`;
+        const sendResult = await sendMagicLinkEmail(email, magicUrl, code);
+        if (!sendResult.ok) {
+          return res.status(500).json({
+            ok: false, error: 'email_send_failed',
+            message: '이메일 발송 실패. 잠시 후 다시 시도해 주세요.',
+            debug: { reason: sendResult.reason },
+          });
+        }
+        return res.status(200).json({
+          ok: true, sent: true, mode: 'redeem_request',
+          message: `${email}로 쿠폰 활성화 링크를 발송했습니다. 메일함을 확인해 주세요. (30분 유효)`,
+          method: sendResult.method,
+        });
+      }
+
+      // ─── mode='redeem_confirm' (또는 legacy 'redeem' + token): 토큰 검증 후 entitlement 부여 ───
+      if (mode === 'redeem_confirm' || (mode === 'redeem' && body.token)) {
+        if (!email) return res.status(400).json({ ok: false, error: 'email_required_for_redeem' });
+        const secret = (process.env.INFLU_COUPON_SECRET || '').trim();
+        if (!secret) return res.status(500).json({ ok: false, error: 'server_misconfigured' });
+        const token = String(body.token || '').trim();
+        const ts = body.ts || body.timestamp;
+        const verify = verifyMagicLinkToken(email, code, ts, token, secret);
+        if (!verify.ok) {
+          return res.status(401).json({
+            ok: false, error: 'invalid_token',
+            reason: verify.reason,
+            message: verify.reason === 'expired'
+              ? '활성화 링크가 만료되었습니다 (30분 초과). 쿠폰 입력 → 이메일 재요청해 주세요.'
+              : '잘못된 활성화 링크입니다.',
+          });
+        }
         const validUntil = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
         let recordResult = { ok: false };
         try { recordResult = await recordCouponUsage(code, email, 'influencer_30d', validUntil); } catch (e) { recordResult = { ok: false, error: String(e && e.message || e) }; }
@@ -253,39 +640,33 @@ module.exports = async (req, res) => {
             debug: { status: recordResult.status, body: recordResult.body_excerpt, err: recordResult.error },
           });
         }
-
-        // ─── entitlement 등록 (purchases.json에 synthetic 결제 기록 추가) ───
-        // 기존 check-entitlement.js 인프라 통과시켜 30일 무료 access 부여.
-        // skuId 3종 등록 (saju_premium_9900 + comprehensive_29900 + subscribe_monthly_29900)
-        // → 종합풀이/사주정밀/월회원 모두 무료 access.
         const orderId = `infl_${code}_${Date.now()}`;
         const grantedSkus = ['saju_premium_9900', 'comprehensive_29900', 'subscribe_monthly_29900'];
         let purchaseResults = [];
-        for (const sku of grantedSkus) {
+        for (const skuItem of grantedSkus) {
           try {
             const r = await appendPurchase({
-              orderId: `${orderId}_${sku}`,
+              orderId: `${orderId}_${skuItem}`,
               paymentKey: `coupon_${code}`,
               customerEmail: email,
               customerName: '[인플루언서 무료]',
-              skuId: sku,
-              skuName: `[인플루언서 30일 무료] ${sku}`,
+              skuId: skuItem,
+              skuName: `[인플루언서 30일 무료] ${skuItem}`,
               amount: 0,
               method: '쿠폰',
               paid_at: new Date().toISOString(),
               valid_until: validUntil,
-              followup_sent: true, // 후속 메일 스킵 (이미 무료 알림 보냄)
+              followup_sent: true,
               refunded: false,
               source: 'influencer_coupon',
               coupon_code: code,
             });
-            purchaseResults.push({ sku, ok: r.ok, reason: r.reason || null });
+            purchaseResults.push({ sku: skuItem, ok: r.ok, reason: r.reason || null });
           } catch (e) {
-            purchaseResults.push({ sku, ok: false, reason: String(e && e.message || e) });
+            purchaseResults.push({ sku: skuItem, ok: false, reason: String(e && e.message || e) });
           }
         }
         const entitlement_ok = purchaseResults.every(p => p.ok);
-
         return res.status(200).json({
           ok: true, code, mode: 'redeemed',
           coupon_type: 'influencer_30d',
@@ -296,8 +677,17 @@ module.exports = async (req, res) => {
           entitlement_ok,
           entitlement_debug: entitlement_ok ? null : purchaseResults,
           message: entitlement_ok
-            ? '✅ 쿠폰 적용 완료. 30일 무료 구독이 활성화되었습니다. 메인 페이지에서 사주 입력 → 종합 풀이 결과 무료로 받으세요.'
-            : '✅ 쿠폰은 적용되었으나 일부 권한 등록에 실패했습니다. 고객센터로 문의해주세요.',
+            ? '쿠폰 적용 완료. 30일 무료 구독이 활성화되었습니다.'
+            : '쿠폰은 적용되었으나 일부 권한 등록에 실패했습니다. 고객센터로 문의해주세요.',
+        });
+      }
+
+      // ─── 레거시 mode='redeem' (token 없음) — 보안상 차단, redeem_request로 유도 ───
+      if (mode === 'redeem') {
+        return res.status(400).json({
+          ok: false,
+          error: 'redeem_requires_email_verification',
+          message: '쿠폰 적용을 위해 이메일 인증이 필요합니다. 먼저 mode=redeem_request로 활성화 링크를 받아주세요.',
         });
       }
       // validate 모드 (preview): 사용 가능 여부만 반환

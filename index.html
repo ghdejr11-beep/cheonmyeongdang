@@ -3426,56 +3426,33 @@ async function redeemCoupon(ev){
       return;
     }
 
-    // 2단계: 사용자 확인
-    if(!confirm(`쿠폰 "${code}"를 ${email}로 활성화합니다.\n한 번 사용한 코드는 다시 사용할 수 없습니다.\n계속 진행할까요?`)){
+    // 2단계: 사용자 확인 + 매직링크 발송 동의
+    if(!confirm(`쿠폰 "${code}"를 ${email}로 활성화합니다.\n\n보안상 ${email}로 활성화 링크를 발송합니다.\n메일 수신함을 확인 후 링크를 클릭해 주세요. (30분 유효)\n\n계속 진행할까요?`)){
       btn.disabled = false;
       btn.textContent = '쿠폰 적용하기';
       return;
     }
 
-    // 3단계: redeem (실제 사용 처리)
-    btn.textContent = '활성화 중...';
-    const redeemed = await fetch('/api/coupon-validate', {
+    // 3단계: redeem_request — 매직링크 발송 (entitlement 부여 X)
+    btn.textContent = '메일 발송 중...';
+    const requested = await fetch('/api/coupon-validate', {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({code, email, mode:'redeem'})
+      body: JSON.stringify({code, email, mode:'redeem_request'})
     }).then(r=>r.json());
 
-    if(redeemed.ok){
-      // entitlement localStorage 저장 → 메인 사이트 premium 자동 인식
-      try {
-        localStorage.setItem('cm_premium_email', email);
-        localStorage.setItem('cm_premium_until', redeemed.valid_until || '');
-        localStorage.setItem('cm_premium_skus', JSON.stringify(redeemed.granted_skus || []));
-      } catch(e) {}
-
+    if(requested.ok && requested.sent){
       resultBox.style.display='block';
       resultBox.style.background='rgba(120,140,93,0.14)';
       resultBox.style.border='1px solid rgba(120,140,93,0.5)';
       resultBox.style.color='#a8c882';
-      const validUntil = redeemed.valid_until ? new Date(redeemed.valid_until).toLocaleDateString('ko-KR') : '';
-      // 자동 entitlement 동기화 — restore.html 흐름과 동일하게 cm_purchases 셋업
-      try {
-        const skus = redeemed.granted_skus || ['saju_premium_9900', 'comprehensive_29900', 'subscribe_monthly_29900'];
-        const existing = JSON.parse(localStorage.getItem('cm_purchases') || '[]');
-        const merged = [...new Set([...existing, ...skus])];
-        localStorage.setItem('cm_purchases', JSON.stringify(merged));
-        localStorage.setItem('cm_premium_email', email);
-        localStorage.setItem('cm_premium_until', redeemed.valid_until || '');
-      } catch(e) {}
-
-      resultBox.innerHTML = '✓ ' + (redeemed.message || '쿠폰이 적용되었습니다.') +
-        (validUntil ? '<br><small style="color:var(--text2);">유효기간: ~' + validUntil + '</small>' : '') +
-        '<br><br><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px;">' +
-          '<a href="/" style="padding:10px 16px;background:var(--gold);color:#1a1206;border-radius:8px;text-decoration:none;font-weight:600;">→ 사주 보러 가기</a>' +
-          '<a href="/restore.html?email='+encodeURIComponent(email)+'" style="padding:10px 16px;background:rgba(0,0,0,0.4);border:1px solid var(--border);color:var(--gold2);border-radius:8px;text-decoration:none;font-weight:600;">→ 권한 동기화 (내 이메일로 복원)</a>' +
-        '</div>';
+      resultBox.innerHTML = '📩 <strong>' + email + '</strong>로 활성화 링크를 발송했습니다.<br><small style="color:var(--text2);">메일함을 확인하고 링크를 클릭해 주세요. (30분 유효)<br>※ 스팸함도 확인해 주세요.</small>';
       btn.style.display = 'none';
     } else {
       resultBox.style.display='block';
       resultBox.style.background='rgba(199,90,110,0.12)';
       resultBox.style.border='1px solid rgba(199,90,110,0.4)';
       resultBox.style.color='#e0838f';
-      resultBox.innerHTML = '✗ ' + (redeemed.message || '활성화에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+      resultBox.innerHTML = '✗ ' + (requested.message || '메일 발송에 실패했습니다. 잠시 후 다시 시도해 주세요.');
       btn.disabled = false;
       btn.textContent = '쿠폰 적용하기';
     }
@@ -3488,6 +3465,45 @@ async function redeemCoupon(ev){
     btn.textContent = '쿠폰 적용하기';
   }
 }
+
+// ─── 매직링크로부터 도착 시 자동 redeem_confirm ───
+// URL: ?coupon_redeem=true&code=XXX&email=XXX&token=YYY&ts=ZZZ
+(function handleCouponRedeemCallback(){
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('coupon_redeem') !== 'true') return;
+    var code = params.get('code');
+    var email = params.get('email');
+    var token = params.get('token');
+    var ts = params.get('ts');
+    if (!code || !email || !token || !ts) return;
+    // confirm 호출 후 결과 표시
+    fetch('/api/coupon-validate', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ code: code, email: email, mode: 'redeem_confirm', token: token, ts: parseInt(ts, 10) })
+    }).then(function(r){ return r.json(); }).then(function(d){
+      if (d && d.ok && d.entitlement_ok) {
+        // entitlement localStorage 캐시 (서버 재검증 후에만 사용)
+        try {
+          localStorage.setItem('cm_premium_email', email);
+          localStorage.setItem('cm_premium_until', d.valid_until || '');
+          localStorage.setItem('cm_purchases', JSON.stringify(d.granted_skus || []));
+          var ui = JSON.parse(localStorage.getItem('cm_user_info') || '{}');
+          ui.email = email;
+          localStorage.setItem('cm_user_info', JSON.stringify(ui));
+        } catch(e) {}
+        alert('쿠폰 활성화 완료. 30일 무료 구독이 시작되었습니다.\n사주 결과 페이지에서 정밀 분석을 확인하세요.');
+        // URL 정리 후 메인으로
+        try { window.history.replaceState({}, '', '/'); } catch(e) {}
+      } else {
+        alert((d && d.message) || '활성화 링크가 유효하지 않습니다. 쿠폰을 다시 입력해 주세요.');
+        try { window.history.replaceState({}, '', '/'); } catch(e) {}
+      }
+    }).catch(function(){
+      alert('네트워크 오류로 활성화에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+    });
+  } catch(e) { console.warn('coupon_redeem callback failed', e); }
+})();
 </script>
 
 <!-- 글로벌 영문 디지털 상품 cross-sell (20 PDF) -->
@@ -3977,6 +3993,8 @@ async function redeemCoupon(ev){
  }
 
  function renderSajuResult(r) {
+ // 재렌더용 저장 (entitlement 비동기 검증 통과 시 잠금해제 재렌더)
+ try { window._lastSajuResult = r; } catch(e) {}
  const el = document.getElementById('saju-result');
  el.classList.remove('hidden');
  el.style.opacity = '0';
@@ -3991,20 +4009,43 @@ async function redeemCoupon(ev){
  const isSingle = uctx.marital === 'single';
  const hasChildren = uctx.children >0;
 
- // 프리미엄 entitlement 검사 (쿠폰/결제 보유자에게 깊이 있는 카드 7개 잠금해제)
+ // 프리미엄 entitlement 검사 — 보안: 클라이언트 신뢰 X (localStorage 위변조 / URL ?premium=1 백도어 차단)
+ // 첫 렌더 시 false (잠금 티저), 같은 세션 내 서버 검증 통과 시에만 잠금해제
  let isPremium = false;
  try {
-   const purchases = JSON.parse(localStorage.getItem('cm_purchases') || '[]');
-   isPremium = Array.isArray(purchases) && (
-     purchases.indexOf('comprehensive_29900') >= 0 ||
-     purchases.indexOf('saju_premium_9900') >= 0 ||
-     purchases.indexOf('subscribe_monthly_29900') >= 0
-   );
+   if (window._cmEntitlementVerified === true) isPremium = true;
  } catch(e) {}
- // URL ?premium=1 으로 강제 활성 (success.html에서 redirect 시)
- try {
-   if (new URLSearchParams(window.location.search).get('premium') === '1') isPremium = true;
- } catch(e) {}
+ // 백그라운드 서버 entitlement 검증 — 통과 시 재렌더로 잠금해제
+ (function asyncEntitlementRecheck(){
+   if (isPremium) return; // 이미 검증됨
+   try {
+     var emailForCheck = '';
+     try {
+       var ui = JSON.parse(localStorage.getItem('cm_user_info') || '{}');
+       emailForCheck = (ui.email || localStorage.getItem('cm_premium_email') || '').trim();
+     } catch(e) {}
+     if (!emailForCheck || emailForCheck.indexOf('@') < 0) return; // 무료 모드 유지
+     fetch('/api/check-entitlement', {
+       method: 'POST', headers: {'Content-Type':'application/json'},
+       body: JSON.stringify({ email: emailForCheck })
+     }).then(function(resp){ return resp.json(); }).then(function(d){
+       if (!d || !d.ok || !Array.isArray(d.skus)) return;
+       var hasPremium = d.skus.indexOf('comprehensive_29900') >= 0 ||
+                        d.skus.indexOf('saju_premium_9900') >= 0 ||
+                        d.skus.indexOf('subscribe_monthly_29900') >= 0;
+       if (!hasPremium) return;
+       try {
+         localStorage.setItem('cm_purchases', JSON.stringify(d.skus));
+         localStorage.setItem('cm_premium_email', emailForCheck);
+       } catch(e) {}
+       window._cmEntitlementVerified = true;
+       // 결과 재렌더 — 잠금 카드를 풀린 카드로 교체
+       try {
+         if (window._lastSajuResult) renderSajuResult(window._lastSajuResult);
+       } catch(e) { console.warn('saju re-render failed', e); }
+     }).catch(function(){ /* 무료 모드 유지 */ });
+   } catch(e) {}
+ })();
 
  // Day stem personality from knowledge
  let personalityHTML = '';
@@ -6031,31 +6072,15 @@ async function redeemCoupon(ev){
  }));
 
  // ═══════════════════════════════════════════════
- // Entitlement Shortcut — 인플루언서 쿠폰/기존 결제 보유자는 결제 스킵
+ // Entitlement Shortcut — 서버 검증만 신뢰 (localStorage 캐시 X)
+ // 보안: localStorage cm_purchases는 클라이언트 위변조 가능 → 신뢰 금지
+ // 무조건 /api/check-entitlement 비동기 호출 → 응답 기반 판단
  // ═══════════════════════════════════════════════
- (function entitlementShortcut() {
-   try {
-     var skuInfo = window.cmdLookupSku && window.cmdLookupSku(currentOrder.serviceName);
-     var skuId = skuInfo && skuInfo.sku;
-     if (!skuId) return; // SKU 매핑 없으면 정상 결제 진행
-     // 1) localStorage 캐시 검사 (즉시)
-     var cached = JSON.parse(localStorage.getItem('cm_purchases') || '[]');
-     if (Array.isArray(cached) && cached.indexOf(skuId) >= 0) {
-       runEntitlementSuccess(orderData, skuId, 'localStorage');
-       return 'BREAK';
-     }
-   } catch(e) { console.warn('entitlement cache check failed', e); }
- })();
- // 비동기 서버 검증 (이메일 + check-entitlement) — non-blocking promise
  try {
    var skuInfoAsync = window.cmdLookupSku && window.cmdLookupSku(currentOrder.serviceName);
    var skuIdAsync = skuInfoAsync && skuInfoAsync.sku;
    if (skuIdAsync && email) {
-     // BLOCK: server-side check before payment trigger
-     var entitlementChecked = false;
-     var entitlementHasSKU = false;
-     // Use sync XHR style: fetch + await via Promise — but main flow is callback-style.
-     // Strategy: fire fetch and only proceed to payment if entitlement says no.
+     // 서버 검증만 신뢰 — localStorage는 캐시 용도만 (entitlement 판단 X)
      fetch('/api/check-entitlement', {
        method: 'POST', headers: {'Content-Type':'application/json'},
        body: JSON.stringify({ email: email })
@@ -6067,17 +6092,17 @@ async function redeemCoupon(ev){
          } catch(e) {}
          runEntitlementSuccess(orderData, skuIdAsync, 'server-check');
        } else {
-         // 권한 없음 → 정상 결제 트리거
+         // 서버에 권한 없음 → 정상 결제 트리거
          _proceedToPayment(orderData);
        }
      }).catch(function(){
-       // 검증 실패 시 결제 진행 (사용자 마찰 최소화)
+       // 검증 네트워크 실패 시 정상 결제 진행 (사용자 마찰 최소화)
        _proceedToPayment(orderData);
      });
      return; // 정상 결제 흐름 차단 — 비동기 결과로 분기
    }
  } catch(e) { console.warn('entitlement async check failed', e); }
- // 권한 없음 → 정상 결제 흐름
+ // email 없거나 SKU 매핑 없음 → 정상 결제 흐름
  _proceedToPayment(orderData);
  return;
  } // closes openOrder/saveAndPay outer function
