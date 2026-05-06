@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "purpose": "Japanese long-tail SEO blog factory — Korean Saju/K-pop/K-drama/Romance/Career targeting JP market",
+    "language": "ja",
+    "target_market": "japan",
+    "created": "2026-05-06",
+    "url_pattern": "/ja/blog/{slug}.html",
+    "categories": 5,
+    "total_keywords": 50
+  },
+  "korean_astrology_intro": [
+    {"kw": "韓国 占い 当たる 種類", "intent": "informational", "vol": 22000},
+    {"kw": "韓国 占い 人気 ランキング", "intent": "informational", "vol": 14800},
+    {"kw": "韓国 占い 無料 サイト", "intent": "transactional", "vol": 12100},
+    {"kw": "韓国 占い 日本 違い", "intent": "informational", "vol": 6600},
+    {"kw": "韓国 占い 体験談 評判", "intent": "informational", "vol": 4400},
+    {"kw": "韓国 占い 当たりすぎ 怖い", "intent": "informational", "vol": 3600},
+    {"kw": "韓国 占い 種類 解説", "intent": "informational", "vol": 2900},
+    {"kw": "韓国 占い 名古屋 大阪 東京", "intent": "transactional", "vol": 2400},
+    {"kw": "韓国 占い アプリ おすすめ", "intent": "transactional", "vol": 8100},
+    {"kw": "韓国 占い 旅行 ソウル", "intent": "transactional", "vol": 5400}
+  ],
+  "saju_technical": [
+    {"kw": "四柱推命 韓国式 サジュ 違い", "intent": "informational", "vol": 8100},
+    {"kw": "四柱推命 無料 自動計算", "intent": "transactional", "vol": 18100},
+    {"kw": "四柱推命 命式 見方 初心者", "intent": "informational", "vol": 9900},
+    {"kw": "四柱推命 大運 流年 読み方", "intent": "informational", "vol": 4400},
+    {"kw": "四柱推命 通変星 意味 一覧", "intent": "informational", "vol": 3600},
+    {"kw": "四柱推命 十二運 解説", "intent": "informational", "vol": 2900},
+    {"kw": "四柱推命 用神 求め方", "intent": "informational", "vol": 2400},
+    {"kw": "四柱推命 空亡 天中殺 違い", "intent": "informational", "vol": 1900},
+    {"kw": "四柱推命 性格 当たる 占い", "intent": "informational", "vol": 6600},
+    {"kw": "四柱推命 結婚 時期 出る", "intent": "transactional", "vol": 5400}
+  ],
+  "kpop_kdrama_hook": [
+    {"kw": "BTS メンバー 四柱推命 命式", "intent": "informational", "vol": 12100},
+    {"kw": "BLACKPINK 占い 相性 サジュ", "intent": "informational", "vol": 8100},
+    {"kw": "韓ドラ 主人公 占い 性格分析", "intent": "informational", "vol": 4400},
+    {"kw": "TWICE メンバー 性格 占い", "intent": "informational", "vol": 5400},
+    {"kw": "K-POP アイドル 占い 推し", "intent": "informational", "vol": 3600},
+    {"kw": "韓ドラ あるある 占い シーン", "intent": "informational", "vol": 2400},
+    {"kw": "推し と 自分 相性 占い 韓国", "intent": "transactional", "vol": 6600},
+    {"kw": "K-POP デビュー 日 占い 命式", "intent": "informational", "vol": 1900},
+    {"kw": "韓国 ドラマ 主人公 サジュ", "intent": "informational", "vol": 2900},
+    {"kw": "アイドル 生年月日 占い 比較", "intent": "informational", "vol": 3300}
+  ],
+  "marriage_compatibility": [
+    {"kw": "韓国 結婚 占い 相性 サジュ", "intent": "transactional", "vol": 9900},
+    {"kw": "宮合 韓国 結婚 占い 解説", "intent": "informational", "vol": 4400},
+    {"kw": "彼氏 相性 占い 韓国式 無料", "intent": "transactional", "vol": 7300},
+    {"kw": "韓国 結婚式 文化 マナー", "intent": "informational", "vol": 3600},
+    {"kw": "国際結婚 韓国人 占い 相性", "intent": "transactional", "vol": 2400},
+    {"kw": "彼の気持ち 韓国 占い 当たる", "intent": "transactional", "vol": 5400},
+    {"kw": "復縁 韓国 占い 効く サジュ", "intent": "transactional", "vol": 3300},
+    {"kw": "結婚運 韓国式 四柱推命 鑑定", "intent": "transactional", "vol": 2900},
+    {"kw": "片思い 韓国 占い 当たる 無料", "intent": "transactional", "vol": 4400},
+    {"kw": "夫婦 相性 韓国 占い 命式", "intent": "informational", "vol": 1900}
+  ],
+  "career_money_health": [
+    {"kw": "仕事運 韓国 占い 転職 時期", "intent": "transactional", "vol": 6600},
+    {"kw": "金運 韓国 占い 上げる 方法", "intent": "informational", "vol": 4400},
+    {"kw": "健康運 韓国式 占い 体質", "intent": "informational", "vol": 2400},
+    {"kw": "起業 韓国 占い 開業日 決め", "intent": "transactional", "vol": 1900},
+    {"kw": "天職 韓国 占い 適職 診断", "intent": "transactional", "vol": 3600},
+    {"kw": "退職 占い 韓国 タイミング", "intent": "transactional", "vol": 2900},
+    {"kw": "韓国 風水 オフィス 配置", "intent": "informational", "vol": 1600},
+    {"kw": "韓国 開運 グッズ 護符", "intent": "transactional", "vol": 2400},
+    {"kw": "今年 の 運勢 韓国 占い 無料", "intent": "transactional", "vol": 8100},
+    {"kw": "本命星 韓国 占い 月別", "intent": "informational", "vol": 1300}
+  ]
+}

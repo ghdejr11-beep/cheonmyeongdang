@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "purpose": "Traditional Chinese long-tail SEO blog factory — Korean Bazi/K-pop/K-drama/Marriage/Career targeting TW/HK/SG/MY",
+    "language": "zh-TW",
+    "target_market": "greater_china_traditional",
+    "created": "2026-05-06",
+    "url_pattern": "/zh/blog/{slug}.html",
+    "categories": 5,
+    "total_keywords": 50
+  },
+  "korean_bazi_intro": [
+    {"kw": "韓國 八字 算命 入門 教學", "intent": "informational", "vol": 18100},
+    {"kw": "韓國 算命 文化 介紹", "intent": "informational", "vol": 9900},
+    {"kw": "韓國 八字 免費 線上 算", "intent": "transactional", "vol": 14800},
+    {"kw": "韓國 算命 準 嗎 體驗", "intent": "informational", "vol": 6600},
+    {"kw": "韓國 算命 跟 台灣 差別", "intent": "informational", "vol": 4400},
+    {"kw": "韓國 算命 推薦 排行", "intent": "transactional", "vol": 5400},
+    {"kw": "首爾 算命 一條街 觀光", "intent": "transactional", "vol": 3600},
+    {"kw": "韓國 算命 APP 推薦 中文", "intent": "transactional", "vol": 8100},
+    {"kw": "韓國 神算 大師 介紹", "intent": "informational", "vol": 2900},
+    {"kw": "韓劇 算命 場景 真實 嗎", "intent": "informational", "vol": 4400}
+  ],
+  "saju_technical": [
+    {"kw": "四柱命理 八字 韓國式 解析", "intent": "informational", "vol": 8100},
+    {"kw": "韓國 四柱 推命 計算 教學", "intent": "informational", "vol": 6600},
+    {"kw": "四柱 大運 流年 解讀", "intent": "informational", "vol": 5400},
+    {"kw": "十神 通變星 意義 表", "intent": "informational", "vol": 3600},
+    {"kw": "用神 喜神 找法 韓國式", "intent": "informational", "vol": 2400},
+    {"kw": "八字 空亡 解釋 影響", "intent": "informational", "vol": 1900},
+    {"kw": "四柱 八字 性格 分析 準確", "intent": "informational", "vol": 7300},
+    {"kw": "韓國 八字 結婚 時間 預測", "intent": "transactional", "vol": 4400},
+    {"kw": "八字 五行 缺 補救 方法", "intent": "informational", "vol": 6600},
+    {"kw": "韓國 算命 名字 學 教學", "intent": "informational", "vol": 2900}
+  ],
+  "kpop_kdrama_hook": [
+    {"kw": "BTS 防彈少年團 八字 命盤", "intent": "informational", "vol": 9900},
+    {"kw": "BLACKPINK 成員 命盤 分析", "intent": "informational", "vol": 8100},
+    {"kw": "韓劇 男主角 八字 性格", "intent": "informational", "vol": 4400},
+    {"kw": "TWICE 成員 八字 介紹", "intent": "informational", "vol": 5400},
+    {"kw": "K-POP 偶像 八字 合盤", "intent": "informational", "vol": 6600},
+    {"kw": "孫藝珍 玄彬 八字 合婚", "intent": "informational", "vol": 3600},
+    {"kw": "韓劇 婚姻線 算命 真實", "intent": "informational", "vol": 2400},
+    {"kw": "推 跟 我 合盤 韓國 算命", "intent": "transactional", "vol": 4400},
+    {"kw": "宋仲基 宋慧喬 八字 解析", "intent": "informational", "vol": 1900},
+    {"kw": "K-POP 出道 日 命盤 影響", "intent": "informational", "vol": 2900}
+  ],
+  "marriage_compatibility": [
+    {"kw": "韓國 八字 合婚 宮合 解析", "intent": "informational", "vol": 9900},
+    {"kw": "韓國 算命 結婚 時間 看", "intent": "transactional", "vol": 7300},
+    {"kw": "男女 合盤 韓國 八字 免費", "intent": "transactional", "vol": 6600},
+    {"kw": "復合 韓國 算命 神準", "intent": "transactional", "vol": 4400},
+    {"kw": "桃花運 韓國 八字 看", "intent": "informational", "vol": 5400},
+    {"kw": "夫妻 八字 韓國 兼容", "intent": "informational", "vol": 2900},
+    {"kw": "跨國 婚姻 韓國 算命 合盤", "intent": "transactional", "vol": 1900},
+    {"kw": "曖昧 韓國 算命 是否 喜歡", "intent": "transactional", "vol": 3600},
+    {"kw": "離婚 韓國 算命 合適 時機", "intent": "transactional", "vol": 2400},
+    {"kw": "韓國 婚禮 文化 禁忌 介紹", "intent": "informational", "vol": 4400}
+  ],
+  "career_wealth_health": [
+    {"kw": "事業 韓國 八字 轉職 時機", "intent": "transactional", "vol": 6600},
+    {"kw": "財運 韓國 算命 提升 方法", "intent": "informational", "vol": 5400},
+    {"kw": "健康 韓國 八字 體質 解析", "intent": "informational", "vol": 2900},
+    {"kw": "創業 開業 韓國 擇日 八字", "intent": "transactional", "vol": 3600},
+    {"kw": "適合 行業 韓國 算命 八字", "intent": "transactional", "vol": 4400},
+    {"kw": "韓國 風水 辦公室 擺設", "intent": "informational", "vol": 2400},
+    {"kw": "韓國 護身符 護符 求得", "intent": "transactional", "vol": 1900},
+    {"kw": "今年 運勢 韓國 八字 免費", "intent": "transactional", "vol": 9900},
+    {"kw": "本命 神 韓國 算命 月份", "intent": "informational", "vol": 1300},
+    {"kw": "投資 理財 韓國 八字 看 運", "intent": "transactional", "vol": 2900}
+  ]
+}
