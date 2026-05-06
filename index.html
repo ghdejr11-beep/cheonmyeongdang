@@ -4110,6 +4110,182 @@ async function redeemCoupon(ev){
      '</p>';
  }
 
+ // ─── 시각화 차트 헬퍼 (Round 2 G — 포스텔러/Pattern 갭 메우기) ───
+ // 기존 사이트 색상 팔레트(--gold/--jade/--crimson/var(--text2)) 재사용 — 신규 색상 도입 X
+ // 모든 SVG는 viewBox 사용 → 모바일(320px) 반응형
+ var SIPSIN_COLOR = {
+   '비견': 'var(--gold2)', '겁재': 'var(--gold3)',
+   '식신': 'var(--jade2)', '상관': 'var(--jade)',
+   '정재': 'var(--jade)',   '편재': 'var(--jade2)',
+   '정관': 'var(--crimson)','편관': '#c4546a',
+   '정인': 'var(--gold)',   '편인': '#a88736'
+ };
+ var SIPSIN_ORDER = ['비견','겁재','식신','상관','정재','편재','정관','편관','정인','편인'];
+ var UNSEONG_SCORE = {
+   '장생':9,'목욕':6,'관대':10,'건록':11,'제왕':12,
+   '쇠':5,'병':4,'사':3,'묘':2,'절':1,'태':4,'양':7
+ };
+ function getUnseongColor(name) {
+   var s = UNSEONG_SCORE[name] || 0;
+   if (s >= 9) return 'var(--jade)';
+   if (s >= 5) return 'var(--gold2)';
+   return 'var(--text2)';
+ }
+
+ // 차트 1: 대운 Timeline (가로 막대)
+ function buildDaeunTimelineSVG(r) {
+   try {
+     var pillars = (r.대운 && r.대운.pillars) || [];
+     if (!pillars.length) return '';
+     var currentAge = -1;
+     try {
+       var match = (r.기본정보.입력.양력 || '').match(/(\d{4})\D+(\d{1,2})\D+(\d{1,2})/);
+       if (match) {
+         var by = parseInt(match[1],10), bm = parseInt(match[2],10)-1, bd = parseInt(match[3],10);
+         var today = new Date();
+         currentAge = today.getFullYear() - by - ((today.getMonth() < bm || (today.getMonth() === bm && today.getDate() < bd)) ? 1 : 0);
+       }
+     } catch(e) {}
+     var W = 600, H = 220, padL = 40, padR = 16, padT = 28, padB = 32;
+     var chartW = W - padL - padR;
+     var x = function(age) { return padL + chartW * age / 90; };
+     var rowH = (H - padT - padB) / Math.min(pillars.length, 8);
+     var grid = '';
+     for (var a = 0; a <= 90; a += 10) {
+       grid += '<line x1="' + x(a).toFixed(1) + '" y1="' + padT + '" x2="' + x(a).toFixed(1) + '" y2="' + (H-padB) + '" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>';
+       grid += '<text x="' + x(a).toFixed(1) + '" y="' + (H - padB + 14) + '" text-anchor="middle" font-size="9" fill="var(--text2)">' + a + '</text>';
+     }
+     var bars = '';
+     pillars.slice(0, 8).forEach(function(dp, i) {
+       var x1 = x(dp.startAge), x2 = x(dp.endAge + 1);
+       var bw = Math.max(2, x2 - x1);
+       var by = padT + i * rowH + 4;
+       var bh = Math.max(8, rowH - 8);
+       var color = SIPSIN_COLOR[dp.십신_천간] || 'var(--gold2)';
+       bars += '<rect x="' + x1.toFixed(1) + '" y="' + by.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + bh.toFixed(1) + '" fill="' + color + '" opacity="0.55" stroke="' + color + '" stroke-width="1"/>';
+       bars += '<text x="' + (x1 + bw/2).toFixed(1) + '" y="' + (by + bh/2 + 3).toFixed(1) + '" text-anchor="middle" font-size="10" fill="var(--text)" font-family="Noto Serif KR,serif" font-weight="700">' + dp.간지 + '</text>';
+       bars += '<text x="' + (padL - 6) + '" y="' + (by + bh/2 + 3).toFixed(1) + '" text-anchor="end" font-size="9" fill="var(--text2)">' + dp.startAge + '세</text>';
+     });
+     var nowLine = '';
+     if (currentAge >= 0 && currentAge <= 90) {
+       nowLine = '<line x1="' + x(currentAge).toFixed(1) + '" y1="' + (padT - 6) + '" x2="' + x(currentAge).toFixed(1) + '" y2="' + (H - padB) + '" stroke="var(--crimson)" stroke-width="1.8" stroke-dasharray="3,3"/>';
+       nowLine += '<text x="' + x(currentAge).toFixed(1) + '" y="' + (padT - 10) + '" text-anchor="middle" font-size="9" fill="var(--crimson)" font-weight="700">현재 ' + currentAge + '세</text>';
+     }
+     return '<h3 style="font-family:\'Noto Serif KR\',serif;text-align:center;color:var(--gold2);margin:32px 0 12px;font-size:1.05rem;">대운 타임라인 (0~90세)</h3>' +
+       '<div style="max-width:600px;margin:0 auto 24px;">' +
+       '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" aria-label="대운 타임라인 가로 막대 차트">' +
+       grid + bars + nowLine +
+       '</svg>' +
+       '<p style="text-align:center;font-size:0.72rem;color:var(--text2);margin-top:6px;">막대 색상 = 대운 천간 십신 (재성·관성·인성·식상·비겁)</p>' +
+       '</div>';
+   } catch(e) { return ''; }
+ }
+
+ // 차트 2: 십신 도넛 차트
+ function buildSipsinDoughnutSVG(r) {
+   try {
+     var sipsinList = r.십신 || [];
+     if (!sipsinList.length) return '';
+     var counts = {};
+     SIPSIN_ORDER.forEach(function(s){ counts[s] = 0; });
+     sipsinList.forEach(function(item) {
+       if (item.천간 && counts[item.천간.십신] !== undefined) counts[item.천간.십신]++;
+       if (item.지지 && counts[item.지지.십신] !== undefined) counts[item.지지.십신]++;
+     });
+     var total = 0;
+     SIPSIN_ORDER.forEach(function(s){ total += counts[s]; });
+     if (total === 0) return '';
+     var W = 280, H = 280, cx = W/2, cy = H/2, R = 90, r0 = 56;
+     var startAngle = -Math.PI / 2;
+     var segs = '';
+     var labels = '';
+     SIPSIN_ORDER.forEach(function(name) {
+       var c = counts[name];
+       if (c === 0) return;
+       var frac = c / total;
+       var endAngle = startAngle + frac * 2 * Math.PI;
+       var x1 = cx + R * Math.cos(startAngle);
+       var y1 = cy + R * Math.sin(startAngle);
+       var x2 = cx + R * Math.cos(endAngle);
+       var y2 = cy + R * Math.sin(endAngle);
+       var x3 = cx + r0 * Math.cos(endAngle);
+       var y3 = cy + r0 * Math.sin(endAngle);
+       var x4 = cx + r0 * Math.cos(startAngle);
+       var y4 = cy + r0 * Math.sin(startAngle);
+       var largeArc = frac > 0.5 ? 1 : 0;
+       var color = SIPSIN_COLOR[name] || 'var(--gold2)';
+       var path = 'M ' + x1.toFixed(1) + ' ' + y1.toFixed(1) +
+                  ' A ' + R + ' ' + R + ' 0 ' + largeArc + ' 1 ' + x2.toFixed(1) + ' ' + y2.toFixed(1) +
+                  ' L ' + x3.toFixed(1) + ' ' + y3.toFixed(1) +
+                  ' A ' + r0 + ' ' + r0 + ' 0 ' + largeArc + ' 0 ' + x4.toFixed(1) + ' ' + y4.toFixed(1) +
+                  ' Z';
+       segs += '<path d="' + path + '" fill="' + color + '" opacity="0.78" stroke="rgba(13,16,32,0.85)" stroke-width="1.5"/>';
+       var midA = (startAngle + endAngle) / 2;
+       var lx = cx + (R + 18) * Math.cos(midA);
+       var ly = cy + (R + 18) * Math.sin(midA);
+       labels += '<text x="' + lx.toFixed(1) + '" y="' + ly.toFixed(1) + '" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="' + color + '" font-weight="700">' + name + ' ' + c + '</text>';
+       startAngle = endAngle;
+     });
+     var dayStem = (r.기본정보 && r.기본정보.일간) ? r.기본정보.일간.글자 : '';
+     var dayElement = (r.기본정보 && r.기본정보.일간) ? r.기본정보.일간.오행 : '';
+     var dayHanja = (r.기본정보 && r.기본정보.일간) ? r.기본정보.일간.한자 : '';
+     var centerText =
+       '<text x="' + cx + '" y="' + (cy - 6) + '" text-anchor="middle" font-size="11" fill="var(--text2)" letter-spacing="0.05em">일간</text>' +
+       '<text x="' + cx + '" y="' + (cy + 12) + '" text-anchor="middle" font-size="20" fill="' + (getElColor(dayElement) || 'var(--gold2)') + '" font-weight="700" font-family="Noto Serif KR,serif">' + dayStem + dayElement + '</text>' +
+       '<text x="' + cx + '" y="' + (cy + 28) + '" text-anchor="middle" font-size="10" fill="var(--text2)">' + dayHanja + '</text>';
+     return '<h3 style="font-family:\'Noto Serif KR\',serif;text-align:center;color:var(--gold2);margin:32px 0 12px;font-size:1.05rem;">십신 분포 도넛</h3>' +
+       '<div style="max-width:340px;margin:0 auto 24px;">' +
+       '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" aria-label="십신 도넛 차트">' +
+       segs + labels + centerText +
+       '</svg>' +
+       '<p style="text-align:center;font-size:0.72rem;color:var(--text2);margin-top:6px;">사주 8글자의 십신 비율 (총 ' + total + ')</p>' +
+       '</div>';
+   } catch(e) { return ''; }
+ }
+
+ // 차트 3: 12운성 막대 차트
+ function buildUnseong12BarSVG(r) {
+   try {
+     var unseong12 = r.운성12 || [];
+     if (!unseong12.length) return '';
+     var pillarOrder = ['년주','월주','일주','시주'];
+     var data = pillarOrder.map(function(p) {
+       var found = unseong12.find(function(u){ return u.위치 === p; });
+       return { 위치: p, 운성: found ? found.운성 : '', score: found ? (UNSEONG_SCORE[found.운성] || 0) : 0 };
+     }).filter(function(d){ return d.운성; });
+     if (!data.length) return '';
+     var W = 360, H = 180, padL = 36, padR = 16, padT = 20, padB = 36;
+     var chartW = W - padL - padR;
+     var chartH = H - padT - padB;
+     var n = data.length;
+     var bw = Math.min(50, (chartW - 16 * (n-1)) / n);
+     var bars = '';
+     data.forEach(function(d, i) {
+       var bh = chartH * (d.score / 12);
+       var bx = padL + i * (chartW / n) + ((chartW/n) - bw)/2;
+       var by = padT + (chartH - bh);
+       var color = getUnseongColor(d.운성);
+       bars += '<rect x="' + bx.toFixed(1) + '" y="' + by.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + bh.toFixed(1) + '" fill="' + color + '" opacity="0.65" stroke="' + color + '" stroke-width="1.2" rx="2"/>';
+       bars += '<text x="' + (bx + bw/2).toFixed(1) + '" y="' + (by - 4).toFixed(1) + '" text-anchor="middle" font-size="11" fill="' + color + '" font-weight="700" font-family="Noto Serif KR,serif">' + d.운성 + '</text>';
+       bars += '<text x="' + (bx + bw/2).toFixed(1) + '" y="' + (H - padB + 14) + '" text-anchor="middle" font-size="10" fill="var(--text2)">' + d.위치 + '</text>';
+       bars += '<text x="' + (bx + bw/2).toFixed(1) + '" y="' + (H - padB + 26) + '" text-anchor="middle" font-size="8" fill="var(--text2)" opacity="0.7">강도 ' + d.score + '/12</text>';
+     });
+     var y9 = padT + chartH * (1 - 9/12);
+     var y4 = padT + chartH * (1 - 4/12);
+     var refs = '<line x1="' + padL + '" y1="' + y9.toFixed(1) + '" x2="' + (W-padR) + '" y2="' + y9.toFixed(1) + '" stroke="var(--jade)" stroke-width="0.8" stroke-dasharray="2,3" opacity="0.4"/>' +
+                '<text x="' + (W-padR-2) + '" y="' + (y9 - 2).toFixed(1) + '" text-anchor="end" font-size="8" fill="var(--jade)" opacity="0.6">왕성</text>' +
+                '<line x1="' + padL + '" y1="' + y4.toFixed(1) + '" x2="' + (W-padR) + '" y2="' + y4.toFixed(1) + '" stroke="var(--text2)" stroke-width="0.8" stroke-dasharray="2,3" opacity="0.3"/>' +
+                '<text x="' + (W-padR-2) + '" y="' + (y4 - 2).toFixed(1) + '" text-anchor="end" font-size="8" fill="var(--text2)" opacity="0.6">약</text>';
+     return '<h3 style="font-family:\'Noto Serif KR\',serif;text-align:center;color:var(--gold2);margin:32px 0 12px;font-size:1.05rem;">12운성 강약 (4기둥)</h3>' +
+       '<div style="max-width:400px;margin:0 auto 24px;">' +
+       '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" aria-label="12운성 막대 차트">' +
+       refs + bars +
+       '</svg>' +
+       '<p style="text-align:center;font-size:0.72rem;color:var(--text2);margin-top:6px;">제왕(12) → 절(1) · 초록=왕성 · 황금=중립 · 회색=정리</p>' +
+       '</div>';
+   } catch(e) { return ''; }
+ }
+
  function renderSajuResult(r) {
  // 재렌더용 저장 (entitlement 비동기 검증 통과 시 잠금해제 재렌더)
  try { window._lastSajuResult = r; } catch(e) {}
@@ -4303,6 +4479,12 @@ async function redeemCoupon(ev){
  }).join('')}
 </div>
 
+<!-- ⭐ Round 2 G: 십신 도넛 차트 (사주 8글자 직후) -->
+${buildSipsinDoughnutSVG(r)}
+
+<!-- ⭐ Round 2 G: 12운성 막대 차트 (4기둥 강약) -->
+${buildUnseong12BarSVG(r)}
+
 <!-- Ohaeng Distribution (Pentagon Radar Chart) -->
 <h3 style="font-family:'Noto Serif KR',serif;text-align:center;color:var(--gold2);margin:32px 0 20px;font-size:1.15rem;">오행 분포</h3>
 <div class="ohaeng-chart">
@@ -4413,6 +4595,9 @@ async function redeemCoupon(ev){
 
 <!-- Interactions -->
  ${interHTML}
+
+<!-- ⭐ Round 2 G: 대운 타임라인 차트 (대운 카드 위) -->
+${buildDaeunTimelineSVG(r)}
 
 <!-- Daeun -->
  ${daeunHTML}
