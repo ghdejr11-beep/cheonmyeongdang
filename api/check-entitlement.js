@@ -101,11 +101,12 @@ module.exports = async (req, res) => {
   return res.status(200).json({
     ok: true,
     skus: skusList,
-    count: records.length + influCoupons.length,
+    count: skusList.length,
+    raw_count: records.length + influCoupons.length,
     latest_paid_at: latest || null,
     has_influencer_coupon: influCoupons.length > 0,
     influencer_valid_until: influCoupons.length ? influCoupons[0].valid_until : null,
     // 토큰: 클라이언트가 localStorage에 저장 (위변조 방지보다는 entitlement 인식용)
-    token: skusList.length > 0 ? Buffer.from(`${email}|${latest || ''}|${skusList.join(',')}`).toString('base64') : null,
+    token: skusList.length > 0 ? Buffer.from(`${email.toLowerCase()}|${latest || ''}|${skusList.join(',')}`).toString('base64') : null,
   });
 };

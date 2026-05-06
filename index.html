@@ -3888,7 +3888,7 @@ async function redeemCoupon(ev){
      if (hasGwan >= 2) childAnalysis += '자녀 다산형 — 2명 이상 자녀와 인연 깊음. 자녀가 본인의 사회적 명예를 높여줌. ';
      else if (hasGwan === 1) childAnalysis += '자녀 1~2명 — 한 자녀에게 깊은 부정(父情). 자녀 교육에 적극 투자. ';
      else childAnalysis += '관성 약 — 자녀 인연 늦거나 한 자녀에게 집중. 자녀와의 소통보다 모범을 보이는 부정형. ';
-     childAnalysis += '<br><br>특히<strong>시주(時柱)</strong>가 자녀궁 — 시주 십신이 ' + ((r.십신.find(function(s){return s.위치==='시주';}) || {}).천간 || {}).십신 + ' 으로 자녀와의 관계 흐름을 봅니다.';
+     childAnalysis += '<br><br>특히<strong>시주(時柱)</strong>가 자녀궁 — 시주 십신이 ' + (((r.십신.find(function(s){return s.위치==='시주';}) || {}).천간 || {}).십신 || '없음') + ' 으로 자녀와의 관계 흐름을 봅니다.';
    } else {
      // 여자: 식상 = 자식, 임신·출산
      var hasSikSang = count(['식신','상관']);
@@ -3896,7 +3896,7 @@ async function redeemCoupon(ev){
      childAnalysis = '여자 사주에서 자식은<strong>식상(食傷, 식신·상관)</strong>으로 봅니다. 본인 사주의 식상 ' + hasSikSang + '개. ';
      if (hasSikShin >= 1) childAnalysis += '식신이 있어 자녀 임신·출산이 순조롭고, 자녀가 안정적이고 효성 깊은 성품. ';
      else if (count(['상관']) >= 1) childAnalysis += '상관이 강해 자녀가 똑똑하고 표현력 풍부, 다만 자녀 양육 중 본인의 사회생활 균형이 중요. ';
-     else childAnalysis += '식상 약 — 자녀 인연이 늦거나(30대 중반 이후), 자녀 1명에게 집중. 임신은 식상 강해지는 운(대운/세운)에 ';
+     else childAnalysis += '식상 약 — 자녀 인연이 늦거나(30대 중반 이후), 자녀 1명에게 집중. 임신은 식상 강해지는 운(대운/세운)에 맞추는 것이 유리합니다.';
      childAnalysis += '<br><br><strong>임신·출산 가장 좋은 시기</strong>: 본인 대운에서 식상이 들어오는 ' + (startAge + 10) + '~' + (startAge + 30) + '세 사이.';
    }
    html += '<div class="result-card"><h4>👶 ' + label + ' 자녀운 깊이 분석' + (isMale?' (양육)':' (임신·출산)') + '</h4><p style="line-height:1.85;">' + childAnalysis + '</p></div>';
