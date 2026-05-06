@@ -1805,6 +1805,7 @@
 <a href="#dream" data-i18n="nav_dream"><span class="nav-icon"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10 C2 10 2 6 5 6 C5 4 8 3 10 5 C12 3 15 4 15 6 C18 6 18 10 16 10 Z"/><path d="M6 13 L14 13 M7 15 L13 15"/></svg></span>꿈해몽</a>
 <a href="#paid" data-i18n="nav_paid"><span class="nav-icon"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3 L15 3 L18 8 L10 18 L2 8 Z M5 3 L10 18 M15 3 L10 18 M2 8 H18"/></svg></span>유료 서비스</a>
 <a href="#complaint"><span class="nav-icon"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5 C3 3 5 3 6 4 L8 6 C9 7 8 8 7 8 C7 10 10 13 12 13 C12 12 13 11 14 12 L16 14 C17 15 17 17 15 17 C9 17 3 11 3 5 Z"/></svg></span>불만접수</a>
+<a href="#coupon"><span class="nav-icon"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7 L3 13 L17 13 L17 7 Z M7 5 L7 15 M13 5 L13 15"/></svg></span>쿠폰입력</a>
 </nav>
 <div class="lang-switcher">
 <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
@@ -1841,7 +1842,7 @@
 
 <div class="hero-btns">
 <a href="#saju" class="btn-gold pulse-cta" data-i18n="hero_btn1">무료 사주 분석 시작</a>
-<a href="#paid" class="btn-outline" data-i18n="hero_btn2">프리미엄 서비스</a>
+<a href="#paid" class="btn-outline" data-i18n="hero_btn2">정밀 풀이 ₩9,900 →</a>
 </div>
 
 <!-- 무료 강조 배지 -->
@@ -2914,32 +2915,34 @@
 <section class="section" id="paid">
 <p class="section-sub reveal">&#10022; PREMIUM SERVICES &#10022;</p>
 <h2 class="section-title reveal">천명당 사주 심층 풀이</h2>
-<p class="section-sub reveal" style="margin-bottom:24px;">당신의 사주 8글자를 A4 5장 분량으로 정밀하게 풀어드립니다 (즉시 발송).</p>
+<p class="section-sub reveal" style="margin-bottom:24px;">사주 8글자를 <strong style="color:var(--gold2);">A4 5장 PDF</strong>로 정밀하게. 결제 즉시 이메일 발송 · 마음에 안 들면 24시간 내 100% 환불.</p>
 
 <!-- 보장 배지 -->
 <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;">
-<div style="background:rgba(74,158,142,0.1);border:1px solid rgba(74,158,142,0.4);padding:10px 18px;border-radius:24px;font-size:0.78rem;color:var(--jade);">24시간 환불 보장</div>
-<div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.4);padding:10px 18px;border-radius:24px;font-size:0.78rem;color:var(--gold2);">정밀 심층 분석</div>
-<div style="background:rgba(139,44,62,0.15);border:1px solid rgba(139,44,62,0.5);padding:10px 18px;border-radius:24px;font-size:0.78rem;color:#e07070;">즉시 발송</div>
+<div style="background:rgba(74,158,142,0.1);border:1px solid rgba(74,158,142,0.4);padding:10px 18px;border-radius:24px;font-size:0.78rem;color:var(--jade);">✓ 24시간 100% 환불 보장</div>
+<div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.4);padding:10px 18px;border-radius:24px;font-size:0.78rem;color:var(--gold2);">✓ A4 5장 PDF · 이메일 발송</div>
+<div style="background:rgba(139,44,62,0.15);border:1px solid rgba(139,44,62,0.5);padding:10px 18px;border-radius:24px;font-size:0.78rem;color:#e07070;">✓ 결제 즉시 발송 (수동 대기 X)</div>
 </div>
 <p style="text-align:center;font-size:0.7rem;color:var(--text2);margin-top:-28px;margin-bottom:32px;opacity:0.7;">※ 천명당의 모든 풀이는 사주명리 데이터 기반 자동 풀이 시스템으로 생성됩니다. 참고용이며, 중요한 결정은 전문가와 상담하시길 권합니다.</p>
 
 <div class="services-grid">
 <div class="service-card reveal" onclick="openOrder('사주 정밀 풀이', 9900)" style="border-color:var(--gold);background:linear-gradient(135deg,rgba(13,16,32,0.95) 0%,rgba(30,24,10,0.95) 100%);position:relative;overflow:visible;">
-<div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold2));color:#080a10;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:6px 16px;border-radius:20px;box-shadow:0 4px 16px rgba(201,168,76,0.5);">출시 추천</div>
+<div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold2));color:#080a10;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:6px 16px;border-radius:20px;box-shadow:0 4px 16px rgba(201,168,76,0.5);">베스트셀러</div>
 <div class="service-name" style="color:var(--gold3);">사주 정밀 풀이</div>
-<div class="service-desc">대운·세운·월운, 직업·재물·결혼·건강을<strong style="color:var(--gold2);">A4 5장 이상</strong>으로 심층 분석합니다. 당신만의 사주 8글자 운명 가이드.</div>
+<div class="service-desc">당신의 사주 8글자를<strong style="color:var(--gold2);">A4 5장 PDF</strong>로 정밀 분석. 대운·세운·직업·재물·결혼·건강 한 번에.</div>
 <div style="margin:14px 0;">
-<div class="service-price" style="color:var(--gold2);font-size:1.6rem;font-weight:700;">9,900원</div>
+<div style="font-size:0.78rem;color:var(--text2);text-decoration:line-through;">출시 후 ₩19,900 예정</div>
+<div class="service-price" style="color:var(--gold2);font-size:1.6rem;font-weight:700;">9,900원<span style="font-size:0.7rem;color:#e07070;font-weight:700;margin-left:6px;">50% OFF · 출시 기념</span></div>
 </div>
 <div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;font-size:0.72rem;color:var(--text2);text-align:left;line-height:1.7;">
- 일주/월주/시주 상세 해석<br>
- 10년 단위 대운 흐름<br>
- 직업·재물·연애·건강 종합 분석<br>
- 올해 운세 + 다음해 전망<br>
- 행운의 색·방향·숫자
+ ✓ 일주/월주/시주 상세 해석 (A4 5장)<br>
+ ✓ 10년 단위 대운 흐름 (8개 대운)<br>
+ ✓ 직업·재물·연애·건강 종합 분석<br>
+ ✓ 올해 운세 + 다음해 전망<br>
+ ✓ 행운의 색·방향·숫자<br>
+ ✓ 결제 즉시 PDF 발송 · 24h 환불 보장
 </div>
-<button class="btn-gold pulse-cta" style="width:100%;margin-top:16px;font-size:0.85rem;padding:14px;">지금 신청하기</button>
+<button class="btn-gold pulse-cta" style="width:100%;margin-top:16px;font-size:0.85rem;padding:14px;">9,900원으로 지금 받기 →</button>
 </div>
 
 <div class="service-card reveal" onclick="openOrder('궁합 상세 분석', 9900)">
@@ -2951,12 +2954,13 @@
 <div class="service-price" style="color:var(--gold2);font-size:1.4rem;">9,900원<span style="font-size:0.7rem;color:#e07070;font-weight:700;margin-left:6px;">출시 기념가</span></div>
 </div>
 <div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;font-size:0.72rem;color:var(--text2);text-align:left;line-height:1.7;">
- 오행 궁합 심층 분석<br>
- 연애/결혼 궁합 점수<br>
- 갈등 가능성 + 해결책<br>
- 행운의 데이트 코스
+ ✓ 오행 궁합 심층 분석<br>
+ ✓ 연애/결혼 궁합 점수<br>
+ ✓ 갈등 가능성 + 해결책<br>
+ ✓ 행운의 데이트 코스<br>
+ ✓ 결제 즉시 PDF 발송 · 24h 환불 보장
 </div>
-<button class="btn-outline" style="width:100%;margin-top:16px;font-size:0.85rem;padding:13px;">궁합 신청</button>
+<button class="btn-outline" style="width:100%;margin-top:16px;font-size:0.85rem;padding:13px;">9,900원으로 궁합 받기 →</button>
 </div>
 
 <div class="service-card reveal" id="sinnyeon-card" onclick="openOrder('신년운세 ' + new Date().getFullYear(), 15000)">
@@ -2967,12 +2971,13 @@
 <div class="service-price" style="color:var(--gold2);font-size:1.4rem;">15,000원<span style="font-size:0.7rem;color:#e07070;font-weight:700;margin-left:6px;">출시 기념가</span></div>
 </div>
 <div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;font-size:0.72rem;color:var(--text2);text-align:left;line-height:1.7;">
- 12개월 월별 운세<br>
- 재물·연애·건강 예측<br>
- 길일·흉일 캘린더<br>
- 새해 다짐 가이드
+ ✓ 12개월 월별 운세<br>
+ ✓ 재물·연애·건강 예측<br>
+ ✓ 길일·흉일 캘린더<br>
+ ✓ 새해 다짐 가이드<br>
+ ✓ 결제 즉시 PDF 발송 · 24h 환불 보장
 </div>
-<button class="btn-outline" style="width:100%;margin-top:16px;font-size:0.85rem;padding:13px;">신년운세 신청</button>
+<button class="btn-outline" style="width:100%;margin-top:16px;font-size:0.85rem;padding:13px;">15,000원으로 신년운세 받기 →</button>
 </div>
 
 <!-- 종합 풀이 (정책 SKU, 사주+궁합+신년운세 통합) -->
@@ -2985,12 +2990,13 @@
 <div class="service-price" style="color:var(--jade);font-size:1.6rem;font-weight:700;">29,900원<span style="font-size:0.7rem;color:#e07070;font-weight:700;margin-left:6px;">14% 절약</span></div>
 </div>
 <div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;font-size:0.72rem;color:var(--text2);text-align:left;line-height:1.7;">
- 사주 정밀 풀이 (9,900원 가치)<br>
- 궁합 분석 (9,900원 가치)<br>
- 신년 12개월 운세 (15,000원 가치)<br>
- 통합 심층 리포트
+ ✓ 사주 정밀 풀이 (₩9,900 가치)<br>
+ ✓ 궁합 분석 (₩9,900 가치)<br>
+ ✓ 신년 12개월 운세 (₩15,000 가치)<br>
+ ✓ 통합 심층 리포트 (A4 12장+ PDF)<br>
+ ✓ 결제 즉시 발송 · 24h 환불 보장
 </div>
-<button class="btn-outline" style="width:100%;margin-top:16px;font-size:0.85rem;padding:13px;border-color:var(--jade);color:var(--jade);">종합 풀이 신청</button>
+<button class="btn-outline" style="width:100%;margin-top:16px;font-size:0.85rem;padding:13px;border-color:var(--jade);color:var(--jade);">29,900원으로 종합 풀이 받기 →</button>
 </div>
 
 <!-- 광고 없음 영구 (no_ads_9900, 1회 결제로 평생 광고 제거) -->
@@ -3360,6 +3366,109 @@
 </div>
 </div>
 </section>
+
+<div class="divider"><div class="divider-icon">&#9775;</div></div>
+
+<!-- ==================== COUPON REDEEM ==================== -->
+<section class="section coupon-section" id="coupon">
+<p class="section-sub reveal">&#10022; INFLUENCER COUPON REDEEM &#10022;</p>
+<h2 class="section-title reveal">쿠폰 코드 입력</h2>
+<p class="complaint-subtitle reveal">받으신 1회용 쿠폰 코드를 입력하시면 30일 무료 구독이 즉시 활성화됩니다.</p>
+
+<div class="complaint-form-wrap reveal" id="coupon-form-wrap" style="max-width:560px;margin:0 auto;">
+<form id="coupon-form" onsubmit="redeemCoupon(event)">
+<div class="form-group">
+<label>이메일 <span style="color:var(--text2);font-size:0.75rem;">(필수, 구독 활성화에 사용)</span></label>
+<input type="email" id="coupon-email" placeholder="example@email.com" required style="width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text);padding:12px 16px;font-size:0.9rem;font-family:'Noto Sans KR',sans-serif;outline:none;">
+</div>
+<div class="form-group">
+<label>쿠폰 코드 <span style="color:var(--text2);font-size:0.75rem;">(예: KSAJU-XXXXXX)</span></label>
+<input type="text" id="coupon-code" placeholder="KSAJU-XXXXXX" required maxlength="20" autocomplete="off" autocapitalize="characters" style="width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text);padding:12px 16px;font-size:0.95rem;font-family:'Courier New',monospace;letter-spacing:1.5px;outline:none;text-transform:uppercase;">
+</div>
+<button type="submit" class="btn-complaint" id="coupon-submit-btn">쿠폰 적용하기</button>
+</form>
+
+<div id="coupon-result" style="display:none;margin-top:24px;padding:18px;border-radius:10px;text-align:center;"></div>
+</div>
+</section>
+
+<script>
+async function redeemCoupon(ev){
+  ev.preventDefault();
+  const email = document.getElementById('coupon-email').value.trim().toLowerCase();
+  const code = document.getElementById('coupon-code').value.trim().toUpperCase();
+  const btn = document.getElementById('coupon-submit-btn');
+  const resultBox = document.getElementById('coupon-result');
+  if(!email || !code) return;
+
+  btn.disabled = true;
+  btn.textContent = '검증 중...';
+  resultBox.style.display = 'none';
+
+  try {
+    // 1단계: validate (preview)
+    const preview = await fetch('/api/coupon-validate', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({code, email, mode:'validate'})
+    }).then(r=>r.json());
+
+    if(!preview.ok){
+      resultBox.style.display='block';
+      resultBox.style.background='rgba(199,90,110,0.12)';
+      resultBox.style.border='1px solid rgba(199,90,110,0.4)';
+      resultBox.style.color='#e0838f';
+      const msg = preview.error === 'already_used' ? '이미 사용된 쿠폰 코드입니다.'
+        : preview.error === 'invalid_code' ? '유효하지 않은 쿠폰 코드입니다. 코드를 다시 확인해 주세요.'
+        : preview.message || '쿠폰 검증에 실패했습니다. 다시 시도해 주세요.';
+      resultBox.innerHTML = '✗ ' + msg;
+      btn.disabled = false;
+      btn.textContent = '쿠폰 적용하기';
+      return;
+    }
+
+    // 2단계: 사용자 확인
+    if(!confirm(`쿠폰 "${code}"를 ${email}로 활성화합니다.\n한 번 사용한 코드는 다시 사용할 수 없습니다.\n계속 진행할까요?`)){
+      btn.disabled = false;
+      btn.textContent = '쿠폰 적용하기';
+      return;
+    }
+
+    // 3단계: redeem (실제 사용 처리)
+    btn.textContent = '활성화 중...';
+    const redeemed = await fetch('/api/coupon-validate', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({code, email, mode:'redeem'})
+    }).then(r=>r.json());
+
+    if(redeemed.ok){
+      resultBox.style.display='block';
+      resultBox.style.background='rgba(120,140,93,0.14)';
+      resultBox.style.border='1px solid rgba(120,140,93,0.5)';
+      resultBox.style.color='#a8c882';
+      const validUntil = redeemed.valid_until ? new Date(redeemed.valid_until).toLocaleDateString('ko-KR') : '';
+      resultBox.innerHTML = '✓ ' + (redeemed.message || '쿠폰이 적용되었습니다.') +
+        (validUntil ? '<br><small style="color:var(--text2);">유효기간: ~' + validUntil + '</small>' : '') +
+        '<br><br><a href="/pay.html?sku=comprehensive_29900&coupon='+encodeURIComponent(code)+'&prepaid=1" style="display:inline-block;margin-top:8px;color:var(--gold2);text-decoration:underline;">→ 종합 사주 풀이 받기</a>';
+      btn.style.display = 'none';
+    } else {
+      resultBox.style.display='block';
+      resultBox.style.background='rgba(199,90,110,0.12)';
+      resultBox.style.border='1px solid rgba(199,90,110,0.4)';
+      resultBox.style.color='#e0838f';
+      resultBox.innerHTML = '✗ ' + (redeemed.message || '활성화에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+      btn.disabled = false;
+      btn.textContent = '쿠폰 적용하기';
+    }
+  } catch(err){
+    resultBox.style.display='block';
+    resultBox.style.background='rgba(199,90,110,0.12)';
+    resultBox.style.color='#e0838f';
+    resultBox.innerHTML = '✗ 네트워크 오류가 발생했습니다. 다시 시도해 주세요.';
+    btn.disabled = false;
+    btn.textContent = '쿠폰 적용하기';
+  }
+}
+</script>
 
 <!-- 글로벌 영문 디지털 상품 cross-sell (20 PDF) -->
 <section style="background:rgba(74,158,142,0.06);border:1px solid rgba(74,158,142,0.2);border-radius:16px;padding:28px;margin:32px auto;max-width:1080px;">
@@ -6340,7 +6449,7 @@
  hero_badge: '천 년의 지혜 , 당신의 운명을 읽다',
  hero_title: '하늘이 정한 길을<br>천명당이 밝힙니다',
  hero_desc: '사주팔��(四柱八字) , 관상 , 풍수지리 , 손금<br>동양 철학의 정수를 한곳에서 체험하세요.<br>천명당에서 당신만의 운명을 깊이 있게 풀어드립니다.',
- hero_btn1: '무료 사주 분석', hero_btn2: '유료 서비스 안내',
+ hero_btn1: '무료 사주 분석 시작', hero_btn2: '정밀 풀이 ₩9,900 →',
  saju_title: '무료 사주팔자 분석',
  saju_desc: '생년월일과 태어난 시간을 입력하면 사주팔자를 즉시 분석해 드립니다',
  saju_btn: '사주 분석하기',
@@ -6355,7 +6464,7 @@
  hero_badge: 'Ancient Wisdom , Reading Your Destiny',
  hero_title: 'Illuminate Your Path<br>with Cheonmyeongdang',
  hero_desc: 'Four Pillars of Destiny , Face Reading , Feng Shui , Palmistry<br>Experience the essence of Eastern philosophy.<br>Discover your unique destiny with us.',
- hero_btn1: 'Free Saju Analysis', hero_btn2: 'Premium Services',
+ hero_btn1: 'Free Saju Analysis', hero_btn2: 'Detailed Reading ₩9,900 →',
  saju_title: 'Free Four Pillars Analysis',
  saju_desc: 'Enter your birth date and time for instant saju analysis',
  saju_btn: 'Analyze Saju',

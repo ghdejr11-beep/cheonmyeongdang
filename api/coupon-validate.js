@@ -59,6 +59,39 @@ const COUPONS = {
   },
 };
 
+// ─── 인플루언서 쿠폰 (KSAJU-NNNNN-XXXXXX) — HMAC 검증, 1코드 1사용, 30일 무료 ───
+// 형식: KSAJU-{seed:5digits}-{hmac6}
+// hmac6 = HMAC-SHA256(INFLU_COUPON_SECRET, seed_str).b32encode()[:6] (위·아래 영문 + 23456789)
+// seed range: 00001..20000 (2만 unique codes)
+// 검증: 서버에서 동일 HMAC 계산 후 매칭 → DB 없이 무한 확장
+// 단일 사용 강제: Gist coupon_usage.json (코드 단위 dedup)
+const INFLU_ALPHA = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+const INFLU_SEED_MIN = 1;
+const INFLU_SEED_MAX = 20000;
+
+function isValidInfluCode(code) {
+  const m = String(code || '').match(/^KSAJU-(\d{5})-([A-Z0-9]{6})$/);
+  if (!m) return null;
+  const seed = parseInt(m[1], 10);
+  if (seed < INFLU_SEED_MIN || seed > INFLU_SEED_MAX) return null;
+  const secret = (process.env.INFLU_COUPON_SECRET || '').trim();
+  if (!secret) return null;
+  const seedStr = String(seed).padStart(5, '0');
+  const h = crypto.createHmac('sha256', secret).update(seedStr).digest();
+  // base32 (RFC 4648) — node 18+ supports buf.toString('base64') but not base32 directly. Implement.
+  let b32 = '';
+  let bits = 0, value = 0;
+  for (let i = 0; i < h.length && b32.length < 6; i++) {
+    value = (value << 8) | h[i];
+    bits += 8;
+    while (bits >= 5 && b32.length < 6) {
+      b32 += INFLU_ALPHA[(value >>> (bits - 5)) & 31];
+      bits -= 5;
+    }
+  }
+  return b32 === m[2] ? { seed, code } : null;
+}
+
 // ─── 동적 윈백 쿠폰 검증 (WB30-XXXX / WB90-XXXX) ───
 // cron-followup.js의 genWinbackCoupon과 동일 로직: 4자리 영숫자 = HMAC(prefix:orderId, secret).slice(0,4).upper
 // orderId는 쿠폰 코드만으로는 알 수 없으므로, 본 검증은 "이 코드가 우리가 발급한 형식인지"만 확인.
@@ -142,6 +175,37 @@ async function getCouponUsageCount(code, email) {
   return data.usages.filter((u) => u.code === code && (u.email || '').toLowerCase() === (email || '').toLowerCase()).length;
 }
 
+// ─── INFLU: 코드 단독 사용 검증 (이메일 무관, 코드 1회 = 글로벌 dead) ───
+async function getCouponUsageByCodeOnly(code) {
+  const ghToken = (process.env.GITHUB_TOKEN || '').trim();
+  const gistId = ((process.env.GIST_COUPON_USAGE_ID || process.env.GIST_ID) || '').trim();
+  if (!ghToken || !gistId) return null;
+  const data = await readGist(gistId, ghToken, 'coupon_usage.json');
+  if (!data || !Array.isArray(data.usages)) return null;
+  return data.usages.find((u) => u.code === code) || null;
+}
+
+async function recordCouponUsage(code, email, type, validUntil) {
+  const ghToken = (process.env.GITHUB_TOKEN || '').trim();
+  const gistId = ((process.env.GIST_COUPON_USAGE_ID || process.env.GIST_ID) || '').trim();
+  if (!ghToken || !gistId) return { ok: false, error: 'no_token_or_gist' };
+  const existing = (await readGist(gistId, ghToken, 'coupon_usage.json')) || { usages: [] };
+  if (!Array.isArray(existing.usages)) existing.usages = [];
+  existing.usages.push({
+    code, email: (email || '').toLowerCase(), type, valid_until: validUntil || null,
+    redeemed_at: new Date().toISOString(),
+  });
+  // PATCH /gists/{id} with updated file content
+  const patch = await jsonReq({
+    hostname: 'api.github.com', port: 443,
+    path: `/gists/${gistId}`, method: 'PATCH',
+    headers: { Authorization: `Bearer ${ghToken}`, 'User-Agent': 'cheonmyeongdang-coupon', 'Accept': 'application/vnd.github+json' },
+  }, {
+    files: { 'coupon_usage.json': { content: JSON.stringify(existing, null, 2) } },
+  });
+  return { ok: patch.ok, status: patch.status, body_excerpt: patch.body ? JSON.stringify(patch.body).slice(0, 200) : (patch.raw || '').slice(0, 200) };
+}
+
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -159,8 +223,55 @@ module.exports = async (req, res) => {
   const email = String(body.email || '').trim().toLowerCase();
   const sku = String(body.sku || '').trim();
   const amount = parseInt(body.amount || '0', 10) || 0;
+  const mode = String(body.mode || 'validate').trim().toLowerCase(); // 'validate' | 'redeem'
 
   if (!code) return res.status(400).json({ ok: false, error: 'no_code' });
+
+  // ─── 인플루언서 쿠폰 (KSAJU-NNNNN-XXXXXX) — HMAC 검증, 1코드 1사용, 30일 무료 ───
+  const influ = isValidInfluCode(code);
+  if (influ) {
+    try {
+      let used = null;
+      try { used = await getCouponUsageByCodeOnly(code); } catch (e) { used = null; }
+      if (used) {
+        return res.status(409).json({
+          ok: false, error: 'already_used',
+          message: '이미 사용된 쿠폰입니다.',
+          redeemed_at: used.redeemed_at,
+        });
+      }
+      if (mode === 'redeem') {
+        if (!email) return res.status(400).json({ ok: false, error: 'email_required_for_redeem' });
+        const validUntil = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+        let recordResult = { ok: false };
+        try { recordResult = await recordCouponUsage(code, email, 'influencer_30d', validUntil); } catch (e) { recordResult = { ok: false, error: String(e && e.message || e) }; }
+        if (!recordResult.ok) {
+          return res.status(500).json({
+            ok: false, error: 'recording_failed',
+            message: '저장 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.',
+            debug: { status: recordResult.status, body: recordResult.body_excerpt, err: recordResult.error },
+          });
+        }
+        return res.status(200).json({
+          ok: true, code, mode: 'redeemed',
+          coupon_type: 'influencer_30d',
+          description: '인플루언서 30일 무료 구독권',
+          granted_email: email,
+          valid_until: validUntil,
+          message: '✅ 쿠폰이 적용되었습니다. 30일 무료 구독이 활성화됐습니다.',
+        });
+      }
+      // validate 모드 (preview): 사용 가능 여부만 반환
+      return res.status(200).json({
+        ok: true, code, mode: 'preview',
+        coupon_type: 'influencer_30d',
+        description: '인플루언서 30일 무료 구독권 (사용 시 즉시 활성화)',
+        restriction: { single_use_per_code: true, free_subscription_days: 30 },
+      });
+    } catch (err) {
+      return res.status(500).json({ ok: false, error: 'influ_branch_error', message: String(err && err.message || err) });
+    }
+  }
 
   // ─── 동적 윈백 쿠폰 (WB30-XXXX / WB90-XXXX) 우선 처리 ───
   const wb = isValidWinbackCode(code);
