@@ -456,3 +456,131 @@
 2026-05-03 08:35:09,357 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': '9vklRB_PUIU', 'url': 'https://www.youtube.com/watch?v=9vklRB_PUIU', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
 2026-05-03 08:36:39,733 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'gKPN4Auj8WY', 'url': 'https://www.youtube.com/watch?v=gKPN4Auj8WY', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
 2026-05-03 08:38:10,011 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'QL1m-H90QXc', 'url': 'https://www.youtube.com/watch?v=QL1m-H90QXc', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-04 16:00:02,422 [INFO] === Wealth Blueprint | quote=Naval Ravikant theme=mindset dry_run=False ===
+2026-05-04 16:00:06,142 [INFO]   script: 990 chars
+2026-05-04 16:00:12,279 [INFO]   voice: edge-tts → mindset_2026-05-04.mp3
+2026-05-04 16:00:12,280 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-05-04 16:00:12,314 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-05-04 16:00:12,315 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-05-04 16:00:12,315 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-05-04 16:00:12,316 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-05-04 16:00:14,523 [INFO]   clip 1/5 546KB
+2026-05-04 16:00:16,540 [INFO]   clip 2/5 577KB
+2026-05-04 16:00:18,805 [INFO]   clip 3/5 556KB
+2026-05-04 16:00:21,777 [INFO]   clip 4/5 495KB
+2026-05-04 16:00:24,433 [INFO]   clip 5/5 595KB
+2026-05-04 16:00:24,434 [INFO]   render → mindset_2026-05-04.mp4
+2026-05-04 16:00:25,839 [INFO]   size: 3.36 MB
+2026-05-04 16:00:53,894 [INFO] upload wealth_blueprint attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': '6tnBxOGaqpI', 'url': 'https://www.youtube.com/watch?v=6tnBxOGaqpI', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-04 16:00:53,895 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': '6tnBxOGaqpI', 'url': 'https://www.youtube.com/watch?v=6tnBxOGaqpI', ')
+2026-05-04 16:00:53,896 [INFO] === Wealth Blueprint done ===
+2026-05-05 04:00:02,546 [INFO] === Wealth Blueprint | quote=James Clear theme=habits dry_run=False ===
+2026-05-05 04:00:06,327 [INFO]   script: 1034 chars
+2026-05-05 04:00:11,787 [INFO]   voice: edge-tts → habits_2026-05-05.mp3
+2026-05-05 04:00:11,787 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-05-05 04:00:13,358 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-05-05 04:01:43,335 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-05-05 04:03:13,309 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-05-05 04:04:43,394 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-05-05 04:06:16,359 [INFO]   clip 1/5 616KB
+2026-05-05 04:06:18,250 [INFO]   clip 2/5 552KB
+2026-05-05 04:06:20,135 [INFO]   clip 3/5 541KB
+2026-05-05 04:06:21,993 [INFO]   clip 4/5 531KB
+2026-05-05 04:06:23,959 [INFO]   clip 5/5 622KB
+2026-05-05 04:06:23,959 [INFO]   render → habits_2026-05-05.mp4
+2026-05-05 04:06:25,154 [INFO]   size: 3.43 MB
+2026-05-05 04:07:33,769 [INFO] upload wealth_blueprint attempt 1/3 ok=False resp=error: conn: ('Connection aborted.', TimeoutError('The write operation timed out'))
+2026-05-05 04:07:33,770 [INFO]   retryable error, waiting 10s before retry
+2026-05-05 04:08:17,778 [INFO] upload wealth_blueprint attempt 2/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'piuJ5tQpkZg', 'url': 'https://www.youtube.com/watch?v=piuJ5tQpkZg', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-05 04:08:17,778 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'piuJ5tQpkZg', 'url': 'https://www.youtube.com/watch?v=piuJ5tQpkZg', ')
+2026-05-05 04:08:17,779 [INFO] === Wealth Blueprint done ===
+2026-05-05 06:00:03,005 [INFO] === Inner Archetypes | Jung 12 Archetypes · The Jester (광대) | dry_run=False ===
+2026-05-05 06:00:21,318 [INFO]   script: 6861 chars (~1074 words)
+2026-05-05 06:02:10,863 [INFO]   voice: edge-tts → jung_jester.mp3
+2026-05-05 06:02:10,863 [INFO]   image 1/6: The Jester (광대) archetype mood, abstract symbolic figur...
+2026-05-05 08:30:35,806 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'aL83G9AyygQ', 'url': 'https://www.youtube.com/watch?v=aL83G9AyygQ', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-05 08:32:05,656 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'FiYc0PEwYSg', 'url': 'https://www.youtube.com/watch?v=FiYc0PEwYSg', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-05 08:33:37,566 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'VpDUdZqn-fY', 'url': 'https://www.youtube.com/watch?v=VpDUdZqn-fY', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-05 08:35:06,318 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': '2i1CJ7fUHfU', 'url': 'https://www.youtube.com/watch?v=2i1CJ7fUHfU', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-05 08:36:35,457 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'UHtSbhZSxM8', 'url': 'https://www.youtube.com/watch?v=UHtSbhZSxM8', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-05 08:38:07,412 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'jl66_k0lPa4', 'url': 'https://www.youtube.com/watch?v=jl66_k0lPa4', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-05 16:00:02,186 [INFO] === Wealth Blueprint | quote=James Clear theme=habits dry_run=False ===
+2026-05-05 16:00:06,001 [INFO]   script: 1033 chars
+2026-05-05 16:00:14,286 [INFO]   voice: edge-tts → habits_2026-05-05.mp3
+2026-05-05 16:00:14,287 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-05-05 16:00:14,287 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-05-05 16:00:14,288 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-05-05 16:00:14,288 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-05-05 16:00:14,288 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-05-05 16:00:17,042 [INFO]   clip 1/5 616KB
+2026-05-05 16:00:19,078 [INFO]   clip 2/5 552KB
+2026-05-05 16:00:21,001 [INFO]   clip 3/5 541KB
+2026-05-05 16:00:22,947 [INFO]   clip 4/5 531KB
+2026-05-05 16:00:25,167 [INFO]   clip 5/5 622KB
+2026-05-05 16:00:25,167 [INFO]   render → habits_2026-05-05.mp4
+2026-05-05 16:00:26,325 [INFO]   size: 3.43 MB
+2026-05-05 16:00:35,809 [INFO] upload wealth_blueprint attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'jSmaObnvwgU', 'url': 'https://www.youtube.com/watch?v=jSmaObnvwgU', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-05 16:00:35,809 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'jSmaObnvwgU', 'url': 'https://www.youtube.com/watch?v=jSmaObnvwgU', ')
+2026-05-05 16:00:35,809 [INFO] === Wealth Blueprint done ===
+2026-05-05 18:00:01,873 [INFO] === Inner Archetypes | Jung 12 Archetypes · The Jester (광대) | dry_run=False ===
+2026-05-05 18:00:20,750 [INFO]   script: 6959 chars (~1101 words)
+2026-05-05 18:02:24,114 [INFO]   voice: edge-tts → jung_jester.mp3
+2026-05-05 18:02:24,115 [INFO]   image 1/6: The Jester (광대) archetype mood, abstract symbolic figur...
+2026-05-05 18:02:25,804 [INFO]   image 2/6: Inner landscape representing The Jester (광대), surreal s...
+2026-05-05 18:03:55,861 [INFO]   image 3/6: Tarot-card-style emblem for The Jester (광대), mystical, ...
+2026-05-05 18:05:25,865 [INFO]   image 4/6: Shadow side of The Jester (광대) archetype, twilight mood...
+2026-05-05 18:06:55,722 [INFO]   image 5/6: Light side of The Jester (광대) archetype, dawn mood, eth...
+2026-05-05 18:08:25,635 [INFO]   image 6/6: Integration journey of The Jester (광대), bridge from sha...
+2026-05-05 18:10:02,908 [INFO]   clip 1/6 (60s)
+2026-05-05 18:10:09,727 [INFO]   clip 2/6 (60s)
+2026-05-05 18:10:16,325 [INFO]   clip 3/6 (60s)
+2026-05-05 18:10:23,059 [INFO]   clip 4/6 (60s)
+2026-05-05 18:10:29,848 [INFO]   clip 5/6 (60s)
+2026-05-05 18:10:36,436 [INFO]   clip 6/6 (60s)
+2026-05-05 18:10:36,436 [INFO]   render → jung_jester.mp4
+2026-05-05 18:10:45,357 [INFO]   size: 15.14 MB
+2026-05-05 18:10:56,734 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'rYuzT5m5Jow', 'url': 'https://www.youtube.com/watch?v=rYuzT5m5Jow', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-05 18:10:56,734 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'rYuzT5m5Jow', 'url': 'https://www.youtube.com/watch?v=rYuzT5m5Jow', ')
+2026-05-05 18:10:56,735 [INFO] === Inner Archetypes done ===
+2026-05-06 04:00:02,534 [INFO] === Wealth Blueprint | quote=Warren Buffett theme=mindset dry_run=False ===
+2026-05-06 04:00:05,534 [INFO]   script: 825 chars
+2026-05-06 04:00:09,942 [INFO]   voice: edge-tts → mindset_2026-05-06.mp3
+2026-05-06 04:00:09,943 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-05-06 04:00:12,380 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-05-06 04:01:42,334 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-05-06 04:03:11,786 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-05-06 04:04:41,848 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-05-06 04:06:13,449 [INFO]   clip 1/5 624KB
+2026-05-06 04:06:15,092 [INFO]   clip 2/5 562KB
+2026-05-06 04:06:16,738 [INFO]   clip 3/5 564KB
+2026-05-06 04:06:18,362 [INFO]   clip 4/5 494KB
+2026-05-06 04:06:19,995 [INFO]   clip 5/5 584KB
+2026-05-06 04:06:19,996 [INFO]   render → mindset_2026-05-06.mp4
+2026-05-06 04:06:21,193 [INFO]   size: 3.25 MB
+2026-05-06 04:06:31,070 [INFO] upload wealth_blueprint attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': '0JZxCH9WbFQ', 'url': 'https://www.youtube.com/watch?v=0JZxCH9WbFQ', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-06 04:06:31,071 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': '0JZxCH9WbFQ', 'url': 'https://www.youtube.com/watch?v=0JZxCH9WbFQ', ')
+2026-05-06 04:06:31,071 [INFO] === Wealth Blueprint done ===
+2026-05-06 08:30:39,773 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'PBX5QHM5zgk', 'url': 'https://www.youtube.com/watch?v=PBX5QHM5zgk', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-06 08:32:09,484 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'SFkbM3_A42g', 'url': 'https://www.youtube.com/watch?v=SFkbM3_A42g', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-06 08:33:40,670 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'WLrPqg6tIFM', 'url': 'https://www.youtube.com/watch?v=WLrPqg6tIFM', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-06 08:35:11,134 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'P9CBEj66lbI', 'url': 'https://www.youtube.com/watch?v=P9CBEj66lbI', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-06 08:36:40,033 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': '3DFoQynCZs8', 'url': 'https://www.youtube.com/watch?v=3DFoQynCZs8', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-06 08:38:08,948 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'W_jO0F6AvQY', 'url': 'https://www.youtube.com/watch?v=W_jO0F6AvQY', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-06 16:00:02,425 [INFO] === Wealth Blueprint | quote=Warren Buffett theme=mindset dry_run=False ===
+2026-05-06 16:00:06,357 [INFO]   script: 930 chars
+2026-05-06 16:00:10,806 [INFO]   voice: edge-tts → mindset_2026-05-06.mp3
+2026-05-06 16:00:10,806 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-05-06 16:00:10,807 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-05-06 16:00:10,808 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-05-06 16:00:10,808 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-05-06 16:00:10,808 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-05-06 16:00:13,738 [INFO]   clip 1/5 624KB
+2026-05-06 16:00:15,870 [INFO]   clip 2/5 562KB
+2026-05-06 16:00:17,989 [INFO]   clip 3/5 564KB
+2026-05-06 16:00:20,038 [INFO]   clip 4/5 494KB
+2026-05-06 16:00:22,309 [INFO]   clip 5/5 584KB
+2026-05-06 16:00:22,310 [INFO]   render → mindset_2026-05-06.mp4
+2026-05-06 16:00:23,731 [INFO]   size: 3.44 MB
+2026-05-06 16:00:41,088 [INFO] upload wealth_blueprint attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'd6YjcdppGfo', 'url': 'https://www.youtube.com/watch?v=d6YjcdppGfo', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-06 16:00:41,088 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'd6YjcdppGfo', 'url': 'https://www.youtube.com/watch?v=d6YjcdppGfo', ')
+2026-05-06 16:00:41,089 [INFO] === Wealth Blueprint done ===

@@ -58,3 +58,7 @@
 2026-04-27 02:10:25 === build 완료 ===
 2026-05-02 18:00:02 [post] cards shorts1_price_cards
 2026-05-02 18:00:26 [post] results: {'bluesky': True, 'discord': True, 'mastodon': True, 'x': False, 'threads': True, 'instagram': True}
+2026-05-04 18:00:03 [post] cards shorts2_refund_cards
+2026-05-05 18:00:02 [post] shorts shorts3_deadline
+2026-05-06 18:00:03 [post] cards shorts3_deadline_cards
+2026-05-06 18:00:31 [post] results: {'bluesky': True, 'discord': True, 'mastodon': True, 'x': False, 'threads': True, 'instagram': True, 'facebook': True}
