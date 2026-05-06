@@ -5799,9 +5799,76 @@ async function redeemCoupon(ev){
  }));
 
  // ═══════════════════════════════════════════════
- // Capacitor 네이티브 환경 (Android 앱) → Google Play 인앱결제
- // 웹 환경 → 토스페이먼츠 (기존 흐름)
+ // Entitlement Shortcut — 인플루언서 쿠폰/기존 결제 보유자는 결제 스킵
  // ═══════════════════════════════════════════════
+ (function entitlementShortcut() {
+   try {
+     var skuInfo = window.cmdLookupSku && window.cmdLookupSku(currentOrder.serviceName);
+     var skuId = skuInfo && skuInfo.sku;
+     if (!skuId) return; // SKU 매핑 없으면 정상 결제 진행
+     // 1) localStorage 캐시 검사 (즉시)
+     var cached = JSON.parse(localStorage.getItem('cm_purchases') || '[]');
+     if (Array.isArray(cached) && cached.indexOf(skuId) >= 0) {
+       runEntitlementSuccess(orderData, skuId, 'localStorage');
+       return 'BREAK';
+     }
+   } catch(e) { console.warn('entitlement cache check failed', e); }
+ })();
+ // 비동기 서버 검증 (이메일 + check-entitlement) — non-blocking promise
+ try {
+   var skuInfoAsync = window.cmdLookupSku && window.cmdLookupSku(currentOrder.serviceName);
+   var skuIdAsync = skuInfoAsync && skuInfoAsync.sku;
+   if (skuIdAsync && email) {
+     // BLOCK: server-side check before payment trigger
+     var entitlementChecked = false;
+     var entitlementHasSKU = false;
+     // Use sync XHR style: fetch + await via Promise — but main flow is callback-style.
+     // Strategy: fire fetch and only proceed to payment if entitlement says no.
+     fetch('/api/check-entitlement', {
+       method: 'POST', headers: {'Content-Type':'application/json'},
+       body: JSON.stringify({ email: email })
+     }).then(function(r){ return r.json(); }).then(function(d){
+       if (d && d.ok && Array.isArray(d.skus) && d.skus.indexOf(skuIdAsync) >= 0) {
+         try {
+           localStorage.setItem('cm_purchases', JSON.stringify(d.skus));
+           localStorage.setItem('cm_premium_email', email);
+         } catch(e) {}
+         runEntitlementSuccess(orderData, skuIdAsync, 'server-check');
+       } else {
+         // 권한 없음 → 정상 결제 트리거
+         _proceedToPayment(orderData);
+       }
+     }).catch(function(){
+       // 검증 실패 시 결제 진행 (사용자 마찰 최소화)
+       _proceedToPayment(orderData);
+     });
+     return; // 정상 결제 흐름 차단 — 비동기 결과로 분기
+   }
+ } catch(e) { console.warn('entitlement async check failed', e); }
+ // 권한 없음 → 정상 결제 흐름
+ _proceedToPayment(orderData);
+ return;
+ } // closes openOrder/saveAndPay outer function
+
+ // 헬퍼: 권한 보유 시 즉시 success 처리 (결제 스킵)
+ function runEntitlementSuccess(orderData, skuId, source) {
+   try {
+     console.log('[entitlement] SHORTCUT — skipping payment for', skuId, 'via', source);
+     orderData.paid = true;
+     orderData.method = 'influencer_coupon';
+     orderData.skuId = skuId;
+     orderData.amount = 0;
+     orderData.via = 'entitlement_' + source;
+     localStorage.setItem('cm_current_order', JSON.stringify(orderData));
+     window.location.href = 'success.html?sku=' + encodeURIComponent(skuId) + '&via=entitlement';
+   } catch(e) {
+     console.error('runEntitlementSuccess fail', e);
+     _proceedToPayment(orderData);
+   }
+ }
+
+ // 헬퍼: 정상 결제 트리거 (Capacitor IAP / 토스페이먼츠 / 데모)
+ function _proceedToPayment(orderData) {
  if (window.cmdIsNative && window.cmdIsNative()) {
  runNativeIAP(orderData);
  return;
