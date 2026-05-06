@@ -413,6 +413,55 @@ def build_market_section(ms):
     return msg
 
 
+def build_kpi_section():
+    """📊 100일 KPI — D-Day 부터 며칠 / 매출 목표 vs 실제.
+    intelligence/100_day_kpi.md 에 정의된 D+30/D+60/D+100 마일스톤 추적.
+    매출은 ceo-briefing/output/revenue_*.json 에서 누적 합계 계산."""
+    msg = "📊 <b>100일 KPI</b>\n"
+    D_DAY = datetime.date(2026, 5, 5)  # 100D-2026-05 시작일
+    today = datetime.date.today()
+    days_elapsed = (today - D_DAY).days
+    if days_elapsed < 0:
+        msg += f"  D-Day 까지 {-days_elapsed}일\n\n"
+        return msg
+    # 다음 마일스톤
+    milestones = [
+        (30, 100, "$100"),    # D+30 = $100
+        (60, 500, "$500"),    # D+60 = $500
+        (100, 2000, "$2,000"),# D+100 = $2,000
+    ]
+    next_ms = next(((d, t, lbl) for d, t, lbl in milestones if d >= days_elapsed), None)
+    if next_ms:
+        d, target, lbl = next_ms
+        days_left = d - days_elapsed
+        msg += f"  D+{days_elapsed} / D+100 (목표 {lbl})\n"
+        msg += f"  다음: D+{d} → {lbl} ({days_left}일 남음)\n"
+    else:
+        msg += f"  D+{days_elapsed} (100일 종료) — 시나리오 결정 필요\n"
+    # 누적 매출 (revenue_*.json 의 paypal_total + gumroad_total 합산 시도)
+    OUT = BASE / "output"
+    cumulative_usd = 0.0
+    if OUT.exists():
+        for jf in sorted(OUT.glob("revenue_2026-*.json")):
+            # D-Day 이후만
+            try:
+                fdate = datetime.date.fromisoformat(jf.stem.replace("revenue_", ""))
+                if fdate < D_DAY:
+                    continue
+            except Exception:
+                continue
+            try:
+                d = json.loads(jf.read_text(encoding="utf-8"))
+                rv = d.get("revenue", {})
+                gm = rv.get("gumroad", {})
+                if isinstance(gm, dict):
+                    cumulative_usd += float(gm.get("total_usd", 0) or 0)
+            except Exception:
+                pass
+    msg += f"  누적 매출(D+0~): ${cumulative_usd:.2f}\n\n"
+    return msg
+
+
 def build_priority_section():
     """🎯 오늘의 우선순위 — priority_tasks.json 에서 동적 로드.
     완료된 항목 자동 제외. 파일 없으면 빈 섹션."""
@@ -477,6 +526,7 @@ def build_message(hour=None):
     except Exception as e:
         msg += f"💰 <b>통합 매출</b>\n  (집계기 오류: {str(e)[:80]})\n\n"
 
+    msg += build_kpi_section()
     msg += build_priority_section()
     msg += build_revenue_section(data["revenue"])
     msg += build_admob_section(data["revenue"].get("admob", {}))

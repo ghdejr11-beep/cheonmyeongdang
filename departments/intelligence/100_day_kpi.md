@@ -35,3 +35,12 @@
 - 토스/갤럭시아 (라이브 키 발급 후)
 
 목표 미달 시 다음 주 액션 자동 추천 (briefing_run.py).
+
+## 자동 추적 (5/6 audit 추가)
+
+`departments/ceo-briefing/briefing_v2.py` → `build_kpi_section()` 매 브리핑(6회/일) 마다:
+- D+N 자동 계산 (D-Day 2026-05-05 기준)
+- 다음 마일스톤 (D+30 / D+60 / D+100) 카운트다운
+- 누적 매출 (revenue_*.json gumroad 합산)
+
+**시나리오 분기 자동 알림**: D+95 도달 시 시나리오 A/B/C 결정 brief에 우선 노출 권장.
