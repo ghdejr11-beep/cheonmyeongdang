@@ -3846,6 +3846,124 @@ async function redeemCoupon(ev){
    return '<div class="result-card"><h4>👶 ' + label + ' 자녀운</h4><p style="line-height:1.85;">' + text + '</p></div>';
  }
 
+ // ─── 프리미엄 깊이 있는 남/여 명리학 해석 카드들 (entitlement 보유자만) ───
+ function buildPremiumGenderCards(r, uctx) {
+   var isMale = uctx.gender === 'M';
+   var label = isMale ? '남자' : '여자';
+   var sipsin = r.십신 || [];
+   var has = function(name) { return sipsin.some(function(s){ return (s.천간&&s.천간.십신===name)||(s.지지&&s.지지.십신===name); }); };
+   var count = function(names) { var c=0; sipsin.forEach(function(s){ names.forEach(function(n){ if(s.천간&&s.천간.십신===n) c++; if(s.지지&&s.지지.십신===n) c++; }); }); return c; };
+   var dayStem = r.기본정보 && r.기본정보.일간 ? r.기본정보.일간.글자 : '';
+   var dayYinYang = r.기본정보 && r.기본정보.일간 ? r.기본정보.일간.음양 : '';
+   var direction = r.대운 && r.대운.direction;
+   var startAge = r.대운 && r.대운.startAge;
+   var html = '';
+
+   // 1) 배우자 상세 분석 (남자=정재 안주인, 여자=정관 가장)
+   var spouseStar = isMale ? '정재' : '정관';
+   var spouseSubStar = isMale ? '편재' : '편관';
+   var spouseCount = count([spouseStar, spouseSubStar]);
+   var spouseAnalysis = '';
+   if (isMale) {
+     spouseAnalysis = '남자 사주에서<strong>정재(正財)</strong>는 정식 배우자(아내)를 의미합니다. ';
+     if (count(['정재']) >= 2) spouseAnalysis += '정재가 2개 이상 → 본인보다 더 가정을 챙기는 안주인 만남, 다만 인연이 두 번에 걸쳐 깊어질 수 있음. ';
+     else if (count(['정재']) === 1) spouseAnalysis += '정재 1개 → 한 사람과 깊은 인연. 결혼 후 재물·안정 모두 상승. ';
+     else if (count(['편재']) >= 1) spouseAnalysis += '정재 없고 편재 — 자유연애·연상연하 가능, 결혼 후에도 외부 활동 활발한 배우자. ';
+     else spouseAnalysis += '재성 약 — 만혼(晚婚) 또는 본인이 적극 다가가야 인연이 옴. 30대 중후반 결혼이 더 안정적. ';
+   } else {
+     spouseAnalysis = '여자 사주에서<strong>정관(正官)</strong>은 정식 배우자(남편)를 의미합니다. ';
+     if (count(['정관']) >= 2) spouseAnalysis += '정관 2개 이상 — 좋은 배우자감 여러 명 만나지만 선택을 신중히. 1차 결혼이 늦거나 재혼 가능성 있음. ';
+     else if (count(['정관']) === 1) spouseAnalysis += '정관 1개 → 책임감 있고 안정된 배우자와 한 번의 인연. 결혼 후 사회적 위치 상승. ';
+     else if (count(['편관']) >= 1) spouseAnalysis += '정관 없고 편관 — 카리스마 있는 남성에게 끌리지만 결혼 생활은 굴곡 있을 수 있음. 본인 커리어가 안정된 후 결혼이 유리. ';
+     else spouseAnalysis += '관성 약 — 본인이 가정의 중심이 되는 사주. 가정 내 리더십을 발휘하며, 배우자보다 본인 커리어가 앞설 수 있음. ';
+   }
+   html += '<div class="result-card" style="border-color:var(--gold);background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(74,158,142,0.04));"><h4>💑 ' + label + ' 배우자운 정밀 분석</h4><p style="line-height:1.85;">' + spouseAnalysis + '</p></div>';
+
+   // 2) 자녀 임신/출산 시기 (여자) 또는 자녀 양육 (남자)
+   var childAnalysis = '';
+   if (isMale) {
+     // 남자: 관성 = 자식, 시주 = 자녀궁
+     var hasGwan = count(['정관','편관']);
+     childAnalysis = '남자 사주에서 자식은<strong>관성(官星)</strong>으로 봅니다. 본인 사주의 관성 ' + hasGwan + '개. ';
+     if (hasGwan >= 2) childAnalysis += '자녀 다산형 — 2명 이상 자녀와 인연 깊음. 자녀가 본인의 사회적 명예를 높여줌. ';
+     else if (hasGwan === 1) childAnalysis += '자녀 1~2명 — 한 자녀에게 깊은 부정(父情). 자녀 교육에 적극 투자. ';
+     else childAnalysis += '관성 약 — 자녀 인연 늦거나 한 자녀에게 집중. 자녀와의 소통보다 모범을 보이는 부정형. ';
+     childAnalysis += '<br><br>특히<strong>시주(時柱)</strong>가 자녀궁 — 시주 십신이 ' + ((r.십신.find(function(s){return s.위치==='시주';}) || {}).천간 || {}).십신 + ' 으로 자녀와의 관계 흐름을 봅니다.';
+   } else {
+     // 여자: 식상 = 자식, 임신·출산
+     var hasSikSang = count(['식신','상관']);
+     var hasSikShin = count(['식신']);
+     childAnalysis = '여자 사주에서 자식은<strong>식상(食傷, 식신·상관)</strong>으로 봅니다. 본인 사주의 식상 ' + hasSikSang + '개. ';
+     if (hasSikShin >= 1) childAnalysis += '식신이 있어 자녀 임신·출산이 순조롭고, 자녀가 안정적이고 효성 깊은 성품. ';
+     else if (count(['상관']) >= 1) childAnalysis += '상관이 강해 자녀가 똑똑하고 표현력 풍부, 다만 자녀 양육 중 본인의 사회생활 균형이 중요. ';
+     else childAnalysis += '식상 약 — 자녀 인연이 늦거나(30대 중반 이후), 자녀 1명에게 집중. 임신은 식상 강해지는 운(대운/세운)에 ';
+     childAnalysis += '<br><br><strong>임신·출산 가장 좋은 시기</strong>: 본인 대운에서 식상이 들어오는 ' + (startAge + 10) + '~' + (startAge + 30) + '세 사이.';
+   }
+   html += '<div class="result-card"><h4>👶 ' + label + ' 자녀운 깊이 분석' + (isMale?' (양육)':' (임신·출산)') + '</h4><p style="line-height:1.85;">' + childAnalysis + '</p></div>';
+
+   // 3) 형제·자매·동료 (비겁 — 남자/여자 다름)
+   var bigeup = count(['비견','겁재']);
+   var siblingHtml = '<strong>비겁(比劫, 비견·겁재) ' + bigeup + '개</strong>. ';
+   if (isMale) {
+     if (bigeup >= 3) siblingHtml += '남자 비겁 多 — 형제·동료·경쟁자 多. 협업 사업 가능하나 재물 분배 갈등 주의. 군겁쟁재(群劫爭財) 위험. ';
+     else if (bigeup >= 1) siblingHtml += '비겁 적정 — 형제 1~2명, 동료와 협력 좋음. ';
+     else siblingHtml += '비겁 약 — 외동 또는 형제 인연 적음. 독립적 단독 행동 사주. ';
+   } else {
+     if (bigeup >= 3) siblingHtml += '여자 비겁 多 — 자매·여자친구 多, 사회적 인맥 풍부. 다만 재물·남편 운에서 경쟁 주의(여자 비겁=관성을 흔드는 별). ';
+     else if (bigeup >= 1) siblingHtml += '비겁 적정 — 자매 1~2명, 친구 관계 안정. ';
+     else siblingHtml += '비겁 약 — 외동 또는 친구 적음. 본인이 독립적이고 자존감 강한 사주. ';
+   }
+   html += '<div class="result-card"><h4>👯 ' + label + ' 형제·동료운</h4><p style="line-height:1.85;">' + siblingHtml + '</p></div>';
+
+   // 4) 부모운 (인성 — 남녀 동일하나 강도 해석 다름)
+   var inseong = count(['정인','편인']);
+   var parentHtml = '<strong>인성(印星, 정인·편인) ' + inseong + '개</strong>. ';
+   if (inseong >= 2) parentHtml += '인성 多 — 부모(특히 어머니)의 도움·후원 풍부. 학업·자격·전문지식으로 성공. ';
+   else if (inseong === 1) parentHtml += '인성 적정 — 부모와 안정적 관계, 학업·자격 운 보통. ';
+   else parentHtml += '인성 약 — 부모 도움보다 본인 노력으로 일군 사주. 자수성가형. ';
+   if (isMale) parentHtml += '남자 인성은 어머니·후원자·학업·자격증으로 봅니다.';
+   else parentHtml += '여자 인성은 어머니·시어머니·학업·문서/자격으로 봅니다. 결혼 후 시댁 영향이 인성으로 나타남.';
+   html += '<div class="result-card"><h4>👨‍👩‍👧 ' + label + ' 부모·인성운</h4><p style="line-height:1.85;">' + parentHtml + '</p></div>';
+
+   // 5) 직장·승진·창업 시기 (관성 + 대운)
+   var careerHtml = '<strong>관성 ' + count(['정관','편관']) + '개 / 재성 ' + count(['정재','편재']) + '개 / 식상 ' + count(['식신','상관']) + '개</strong>. ';
+   if (isMale) {
+     if (count(['정관']) >= 1) careerHtml += '정관 보유 — 조직·공직·전문직 적합. 승진은 정관이 천간에 투출된 대운에 빠름. ';
+     else if (count(['편관']) >= 1) careerHtml += '편관 보유 — 경쟁·창업·해외 진출에 강함. 30대 중반 이후 사업운 발현. ';
+     else if (count(['정재','편재']) >= 2) careerHtml += '재성 多 + 관성 약 — 자수성가 사업가형. 본인 기술·노하우로 큰돈 가능. ';
+     else careerHtml += '재관 모두 약 — 식상(전문기술·표현)으로 살아가는 사주. 프리랜서·전문직 적합. ';
+   } else {
+     if (count(['정관']) >= 1 && count(['정재']) >= 1) careerHtml += '정관+정재 — 결혼 후 사회적 위치·재물 모두 상승하는 안정형. 공직·금융·교육·의료 잘 맞음. ';
+     else if (count(['식신','상관']) >= 2) careerHtml += '식상 多 — 창의력·표현력 직업(예술·교육·디자인·글쓰기·콘텐츠) 강. 본인 이름으로 성공. ';
+     else if (count(['정재','편재']) >= 2) careerHtml += '재성 多 — 본인이 직접 사업·투자·재물 일구는 사주. 결혼보다 커리어가 우선될 수 있음. ';
+     else careerHtml += '관성·재성 약 — 자기표현·기예 자립형. 프리랜서·전문직 적합. ';
+   }
+   careerHtml += '<br><br><strong>대운 ' + direction + '</strong> — ' + (direction==='순행' ? '인생 후반(40~70대)에 운기가 강해짐. 조기 은퇴보다 노년 활동 길어짐.' : '인생 전반(20~40대)에 운기가 빠르게 발현. 조기 성공형, 30대 중반에 1차 정점.');
+   html += '<div class="result-card"><h4>💼 ' + label + ' 직업·승진·사업 시기</h4><p style="line-height:1.85;">' + careerHtml + '</p></div>';
+
+   // 6) 결혼 적령기 (성별 + 십신 + 대운)
+   var weddingHtml = '';
+   if (isMale) {
+     if (count(['정재']) >= 1) weddingHtml += '남자 정재 보유 — 결혼 적령기는 정재가 강해지는 대운. 본 사주에서는 약 ' + (startAge + 20) + '~' + (startAge + 30) + '세 사이가 1차 적령. ';
+     else weddingHtml += '남자 정재 약 — 결혼이 늦거나(30대 후반~40대 초) 본인이 적극적으로 만들어가야 함. ';
+   } else {
+     if (count(['정관']) >= 1) weddingHtml += '여자 정관 보유 — 결혼 적령기는 정관이 강해지는 대운. 본 사주에서는 약 ' + (startAge + 18) + '~' + (startAge + 28) + '세 사이가 1차 적령. ';
+     else if (count(['편관']) >= 1) weddingHtml += '여자 편관 보유 — 강렬한 사랑 후 결혼. 다만 1차 결혼은 신중, 재혼 가능성 있는 사주. ';
+     else weddingHtml += '여자 관성 약 — 본인이 결혼보다 커리어를 더 중시할 수 있음. 늦은 결혼(30대 중반~) 또는 비혼 선택도 흉이 아님. ';
+   }
+   html += '<div class="result-card"><h4>💍 ' + label + ' 결혼 적령기</h4><p style="line-height:1.85;">' + weddingHtml + '</p></div>';
+
+   // 7) 인생 황금기 (대운 + 일간 강약)
+   var goldenAge = startAge + 40; // 4번째 대운 = 보통 인생 정점
+   var goldenHtml = '<strong>인생 황금기 (4번째 대운)</strong>: 약<strong>' + (goldenAge - 5) + '~' + (goldenAge + 5) + '세</strong>. ';
+   goldenHtml += '이 시기에 본인 십신(' + (count(['정인','편인']) > count(['식신','상관']) ? '인성 강' : count(['식신','상관']) > count(['정관','편관']) ? '식상 강' : count(['정관','편관']) > count(['정재','편재']) ? '관성 강' : '재성 강') + ')의 능력이 최대로 발현됩니다. ';
+   if (isMale) goldenHtml += '남자는 이 시기에 사회적 정점·재물 정점·가장 역할 정점이 한꺼번에 옵니다.';
+   else goldenHtml += '여자는 이 시기에 가정·자녀·본인 커리어 모두 안정되는 시기. 본인의 내면이 가장 단단해지는 시기.';
+   html += '<div class="result-card" style="border-color:var(--gold);"><h4>⭐ ' + label + ' 인생 황금기</h4><p style="line-height:1.85;">' + goldenHtml + '</p></div>';
+
+   return html;
+ }
+
  function buildDaeunGenderHeader(r, uctx) {
    var isMale = uctx.gender === 'M';
    var dir = r.대운 && r.대운.direction;
@@ -3872,6 +3990,21 @@ async function redeemCoupon(ev){
  const isDivorced = uctx.marital === 'divorced';
  const isSingle = uctx.marital === 'single';
  const hasChildren = uctx.children >0;
+
+ // 프리미엄 entitlement 검사 (쿠폰/결제 보유자에게 깊이 있는 카드 7개 잠금해제)
+ let isPremium = false;
+ try {
+   const purchases = JSON.parse(localStorage.getItem('cm_purchases') || '[]');
+   isPremium = Array.isArray(purchases) && (
+     purchases.indexOf('comprehensive_29900') >= 0 ||
+     purchases.indexOf('saju_premium_9900') >= 0 ||
+     purchases.indexOf('subscribe_monthly_29900') >= 0
+   );
+ } catch(e) {}
+ // URL ?premium=1 으로 강제 활성 (success.html에서 redirect 시)
+ try {
+   if (new URLSearchParams(window.location.search).get('premium') === '1') isPremium = true;
+ } catch(e) {}
 
  // Day stem personality from knowledge
  let personalityHTML = '';
@@ -4085,6 +4218,27 @@ async function redeemCoupon(ev){
 <!-- ⭐ 성별 특화 카드 (남/여 십신 의미 차이) -->
  ${genderJobMoneyHTML}
  ${genderChildHTML}
+
+<!-- 🔒 프리미엄: 깊이 있는 명리학 분석 7개 카드 (entitlement 보유자만) -->
+ ${isPremium ? `
+   <div style="margin:32px 0 16px;padding:14px 18px;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(74,158,142,0.10));border:2px solid var(--gold);border-radius:12px;text-align:center;">
+     <strong style="color:var(--gold2);font-size:1.05rem;">⭐ 프리미엄 정밀 분석 (잠금 해제)</strong>
+     <p style="color:var(--text2);font-size:0.85rem;margin-top:6px;">정통 명리학 기반 ${uctx.gender === 'M' ? '남자' : '여자'} 전용 깊이 분석 7개 카드</p>
+   </div>
+   ${buildPremiumGenderCards(r, uctx)}
+ ` : `
+   <div style="margin:32px 0 16px;padding:24px;background:rgba(0,0,0,0.4);border:2px dashed var(--border);border-radius:12px;text-align:center;">
+     <div style="font-size:2rem;margin-bottom:8px;">🔒</div>
+     <strong style="color:var(--gold2);font-size:1.05rem;">정통 명리학 정밀 분석 (7개 카드)</strong>
+     <p style="color:var(--text2);font-size:0.88rem;margin:10px 0 16px;line-height:1.7;">
+       ${uctx.gender === 'M' ? '남자' : '여자'} 전용 깊이 분석:<br>
+       💑 배우자운 정밀 · 👶 자녀운 깊이 · 👯 형제·동료운 · 👨‍👩‍👧 부모·인성운<br>
+       💼 직업·승진·사업 시기 · 💍 결혼 적령기 · ⭐ 인생 황금기 (4번째 대운)
+     </p>
+     <a href="#premium" onclick="document.getElementById('premium')&&document.getElementById('premium').scrollIntoView({behavior:'smooth'});return false;" style="display:inline-block;padding:10px 20px;background:var(--gold);color:#1a1206;border-radius:8px;text-decoration:none;font-weight:600;">프리미엄 잠금해제 — ₩29,900</a>
+     <p style="color:var(--text2);font-size:0.78rem;margin-top:10px;">또는 인플루언서 쿠폰으로 30일 무료</p>
+   </div>
+ `}
 
 <!-- Interactions -->
  ${interHTML}
