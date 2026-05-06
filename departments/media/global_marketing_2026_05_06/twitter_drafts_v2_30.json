@@ -1,0 +1,547 @@
+{
+  "account": "@deokgune_ai",
+  "created_at": "2026-05-07",
+  "version": "v2",
+  "total_drafts": 30,
+  "language_split": {
+    "en": 25,
+    "ja": 5
+  },
+  "schedule_strategy": "1_thread_per_day_42_days",
+  "auto_post_compatible": true,
+  "url_bases": {
+    "en": "https://www.cheonmyeongdang.com/en/",
+    "ja": "https://www.cheonmyeongdang.com/ja/"
+  },
+  "default_influencer_code": "FRIEND2026",
+  "drafts": [
+    {
+      "id": 1,
+      "category": "saju_vs_western",
+      "language": "en",
+      "publish_date_recommend": "2026-05-08",
+      "type": "thread",
+      "title": "Why your Co-Star reading feels generic",
+      "hook": "Why does every Leo get the same horoscope? Because Western astrology uses 1 data point (sun sign). Korean Saju uses 8. Here's why that matters in 2026 🧵",
+      "body": [
+        "Western astrology: Sun sign + maybe rising/moon = 3 variables. ~12 archetypes. 8 billion humans squeezed into 12 boxes.",
+        "Korean Saju (사주): 4 pillars × 2 characters each = 8 characters. Each character is one of 22 possible. Permutations: 518,400 distinct base charts. Plus timing cycles.",
+        "That's why Saju readings feel surgical. It isn't a horoscope. It's a personality + timing engine built over 5,000 years in East Asia.",
+        "And it gets weirder: each pillar maps to a life domain.\n• Year = ancestry/society\n• Month = career\n• Day = self + romance\n• Hour = hidden self + late life",
+        "If you've ever wondered why your Korean friend asks for your birth TIME (not just date), this is why. The hour pillar changes 12 times a day. Without it, you're missing 25% of the chart.",
+        "Free English Saju (no signup): → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d1"
+      ],
+      "cta": "Get your free 8-character chart → cheonmyeongdang.com/en",
+      "hashtags": ["#KoreanAstrology", "#Saju", "#Astrology", "#KCulture", "#BaZi"]
+    },
+    {
+      "id": 2,
+      "category": "saju_vs_western",
+      "language": "en",
+      "publish_date_recommend": "2026-05-09",
+      "type": "thread",
+      "title": "12 zodiac signs vs 60-year cycle",
+      "hook": "Western astrology repeats every 1 year. Korean Saju repeats every 60. That's not a flex — it's a math claim. Here's what 60-year cycles predict that 1-year cycles can't 🧵",
+      "body": [
+        "The Korean (and Chinese) sexagenary cycle pairs 10 Heavenly Stems × 12 Earthly Branches = 60 unique year-codes. 2026 is 동오 (Bing-Wu, Red Horse).",
+        "Last Red Horse year: 1966. Before that: 1906, 1846, 1786. The pattern? Cultural inflection points. Civil rights, post-war booms, AI revolutions.",
+        "Western horoscopes give you a vibe for the week. Saju gives you the macro tide your decade is riding.",
+        "This is why Korean families historically used Saju for marriage timing, business launch dates, and even baby planning. The math has 60 years of texture, not 12.",
+        "Try yours free in English. See your decade-tide (대운) projected to 2034 → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d2"
+      ],
+      "cta": "See your 10-year luck cycle → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju", "#Astrology", "#2026", "#KoreanCulture", "#BaZi"]
+    },
+    {
+      "id": 3,
+      "category": "saju_vs_western",
+      "language": "en",
+      "publish_date_recommend": "2026-05-10",
+      "type": "thread",
+      "title": "Mercury retrograde vs 삼한살",
+      "hook": "Western astrology has Mercury retrograde (3x a year). Korean Saju has 삼한살 (Samhansal) — a 3-year unlucky cycle hitting only specific zodiac groups. Way more surgical 🧵",
+      "body": [
+        "Samhansal divides the 12 Earthly Branches into 4 groups of 3. Each group has a 3-year window where they're statistically more accident-prone, decision-impaired, financially leaky.",
+        "Born in Tiger/Horse/Dog years? Your Samhansal is Snake/Horse/Sheep years. So 2026 (Horse) is mid-Samhansal for you.",
+        "Born in Rat/Dragon/Monkey? Yours is Tiger/Rabbit/Dragon (2022–2024 — just exited).",
+        "This isn't superstition theatre — Korean insurance actuaries and traditional doctors still glance at this when assessing risk windows.",
+        "Check your own Samhansal status (free, English) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d3"
+      ],
+      "cta": "Check your unlucky-year window → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju", "#KoreanAstrology", "#Astrology", "#2026Forecast", "#BaZi"]
+    },
+    {
+      "id": 4,
+      "category": "saju_vs_western",
+      "language": "en",
+      "publish_date_recommend": "2026-05-11",
+      "type": "thread",
+      "title": "Birth chart depth: 1 vs 8",
+      "hook": "I asked Co-Star and a Korean Saju site the same question: 'Why do I keep dating the wrong people?' One gave me a 4-line meme. The other gave me my Day Master's element conflict. Guess which helped 🧵",
+      "body": [
+        "Day Master = the Heavenly Stem of your Day Pillar. It's YOU. Your Day Master is one of 10 elements: Yang Wood, Yin Wood, Yang Fire, Yin Fire, etc.",
+        "Romantic compatibility in Saju = your Day Master's element relationship with theirs. Wood feeds Fire (good). Fire melts Metal (tense). Water extinguishes Fire (toxic).",
+        "If you're Yang Fire and you keep dating Yin Water? Saju would have flagged that on date 1.",
+        "Western: 'You're a Sagittarius, they're a Pisces, mixed.' \nSaju: 'Your Day Master is 정화 (Yin Fire). Their 일간 is 임수 (Yang Water). Direct extinguishment. Romance will mirror water-on-fire dynamics.'",
+        "Free Day Master + compatibility check (English) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d4"
+      ],
+      "cta": "Find your Day Master + dating type → cheonmyeongdang.com/en",
+      "hashtags": ["#KoreanAstrology", "#Saju", "#Compatibility", "#DatingAdvice", "#Astrology"]
+    },
+    {
+      "id": 5,
+      "category": "saju_vs_western",
+      "language": "en",
+      "publish_date_recommend": "2026-05-12",
+      "type": "thread",
+      "title": "Why Saju isn't 'Chinese astrology'",
+      "hook": "Friendly correction — Korean Saju and Chinese BaZi share the same character system but diverged 800 years ago. Here's what's specifically Korean about Saju, and why it matters 🧵",
+      "body": [
+        "Both use 60-year sexagenary cycles + 8 characters. That's the shared core.",
+        "Korean Saju layered on:\n• 십신 (Ten Gods) emphasis on social/family roles\n• 대운 (10-year luck cycles) read for women too (Chinese tradition often skipped this)\n• 신살 (Spirit Killers) — 22 named patterns unique to Korean lineage",
+        "Chinese BaZi tends toward business/wealth. Korean Saju tends toward relationships, education, and family timing — reflecting Confucian Korea's social structure.",
+        "If you've tried 'BaZi calculators' and felt the analysis was cold, try the Korean version. It reads people, not just markets.",
+        "Free Korean-method Saju in English → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d5"
+      ],
+      "cta": "Try the Korean-lineage version → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju", "#KoreanAstrology", "#BaZi", "#KCulture", "#Astrology"]
+    },
+    {
+      "id": 6,
+      "category": "four_pillars_intro",
+      "language": "en",
+      "publish_date_recommend": "2026-05-13",
+      "type": "thread",
+      "title": "Four Pillars 101: Year",
+      "hook": "Saju 101 — Pillar #1 of 4: the YEAR PILLAR. This is your ancestral software. Not your destiny — your inherited operating system. Here's how to read it 🧵",
+      "body": [
+        "The Year Pillar = the year you were born, encoded in 1 Heavenly Stem + 1 Earthly Branch. 2026 = 동오 (Bing Wu, Yang Fire + Horse).",
+        "What it tells you:\n• Generational karma (what your family/society handed you)\n• Childhood environment\n• Public reputation seed",
+        "Example: Born 1995 = 을해 (Yi Hai, Yin Wood + Pig). Carries themes of late-bloomer creativity, water-fed wood = research/healing tendencies.",
+        "Common mistake: thinking 'I'm a Horse year' = you're a Horse like the Western zodiac. No. Horse is just 1 of your 8 characters. The dominant character is your DAY Master.",
+        "See all 8 of your characters (free) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d6"
+      ],
+      "cta": "Decode your Year Pillar → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju101", "#KoreanAstrology", "#FourPillars", "#Astrology", "#BaZi"]
+    },
+    {
+      "id": 7,
+      "category": "four_pillars_intro",
+      "language": "en",
+      "publish_date_recommend": "2026-05-14",
+      "type": "thread",
+      "title": "Four Pillars 102: Month",
+      "hook": "Saju 102 — Pillar #2 of 4: the MONTH PILLAR. This is your career operating system. Why you naturally gravitate toward certain industries. Most overlooked pillar 🧵",
+      "body": [
+        "Month Pillar = the lunar/solar month you were born + its stem-branch pair. It governs the 'palace' of career, mid-life, and how peers perceive you.",
+        "Born in summer months (May–July)? Strong fire energy. Tendency toward sales, performance, leadership, hospitality.",
+        "Born in winter months (Nov–Jan)? Strong water energy. Tendency toward analysis, research, finance, wisdom-based work.",
+        "Born in transitional months (Apr/Jul/Oct/Jan endings)? Earth energy = stability, real estate, food, mediation.",
+        "This is why career coaches who understand Saju can be eerily accurate — they're reading your Month Pillar before you've named your strengths.",
+        "Map your career pillar free → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d7"
+      ],
+      "cta": "See what work suits your chart → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju101", "#CareerAstrology", "#KoreanAstrology", "#FourPillars", "#BaZi"]
+    },
+    {
+      "id": 8,
+      "category": "four_pillars_intro",
+      "language": "en",
+      "publish_date_recommend": "2026-05-15",
+      "type": "thread",
+      "title": "Four Pillars 103: Day (the YOU pillar)",
+      "hook": "Saju 103 — Pillar #3 of 4: the DAY PILLAR. This is literally YOU. Your Day Master (the Heavenly Stem of your Day Pillar) is the #1 most important character in your chart. Here's why 🧵",
+      "body": [
+        "There are 10 possible Day Masters: Yang Wood, Yin Wood, Yang Fire, Yin Fire, Yang Earth, Yin Earth, Yang Metal, Yin Metal, Yang Water, Yin Water.",
+        "Your Day Master is the 'I' in your chart. Every other character is read in RELATION to it.",
+        "• Yang Wood = pine tree, ambitious, growth-driven\n• Yin Fire = candle, intimate, intuitive\n• Yang Metal = sword, decisive, justice-oriented\n• Yin Water = mist, adaptive, deeply intuitive",
+        "Compatibility, career fit, dating type, even health tendencies — all start from the Day Master.",
+        "If a 'Saju reading' didn't tell you your Day Master, you didn't get a Saju reading. You got a horoscope.",
+        "Find yours free → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d8"
+      ],
+      "cta": "Discover your Day Master → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju101", "#DayMaster", "#KoreanAstrology", "#FourPillars", "#BaZi"]
+    },
+    {
+      "id": 9,
+      "category": "four_pillars_intro",
+      "language": "en",
+      "publish_date_recommend": "2026-05-16",
+      "type": "thread",
+      "title": "Four Pillars 104: Hour",
+      "hook": "Saju 104 — Pillar #4 of 4: the HOUR PILLAR. This is the most asked-about and least understood pillar. It governs your hidden self, late life, and children. Here's why your birth time matters 🧵",
+      "body": [
+        "The day is divided into 12 two-hour blocks (시지). Each block has a unique stem-branch pair.",
+        "Born 23:00–00:59 = Rat hour. Born 11:00–12:59 = Horse hour. Etc.",
+        "What the Hour Pillar reveals:\n• Hidden personality (what you don't show publicly)\n• Children's karma\n• Late-life tendencies (60+)\n• Dream/inner-life patterns",
+        "If you don't know your birth time, Saju still works on 6 of 8 characters — but you lose the 'inner self' read. That's why Korean grandparents wrote birth times on family registries for centuries.",
+        "Don't know your time? Most countries have it on the long-form birth certificate.",
+        "Try with or without time (English) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d9"
+      ],
+      "cta": "Build your full 8-character chart → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju101", "#FourPillars", "#KoreanAstrology", "#BirthChart", "#BaZi"]
+    },
+    {
+      "id": 10,
+      "category": "four_pillars_intro",
+      "language": "en",
+      "publish_date_recommend": "2026-05-17",
+      "type": "single",
+      "title": "Four Pillars summary card",
+      "hook": "Saju cheat-sheet — the 4 Pillars in one image:\n\n🏛️ Year = ancestry/society\n💼 Month = career/peers\n👤 Day = YOU + romance\n🌙 Hour = hidden self + late life\n\nEach has 2 characters. 8 total. 518,400 base permutations.\n\nFree English chart → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d10",
+      "body": [],
+      "cta": "Build your chart → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju", "#FourPillars", "#KoreanAstrology", "#BaZi", "#Astrology"]
+    },
+    {
+      "id": 11,
+      "category": "twelve_unseong_sipsin",
+      "language": "en",
+      "publish_date_recommend": "2026-05-18",
+      "type": "thread",
+      "title": "12 Unseong: your life-stage map",
+      "hook": "Saju has a concept Western astrology completely lacks: 12 운성 (Unseong) — the life-stage of every character in your chart. From 'fetus' to 'tomb,' it tells you where each part of your life is in its cycle 🧵",
+      "body": [
+        "The 12 stages: 장생 (birth), 목욕 (bath), 관대 (coming-of-age), 건록 (peak), 제왕 (king), 쇠 (decline), 병 (sickness), 사 (death), 묘 (tomb), 절 (cut-off), 태 (fetus), 양 (gestation).",
+        "Each character in your 8 has a stage. Example: Day Master 고 (Yang Wood) born in summer = 제왕 stage = peak strength.",
+        "Same Day Master born in autumn = 쇠 stage = declining strength = needs support.",
+        "Why it matters: it tells you when to push (peak stages) and when to recover (death/tomb stages). Career timing without this is guessing.",
+        "Free 12-Unseong reading in English → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d11"
+      ],
+      "cta": "Map your life-stages → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju", "#KoreanAstrology", "#Unseong", "#LifeCycles", "#BaZi"]
+    },
+    {
+      "id": 12,
+      "category": "twelve_unseong_sipsin",
+      "language": "en",
+      "publish_date_recommend": "2026-05-19",
+      "type": "thread",
+      "title": "Sipsin (Ten Gods): your relationship map",
+      "hook": "The single most useful concept in Korean Saju: 십신 (Sipsin) = 'Ten Gods.' It's a relationship map. It tells you how every person, opportunity, and obstacle relates to YOU. Western astrology has no analog 🧵",
+      "body": [
+        "10 Gods, paired by polarity:\n• 비견/곁재 = peers/competitors\n• 식신/상관 = creativity/expression\n• 편재/정재 = wealth (variable/stable)\n• 편관/정관 = authority (challenge/legitimate)\n• 편인/정인 = knowledge/protection",
+        "Your 8 characters generate a unique mix of these 10. Strong Wealth gods? Money-magnet (also money-spender).",
+        "Strong Authority gods? Natural leader (also pressure-prone).",
+        "Strong Knowledge gods? Academic/researcher (also overthinker).",
+        "Free Sipsin breakdown for your chart → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d12"
+      ],
+      "cta": "See your Ten Gods profile → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju", "#TenGods", "#Sipsin", "#KoreanAstrology", "#BaZi"]
+    },
+    {
+      "id": 13,
+      "category": "twelve_unseong_sipsin",
+      "language": "en",
+      "publish_date_recommend": "2026-05-20",
+      "type": "thread",
+      "title": "Sinsal (Spirit Killers): the 22 patterns",
+      "hook": "The spookiest part of Korean Saju: 신살 (Sinsal) — 22 named 'spirit killer' patterns that activate based on character combinations. Some bring fame. Some bring travel. Some bring sudden change. Here are 5 famous ones 🧵",
+      "body": [
+        "1. 도화살 (Peach Blossom) — the charm/attraction pattern. Common in actors, idols, models.",
+        "2. 역마살 (Travel Horse) — the wanderer pattern. Common in expats, frequent flyers, digital nomads.",
+        "3. 곡각살 (Lonely Roof) — the solitude pattern. Common in researchers, monks, deep thinkers.",
+        "4. 화개살 (Flower Cover) — the artistic/spiritual pattern. Common in writers, designers, mystics.",
+        "5. 천을귀인 (Heavenly Noble) — the lucky-helper pattern. People who attract mentors and rescue at critical moments.",
+        "Check which Sinsal you have (free, English) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d13"
+      ],
+      "cta": "Find your Spirit Killer pattern → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju", "#KoreanAstrology", "#Sinsal", "#Astrology", "#BaZi"]
+    },
+    {
+      "id": 14,
+      "category": "twelve_unseong_sipsin",
+      "language": "en",
+      "publish_date_recommend": "2026-05-21",
+      "type": "thread",
+      "title": "Daewoon (10-year luck cycles)",
+      "hook": "Most powerful prediction tool in Korean Saju: 대운 (Daewoon) — your 10-year luck cycle. It changes every decade and tells you which life domain dominates your next 10 years. Here's how to read yours 🧵",
+      "body": [
+        "From birth, your Daewoon shifts every ~10 years. Each block is a 2-character pair (stem + branch) that flavors that decade.",
+        "If your current Daewoon strengthens your Wealth gods? Decade of money flow.",
+        "If it strengthens Authority gods? Decade of leadership/promotion.",
+        "If it strengthens Knowledge gods? Decade of education/research/spiritual growth.",
+        "This is why Korean families used to consult Saju before big life moves — they were checking the macro tide before swimming.",
+        "See your next 30 years projected (free, English) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d14"
+      ],
+      "cta": "Map your 10-year luck cycles → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju", "#Daewoon", "#KoreanAstrology", "#LuckCycles", "#BaZi"]
+    },
+    {
+      "id": 15,
+      "category": "twelve_unseong_sipsin",
+      "language": "en",
+      "publish_date_recommend": "2026-05-22",
+      "type": "single",
+      "title": "Sipsin one-liner card",
+      "hook": "Korean Saju Ten Gods, one-liner each:\n\n🤝 Peers → collaboration & rivalry\n🎨 Output → creativity & expression\n💰 Wealth → money & desire\n👑 Authority → leadership & pressure\n📚 Knowledge → learning & protection\n\nWhich is dominant in YOU?\n\nFree check → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d15",
+      "body": [],
+      "cta": "Find your dominant god → cheonmyeongdang.com/en",
+      "hashtags": ["#Saju", "#TenGods", "#KoreanAstrology", "#Astrology", "#BaZi"]
+    },
+    {
+      "id": 16,
+      "category": "horse_year_2026",
+      "language": "en",
+      "publish_date_recommend": "2026-05-23",
+      "type": "thread",
+      "title": "2026 Bing-Wu Red Horse year",
+      "hook": "2026 is the Red Horse year (동오, Bing-Wu) — a Yang Fire over Fire double-fire year. Last one was 1966. Here's what 1966 looked like and what 2026 might mirror 🧵",
+      "body": [
+        "1966 highlights:\n• Cultural Revolution begins (China)\n• Beatles' final tour\n• Star Trek premieres\n• Japan's birth rate drops 25% (Hinoeuma superstition)\n• US civil rights peak",
+        "Theme: combustion. What was hidden ignites. What was repressed explodes. What was old burns away.",
+        "2026 stacking trends already mirror this:\n• AI revolution accelerating\n• US-China tension ignition points\n• Gen Z taking consumer power\n• Climate-driven reordering",
+        "In Saju, double-fire years favor: bold action, public visibility, decisive launches. They punish: hesitation, opacity, slow systems.",
+        "See how 2026 hits YOUR chart specifically (free) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d16"
+      ],
+      "cta": "Get your 2026 forecast → cheonmyeongdang.com/en",
+      "hashtags": ["#2026", "#RedHorseYear", "#Saju", "#KoreanAstrology", "#BaZi"]
+    },
+    {
+      "id": 17,
+      "category": "horse_year_2026",
+      "language": "en",
+      "publish_date_recommend": "2026-05-24",
+      "type": "thread",
+      "title": "Best months to act in 2026",
+      "hook": "If 2026 is a double-fire year, here are the 4 'power months' for launching, pitching, debuting in Korean Saju — and the 2 to AVOID big moves 🧵",
+      "body": [
+        "POWER MONTHS:\n• May (계사 month) — fire on water, dramatic visibility\n• July (을미) — wood feeds fire, peak energy\n• September (정유) — fire on metal, decisive cut-through\n• December (경자) — metal-water transition, year-end harvests",
+        "AVOID MONTHS for big launches:\n• March (신묘) — metal clash, friction with the year energy\n• October (무술) — earth-on-earth, stagnation pattern",
+        "These are macro tides — your personal chart can override them. But for 'when to launch the product,' these are decent defaults.",
+        "Get YOUR personalized 2026 month-by-month forecast (free) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d17"
+      ],
+      "cta": "Get monthly 2026 timing → cheonmyeongdang.com/en",
+      "hashtags": ["#2026Forecast", "#Saju", "#KoreanAstrology", "#Timing", "#BaZi"]
+    },
+    {
+      "id": 18,
+      "category": "horse_year_2026",
+      "language": "en",
+      "publish_date_recommend": "2026-05-25",
+      "type": "thread",
+      "title": "Who wins big in a Red Horse year",
+      "hook": "Korean Saju identifies 3 chart-types that disproportionately benefit in Red Horse years like 2026. Are you one of them? 🧵",
+      "body": [
+        "TYPE 1: Strong Wood Day Masters (갑/을). Wood feeds Fire → your output explodes in 2026. Best year of the decade for visibility.",
+        "TYPE 2: Weak Fire Day Masters (병/정) needing reinforcement. The year's fire energy supports you → confidence + leadership unlock.",
+        "TYPE 3: Charts with strong Earth gods. Fire produces Earth → your money/grounding gods get fed all year.",
+        "Who should be cautious: Strong Metal Day Masters (경/신) — fire melts metal. Slow down on aggressive plays.",
+        "Find your Day Master + 2026 fit (free) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d18"
+      ],
+      "cta": "Check your 2026 fit → cheonmyeongdang.com/en",
+      "hashtags": ["#2026Forecast", "#RedHorseYear", "#Saju", "#KoreanAstrology", "#BaZi"]
+    },
+    {
+      "id": 19,
+      "category": "horse_year_2026",
+      "language": "en",
+      "publish_date_recommend": "2026-05-26",
+      "type": "thread",
+      "title": "Money in 2026: industries Saju favors",
+      "hook": "Industry-by-industry 2026 forecast in Korean Saju: which sectors the Red Horse year structurally favors, and which face headwinds. (Disclaimer: macro tide, not investment advice.) 🧵",
+      "body": [
+        "FAVORED (Fire-aligned sectors):\n• AI/compute (fire = energy/electricity)\n• Entertainment/media\n• Restaurants/hospitality\n• Consumer brands with strong visual identity",
+        "FAVORED (Wood-aligned, feeding fire):\n• Education\n• Publishing\n• Wellness/healthcare\n• Sustainable agriculture",
+        "HEADWIND (Metal sectors, melted by fire):\n• Heavy industry\n• Traditional banking (especially legacy structures)\n• Mining",
+        "HEADWIND (Water sectors, evaporated by fire):\n• Shipping\n• Cold-chain\n• Some logistics",
+        "Map your career/business to 2026 (free) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d19"
+      ],
+      "cta": "Get your 2026 work forecast → cheonmyeongdang.com/en",
+      "hashtags": ["#2026Forecast", "#Saju", "#BusinessAstrology", "#KoreanAstrology", "#BaZi"]
+    },
+    {
+      "id": 20,
+      "category": "horse_year_2026",
+      "language": "en",
+      "publish_date_recommend": "2026-05-27",
+      "type": "thread",
+      "title": "Why 1966 was bad for one country only",
+      "hook": "Last Red Horse year (1966) hit Japan uniquely hard — birth rate dropped 25% from a single superstition. Here's the story, and what 2026 means for the modern version of that fear 🧵",
+      "body": [
+        "Hinoeuma superstition (Japan, since Edo period): women born in Bing-Wu (Red Horse) years are 'too strong-willed' and unsuitable as wives.",
+        "1966: parents collectively delayed/avoided births. Annual births fell from ~1.82M to ~1.36M. Single largest fertility shock in modern Japan.",
+        "Korea historically had a similar superstition but it was less binding, and it has fully faded. China never had it.",
+        "2026: Japan's birth rate is already at crisis lows. Demographers are watching whether even modern, secular Japanese parents quietly avoid Red Horse births again.",
+        "The data point itself doesn't matter. What matters: superstitions move populations. Saju is the systematic version of that intuition — surfaced and analyzed.",
+        "Read your own chart instead of inheriting a superstition (free) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d20"
+      ],
+      "cta": "Read your own chart → cheonmyeongdang.com/en",
+      "hashtags": ["#2026", "#Hinoeuma", "#Saju", "#KoreanAstrology", "#BaZi"]
+    },
+    {
+      "id": 21,
+      "category": "kpop_kdrama_charts",
+      "language": "en",
+      "publish_date_recommend": "2026-05-28",
+      "type": "thread",
+      "title": "K-drama character archetypes via Sipsin",
+      "hook": "Why does every K-drama have the same 5 character types? Korean writers know Saju. Here are the 5 Ten Gods archetypes — and the K-drama trope each one became 🧵\n(Note: trope analysis, not real-person reads.)",
+      "body": [
+        "1. PEER GODS (비견곁재) → the rival/best friend who pushes the lead. The chaebol heir's loyal cousin. The idol's competitive bandmate.",
+        "2. OUTPUT GODS (식신상관) → the artist/free spirit. The ramyeon shop owner with a past. The webtoon-drawing love interest.",
+        "3. WEALTH GODS (재성) → the ambitious lead. CEO romance. The flower-shop heiress. Money-as-character.",
+        "4. AUTHORITY GODS (관성) → the prosecutor, surgeon, detective. The 'stoic-with-a-secret' male lead.",
+        "5. KNOWLEDGE GODS (인성) → the wise grandma, the protective senior, the encyclopedic side character.",
+        "Find your own dominant archetype (free, English) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d21"
+      ],
+      "cta": "Find your K-drama archetype → cheonmyeongdang.com/en",
+      "hashtags": ["#KDrama", "#Saju", "#KoreanAstrology", "#KCulture", "#TenGods"]
+    },
+    {
+      "id": 22,
+      "category": "kpop_kdrama_charts",
+      "language": "en",
+      "publish_date_recommend": "2026-05-29",
+      "type": "thread",
+      "title": "K-pop debut date as a chart",
+      "hook": "K-pop companies pick debut dates carefully. The DEBUT DATE creates a 'group chart' in Korean Saju. Here's how a debut day becomes the group's collective destiny 🧵\n(Date analysis, not personal reads.)",
+      "body": [
+        "When a group debuts, the date functions like a 'birth' for the group entity. Saju practitioners can read it like a person's chart.",
+        "August 8, 2016 — a famous girl group debut. Day Master Yang Metal + Monkey support = world-bestriding completionism. Decade later, still #1 globally. The chart held.",
+        "June 13, 2013 — a famous boy group debut. Yang Metal Day Master + supportive Water gods = global influence + emotional connection. Pattern visible in their decade-long arc.",
+        "July 22, 2022 — newer girl group debut. Yang Metal + Horse hour = trend-creating sharpness. Watch the next 4–3 years.",
+        "Your own chart works the same way. Free English Saju → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d22"
+      ],
+      "cta": "Build your own debut/birth chart → cheonmyeongdang.com/en",
+      "hashtags": ["#KPop", "#Saju", "#KoreanAstrology", "#BirthChart", "#BaZi"]
+    },
+    {
+      "id": 23,
+      "category": "kpop_kdrama_charts",
+      "language": "en",
+      "publish_date_recommend": "2026-05-30",
+      "type": "thread",
+      "title": "Why K-drama leads have 'birth secret' tropes",
+      "hook": "Every other K-drama has a 'switched at birth' or 'unknown birth time' twist. There's a Saju reason — birth time controls 25% of your chart. Korean writers weaponize this for plot 🧵",
+      "body": [
+        "If you don't know your birth hour, your Hour Pillar is missing. That's 2 of your 8 characters — a quarter of the read.",
+        "K-drama writers use this culturally: a hidden birth = hidden destiny. The character literally cannot know their full self until the secret is revealed.",
+        "It's a cultural shorthand foreign audiences often miss. The 'birth secret reveal' isn't just plot — it's a Saju-coded identity unlock.",
+        "(This is also why Korean fans care SO much about idols' birth times being public.)",
+        "Build YOUR full chart (with or without time) free → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d23"
+      ],
+      "cta": "Unlock your full chart → cheonmyeongdang.com/en",
+      "hashtags": ["#KDrama", "#Saju", "#KoreanAstrology", "#KCulture", "#BaZi"]
+    },
+    {
+      "id": 24,
+      "category": "kpop_kdrama_charts",
+      "language": "en",
+      "publish_date_recommend": "2026-05-31",
+      "type": "thread",
+      "title": "Compatibility: idol pairings via Day Master",
+      "hook": "K-pop fans constantly speculate about member compatibility. Korean Saju has a real framework for this: Day Master element relationships. Here are the 5 dynamics, with idol-trope examples 🧵\n(Trope analysis, not personal claims.)",
+      "body": [
+        "1. SAME ELEMENT → 'mirror twin' energy. Often the 'best friends' member pair fans love.",
+        "2. PRODUCING (Wood→Fire, Fire→Earth, etc.) → 'mentor-mentee' chemistry. The 'leader supports the maknae' dynamic.",
+        "3. CONTROLLING (Wood→Earth, Fire→Metal) → 'push-pull' chemistry. The rival-but-respect pair.",
+        "4. CONTROLLED (you receive control) → 'protective' chemistry. The 'I rely on this member' pair.",
+        "5. WEAKENING (you produce them, they drain you) → 'caretaker-fan' chemistry. The 'mom of the group' role.",
+        "Check YOUR compatibility with someone (free) → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d24"
+      ],
+      "cta": "Check your compatibility → cheonmyeongdang.com/en",
+      "hashtags": ["#KPop", "#Compatibility", "#Saju", "#KoreanAstrology", "#BaZi"]
+    },
+    {
+      "id": 25,
+      "category": "kpop_kdrama_charts",
+      "language": "en",
+      "publish_date_recommend": "2026-06-01",
+      "type": "single",
+      "title": "K-pop chart card",
+      "hook": "K-pop & K-drama fans — want to know which Sipsin (Ten Gods) archetype YOU match?\n\n🔥 Wealth-dominant = ambitious lead\n⚖️ Authority-dominant = stoic prosecutor\n🎨 Output-dominant = artist trope\n📚 Knowledge-dominant = wise senior\n🤝 Peer-dominant = loyal best friend\n\nFree English check → https://cheonmyeongdang.com/en/?utm_source=x&utm_campaign=v2_d25",
+      "body": [],
+      "cta": "Find your archetype → cheonmyeongdang.com/en",
+      "hashtags": ["#KDrama", "#KPop", "#Saju", "#KoreanAstrology", "#KCulture"]
+    },
+    {
+      "id": 26,
+      "category": "japanese_korean_uranai",
+      "language": "ja",
+      "publish_date_recommend": "2026-06-02",
+      "type": "thread",
+      "title": "韓国四柱推命 体験",
+      "hook": "「韓国の占い」と言えばタロットやスピリチュアルだけと思っていませんか?\n本当に人生を見るのは「四柱推命(サジュ)」です。今、日本語で完全無料で体験できます 🧵",
+      "body": [
+        "四柱推命は生年月日時を「4つの柱×2文字=8文字」にコード化した韓国伝統の命理学。西洋占星術の「太陽星座」1つとは読みの深さが違います。",
+        "読めるもの:\n• 性格・適職(月柱)\n• 恒恋・結婚運(日柱)\n• 2026年丈午年の流れ(歳運)\n• 10年ごとの大運\n• 人間関係(十神)",
+        "重要なのは「生まれた時間」。時間は診断の25%を占めます。母子手帳や出生証明書で確認できます。",
+        "登録不要・完全無料・日本語対応。まず1分でチャートを見て下さい。\n▶️ https://cheonmyeongdang.com/ja/?utm_source=x&utm_campaign=v2_d26"
+      ],
+      "cta": "無料で四柱推命 → cheonmyeongdang.com/ja",
+      "hashtags": ["#韓国占い", "#四柱推命", "#サジュ", "#丈午年", "#2026年運勢"]
+    },
+    {
+      "id": 27,
+      "category": "japanese_korean_uranai",
+      "language": "ja",
+      "publish_date_recommend": "2026-06-03",
+      "type": "thread",
+      "title": "丈午年迷信の本当の意味",
+      "hook": "1966年の丈午年、日本で出生数が25%減った「丈午年迷信」——でも韓国四柱推命では「丈午年生まれ」は本当はどんな人でしょうか? 🧵",
+      "body": [
+        "韓国伝統の読み:\n丈(ひのえ) = 太陽の火 = 温かくて明るいリーダー質\n午(うま) = 真夏の馬の火 = 行動力と情熱",
+        "つまり丈午年生まれは:\n• 見せる仕事に適している(エンタメ・講師・朝ドラ主演)\n• リーダーシップを取るのが自然\n• 古いものを火で燃やして新しいものを生むタイプ",
+        "「気が強い」=ネガティブという見方こそ古い。現代では「ステージで輝く人」「決断力のある人」と評価される質です。",
+        "あなたの本当の命式を読みませんか? 無料・日本語。\n▶️ https://cheonmyeongdang.com/ja/?utm_source=x&utm_campaign=v2_d27"
+      ],
+      "cta": "丈午年生まれもそれ以外も → cheonmyeongdang.com/ja",
+      "hashtags": ["#韓国占い", "#丈午年", "#四柱推命", "#2026年", "#サジュ"]
+    },
+    {
+      "id": 28,
+      "category": "japanese_korean_uranai",
+      "language": "ja",
+      "publish_date_recommend": "2026-06-04",
+      "type": "thread",
+      "title": "推しとの相性を日柱で",
+      "hook": "K-POP・K-dramaファンに人気の「推しとの相性診断」——韓国四柱推命では「日柱」で見ます。準さ推しとの相性、試した事ありますか? 🧵",
+      "body": [
+        "日柱の「日干」があなたと推しの「本質」。五行(木火土金水)の関係で相性が読めます。",
+        "よい相性:\n• 木→火(生) メンター型推しとファンの関係\n• 同じ五行 〜心中推し関係〜\n• 金→水(生) 厳しい推しとファンの依存",
+        "要注意相性:\n• 木→土(克) 推しからストレスを受けるタイプ\n• 金→木(克) 推しが誇りに思えないタイプ",
+        "推しの生年月日(ただし公表ケースのみ・创作として)とあなたの診断、無料で見られます。\n▶️ https://cheonmyeongdang.com/ja/?utm_source=x&utm_campaign=v2_d28"
+      ],
+      "cta": "推しとの相性診断 → cheonmyeongdang.com/ja",
+      "hashtags": ["#韓国占い", "#推し活", "#相性診断", "#Kポップ", "#四柱推命"]
+    },
+    {
+      "id": 29,
+      "category": "japanese_korean_uranai",
+      "language": "ja",
+      "publish_date_recommend": "2026-06-05",
+      "type": "thread",
+      "title": "2026年キャリア推し月・避ける月",
+      "hook": "2026年丈午年 — どの月に動けばキャリアが高く伸び、どの月は動かない方が良いか、韓国四柱推命の公式タイミングでシェアします 🧵",
+      "body": [
+        "転職・起業・プレゼンに最適:\n• 5月(火が見える月)\n• 7月(火ピーク)\n• 9月(火が金を切る月)\n• 12月(年末収穫)",
+        "動かない方が良い:\n• 3月(金・年と衰突)\n• 10月(土重複・停滞パターン)",
+        "これは「社会全体の潮」。あなた個人の命式で調整が入ります。",
+        "個人的な2026年月別タイミングを見る(無料)→ https://cheonmyeongdang.com/ja/?utm_source=x&utm_campaign=v2_d29"
+      ],
+      "cta": "月別タイミングを見る → cheonmyeongdang.com/ja",
+      "hashtags": ["#2026年運勢", "#韓国占い", "#四柱推命", "#キャリアアップ", "#タイミング"]
+    },
+    {
+      "id": 30,
+      "category": "japanese_korean_uranai",
+      "language": "ja",
+      "publish_date_recommend": "2026-06-06",
+      "type": "single",
+      "title": "日本語サジュ無料キャンペーン【拡散ポスト】",
+      "hook": "🎁 友達を誘うと互いに1ヶ月プレミアム無料🎁\n\n参加方法:\n1️⃣ https://cheonmyeongdang.com/ja/ で友達リンクをシェア\n2️⃣ 両者がサインアップすると両方に1ヶ月プレミアム付与\n3️⃣ プロモコード: FRIEND2026\n\n限定100名・先着順、どうぞ!\n▶️ https://cheonmyeongdang.com/ja/?ref=FRIEND2026",
+      "body": [],
+      "cta": "プロモコード FRIEND2026 → cheonmyeongdang.com/ja",
+      "hashtags": ["#韓国占い", "#フォローとRT", "#プレゼント企画", "#四柱推命", "#サジュ"]
+    }
+  ],
+  "scheduling": {
+    "frequency": "1_per_day",
+    "start_date": "2026-05-08",
+    "end_date": "2026-06-06",
+    "duration_days": 30,
+    "schtask_compatible": true,
+    "auto_post_script": "auto_post_x_jp.py (extend to en)"
+  }
+}
