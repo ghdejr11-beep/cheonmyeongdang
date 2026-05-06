@@ -3631,6 +3631,8 @@ async function redeemCoupon(ev){
 <script src="js/saju-engine.js?v=20260427d"></script>
 <script src="js/premium-saju.js?v=20260427d"></script>
 <script src="js/premium-render.js?v=20260427d"></script>
+<script src="js/gaewoonbeob.js?v=20260506a"></script>
+<script src="js/pdf-generator.js?v=20260506a"></script>
 <script>
 // Global scope (no IIFE)
 
@@ -4420,6 +4422,25 @@ async function redeemCoupon(ev){
  (r.기본정보.입력.양력 || '').replace(/\D/g,'') * 1 + getDayOfYear() * 17 + (uctx.gender === 'F' ? 3 : 1),
  '내 사주 + 오늘 날짜 기반'
  )}
+
+<!-- 🍀 개운법 카드 (일간 + 용신 보강) -->
+ ${(typeof window.buildGaewoonbeobCard === 'function') ? window.buildGaewoonbeobCard(r) : ''}
+
+<!-- 📄 PDF 30페이지 다운로드 (프리미엄) -->
+ ${isPremium ? `
+ <div style="margin:24px 0;padding:20px;background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(74,158,142,0.08));border:2px solid var(--gold);border-radius:12px;text-align:center;">
+   <strong style="color:var(--gold2);font-size:1rem;">⭐ 프리미엄 — 30페이지 정밀 보고서</strong>
+   <p style="color:var(--text2);font-size:0.85rem;margin:8px 0 14px;line-height:1.7;">표지·사주·십신·오행·신살·신강신약·12운성·대운·배우자운·자녀운·부모운·직업·결혼·황금기·개운법·12개월 운세까지 A4 30페이지 PDF로 받으세요.</p>
+   <button onclick="downloadSajuPDF()" class="btn-pdf btn-gold" style="font-size:0.95rem;padding:12px 28px;">📄 PDF 30페이지 다운로드</button>
+ </div>
+ ` : `
+ <div style="margin:24px 0;padding:20px;background:rgba(0,0,0,0.4);border:2px dashed var(--border);border-radius:12px;text-align:center;">
+   <div style="font-size:1.6rem;margin-bottom:6px;">🔒</div>
+   <strong style="color:var(--gold2);font-size:1rem;">PDF 30페이지 정밀 보고서 (프리미엄 전용)</strong>
+   <p style="color:var(--text2);font-size:0.85rem;margin:8px 0 14px;line-height:1.7;">A4 30페이지 PDF로 본인 사주를 영구 보관하세요.<br>표지·사주 8글자·십신·오행·12운성·대운·배우자·자녀·황금기·개운법·12개월 운세 포함.</p>
+   <a href="#premium" onclick="document.getElementById('premium')&&document.getElementById('premium').scrollIntoView({behavior:'smooth'});return false;" style="display:inline-block;padding:10px 22px;background:var(--gold);color:#1a1206;border-radius:8px;text-decoration:none;font-weight:600;">프리미엄 잠금해제 — ₩29,900</a>
+ </div>
+ `}
 
 <!-- Upsell -->
 <div class="upsell-box">
