@@ -52,14 +52,14 @@ def check():
         # script 블록 균형 체크 (<script>...</script>)
         opens = html.count("<script")
         closes = html.count("</script>")
-        # dream 관련 키워드 존재
-        dream_kw = len(re.findall(r'keyword\s*:\s*["\']', html))
+        # dream 관련 키워드 존재 (스키마: { name: '...' } 패턴)
+        dream_kw = len(re.findall(r"name\s*:\s*['\"]", html))
         report["checks"]["index.html"] = {
-            "status": "OK" if opens == closes else "SCRIPT_IMBALANCE",
+            "status": "OK" if opens == closes and dream_kw > 100 else ("SCRIPT_IMBALANCE" if opens != closes else "DREAM_DATA_LOW"),
             "size_bytes": size,
             "script_open": opens,
             "script_close": closes,
-            "dream_keyword_refs": dream_kw,
+            "dream_name_refs": dream_kw,
         }
 
     # www 동기화 체크
@@ -98,6 +98,16 @@ def check():
     out_path = OUT / f"health_{TODAY}.json"
     out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"wrote {out_path}")
+
+    # 로그 회전 (90일 이전 health_*.json 삭제)
+    cutoff = (datetime.date.today() - datetime.timedelta(days=90)).isoformat()
+    for old in OUT.glob("health_*.json"):
+        try:
+            d = old.stem.replace("health_", "")
+            if d < cutoff:
+                old.unlink()
+        except Exception:
+            pass
 
     # 이상 감지 → 텔레그램
     alerts = []

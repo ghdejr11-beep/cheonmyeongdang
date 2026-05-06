@@ -177,6 +177,16 @@ def main():
                                    indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"✅ 오늘 총 {len(added_all)}개 꿈 추가 · {log_file}")
 
+    # 로그 회전 (90일 이전 dreams_*.json 삭제)
+    cutoff = (today - datetime.timedelta(days=90)).isoformat()
+    for old in LOG_DIR.glob("dreams_*.json"):
+        try:
+            d = old.stem.replace("dreams_", "")
+            if d < cutoff:
+                old.unlink()
+        except Exception:
+            pass
+
 
 if __name__ == "__main__":
     main()

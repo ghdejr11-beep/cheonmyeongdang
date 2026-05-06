@@ -69,6 +69,16 @@ def main():
     log_file = LOG_DIR / f"daily_fortune_{today.isoformat()}.json"
     log_file.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"📂 로그: {log_file}")
+
+    # 로그 회전 (90일 이전 daily_fortune_*.json 삭제)
+    cutoff = (today - datetime.timedelta(days=90)).isoformat()
+    for old in LOG_DIR.glob("daily_fortune_*.json"):
+        try:
+            d = old.stem.replace("daily_fortune_", "")
+            if d < cutoff:
+                old.unlink()
+        except Exception:
+            pass
     print(f"   성공 {result.get('sent', 0)} · 스킵 {result.get('skipped', 0)} · 실패 {result.get('failed', 0)}")
 
     # 관리자 요약
