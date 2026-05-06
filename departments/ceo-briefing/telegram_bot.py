@@ -53,10 +53,50 @@ def send(chat_id, text):
     })
 
 
+PHOTO_DIR = os.path.join(ROOT, 'departments/telegram_inbox/photos')
+
+
+def save_photo(msg):
+    """Download photo from Telegram → /telegram_inbox/photos/."""
+    os.makedirs(PHOTO_DIR, exist_ok=True)
+    photos = msg.get('photo', [])
+    if not photos:
+        return None
+    # highest resolution = largest file_size
+    photos = sorted(photos, key=lambda p: p.get('file_size', 0), reverse=True)
+    file_id = photos[0]['file_id']
+    info = requests.get(f'{BASE}/getFile', params={'file_id': file_id}).json()
+    if not info.get('ok'):
+        return None
+    file_path = info['result']['file_path']
+    ext = file_path.rsplit('.', 1)[-1] if '.' in file_path else 'jpg'
+    msg_id = msg.get('message_id', 'unknown')
+    out = os.path.join(PHOTO_DIR, f'photo_{msg_id}.{ext}')
+    img = requests.get(f'https://api.telegram.org/file/{TOKEN.split(":")[0] and "bot"+TOKEN}/{file_path}').content
+    with open(out, 'wb') as f:
+        f.write(img)
+    # also save as latest.jpg
+    latest = os.path.join(PHOTO_DIR, f'latest.{ext}')
+    with open(latest, 'wb') as f:
+        f.write(img)
+    return out
+
+
 def handle(msg):
     chat_id = msg['chat']['id']
     if chat_id != ALLOWED_CHAT:
         return
+
+    # Handle photos first (no text)
+    if msg.get('photo'):
+        try:
+            saved = save_photo(msg)
+            if saved:
+                send(chat_id, f'📷 사진 받았어요!\n저장: <code>{saved}</code>\n다음 Claude 세션에서 사용 가능.')
+                return
+        except Exception as e:
+            send(chat_id, f'⚠️ 사진 저장 실패: {e}')
+            return
 
     text = msg.get('text', '').strip()
     if not text.startswith('/'):

@@ -37,7 +37,7 @@ TOKEN_PATH = os.path.normpath(os.path.join(
 
 FROM_NAME = 'Deokhun Hong (KunStudio)'
 FROM_EMAIL = 'ghdejr11@gmail.com'
-BATCH_SIZE = 10  # emails per day
+BATCH_SIZE = 5  # emails per day (안전 cap, 6일 분산)
 SLEEP_BETWEEN_SENDS = 6  # seconds — 10 emails / 60s = under Gmail per-minute soft cap
 
 
@@ -114,13 +114,16 @@ def main():
     data = load_emails()
     emails = data['emails']
 
-    # Sort by priority then idx so high-priority first
+    # FILTER unfilled BEFORE sorting (verified-only queue)
+    verified = [e for e in emails if is_filled(e)]
+
+    # Sort verified by priority then idx so high-priority first
     priority_order = {'높음': 0, '중간': 1, '낮음': 2}
-    emails_sorted = sorted(emails, key=lambda e: (priority_order.get(e['priority'], 9), e['idx']))
+    verified_sorted = sorted(verified, key=lambda e: (priority_order.get(e['priority'], 9), e['idx']))
 
     start = (args.batch - 1) * BATCH_SIZE
     end = start + BATCH_SIZE
-    batch = emails_sorted[start:end]
+    batch = verified_sorted[start:end]
 
     if not batch:
         print('[INFO] Batch {} is empty — nothing to do.'.format(args.batch))

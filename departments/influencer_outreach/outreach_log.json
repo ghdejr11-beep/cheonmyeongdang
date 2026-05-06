@@ -1,0 +1,30 @@
+{
+  "_meta": {
+    "purpose": "Cheonmyeongdang influencer outreach send-log — append a row at moment of DM send",
+    "created": "2026-05-06",
+    "schema": {
+      "handle": "@username",
+      "platform": "TikTok | Instagram | X | YouTube",
+      "status": "rising | declining",
+      "sent_at": "ISO8601 e.g. 2026-05-06T14:23:11+09:00",
+      "code": "KSAJU-XXXXXXXX",
+      "response": "no_reply | replied_positive | replied_negative | redeemed | unsubscribed | bounced"
+    },
+    "campaign_codes_prefix": "KSAJU-",
+    "expected_redemption_rate": "1-3% on cold DMs, 5-10% if reply received"
+  },
+  "sent": [
+    {
+      "handle": "@chelc_cooky",
+      "platform": "Email (PR/Collab)",
+      "recipient": "ashley_dianne08@yahoo.com",
+      "status": "rising_kpop",
+      "country": "Philippines",
+      "followers": "38000",
+      "sent_at": "2026-05-06T15:56:34.012141",
+      "gmail_msg_id": "19dfc12b1dd224d5",
+      "code": "KSAJU-00003-XUFERK",
+      "response": null
+    }
+  ]
+}

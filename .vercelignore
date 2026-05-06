@@ -8,10 +8,8 @@ hq/
 scripts/
 www/
 
-# Capacitor 관련
+# Capacitor 관련 (모바일 빌드 전용 파일만 — package.json은 Vercel이 npm install용으로 필요)
 capacitor.config.json
-package.json
-package-lock.json
 
 # 비밀
 .secrets

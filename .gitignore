@@ -58,3 +58,4 @@ departments/sales-collection/data/yt_*_daily.json
 departments/media/src/*_state.json
 departments/media/src/seasonal_state.json
 departments/media/src/tax_promo_queue.json
+.secrets.backup_*

@@ -20,6 +20,8 @@ URLS = [
     f"https://{HOST}/blog/how-to-check-compatibility.html",
     f"https://{HOST}/blog/gwansang-basics.html",
     f"https://{HOST}/blog/saju-beginner-guide.html",
+    f"https://{HOST}/blog/2026-new-year-fortune-saju.html",
+    f"https://{HOST}/team",
     f"https://{HOST}/#ddi",
 ]
 

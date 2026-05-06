@@ -899,6 +899,942 @@
         "free",
         "vast"
       ]
+    },
+    {
+      "romanized": "Ryu-jin",
+      "hangul": "류진",
+      "hanja": "流珍",
+      "gender": "female",
+      "meaning_short": "Flowing treasure",
+      "meaning_long": "류(流) flowing like a river; 진(珍) rare and precious treasure. A girl whose grace moves freely and whose value is beyond measure.",
+      "popularity_2026": "trending",
+      "famous_examples": "Ryu Jin of ITZY (K-pop idol)",
+      "kpop_match": "ITZY Ryujin (direct match)",
+      "saju_meaning": "Water element dominant, fluid yin energy that adapts and shines in all circumstances",
+      "pronunciation_guide": "RYOO-jin (rhymes with 'you-jin' with a soft R)",
+      "personality_traits": [
+        "magnetic",
+        "adaptable",
+        "charismatic"
+      ]
+    },
+    {
+      "romanized": "Tae-min",
+      "hangul": "태민",
+      "hanja": "泰民",
+      "gender": "male",
+      "meaning_short": "Great and people-centered",
+      "meaning_long": "태(泰) greatness and peace; 민(民) the people. A boy destined to lead with calm authority and a heart devoted to those around him.",
+      "popularity_2026": "steady",
+      "famous_examples": "SHINee Taemin (legendary K-pop soloist)",
+      "kpop_match": "SHINee Taemin (direct match)",
+      "saju_meaning": "Earth element base with Metal refinement, stable yang energy that commands respect",
+      "pronunciation_guide": "TAY-min (rhymes with 'hay-min')",
+      "personality_traits": [
+        "disciplined",
+        "elegant",
+        "devoted"
+      ]
+    },
+    {
+      "romanized": "Chae-ryeong",
+      "hangul": "채령",
+      "hanja": "彩靈",
+      "gender": "female",
+      "meaning_short": "Colorful spirit",
+      "meaning_long": "채(彩) vivid colors and brilliance; 령(靈) a divine and luminous spirit. A girl whose presence brightens every room with vibrant spiritual energy.",
+      "popularity_2026": "rising",
+      "famous_examples": "ITZY Chaeryeong (K-pop idol)",
+      "kpop_match": "ITZY Chaeryeong (direct match)",
+      "saju_meaning": "Fire element with Wood support, expansive yin energy full of creative expression",
+      "pronunciation_guide": "CHAY-ryung (rhymes with 'hay-ryung')",
+      "personality_traits": [
+        "expressive",
+        "artistic",
+        "spirited"
+      ]
+    },
+    {
+      "romanized": "Hyun-jin",
+      "hangul": "현진",
+      "hanja": "賢珍",
+      "gender": "male",
+      "meaning_short": "Wise and precious",
+      "meaning_long": "현(賢) moral wisdom and intellect; 진(珍) rare and precious. A boy who is both intellectually gifted and a treasure to all who know him.",
+      "popularity_2026": "steady",
+      "famous_examples": "Stray Kids Hyunjin (K-pop idol and visual)",
+      "kpop_match": "Stray Kids Hyunjin (direct match)",
+      "saju_meaning": "Metal element with Water depth, sharp yang energy balanced by emotional intelligence",
+      "pronunciation_guide": "HYUN-jin (rhymes with 'fun-gin' with an H)",
+      "personality_traits": [
+        "creative",
+        "introspective",
+        "refined"
+      ]
+    },
+    {
+      "romanized": "Ye-rim",
+      "hangul": "예림",
+      "hanja": "藝琳",
+      "gender": "female",
+      "meaning_short": "Artistic jade forest",
+      "meaning_long": "예(藝) artistic talent and skill; 림(琳) beautiful jade and forest. A girl whose artistic soul is as deep and lush as a forest of precious gems.",
+      "popularity_2026": "rising",
+      "famous_examples": "Wonder Girls Yurim, common among dancers and artists",
+      "kpop_match": "MAMAMOO Wheein (similar artistic energy)",
+      "saju_meaning": "Wood element flourishing, yin energy rooted in creativity and natural beauty",
+      "pronunciation_guide": "YEH-rim (rhymes with 'yay-rim')",
+      "personality_traits": [
+        "artistic",
+        "gentle",
+        "imaginative"
+      ]
+    },
+    {
+      "romanized": "Seung-jun",
+      "hangul": "승준",
+      "hanja": "承俊",
+      "gender": "male",
+      "meaning_short": "Inheriting excellence",
+      "meaning_long": "승(承) to inherit and carry forward; 준(俊) outstanding talent and handsomeness. A boy who carries the best of his lineage and elevates it to new heights.",
+      "popularity_2026": "steady",
+      "famous_examples": "Common among Korean professional athletes and scholars",
+      "kpop_match": "EXO Suho (similar dignified energy)",
+      "saju_meaning": "Earth element grounded with Metal polish, strong yang energy tied to legacy and achievement",
+      "pronunciation_guide": "SEUNG-joon (rhymes with 'sung-june')",
+      "personality_traits": [
+        "ambitious",
+        "respectful",
+        "accomplished"
+      ]
+    },
+    {
+      "romanized": "Ha-rin",
+      "hangul": "하린",
+      "hanja": "夏麟",
+      "gender": "female",
+      "meaning_short": "Summer unicorn",
+      "meaning_long": "하(夏) the warmth and abundance of summer; 린(麟) the mythical qilin, symbolizing good luck and purity. A girl born with the radiance of summer and the grace of a divine creature.",
+      "popularity_2026": "trending",
+      "famous_examples": "Weki Meki Doyeon's stage name variant, popular in 2020s generation",
+      "kpop_match": "aespa Karina (similar ethereal quality)",
+      "saju_meaning": "Fire element shining with Wood vitality, bright yin energy that draws fortune",
+      "pronunciation_guide": "HAH-rin (rhymes with 'ha-rin')",
+      "personality_traits": [
+        "radiant",
+        "lucky",
+        "graceful"
+      ]
+    },
+    {
+      "romanized": "Do-hyun",
+      "hangul": "도현",
+      "hanja": "道賢",
+      "gender": "male",
+      "meaning_short": "Path of wisdom",
+      "meaning_long": "도(道) the way, path, and moral principle; 현(賢) sagely wisdom. A boy who walks life's journey guided by deep moral insight and philosophical clarity.",
+      "popularity_2026": "rising",
+      "famous_examples": "Actor Kim Do-hyun, B1A4 Baro (Lee Do-hyun stage names)",
+      "kpop_match": "VIXX N (similar philosophical presence)",
+      "saju_meaning": "Water element flowing with Earth stability, balanced yang energy of a natural leader",
+      "pronunciation_guide": "DOH-hyun (rhymes with 'go-fun' with an H)",
+      "personality_traits": [
+        "philosophical",
+        "principled",
+        "calm"
+      ]
+    },
+    {
+      "romanized": "Seo-rin",
+      "hangul": "서린",
+      "hanja": "瑞麟",
+      "gender": "female",
+      "meaning_short": "Auspicious and mythical",
+      "meaning_long": "서(瑞) auspicious signs and good omens; 린(麟) the sacred qilin of legend. A girl whose birth was heralded by fortune and whose nature is rare and magical.",
+      "popularity_2026": "rising",
+      "famous_examples": "Common in K-dramas for ethereal female leads",
+      "kpop_match": "IU (similar gentle otherworldly aura)",
+      "saju_meaning": "Metal element refined with Wood blessing, yin energy that carries divine favor",
+      "pronunciation_guide": "SUH-rin (rhymes with 'sir-rin')",
+      "personality_traits": [
+        "ethereal",
+        "fortunate",
+        "serene"
+      ]
+    },
+    {
+      "romanized": "Joon-hyuk",
+      "hangul": "준혁",
+      "hanja": "俊赫",
+      "gender": "male",
+      "meaning_short": "Outstanding and glorious",
+      "meaning_long": "준(俊) exceptional talent and handsome bearing; 혁(赫) brilliant radiance and glory. A boy whose gifts shine so brightly they cannot be ignored.",
+      "popularity_2026": "steady",
+      "famous_examples": "Actor Nam Joo-hyuk, popular in Korean business and arts communities",
+      "kpop_match": "ASTRO Cha Eun-woo (similar striking presence)",
+      "saju_meaning": "Fire element blazing with Metal brilliance, intense yang energy that commands attention",
+      "pronunciation_guide": "JOON-hyuk (rhymes with 'moon-hyuk')",
+      "personality_traits": [
+        "striking",
+        "talented",
+        "ambitious"
+      ]
+    },
+    {
+      "romanized": "Yoon-ah",
+      "hangul": "윤아",
+      "hanja": "潤雅",
+      "gender": "female",
+      "meaning_short": "Graceful and refined",
+      "meaning_long": "윤(潤) lustrous and nourishing like rain; 아(雅) elegant refinement and classic beauty. A girl whose very presence nurtures those around her with quiet, timeless grace.",
+      "popularity_2026": "classic",
+      "famous_examples": "SNSD Yoona (Im Yoon-ah, iconic K-pop star and actress)",
+      "kpop_match": "SNSD Yoona (direct match)",
+      "saju_meaning": "Water element nourishing with Metal elegance, harmonious yin energy of enduring beauty",
+      "pronunciation_guide": "YOON-ah (rhymes with 'moon-ah')",
+      "personality_traits": [
+        "graceful",
+        "nurturing",
+        "timeless"
+      ]
+    },
+    {
+      "romanized": "Chan-yeol",
+      "hangul": "찬열",
+      "hanja": "燦烈",
+      "gender": "male",
+      "meaning_short": "Brilliantly passionate",
+      "meaning_long": "찬(燦) dazzling radiance and brilliance; 열(烈) fierce passion and burning intensity. A boy whose enthusiasm and energy are as unstoppable as a blazing fire.",
+      "popularity_2026": "steady",
+      "famous_examples": "EXO Chanyeol (Park Chan-yeol, beloved K-pop idol)",
+      "kpop_match": "EXO Chanyeol (direct match)",
+      "saju_meaning": "Fire element fully expressed, dominant yang energy of passion and creative force",
+      "pronunciation_guide": "CHAN-yul (rhymes with 'han-yul')",
+      "personality_traits": [
+        "passionate",
+        "energetic",
+        "charismatic"
+      ]
+    },
+    {
+      "romanized": "Ji-yeon",
+      "hangul": "지연",
+      "hanja": "智娟",
+      "gender": "female",
+      "meaning_short": "Wise and graceful beauty",
+      "meaning_long": "지(智) sharp and clear wisdom; 연(娟) the gentle beauty of a slender graceful form. A girl who combines intellectual depth with soft feminine charm.",
+      "popularity_2026": "classic",
+      "famous_examples": "T-ara Jiyeon, actress Park Ji-yeon",
+      "kpop_match": "T-ara Jiyeon (direct match)",
+      "saju_meaning": "Metal element with Water flow, balanced yin energy of quiet intelligence and grace",
+      "pronunciation_guide": "JEE-yun (rhymes with 'see-yun')",
+      "personality_traits": [
+        "intelligent",
+        "graceful",
+        "perceptive"
+      ]
+    },
+    {
+      "romanized": "Kang-hyun",
+      "hangul": "강현",
+      "hanja": "剛賢",
+      "gender": "male",
+      "meaning_short": "Strong and virtuous",
+      "meaning_long": "강(剛) unyielding strength and firmness of character; 현(賢) wise virtue and moral excellence. A boy of iron will and righteous spirit who stands firm in all challenges.",
+      "popularity_2026": "steady",
+      "famous_examples": "Common among Korean military officers and scholars",
+      "kpop_match": "Monsta X Shownu (similar powerful dignified presence)",
+      "saju_meaning": "Metal element dominant, strong yang energy of righteousness and unshakeable resolve",
+      "pronunciation_guide": "KANG-hyun (rhymes with 'hang-fun' with a K)",
+      "personality_traits": [
+        "strong",
+        "virtuous",
+        "dependable"
+      ]
+    },
+    {
+      "romanized": "Soo-yeon",
+      "hangul": "수연",
+      "hanja": "秀娟",
+      "gender": "female",
+      "meaning_short": "Elegant excellence",
+      "meaning_long": "수(秀) outstanding and refined excellence; 연(娟) graceful and slender beauty. A girl who naturally stands out with effortless elegance and exceptional quality.",
+      "popularity_2026": "classic",
+      "famous_examples": "Common in Korean literary and artistic communities, K-drama heroines",
+      "kpop_match": "TWICE Nayeon (similar fresh elegant energy)",
+      "saju_meaning": "Wood element thriving with Water nourishment, yin energy of natural excellence",
+      "pronunciation_guide": "SOO-yun (rhymes with 'sue-yun')",
+      "personality_traits": [
+        "elegant",
+        "accomplished",
+        "refined"
+      ]
+    },
+    {
+      "romanized": "Min-ho",
+      "hangul": "민호",
+      "hanja": "珉昊",
+      "gender": "male",
+      "meaning_short": "Precious sky",
+      "meaning_long": "민(珉) a precious jade-like stone; 호(昊) the vast expanse of the open sky. A boy whose value is as enduring as stone yet whose ambitions stretch limitlessly toward the heavens.",
+      "popularity_2026": "classic",
+      "famous_examples": "SHINee Minho, Stray Kids Minho",
+      "kpop_match": "SHINee Minho (direct match)",
+      "saju_meaning": "Earth element grounded with Wood expansion, balanced yang energy of steady growth",
+      "pronunciation_guide": "MIN-ho (rhymes with 'bin-ho')",
+      "personality_traits": [
+        "athletic",
+        "determined",
+        "warm"
+      ]
+    },
+    {
+      "romanized": "Ye-na",
+      "hangul": "예나",
+      "hanja": "藝娜",
+      "gender": "female",
+      "meaning_short": "Artistic and graceful",
+      "meaning_long": "예(藝) artistic talent blooming in all forms; 나(娜) graceful and gentle femininity. A girl whose creative gifts flow through everything she does with effortless charm.",
+      "popularity_2026": "rising",
+      "famous_examples": "IZ*ONE Yena (Choi Ye-na, solo artist)",
+      "kpop_match": "IZ*ONE Yena (direct match)",
+      "saju_meaning": "Wood element creative with Fire expression, bright yin energy of joyful artistry",
+      "pronunciation_guide": "YEH-nah (rhymes with 'yay-nah')",
+      "personality_traits": [
+        "creative",
+        "bubbly",
+        "charming"
+      ]
+    },
+    {
+      "romanized": "Jae-beom",
+      "hangul": "재범",
+      "hanja": "宰範",
+      "gender": "male",
+      "meaning_short": "Governing example",
+      "meaning_long": "재(宰) to govern and preside with authority; 범(範) a model or exemplary standard. A boy born to lead others and set the gold standard in everything he pursues.",
+      "popularity_2026": "steady",
+      "famous_examples": "Jay Park (Park Jae-beom), influential Korean-American artist",
+      "kpop_match": "Jay Park (direct match)",
+      "saju_meaning": "Earth element governing with Metal precision, strong yang energy of authority and leadership",
+      "pronunciation_guide": "JAY-bum (rhymes with 'hay-bum')",
+      "personality_traits": [
+        "authoritative",
+        "pioneering",
+        "influential"
+      ]
+    },
+    {
+      "romanized": "Chae-yeon",
+      "hangul": "채연",
+      "hanja": "彩娟",
+      "gender": "female",
+      "meaning_short": "Colorful grace",
+      "meaning_long": "채(彩) vivid and beautiful colors radiating outward; 연(娟) the soft graceful beauty of a gentle soul. A girl whose personality is as vibrant and arresting as a living painting.",
+      "popularity_2026": "trending",
+      "famous_examples": "IZ*ONE Chaeyeon (Kim Chae-yeon)",
+      "kpop_match": "IZ*ONE Chaeyeon (direct match)",
+      "saju_meaning": "Fire element expressive with Wood vitality, lively yin energy of joyful beauty",
+      "pronunciation_guide": "CHAY-yun (rhymes with 'hay-yun')",
+      "personality_traits": [
+        "vibrant",
+        "expressive",
+        "warm"
+      ]
+    },
+    {
+      "romanized": "Tae-il",
+      "hangul": "태일",
+      "hanja": "太一",
+      "gender": "male",
+      "meaning_short": "The supreme one",
+      "meaning_long": "태(太) supreme greatness beyond all measure; 일(一) the primal unity and singularity. A boy who carries the energy of the cosmos, destined to be uniquely incomparable.",
+      "popularity_2026": "rising",
+      "famous_examples": "NCT Taeil (Kim Tae-il, renowned for vocal talent)",
+      "kpop_match": "NCT Taeil (direct match)",
+      "saju_meaning": "Metal element singular with Fire intensity, pure yang energy of extraordinary individuality",
+      "pronunciation_guide": "TAY-il (rhymes with 'hay-ill')",
+      "personality_traits": [
+        "singular",
+        "gifted",
+        "profound"
+      ]
+    },
+    {
+      "romanized": "Bo-young",
+      "hangul": "보영",
+      "hanja": "寶映",
+      "gender": "female",
+      "meaning_short": "Precious radiance",
+      "meaning_long": "보(寶) a precious treasure of the highest worth; 영(映) radiant light reflected and cast outward. A girl whose inner worth illuminates everything around her like a jewel catching sunlight.",
+      "popularity_2026": "steady",
+      "famous_examples": "Actress Park Bo-young, beloved for warm roles",
+      "kpop_match": "IU (similar warm luminous energy)",
+      "saju_meaning": "Fire element illuminating with Earth grounding, yin energy of treasured warmth",
+      "pronunciation_guide": "BOH-young (rhymes with 'go-young')",
+      "personality_traits": [
+        "warm",
+        "radiant",
+        "beloved"
+      ]
+    },
+    {
+      "romanized": "Seok-jin",
+      "hangul": "석진",
+      "hanja": "碩珍",
+      "gender": "male",
+      "meaning_short": "Great and precious",
+      "meaning_long": "석(碩) great magnitude and substantial excellence; 진(珍) rare precious treasure. A boy whose greatness is not loud but profound, a treasure recognized by all who encounter him.",
+      "popularity_2026": "steady",
+      "famous_examples": "BTS Jin (Kim Seok-jin, globally beloved vocalist)",
+      "kpop_match": "BTS Jin (direct match)",
+      "saju_meaning": "Earth element substantial with Metal luster, balanced yang energy of generous greatness",
+      "pronunciation_guide": "SUK-jin (rhymes with 'book-gin')",
+      "personality_traits": [
+        "generous",
+        "humorous",
+        "genuine"
+      ]
+    },
+    {
+      "romanized": "Hye-jin",
+      "hangul": "혜진",
+      "hanja": "慧珍",
+      "gender": "female",
+      "meaning_short": "Bright wisdom and treasure",
+      "meaning_long": "혜(慧) bright and penetrating wisdom; 진(珍) a rare and precious gem. A girl whose mind shines with keen insight and whose character is a treasure to all who know her.",
+      "popularity_2026": "classic",
+      "famous_examples": "Actress Jeon Hye-jin, common in Korean professional women",
+      "kpop_match": "BLACKPINK Jisoo (similar classic beauty and intelligence)",
+      "saju_meaning": "Water element deep with Metal clarity, strong yin energy of penetrating intelligence",
+      "pronunciation_guide": "HYEH-jin (rhymes with 'yay-gin' with an H)",
+      "personality_traits": [
+        "wise",
+        "analytical",
+        "elegant"
+      ]
+    },
+    {
+      "romanized": "Yong-jun",
+      "hangul": "용준",
+      "hanja": "龍俊",
+      "gender": "male",
+      "meaning_short": "Dragon of excellence",
+      "meaning_long": "용(龍) the magnificent dragon, symbol of power and celestial authority; 준(俊) outstanding talent and noble bearing. A boy with the majestic power of a dragon and the grace of a true talent.",
+      "popularity_2026": "steady",
+      "famous_examples": "Actor Bae Yong-jun (pioneer of the Korean Wave)",
+      "kpop_match": "EXO Lay (similar mythical quality)",
+      "saju_meaning": "Wood element dragon-powered with Fire intensity, commanding yang energy of mythic ambition",
+      "pronunciation_guide": "YONG-joon (rhymes with 'song-june')",
+      "personality_traits": [
+        "powerful",
+        "noble",
+        "exceptional"
+      ]
+    },
+    {
+      "romanized": "Da-hyun",
+      "hangul": "다현",
+      "hanja": "多賢",
+      "gender": "female",
+      "meaning_short": "Abundantly wise",
+      "meaning_long": "다(多) abundance and multiplicity in all things; 현(賢) wise virtue and intellectual depth. A girl blessed with many talents and a wisdom that enriches everyone she meets.",
+      "popularity_2026": "trending",
+      "famous_examples": "TWICE Dahyun (Kim Da-hyun, beloved for wit and personality)",
+      "kpop_match": "TWICE Dahyun (direct match)",
+      "saju_meaning": "Earth element abundant with Metal refinement, bright yin energy of multifaceted talent",
+      "pronunciation_guide": "DAH-hyun (rhymes with 'dah-fun' with an H)",
+      "personality_traits": [
+        "witty",
+        "versatile",
+        "bright"
+      ]
+    },
+    {
+      "romanized": "Jeong-han",
+      "hangul": "정한",
+      "hanja": "精翰",
+      "gender": "male",
+      "meaning_short": "Pure and literary",
+      "meaning_long": "정(精) pure essence and refined spirit; 한(翰) literary talent, written words, and feathers of flight. A boy of refined artistic soul whose words and art carry the beauty of pure thought.",
+      "popularity_2026": "rising",
+      "famous_examples": "SEVENTEEN Jeonghan (Yoon Jeong-han, known for artistic grace)",
+      "kpop_match": "SEVENTEEN Jeonghan (direct match)",
+      "saju_meaning": "Metal element pure with Wood creativity, gentle yang energy of artistic refinement",
+      "pronunciation_guide": "JUNG-han (rhymes with 'sung-han')",
+      "personality_traits": [
+        "artistic",
+        "elegant",
+        "thoughtful"
+      ]
+    },
+    {
+      "romanized": "So-jung",
+      "hangul": "소정",
+      "hanja": "素貞",
+      "gender": "female",
+      "meaning_short": "Pure and faithful",
+      "meaning_long": "소(素) natural simplicity and unadorned purity; 정(貞) faithful integrity and chaste virtue. A girl of natural beauty who needs no embellishment and whose loyalty is her greatest gift.",
+      "popularity_2026": "steady",
+      "famous_examples": "CLC Sorn (Charpim Sorn), Girls' Generation Sooyoung born name variant",
+      "kpop_match": "GFRIEND SinB (similar pure earnest energy)",
+      "saju_meaning": "Metal element pure with Earth foundation, honest yin energy of natural virtue",
+      "pronunciation_guide": "SOH-jung (rhymes with 'go-jung')",
+      "personality_traits": [
+        "sincere",
+        "pure",
+        "loyal"
+      ]
+    },
+    {
+      "romanized": "Myung-soo",
+      "hangul": "명수",
+      "hanja": "明秀",
+      "gender": "male",
+      "meaning_short": "Bright and excellent",
+      "meaning_long": "명(明) brilliant brightness and clear illumination; 수(秀) outstanding excellence that rises above the rest. A boy whose clarity of mind and exceptional ability light the way for others.",
+      "popularity_2026": "classic",
+      "famous_examples": "Infinite L (Kim Myung-soo), actor and idol",
+      "kpop_match": "Infinite L (direct match)",
+      "saju_meaning": "Fire element bright with Wood upward growth, clear yang energy of luminous achievement",
+      "pronunciation_guide": "MYUNG-soo (rhymes with 'young-sue')",
+      "personality_traits": [
+        "brilliant",
+        "composed",
+        "distinguished"
+      ]
+    },
+    {
+      "romanized": "Hee-jin",
+      "hangul": "희진",
+      "hanja": "熙珍",
+      "gender": "female",
+      "meaning_short": "Joyful treasure",
+      "meaning_long": "희(熙) bright joy, happiness, and prosperous warmth; 진(珍) a precious gem. A girl whose very presence brings radiant happiness and whose worth is immeasurable.",
+      "popularity_2026": "trending",
+      "famous_examples": "LoOna Heejin, HyunA's real name (Kim Hyun-ah, stage known as HyunA)",
+      "kpop_match": "LoOna Heejin (direct match)",
+      "saju_meaning": "Fire element joyful with Metal luster, vibrant yin energy of treasured happiness",
+      "pronunciation_guide": "HEE-jin (rhymes with 'see-gin' with an H)",
+      "personality_traits": [
+        "joyful",
+        "energetic",
+        "precious"
+      ]
+    },
+    {
+      "romanized": "Joon-won",
+      "hangul": "준원",
+      "hanja": "俊源",
+      "gender": "male",
+      "meaning_short": "Outstanding origin",
+      "meaning_long": "준(俊) outstanding talent and refined character; 원(源) the source and origin of all things. A boy who is not only exceptionally gifted but carries within him the wellspring of great potential.",
+      "popularity_2026": "rising",
+      "famous_examples": "Actor Kim Joon-won, common in Korean business leadership",
+      "kpop_match": "GOT7 JB (similar composed ambitious quality)",
+      "saju_meaning": "Water element sourced with Metal excellence, deep yang energy of foundational brilliance",
+      "pronunciation_guide": "JOON-won (rhymes with 'moon-won')",
+      "personality_traits": [
+        "foundational",
+        "talented",
+        "reliable"
+      ]
+    },
+    {
+      "romanized": "Ji-soo",
+      "hangul": "지수",
+      "hanja": "智秀",
+      "gender": "female",
+      "meaning_short": "Wise and outstanding",
+      "meaning_long": "지(智) deep and practical wisdom; 수(秀) exceptional excellence rising above all. A girl whose intelligence and outstanding character make her naturally remarkable in any setting.",
+      "popularity_2026": "trending",
+      "famous_examples": "BLACKPINK Jisoo (Kim Ji-soo, actress and idol)",
+      "kpop_match": "BLACKPINK Jisoo (direct match)",
+      "saju_meaning": "Metal element sharp with Wood flourishing, elegant yin energy of classic excellence",
+      "pronunciation_guide": "JEE-soo (rhymes with 'see-sue')",
+      "personality_traits": [
+        "classic",
+        "intelligent",
+        "captivating"
+      ]
+    },
+    {
+      "romanized": "Hyun-sik",
+      "hangul": "현식",
+      "hanja": "賢植",
+      "gender": "male",
+      "meaning_short": "Wise and rooted",
+      "meaning_long": "현(賢) virtuous wisdom and moral clarity; 식(植) to plant and grow, deeply rooted. A boy whose wisdom is not abstract but grows from solid roots and bears lasting fruit.",
+      "popularity_2026": "steady",
+      "famous_examples": "BTOB Hyunsik (Im Hyun-sik, vocalist and composer)",
+      "kpop_match": "BTOB Hyunsik (direct match)",
+      "saju_meaning": "Wood element rooted with Metal wisdom, grounded yang energy of cultivated talent",
+      "pronunciation_guide": "HYUN-sik (rhymes with 'fun-sick' with an H)",
+      "personality_traits": [
+        "grounded",
+        "musical",
+        "sincere"
+      ]
+    },
+    {
+      "romanized": "Eun-bi",
+      "hangul": "은비",
+      "hanja": "恩霏",
+      "gender": "female",
+      "meaning_short": "Gracious misty rain",
+      "meaning_long": "은(恩) deep grace, kindness, and gratitude; 비(霏) a fine misty rain falling gently. A girl whose kindness falls on others like soft rain, nurturing everything quietly and continuously.",
+      "popularity_2026": "rising",
+      "famous_examples": "IZ*ONE Eunbi (Kwon Eun-bi, leader and solo artist)",
+      "kpop_match": "IZ*ONE Eunbi (direct match)",
+      "saju_meaning": "Water element gentle with Wood nourishment, soft yin energy of endless quiet grace",
+      "pronunciation_guide": "UN-bee (rhymes with 'fun-bee')",
+      "personality_traits": [
+        "nurturing",
+        "gracious",
+        "gentle"
+      ]
+    },
+    {
+      "romanized": "Sung-hoon",
+      "hangul": "성훈",
+      "hanja": "成勳",
+      "gender": "male",
+      "meaning_short": "Achieving great merit",
+      "meaning_long": "성(成) to achieve and accomplish; 훈(勳) great merit, distinguished service, and honor. A boy destined to complete great works and be recognized for his honorable contributions.",
+      "popularity_2026": "steady",
+      "famous_examples": "Actor Oh Sung-hoon, common in Korean military and civil service",
+      "kpop_match": "Super Junior Siwon (similar accomplished honorable energy)",
+      "saju_meaning": "Earth element achieving with Fire merit, strong yang energy of earned distinction",
+      "pronunciation_guide": "SUNG-hoon (rhymes with 'sung-moon')",
+      "personality_traits": [
+        "accomplished",
+        "honorable",
+        "diligent"
+      ]
+    },
+    {
+      "romanized": "Na-yeon",
+      "hangul": "나연",
+      "hanja": "娜娟",
+      "gender": "female",
+      "meaning_short": "Graceful and elegant",
+      "meaning_long": "나(娜) graceful and charming femininity; 연(娟) elegant slender beauty. A girl of double grace whose charm is both natural and cultivated, radiating effortless elegance.",
+      "popularity_2026": "trending",
+      "famous_examples": "TWICE Nayeon (Im Na-yeon, lead vocalist and visual)",
+      "kpop_match": "TWICE Nayeon (direct match)",
+      "saju_meaning": "Wood element graceful with Water flow, bright yin energy of natural charm and charisma",
+      "pronunciation_guide": "NAH-yun (rhymes with 'bah-yun')",
+      "personality_traits": [
+        "charming",
+        "bubbly",
+        "magnetic"
+      ]
+    },
+    {
+      "romanized": "Jae-sung",
+      "hangul": "재성",
+      "hanja": "才星",
+      "gender": "male",
+      "meaning_short": "Star of talent",
+      "meaning_long": "재(才) natural innate talent and gift; 성(星) a shining star in the heavens. A boy whose gifts are written in the stars and whose talents illuminate all who witness them.",
+      "popularity_2026": "rising",
+      "famous_examples": "Common among K-pop trainees and Korean athletes",
+      "kpop_match": "NCT Taeyong (similar star-quality energy)",
+      "saju_meaning": "Fire element stellar with Metal talent, radiant yang energy of destined stardom",
+      "pronunciation_guide": "JAY-sung (rhymes with 'hay-sung')",
+      "personality_traits": [
+        "talented",
+        "destined",
+        "luminous"
+      ]
+    },
+    {
+      "romanized": "Sae-rom",
+      "hangul": "새롬",
+      "hanja": "N/A",
+      "gender": "female",
+      "meaning_short": "New freshness",
+      "meaning_long": "새(새) new and fresh; 롬 a native Korean suffix conveying pure freshness and novelty. A purely Korean name for a girl who brings newness, vitality, and a fresh breeze into every situation.",
+      "popularity_2026": "rising",
+      "famous_examples": "Common in Korean variety shows and new-generation personalities",
+      "kpop_match": "NewJeans Minji (similar fresh modern energy)",
+      "saju_meaning": "Wood element new growth with Water freshness, pure yin energy of renewal and beginning",
+      "pronunciation_guide": "SAY-rom (rhymes with 'hay-rom')",
+      "personality_traits": [
+        "fresh",
+        "innovative",
+        "lively"
+      ]
+    },
+    {
+      "romanized": "Woo-seok",
+      "hangul": "우석",
+      "hanja": "宇碩",
+      "gender": "male",
+      "meaning_short": "Universe of greatness",
+      "meaning_long": "우(宇) the boundless universe and cosmic space; 석(碩) great magnitude and substantial achievement. A boy whose ambitions span the cosmos and whose accomplishments are of monumental scale.",
+      "popularity_2026": "trending",
+      "famous_examples": "X1 Woo Seok (Kim Woo-seok, popular from Produce X 101)",
+      "kpop_match": "X1 Woo Seok (direct match)",
+      "saju_meaning": "Earth element vast with Metal substance, expansive yang energy of cosmic potential",
+      "pronunciation_guide": "WOO-suk (rhymes with 'sue-book')",
+      "personality_traits": [
+        "expansive",
+        "ambitious",
+        "substantial"
+      ]
+    },
+    {
+      "romanized": "Ji-an",
+      "hangul": "지안",
+      "hanja": "智安",
+      "gender": "female",
+      "meaning_short": "Wise and peaceful",
+      "meaning_long": "지(智) clear wisdom and deep understanding; 안(安) peaceful serenity and tranquil safety. A girl whose wisdom creates peace wherever she goes, a calming presence of thoughtful grace.",
+      "popularity_2026": "trending",
+      "famous_examples": "Common in Korean literature and modern naming trends post-2015",
+      "kpop_match": "aespa Winter (similar calm intelligent energy)",
+      "saju_meaning": "Metal element wise with Earth peace, harmonious yin energy of serene intelligence",
+      "pronunciation_guide": "JEE-an (rhymes with 'see-an')",
+      "personality_traits": [
+        "serene",
+        "wise",
+        "grounding"
+      ]
+    },
+    {
+      "romanized": "Kyung-jun",
+      "hangul": "경준",
+      "hanja": "景俊",
+      "gender": "male",
+      "meaning_short": "Bright and outstanding",
+      "meaning_long": "경(景) a bright and admirable scene, great scenery; 준(俊) outstanding talent and handsome excellence. A boy who is a beautiful sight to behold, both in appearance and in remarkable ability.",
+      "popularity_2026": "steady",
+      "famous_examples": "Common in Korean academia and professional settings",
+      "kpop_match": "SEVENTEEN Mingyu (similar tall handsome talented energy)",
+      "saju_meaning": "Fire element scenic with Metal excellence, clear yang energy of admirable distinction",
+      "pronunciation_guide": "KYUNG-joon (rhymes with 'young-june')",
+      "personality_traits": [
+        "admirable",
+        "outstanding",
+        "composed"
+      ]
+    },
+    {
+      "romanized": "Yoo-ri",
+      "hangul": "유리",
+      "hanja": "琉璃",
+      "gender": "female",
+      "meaning_short": "Translucent glass beauty",
+      "meaning_long": "유리(琉璃) crystal clear glass or lapis lazuli, a gemstone of extraordinary beauty and clarity. A girl of crystalline beauty whose transparent nature and inner clarity are as breathtaking as precious crystal.",
+      "popularity_2026": "steady",
+      "famous_examples": "SNSD Yuri (Kwon Yoo-ri), actress and idol",
+      "kpop_match": "SNSD Yuri (direct match)",
+      "saju_meaning": "Water element crystal-clear with Metal luster, pure yin energy of transparent beauty",
+      "pronunciation_guide": "YOO-ree (rhymes with 'sue-ree')",
+      "personality_traits": [
+        "transparent",
+        "beautiful",
+        "clear-minded"
+      ]
+    },
+    {
+      "romanized": "Hyun-seok",
+      "hangul": "현석",
+      "hanja": "賢碩",
+      "gender": "male",
+      "meaning_short": "Great wisdom",
+      "meaning_long": "현(賢) wise and virtuous character; 석(碩) great and substantial magnitude. A boy of immense moral wisdom whose intellectual and ethical stature grows ever greater with time.",
+      "popularity_2026": "steady",
+      "famous_examples": "Common in Korean academic and legal professions",
+      "kpop_match": "BTS RM (similar intellectual commanding energy)",
+      "saju_meaning": "Earth element substantial with Metal wisdom, solid yang energy of commanding intellect",
+      "pronunciation_guide": "HYUN-suk (rhymes with 'fun-book' with an H)",
+      "personality_traits": [
+        "intellectual",
+        "commanding",
+        "substantial"
+      ]
+    },
+    {
+      "romanized": "Ye-seul",
+      "hangul": "예슬",
+      "hanja": "藝瑟",
+      "gender": "female",
+      "meaning_short": "Artistic melody",
+      "meaning_long": "예(藝) artistic talent and creative mastery; 슬(瑟) the ancient zither, symbol of musical harmony and soulful sound. A girl whose every action has the rhythm and artistry of a perfectly played melody.",
+      "popularity_2026": "rising",
+      "famous_examples": "Actress Han Ye-seul, popular in Korean entertainment",
+      "kpop_match": "MAMAMOO Solar (similar artistic musical energy)",
+      "saju_meaning": "Metal element musical with Wood creativity, harmonious yin energy of artistic expression",
+      "pronunciation_guide": "YEH-sul (rhymes with 'yay-sul')",
+      "personality_traits": [
+        "musical",
+        "artistic",
+        "harmonious"
+      ]
+    },
+    {
+      "romanized": "Dae-hyun",
+      "hangul": "대현",
+      "hanja": "大賢",
+      "gender": "male",
+      "meaning_short": "Great sage",
+      "meaning_long": "대(大) great, vast, and supreme; 현(賢) sagely wisdom and virtuous intellect. A boy destined to become a great sage, admired for both the scale of his wisdom and the virtue of his character.",
+      "popularity_2026": "steady",
+      "famous_examples": "B.A.P Daehyun (Jung Dae-hyun, powerful vocalist)",
+      "kpop_match": "B.A.P Daehyun (direct match)",
+      "saju_meaning": "Earth element vast with Water wisdom, deep yang energy of sagely leadership",
+      "pronunciation_guide": "DAY-hyun (rhymes with 'hay-fun' with a D)",
+      "personality_traits": [
+        "powerful",
+        "wise",
+        "magnanimous"
+      ]
+    },
+    {
+      "romanized": "Su-jeong",
+      "hangul": "수정",
+      "hanja": "水晶",
+      "gender": "female",
+      "meaning_short": "Crystal clear",
+      "meaning_long": "수정(水晶) water crystal, the purest and most transparent of all natural gems. A girl of absolute clarity and purity whose mind is like crystal — clear, brilliant, and refracting light into beauty.",
+      "popularity_2026": "classic",
+      "famous_examples": "Common in Korean beauty and modeling industries",
+      "kpop_match": "SISTAR Bora (similar clear striking presence)",
+      "saju_meaning": "Water element crystallized with Metal purity, clear yin energy of absolute transparency",
+      "pronunciation_guide": "SOO-jung (rhymes with 'sue-jung')",
+      "personality_traits": [
+        "clear-minded",
+        "pure",
+        "brilliant"
+      ]
+    },
+    {
+      "romanized": "Young-min",
+      "hangul": "영민",
+      "hanja": "英敏",
+      "gender": "male",
+      "meaning_short": "Heroically quick-minded",
+      "meaning_long": "영(英) heroic excellence and outstanding brilliance; 민(敏) quick-witted agility and sharp perception. A boy of heroic caliber whose mind works at lightning speed and whose excellence shines naturally.",
+      "popularity_2026": "classic",
+      "famous_examples": "B1A4 Baro's real name variant, common in Korean business leaders",
+      "kpop_match": "Super Junior Leeteuk (similar sharp leadership energy)",
+      "saju_meaning": "Metal element sharp with Fire brilliance, quick yang energy of heroic intelligence",
+      "pronunciation_guide": "YOUNG-min (rhymes with 'sung-min' with a Y)",
+      "personality_traits": [
+        "quick-witted",
+        "heroic",
+        "sharp"
+      ]
+    },
+    {
+      "romanized": "Seol-ah",
+      "hangul": "설아",
+      "hanja": "雪兒",
+      "gender": "female",
+      "meaning_short": "Snow child",
+      "meaning_long": "설(雪) pure white snow falling softly; 아(兒) a beloved child. A girl as pure and beautiful as freshly fallen snow, bringing a quiet magical wonder wherever she goes.",
+      "popularity_2026": "rising",
+      "famous_examples": "Common in Korean winter-born generations, K-drama names",
+      "kpop_match": "aespa Winter (direct thematic match)",
+      "saju_meaning": "Water element pure with Metal frost, pristine yin energy of winter clarity and rare beauty",
+      "pronunciation_guide": "SUL-ah (rhymes with 'bull-ah')",
+      "personality_traits": [
+        "pure",
+        "unique",
+        "quietly stunning"
+      ]
+    },
+    {
+      "romanized": "Min-seok",
+      "hangul": "민석",
+      "hanja": "旻碩",
+      "gender": "male",
+      "meaning_short": "Sky of greatness",
+      "meaning_long": "민(旻) the clear autumn sky, vast and boundless; 석(碩) great and substantial achievement. A boy whose ambitions are as wide as the sky and whose accomplishments are as solid as stone.",
+      "popularity_2026": "steady",
+      "famous_examples": "EXO Xiumin (Kim Min-seok, oldest EXO member)",
+      "kpop_match": "EXO Xiumin (direct match)",
+      "saju_meaning": "Metal element great with Water sky, balanced yang energy of quiet substantial power",
+      "pronunciation_guide": "MIN-suk (rhymes with 'win-book')",
+      "personality_traits": [
+        "grounded",
+        "reliable",
+        "quietly powerful"
+      ]
+    },
+    {
+      "romanized": "Ji-eun",
+      "hangul": "지은",
+      "hanja": "智恩",
+      "gender": "female",
+      "meaning_short": "Wise grace",
+      "meaning_long": "지(智) penetrating wisdom and discernment; 은(恩) deep grace and loving kindness. A girl whose wisdom is expressed through acts of gracious kindness, combining intellect with a giving heart.",
+      "popularity_2026": "classic",
+      "famous_examples": "IU's real name (Lee Ji-eun), one of Korea's most beloved artists",
+      "kpop_match": "IU (direct match — her real name)",
+      "saju_meaning": "Water element wise with Earth grace, deep yin energy of intelligent compassion",
+      "pronunciation_guide": "JEE-un (rhymes with 'see-un')",
+      "personality_traits": [
+        "wise",
+        "compassionate",
+        "gifted"
+      ]
+    },
+    {
+      "romanized": "In-seong",
+      "hangul": "인성",
+      "hanja": "仁星",
+      "gender": "male",
+      "meaning_short": "Benevolent star",
+      "meaning_long": "인(仁) the Confucian virtue of benevolence and human-heartedness; 성(星) a shining star in the heavens. A boy whose compassionate nature makes him shine like a star, guiding others with warmth.",
+      "popularity_2026": "steady",
+      "famous_examples": "SF9 Inseong (Kim In-seong, vocalist)",
+      "kpop_match": "SF9 Inseong (direct match)",
+      "saju_meaning": "Fire element stellar with Earth benevolence, warm yang energy of compassionate leadership",
+      "pronunciation_guide": "IN-sung (rhymes with 'win-sung')",
+      "personality_traits": [
+        "benevolent",
+        "guiding",
+        "warm"
+      ]
+    },
+    {
+      "romanized": "Ha-yoon",
+      "hangul": "하윤",
+      "hanja": "夏允",
+      "gender": "female",
+      "meaning_short": "Summer blessing",
+      "meaning_long": "하(夏) the abundant warmth of summer; 윤(允) genuine sincerity and gracious approval. A girl born with summer's abundance whose sincere heart earns the trust and affection of all.",
+      "popularity_2026": "trending",
+      "famous_examples": "One of the top baby names in South Korea 2020-2024",
+      "kpop_match": "TWICE Sana (similar sunny warm personality energy)",
+      "saju_meaning": "Fire element warm with Earth sincerity, bright yin energy of summer abundance and trust",
+      "pronunciation_guide": "HAH-yoon (rhymes with 'hah-moon')",
+      "personality_traits": [
+        "sunny",
+        "sincere",
+        "beloved"
+      ]
+    },
+    {
+      "romanized": "Yeon-jun",
+      "hangul": "연준",
+      "hanja": "姸俊",
+      "gender": "male",
+      "meaning_short": "Beautiful excellence",
+      "meaning_long": "연(姸) beautiful and elegant in appearance and manner; 준(俊) outstanding talent and noble character. A boy of striking beauty paired with exceptional talent — grace and genius in equal measure.",
+      "popularity_2026": "trending",
+      "famous_examples": "TXT Yeonjun (Choi Yeon-jun, multi-talented K-pop idol)",
+      "kpop_match": "TXT Yeonjun (direct match)",
+      "saju_meaning": "Wood element beautiful with Fire talent, vibrant yang energy of expressive excellence",
+      "pronunciation_guide": "YUN-joon (rhymes with 'fun-june')",
+      "personality_traits": [
+        "talented",
+        "charismatic",
+        "versatile"
+      ]
     }
   ]
 }

@@ -1,0 +1,38 @@
+{
+  "book_id": "migraine-headache-tracker",
+  "title": "Migraine & Headache Tracker",
+  "subtitle": "13-Week Daily Journal for Pain, Triggers, Medication & Hormones with Neurologist Visit Prep",
+  "author": "Deokgu Studio",
+  "language": "en",
+  "description": "Most patients walk into a neurologist's office trying to remember the last three months from memory. This 13-week tracker fixes that.\n\nEach daily page captures peak pain (0-10), type and location, aura, associated symptoms, triggers, rescue medication, and what actually relieved the attack. Weekly Reviews surface trends. Monthly Neurologist Visit Prep pages turn three months of data into a focused conversation with your doctor.\n\nWhat's inside:\n- 13 weeks of daily attack logs (0-10 pain scale, type, location, aura)\n- 13 weekly reviews with daily pain trend chart\n- 3 Neurologist Visit Prep sheets (top triggers, plan, questions)\n- Quick-reference trigger guide: food, sleep, hormonal, environment, weather, stress\n- Preventive & rescue medication log with MOH (medication overuse) alert\n- Personal info, medical history, allergies, primary diagnosis\n\nFor chronic migraine sufferers, tension headache patients, cluster headache fighters, and anyone whose neurologist said 'keep a headache diary.' Walk into your next appointment with evidence.",
+  "keywords": [
+    "migraine tracker journal",
+    "headache diary log book",
+    "migraine trigger tracker",
+    "chronic migraine journal",
+    "headache log book for women",
+    "neurologist visit prep",
+    "cluster headache tracker"
+  ],
+  "categories": [
+    "BISAC: HEALTH & FITNESS / Diseases / Headaches",
+    "BISAC: HEALTH & FITNESS / Pain Management",
+    "BISAC: SELF-HELP / Journaling"
+  ],
+  "isbn": "",
+  "price_usd": 8.99,
+  "page_count": 113,
+  "trim_size": "8.5x11",
+  "publication_date": "2026-05-05",
+  "interior_pdf": "migraine_headache_tracker.pdf",
+  "cover_pdf": "cover.pdf",
+  "low_content": false,
+  "medium_content": true,
+  "published": false,
+  "todo": [
+    "isbn",
+    "kdp_upload",
+    "review_keywords",
+    "review_categories"
+  ]
+}

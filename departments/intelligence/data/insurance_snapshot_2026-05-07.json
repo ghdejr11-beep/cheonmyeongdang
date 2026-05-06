@@ -1,0 +1,35 @@
+{
+  "dept": "insurance",
+  "label": "🛡️ 보험다보여",
+  "date": "2026-05-07",
+  "targets": [
+    {
+      "name": "보맵",
+      "url": "https://bomapp.com/",
+      "fetched": true,
+      "hash": "784da0a1beec58b5",
+      "texts": [
+        "bomapp.com",
+        "get this domain"
+      ]
+    },
+    {
+      "name": "굿리치",
+      "url": "https://www.goodrich.co.kr/",
+      "fetched": true,
+      "hash": "c5384b115985feff",
+      "texts": []
+    },
+    {
+      "name": "레몬클립",
+      "url": "https://www.lemonclip.com/",
+      "fetched": true,
+      "hash": "6509738f9045a9eb",
+      "texts": [
+        "Contact Us",
+        "About",
+        "Contact"
+      ]
+    }
+  ]
+}

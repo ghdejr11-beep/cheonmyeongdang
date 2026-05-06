@@ -1,0 +1,82 @@
+[
+  {
+    "sent_at": "2026-05-06T13:32:15.278817",
+    "idx": 1,
+    "sector": "A",
+    "recipient": "experience@trazy.com",
+    "subject": "Quick question about Saju + Korean travel personalization",
+    "message_id": "19dfb8edeba997e2"
+  },
+  {
+    "sent_at": "2026-05-06T13:32:21.652131",
+    "idx": 2,
+    "sector": "A",
+    "recipient": "alliance@hanatour.com",
+    "subject": "Saju-driven Korean travel itineraries — white-label API",
+    "message_id": "19dfb8ef81b6edc0"
+  },
+  {
+    "sent_at": "2026-05-06T13:32:28.019993",
+    "idx": 3,
+    "sector": "A",
+    "recipient": "biz@hanatour.com",
+    "subject": "How are you handling Korean culture personalization at Hanatour?",
+    "message_id": "19dfb8f1085531af"
+  },
+  {
+    "sent_at": "2026-05-06T13:32:34.414112",
+    "idx": 11,
+    "sector": "B",
+    "recipient": "smeir@smtown.com",
+    "subject": "A question about your daily-mission engagement loop",
+    "message_id": "19dfb8f29fb286ee"
+  },
+  {
+    "sent_at": "2026-05-06T13:32:40.746048",
+    "idx": 12,
+    "sector": "B",
+    "recipient": "hybe.india@hybecorp.com",
+    "subject": "Korean Saju engine for daily missions — API in 1 day",
+    "message_id": "19dfb8f43139292a"
+  },
+  {
+    "sent_at": "2026-05-06T16:52:30.925175",
+    "idx": 13,
+    "sector": "B",
+    "recipient": "publishing@jype.com",
+    "subject": "Have you tested Saju-based daily missions yet?",
+    "message_id": "19dfc462ed1e38e6"
+  },
+  {
+    "sent_at": "2026-05-06T16:52:37.305116",
+    "idx": 41,
+    "sector": "E",
+    "recipient": "partners@beautyofjoseon.com",
+    "subject": "\"Lucky shopping day\" — already tested in Korean retail",
+    "message_id": "19dfc4646722bf61"
+  },
+  {
+    "sent_at": "2026-05-06T16:52:43.677211",
+    "idx": 42,
+    "sector": "E",
+    "recipient": "partner.biz@innisfree.com",
+    "subject": "Lucky-day Saju marketing API — white-label license",
+    "message_id": "19dfc4661cc98837"
+  },
+  {
+    "sent_at": "2026-05-06T16:52:50.029745",
+    "idx": 43,
+    "sector": "E",
+    "recipient": "global@cosrx.co.kr",
+    "subject": "Are you running Saju-based loyalty campaigns yet?",
+    "message_id": "19dfc4678b82dbd5"
+  },
+  {
+    "sent_at": "2026-05-06T16:52:56.387081",
+    "idx": 4,
+    "sector": "A",
+    "recipient": "SIT_MICE@hanatour.com",
+    "subject": "Posteller raised KRW 85B — your travel angle on the same wave",
+    "message_id": "19dfc469300704aa"
+  }
+]

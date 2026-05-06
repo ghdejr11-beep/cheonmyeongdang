@@ -178,13 +178,17 @@ async function sendMagicLinkEmail(toEmail, magicUrl, code) {
 
   // 1) SMTP App Password 우선
   const appPass = (process.env.GMAIL_APP_PASSWORD || '').trim();
+  let smtpError = null;
   if (appPass) {
     try {
       const r = await _sendViaSmtp({ from, to: toEmail, subject, html, text, user: fromAddr, pass: appPass });
       return { ok: true, method: 'smtp', messageId: r.id };
     } catch (err) {
-      console.error('[magic-link] SMTP 실패, OAuth2로 fallback:', err.message);
+      smtpError = err.message || String(err);
+      console.error('[magic-link] SMTP 실패, OAuth2로 fallback:', smtpError);
     }
+  } else {
+    smtpError = 'GMAIL_APP_PASSWORD env not set';
   }
   // 2) OAuth2
   const clientId = (process.env.GMAIL_OAUTH_CLIENT_ID || '').trim();
@@ -197,10 +201,10 @@ async function sendMagicLinkEmail(toEmail, magicUrl, code) {
       const r = await _sendViaGmailApi({ accessToken, raw });
       return { ok: true, method: 'gmail-oauth', messageId: r.id };
     } catch (err) {
-      return { ok: false, reason: 'oauth_send_failed: ' + err.message };
+      return { ok: false, reason: 'oauth_send_failed: ' + err.message + ' | smtp_error: ' + (smtpError || 'no_smtp_attempted') };
     }
   }
-  return { ok: false, reason: 'no_gmail_credentials' };
+  return { ok: false, reason: 'no_gmail_credentials | smtp_error: ' + (smtpError || 'unknown') };
 }
 
 // ─── 쿠폰 정의 ───

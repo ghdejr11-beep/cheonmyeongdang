@@ -4,8 +4,9 @@
     {
       "name": "cheonmyeongdang",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["http-server", ".", "-p", "3002", "-c-1"],
-      "port": 3002
+      "runtimeArgs": ["http-server", ".", "-c-1"],
+      "port": 3002,
+      "autoPort": true
     }
   ]
 }

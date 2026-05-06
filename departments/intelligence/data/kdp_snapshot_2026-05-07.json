@@ -1,0 +1,41 @@
+{
+  "dept": "kdp",
+  "label": "📖 KDP 전자책",
+  "date": "2026-05-07",
+  "targets": [
+    {
+      "name": "Amazon 베스트셀러 로코믹",
+      "url": "https://www.amazon.com/Best-Sellers-Books-Low-Content-Books/zgbs/books/14111361011",
+      "fetched": true,
+      "hash": "338f8a3d1561b009",
+      "texts": [
+        "Amazon Best Sellers",
+        "Best Sellers",
+        "Skip to",
+        "Keyboard shortcuts",
+        "Main content",
+        "Searchalt+/",
+        "Cartshift+alt+C",
+        "Homeshift+alt+H",
+        "Ordersshift+alt+O"
+      ]
+    },
+    {
+      "name": "Amazon 베스트셀러 저널",
+      "url": "https://www.amazon.com/Best-Sellers-Books-Journals/zgbs/books/10807",
+      "fetched": true,
+      "hash": "6c471a13551d1889",
+      "texts": [
+        "Amazon Best Sellers",
+        "Best Sellers",
+        "Skip to",
+        "Keyboard shortcuts",
+        "Main content",
+        "Searchalt+/",
+        "Cartshift+alt+C",
+        "Homeshift+alt+H",
+        "Ordersshift+alt+O"
+      ]
+    }
+  ]
+}
