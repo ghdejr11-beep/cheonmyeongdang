@@ -24,7 +24,7 @@ Vercel 트래픽/배포 데이터 수집
 설정 (.secrets):
   VERCEL_API_TOKEN=...           # https://vercel.com/account/tokens
   VERCEL_TEAM_ID=team_xxx         # 팀이면 필수, 개인 계정이면 비워두기
-  VERCEL_PROJECT_IDS=tax-n-benefit-api,korlens,cheonmyeongdang.com
+  VERCEL_PROJECT_IDS=tax-n-benefit-api,korlens,cheonmyeongdang
   # 선택: Drain 으로 받은 분석 JSON 경로 (PV/UV 채움)
   VERCEL_ANALYTICS_DRAIN_PATH=D:\\documents\\쿤스튜디오\\vercel_drain.json
 """
@@ -39,7 +39,7 @@ from pathlib import Path
 SECRETS_PATH = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
 VERCEL_API = "https://api.vercel.com"
 USER_AGENT = "KunStudio-Briefing/1.0 (+ghdejr11@gmail.com)"
-DEFAULT_PROJECTS = ["tax-n-benefit-api", "korlens", "cheonmyeongdang.com"]
+DEFAULT_PROJECTS = ["tax-n-benefit-api", "korlens", "cheonmyeongdang"]
 
 
 # ──────────────────────────────────────────────────────────
