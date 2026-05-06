@@ -9,18 +9,33 @@ info:
     personality, lucky color and lucky direction. Optional Claude AI insight
     delivers a 3-sentence English advice paragraph blending traditional Korean
     metaphysics with modern second-person guidance.
-  version: 1.0.0
+
+    4 endpoints:
+      - POST /calculate          : Core 4-Pillar Saju reading + 5 elements + advice
+      - POST /qa                 : Free-form AI Q&A grounded on a Saju chart
+      - POST /compatibility      : Two-person Saju (Gunghap) compatibility score
+      - POST /monthly-fortune    : 12-month forecast for current year
+  version: 1.1.0
   contact:
     name: KunStudio (cheonmyeongdang)
     url: https://cheonmyeongdang.vercel.app
+    email: ghdejr11@gmail.com
   license:
     name: Proprietary
 servers:
   - url: https://cheonmyeongdang.vercel.app
     description: Production
+tags:
+  - name: saju
+    description: Core 4-Pillar Saju reading endpoints
+  - name: ai
+    description: AI-grounded Q&A and forecasts
+  - name: compatibility
+    description: Two-person matching (Gunghap)
 paths:
-  /saju/reading:
+  /calculate:
     post:
+      tags: [saju]
       summary: Generate a Korean Saju (4 Pillars + 5 Elements + AI insight) reading
       description: >
         Submits a solar-calendar birth date (year/month/day, optional hour) and
@@ -28,8 +43,14 @@ paths:
         and direction, plus an English AI-generated personality and yearly advice
         paragraph. Response time under 3 seconds. Authentic classical Korean Saju
         algorithm (no random or AI-only outputs).
+
+        Rate limits per RapidAPI plan:
+          FREE  -> 100 req/day
+          PRO   -> 5,000 req/day  (≈150K/mo)
+          ULTRA -> 50,000 req/day (≈1.5M/mo)
       operationId: getSajuReading
       security:
+        - RapidAPIKey: []
         - RapidAPIProxySecret: []
       requestBody:
         required: true
@@ -61,33 +82,289 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SajuResponse'
+              examples:
+                standard:
+                  summary: Full 4-pillar response
+                  value:
+                    ok: true
+                    pillars:
+                      - { pillar: year,  stem_kr: 경, stem_hanja: 庚, branch_kr: 오, branch_hanja: 午 }
+                      - { pillar: month, stem_kr: 신, stem_hanja: 辛, branch_kr: 사, branch_hanja: 巳 }
+                      - { pillar: day,   stem_kr: 갑, stem_hanja: 甲, branch_kr: 신, branch_hanja: 申 }
+                      - { pillar: hour,  stem_kr: 신, stem_hanja: 辛, branch_kr: 미, branch_hanja: 未 }
+                    elements:
+                      - { element_kr: 목, element_en: Wood,  count: 1 }
+                      - { element_kr: 화, element_en: Fire,  count: 1 }
+                      - { element_kr: 토, element_en: Earth, count: 2 }
+                      - { element_kr: 금, element_en: Metal, count: 3 }
+                      - { element_kr: 수, element_en: Water, count: 1 }
+                    summary: "Day stem 甲 (목/Wood). Dominant element: 금 (Metal)."
+                    lucky_color: green
+                    lucky_direction: East
+                    advice: "You carry the steady forward growth of Wood paired with the precision of a Metal-dominant chart..."
         '400':
-          description: Invalid input (year out of range, month/day invalid, etc.)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          $ref: '#/components/responses/BadRequest'
         '401':
-          description: Unauthorized (missing or invalid X-RapidAPI-Proxy-Secret)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          $ref: '#/components/responses/Unauthorized'
         '429':
-          description: Rate limit exceeded (Free tier 100 req/day; upgrade for more)
+          $ref: '#/components/responses/RateLimited'
         '500':
-          description: Internal calculation error
+          $ref: '#/components/responses/ServerError'
+  /qa:
+    post:
+      tags: [ai, saju]
+      summary: Ask a free-form question grounded on a Saju chart
+      description: >
+        Submit a Saju chart (or a birth date) plus a natural-language question
+        in any of {ko,en,ja,zh}; returns a 3–5 sentence Claude-generated answer
+        grounded on the four pillars and 5-element balance. Useful for chat-style
+        astrology apps. Token-bounded (≤ 350 output tokens).
+      operationId: askSajuQuestion
+      security:
+        - RapidAPIKey: []
+        - RapidAPIProxySecret: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QARequest'
+            examples:
+              career:
+                summary: Career question in English
+                value:
+                  birth_year: 1990
+                  birth_month: 5
+                  birth_day: 15
+                  birth_hour: 14
+                  gender: F
+                  lang: en
+                  question: "Should I switch from a corporate job to freelancing this year?"
+              love_ko:
+                summary: Korean love question
+                value:
+                  birth_year: 1992
+                  birth_month: 8
+                  birth_day: 22
+                  birth_hour: 9
+                  gender: F
+                  lang: ko
+                  question: "올해 안에 결혼할 인연이 보이나요?"
+      responses:
+        '200':
+          description: Q&A answer (lang-matched)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: '#/components/schemas/QAResponse'
+              examples:
+                career:
+                  summary: Career answer
+                  value:
+                    ok: true
+                    lang: en
+                    answer: "Your Wood day-stem with Metal-heavy stems suggests structured environments amplify your strengths..."
+                    used_pillars: 4
+                    tokens: 287
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /compatibility:
+    post:
+      tags: [compatibility, saju]
+      summary: Two-person Saju (Gunghap) compatibility score 0–100
+      description: >
+        Pass two birth records; returns a 0–100 compatibility score, breakdown
+        by 5-element interaction (生/克), an Hanja stems-and-branches harmony
+        analysis, and a 2-sentence advice paragraph. Backed by classical
+        Gunghap (궁합) rules used for 1,000 years in Korean marriage screening.
+      operationId: getSajuCompatibility
+      security:
+        - RapidAPIKey: []
+        - RapidAPIProxySecret: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompatRequest'
+            examples:
+              couple:
+                summary: Standard couple
+                value:
+                  person_a:
+                    birth_year: 1990
+                    birth_month: 5
+                    birth_day: 15
+                    birth_hour: 14
+                    gender: F
+                  person_b:
+                    birth_year: 1988
+                    birth_month: 11
+                    birth_day: 7
+                    birth_hour: 22
+                    gender: M
+                  lang: en
+      responses:
+        '200':
+          description: Compatibility score and breakdown
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompatResponse'
+              examples:
+                couple:
+                  summary: Strong match
+                  value:
+                    ok: true
+                    score: 82
+                    grade: "Strong harmony"
+                    element_balance:
+                      generative: 3
+                      controlling: 1
+                      neutral: 1
+                    breakdown:
+                      day_stem_match: 18
+                      branch_harmony: 22
+                      element_balance: 24
+                      ten_gods_match: 18
+                    advice: "Your Wood-Earth pairing creates steady growth with grounded support..."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /monthly-fortune:
+    post:
+      tags: [saju, ai]
+      summary: 12-month forecast (current year) keyed to a Saju chart
+      description: >
+        Returns 12 month-by-month one-paragraph forecasts for the current year,
+        keyed to the user's 4-pillar Saju chart. Each month delivers wealth,
+        love, health and career bullets plus an overall sentiment score (-2..+2).
+        Localized to {ko,en,ja,zh}.
+      operationId: getMonthlyFortune
+      security:
+        - RapidAPIKey: []
+        - RapidAPIProxySecret: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonthlyRequest'
+            examples:
+              standard:
+                summary: 2026 forecast in English
+                value:
+                  birth_year: 1990
+                  birth_month: 5
+                  birth_day: 15
+                  birth_hour: 14
+                  gender: F
+                  year: 2026
+                  lang: en
+      responses:
+        '200':
+          description: 12-month forecast array
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyResponse'
+              examples:
+                standard:
+                  summary: 12 entries
+                  value:
+                    ok: true
+                    year: 2026
+                    lang: en
+                    months:
+                      - { month: 1, sentiment: 1, wealth: "stable", love: "spark", health: "rest", career: "plan", note: "January favors quiet planning..." }
+                      - { month: 2, sentiment: 2, wealth: "rising", love: "deepen", health: "boost", career: "ship", note: "February brings momentum..." }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
 components:
   securitySchemes:
+    RapidAPIKey:
+      type: apiKey
+      in: header
+      name: X-RapidAPI-Key
+      description: >
+        Subscriber's RapidAPI key. Forwarded automatically by the RapidAPI
+        gateway; subscribers paste this header in their own client.
     RapidAPIProxySecret:
       type: apiKey
       in: header
       name: X-RapidAPI-Proxy-Secret
-      description: Injected automatically by the RapidAPI gateway; do not set manually.
+      description: >
+        Server-to-server shared secret injected by the RapidAPI gateway and
+        validated by the upstream Vercel function. Subscribers do NOT set this
+        header manually.
+  responses:
+    BadRequest:
+      description: Invalid input (year out of range, month/day invalid, etc.)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            ok: false
+            error: "birth_year must be 1920-2050"
+    Unauthorized:
+      description: Unauthorized (missing or invalid X-RapidAPI-Key / X-RapidAPI-Proxy-Secret)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            ok: false
+            error: "Unauthorized: invalid API key"
+    RateLimited:
+      description: >
+        Rate limit exceeded. Quotas per RapidAPI plan:
+          FREE  -> 100 req/day (hard cap)
+          PRO   -> 5,000 req/day
+          ULTRA -> 50,000 req/day
+      headers:
+        X-RateLimit-Requests-Limit:
+          schema: { type: integer }
+          description: Daily quota for the active subscription tier
+        X-RateLimit-Requests-Remaining:
+          schema: { type: integer }
+          description: Remaining requests today
+        Retry-After:
+          schema: { type: integer }
+          description: Seconds until the next request is allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            ok: false
+            error: "Rate limit exceeded. Upgrade plan or retry tomorrow."
+    ServerError:
+      description: Internal calculation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            ok: false
+            error: "Internal calculation error"
   schemas:
     SajuRequest:
       type: object
@@ -123,6 +400,7 @@ components:
           description: M = male, F = female. Required for daeun (10-year cycle) direction.
     SajuResponse:
       type: object
+      required: [ok, pillars, elements, summary]
       properties:
         ok:
           type: boolean
@@ -142,67 +420,153 @@ components:
           example: "Day stem 庚 (금/Metal). Dominant element: 토 (Earth)."
         lucky_color:
           type: string
-          example: "white"
+          example: white
         lucky_direction:
           type: string
-          example: "West"
+          example: West
         advice:
           type: string
           example: "You carry a refined sense of structure and clear judgment..."
         meta:
           type: object
           properties:
-            day_stem_element:
-              type: string
-              example: "금"
-            dominant_element:
-              type: string
-              example: "토"
-            gender:
-              type: string
+            day_stem_element: { type: string, example: "금" }
+            dominant_element: { type: string, example: "토" }
+            gender:           { type: string }
             birth:
               type: object
               properties:
-                year: { type: integer }
+                year:  { type: integer }
                 month: { type: integer }
-                day: { type: integer }
-                hour: { type: integer, nullable: true }
+                day:   { type: integer }
+                hour:  { type: integer, nullable: true }
+    QARequest:
+      type: object
+      required: [birth_year, birth_month, birth_day, gender, question]
+      properties:
+        birth_year:  { type: integer, minimum: 1920, maximum: 2050 }
+        birth_month: { type: integer, minimum: 1, maximum: 12 }
+        birth_day:   { type: integer, minimum: 1, maximum: 31 }
+        birth_hour:  { type: integer, minimum: -1, maximum: 23, default: -1 }
+        gender:      { type: string, enum: [M, F] }
+        lang:
+          type: string
+          enum: [ko, en, ja, zh]
+          default: en
+          description: Output language for the answer.
+        question:
+          type: string
+          minLength: 5
+          maxLength: 400
+          example: "Should I switch from a corporate job to freelancing this year?"
+    QAResponse:
+      type: object
+      required: [ok, lang, answer]
+      properties:
+        ok:     { type: boolean, example: true }
+        lang:   { type: string, enum: [ko, en, ja, zh] }
+        answer: { type: string, description: "3–5 sentence Claude-generated answer grounded on the chart." }
+        used_pillars: { type: integer, example: 4 }
+        tokens:       { type: integer, example: 287 }
+    CompatRequest:
+      type: object
+      required: [person_a, person_b]
+      properties:
+        person_a: { $ref: '#/components/schemas/SajuRequest' }
+        person_b: { $ref: '#/components/schemas/SajuRequest' }
+        lang:
+          type: string
+          enum: [ko, en, ja, zh]
+          default: en
+    CompatResponse:
+      type: object
+      required: [ok, score, grade]
+      properties:
+        ok:    { type: boolean, example: true }
+        score: { type: integer, minimum: 0, maximum: 100, example: 82 }
+        grade:
+          type: string
+          enum: [
+            "Critical clash", "Difficult", "Mixed", "Workable",
+            "Good harmony", "Strong harmony", "Soulmate"
+          ]
+        element_balance:
+          type: object
+          properties:
+            generative:  { type: integer, example: 3 }
+            controlling: { type: integer, example: 1 }
+            neutral:     { type: integer, example: 1 }
+        breakdown:
+          type: object
+          properties:
+            day_stem_match:  { type: integer, example: 18 }
+            branch_harmony:  { type: integer, example: 22 }
+            element_balance: { type: integer, example: 24 }
+            ten_gods_match:  { type: integer, example: 18 }
+        advice: { type: string }
+    MonthlyRequest:
+      type: object
+      required: [birth_year, birth_month, birth_day, gender, year]
+      properties:
+        birth_year:  { type: integer, minimum: 1920, maximum: 2050 }
+        birth_month: { type: integer, minimum: 1, maximum: 12 }
+        birth_day:   { type: integer, minimum: 1, maximum: 31 }
+        birth_hour:  { type: integer, minimum: -1, maximum: 23, default: -1 }
+        gender:      { type: string, enum: [M, F] }
+        year:
+          type: integer
+          minimum: 2024
+          maximum: 2030
+          example: 2026
+        lang:
+          type: string
+          enum: [ko, en, ja, zh]
+          default: en
+    MonthlyResponse:
+      type: object
+      required: [ok, year, lang, months]
+      properties:
+        ok:   { type: boolean, example: true }
+        year: { type: integer, example: 2026 }
+        lang: { type: string, enum: [ko, en, ja, zh] }
+        months:
+          type: array
+          minItems: 12
+          maxItems: 12
+          items:
+            type: object
+            required: [month, sentiment, note]
+            properties:
+              month:     { type: integer, minimum: 1, maximum: 12 }
+              sentiment: { type: integer, minimum: -2, maximum: 2 }
+              wealth:    { type: string, example: "stable" }
+              love:      { type: string, example: "spark" }
+              health:    { type: string, example: "rest" }
+              career:    { type: string, example: "plan" }
+              note:      { type: string, description: "1-paragraph month outlook." }
     Pillar:
       type: object
+      required: [pillar, stem_kr, stem_hanja, branch_kr, branch_hanja]
       properties:
         pillar:
           type: string
           enum: [year, month, day, hour]
-        stem_kr:
-          type: string
-          example: "경"
-        stem_hanja:
-          type: string
-          example: "庚"
-        branch_kr:
-          type: string
-          example: "오"
-        branch_hanja:
-          type: string
-          example: "午"
+        stem_kr:      { type: string, example: "경" }
+        stem_hanja:   { type: string, example: "庚" }
+        branch_kr:    { type: string, example: "오" }
+        branch_hanja: { type: string, example: "午" }
     Element:
       type: object
+      required: [element_kr, element_en, count]
       properties:
-        element_kr:
-          type: string
-          example: "목"
+        element_kr: { type: string, example: "목" }
         element_en:
           type: string
           enum: [Wood, Fire, Earth, Metal, Water]
-        count:
-          type: integer
-          example: 2
+        count: { type: integer, minimum: 0, example: 2 }
     ErrorResponse:
       type: object
+      required: [ok, error]
       properties:
-        ok:
-          type: boolean
-          example: false
-        error:
-          type: string
-          example: "birth_year must be 1920-2050"
+        ok:    { type: boolean, example: false }
+        error: { type: string, example: "birth_year must be 1920-2050" }
