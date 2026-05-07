@@ -239,16 +239,16 @@ const COUPONS = {
     description: '사주 정밀/종합 풀이 신규 가입자 ₩5,000 할인',
   },
   // ─── 대표자 친구 10명 무료 (5/7 발급, 100% 할인 = ₩0 결제) ───
-  SAJUF001: { discount_amount: 9900, discount_pct: null, restriction: { sku_in: ['saju_premium_9900'], single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 (정밀 풀이) 1' },
-  SAJUF002: { discount_amount: 9900, discount_pct: null, restriction: { sku_in: ['saju_premium_9900'], single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 (정밀 풀이) 2' },
-  SAJUF003: { discount_amount: 9900, discount_pct: null, restriction: { sku_in: ['saju_premium_9900'], single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 (정밀 풀이) 3' },
-  SAJUF004: { discount_amount: 9900, discount_pct: null, restriction: { sku_in: ['saju_premium_9900'], single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 (정밀 풀이) 4' },
-  SAJUF005: { discount_amount: 9900, discount_pct: null, restriction: { sku_in: ['saju_premium_9900'], single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 (정밀 풀이) 5' },
-  SAJUF006: { discount_amount: 9900, discount_pct: null, restriction: { sku_in: ['saju_premium_9900'], single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 (정밀 풀이) 6' },
-  SAJUF007: { discount_amount: 9900, discount_pct: null, restriction: { sku_in: ['saju_premium_9900'], single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 (정밀 풀이) 7' },
-  SAJUF008: { discount_amount: 9900, discount_pct: null, restriction: { sku_in: ['saju_premium_9900'], single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 (정밀 풀이) 8' },
-  SAJUF009: { discount_amount: 9900, discount_pct: null, restriction: { sku_in: ['saju_premium_9900'], single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 (정밀 풀이) 9' },
-  SAJUF010: { discount_amount: 9900, discount_pct: null, restriction: { sku_in: ['saju_premium_9900'], single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 (정밀 풀이) 10' },
+  SAJUF001: { discount_amount: 9900, discount_pct: null, restriction: { min_amount: 9900, sku_in: null, single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 1' },
+  SAJUF002: { discount_amount: 9900, discount_pct: null, restriction: { min_amount: 9900, sku_in: null, single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 2' },
+  SAJUF003: { discount_amount: 9900, discount_pct: null, restriction: { min_amount: 9900, sku_in: null, single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 3' },
+  SAJUF004: { discount_amount: 9900, discount_pct: null, restriction: { min_amount: 9900, sku_in: null, single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 4' },
+  SAJUF005: { discount_amount: 9900, discount_pct: null, restriction: { min_amount: 9900, sku_in: null, single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 5' },
+  SAJUF006: { discount_amount: 9900, discount_pct: null, restriction: { min_amount: 9900, sku_in: null, single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 6' },
+  SAJUF007: { discount_amount: 9900, discount_pct: null, restriction: { min_amount: 9900, sku_in: null, single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 7' },
+  SAJUF008: { discount_amount: 9900, discount_pct: null, restriction: { min_amount: 9900, sku_in: null, single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 8' },
+  SAJUF009: { discount_amount: 9900, discount_pct: null, restriction: { min_amount: 9900, sku_in: null, single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 9' },
+  SAJUF010: { discount_amount: 9900, discount_pct: null, restriction: { min_amount: 9900, sku_in: null, single_use_per_email: true }, valid_until: '2026-08-07T23:59:59+09:00', description: '친구 무료 10' },
 };
 
 // ─── 인플루언서 쿠폰 (KSAJU-NNNNN-XXXXXX) — HMAC 검증, 1코드 1사용, 30일 무료 ───
