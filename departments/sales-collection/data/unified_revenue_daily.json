@@ -1,0 +1,21 @@
+{
+  "2026-05-06": {
+    "date": "2026-05-06",
+    "by_channel_krw": {
+      "admob": 0,
+      "youtube": 0,
+      "gumroad": 0,
+      "kdp": 0,
+      "kreatie": 0
+    },
+    "by_channel_usd": {
+      "admob": 0,
+      "youtube": 0,
+      "gumroad": 0,
+      "kdp": 0,
+      "kreatie_krw": 0
+    },
+    "total_krw": 0,
+    "fx": 1380
+  }
+}

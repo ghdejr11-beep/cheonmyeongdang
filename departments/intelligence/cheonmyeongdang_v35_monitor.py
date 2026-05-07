@@ -310,16 +310,28 @@ def run(force=False):
     for r in results:
         prev = state.get(r['name'], {})
         prev_ok = prev.get('ok', True)
-        if prev_ok and not r['ok']:
+        prev_fail_count = prev.get('fail_count', 0)
+        prev_alerted_down = prev.get('alerted_down', False)
+        this_fail_count = 0 if r['ok'] else prev_fail_count + 1
+
+        # 2회 연속 fail 시 confirmed DOWN — Vercel CDN 갱신 false alarm 방지
+        if not r['ok'] and this_fail_count >= 2 and not prev_alerted_down:
             changes_down.append(r)
-        elif not prev_ok and r['ok']:
+            this_alerted_down = True
+        elif r['ok'] and prev_alerted_down:
             changes_up.append(r)
+            this_alerted_down = False
+        else:
+            this_alerted_down = prev_alerted_down
+
         state[r['name']] = {
             'ok': r['ok'],
             'status': r['status'],
             'elapsed_ms': r['elapsed_ms'],
             'last_check': datetime.now().isoformat(timespec='seconds'),
             'error': r.get('error'),
+            'fail_count': this_fail_count,
+            'alerted_down': this_alerted_down,
         }
         mark = 'UP' if r['ok'] else 'DOWN'
         meta = f' ({r.get("meta")})' if r.get('meta') else ''

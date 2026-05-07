@@ -1,0 +1,21 @@
+{
+  "slug": "word-search-seniors-nature",
+  "title": "Large Print Word Search for Seniors",
+  "subtitle": "Calming Nature Edition",
+  "author": "Deokgu Studio",
+  "trim": "8.5x11",
+  "pages": 78,
+  "category": "puzzles_word_search",
+  "audience": "seniors",
+  "language": "en",
+  "format": "paperback",
+  "price_usd": 8.99,
+  "themes": ["large-print", "nature", "calming", "seniors"],
+  "created": "2026-05-07",
+  "status": "draft_complete_pending_cover_and_upload",
+  "interior_pdf": "Word_Search_Seniors_Nature_Interior.pdf",
+  "puzzles": 50,
+  "grid_size": "15x15",
+  "words_per_puzzle": 12,
+  "answer_key": true
+}
