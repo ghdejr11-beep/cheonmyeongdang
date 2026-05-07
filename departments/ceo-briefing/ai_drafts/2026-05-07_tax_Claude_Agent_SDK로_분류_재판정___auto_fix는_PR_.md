@@ -1,8 +1,8 @@
 # tax: Claude Agent SDK로 분류 재판정 + auto_fix는 PR 자동 생성
 
-**생성**: 2026-05-07 09:01 | **비용**: $0.0016
+**생성**: 2026-05-07 12:01 | **비용**: $0.0015
 
-**요약**: Claude Agent SDK 분류 재판정 및 PR 자동 생성 구현 방안 조사
+**요약**: Claude Agent SDK 기반 분류 재판정 및 PR 자동생성 시스템 설계 필요
 
 ## 메모
-Claude Agent SDK는 현재 공식 문서에서 'tools' 기능으로 함수 호출을 지원합니다. 1) 분류 재판정: Claude가 tax 항목을 분석하여 카테고리 재할당하는 tool 설계 2) auto_fix PR 생성: GitHub API(PyGithub/Octokit)로 브랜치→PR 자동화 3) 통합 흐름: Agent가 분석 결과 기반 코드 수정 후 PR 생성 tool 호출. SDK 버전, 모델(claude-3.5-sonnet 권장), 인증(API key, GitHub token) 확인 필요.
+Claude Agent SDK를 활용한 세무 분류 재판정 자동화: (1) 기존 분류 규칙을 Agent에 학습시켜 판정 정확도 향상, (2) auto_fix 로직으로 오류 항목 자동 수정, (3) GitHub API 연동하여 PR 자동 생성. 필요 요소: Agent 프롬프트 설계, 분류 룰셋 정의, Git 토큰 관리, PR 템플릿 구성. Claude API 문서의 tool_use 활용 권장.
