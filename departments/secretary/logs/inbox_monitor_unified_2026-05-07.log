@@ -1,0 +1,36 @@
+[2026-05-07 12:40:23] === 통합 inbox monitor 시작 ===
+[2026-05-07 12:40:24]   inbox fetched: 80
+[2026-05-07 12:40:55]   [RED] ghdejr11@gmail.com | Re: 빈양식 회신 정정 - 기업정보등록-한국관광공사-쿤스튜디오 | tg=True
+[2026-05-07 12:40:56]   telegram fail: HTTP Error 400: Bad Request
+[2026-05-07 12:40:56]   [RED] Hong Deokhoon <ghdejr11@gmail.com> | [Seed 제안] 천명당 - Co-Star $25M 미국만, 정통 한국 사주 4언어 글로벌 | tg=False
+[2026-05-07 12:40:57]   telegram fail: HTTP Error 400: Bad Request
+[2026-05-07 12:40:57]   [RED] "김지은jella.tto" <jella.tto@kakaopaycorp.c | Re: [카카오페이] 심사관련 보완사항 안내_쿤스튜디오 | tg=False
+[2026-05-07 12:40:58]   telegram fail: HTTP Error 400: Bad Request
+[2026-05-07 12:40:58]   [RED] X Developer Platform <receipts+acct_1S46 | Your X Developer Platform receipt [#1029-8126] | tg=False
+[2026-05-07 12:40:58]   [OTHER NEW] 76건 (push 안 함)
+[2026-05-07 12:40:58] === 종료: RED=4건 push, OTHER=76건 skip ===
+[2026-05-07 12:41:29] === 통합 inbox monitor 시작 ===
+[2026-05-07 12:41:30]   inbox fetched: 80
+[2026-05-07 12:41:30] === 종료: RED=0건 push, OTHER=0건 skip ===
+[2026-05-07 12:42:08] === 통합 inbox monitor 시작 ===
+[2026-05-07 12:42:09]   inbox fetched: 80
+[2026-05-07 12:42:09] === 종료: RED=0건 push, OTHER=0건 skip ===
+[2026-05-07 12:43:54] === 통합 inbox monitor 시작 ===
+[2026-05-07 12:43:54]   inbox fetched: 80
+[2026-05-07 12:44:14]   [RED] "김지은jella.tto" <jella.tto@kakaopaycorp.c | Re: [카카오페이] 심사관련 보완사항 안내_쿤스튜디오 | tg=True
+[2026-05-07 12:44:14]   [OTHER NEW] 50건 (push 안 함)
+[2026-05-07 12:44:14] === 종료: RED=1건 push, OTHER=50건 skip ===
+[2026-05-07 12:45:38] === 통합 inbox monitor 시작 ===
+[2026-05-07 12:45:39]   inbox fetched: 80
+[2026-05-07 12:45:39] === 종료: RED=0건 push, OTHER=0건 skip ===
+[2026-05-07 12:46:01] === 통합 inbox monitor 시작 ===
+[2026-05-07 12:46:02]   inbox fetched: 80
+[2026-05-07 12:46:02] === 종료: RED=0건 push, OTHER=0건 skip ===
+[2026-05-07 12:51:00] === 통합 inbox monitor 시작 ===
+[2026-05-07 12:51:01]   inbox fetched: 80
+[2026-05-07 12:51:02]   [OTHER NEW] 1건 (push 안 함)
+[2026-05-07 12:51:02] === 종료: RED=0건 push, OTHER=1건 skip ===
+[2026-05-07 12:56:00] === 통합 inbox monitor 시작 ===
+[2026-05-07 12:56:01]   inbox fetched: 80
+[2026-05-07 12:56:02]   [OTHER NEW] 1건 (push 안 함)
+[2026-05-07 12:56:02] === 종료: RED=0건 push, OTHER=1건 skip ===
