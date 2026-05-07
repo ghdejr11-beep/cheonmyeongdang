@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>천명당 액션 대시보드 · 2026-05-07</title>
+<title>천명당 액션 대시보드 · 2026-05-07 13:00</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
@@ -116,6 +116,7 @@ section { margin-bottom: 48px; }
 .auto-item .time { color: var(--text-3); font-size: 11px; min-width: 52px; font-variant-numeric: tabular-nums; }
 .auto-item .name { color: var(--text); flex: 1; font-weight: 500; }
 .auto-item .status { font-size: 10px; padding: 2px 6px; border-radius: 4px; background: rgba(74,222,128,0.12); color: var(--low); font-weight: 600; }
+.auto-item .status.done { background: rgba(108,108,120,0.18); color: var(--text-3); }
 
 /* ALL ACTIONS TABLE */
 .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
@@ -124,6 +125,8 @@ th { background: var(--surface-2); color: var(--text-3); font-size: 11px; font-w
 td { padding: 12px 14px; border-bottom: 1px solid var(--border); }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: rgba(255,255,255,0.02); }
+tr.done td { color: var(--text-3); text-decoration: line-through; opacity: 0.55; }
+tr.done td .tag, tr.done td a { text-decoration: none; }
 .tag {
   display: inline-block; padding: 2px 7px; border-radius: 4px;
   font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
@@ -133,6 +136,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .tag.med { background: rgba(255,200,61,0.15); color: var(--med); }
 .tag.low { background: rgba(74,222,128,0.15); color: var(--low); }
 .tag.auto { background: rgba(96,165,250,0.15); color: var(--link); }
+.tag.done { background: rgba(108,108,120,0.18); color: var(--text-3); }
 td a { color: var(--link); text-decoration: none; }
 td a:hover { text-decoration: underline; }
 .num { font-variant-numeric: tabular-nums; color: var(--text-2); }
@@ -172,7 +176,7 @@ footer a { color: var(--text-2); text-decoration: none; }
 <header>
   <div>
     <div class="title">천명당 액션 대시보드</div>
-    <div class="subtitle">2026-05-07 · 새벽 자동 처리 완료 · 사용자 액션 대기 중</div>
+    <div class="subtitle">2026-05-07 · 13:00 갱신 · 자동 9건 완료 · 사용자 11건 + 자동 대기 2건</div>
   </div>
   <div class="meta">
     <div><span class="live-dot"></span><strong>16/16 라이브</strong></div>
@@ -185,7 +189,7 @@ footer a { color: var(--text-2); text-decoration: none; }
   <div class="summary">
     <div class="sum-card"><span class="num">90<small style="font-size:14px; color:var(--text-3);"> 분</small></span><span class="label">TOP 3 사용자 시간</span></div>
     <div class="sum-card"><span class="num" style="color:var(--accent);">₩6천만~7천만</span><span class="label">90일 매출 기댓값</span></div>
-    <div class="sum-card"><span class="num">38<small style="font-size:14px; color:var(--text-3);"> 개</small></span><span class="label">자동 schtask 가동</span></div>
+    <div class="sum-card"><span class="num">9<small style="font-size:14px; color:var(--text-3);"> 건</small></span><span class="label">오늘 자동 완료</span></div>
     <div class="sum-card"><span class="num">D-13</span><span class="label">K-Startup AI 리그 마감</span></div>
   </div>
 </section>
@@ -211,7 +215,7 @@ footer a { color: var(--text-2); text-decoration: none; }
       <span class="rank">2</span>
       <span class="badge">🔴 CRITICAL</span>
       <div class="h2">Play Console v1.3.1 AAB 업로드</div>
-      <div class="desc">AAB 드래그 + 출시 노트 4 lang 복붙 + Rollout 20% 1클릭.</div>
+      <div class="desc">AAB 드래그 + 출시 노트 4 lang 복붙 + Rollout 20% 1클릭. 다른 Agent가 빌드 중.</div>
       <div class="stats">
         <div class="stat"><label>시간</label><value>5분</value></div>
         <div class="stat"><label>매출</label><value style="color:var(--high);">₩14,500/월</value></div>
@@ -239,9 +243,10 @@ footer a { color: var(--text-2); text-decoration: none; }
 <section>
   <div class="section-h">🤖 오늘 자동 진행 — 사용자 0분</div>
   <div class="auto-grid">
-    <div class="auto-item"><span class="time">09:00</span><span class="name">Kakao Ventures cold email 자동 발송</span><span class="status">스케줄</span></div>
+    <div class="auto-item"><span class="time">12:16</span><span class="name">Kakao Ventures cold email 자동 발송</span><span class="status done">✅ 완료</span></div>
+    <div class="auto-item"><span class="time">5분</span><span class="name">inbox_monitor_unified 통합 폴링</span><span class="status">RUNNING</span></div>
+    <div class="auto-item"><span class="time">2시간</span><span class="name">secretary_2h_report 비서부 보고</span><span class="status">RUNNING</span></div>
     <div class="auto-item"><span class="time">09:00</span><span class="name">PayPal Daily Monitor</span><span class="status">스케줄</span></div>
-    <div class="auto-item"><span class="time">09:00</span><span class="name">KoDATA Reply Monitor</span><span class="status">스케줄</span></div>
     <div class="auto-item"><span class="time">09:30</span><span class="name">Pinterest 1핀 자동 발행 (53일치)</span><span class="status">스케줄</span></div>
     <div class="auto-item"><span class="time">09:30</span><span class="name">B2B Outreach + Daily Revenue Report</span><span class="status">스케줄</span></div>
     <div class="auto-item"><span class="time">10:00</span><span class="name">Twitter @deokgune_ai Draft #1 발행</span><span class="status">스케줄</span></div>
@@ -257,7 +262,7 @@ footer a { color: var(--text-2); text-decoration: none; }
 
 <!-- ALL ACTIONS TABLE -->
 <section>
-  <div class="section-h">📋 사용자 직접 액션 13건 — 시간 부족 시 TOP 3만</div>
+  <div class="section-h">📋 사용자 직접 액션 — 남은 11건 + 자동 대기 2건</div>
   <div class="table-wrap">
     <table>
       <thead>
@@ -275,16 +280,21 @@ footer a { color: var(--text-2); text-decoration: none; }
         <tr><td class="num">1</td><td><span class="tag crit">CRITICAL</span></td><td>K-Startup AI 리그 PMS 신청</td><td class="num">60분</td><td class="revenue-cell">₩5천~5억</td><td>D-13 (5/20)</td><td><a href="https://pms.k-startup.go.kr" target="_blank">열기</a></td></tr>
         <tr><td class="num">2</td><td><span class="tag crit">CRITICAL</span></td><td>Play Console v1.3.1 AAB 업로드</td><td class="num">5분</td><td class="revenue-cell">₩14,500/월</td><td>즉시</td><td><a href="https://play.google.com/console" target="_blank">열기</a></td></tr>
         <tr><td class="num">3</td><td><span class="tag high">HIGH</span></td><td>AppSumo Cheonmyeongdang LTD 제출</td><td class="num">20분</td><td class="revenue-cell">$5K~$15K (30일)</td><td>즉시</td><td><a href="https://appsumo.com/partners/list-your-product/" target="_blank">열기</a></td></tr>
-        <tr><td class="num">4</td><td><span class="tag high">HIGH</span></td><td>Etsy + Vela 40 listings (Top 5만 먼저)</td><td class="num">12분</td><td class="revenue-cell">$150~$450/월</td><td>즉시</td><td><a href="https://www.etsy.com/sell" target="_blank">열기</a></td></tr>
+        <tr><td class="num">4</td><td><span class="tag high">HIGH</span></td><td>Etsy Top 5 listings 등록</td><td class="num">12분</td><td class="revenue-cell">$150~$450/월</td><td>즉시</td><td><a href="https://www.etsy.com/sell" target="_blank">열기</a></td></tr>
         <tr><td class="num">5</td><td><span class="tag high">HIGH</span></td><td>영문 인플라 5명 발송 (KSAJU-00043~51)</td><td class="num">30분</td><td class="revenue-cell">$2,250~$8K LTV</td><td>즉시</td><td>—</td></tr>
         <tr><td class="num">6</td><td><span class="tag med">MED</span></td><td>RapidAPI Provider 가입 + listing</td><td class="num">5분</td><td class="revenue-cell">$50~$500/월</td><td>즉시</td><td><a href="https://rapidapi.com/auth/sign-up?referral=/provider" target="_blank">열기</a></td></tr>
         <tr><td class="num">7</td><td><span class="tag med">MED</span></td><td>Beehiiv 가입 (Issue #1~5 사전 작성)</td><td class="num">5분</td><td class="revenue-cell">$500~$2K/월</td><td>즉시</td><td><a href="https://beehiiv.com" target="_blank">열기</a></td></tr>
         <tr><td class="num">8</td><td><span class="tag med">MED</span></td><td>AdMob OAuth 셋업 (매출 추적)</td><td class="num">5분</td><td class="revenue-cell">매출 가시화</td><td>즉시</td><td><a href="https://console.cloud.google.com" target="_blank">열기</a></td></tr>
-        <tr><td class="num">9</td><td><span class="tag med">MED</span></td><td>관광 AI (KORLENS) 신청</td><td class="num">30분</td><td class="revenue-cell">₩1,100만</td><td>D-13 (KoDATA 5/12 후)</td><td><a href="https://touraz.kr" target="_blank">열기</a></td></tr>
-        <tr><td class="num">10</td><td><span class="tag low">LOW</span></td><td>PayPal Client Secret rotate (보안)</td><td class="num">5분</td><td class="revenue-cell">보안 강화</td><td>여유</td><td><a href="https://developer.paypal.com/dashboard/applications/live" target="_blank">열기</a></td></tr>
-        <tr><td class="num">11</td><td><span class="tag low">LOW</span></td><td>Antler Seoul Cohort 8 pitch</td><td class="num">15분</td><td class="revenue-cell">$200K~$500K</td><td>여유</td><td><a href="https://antler.co/apply" target="_blank">열기</a></td></tr>
-        <tr><td class="num">12</td><td><span class="tag auto">AUTO</span></td><td>Kakao Ventures cold email (5/7 09:00 자동)</td><td class="num">0분</td><td class="revenue-cell">$300K~$1M</td><td>오늘</td><td>—</td></tr>
-        <tr><td class="num">13</td><td><span class="tag low">LOW</span></td><td>Naver D2SF 신청서</td><td class="num">20분</td><td class="revenue-cell">$200K~$500K</td><td>여유</td><td><a href="https://d2startup.com" target="_blank">열기</a></td></tr>
+        <tr><td class="num">9</td><td><span class="tag low">LOW</span></td><td>Antler Seoul Cohort 8 pitch</td><td class="num">15분</td><td class="revenue-cell">$200K~$500K</td><td>여유</td><td><a href="https://antler.co/apply" target="_blank">열기</a></td></tr>
+        <tr><td class="num">10</td><td><span class="tag low">LOW</span></td><td>Naver D2SF 신청서</td><td class="num">20분</td><td class="revenue-cell">$200K~$500K</td><td>여유</td><td><a href="https://d2startup.com" target="_blank">열기</a></td></tr>
+        <tr><td class="num">11</td><td><span class="tag low">LOW</span></td><td>PayPal Client Secret rotate (보안)</td><td class="num">5분</td><td class="revenue-cell">보안 강화</td><td>여유</td><td><a href="https://developer.paypal.com/dashboard/applications/live" target="_blank">열기</a></td></tr>
+        <tr><td class="num">12</td><td><span class="tag auto">AUTO 대기</span></td><td>KoDATA 회신 (find@kodata.co.kr)</td><td class="num">0분</td><td class="revenue-cell">관광AI 1,100만 unlock</td><td>5/8~5/14</td><td>—</td></tr>
+        <tr><td class="num">13</td><td><span class="tag auto">AUTO 대기</span></td><td>PG 가맹점 검토 결과 (단건+정기)</td><td class="num">0분</td><td class="revenue-cell">PG 라이브</td><td>1~3 영업일</td><td>—</td></tr>
+        <tr class="done"><td class="num">—</td><td><span class="tag done">완료</span></td><td>Kakao Ventures cold email (자동 12:16)</td><td class="num">0분</td><td class="revenue-cell">$300K~$1M</td><td>—</td><td>—</td></tr>
+        <tr class="done"><td class="num">—</td><td><span class="tag done">완료</span></td><td>카카오페이 jella.tto 답장</td><td class="num">—</td><td class="revenue-cell">PG 진행</td><td>—</td><td>—</td></tr>
+        <tr class="done"><td class="num">—</td><td><span class="tag done">완료</span></td><td>네이버페이 1:1 문의 (사용자 send)</td><td class="num">—</td><td class="revenue-cell">PG 진행</td><td>—</td><td>—</td></tr>
+        <tr class="done"><td class="num">—</td><td><span class="tag done">완료</span></td><td>카카오페이 단건+정기 PortOne 신청 (자동)</td><td class="num">—</td><td class="revenue-cell">PG 검토중</td><td>—</td><td>—</td></tr>
+        <tr class="done"><td class="num">—</td><td><span class="tag done">완료</span></td><td>OAuth 영구 해결 (Cloud Console PUBLISH)</td><td class="num">—</td><td class="revenue-cell">로그인 라이브</td><td>—</td><td>—</td></tr>
       </tbody>
     </table>
   </div>
@@ -306,29 +316,24 @@ footer a { color: var(--text-2); text-decoration: none; }
 
 <!-- LATEST AUTO RESULTS -->
 <section>
-  <div class="section-h">✅ 새벽 자동 완료 (5/7 00:14~01:00)</div>
+  <div class="section-h">✅ 오늘 자동 완료 (5/7 새벽~13:00)</div>
   <div class="table-wrap">
     <table>
       <thead><tr><th width="40">#</th><th>작업</th><th width="220">결과</th><th width="120">시간 절약</th></tr></thead>
       <tbody>
-        <tr><td class="num">1</td><td>251 파일 git 일괄 정리</td><td><span class="tag low">완료</span> commit 57c8aac</td><td class="num">—</td></tr>
-        <tr><td class="num">2</td><td>AppSumo demo video script (ko/en, 90초)</td><td><span class="tag low">완료</span> docs/appsumo_demo_video_script.md</td><td class="num">25분</td></tr>
-        <tr><td class="num">3</td><td>Etsy 40 listings 검증 + Top 5 우선순위</td><td><span class="tag low">PASS</span> 40/40, 자동 수정 0건</td><td class="num">13분</td></tr>
-        <tr><td class="num">4</td><td>Grant docx 5종 검증 + 보강 부록</td><td><span class="tag low">완료</span> docs/grant_appendix_2026_05.md</td><td class="num">60분</td></tr>
-        <tr><td class="num">5</td><td>Twitter 30 drafts (영 25 + 일 5, 6주치)</td><td><span class="tag low">완료</span> twitter_drafts_v2_30.json</td><td class="num">매일 자동</td></tr>
-        <tr><td class="num">6</td><td>Beehiiv Issue #2~5 사전 작성</td><td><span class="tag low">완료</span> issue_2~5.md (각 1100w)</td><td class="num">240분</td></tr>
-        <tr><td class="num">7</td><td>RapidAPI yaml 검증 + 4 lang listing</td><td><span class="tag low">완료</span> openapi_validation_report.md</td><td class="num">3분</td></tr>
-        <tr><td class="num">8</td><td>Pinterest 4-lang 12핀 v2 (큐 52)</td><td><span class="tag med">진행</span> 1핀 추가, 11핀 schtask</td><td class="num">—</td></tr>
-        <tr><td class="num">9</td><td>ja/zh/en pricing 페이지 추가 (4 lang)</td><td><span class="tag low">완료</span> pricing.html × 3</td><td class="num">SEO+</td></tr>
-        <tr><td class="num">10</td><td>4 lang FAQ 페이지 (Schema.org)</td><td><span class="tag low">완료</span> ko/en/ja/zh faq.html</td><td class="num">SEO+</td></tr>
-        <tr><td class="num">11</td><td>sitemap.xml 4 lang + IndexNow ping</td><td><span class="tag low">3/3 OK</span> Bing/IndexNow/Yandex</td><td class="num">—</td></tr>
-        <tr><td class="num">12</td><td>천명당 v3.5 라이브 모니터 (16 항목)</td><td><span class="tag low">16/16 UP</span> 매시간 schtask</td><td class="num">—</td></tr>
-        <tr><td class="num">13</td><td>액션 인쇄용 PDF + TOP 3 큰 PNG + 카톡 메시지</td><td><span class="tag low">완료</span> docs/user_actions...pdf</td><td class="num">—</td></tr>
-        <tr><td class="num">14</td><td>이 대시보드 (actions.html)</td><td><span class="tag low">완료</span> cheonmyeongdang.com/actions.html</td><td class="num">—</td></tr>
+        <tr><td class="num">1</td><td>KoDATA 빈 양식 → 정정 재발송 (자동)</td><td><span class="tag low">완료</span> commit 861f6f4</td><td class="num">15분</td></tr>
+        <tr><td class="num">2</td><td>Kakao Ventures cold email (12:16 자동)</td><td><span class="tag low">발송</span> $300K~$1M 펀드 응답 대기</td><td class="num">10분</td></tr>
+        <tr><td class="num">3</td><td>카카오페이 단건+정기 PortOne 신청 (자동)</td><td><span class="tag low">제출</span> 가맹점 검토중 1~3일</td><td class="num">20분</td></tr>
+        <tr><td class="num">4</td><td>OAuth 영구 해결 (Cloud Console PUBLISH APP)</td><td><span class="tag low">라이브</span> 로그인 정상화</td><td class="num">30분</td></tr>
+        <tr><td class="num">5</td><td>schtask 3개 path fix (B2B / Pinterest / Twitter)</td><td><span class="tag low">완료</span> commit 6f6e80d</td><td class="num">자동 정상화</td></tr>
+        <tr><td class="num">6</td><td>inbox_monitor_unified 5분 폴링 가동</td><td><span class="tag low">RUNNING</span> 메일 즉시 푸시</td><td class="num">매시간 절감</td></tr>
+        <tr><td class="num">7</td><td>secretary_2h_report 매 2시간 보고</td><td><span class="tag low">RUNNING</span> commit b4347c6</td><td class="num">상시 보고</td></tr>
+        <tr><td class="num">8</td><td>251 파일 git 일괄 정리 (새벽)</td><td><span class="tag low">완료</span> commit 57c8aac</td><td class="num">—</td></tr>
+        <tr><td class="num">9</td><td>AppSumo demo script + Beehiiv #1~5 + Etsy 검증 + Grant 부록</td><td><span class="tag low">완료</span> 새벽 자동 6건 묶음</td><td class="num">340분</td></tr>
       </tbody>
     </table>
   </div>
-  <div style="margin-top:12px; color: var(--text-3); font-size: 12px; text-align: right;">사용자 시간 누적 절약: <strong style="color: var(--accent);">약 6시간</strong></div>
+  <div style="margin-top:12px; color: var(--text-3); font-size: 12px; text-align: right;">사용자 시간 누적 절약: <strong style="color: var(--accent);">약 6시간 + α</strong></div>
 </section>
 
 <footer>

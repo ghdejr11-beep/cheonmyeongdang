@@ -1,37 +1,57 @@
-# 천명당 사용자 1클릭 액션 매트릭스 — 2026-05-07
+# 천명당 사용자 1클릭 액션 매트릭스 — 2026-05-07 (13:00 갱신)
 
-> **컴파일 일자**: 2026-05-07
+> **컴파일 일자**: 2026-05-07 13:00
 > **다음 갱신**: 사용자 액션 1건 완료시마다 자동 업데이트
 > **관련 가이드 폴더**: `docs/` (총 11개 oneliner)
+> **자동 완료 9건**: KoDATA 정정 재발송 / 카카오페이 jella.tto / 네이버페이 1:1 / Kakao Ventures cold email (12:16) / 카카오페이 단건+정기 PortOne / OAuth 영구 해결 / schtask 3개 path fix / inbox_monitor 5분 폴링 / secretary 2h 보고
 
 ---
 
 ## 섹션 1. TL;DR — 매출 unlock 요약
 
-**오늘 ~3.5시간 투자로 90일 누적 ₩7,000만~₩2.4억 매출 잠재력 unlock 가능.** 1순위는 **K-Startup AI리그 신청 (D-13, 5/20 마감, 통과시 5천만~5억원)** + **Play Console v1.3.1 배포 (5분, 즉시 매출 회복)** + **AppSumo Lifetime Deal 제출 (20분, 첫 30일 $5K~$15K).**
+**오늘 ~2.5시간 투자로 90일 누적 ₩7,000만~₩2.4억 매출 잠재력 unlock 가능.** 1순위는 **K-Startup AI리그 신청 (D-13, 5/20 마감, 통과시 5천만~5억원)** + **Play Console v1.3.1 배포 (5분, 즉시 매출 회복)** + **AppSumo Lifetime Deal 제출 (20분, 첫 30일 $5K~$15K).**
+
+**오전~오후 자동 처리 9건** 덕분에 사용자 시간 6.5시간 → 2.5시간으로 단축. 남은 사용자 액션은 11건 (자동 대기 2건 = KoDATA 회신 + PG 가맹점 검토).
 
 ---
 
-## 섹션 2. 우선순위 매트릭스
+## 섹션 2. 우선순위 매트릭스 (남은 11건 + 자동 대기 2건)
 
 | # | 우선순위 | 액션 | 시간 | URL | 매출 잠재 | 가이드 | 결과 일정 |
 |---|---|---|---|---|---|---|---|
 | 1 | 🔴 **CRITICAL** | K-Startup AI리그 PMS 가입 + 신청서 제출 | 60분 | https://pms.k-startup.go.kr | ₩5천만~₩5억 | `grant_application_oneliners.md` | 5/20 마감 / 5월말~6월초 발표 |
 | 2 | 🔴 **CRITICAL** | Play Console v1.3.1 AAB 배포 (20% rollout) | 5분 | https://play.google.com/console | ₩14,500~₩29,000/월 정기결제 | `play_console_oneliners.md` | 1~2일 검토 후 라이브 |
 | 3 | 🟠 **HIGH** | AppSumo Lifetime Deal 제출 | 20분 | https://appsumo.com/partners/list-your-product/ | $5K~$15K (30일) / $30K~$80K (90일) | `appsumo_submit_oneliners.md` | 5~14일 검토 / 1주일 내 첫 sale |
-| 4 | 🟠 **HIGH** | Etsy + Vela 40 listings push | 25분 | https://www.etsy.com/sell | $150~$450 (30일) / $500~$2K (90일) | `etsy_vela_oneliners.md` | 1~3일 검토 후 publish / 7일 내 첫 sale |
+| 4 | 🟠 **HIGH** | Etsy Top 5 listings 등록 | 12분 | https://www.etsy.com/sell | $150~$450 (30일) / $500~$2K (90일) | `etsy_vela_oneliners.md` | 1~3일 검토 후 publish / 7일 내 첫 sale |
 | 5 | 🟠 **HIGH** | 영문 인플루언서 5명 발송 | 30분 | (가이드 내 5개 URL) | $2,250~$8,000 LTV | `influencer_5_eng_oneliners.md` | 7~14일 응답률 30% |
 | 6 | 🟡 **MED** | RapidAPI Provider 가입 + listing | 5분 | https://rapidapi.com/auth/sign-up?referral=/provider | $50~$500/월 (6개월차) | `rapidapi_listing_oneliners.md` | 1~3일 검토 / 1개월 내 첫 sub |
 | 7 | 🟡 **MED** | Beehiiv 가입 + Issue #1 schedule | 5분 | https://beehiiv.com | $500~$2K/월 (180일차 Sponsorship) | `beehiiv_signup_oneliners.md` | 즉시 publish / 90일 1K sub |
 | 8 | 🟡 **MED** | AdMob OAuth 셋업 (매출 추적) | 5분 | https://console.cloud.google.com | 매출 가시화 (수동 30분/주 절감) | `admob_oauth_oneliners.md` | 즉시 작동 |
-| 9 | 🟡 **MED** | 관광 AI (KORLENS) 신청 (KoDATA 회신 후) | 30분 | https://touraz.kr | ₩1,100만 | `grant_application_oneliners.md` (Section 2) | 5/12경 회신 → 5/20 마감 |
-| 10 | 🟢 **LOW** | PayPal Client Secret rotate (보안) | 5분 | https://developer.paypal.com/dashboard/applications/live | (보안 강화, 매출 X) | `paypal_creds_rotate_guide.md` | 즉시 |
-| 11 | 🟢 **LOW** | Antler Seoul Cohort 8 pitch 발송 | 15분 | https://antler.co/apply | $100K-$500K 시드 (3~5%) | `departments/fundraising/antler_seoul_cohort8_pitch.md` | 4~8주 심사 |
-| 12 | 🟢 **LOW** | Kakao Ventures cold email 발송 | 10분 | (가이드 내) | $200K-$1M 시드 (2~3%) | `departments/fundraising/kakao_ventures_cold_email.md` | 2~4주 응답률 ~10% |
-| 13 | 🟢 **LOW** | Naver D2SF 신청서 제출 | 20분 | https://d2startup.com | $200K-$500K (2~5%) | `departments/fundraising/naver_d2sf_application.md` | 6~12주 심사 |
+| 9 | 🟢 **LOW** | Antler Seoul Cohort 8 pitch 발송 | 15분 | https://antler.co/apply | $200K~$500K 시드 (3~5%) | `departments/fundraising/antler_seoul_cohort8_pitch.md` | 4~8주 심사 |
+| 10 | 🟢 **LOW** | Naver D2SF 신청서 제출 | 20분 | https://d2startup.com | $200K~$500K (2~5%) | `departments/fundraising/naver_d2sf_application.md` | 6~12주 심사 |
+| 11 | 🟢 **LOW** | PayPal Client Secret rotate (보안) | 5분 | https://developer.paypal.com/dashboard/applications/live | (보안 강화, 매출 X) | `paypal_creds_rotate_guide.md` | 즉시 |
+| 12 | ⏳ **AUTO 대기** | KoDATA 회신 → 관광 AI(KORLENS) 신청 | 0분 (auto) | (find@kodata.co.kr) | ₩1,100만 unlock | `grant_application_oneliners.md` Section 2 | 5/8~5/14 회신 예상 |
+| 13 | ⏳ **AUTO 대기** | PG 가맹점 검토 결과 (단건+정기) | 0분 (auto) | (PortOne admin) | PG 라이브 → 결제 다양화 | (자동 모니터) | 1~3 영업일 |
 
-**총 시간**: ~3.5시간 (전체 13건)
+**총 시간 (남은 11건)**: ~3.0시간
 **Critical 2건만 시간 부족시**: ~65분 (1번 + 2번) → ₩5천만~₩5억 + ₩14,500/월 unlock
+**TOP 3 (90분)**: 1번 + 2번 + 3번 → ₩6천만~₩7천만 90일 기댓값
+
+---
+
+## 섹션 2-A. ✅ 오늘 자동 완료 9건 (사용자 0분)
+
+| # | 항목 | 시각 | 결과 |
+|---|---|---|---|
+| 1 | KoDATA 빈 양식 → 정정 재발송 | 새벽 자동 | commit `861f6f4` |
+| 2 | 카카오페이 jella.tto 답장 | 사용자 send | (파트너 응답 대기) |
+| 3 | 네이버페이 1:1 문의 | 사용자 send | (응답 대기) |
+| 4 | Kakao Ventures cold email | 12:16 자동 | $300K~$1M 응답 대기 |
+| 5 | 카카오페이 단건+정기 PortOne 신청 | 자동 | 가맹점 검토중 1~3일 |
+| 6 | OAuth 영구 해결 (Cloud Console PUBLISH) | 자동 | 로그인 정상화 |
+| 7 | schtask 3개 path fix (B2B/Pinterest/Twitter) | 자동 | commit `6f6e80d` |
+| 8 | inbox_monitor_unified 5분 폴링 가동 | 자동 | commit `adb8b16` |
+| 9 | secretary_2h_report 매 2시간 보고 가동 | 자동 | commit `b4347c6` |
 
 ---
 
@@ -239,5 +259,13 @@
 
 - 사용자가 액션 1건 완료 메시지 → 해당 줄 ✅ 표시 + 후속 자동화 가동
 - 외부 검토 응답 도착 → 해당 행에 결과 표시 + 후속 액션 추가
-- 5/12 KoDATA 회신 → 9순위 (관광 AI) `BLOCKED` → `READY` 전환
-- 5/20 마감 후 → 1순위/9순위 → `RESULTS` 모니터링 모드 전환
+- 5/8~5/14 KoDATA 회신 → 12순위 (관광 AI) `AUTO 대기` → `READY` 전환 + 사용자 액션으로 승격
+- PG 가맹점 검토 결과 도착 (1~3일) → 13순위 `AUTO 대기` → `완료` (자동 처리, 사용자 액션 X)
+- 5/20 마감 후 → 1순위/12순위 → `RESULTS` 모니터링 모드 전환
+
+---
+
+## 갱신 이력
+
+- **2026-05-07 13:00**: 자동 9건 완료 표시 → 사용자 액션 13건 → 11건 + 자동 대기 2건. TOP 3 / 90분 / ₩6천~7천만 통계 갱신.
+- **2026-05-07 새벽**: 초기 컴파일 (사용자 액션 13건).
