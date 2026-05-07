@@ -1,0 +1,13 @@
+{
+  "ok": false,
+  "draft_id": 1,
+  "title": "2026 丙午年 60年ぶり",
+  "type": "thread",
+  "tweet_count": 5,
+  "posted_tweet_ids": [
+    "2052237302915797379",
+    "2052237312474726506"
+  ],
+  "error": "tweet 3/5: Forbidden: 403 Forbidden\nYou are not permitted to perform this action.",
+  "posted_at": "2026-05-07T13:01:18.391317"
+}

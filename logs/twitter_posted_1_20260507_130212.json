@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "draft_id": 1,
+  "title": "2026 丙午年 60年ぶり",
+  "type": "thread",
+  "tweet_count": 5,
+  "posted_tweet_ids": [],
+  "error": "tweet 1/5: Forbidden: 403 Forbidden\nYou are not allowed to create a Tweet with duplicate content.",
+  "posted_at": "2026-05-07T13:02:12.833186"
+}

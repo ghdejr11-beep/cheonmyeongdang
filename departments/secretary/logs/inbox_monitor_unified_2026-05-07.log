@@ -34,3 +34,14 @@
 [2026-05-07 12:56:01]   inbox fetched: 80
 [2026-05-07 12:56:02]   [OTHER NEW] 1건 (push 안 함)
 [2026-05-07 12:56:02] === 종료: RED=0건 push, OTHER=1건 skip ===
+[2026-05-07 13:00:38] === 통합 inbox monitor 시작 ===
+[2026-05-07 13:00:39]   inbox fetched: 80
+[2026-05-07 13:00:42]   [RED] cs@portone.io | [PortOne] 전자결제 신청이 정상적으로 접수되었습니다. | tg=True
+[2026-05-07 13:00:43]   [RED] cs@portone.io | [PortOne] 포트원 V2 결제 연동 안내 | tg=True
+[2026-05-07 13:00:44]   [RED] cs@portone.io | 포트원_PG 가입 접수완료 안내 | tg=True
+[2026-05-07 13:00:47]   [RED] cs@portone.io | [PortOne]카카오페이 가입신청방법 안내 | tg=True
+[2026-05-07 13:00:47]   [OTHER NEW] 4건 (push 안 함)
+[2026-05-07 13:00:47] === 종료: RED=4건 push, OTHER=4건 skip ===
+[2026-05-07 13:01:00] === 통합 inbox monitor 시작 ===
+[2026-05-07 13:01:01]   inbox fetched: 80
+[2026-05-07 13:01:01] === 종료: RED=0건 push, OTHER=0건 skip ===

@@ -134,3 +134,20 @@
 [2026-05-07T12:24:57]   UP: Pinterest queue.json → HTTP 200 0ms (0 pins)
 [2026-05-07T12:24:57]   UP: Blog index (ko) → HTTP 200 546ms
 [2026-05-07T12:24:57] 천명당 v3.5 헬스체크: 16/16 UP
+[2026-05-07T12:59:50]   UP: KO 메인 페이지 → HTTP 200 1151ms
+[2026-05-07T12:59:50]   UP: EN 메인 페이지 → HTTP 200 669ms
+[2026-05-07T12:59:50]   UP: JA 메인 페이지 → HTTP 200 709ms
+[2026-05-07T12:59:50]   UP: ZH 메인 페이지 → HTTP 200 736ms
+[2026-05-07T12:59:50]   UP: check-entitlement → HTTP 200 910ms
+[2026-05-07T12:59:50]   UP: payment-config → HTTP 200 574ms
+[2026-05-07T12:59:50]   UP: confirm-payment → HTTP 405 539ms
+[2026-05-07T12:59:50]   UP: send-receipt → HTTP 400 529ms
+[2026-05-07T12:59:50]   UP: coupon-validate → HTTP 404 544ms
+[2026-05-07T12:59:50]   UP: subscribe-fortune → HTTP 400 535ms
+[2026-05-07T12:59:50]   UP: lucky-pass → HTTP 405 537ms
+[2026-05-07T12:59:50]   UP: vip-status → HTTP 405 563ms
+[2026-05-07T12:59:50]   UP: sitemap.xml → HTTP 200 346ms (148 urls)
+[2026-05-07T12:59:50]   UP: robots.txt → HTTP 200 309ms
+[2026-05-07T12:59:50]   UP: Pinterest queue.json → HTTP 200 0ms (0 pins)
+[2026-05-07T12:59:50]   UP: Blog index (ko) → HTTP 200 435ms
+[2026-05-07T12:59:50] 천명당 v3.5 헬스체크: 16/16 UP
