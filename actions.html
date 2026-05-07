@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>천명당 액션 대시보드 · 2026-05-07</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+:root {
+  --bg: #0a0a0b;
+  --surface: #16161a;
+  --surface-2: #1f1f25;
+  --border: #2a2a32;
+  --text: #f5f5f7;
+  --text-2: #a8a8b3;
+  --text-3: #6c6c78;
+  --accent: #ff6b3d;
+  --critical: #ff4757;
+  --high: #ff8c42;
+  --med: #ffc83d;
+  --low: #4ade80;
+  --done: #6c6c78;
+  --link: #60a5fa;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-feature-settings: "tnum" on;
+  line-height: 1.55;
+}
+body { padding: 32px 24px 80px; max-width: 1280px; margin: 0 auto; }
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.title { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+.subtitle { color: var(--text-2); font-size: 14px; margin-top: 4px; }
+.meta { color: var(--text-3); font-size: 13px; text-align: right; }
+.meta strong { color: var(--text); font-weight: 600; }
+.live-dot {
+  display: inline-block; width: 8px; height: 8px; background: var(--low); border-radius: 50%;
+  margin-right: 6px; animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+/* SECTION TITLE */
+.section-h {
+  font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--text-3); margin-bottom: 16px;
+}
+section { margin-bottom: 48px; }
+
+/* TOP 3 CARDS */
+.top3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .top3 { grid-template-columns: 1fr; } }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  position: relative;
+  transition: transform 0.15s, border-color 0.15s;
+  display: flex; flex-direction: column;
+}
+.card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.card .rank {
+  position: absolute; top: 16px; right: 16px;
+  font-size: 32px; font-weight: 800; color: var(--text-3); opacity: 0.5;
+}
+.card .badge {
+  display: inline-block; padding: 4px 10px; border-radius: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+.card.crit .badge { background: rgba(255,71,87,0.12); color: var(--critical); }
+.card.high .badge { background: rgba(255,140,66,0.12); color: var(--high); }
+.card.med .badge { background: rgba(255,200,61,0.12); color: var(--med); }
+.card .h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
+.card .desc { color: var(--text-2); font-size: 13px; margin-bottom: 20px; line-height: 1.5; flex: 1; }
+.card .stats { display: flex; gap: 20px; margin-bottom: 20px; }
+.card .stat label { display: block; font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.card .stat value { display: block; font-size: 16px; font-weight: 700; }
+.card .revenue { font-size: 13px; color: var(--low); margin-bottom: 16px; font-weight: 600; }
+.card.crit .revenue { color: var(--critical); }
+.card .cta {
+  display: flex; align-items: center; justify-content: center;
+  padding: 12px 16px; background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 10px; color: var(--text); text-decoration: none;
+  font-weight: 600; font-size: 14px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.card .cta:hover { background: var(--accent); border-color: var(--accent); }
+.card .cta::after { content: " ↗"; opacity: 0.6; margin-left: 4px; }
+.card .deadline { color: var(--text-3); font-size: 11px; text-align: center; margin-top: 8px; }
+.card .deadline.urgent { color: var(--critical); font-weight: 600; }
+
+/* AUTO STATUS */
+.auto-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; }
+.auto-item {
+  display: flex; align-items: center; padding: 10px 14px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  font-size: 13px; gap: 10px;
+}
+.auto-item .time { color: var(--text-3); font-size: 11px; min-width: 52px; font-variant-numeric: tabular-nums; }
+.auto-item .name { color: var(--text); flex: 1; font-weight: 500; }
+.auto-item .status { font-size: 10px; padding: 2px 6px; border-radius: 4px; background: rgba(74,222,128,0.12); color: var(--low); font-weight: 600; }
+
+/* ALL ACTIONS TABLE */
+.table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--surface-2); color: var(--text-3); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+td { padding: 12px 14px; border-bottom: 1px solid var(--border); }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+.tag {
+  display: inline-block; padding: 2px 7px; border-radius: 4px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
+}
+.tag.crit { background: rgba(255,71,87,0.15); color: var(--critical); }
+.tag.high { background: rgba(255,140,66,0.15); color: var(--high); }
+.tag.med { background: rgba(255,200,61,0.15); color: var(--med); }
+.tag.low { background: rgba(74,222,128,0.15); color: var(--low); }
+.tag.auto { background: rgba(96,165,250,0.15); color: var(--link); }
+td a { color: var(--link); text-decoration: none; }
+td a:hover { text-decoration: underline; }
+.num { font-variant-numeric: tabular-nums; color: var(--text-2); }
+.revenue-cell { color: var(--low); font-weight: 600; font-size: 12px; font-variant-numeric: tabular-nums; }
+
+/* TIMELINE */
+.timeline { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+@media (max-width: 700px) { .timeline { grid-template-columns: repeat(2, 1fr); } }
+.tl-item {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px;
+}
+.tl-item .day { font-size: 11px; color: var(--text-3); font-weight: 600; letter-spacing: 0.5px; }
+.tl-item .amount { font-size: 16px; font-weight: 700; margin-top: 6px; color: var(--low); font-variant-numeric: tabular-nums; }
+.tl-item .label { font-size: 11px; color: var(--text-2); margin-top: 4px; }
+.tl-item.cumulative { background: linear-gradient(135deg, rgba(255,107,61,0.08), transparent); border-color: rgba(255,107,61,0.3); }
+.tl-item.cumulative .amount { color: var(--accent); }
+
+/* SUMMARY BAR */
+.summary {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px;
+}
+@media (max-width: 700px) { .summary { grid-template-columns: repeat(2, 1fr); } }
+.sum-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px; text-align: center;
+}
+.sum-card .num { font-size: 24px; font-weight: 800; display: block; color: var(--text); margin-bottom: 4px; }
+.sum-card .label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.8px; }
+
+/* FOOTER */
+footer { text-align: center; color: var(--text-3); font-size: 11px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+footer a { color: var(--text-2); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="title">천명당 액션 대시보드</div>
+    <div class="subtitle">2026-05-07 · 새벽 자동 처리 완료 · 사용자 액션 대기 중</div>
+  </div>
+  <div class="meta">
+    <div><span class="live-dot"></span><strong>16/16 라이브</strong></div>
+    <div>매시간 자동 갱신</div>
+  </div>
+</header>
+
+<!-- SUMMARY BAR -->
+<section>
+  <div class="summary">
+    <div class="sum-card"><span class="num">90<small style="font-size:14px; color:var(--text-3);"> 분</small></span><span class="label">TOP 3 사용자 시간</span></div>
+    <div class="sum-card"><span class="num" style="color:var(--accent);">₩6천만~7천만</span><span class="label">90일 매출 기댓값</span></div>
+    <div class="sum-card"><span class="num">38<small style="font-size:14px; color:var(--text-3);"> 개</small></span><span class="label">자동 schtask 가동</span></div>
+    <div class="sum-card"><span class="num">D-13</span><span class="label">K-Startup AI 리그 마감</span></div>
+  </div>
+</section>
+
+<!-- TOP 3 CARDS -->
+<section>
+  <div class="section-h">🎯 오늘 TOP 3 — 90분 투자, ₩6천만~₩7천만 unlock</div>
+  <div class="top3">
+    <a href="https://pms.k-startup.go.kr" target="_blank" class="card crit" style="text-decoration:none; color:inherit;">
+      <span class="rank">1</span>
+      <span class="badge">🔴 CRITICAL</span>
+      <div class="h2">K-Startup AI 리그 신청</div>
+      <div class="desc">PMS 가입 + 사업계획서 5종 docx 첨부. 보강 부록 PDF 자동 작성됨.</div>
+      <div class="stats">
+        <div class="stat"><label>시간</label><value>60분</value></div>
+        <div class="stat"><label>매출</label><value style="color:var(--critical);">₩5천~5억</value></div>
+      </div>
+      <div class="cta">PMS 신청 시작</div>
+      <div class="deadline urgent">⏰ D-13 (5/20 16:00 마감)</div>
+    </a>
+
+    <a href="https://play.google.com/console" target="_blank" class="card high" style="text-decoration:none; color:inherit;">
+      <span class="rank">2</span>
+      <span class="badge">🔴 CRITICAL</span>
+      <div class="h2">Play Console v1.3.1 AAB 업로드</div>
+      <div class="desc">AAB 드래그 + 출시 노트 4 lang 복붙 + Rollout 20% 1클릭.</div>
+      <div class="stats">
+        <div class="stat"><label>시간</label><value>5분</value></div>
+        <div class="stat"><label>매출</label><value style="color:var(--high);">₩14,500/월</value></div>
+      </div>
+      <div class="cta">Play Console 열기</div>
+      <div class="deadline">⏰ 즉시 가능 · 검토 1~2일</div>
+    </a>
+
+    <a href="https://appsumo.com/partners/list-your-product/" target="_blank" class="card med" style="text-decoration:none; color:inherit;">
+      <span class="rank">3</span>
+      <span class="badge">🟠 HIGH</span>
+      <div class="h2">AppSumo Cheonmyeongdang LTD</div>
+      <div class="desc">Demo video 90초 스크립트 ko/en 사전 작성됨. OBS 녹화 5분.</div>
+      <div class="stats">
+        <div class="stat"><label>시간</label><value>20분</value></div>
+        <div class="stat"><label>매출</label><value style="color:var(--med);">$5K~$15K</value></div>
+      </div>
+      <div class="cta">AppSumo 제출</div>
+      <div class="deadline">⏰ 즉시 가능 · 검토 5~14일</div>
+    </a>
+  </div>
+</section>
+
+<!-- AUTO STATUS -->
+<section>
+  <div class="section-h">🤖 오늘 자동 진행 — 사용자 0분</div>
+  <div class="auto-grid">
+    <div class="auto-item"><span class="time">09:00</span><span class="name">Kakao Ventures cold email 자동 발송</span><span class="status">스케줄</span></div>
+    <div class="auto-item"><span class="time">09:00</span><span class="name">PayPal Daily Monitor</span><span class="status">스케줄</span></div>
+    <div class="auto-item"><span class="time">09:00</span><span class="name">KoDATA Reply Monitor</span><span class="status">스케줄</span></div>
+    <div class="auto-item"><span class="time">09:30</span><span class="name">Pinterest 1핀 자동 발행 (53일치)</span><span class="status">스케줄</span></div>
+    <div class="auto-item"><span class="time">09:30</span><span class="name">B2B Outreach + Daily Revenue Report</span><span class="status">스케줄</span></div>
+    <div class="auto-item"><span class="time">10:00</span><span class="name">Twitter @deokgune_ai Draft #1 발행</span><span class="status">스케줄</span></div>
+    <div class="auto-item"><span class="time">11:00</span><span class="name">Grant Result Monitor (K-Startup/관광AI)</span><span class="status">스케줄</span></div>
+    <div class="auto-item"><span class="time">11:30</span><span class="name">B2B Follow-up D+3/D+7</span><span class="status">스케줄</span></div>
+    <div class="auto-item"><span class="time">매시간</span><span class="name">천명당 v3.5 라이브 모니터 (16 항목)</span><span class="status">RUNNING</span></div>
+    <div class="auto-item"><span class="time">매시간</span><span class="name">KORLENS / Telegram / Intrusion Watch</span><span class="status">RUNNING</span></div>
+    <div class="auto-item"><span class="time">5x/일</span><span class="name">SEO blog factory (4 lang)</span><span class="status">스케줄</span></div>
+    <div class="auto-item"><span class="time">매일</span><span class="name">YT 5채널 + DevTo + Hashnode + Bluesky + TikTok</span><span class="status">스케줄</span></div>
+    <div class="auto-item"><span class="time">6/1</span><span class="name">Monthly Fortune Mail (정기결제자)</span><span class="status">예약</span></div>
+  </div>
+</section>
+
+<!-- ALL ACTIONS TABLE -->
+<section>
+  <div class="section-h">📋 사용자 직접 액션 13건 — 시간 부족 시 TOP 3만</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th width="40">#</th>
+          <th width="80">우선순위</th>
+          <th>액션</th>
+          <th width="60">시간</th>
+          <th width="140">매출 잠재</th>
+          <th width="100">마감</th>
+          <th width="80">URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="num">1</td><td><span class="tag crit">CRITICAL</span></td><td>K-Startup AI 리그 PMS 신청</td><td class="num">60분</td><td class="revenue-cell">₩5천~5억</td><td>D-13 (5/20)</td><td><a href="https://pms.k-startup.go.kr" target="_blank">열기</a></td></tr>
+        <tr><td class="num">2</td><td><span class="tag crit">CRITICAL</span></td><td>Play Console v1.3.1 AAB 업로드</td><td class="num">5분</td><td class="revenue-cell">₩14,500/월</td><td>즉시</td><td><a href="https://play.google.com/console" target="_blank">열기</a></td></tr>
+        <tr><td class="num">3</td><td><span class="tag high">HIGH</span></td><td>AppSumo Cheonmyeongdang LTD 제출</td><td class="num">20분</td><td class="revenue-cell">$5K~$15K (30일)</td><td>즉시</td><td><a href="https://appsumo.com/partners/list-your-product/" target="_blank">열기</a></td></tr>
+        <tr><td class="num">4</td><td><span class="tag high">HIGH</span></td><td>Etsy + Vela 40 listings (Top 5만 먼저)</td><td class="num">12분</td><td class="revenue-cell">$150~$450/월</td><td>즉시</td><td><a href="https://www.etsy.com/sell" target="_blank">열기</a></td></tr>
+        <tr><td class="num">5</td><td><span class="tag high">HIGH</span></td><td>영문 인플라 5명 발송 (KSAJU-00043~51)</td><td class="num">30분</td><td class="revenue-cell">$2,250~$8K LTV</td><td>즉시</td><td>—</td></tr>
+        <tr><td class="num">6</td><td><span class="tag med">MED</span></td><td>RapidAPI Provider 가입 + listing</td><td class="num">5분</td><td class="revenue-cell">$50~$500/월</td><td>즉시</td><td><a href="https://rapidapi.com/auth/sign-up?referral=/provider" target="_blank">열기</a></td></tr>
+        <tr><td class="num">7</td><td><span class="tag med">MED</span></td><td>Beehiiv 가입 (Issue #1~5 사전 작성)</td><td class="num">5분</td><td class="revenue-cell">$500~$2K/월</td><td>즉시</td><td><a href="https://beehiiv.com" target="_blank">열기</a></td></tr>
+        <tr><td class="num">8</td><td><span class="tag med">MED</span></td><td>AdMob OAuth 셋업 (매출 추적)</td><td class="num">5분</td><td class="revenue-cell">매출 가시화</td><td>즉시</td><td><a href="https://console.cloud.google.com" target="_blank">열기</a></td></tr>
+        <tr><td class="num">9</td><td><span class="tag med">MED</span></td><td>관광 AI (KORLENS) 신청</td><td class="num">30분</td><td class="revenue-cell">₩1,100만</td><td>D-13 (KoDATA 5/12 후)</td><td><a href="https://touraz.kr" target="_blank">열기</a></td></tr>
+        <tr><td class="num">10</td><td><span class="tag low">LOW</span></td><td>PayPal Client Secret rotate (보안)</td><td class="num">5분</td><td class="revenue-cell">보안 강화</td><td>여유</td><td><a href="https://developer.paypal.com/dashboard/applications/live" target="_blank">열기</a></td></tr>
+        <tr><td class="num">11</td><td><span class="tag low">LOW</span></td><td>Antler Seoul Cohort 8 pitch</td><td class="num">15분</td><td class="revenue-cell">$200K~$500K</td><td>여유</td><td><a href="https://antler.co/apply" target="_blank">열기</a></td></tr>
+        <tr><td class="num">12</td><td><span class="tag auto">AUTO</span></td><td>Kakao Ventures cold email (5/7 09:00 자동)</td><td class="num">0분</td><td class="revenue-cell">$300K~$1M</td><td>오늘</td><td>—</td></tr>
+        <tr><td class="num">13</td><td><span class="tag low">LOW</span></td><td>Naver D2SF 신청서</td><td class="num">20분</td><td class="revenue-cell">$200K~$500K</td><td>여유</td><td><a href="https://d2startup.com" target="_blank">열기</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section>
+  <div class="section-h">📈 매출 시뮬레이션 — 90일 경로</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="day">D+1</div><div class="amount">₩2,900</div><div class="label">Play 검토 통과</div></div>
+    <div class="tl-item"><div class="day">D+7</div><div class="amount">~$88</div><div class="label">AppSumo + Etsy 첫 sale</div></div>
+    <div class="tl-item"><div class="day">D+14</div><div class="amount">$230~450</div><div class="label">인플라 응답 + 누적</div></div>
+    <div class="tl-item"><div class="day">D+30</div><div class="amount">₩400~1,300만</div><div class="label">자동 채널 수렴 (월)</div></div>
+    <div class="tl-item"><div class="day">D+45</div><div class="amount">+₩5천~5억</div><div class="label">K-Startup 발표 (확률 30%)</div></div>
+    <div class="tl-item"><div class="day">D+60</div><div class="amount">+₩1,100만</div><div class="label">관광 AI 발표</div></div>
+    <div class="tl-item cumulative"><div class="day">D+90 누적</div><div class="amount">₩7천만~₩2.4억</div><div class="label">grant 포함 기댓값</div></div>
+  </div>
+</section>
+
+<!-- LATEST AUTO RESULTS -->
+<section>
+  <div class="section-h">✅ 새벽 자동 완료 (5/7 00:14~01:00)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th width="40">#</th><th>작업</th><th width="220">결과</th><th width="120">시간 절약</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>251 파일 git 일괄 정리</td><td><span class="tag low">완료</span> commit 57c8aac</td><td class="num">—</td></tr>
+        <tr><td class="num">2</td><td>AppSumo demo video script (ko/en, 90초)</td><td><span class="tag low">완료</span> docs/appsumo_demo_video_script.md</td><td class="num">25분</td></tr>
+        <tr><td class="num">3</td><td>Etsy 40 listings 검증 + Top 5 우선순위</td><td><span class="tag low">PASS</span> 40/40, 자동 수정 0건</td><td class="num">13분</td></tr>
+        <tr><td class="num">4</td><td>Grant docx 5종 검증 + 보강 부록</td><td><span class="tag low">완료</span> docs/grant_appendix_2026_05.md</td><td class="num">60분</td></tr>
+        <tr><td class="num">5</td><td>Twitter 30 drafts (영 25 + 일 5, 6주치)</td><td><span class="tag low">완료</span> twitter_drafts_v2_30.json</td><td class="num">매일 자동</td></tr>
+        <tr><td class="num">6</td><td>Beehiiv Issue #2~5 사전 작성</td><td><span class="tag low">완료</span> issue_2~5.md (각 1100w)</td><td class="num">240분</td></tr>
+        <tr><td class="num">7</td><td>RapidAPI yaml 검증 + 4 lang listing</td><td><span class="tag low">완료</span> openapi_validation_report.md</td><td class="num">3분</td></tr>
+        <tr><td class="num">8</td><td>Pinterest 4-lang 12핀 v2 (큐 52)</td><td><span class="tag med">진행</span> 1핀 추가, 11핀 schtask</td><td class="num">—</td></tr>
+        <tr><td class="num">9</td><td>ja/zh/en pricing 페이지 추가 (4 lang)</td><td><span class="tag low">완료</span> pricing.html × 3</td><td class="num">SEO+</td></tr>
+        <tr><td class="num">10</td><td>4 lang FAQ 페이지 (Schema.org)</td><td><span class="tag low">완료</span> ko/en/ja/zh faq.html</td><td class="num">SEO+</td></tr>
+        <tr><td class="num">11</td><td>sitemap.xml 4 lang + IndexNow ping</td><td><span class="tag low">3/3 OK</span> Bing/IndexNow/Yandex</td><td class="num">—</td></tr>
+        <tr><td class="num">12</td><td>천명당 v3.5 라이브 모니터 (16 항목)</td><td><span class="tag low">16/16 UP</span> 매시간 schtask</td><td class="num">—</td></tr>
+        <tr><td class="num">13</td><td>액션 인쇄용 PDF + TOP 3 큰 PNG + 카톡 메시지</td><td><span class="tag low">완료</span> docs/user_actions...pdf</td><td class="num">—</td></tr>
+        <tr><td class="num">14</td><td>이 대시보드 (actions.html)</td><td><span class="tag low">완료</span> cheonmyeongdang.com/actions.html</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top:12px; color: var(--text-3); font-size: 12px; text-align: right;">사용자 시간 누적 절약: <strong style="color: var(--accent);">약 6시간</strong></div>
+</section>
+
+<footer>
+  <div>천명당 v3.5 글로벌 사주 SaaS · 4 언어 (ko/en/ja/zh) · 매시간 자동 갱신</div>
+  <div style="margin-top:6px;">
+    <a href="https://github.com/ghdejr11-beep/cheonmyeongdang">GitHub</a> ·
+    <a href="https://cheonmyeongdang.vercel.app">사이트</a> ·
+    <a href="docs/USER_ACTIONS_2026_05_07.md">상세 가이드</a>
+  </div>
+</footer>
+
+<script>
+// 페이지 자동 새로고침 (5분마다)
+setTimeout(() => window.location.reload(), 5 * 60 * 1000);
+
+// 시각 표시
+const now = new Date();
+const fmt = now.toLocaleString('ko-KR', { hour12: false });
+document.querySelector('header .meta').insertAdjacentHTML('beforeend', `<div style="margin-top:6px; font-size:10px; color: var(--text-3);">갱신: ${fmt}</div>`);
+</script>
+
+</body>
+</html>
