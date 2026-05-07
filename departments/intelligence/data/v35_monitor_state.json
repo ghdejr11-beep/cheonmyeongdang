@@ -2,8 +2,8 @@
   "KO 메인 페이지": {
     "ok": true,
     "status": 200,
-    "elapsed_ms": 1151,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 988,
+    "last_check": "2026-05-07T13:15:14",
     "error": null,
     "fail_count": 0,
     "alerted_down": false
@@ -11,8 +11,8 @@
   "EN 메인 페이지": {
     "ok": true,
     "status": 200,
-    "elapsed_ms": 669,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 940,
+    "last_check": "2026-05-07T13:15:14",
     "error": null,
     "fail_count": 0,
     "alerted_down": false
@@ -20,8 +20,8 @@
   "JA 메인 페이지": {
     "ok": true,
     "status": 200,
-    "elapsed_ms": 709,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 895,
+    "last_check": "2026-05-07T13:15:14",
     "error": null,
     "fail_count": 0,
     "alerted_down": false
@@ -29,8 +29,8 @@
   "ZH 메인 페이지": {
     "ok": true,
     "status": 200,
-    "elapsed_ms": 736,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 454,
+    "last_check": "2026-05-07T13:15:14",
     "error": null,
     "fail_count": 0,
     "alerted_down": false
@@ -38,8 +38,8 @@
   "check-entitlement": {
     "ok": true,
     "status": 200,
-    "elapsed_ms": 910,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 1384,
+    "last_check": "2026-05-07T13:15:14",
     "error": null,
     "fail_count": 0,
     "alerted_down": false
@@ -47,8 +47,8 @@
   "payment-config": {
     "ok": true,
     "status": 200,
-    "elapsed_ms": 574,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 1159,
+    "last_check": "2026-05-07T13:15:14",
     "error": null,
     "fail_count": 0,
     "alerted_down": false
@@ -56,8 +56,8 @@
   "confirm-payment": {
     "ok": true,
     "status": 405,
-    "elapsed_ms": 539,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 1065,
+    "last_check": "2026-05-07T13:15:14",
     "error": "HTTP 405",
     "fail_count": 0,
     "alerted_down": false
@@ -65,8 +65,8 @@
   "send-receipt": {
     "ok": true,
     "status": 400,
-    "elapsed_ms": 529,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 938,
+    "last_check": "2026-05-07T13:15:14",
     "error": "HTTP 400",
     "fail_count": 0,
     "alerted_down": false
@@ -74,8 +74,8 @@
   "coupon-validate": {
     "ok": true,
     "status": 404,
-    "elapsed_ms": 544,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 1170,
+    "last_check": "2026-05-07T13:15:14",
     "error": "HTTP 404",
     "fail_count": 0,
     "alerted_down": false
@@ -83,8 +83,8 @@
   "subscribe-fortune": {
     "ok": true,
     "status": 400,
-    "elapsed_ms": 535,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 1211,
+    "last_check": "2026-05-07T13:15:14",
     "error": "HTTP 400",
     "fail_count": 0,
     "alerted_down": false
@@ -92,8 +92,8 @@
   "lucky-pass": {
     "ok": true,
     "status": 405,
-    "elapsed_ms": 537,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 1129,
+    "last_check": "2026-05-07T13:15:14",
     "error": "HTTP 405",
     "fail_count": 0,
     "alerted_down": false
@@ -101,8 +101,8 @@
   "vip-status": {
     "ok": true,
     "status": 405,
-    "elapsed_ms": 563,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 983,
+    "last_check": "2026-05-07T13:15:14",
     "error": "HTTP 405",
     "fail_count": 0,
     "alerted_down": false
@@ -110,8 +110,8 @@
   "sitemap.xml": {
     "ok": true,
     "status": 200,
-    "elapsed_ms": 346,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 411,
+    "last_check": "2026-05-07T13:15:14",
     "error": null,
     "fail_count": 0,
     "alerted_down": false
@@ -119,8 +119,8 @@
   "robots.txt": {
     "ok": true,
     "status": 200,
-    "elapsed_ms": 309,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 326,
+    "last_check": "2026-05-07T13:15:14",
     "error": null,
     "fail_count": 0,
     "alerted_down": false
@@ -129,7 +129,7 @@
     "ok": true,
     "status": 200,
     "elapsed_ms": 0,
-    "last_check": "2026-05-07T12:59:50",
+    "last_check": "2026-05-07T13:15:14",
     "error": null,
     "fail_count": 0,
     "alerted_down": false
@@ -137,8 +137,8 @@
   "Blog index (ko)": {
     "ok": true,
     "status": 200,
-    "elapsed_ms": 435,
-    "last_check": "2026-05-07T12:59:50",
+    "elapsed_ms": 436,
+    "last_check": "2026-05-07T13:15:14",
     "error": null,
     "fail_count": 0,
     "alerted_down": false
