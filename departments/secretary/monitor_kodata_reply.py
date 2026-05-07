@@ -1,6 +1,12 @@
-"""KoDATA(find@kodata.co.kr) 회신 자동 모니터링.
+"""[DEPRECATED 5/7] KoDATA 단일 키워드 모니터.
 
-매일 schtask로 실행 → 새 회신 도착 시 텔레그램 알림.
+⚠️ 5/6 RCA: 이 스크립트는 print만 있고 텔레그램 alert 코드가 없어서
+KoDATA 5/6 09:24 회신을 사용자에게 알리지 못했음.
+→ inbox_monitor_unified.py로 통합 (5분 주기 + telegram push 강제).
+
+이 파일은 호환성으로 남아있으나, schtask는 KunStudio_Inbox_Monitor_Unified로
+교체됨. 신규 키워드 추가는 inbox_monitor_unified.py의 RED_FROM_DOMAINS/
+RED_SUBJECT_KEYWORDS에 추가할 것.
 """
 import os, json, sys, datetime
 from google.oauth2.credentials import Credentials

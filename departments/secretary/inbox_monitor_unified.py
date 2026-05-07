@@ -207,15 +207,20 @@ def telegram_alert(env: dict, text: str, prefix: str = "") -> bool:
     if not (token and chat):
         log("  [WARN] no telegram creds")
         return False
-    # HTML 파서 안전: <, >, & 만 허용된 태그(b/a) 제외하고 escape
-    def _safe(s: str) -> str:
-        return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
-    # prefix는 신뢰 (우리가 작성), text는 사용자 입력 가능 — 그대로 두면 risky
-    # 따라서 plain mode로 폴백 (HTML 안 씀)
+    # 5/7 12:40 RCA: 메일 본문에 들어간 control char (예: \r, BOM, NBSP)와
+    # 200+자 발신자 이름 + 메일 본문이 합쳐져 4096자 한도 초과 → HTTP 400.
+    # → control char 제거 + 안전한 substring + 4000자 잘림.
+    raw = prefix + text
+    sanitized = "".join(
+        c for c in raw
+        if c == "\n" or c == "\t" or (32 <= ord(c) < 127) or ord(c) >= 160
+    )
+    sanitized = sanitized[:3900]  # 텔레그램 4096 한도 안전 마진
+
     payload = {
         "chat_id": chat,
-        "text": (prefix + text)[:4000],
+        "text": sanitized,
         "disable_web_page_preview": "true",
     }
     body = urllib.parse.urlencode(payload).encode()
@@ -226,6 +231,29 @@ def telegram_alert(env: dict, text: str, prefix: str = "") -> bool:
     try:
         urllib.request.urlopen(req, timeout=15).read()
         return True
+    except urllib.error.HTTPError as e:
+        # 400 에러 시 응답 본문 로깅 (원인 파악용)
+        try:
+            err_body = e.read().decode("utf-8", errors="replace")[:300]
+        except Exception:
+            err_body = "(read fail)"
+        log(f"  telegram HTTP {e.code}: {err_body}")
+        # 폴백: 최소 메시지로 재시도
+        try:
+            fallback_payload = {
+                "chat_id": chat,
+                "text": f"[ALERT — 본문 송신 실패] {sanitized[:200]}",
+            }
+            fb = urllib.parse.urlencode(fallback_payload).encode()
+            fb_req = urllib.request.Request(
+                f"https://api.telegram.org/bot{token}/sendMessage",
+                data=fb, method="POST",
+            )
+            urllib.request.urlopen(fb_req, timeout=15).read()
+            return True
+        except Exception as e2:
+            log(f"  telegram fallback fail: {e2}")
+            return False
     except Exception as e:
         log(f"  telegram fail: {e}")
         return False
