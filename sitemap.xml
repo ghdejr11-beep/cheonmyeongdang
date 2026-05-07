@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://cheonmyeongdang.vercel.app/</loc>
     <lastmod>2026-05-03</lastmod>
@@ -750,4 +750,116 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+
+
+  <!-- ===== 4 lang main + FAQ + 4 lang core pages (added 2026-05-07) ===== -->
+
+  <!-- KO main with hreflang alternates -->
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cheonmyeongdang.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheonmyeongdang.vercel.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cheonmyeongdang.vercel.app/ja/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://cheonmyeongdang.vercel.app/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheonmyeongdang.vercel.app/"/>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/en/</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cheonmyeongdang.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheonmyeongdang.vercel.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cheonmyeongdang.vercel.app/ja/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://cheonmyeongdang.vercel.app/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheonmyeongdang.vercel.app/"/>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/ja/</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cheonmyeongdang.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheonmyeongdang.vercel.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cheonmyeongdang.vercel.app/ja/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://cheonmyeongdang.vercel.app/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheonmyeongdang.vercel.app/"/>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/zh/</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cheonmyeongdang.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheonmyeongdang.vercel.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cheonmyeongdang.vercel.app/ja/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://cheonmyeongdang.vercel.app/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheonmyeongdang.vercel.app/"/>
+  </url>
+
+  <!-- 4 lang FAQ pages (FAQPage Schema.org) -->
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/faq.html</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cheonmyeongdang.vercel.app/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheonmyeongdang.vercel.app/en/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cheonmyeongdang.vercel.app/ja/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://cheonmyeongdang.vercel.app/zh/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheonmyeongdang.vercel.app/faq.html"/>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/en/faq.html</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cheonmyeongdang.vercel.app/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheonmyeongdang.vercel.app/en/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cheonmyeongdang.vercel.app/ja/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://cheonmyeongdang.vercel.app/zh/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheonmyeongdang.vercel.app/faq.html"/>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/ja/faq.html</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cheonmyeongdang.vercel.app/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheonmyeongdang.vercel.app/en/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cheonmyeongdang.vercel.app/ja/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://cheonmyeongdang.vercel.app/zh/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheonmyeongdang.vercel.app/faq.html"/>
+  </url>
+  <url>
+    <loc>https://cheonmyeongdang.vercel.app/zh/faq.html</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cheonmyeongdang.vercel.app/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheonmyeongdang.vercel.app/en/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cheonmyeongdang.vercel.app/ja/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://cheonmyeongdang.vercel.app/zh/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheonmyeongdang.vercel.app/faq.html"/>
+  </url>
+
+  <!-- ja/zh core pages (en already listed above) -->
+  <url><loc>https://cheonmyeongdang.vercel.app/ja/pricing.html</loc><lastmod>2026-05-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/ja/four-pillars-jukai.html</loc><lastmod>2026-05-07</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/ja/jukkan-junishi.html</loc><lastmod>2026-05-07</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/ja/korean-zodiac-2026-uma.html</loc><lastmod>2026-05-07</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/ja/saju-aishou-test.html</loc><lastmod>2026-05-07</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/ja/saju-vs-japanese-shichu-suimei.html</loc><lastmod>2026-05-07</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/zh/pricing.html</loc><lastmod>2026-05-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/zh/four-pillars-mingli.html</loc><lastmod>2026-05-07</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/zh/ten-stems-twelve-branches.html</loc><lastmod>2026-05-07</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/zh/zodiac-2026-red-horse.html</loc><lastmod>2026-05-07</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/zh/bazi-compatibility-test.html</loc><lastmod>2026-05-07</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/zh/korean-bazi-vs-chinese-bazi.html</loc><lastmod>2026-05-07</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/en/pricing.html</loc><lastmod>2026-05-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cheonmyeongdang.vercel.app/en/index.html</loc><lastmod>2026-05-07</lastmod><changefreq>daily</changefreq><priority>0.95</priority></url>
+
 </urlset>

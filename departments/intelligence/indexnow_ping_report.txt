@@ -1,0 +1,40 @@
+# IndexNow Ping Report — 2026-05-07T11:14:32
+# Host: cheonmyeongdang.vercel.app
+# Key: d36c6c00cec20261eabe2e1ea32164e0
+# URLs: 25
+
+[OK] https://api.indexnow.org/IndexNow → HTTP 200
+      body: 
+[OK] https://www.bing.com/IndexNow → HTTP 200
+      body: 
+[OK] https://yandex.com/indexnow → HTTP 202
+      body: {
+  "success":true
+}
+
+# URL list submitted:
+  - https://cheonmyeongdang.vercel.app/
+  - https://cheonmyeongdang.vercel.app/en/
+  - https://cheonmyeongdang.vercel.app/ja/
+  - https://cheonmyeongdang.vercel.app/zh/
+  - https://cheonmyeongdang.vercel.app/faq.html
+  - https://cheonmyeongdang.vercel.app/en/faq.html
+  - https://cheonmyeongdang.vercel.app/ja/faq.html
+  - https://cheonmyeongdang.vercel.app/zh/faq.html
+  - https://cheonmyeongdang.vercel.app/sitemap.xml
+  - https://cheonmyeongdang.vercel.app/ja/pricing.html
+  - https://cheonmyeongdang.vercel.app/ja/four-pillars-jukai.html
+  - https://cheonmyeongdang.vercel.app/ja/jukkan-junishi.html
+  - https://cheonmyeongdang.vercel.app/ja/korean-zodiac-2026-uma.html
+  - https://cheonmyeongdang.vercel.app/ja/saju-aishou-test.html
+  - https://cheonmyeongdang.vercel.app/ja/saju-vs-japanese-shichu-suimei.html
+  - https://cheonmyeongdang.vercel.app/zh/pricing.html
+  - https://cheonmyeongdang.vercel.app/zh/four-pillars-mingli.html
+  - https://cheonmyeongdang.vercel.app/zh/ten-stems-twelve-branches.html
+  - https://cheonmyeongdang.vercel.app/zh/zodiac-2026-red-horse.html
+  - https://cheonmyeongdang.vercel.app/zh/bazi-compatibility-test.html
+  - https://cheonmyeongdang.vercel.app/zh/korean-bazi-vs-chinese-bazi.html
+  - https://cheonmyeongdang.vercel.app/en/pricing.html
+  - https://cheonmyeongdang.vercel.app/en/four-pillars-of-destiny.html
+  - https://cheonmyeongdang.vercel.app/en/saju.html
+  - https://cheonmyeongdang.vercel.app/en/saju-compatibility-test.html
