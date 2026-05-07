@@ -64,15 +64,16 @@ def gmail_token(env: dict) -> str | None:
 
 
 def gmail_count(token: str, q: str) -> int:
+    """Count messages by listing actual ids (resultSizeEstimate is unreliable)."""
     if not token:
         return -1
-    url = f"https://gmail.googleapis.com/gmail/v1/users/me/messages?q={urllib.parse.quote(q)}&maxResults=1"
+    url = f"https://gmail.googleapis.com/gmail/v1/users/me/messages?q={urllib.parse.quote(q)}&maxResults=50"
     req = urllib.request.Request(url)
     req.add_header("Authorization", f"Bearer {token}")
     try:
         with urllib.request.urlopen(req, timeout=10) as r:
             res = json.loads(r.read())
-            return res.get("resultSizeEstimate", 0)
+            return len(res.get("messages", []))
     except Exception:
         return -1
 
