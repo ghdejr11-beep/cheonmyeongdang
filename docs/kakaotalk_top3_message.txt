@@ -1,0 +1,16 @@
+[천명당 TOP 3 — 5/7] 총 90분 / 90일 기댓값 ₩6,000만~7천만
+
+1) K-Startup AI리그 60분 (₩5천만~5억) D-13 ★★★
+   pms.k-startup.go.kr → 로그인 hdh0203 → 신청서 paste
+   가이드: docs/grant_application_oneliners.md
+
+2) Play Console v1.3.1 5분 (₩14,500/월 정기결제 회복)
+   play.google.com/console → AAB 드롭 → 20% rollout
+   AAB: android/app/build/outputs/bundle/release/app-release.aab
+
+3) AppSumo Lifetime Deal 20분 ($5K~15K · 30일)
+   appsumo.com/partners/list-your-product/ → Submit Your Tool
+   가이드: docs/appsumo_submit_oneliners.md
+
+완료시: "#1 완료" / "#2 완료" / "#3 완료" 한 줄만
+전체 13건: docs/USER_ACTIONS_2026_05_07.md (or PDF 인쇄본)
