@@ -12,7 +12,7 @@
 ## 0. 사전 점검 (자동 완료)
 
 - ✅ 5명 영문 인플루언서 draft 작성 완료: `departments/influencer_outreach/drafts_global_2026_05_06/013_en_KSAJU-00043` ~ `021_en_KSAJU-00051`
-- ✅ KSAJU 쿠폰 코드 5개 사전 발행: `KSAJU-00043-VJ5SXU` (각 draft 본문에 unique 코드 명시)
+- ✅ KSAJU 쿠폰 코드 5개 사전 발행 (HMAC self-validating, `data/influencer_coupons_20k.json` 기반): `KSAJU-00043-3JABWV` / `KSAJU-00044-JLUD77` / `KSAJU-00045-FJT5U5` / `KSAJU-00046-FBR4QH` / `KSAJU-00047-4HTZU4`
 - ✅ 본문 1.5K~2K chars (anti-spam 준수)
 - ✅ Polite tone + opt-out line + memory 규칙 (BTS/연예인 거론 X / 070 mask)
 - ✅ Outreach log: `departments/influencer_outreach/outreach_log.json`
