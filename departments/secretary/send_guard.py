@@ -20,9 +20,28 @@ Rules (HARD — never bypass without explicit user approval):
 4. recipient must contain '@' and a TLD
 5. body cannot equal a known generic-ack template (블랙리스트 string match)
 """
+import os
 import re
 
 MIN_BODY_LEN = 250
+
+# 외부 기관 도메인 — 자동 send 절대 X (drafts만, 사용자 검토 후 1클릭 send)
+# 5/7 KoDATA 빈 hwp 사고 학습 (memory feedback_external_mail_user_review_first.md)
+EXTERNAL_ORG_DOMAINS = [
+    'kodata.co.kr', 'k-startup.go.kr', 'kakaopaycorp.com',
+    'naverpay.com', 'kakao.vc', 'antler.co', 'kakaobrain.com',
+    'd2sf.com', 'naverd2sf.com', 'touraz.kr', 'kreonet.kr',
+    'sba.kr', 'innovation.go.kr', 'kibo.or.kr', 'koss.go.kr',
+    'tossbank.com', 'tosspayments.com',
+]
+
+# 빈 양식 의심 첨부 (사고 패턴)
+SUSPICIOUS_HWP_SIZE_RANGE = (90_000, 110_000)  # KoDATA 빈 의뢰서 ~98KB
+DOCX_PLACEHOLDER_PATTERNS = [
+    r'\[회사명\]', r'\[대표자명\]', r'\{\{.+\}\}',
+    r'_______+', r'\(작성\)', r'\(예시\)',
+    r'XXX[-_]', r'TBD', r'TODO',
+]
 
 PLACEHOLDER_TOKENS = [
     'Lorem ipsum', 'TODO', '{{', 'TBD',
@@ -43,9 +62,42 @@ class GuardFailure(Exception):
     pass
 
 
+def is_external_org(recipient: str) -> bool:
+    """수신자가 외부 기관(정부/공공/심사) 도메인이면 True."""
+    r = (recipient or '').lower()
+    return any(d in r for d in EXTERNAL_ORG_DOMAINS)
+
+
+def validate_attachments(paths: list[str]) -> None:
+    """첨부 파일 검증. 빈 hwp / placeholder docx / 빈 pdf form 발견 시 GuardFailure."""
+    import zipfile
+    for p in paths or []:
+        if not os.path.exists(p):
+            raise GuardFailure(f'ATTACHMENT_MISSING: {p}')
+        size = os.path.getsize(p)
+        ext = p.lower().rsplit('.', 1)[-1]
+
+        # hwp 빈 양식 의심 (KoDATA 사고 패턴)
+        if ext == 'hwp' and SUSPICIOUS_HWP_SIZE_RANGE[0] <= size <= SUSPICIOUS_HWP_SIZE_RANGE[1]:
+            raise GuardFailure(f'SUSPICIOUS_EMPTY_HWP: {os.path.basename(p)} {size}B (in suspicious range)')
+
+        # docx placeholder
+        if ext == 'docx':
+            try:
+                with zipfile.ZipFile(p, 'r') as z:
+                    text = z.read('word/document.xml').decode('utf-8', errors='ignore')
+                for pat in DOCX_PLACEHOLDER_PATTERNS:
+                    if re.search(pat, text):
+                        raise GuardFailure(f'DOCX_PLACEHOLDER: {os.path.basename(p)} matches {pat!r}')
+            except (zipfile.BadZipFile, KeyError):
+                raise GuardFailure(f'DOCX_BROKEN: {os.path.basename(p)}')
+
+
 def validate_outbound(subject: str, body: str, recipient: str,
                       min_body_len: int = MIN_BODY_LEN,
-                      allow_short: bool = False):
+                      allow_short: bool = False,
+                      attachments: list[str] | None = None,
+                      allow_external_org: bool = False):
     """Raise GuardFailure if outbound email looks unsafe to send.
 
     Args:
@@ -84,6 +136,14 @@ def validate_outbound(subject: str, body: str, recipient: str,
     for pat in BLACKLISTED_BODY_PATTERNS:
         if re.search(pat, b, flags=re.IGNORECASE):
             raise GuardFailure(f'BLACKLISTED_TEMPLATE: matches {pat[:50]!r}')
+
+    # 외부 기관 자동 send 차단 (5/7 KoDATA 사고 학습)
+    if is_external_org(r) and not allow_external_org:
+        raise GuardFailure(f'EXTERNAL_ORG_AUTO_SEND_BLOCKED: {r} - drafts에 저장 후 사용자 검토 필수')
+
+    # 첨부 검증
+    if attachments:
+        validate_attachments(attachments)
 
     return True
 

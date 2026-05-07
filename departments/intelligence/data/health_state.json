@@ -2,19 +2,19 @@
   "KORLENS": {
     "ok": true,
     "status": 200,
-    "elapsed_ms": 1268,
-    "last_check": "2026-05-07T13:25:02"
+    "elapsed_ms": 1201,
+    "last_check": "2026-05-07T14:20:02"
   },
   "KORLENS 챗봇 API": {
     "ok": true,
     "status": 200,
-    "elapsed_ms": 3276,
-    "last_check": "2026-05-07T13:25:05"
+    "elapsed_ms": 3618,
+    "last_check": "2026-05-07T14:20:06"
   },
   "세금N혜택 API": {
     "ok": true,
     "status": 200,
-    "elapsed_ms": 500,
-    "last_check": "2026-05-07T13:25:06"
+    "elapsed_ms": 485,
+    "last_check": "2026-05-07T14:20:06"
   }
 }
