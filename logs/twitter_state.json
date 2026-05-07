@@ -1,0 +1,41 @@
+{
+  "last_posted_index": 1,
+  "cycle_count": 0,
+  "history": [
+    {
+      "index": 0,
+      "draft_id": 1,
+      "title": "Why your Co-Star reading feels generic (partial)",
+      "language": "en",
+      "posted_at": "2026-05-07T13:01:18.391317",
+      "tweet_ids": [
+        "2052237302915797379",
+        "2052237312474726506"
+      ],
+      "attempts": [
+        0
+      ],
+      "note": "partial post 2/8, marked complete to advance cycle"
+    },
+    {
+      "index": 1,
+      "draft_id": 2,
+      "title": "12 zodiac signs vs 60-year cycle",
+      "language": "en",
+      "posted_at": "2026-05-07T13:06:22.253237",
+      "tweet_ids": [
+        "2052238529972031962",
+        "2052238539556078010",
+        "2052238549165224364",
+        "2052238558816297043",
+        "2052238568442261982",
+        "2052238578068144433",
+        "2052238587786301812"
+      ],
+      "attempts": [
+        1
+      ]
+    }
+  ],
+  "skipped_duplicates": []
+}

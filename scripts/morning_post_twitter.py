@@ -2,24 +2,26 @@
 # -*- coding: utf-8 -*-
 """
 morning_post_twitter.py
-@deokgune_ai 매일 10:00 1 draft 자동 발행 (5일 순환).
+@deokgune_ai 매일 10:00 1 draft 자동 발행 (30 drafts × 30일 cycle).
 
 동작:
-  1) departments/media/global_marketing_2026_05_06/twitter_jp_drafts.json 로드
-  2) 아직 발행 안 한 가장 낮은 id 1건 발행 (thread = 다중 reply / single = 1tweet)
-  3) 발행 후 logs/twitter_posted_<id>.json 기록
-  4) 5 drafts 모두 소진 시: telegram 알림 + 새 drafts 자동 생성 시도
-     (Anthropic API 키 있으면 — K-pop 멤버 실명 X 정책 강제)
+  1) departments/media/global_marketing_2026_05_06/twitter_drafts_v2_30.json 로드
+  2) logs/twitter_state.json 의 last_posted_index 다음 draft 발행
+  3) 발행 후 state 업데이트, 30개 모두 소진 시 처음으로 cycle
+  4) 403 duplicate content 발생 시 다음 index 자동 retry (최대 3회)
+
+draft 형식 (v2_30):
+  - type=thread: hook → body[0..N-1] → 마지막 reply 에 cta+hashtags
+  - type=single: hook 단일 트윗, hashtags 마지막 줄에 추가
 
 사용법:
   python scripts/morning_post_twitter.py --dry-run        # 다음 발행 예정 미리보기
   python scripts/morning_post_twitter.py                  # 실 발행
-  python scripts/morning_post_twitter.py --reset          # 발행 이력 초기화 (디버그)
+  python scripts/morning_post_twitter.py --reset          # state 초기화 (디버그)
+  python scripts/morning_post_twitter.py --index N        # 특정 index 강제 (디버그)
 
-schtask 등록:
-  schtasks /Create /SC DAILY /ST 10:00 ^
-    /TN "KunStudio_Twitter_Daily" ^
-    /TR "python C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\scripts\\morning_post_twitter.py" /F
+schtask:
+  KunStudio_Twitter_Daily — 매일 10:00 자동 실행
 """
 from __future__ import annotations
 
@@ -45,10 +47,13 @@ SECRETS = ROOT / ".secrets"
 
 DRAFTS_FILE = (
     ROOT / "departments" / "media" / "global_marketing_2026_05_06"
-    / "twitter_jp_drafts.json"
+    / "twitter_drafts_v2_30.json"
 )
 LOGS_DIR = ROOT / "logs"
-STATE_FILE = LOGS_DIR / "twitter_post_state.json"
+STATE_FILE = LOGS_DIR / "twitter_state.json"
+
+MAX_DUPLICATE_RETRIES = 3
+TWEET_MAX_LEN = 280
 
 
 def load_secrets() -> dict[str, str]:
@@ -88,7 +93,13 @@ def load_state() -> dict:
             return json.loads(STATE_FILE.read_text(encoding="utf-8"))
         except Exception:
             pass
-    return {"posted_ids": [], "history": []}
+    # 첫 실행: -1 → 다음 index 0 부터
+    return {
+        "last_posted_index": -1,
+        "cycle_count": 0,
+        "history": [],
+        "skipped_duplicates": [],
+    }
 
 
 def save_state(state: dict) -> None:
@@ -105,21 +116,65 @@ def load_drafts() -> dict:
     return json.loads(DRAFTS_FILE.read_text(encoding="utf-8"))
 
 
-def pick_next_draft(data: dict, state: dict) -> dict | None:
-    posted = set(state.get("posted_ids", []))
-    candidates = [t for t in data["tweets"] if t["id"] not in posted]
-    if not candidates:
-        return None
-    return min(candidates, key=lambda t: t["id"])
+def build_tweets(draft: dict) -> list[str]:
+    """draft → 발행할 트윗 list 생성 (hook + body + cta+hashtags)."""
+    tweets: list[str] = []
+    hook = (draft.get("hook") or "").strip()
+    body = draft.get("body") or []
+    cta = (draft.get("cta") or "").strip()
+    tags = draft.get("hashtags") or []
+    tag_line = " ".join(tags) if tags else ""
+
+    if draft.get("type") == "single" or not body:
+        # 단일 트윗: hook + (hashtags 가능 시 줄바꿈으로)
+        text = hook
+        if tag_line and (len(text) + 2 + len(tag_line)) <= TWEET_MAX_LEN:
+            text = f"{text}\n\n{tag_line}"
+        tweets.append(text[:TWEET_MAX_LEN])
+        return tweets
+
+    # thread
+    tweets.append(hook[:TWEET_MAX_LEN])
+    for b in body:
+        tweets.append(b[:TWEET_MAX_LEN])
+    # 마지막 reply: cta + hashtags
+    closer_parts: list[str] = []
+    if cta:
+        closer_parts.append(cta)
+    if tag_line:
+        closer_parts.append(tag_line)
+    if closer_parts:
+        closer = "\n\n".join(closer_parts)
+        tweets.append(closer[:TWEET_MAX_LEN])
+    return tweets
 
 
-def post_draft(target: dict, dry_run: bool = False) -> tuple[bool, list[str], str]:
+def get_draft_at(data: dict, index: int) -> dict:
+    drafts = data.get("drafts") or data.get("tweets") or []
+    return drafts[index]
+
+
+def total_drafts(data: dict) -> int:
+    drafts = data.get("drafts") or data.get("tweets") or []
+    return len(drafts)
+
+
+def is_duplicate_error(err: str) -> bool:
+    e = (err or "").lower()
+    return "duplicate content" in e or "duplicate" in e and "403" in e
+
+
+def post_draft(
+    draft: dict,
+    dry_run: bool = False,
+) -> tuple[bool, list[str], str]:
     """Returns (ok, posted_tweet_ids, error_msg)."""
+    tweets = build_tweets(draft)
     if dry_run:
-        print(f"\n[DRY-RUN] Draft #{target['id']}: {target['title']} "
-              f"({target['type']})")
-        for i, tw in enumerate(target["tweets"], 1):
-            print(f"\n--- Tweet {i}/{len(target['tweets'])} ({len(tw)} chars) ---")
+        print(f"\n[DRY-RUN] Draft #{draft['id']}: {draft.get('title','')} "
+              f"({draft.get('type','?')}, lang={draft.get('language','?')})")
+        for i, tw in enumerate(tweets, 1):
+            print(f"\n--- Tweet {i}/{len(tweets)} ({len(tw)} chars) ---")
             print(tw)
         return True, [], ""
 
@@ -141,38 +196,46 @@ def post_draft(target: dict, dry_run: bool = False) -> tuple[bool, list[str], st
         access_token_secret=creds["X_ACCESS_SECRET"],
     )
 
-    print(f"[POST] Draft #{target['id']}: {target['title']}")
+    print(f"[POST] Draft #{draft['id']}: {draft.get('title','')}")
     last_id = None
     posted_ids: list[str] = []
-    for i, tw in enumerate(target["tweets"], 1):
+    is_thread = draft.get("type") != "single" and len(tweets) > 1
+    for i, tw in enumerate(tweets, 1):
         try:
             kwargs: dict = {"text": tw}
-            if last_id and target["type"] == "thread":
+            if last_id and is_thread:
                 kwargs["in_reply_to_tweet_id"] = last_id
             resp = client.create_tweet(**kwargs)
             tid = str(resp.data["id"])
             posted_ids.append(tid)
             last_id = tid
-            print(f"  [OK {i}/{len(target['tweets'])}] tweet_id={tid}")
+            print(f"  [OK {i}/{len(tweets)}] tweet_id={tid}")
             time.sleep(2)  # rate limit
         except Exception as e:
-            err = f"tweet {i}/{len(target['tweets'])}: {type(e).__name__}: {e}"
+            err = f"tweet {i}/{len(tweets)}: {type(e).__name__}: {e}"
             print(f"  [FAIL] {err}")
             return False, posted_ids, err
     return True, posted_ids, ""
 
 
-def write_post_log(target: dict, posted_ids: list[str], ok: bool, error: str) -> Path:
+def write_post_log(
+    draft: dict,
+    posted_ids: list[str],
+    ok: bool,
+    error: str,
+    index_used: int,
+) -> Path:
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_path = LOGS_DIR / f"twitter_posted_{target['id']}_{ts}.json"
+    log_path = LOGS_DIR / f"twitter_posted_{draft['id']}_{ts}.json"
     log_path.write_text(
         json.dumps({
             "ok": ok,
-            "draft_id": target["id"],
-            "title": target["title"],
-            "type": target["type"],
-            "tweet_count": len(target["tweets"]),
+            "draft_id": draft["id"],
+            "draft_index": index_used,
+            "title": draft.get("title", ""),
+            "type": draft.get("type", ""),
+            "language": draft.get("language", ""),
             "posted_tweet_ids": posted_ids,
             "error": error,
             "posted_at": datetime.now().isoformat(),
@@ -182,79 +245,14 @@ def write_post_log(target: dict, posted_ids: list[str], ok: bool, error: str) ->
     return log_path
 
 
-def try_generate_new_drafts() -> bool:
-    """5 drafts 소진 후 Claude API 로 새 drafts 생성 (best-effort)."""
-    creds = load_secrets()
-    api_key = creds.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        return False
-    # 정책: K-pop 멤버 실명 / Samsung / Squid Game 등 거론 X
-    policy = (
-        "정책 제약: 특정 K-pop 멤버 실명, Samsung, BTS, Squid Game 등 "
-        "특정 업체·연예인·IP 거론 절대 금지. 일반화('한국 대기업', "
-        "'top K-pop group') 표현 사용. 천명당 본인 제품은 OK."
-    )
-    prompt = f"""@deokgune_ai 일본어 트위터용 5 drafts 새로 생성 (twitter_jp_drafts.json 동일 schema).
-- 타겟: 일본 K-wave/한국 점성술 관심층
-- 톤: 친근, 정보성, CTA: https://www.cheonmyeongdang.com/ja/
-- 각 트윗 280자 이하 (일본어 카운팅 주의)
-- thread / single / single_set 혼합
-- {policy}
-
-JSON 형식으로만 응답하세요. 마크다운 fence X."""
-    try:
-        body = json.dumps({
-            "model": "claude-haiku-4-5",
-            "max_tokens": 4096,
-            "messages": [{"role": "user", "content": prompt}],
-        }).encode("utf-8")
-        req = urllib.request.Request(
-            "https://api.anthropic.com/v1/messages",
-            data=body,
-            headers={
-                "x-api-key": api_key,
-                "anthropic-version": "2023-06-01",
-                "content-type": "application/json",
-            },
-            method="POST",
-        )
-        with urllib.request.urlopen(req, timeout=60) as r:
-            resp = json.loads(r.read())
-        text = resp.get("content", [{}])[0].get("text", "")
-        # JSON 추출
-        start = text.find("{")
-        end = text.rfind("}")
-        if start < 0 or end < 0:
-            return False
-        new_data = json.loads(text[start:end + 1])
-        if "tweets" not in new_data:
-            return False
-        # id 충돌 방지: 기존 id + 100
-        for i, t in enumerate(new_data["tweets"], 1):
-            t["id"] = 100 + i
-        # 백업 후 덮어쓰기
-        backup = DRAFTS_FILE.with_suffix(".json.bak")
-        backup.write_bytes(DRAFTS_FILE.read_bytes())
-        # 기존 drafts 와 합치기 (history 보존용 X — 단순 교체)
-        existing = json.loads(DRAFTS_FILE.read_text(encoding="utf-8"))
-        existing["tweets"] = new_data["tweets"]
-        existing["regenerated_at"] = datetime.now().isoformat()
-        DRAFTS_FILE.write_text(
-            json.dumps(existing, ensure_ascii=False, indent=2),
-            encoding="utf-8",
-        )
-        return True
-    except Exception as e:
-        print(f"  [WARN] new drafts gen failed: {e}")
-        return False
-
-
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true",
                     help="다음 발행 예정 draft 미리보기 (실 발행 X)")
     ap.add_argument("--reset", action="store_true",
-                    help="발행 이력 초기화 (디버그용)")
+                    help="state 초기화 (디버그용)")
+    ap.add_argument("--index", type=int, default=None,
+                    help="특정 draft index 강제 (0-based, 디버그용)")
     args = ap.parse_args()
 
     print("=" * 60)
@@ -275,64 +273,94 @@ def main() -> int:
         telegram_alert(f"[Twitter] drafts 파일 없음: {DRAFTS_FILE.name}")
         return 1
 
-    target = pick_next_draft(data, state)
-    if target is None:
-        print(f"[INFO] 모든 drafts 발행 완료 (posted={state['posted_ids']})")
+    total = total_drafts(data)
+    if total == 0:
+        print("[FAIL] drafts 비어있음")
+        return 1
+
+    last = state.get("last_posted_index", -1)
+    if args.index is not None:
+        start = args.index % total
+    else:
+        start = (last + 1) % total
+
+    # duplicate 발생 시 자동 next index retry
+    attempted: list[int] = []
+    final_ok = False
+    final_posted_ids: list[str] = []
+    final_err = ""
+    final_index = -1
+    final_draft: dict = {}
+
+    for retry in range(MAX_DUPLICATE_RETRIES):
+        idx = (start + retry) % total
+        draft = get_draft_at(data, idx)
+        attempted.append(idx)
+        print(f"\n[ATTEMPT {retry+1}/{MAX_DUPLICATE_RETRIES}] index={idx} "
+              f"(draft id={draft['id']}, total={total})")
+        ok, posted_ids, err = post_draft(draft, dry_run=args.dry_run)
+
         if args.dry_run:
             return 0
-        # 새 drafts 생성 시도
-        if try_generate_new_drafts():
-            print("[REGEN] 새 drafts 생성 완료 — state 초기화")
-            state = {"posted_ids": [], "history": state.get("history", [])}
-            save_state(state)
-            data = load_drafts()
-            target = pick_next_draft(data, state)
-            telegram_alert(
-                "[Twitter] 5 drafts 소진 → 새 drafts 자동 생성 완료. "
-                "재발행 시작."
-            )
-        else:
-            telegram_alert(
-                "[Twitter] 모든 drafts 발행 완료. 새 drafts 수동 생성 필요. "
-                f"파일: {DRAFTS_FILE.name}"
-            )
-            return 0
 
-    if target is None:
-        print("[INFO] 발행 가능한 draft 없음")
-        return 0
+        log_path = write_post_log(draft, posted_ids, ok, err, idx)
+        print(f"  [LOG] {log_path}")
 
-    # 발행
-    ok, posted_ids, err = post_draft(target, dry_run=args.dry_run)
+        final_ok = ok
+        final_posted_ids = posted_ids
+        final_err = err
+        final_index = idx
+        final_draft = draft
 
-    if args.dry_run:
-        return 0
+        if ok:
+            break
+        if is_duplicate_error(err) and not posted_ids:
+            # 깔끔한 duplicate (아무것도 못 보냄) → 다음 index 시도
+            state.setdefault("skipped_duplicates", []).append({
+                "index": idx,
+                "draft_id": draft["id"],
+                "at": datetime.now().isoformat(),
+            })
+            print(f"  [SKIP] duplicate → next index 재시도")
+            continue
+        # 다른 종류의 실패 또는 부분 발행 → 중단
+        break
 
-    log_path = write_post_log(target, posted_ids, ok, err)
-    print(f"  [LOG] {log_path}")
-
-    if ok:
-        state.setdefault("posted_ids", []).append(target["id"])
+    # state 업데이트
+    if final_ok:
+        state["last_posted_index"] = final_index
+        if final_index == total - 1:
+            state["cycle_count"] = state.get("cycle_count", 0) + 1
+            print(f"  [CYCLE] {state['cycle_count']}회 완료, 다음은 처음부터")
         state.setdefault("history", []).append({
-            "draft_id": target["id"],
-            "title": target["title"],
+            "index": final_index,
+            "draft_id": final_draft["id"],
+            "title": final_draft.get("title", ""),
+            "language": final_draft.get("language", ""),
             "posted_at": datetime.now().isoformat(),
-            "tweet_ids": posted_ids,
+            "tweet_ids": final_posted_ids,
+            "attempts": attempted,
         })
         save_state(state)
         telegram_alert(
-            f"[Twitter] Draft #{target['id']} 발행 완료\n"
-            f"제목: {target['title']}\n"
-            f"트윗 수: {len(posted_ids)}\n"
-            f"첫 tweet_id: {posted_ids[0] if posted_ids else 'N/A'}"
+            f"[Twitter] Draft #{final_draft['id']} (idx {final_index}) 발행 완료\n"
+            f"제목: {final_draft.get('title','')}\n"
+            f"언어: {final_draft.get('language','')}\n"
+            f"트윗 수: {len(final_posted_ids)}\n"
+            f"첫 tweet_id: {final_posted_ids[0] if final_posted_ids else 'N/A'}\n"
+            f"시도 indices: {attempted}"
         )
         return 0
     else:
+        # 실패해도 duplicate skip은 state 에 반영
+        save_state(state)
         telegram_alert(
-            f"[Twitter 발행 실패] Draft #{target['id']}\n"
-            f"제목: {target['title']}\n"
-            f"오류: {err}\n"
-            f"부분 발행 ID: {posted_ids}"
+            f"[Twitter 발행 실패] Draft #{final_draft.get('id','?')} "
+            f"(idx {final_index})\n"
+            f"제목: {final_draft.get('title','')}\n"
+            f"오류: {final_err}\n"
+            f"부분 발행 ID: {final_posted_ids}\n"
+            f"시도 indices: {attempted}"
         )
         return 2
 
