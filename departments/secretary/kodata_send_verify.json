@@ -1,0 +1,77 @@
+{
+  "verified_at": "2026-05-07",
+  "sent_count": 3,
+  "sent_messages": [
+    {
+      "id": "19e015c054d7ac79",
+      "date": "Thu, 7 May 2026 16:34:25 +0900",
+      "from": "\"덕구네\" <ghdejr11@gmail.com>",
+      "to": "85343@codate.co.kr",
+      "subject": "쿤스튜디오 재작성 후 답장입니다",
+      "attachments": [
+        {
+          "filename": "주민등록등본.pdf",
+          "size": 1039390,
+          "mimeType": "application/pdf"
+        },
+        {
+          "filename": "(작성완료)한국관광공사_기업정보_등록의뢰서_쿤스튜디오_2026-05-07.hwp",
+          "size": 188416,
+          "mimeType": "application/octet-stream"
+        },
+        {
+          "filename": "01_사업자등록증명.pdf",
+          "size": 226308,
+          "mimeType": "application/pdf"
+        }
+      ],
+      "thread_id": "19e015ae35fb4bbb"
+    },
+    {
+      "id": "19e007d0cd466ea6",
+      "date": "Thu, 7 May 2026 05:30:55 +0200",
+      "from": "ghdejr11@gmail.com",
+      "to": "find@kodata.co.kr",
+      "subject": "Re: 빈양식 회신 정정 - 기업정보등록-한국관광공사-쿤스튜디오",
+      "attachments": [
+        {
+          "filename": "(작성완료)한국관광공사_기업정보_등록의뢰서_쿤스튜디오_2026-05-07.docx",
+          "size": 38956,
+          "mimeType": "application/octet-stream"
+        },
+        {
+          "filename": "(양식)한국관광공사 기업정보 등록의뢰서.hwp",
+          "size": 97792,
+          "mimeType": "application/octet-stream"
+        },
+        {
+          "filename": "사업자등록증명_쿤스튜디오.pdf",
+          "size": 23648,
+          "mimeType": "application/pdf"
+        }
+      ],
+      "thread_id": "19e007d0cd466ea6"
+    },
+    {
+      "id": "19df70fe428c7e65",
+      "date": "Tue, 5 May 2026 07:35:06 +0000",
+      "from": "ghdejr11@gmail.com",
+      "to": "find@kodata.co.kr",
+      "subject": "기업정보등록-한국관광공사-쿤스튜디오",
+      "attachments": [
+        {
+          "filename": "(양식)한국관광공사 기업정보 등록의뢰서.hwp",
+          "size": 97792,
+          "mimeType": "application/octet-stream"
+        },
+        {
+          "filename": "사업자등록증명_쿤스튜디오.pdf",
+          "size": 23648,
+          "mimeType": "application/pdf"
+        }
+      ],
+      "thread_id": "19df70fe428c7e65"
+    }
+  ],
+  "bounces": 2
+}
