@@ -164,13 +164,32 @@ def main():
         print('[DRY-RUN] Add --confirm to actually send.')
         return
 
+    # ── Send guard import (shared validation) ──
+    sys.path.insert(0, os.path.normpath(os.path.join(ROOT, '..', 'secretary')))
+    try:
+        from send_guard import validate_outbound, GuardFailure
+    except ImportError:
+        print('[ABORT] send_guard.py not found in departments/secretary')
+        return
+
     service = gmail_service()
     sent_now = 0
+    skipped_by_guard = 0
     for kind, entry in queue:
         body = D3_BODY if kind == 'D3' else D7_BODY
         # subject: prefix Re: to original
         orig_subject = entry['subject']
         new_subject = orig_subject if orig_subject.lower().startswith('re:') else 'Re: ' + orig_subject
+
+        # ── HARD GUARD ──
+        try:
+            validate_outbound(subject=new_subject, body=body, recipient=entry['recipient'])
+        except GuardFailure as e:
+            print('  [GUARD-BLOCK] {} idx={} to={} reason={}'.format(
+                kind, entry['idx'], entry['recipient'], e))
+            skipped_by_guard += 1
+            continue
+
         msg = build_mime(entry['recipient'], new_subject, body, in_reply_to=entry['message_id'])
         raw = base64.urlsafe_b64encode(msg.as_bytes()).decode()
         try:
@@ -195,7 +214,7 @@ def main():
             print('  [ERROR] {} idx={} -> {}'.format(kind, entry['idx'], exc))
 
     print('')
-    print('=== Done. Sent {} follow-ups ==='.format(sent_now))
+    print('=== Done. Sent {} follow-ups, blocked by guard {} ==='.format(sent_now, skipped_by_guard))
 
 
 if __name__ == '__main__':

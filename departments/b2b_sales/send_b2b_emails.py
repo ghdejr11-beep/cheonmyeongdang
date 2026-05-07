@@ -154,11 +154,30 @@ def main():
                 r['idx'], r['sector'], r['priority'], r['subject'][:60]))
         return
 
+    # ── Send guard import ──
+    sys.path.insert(0, os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'secretary')))
+    try:
+        from send_guard import validate_outbound, GuardFailure
+    except ImportError:
+        print('[ABORT] send_guard.py missing'); return
+
     service = load_gmail_service()
     sent_count = 0
+    skipped_by_guard = 0
     for r in batch:
         if not is_filled(r):
             print('  [SKIP] idx={} (placeholders unfilled)'.format(r['idx']))
+            continue
+        # ── HARD GUARD ──
+        try:
+            validate_outbound(
+                subject=r.get('subject', ''),
+                body=r.get('body', ''),
+                recipient=r.get('recipient_email_placeholder', ''),
+            )
+        except GuardFailure as e:
+            print('  [GUARD-BLOCK] idx={} reason={}'.format(r['idx'], e))
+            skipped_by_guard += 1
             continue
         msg = build_mime(r)
         raw = base64.urlsafe_b64encode(msg.as_bytes()).decode()
@@ -183,7 +202,8 @@ def main():
             print('  [ERROR] idx={} -> {}'.format(r['idx'], exc))
 
     print('')
-    print('=== Done. Sent {} of {} in batch {} ==='.format(sent_count, len(batch), args.batch))
+    print('=== Done. Sent {} of {} in batch {}, blocked-by-guard {} ==='.format(
+        sent_count, len(batch), args.batch, skipped_by_guard))
 
 
 if __name__ == '__main__':

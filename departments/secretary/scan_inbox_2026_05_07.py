@@ -76,6 +76,52 @@ TRUSTED_SYSTEM_FROM = [
     r'@github\.com',
 ]
 
+# 🚫 절대 자동 답장 금지 (영수증/알림/뉴스레터/광고/자기자신/자가알림)
+# 이 리스트의 패턴이 from_addr 또는 subject에 매칭되면 draft 작성 X
+NEVER_REPLY_FROM = [
+    # 영수증·송장
+    r'receipts?@', r'receipt[+]', r'invoice[+]', r'invoice[s]?@',
+    r'@stripe\.com', r'@stripe-mail\.com',
+    r'invoice\+statements@mail\.anthropic\.com',
+    r'billing@', r'no[-_.]?reply@',
+    r'noreply@', r'donotreply@',
+    # SNS 알림
+    r'@mail\.instagram\.com', r'@facebookmail\.com', r'@mail\.facebook\.com',
+    r'@x\.com', r'@twitter\.com',
+    r'@linkedin\.com', r'@li\.linkedin\.com',
+    r'@tiktok\.com',
+    r'-recap@', r'-messages@', r'-notifications?@',
+    r'stories-recap@', r'unread-messages@',
+    # 뉴스레터/마케팅
+    r'@cx\.beehiiv\.com', r'@beehiiv\.com',
+    r'@e\.heepsy\.com', r'support@heepsy\.com',
+    r'@mailchimp\.com', r'@mc\.', r'@convertkit\.com',
+    r'@buttondown\.', r'@substack\.com',
+    r'campaigns?@', r'broadcast@', r'updates@',
+    r'info@make\.com',  # marketing pushes
+    r'yo@dev\.to', r'@dev\.to',
+    # 자기자신 (천명당 자체 알림)
+    r'^ghdejr11@gmail\.com$',
+    # Quora/Reddit 알림 (스레드 답장 절대 X)
+    r'@quora\.co', r'@reddit\.com', r'@redditmail\.com',
+    # 결제·청구 알림
+    r'codef\.io\.dev@gmail\.com',  # 데모 종료 알림
+    # 일회성 인증/확인
+    r'verify@', r'confirm@', r'verification@',
+]
+
+# 🚫 본문 컨텐츠 자동 답장 금지 (제목·본문 키워드)
+NEVER_REPLY_KEYWORDS = [
+    'verification code', 'verify your', '인증번호', 'otp', 'one-time',
+    'password reset', '비밀번호 재설정', 'confirm your', 'unsubscribe',
+    'receipt', '영수증', 'invoice', '인보이스', 'newsletter',
+    'order confirmation', 'shipping update',
+    '스토리', 'story', 'unread message', '읽지 않은 메시지',
+    '이용기간', '만료', 'expir', 'demo expir',
+    '광고', 'sponsored', '할인', 'promotion', 'sale',
+    '프리미엄 구독', '구독 갱신',
+]
+
 
 def load_service(token_path, scopes_required=None):
     if not os.path.exists(token_path):
@@ -152,11 +198,14 @@ def classify_priority(em):
     # 시스템/신뢰 발신 — 자동 답장 절대 X
     is_system = any(re.search(p, f, re.IGNORECASE) for p in TRUSTED_SYSTEM_FROM)
 
-    # 답장 가능 조건: 사람 보낸 메일 + 시스템 아님 + 자동알림 아님
-    repliable = (not is_system) and (not is_auto) and ('@' in em['from_addr'])
+    # 🚫 NEVER_REPLY_FROM 패턴 매칭 (영수증/알림/뉴스레터/자기자신)
+    is_never_reply = any(re.search(p, f, re.IGNORECASE) for p in NEVER_REPLY_FROM)
 
-    # 비밀번호/인증코드 — 절대 답장 X
-    if any(kw in text for kw in ['verification code', 'verify your', '인증번호', 'otp', 'password reset', '비밀번호 재설정']):
+    # 답장 가능 조건: 사람 보낸 메일 + 시스템 아님 + 자동알림 아님 + never_reply 아님
+    repliable = (not is_system) and (not is_auto) and (not is_never_reply) and ('@' in em['from_addr'])
+
+    # 본문/제목 키워드 기반 차단
+    if any(kw.lower() in text for kw in NEVER_REPLY_KEYWORDS):
         repliable = False
 
     return priority, repliable, is_auto, is_system
@@ -213,8 +262,25 @@ def make_draft_body(em, priority):
     return body + SIGNATURE
 
 
+MIN_BODY_LEN = 250  # 자동 draft는 최소 250자 (서명 포함). 그 이하는 무가치한 generic ack.
+PLACEHOLDER_TOKENS = ['Lorem ipsum', 'TODO', '{{', 'TBD', '[placeholder]', '[PLACEHOLDER]', 'XXXX', 'FILL_ME', 'XXX_']
+
+
 def create_draft(send_svc, em, body_text):
-    """Gmail draft 작성 (발송 X)."""
+    """Gmail draft 작성 (발송 X). hard validation guard 통과 필수."""
+    # ── HARD GUARD: 빈/placeholder/너무 짧은 본문은 절대 draft 생성 X ──
+    body_clean = (body_text or '').strip()
+    if len(body_clean) < MIN_BODY_LEN:
+        raise ValueError(f'BODY_TOO_SHORT: len={len(body_clean)} < {MIN_BODY_LEN}')
+    for tok in PLACEHOLDER_TOKENS:
+        if tok in body_clean:
+            # 010-XXXX-XXXX 같은 의도적 마스킹은 예외 (010- prefix)
+            if tok == 'XXXX' and '010-XXXX' in body_clean:
+                continue
+            raise ValueError(f'PLACEHOLDER_FOUND: {tok}')
+    if not (em.get('subject') or '').strip():
+        raise ValueError('EMPTY_SUBJECT')
+
     msg = MIMEMultipart()
     msg['To'] = em['from_addr']
     msg['From'] = f'"{FROM_NAME}" <{FROM_EMAIL}>'

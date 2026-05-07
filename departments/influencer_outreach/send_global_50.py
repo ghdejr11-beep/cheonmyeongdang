@@ -346,11 +346,26 @@ def main() -> None:
             print(f"     subject={render_subject(c)[:70]}")
         return
 
+    # ── Send guard import ──
+    sys.path.insert(0, os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'secretary')))
+    try:
+        from send_guard import validate_outbound, GuardFailure
+    except ImportError:
+        print('[ABORT] send_guard.py missing'); return
+
     service = load_gmail_service()
     sent_count = 0
+    skipped_by_guard = 0
     for c in batch:
         subj = render_subject(c)
         body = render_body(c, c["full_code"])
+        # ── HARD GUARD ──
+        try:
+            validate_outbound(subject=subj, body=body, recipient=c["email"])
+        except GuardFailure as e:
+            print(f"  [GUARD-BLOCK] idx={c['idx']} reason={e}")
+            skipped_by_guard += 1
+            continue
         raw = build_mime(subj, body, c["email"])
         try:
             res = service.users().messages().send(userId="me", body={"raw": raw}).execute()
@@ -374,7 +389,7 @@ def main() -> None:
             print(f"  [ERROR] idx={c['idx']} -> {exc}")
 
     print()
-    print(f"=== Done. Sent {sent_count} of {len(batch)}. ===")
+    print(f"=== Done. Sent {sent_count} of {len(batch)}, blocked-by-guard {skipped_by_guard}. ===")
     print(f"  Sent log: {SENT_LOG_PATH}")
 
 
