@@ -3720,19 +3720,19 @@ window.navigatePaidNav = function(serviceName, price, anchorId, event) {
       if (serviceName.indexOf('종합') !== -1) paidMode = 'comprehensive';
       else if (serviceName.indexOf('신년운세') !== -1) paidMode = 'sinnyeon';
 
-      // cm_user_info 확인 — birth 있으면 모달 스킵, 즉시 cmExecutePremium 호출
-      var savedInfo = {};
-      try { savedInfo = JSON.parse(localStorage.getItem('cm_user_info') || '{}'); } catch(e) {}
-      if (savedInfo.birth && typeof window.cmExecutePremium === 'function') {
-        window.cmExecutePremium(paidMode, savedInfo);
-        return false;
-      }
-      // 정보 없으면 모달
+      // 권한자도 항상 모달 → 시간 정정 가능 (5/8 김유하님 피드백: 시진 잘못 입력 시 수정 불가)
+      // 모달은 cm_user_info 자동 prefill — 시간만 다시 보고 OK 누르면 즉시 분석
       if (typeof window.openPremiumInputModal === 'function') {
         window.openPremiumInputModal(paidMode);
       } else {
-        // 최후 fallback
-        window.location.href = '/?view_saju=1&email=' + email + '#saju-result';
+        // fallback (모달 모듈 미로드 시)
+        var savedInfo = {};
+        try { savedInfo = JSON.parse(localStorage.getItem('cm_user_info') || '{}'); } catch(e) {}
+        if (savedInfo.birth && typeof window.cmExecutePremium === 'function') {
+          window.cmExecutePremium(paidMode, savedInfo);
+        } else {
+          window.location.href = '/?view_saju=1&email=' + email + '#saju-result';
+        }
       }
       return false;
     }
@@ -3829,10 +3829,11 @@ window.cmExecutePremium = function(mode, info) {
         '<span>壹 사주 정밀</span><span>·</span><span>貳 ' + yr + ' 신년운세</span><span>·</span><span>參 개운법</span>' +
         '</div></div>';
     } else {
-      heroHtml = '<div style="text-align:center;padding:36px 20px;border-radius:20px;background:radial-gradient(circle at center,rgba(201,168,76,0.15),rgba(15,15,20,0.95));border:1px solid rgba(201,168,76,0.3);margin:0 0 24px;">' +
+      heroHtml = '<div style="text-align:center;padding:36px 20px;border-radius:20px;background:radial-gradient(circle at center,rgba(201,168,76,0.15),rgba(15,15,20,0.95));border:1px solid rgba(201,168,76,0.3);margin:0 0 24px;position:relative;">' +
         '<div style="font-size:0.7rem;color:var(--gold2);letter-spacing:3px;margin-bottom:8px;">PREMIUM SAJU READING</div>' +
         '<div style="font-size:2.4rem;font-weight:900;color:var(--gold2);font-family:Noto Serif KR,serif;margin:6px 0;">사주 정밀 풀이</div>' +
-        '<div style="font-size:0.95rem;color:var(--gold2);">' + displayName + '님 · ' + info.birth + ' · ' + (parseInt(info.hour) === -1 ? '시간 모름' : info.hour + '시') + ' · ' + (info.gender === 'M' ? '남' : '여') + '</div>' +
+        '<div style="font-size:0.95rem;color:var(--gold2);">' + displayName + '님 · ' + info.birth + ' · ' + (parseInt(info.hour) === -1 ? '시간 모름' : (info.time || (info.hour + '시'))) + ' · ' + (info.gender === 'M' ? '남' : '여') + '</div>' +
+        '<button onclick="window.openPremiumInputModal&&window.openPremiumInputModal(\'' + mode + '\')" style="margin-top:14px;padding:8px 18px;background:rgba(201,168,76,0.12);border:1px solid var(--gold);color:var(--gold2);border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.82rem;">정보 수정 (시간/달력/출생지)</button>' +
         '</div>';
     }
     heroDiv.innerHTML = heroHtml;
@@ -4001,25 +4002,46 @@ window.openPremiumInputModal = function(mode) {
     var map = {23:'자시 (子) 23:00~01:00', 1:'축시 (丑) 01:00~03:00', 3:'인시 (寅) 03:00~05:00', 5:'묘시 (卯) 05:00~07:00', 7:'진시 (辰) 07:00~09:00', 9:'사시 (巳) 09:00~11:00', 11:'오시 (午) 11:00~13:00', 13:'미시 (未) 13:00~15:00', 15:'신시 (申) 15:00~17:00', 17:'유시 (酉) 17:00~19:00', 19:'술시 (戌) 19:00~21:00', 21:'해시 (亥) 21:00~23:00'};
     return map[hourCode] || '시간 모름';
   }
-  // 시간대 보정: 진태양시 (한국 KST 기준 -32분) — 동경 135° 표준 vs 한국 127.5°
-  // 사용자가 "5:00 정각 출생"이라 하면 시계 시각 그대로가 일반적이지만, 정확한 명리학은 진태양시 권장
-  // 여기서는 KST/JST는 보정 없음, CST는 +0, 그 외 timezone offset 차이만큼 보정
+  // ─── 진태양시 (True Solar Time) 보정 ───
+  // 한국: 동경 135° 표준시 vs 한국 평균 경도 127.5° → -32분 (정통 명리학)
+  // 사용자가 "정각 출산"이라 했어도 진태양시 기준 1시진 차이 발생 가능 (예: 시계 5:00 → 진태양 4:28 = 인시)
+  // 진태양시 토글은 모달의 timezone select에서 KST는 자동 적용 (사용자 토글 X — 너무 복잡)
+  // KST/JST는 -32분 (한국 표준 명리학)
+  // CST는 -16분 (북경 116° vs 표준 120° = 4°)
+  // 다른 tz는 사용자가 입력한 시각 그대로 (현지 시각 기준)
+  var _TZ_OFFSET_MIN = { KST: -32, JST: -19, CST: -16, EST: 0, PST: 0, UTC: 0, OTHER: 0 };
   function _adjustHourForTz(hh, mm, tz) {
-    // 단순화: KST/JST/CST는 동아시아 표준이라 보정 없음 (시계 시각 그대로 시진 결정)
-    // EST/PST/UTC/OTHER는 한국식 명리학 적용 시 출생지 현지 시각 기준이 일반적
-    return { hh: hh, mm: mm };
+    var offset = _TZ_OFFSET_MIN[tz] || 0;
+    var total = hh * 60 + mm + offset;
+    // 음수면 전날
+    while (total < 0) total += 24 * 60;
+    while (total >= 24 * 60) total -= 24 * 60;
+    return { hh: Math.floor(total / 60), mm: total % 60 };
   }
 
-  // 음력→양력 변환: 간이 경고 (실제 변환은 외부 라이브러리 또는 KASI API 필요)
-  // 클라이언트 측 정밀 변환은 lunar-javascript 같은 lib 통합 시 추가
-  function _lunarWarning() {
-    return '음력 입력은 현재 양력으로 임시 처리됩니다. 정확한 음력 변환을 위해 양력 환산 후 입력을 권장합니다. (예: 1985-02-03 음력 → 1985-03-23 양력 약)';
+  // ─── 음력 → 양력 자동 변환 (lunar-javascript 라이브러리) ───
+  // window.Lunar (LunarYear/LunarMonth/Solar 등) — CDN으로 로드됨
+  function _lunarToSolar(yyyy, mm, dd) {
+    try {
+      if (typeof window.Lunar !== 'undefined' && typeof window.Lunar.fromYmd === 'function') {
+        var lunar = window.Lunar.fromYmd(yyyy, mm, dd);
+        var solar = lunar.getSolar();
+        return {
+          ok: true,
+          year: solar.getYear(),
+          month: solar.getMonth(),
+          day: solar.getDay()
+        };
+      }
+    } catch (e) { console.warn('[lunar→solar] failed', e); }
+    return { ok: false };
   }
 
-  // 실시간 시진 미리보기
+  // 실시간 시진 미리보기 (timezone 진태양시 보정 반영)
   function _updateTimePreview() {
     var tEl = document.getElementById('pim-time');
     var unknownEl = document.getElementById('pim-time-unknown');
+    var tzEl = document.getElementById('pim-tz');
     var preview = document.getElementById('pim-time-preview');
     if (!tEl || !preview) return;
     if (unknownEl && unknownEl.checked) {
@@ -4032,11 +4054,17 @@ window.openPremiumInputModal = function(mode) {
     if (!v) { preview.innerHTML = ''; return; }
     var parts = v.split(':');
     var hh = parseInt(parts[0]), mm = parseInt(parts[1]);
-    var sij = _hhmmToSijinHour(hh, mm);
-    preview.innerHTML = '시진 자동 계산: <strong style="color:var(--gold2);">' + _sijinLabel(sij) + '</strong>';
+    var tz = tzEl ? tzEl.value : 'KST';
+    var adj = _adjustHourForTz(hh, mm, tz);
+    var sij = _hhmmToSijinHour(adj.hh, adj.mm);
+    var adjStr = (adj.hh < 10 ? '0' + adj.hh : adj.hh) + ':' + (adj.mm < 10 ? '0' + adj.mm : adj.mm);
+    var offsetMin = _TZ_OFFSET_MIN[tz] || 0;
+    var offsetNote = offsetMin !== 0 ? ' <span style="color:var(--text2);font-size:0.74rem;">(진태양시 ' + (offsetMin > 0 ? '+' : '') + offsetMin + '분 보정 → ' + adjStr + ')</span>' : '';
+    preview.innerHTML = '시진 자동 계산: <strong style="color:var(--gold2);">' + _sijinLabel(sij) + '</strong>' + offsetNote;
   }
   document.getElementById('pim-time').addEventListener('input', _updateTimePreview);
   document.getElementById('pim-time-unknown').addEventListener('change', _updateTimePreview);
+  document.getElementById('pim-tz').addEventListener('change', _updateTimePreview);
   _updateTimePreview();
 
   document.getElementById('pim-submit').addEventListener('click', function() {
@@ -4061,11 +4089,21 @@ window.openPremiumInputModal = function(mode) {
       hourVal = _hhmmToSijinHour(adj.hh, adj.mm);
     }
 
-    // 음력 입력 시 경고 (실제 변환은 양력 환산 권장)
+    // 음력 → 양력 자동 변환 (lunar-javascript 사용, 사용자 의식 X)
     var birthForEngine = birthVal;
     if (calendarVal === 'lunar') {
-      var ok = confirm('음력 입력하셨습니다.\n\n' + _lunarWarning() + '\n\n양력으로 환산해서 입력하시려면 [취소]를 누르고 다시 입력하세요.\n그대로 진행하면 정확도가 떨어질 수 있습니다.\n\n계속 진행하시겠습니까?');
-      if (!ok) return;
+      var lp = birthVal.split('-');
+      var ly = parseInt(lp[0]), lm = parseInt(lp[1]), ld = parseInt(lp[2]);
+      var conv = _lunarToSolar(ly, lm, ld);
+      if (conv.ok) {
+        var sm = conv.month < 10 ? '0' + conv.month : conv.month;
+        var sd = conv.day < 10 ? '0' + conv.day : conv.day;
+        birthForEngine = conv.year + '-' + sm + '-' + sd;
+        console.log('[lunar→solar]', birthVal, '→', birthForEngine);
+      } else {
+        var fallback = confirm('음력→양력 자동 변환 실패. 양력으로 그대로 진행하면 결과가 부정확합니다.\n\n[확인]: 그대로 양력으로 진행 (부정확)\n[취소]: 양력 환산값을 직접 입력');
+        if (!fallback) return;
+      }
     }
 
     var newInfo = {
@@ -4229,6 +4267,8 @@ window.openPremiumInputModal = function(mode) {
 <script src="js/pdf-generator.js?v=20260506a"></script>
 <script src="js/help_chatbot.js?v=20260508a"></script>
 <script src="js/sinnyeon_enhanced.js?v=20260508c"></script>
+<!-- lunar-javascript: 음력 ↔ 양력 변환 + 진태양시 (한국 -32분 보정) — 정밀 사주 정확도 -->
+<script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.7.5/lunar.js" defer></script>
 <script>
 // Global scope (no IIFE)
 
