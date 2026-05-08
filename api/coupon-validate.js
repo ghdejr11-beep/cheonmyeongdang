@@ -591,29 +591,72 @@ module.exports = async (req, res) => {
           redeemed_at: used.redeemed_at,
         });
       }
-      // ─── mode='redeem_request': 이메일 받음 → magic-link 토큰 생성 → 메일 발송 (entitlement 부여 X) ───
+      // ─── mode='redeem_request': 이메일 받음 → 즉시 entitlement 부여 + 메일은 백업으로 비동기 시도 ───
+      // (5/8 변경: Gmail OAuth 7일 만료 함정 + 매직링크 UX 부담 → 즉시 활성화로 변경)
       if (mode === 'redeem_request') {
         if (!email) return res.status(400).json({ ok: false, error: 'email_required_for_redeem' });
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
           return res.status(400).json({ ok: false, error: 'invalid_email_format' });
         }
-        const secret = (process.env.INFLU_COUPON_SECRET || '').trim();
-        if (!secret) return res.status(500).json({ ok: false, error: 'server_misconfigured' });
-        const ts = Date.now();
-        const token = buildMagicLinkToken(email, code, ts, secret);
-        const magicUrl = `${MAGIC_LINK_BASE}&code=${encodeURIComponent(code)}&email=${encodeURIComponent(email)}&token=${token}&ts=${ts}`;
-        const sendResult = await sendMagicLinkEmail(email, magicUrl, code);
-        if (!sendResult.ok) {
+        // 즉시 entitlement 부여 (redeem_confirm 로직 인라인)
+        const validUntil = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+        let recordResult = { ok: false };
+        try { recordResult = await recordCouponUsage(code, email, 'influencer_30d', validUntil); } catch (e) { recordResult = { ok: false, error: String(e && e.message || e) }; }
+        if (!recordResult.ok) {
           return res.status(500).json({
-            ok: false, error: 'email_send_failed',
-            message: '이메일 발송 실패. 잠시 후 다시 시도해 주세요.',
-            debug: { reason: sendResult.reason },
+            ok: false, error: 'recording_failed',
+            message: '저장 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.',
+            debug: { status: recordResult.status, body: recordResult.body_excerpt, err: recordResult.error },
           });
         }
+        const orderId = `infl_${code}_${Date.now()}`;
+        const grantedSkus = ['saju_premium_9900', 'comprehensive_29900', 'comprehensive_15000', 'subscribe_monthly_29900', 'subscribe_basic_2900', 'sinnyeon_15000', 'no_ads_9900'];
+        const purchaseResults = [];
+        for (const skuItem of grantedSkus) {
+          try {
+            const r = await appendPurchase({
+              orderId: `${orderId}_${skuItem}`,
+              paymentKey: `coupon_${code}`,
+              customerEmail: email,
+              customerName: '[인플루언서 무료]',
+              skuId: skuItem,
+              skuName: `[인플루언서 30일 무료] ${skuItem}`,
+              amount: 0,
+              method: '쿠폰',
+              paid_at: new Date().toISOString(),
+              valid_until: validUntil,
+              followup_sent: true,
+              refunded: false,
+              source: 'influencer_coupon',
+              coupon_code: code,
+            });
+            purchaseResults.push({ sku: skuItem, ok: r.ok, reason: r.reason || null });
+          } catch (e) {
+            purchaseResults.push({ sku: skuItem, ok: false, reason: String(e && e.message || e) });
+          }
+        }
+        // 메일 발송은 백그라운드로 시도 (실패해도 권한은 이미 활성화됨 — 사용자 영향 없음)
+        try {
+          const secret = (process.env.INFLU_COUPON_SECRET || '').trim();
+          if (secret) {
+            const ts = Date.now();
+            const token = buildMagicLinkToken(email, code, ts, secret);
+            const magicUrl = `${MAGIC_LINK_BASE}&code=${encodeURIComponent(code)}&email=${encodeURIComponent(email)}&token=${token}&ts=${ts}`;
+            sendMagicLinkEmail(email, magicUrl, code).catch(() => {}); // fire-and-forget
+          }
+        } catch (e) { /* 백그라운드 실패 무시 */ }
+        const entitlement_ok = purchaseResults.every(p => p.ok);
         return res.status(200).json({
-          ok: true, sent: true, mode: 'redeem_request',
-          message: `${email}로 쿠폰 활성화 링크를 발송했습니다. 메일함을 확인해 주세요. (30분 유효)`,
-          method: sendResult.method,
+          ok: true, mode: 'redeemed', auto_redeemed: true,
+          coupon_type: 'influencer_30d',
+          description: '인플루언서 30일 무료 구독권',
+          granted_email: email,
+          granted_skus: grantedSkus,
+          valid_until: validUntil,
+          entitlement_ok,
+          message: entitlement_ok
+            ? `${email}로 30일 무료 구독이 즉시 활성화되었습니다. 페이지를 새로고침하시면 모든 정밀 풀이를 무료로 보실 수 있습니다.`
+            : '쿠폰은 적용되었으나 일부 권한 등록에 실패했습니다. 고객센터로 문의해주세요.',
         });
       }
 
@@ -645,7 +688,7 @@ module.exports = async (req, res) => {
           });
         }
         const orderId = `infl_${code}_${Date.now()}`;
-        const grantedSkus = ['saju_premium_9900', 'comprehensive_29900', 'subscribe_monthly_29900'];
+        const grantedSkus = ['saju_premium_9900', 'comprehensive_29900', 'comprehensive_15000', 'subscribe_monthly_29900', 'subscribe_basic_2900', 'sinnyeon_15000', 'no_ads_9900'];
         let purchaseResults = [];
         for (const skuItem of grantedSkus) {
           try {

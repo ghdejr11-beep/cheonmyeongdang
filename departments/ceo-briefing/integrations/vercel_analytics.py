@@ -36,7 +36,7 @@ import urllib.error
 from pathlib import Path
 
 
-SECRETS_PATH = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS_PATH = Path(r"D:\cheonmyeongdang\.secrets")
 VERCEL_API = "https://api.vercel.com"
 USER_AGENT = "KunStudio-Briefing/1.0 (+ghdejr11@gmail.com)"
 DEFAULT_PROJECTS = ["tax-n-benefit-api", "korlens", "cheonmyeongdang"]
@@ -314,7 +314,7 @@ def _stub_project():
 # 일별 저장 (sales-collection/data/vercel_daily.json)
 # ──────────────────────────────────────────────────────────
 DAILY_JSON = Path(
-    r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\sales-collection\data\vercel_daily.json"
+    r"D:\cheonmyeongdang\departments\sales-collection\data\vercel_daily.json"
 )
 
 

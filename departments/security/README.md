@@ -41,8 +41,8 @@ python departments/security/uptime_monitor.py --status   # 현재 다운/UP 상�
 PowerShell 관리자 권한으로:
 ```powershell
 $action = New-ScheduledTaskAction -Execute "python.exe" `
-  -Argument "C:\Users\hdh02\Desktop\cheonmyeongdang\departments\security\uptime_monitor.py --once" `
-  -WorkingDirectory "C:\Users\hdh02\Desktop\cheonmyeongdang\departments\security"
+  -Argument "D:\cheonmyeongdang\departments\security\uptime_monitor.py --once" `
+  -WorkingDirectory "D:\cheonmyeongdang\departments\security"
 $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) `
   -RepetitionInterval (New-TimeSpan -Minutes 5) `
   -RepetitionDuration ([TimeSpan]::FromDays(3650))
@@ -55,7 +55,7 @@ Register-ScheduledTask -TaskName "KunStudio_UptimeMonitor" `
 또는 schtasks (CMD):
 ```bash
 schtasks /Create /TN "KunStudio_UptimeMonitor" ^
-  /TR "python.exe C:\Users\hdh02\Desktop\cheonmyeongdang\departments\security\uptime_monitor.py --once" ^
+  /TR "python.exe D:\cheonmyeongdang\departments\security\uptime_monitor.py --once" ^
   /SC MINUTE /MO 5 /F
 ```
 

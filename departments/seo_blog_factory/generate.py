@@ -24,7 +24,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent
-CHEON_ROOT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+CHEON_ROOT = Path(r"D:\cheonmyeongdang")
 PUBLISHED = ROOT / "published.json"
 LOG = ROOT / "logs" / f"factory_{datetime.date.today()}.log"
 LOG.parent.mkdir(exist_ok=True)

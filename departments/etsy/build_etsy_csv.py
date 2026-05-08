@@ -2,7 +2,7 @@ r"""
 build_etsy_csv.py - Generate Etsy bulk-import CSV from KDP listings + Notion templates + Saju Premium.
 
 Sources:
-  - C:\Users\hdh02\Desktop\cheonmyeongdang\departments\ebook\projects\*\KDP_LISTING.md  (English-only)
+  - D:\cheonmyeongdang\departments\ebook\projects\*\KDP_LISTING.md  (English-only)
   - D:\notion_templates_2026_05_global_v2\*\README.md (+ tags.txt, features.txt, price_usd.txt)
   - D:\saju_premium_pdf\README.md
   - cover assets per listing
@@ -14,10 +14,10 @@ Output:
 """
 import os, re, csv, json, sys, glob
 
-ROOT_KDP   = r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\ebook\projects"
+ROOT_KDP   = r"D:\cheonmyeongdang\departments\ebook\projects"
 ROOT_NOTION= r"D:\notion_templates_2026_05_global_v2"
 SAJU_DIR   = r"D:\saju_premium_pdf"
-OUT_DIR    = r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\etsy"
+OUT_DIR    = r"D:\cheonmyeongdang\departments\etsy"
 IMG_OUT    = os.path.join(OUT_DIR, "images")
 os.makedirs(IMG_OUT, exist_ok=True)
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PG 메일 모니터링 — 박치만(갤럭시아), 한국결제네트웍스, 카카오페이, 빌게이트
+PG 메일 모니터링 — [REDACTED](갤럭시아), 한국결제네트웍스, 카카오페이, 빌게이트
 매시간 Gmail 새 메일 확인 후 텔레그램 알림
 """
 import os, sys, json, requests, base64
@@ -21,7 +21,7 @@ TG_TOKEN = SECRETS.get('TELEGRAM_BOT_TOKEN', '')
 TG_CHAT = SECRETS.get('TELEGRAM_CHAT_ID', '')
 
 PG_KEYWORDS = [
-    '갤럭시아', '박치만', '빌게이트', 'BillGate', 'galaxia',
+    '갤럭시아', '[REDACTED]', '빌게이트', 'BillGate', 'galaxia',
     '한국결제네트웍스', 'KCN', '카카오페이 가맹점', '카카오페이 심사',
     '포트원', 'PortOne', 'pgs@portone', '입점심사', 'CID 발급',
     'TossPayments', '토스페이먼츠 검토', '토스페이먼츠 라이브'

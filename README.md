@@ -103,7 +103,7 @@ An ancient Eastern wisdom, reimagined for today. Experience a personalized desti
 
 ### 설치 (1회)
 ```bat
-cd C:\Users\hdh02\Desktop\cheonmyeongdang\departments\cheonmyeongdang
+cd D:\cheonmyeongdang\departments\cheonmyeongdang
 register_daily_fortune.bat
 ```
 

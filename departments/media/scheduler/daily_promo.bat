@@ -6,7 +6,7 @@ REM   daily_promo.bat service  -> 요일별 서비스 홍보 (auto_promo.daily_p
 REM   daily_promo.bat kdp      -> KDP 책 3권 순환 홍보
 
 set PYEXE=python
-set BASE=C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\src
+set BASE=D:\cheonmyeongdang\departments\media\src
 set PYTHONIOENCODING=utf-8
 
 cd /d "%BASE%"

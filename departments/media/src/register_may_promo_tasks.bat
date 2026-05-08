@@ -12,8 +12,8 @@ REM ============================================================
 
 setlocal
 set PY=python
-set SRC=C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\src
-set LOG=C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\logs\may_promo_task.log
+set SRC=D:\cheonmyeongdang\departments\media\src
+set LOG=D:\cheonmyeongdang\departments\media\logs\may_promo_task.log
 
 echo ===== 기존 태스크 정리 (있으면 삭제) =====
 schtasks /Delete /TN "KunStudio_MayPromo_AM" /F 1>nul 2>nul

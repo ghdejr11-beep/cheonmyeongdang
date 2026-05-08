@@ -7,12 +7,12 @@ setlocal
 
 set TASKNAME=CheonmyeongdangDailyFortune
 set PY=C:\Users\hdh02\AppData\Local\Programs\Python\Python311\python.exe
-set SCRIPT=C:\Users\hdh02\Desktop\cheonmyeongdang\departments\cheonmyeongdang\daily_fortune_run.py
-set RUNNER=C:\Users\hdh02\Desktop\cheonmyeongdang\departments\cheonmyeongdang\run_daily_fortune.bat
+set SCRIPT=D:\cheonmyeongdang\departments\cheonmyeongdang\daily_fortune_run.py
+set RUNNER=D:\cheonmyeongdang\departments\cheonmyeongdang\run_daily_fortune.bat
 
 REM 1) 실행 래퍼 bat 생성 (schtasks 인수 이스케이프 회피)
 > "%RUNNER%" echo @echo off
->> "%RUNNER%" echo cd /d C:\Users\hdh02\Desktop\cheonmyeongdang\departments\cheonmyeongdang
+>> "%RUNNER%" echo cd /d D:\cheonmyeongdang\departments\cheonmyeongdang
 >> "%RUNNER%" echo "%PY%" "%SCRIPT%" 1^>^> logs\daily_fortune_runner.log 2^>^&1
 
 echo.

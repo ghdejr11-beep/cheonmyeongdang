@@ -302,7 +302,7 @@ def build_script(job: dict, env: dict, log) -> str:
 def synth_voice(text: str, out_mp3: Path, env: dict, log) -> Path:
     try:
         sys.path.insert(0, str(Path(
-            r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\youtube\shared"
+            r"D:\cheonmyeongdang\departments\media\youtube\shared"
         )))
         from tts import synthesize  # type: ignore
         synthesize(text, out_mp3, voice="en-US-AndrewNeural", rate="-5%")

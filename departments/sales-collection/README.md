@@ -26,7 +26,7 @@ pip install google-api-python-client google-auth-oauthlib google-auth-httplib2
 AdMob 콘솔 → 계정 → 게시자 ID (`pub-XXXXXXXXXXXXXXXX`)
 
 ### 4) `.secrets` 에 키 추가
-`C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets` 파일에 아래 두 줄 추가:
+`D:\cheonmyeongdang\.secrets` 파일에 아래 두 줄 추가:
 ```
 ADMOB_PUBLISHER_ID=pub-XXXXXXXXXXXXXXXX
 ADMOB_OAUTH_TOKEN_PATH=C:/Users/hdh02/Desktop/cheonmyeongdang/.secrets_admob_token.json
@@ -34,7 +34,7 @@ ADMOB_OAUTH_TOKEN_PATH=C:/Users/hdh02/Desktop/cheonmyeongdang/.secrets_admob_tok
 
 ### 5) 1회 인증 (브라우저 자동 오픈)
 ```bash
-cd C:\Users\hdh02\Desktop\cheonmyeongdang\departments\sales-collection
+cd D:\cheonmyeongdang\departments\sales-collection
 python admob_auth_setup.py
 ```
 → 브라우저에서 Google 로그인 + 권한 승인 → token.json 저장 완료.
@@ -48,7 +48,7 @@ python admob_collector.py
 ### 7) Windows 작업 스케줄러 등록 (매일 09:00)
 관리자 PowerShell에서:
 ```powershell
-schtasks /Create /SC DAILY /TN "KunStudio_AdMobDaily" /TR "python C:\Users\hdh02\Desktop\cheonmyeongdang\departments\sales-collection\admob_collector.py" /ST 09:00 /F
+schtasks /Create /SC DAILY /TN "KunStudio_AdMobDaily" /TR "python D:\cheonmyeongdang\departments\sales-collection\admob_collector.py" /ST 09:00 /F
 ```
 
 ## 데이터 위치
@@ -107,7 +107,7 @@ python unified_revenue.py --collect  # 모든 콜렉터 실행 + JSON 저장
 
 Windows 작업 스케줄러 (매일 08:30 — 브리핑 09:00 직전):
 ```powershell
-schtasks /Create /SC DAILY /TN "KunStudio_RevenueDaily" /TR "python C:\Users\hdh02\Desktop\cheonmyeongdang\departments\sales-collection\unified_revenue.py --collect" /ST 08:30 /F
+schtasks /Create /SC DAILY /TN "KunStudio_RevenueDaily" /TR "python D:\cheonmyeongdang\departments\sales-collection\unified_revenue.py --collect" /ST 08:30 /F
 ```
 
 ## 브리핑 v2 통합

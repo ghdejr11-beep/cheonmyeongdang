@@ -28,7 +28,7 @@
    - Tagline: `Authentic Korean Saju / Bazi reading API. 4 pillars, 5-element balance, two-person compatibility, monthly fortune, free-form AI Q&A.`
 
 2. **OpenAPI 업로드**: "Import from OpenAPI" 클릭 →
-   파일: `C:\Users\hdh02\Desktop\cheonmyeongdang\departments\rapidapi\saju_openapi.yaml`
+   파일: `D:\cheonmyeongdang\departments\rapidapi\saju_openapi.yaml`
    드래그앤드롭
 
 3. **Base URL 확인**: `https://cheonmyeongdang.vercel.app`

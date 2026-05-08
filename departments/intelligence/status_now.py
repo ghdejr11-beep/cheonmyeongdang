@@ -155,7 +155,7 @@ def external_waits() -> list[str]:
         "📨 KoDATA 회신 (5/7 정정 재발송 → 5/8~5/14 예상)",
         "💳 PG 가맹점 검토 (카카오페이 단건+정기, 1~3 영업일)",
         "💼 Kakao Ventures cold (5/7 12:16 발송 → D+5/D+10 자동 follow-up)",
-        "📧 카카오페이 jella.tto 답장 (5/7 사용자 send)",
+        "📧 카카오페이 [REDACTED_HANDLE] 답장 (5/7 사용자 send)",
         "📧 네이버페이 1:1 문의 답장 (5/7 사용자 send)",
     ]
 
@@ -200,7 +200,7 @@ def build_report() -> str:
     sch_fail = sum(1 for v in schs.values() if v not in ["0", "267009", "267011", "missing", "err", ""])
 
     # 5. RED 알림
-    red_q = "in:inbox newer_than:1d (from:@kodata.co.kr OR from:@kakaopaycorp.com OR from:@naverpay.com OR from:@k-startup.go.kr OR from:@kakao.vc OR from:@antler.co OR from:@kakaobrain.com)"
+    red_q = "in:inbox newer_than:1d (from:@kodata.co.kr OR from:@[REDACTED_DOMAIN] OR from:@naverpay.com OR from:@k-startup.go.kr OR from:@kakao.vc OR from:@antler.co OR from:@kakaobrain.com)"
     red_24h = gmail_count(token, red_q) if token else -1
 
     lines = []

@@ -77,7 +77,7 @@
 다운로드한 JSON 파일을 정확히 이 경로로 이동:
 
 ```
-C:\Users\hdh02\Desktop\cheonmyeongdang\departments\sales-collection\client_secret.json
+D:\cheonmyeongdang\departments\sales-collection\client_secret.json
 ```
 
 **파일명 정확히 `client_secret.json`** (스크립트가 이 이름으로 찾음).
@@ -89,7 +89,7 @@ C:\Users\hdh02\Desktop\cheonmyeongdang\departments\sales-collection\client_secre
 PowerShell:
 
 ```powershell
-cd C:\Users\hdh02\Desktop\cheonmyeongdang\departments\sales-collection
+cd D:\cheonmyeongdang\departments\sales-collection
 python admob_auth_setup.py
 ```
 
@@ -115,7 +115,7 @@ ADMOB_OAUTH_TOKEN_PATH=C:/Users/hdh02/Desktop/cheonmyeongdang/.secrets_admob_tok
 ## 7. 테스트 (30초)
 
 ```powershell
-cd C:\Users\hdh02\Desktop\cheonmyeongdang\departments\sales-collection
+cd D:\cheonmyeongdang\departments\sales-collection
 python admob_collector.py
 ```
 

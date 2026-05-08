@@ -8,7 +8,7 @@ REM 삭제: schtasks /Delete /TN KunStudio_InnerArchetypes_Shorts_AM /F
 
 setlocal
 set PY=C:\Users\hdh02\AppData\Local\Programs\Python\Python311\python.exe
-set SRC=C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\src
+set SRC=D:\cheonmyeongdang\departments\media\src
 
 echo === Inner Archetypes Shorts AM (매일 08:30, 3편) ===
 schtasks /Create /TN "KunStudio_InnerArchetypes_Shorts_AM" /SC DAILY /ST 08:30 ^

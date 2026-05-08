@@ -28,9 +28,9 @@ except Exception:
 BASE = Path(__file__).resolve().parent
 DEFAULT_CLIENT_SECRET = BASE / "client_secret.json"
 DEFAULT_TOKEN_OUT = Path(
-    r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets_admob_token.json"
+    r"D:\cheonmyeongdang\.secrets_admob_token.json"
 )
-SECRETS_PATH = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS_PATH = Path(r"D:\cheonmyeongdang\.secrets")
 ADMOB_API_SCOPES = [
     "https://www.googleapis.com/auth/admob.readonly",
     # monetization scope: 광고 단위 자동 생성/수정/삭제용 (2026-05-01 추가)

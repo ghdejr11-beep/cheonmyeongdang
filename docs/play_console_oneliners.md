@@ -38,7 +38,7 @@
 2. App bundles 섹션 → `Upload` 또는 드래그&드롭:
 
 ```
-C:\Users\hdh02\Desktop\cheonmyeongdang\android\app\build\outputs\bundle\release\app-release.aab
+D:\cheonmyeongdang\android\app\build\outputs\bundle\release\app-release.aab
 ```
 
 3. 업로드 완료 후 versionCode 8, versionName 1.3.1 표시 확인.

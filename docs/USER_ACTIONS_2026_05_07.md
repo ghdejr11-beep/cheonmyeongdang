@@ -3,7 +3,7 @@
 > **컴파일 일자**: 2026-05-07 13:00
 > **다음 갱신**: 사용자 액션 1건 완료시마다 자동 업데이트
 > **관련 가이드 폴더**: `docs/` (총 11개 oneliner)
-> **자동 완료 9건**: KoDATA 정정 재발송 / 카카오페이 jella.tto / 네이버페이 1:1 / Kakao Ventures cold email (12:16) / 카카오페이 단건+정기 PortOne / OAuth 영구 해결 / schtask 3개 path fix / inbox_monitor 5분 폴링 / secretary 2h 보고
+> **자동 완료 9건**: KoDATA 정정 재발송 / 카카오페이 [REDACTED_HANDLE] / 네이버페이 1:1 / Kakao Ventures cold email (12:16) / 카카오페이 단건+정기 PortOne / OAuth 영구 해결 / schtask 3개 path fix / inbox_monitor 5분 폴링 / secretary 2h 보고
 
 ---
 
@@ -44,7 +44,7 @@
 | # | 항목 | 시각 | 결과 |
 |---|---|---|---|
 | 1 | KoDATA 빈 양식 → 정정 재발송 | 새벽 자동 | commit `861f6f4` |
-| 2 | 카카오페이 jella.tto 답장 | 사용자 send | (파트너 응답 대기) |
+| 2 | 카카오페이 [REDACTED_HANDLE] 답장 | 사용자 send | (파트너 응답 대기) |
 | 3 | 네이버페이 1:1 문의 | 사용자 send | (응답 대기) |
 | 4 | Kakao Ventures cold email | 12:16 자동 | $300K~$1M 응답 대기 |
 | 5 | 카카오페이 단건+정기 PortOne 신청 | 자동 | 가맹점 검토중 1~3일 |
@@ -74,7 +74,7 @@
 2. **첫 단계**: `ghdejr11@gmail.com` 로그인 → 천명당 앱 → 좌측 `Release` → `Production` → `Create new release`
 3. **AAB 드래그&드롭**:
    ```
-   C:\Users\hdh02\Desktop\cheonmyeongdang\android\app\build\outputs\bundle\release\app-release.aab
+   D:\cheonmyeongdang\android\app\build\outputs\bundle\release\app-release.aab
    ```
 4. **출시 노트 4언어 paste**: `docs/play_console_oneliners.md` Step 3에 4개 언어 그대로 복붙
 5. **Rollout 20%** → `Start rollout to Production` 1클릭
@@ -149,7 +149,7 @@
 4. **OAuth Client 생성**: `Credentials` → `OAuth client ID` → Desktop app → JSON 다운로드
 5. **JSON 위치**:
    ```
-   C:\Users\hdh02\Desktop\cheonmyeongdang\departments\sales-collection\client_secret.json
+   D:\cheonmyeongdang\departments\sales-collection\client_secret.json
    ```
 6. **OAuth flow 실행**: PowerShell `python admob_auth_setup.py` → 브라우저 1클릭
 7. **완료 후 알림**: "AdMob OAuth 토큰 저장 완료, Publisher ID `pub-XXXXX`" → 클로드가 .secrets 등록 + 일별 매출 자동 통합
@@ -174,7 +174,7 @@
 1. **URL 클릭**: https://developer.paypal.com/dashboard/applications/live
 2. **첫 단계**: `hdh0203@naver.com` 로그인 → `cheonmyeongdang` LIVE App 선택
 3. **새 secret 발급**: `Generate new secret` → 새 값 복사
-4. **`.secrets` 업데이트**: `C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets` → `PAYPAL_CLIENT_SECRET=<새 값>`
+4. **`.secrets` 업데이트**: `D:\cheonmyeongdang\.secrets` → `PAYPAL_CLIENT_SECRET=<새 값>`
 5. **Vercel env 동기화**: 클로드에게 "PayPal secret rotate 완료, 새 값 paste:" 메시지 → 클로드가 vercel env update + redeploy 자동 처리
 
 ---

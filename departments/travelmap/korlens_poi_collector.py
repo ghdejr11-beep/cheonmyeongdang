@@ -16,7 +16,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-KORLENS_ENV = Path(r"C:\Users\hdh02\Desktop\korlens\.env.local")
+KORLENS_ENV = Path(r"D:\korlens\.env.local")
 CACHE_DIR = Path(r"D:\tmp\korlens_poi_cache")
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 LOG_DIR = Path(__file__).parent / "logs"

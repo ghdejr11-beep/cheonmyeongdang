@@ -12,7 +12,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-OUT = r'C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\applications\round2_2026_05\(작성완료)양식1_관광데이터공모전_제안서_쿤스튜디오_홍덕훈_2026-05-07.docx'
+OUT = r'D:\cheonmyeongdang\departments\tax\applications\round2_2026_05\(작성완료)양식1_관광데이터공모전_제안서_쿤스튜디오_홍덕훈_2026-05-07.docx'
 
 
 def main():

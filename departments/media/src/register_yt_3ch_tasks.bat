@@ -7,7 +7,7 @@ REM 삭제: schtasks /Delete /TN KunStudio_WhisperAtlas /F
 
 setlocal
 set PY=python
-set SRC=C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\src
+set SRC=D:\cheonmyeongdang\departments\media\src
 
 echo === Whisper Atlas (매일 02:00) ===
 schtasks /Create /TN "KunStudio_WhisperAtlas" /SC DAILY /ST 02:00 ^

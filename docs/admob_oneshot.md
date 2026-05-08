@@ -54,7 +54,7 @@ Write-Host "ADMOB OAuth saved. Client ID: $cid"
 ```
 
 ## Refresh Token 발급 (이후 1회만)
-- 이후 클로드 자동 처리: `python C:\Users\hdh02\Desktop\cheonmyeongdang\departments\automation\admob_oauth_init.py`
+- 이후 클로드 자동 처리: `python D:\cheonmyeongdang\departments\automation\admob_oauth_init.py`
 - 실행 시 브라우저 창 1개 열림 → 본인 계정 로그인 1번 → 종료
 - Refresh token 자동 .secrets 저장됨
 

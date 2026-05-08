@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 SECRET_JSON = Path(
-    r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets\play-service-account.json"
+    r"D:\cheonmyeongdang\.secrets\play-service-account.json"
 )
 
 

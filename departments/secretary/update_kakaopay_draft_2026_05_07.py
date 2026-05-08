@@ -1,4 +1,4 @@
-"""5/7 09:19 김지은 매니저 새 답장에 맞춘 강화된 draft 교체.
+"""5/7 09:19 [PG 담당자] 새 답장에 맞춘 강화된 draft 교체.
 
 기존 일반 draft (r-3810309845873979476) 삭제 → 구체적 답변 draft 신규 작성.
 
@@ -27,17 +27,17 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 TOKEN_SEND = os.path.join(ROOT, "token_send.json")
 TOKEN = os.path.join(ROOT, "token.json")
 
-# 5/7 09:19 김지은 매니저 새 답장
+# 5/7 09:19 [PG 담당자] 새 답장
 TARGET_MSG_ID = "19dffcde861edcae"
 THREAD_ID = "19df17c782d108f0"
-TO = "jella.tto@kakaopaycorp.com"
+TO = "[REDACTED_PG_CONTACT]"
 FROM = "ghdejr11@gmail.com"
 SUBJECT = "Re: [카카오페이] 심사관련 보완사항 안내_쿤스튜디오"
 
 # 기존 약한 draft (5/6 자동 작성)
 OLD_DRAFT_ID = "r-3810309845873979476"
 
-BODY = """안녕하세요. 김지은 매니저님.
+BODY = """안녕하세요. [PG 담당자].
 쿤스튜디오 홍덕훈입니다.
 
 5/7 안내 메일 확인했습니다.

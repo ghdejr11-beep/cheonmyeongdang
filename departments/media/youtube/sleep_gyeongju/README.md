@@ -21,7 +21,7 @@
 
 ## 실행
 ```bash
-cd C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\youtube\sleep_gyeongju
+cd D:\cheonmyeongdang\departments\media\youtube\sleep_gyeongju
 python generate_video.py
 # FAL로 이미지 20장 생성 (~1분)
 # 8시간 영상 output/sleep_gyeongju_8h.mp4 (렌더 20~40분)

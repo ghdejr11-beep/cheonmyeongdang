@@ -64,7 +64,7 @@ messages.append(f"""🔮 천명당팀 상세 보고 | {DATE}
 - 앱인토스: 사업자 검토 중
 - PayPal: confirm-payment.js 검증 라이브 (5/3)
 - Gumroad cross-link: success.html + KORLENS layout.tsx footer (5/5 ffaebbc commit)
-- 한국 PG 라이브키 (포트원): 갤럭시아 박치만 우편 회신 대기
+- 한국 PG 라이브키 (포트원): 갤럭시아 [REDACTED] 우편 회신 대기
 
 ⚠️ 문제점
 - 글로벌·국내 결제 라이브 14일 경과했으나 인입 0 → 트래픽 자체가 부족

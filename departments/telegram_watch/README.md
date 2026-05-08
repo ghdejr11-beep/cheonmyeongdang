@@ -21,7 +21,7 @@
 
 ## 등록
 ```cmd
-schtasks /Create /TN KunStudio_TelegramWatch_Hourly /TR "python C:\Users\hdh02\Desktop\cheonmyeongdang\departments\telegram_watch\monitor.py" /SC HOURLY /F
+schtasks /Create /TN KunStudio_TelegramWatch_Hourly /TR "python D:\cheonmyeongdang\departments\telegram_watch\monitor.py" /SC HOURLY /F
 ```
 
 ## 신규 패턴 추가

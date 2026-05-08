@@ -17,7 +17,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-DEPT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\youtube\sleep_gyeongju")
+DEPT = Path(r"D:\cheonmyeongdang\departments\media\youtube\sleep_gyeongju")
 # 대용량 산출물은 D: 로 (C: 공간 부족)
 STORAGE = Path(r"D:\cheonmyeongdang-outputs\youtube\sleep_gyeongju")
 ASSETS = STORAGE / "assets"
@@ -26,7 +26,7 @@ OUTPUT = STORAGE / "output"
 IMAGES.mkdir(parents=True, exist_ok=True)
 OUTPUT.mkdir(exist_ok=True)
 
-SECRETS = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS = Path(r"D:\cheonmyeongdang\.secrets")
 FFMPEG = r"C:\Users\hdh02\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.1-full_build\bin\ffmpeg.exe"
 
 PROMPTS = [

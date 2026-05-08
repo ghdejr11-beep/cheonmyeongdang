@@ -6,7 +6,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 ROOT = Path(__file__).resolve().parent
-CHEON = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+CHEON = Path(r"D:\cheonmyeongdang")
 TOKEN = ROOT / "token.json"
 
 

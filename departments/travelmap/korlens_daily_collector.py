@@ -10,8 +10,8 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-KORLENS_ENV = Path(r"C:\Users\hdh02\Desktop\korlens\.env.local")
-MOCK_PLACES = Path(r"C:\Users\hdh02\Desktop\korlens\lib\mock-places.ts")
+KORLENS_ENV = Path(r"D:\korlens\.env.local")
+MOCK_PLACES = Path(r"D:\korlens\lib\mock-places.ts")
 LOG_DIR = Path(__file__).parent / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 

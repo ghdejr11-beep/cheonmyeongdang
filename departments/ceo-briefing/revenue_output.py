@@ -12,7 +12,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-BASE = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\ceo-briefing")
+BASE = Path(r"D:\cheonmyeongdang\departments\ceo-briefing")
 sys.path.insert(0, str(BASE))
 
 from briefing_v2 import collect_all  # noqa: E402

@@ -23,8 +23,8 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent
-CHEON_ROOT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
-BLOG_TS = Path(r"C:\Users\hdh02\Desktop\korlens\lib\blog-posts.ts")
+CHEON_ROOT = Path(r"D:\cheonmyeongdang")
+BLOG_TS = Path(r"D:\korlens\lib\blog-posts.ts")
 PUBLISHED = ROOT / "devto_published.json"
 LOG = ROOT / "logs" / f"devto_{datetime.date.today()}.log"
 LOG.parent.mkdir(exist_ok=True, parents=True)

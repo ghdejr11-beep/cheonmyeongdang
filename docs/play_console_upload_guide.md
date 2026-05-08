@@ -44,7 +44,7 @@ python scripts/check_aab_validity.py
 2. 파일 선택 또는 드래그앤드롭:
 
 ```
-C:\Users\hdh02\Desktop\cheonmyeongdang\android\app\build\outputs\bundle\release\app-release.aab
+D:\cheonmyeongdang\android\app\build\outputs\bundle\release\app-release.aab
 ```
 
 3. 업로드 완료 후 versionCode 8, versionName 1.3.1 표시 확인.
@@ -127,7 +127,7 @@ v1.3.1 更新
 
 1. https://console.cloud.google.com → IAM → 서비스 계정 생성
 2. Play Console → 설정 → API 액세스 → 서비스 계정 연결, **Release Manager** 권한
-3. JSON 키 다운로드 → `C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets\play-service-account.json` 저장 (gitignore)
+3. JSON 키 다운로드 → `D:\cheonmyeongdang\.secrets\play-service-account.json` 저장 (gitignore)
 4. `pip install google-api-python-client google-auth`
 5. 다음 빌드부터 클로드가 직접 업로드 (`androidpublisher.edits` API)
 

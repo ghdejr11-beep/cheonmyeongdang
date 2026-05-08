@@ -8,7 +8,7 @@ REM 삭제: schtasks /Delete /TN KunStudio_TaxPromoDaily /F
 
 setlocal
 set PY=python
-set SRC=C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\src
+set SRC=D:\cheonmyeongdang\departments\media\src
 
 echo === KunStudio_TaxPromoDaily (매일 18:00, 5월 1일 시작) ===
 schtasks /Create /TN "KunStudio_TaxPromoDaily" /SC DAILY /ST 18:00 /SD 2026/05/01 /ED 2026/05/31 ^

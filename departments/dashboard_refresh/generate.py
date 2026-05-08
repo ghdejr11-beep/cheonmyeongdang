@@ -21,7 +21,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent
-CHEON = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+CHEON = Path(r"D:\cheonmyeongdang")
 OUT = Path(r"C:\Users\hdh02\Desktop\kunstudio_dashboard.html")
 LOG = ROOT / "logs" / f"refresh_{datetime.date.today()}.log"
 LOG.parent.mkdir(exist_ok=True)

@@ -27,7 +27,7 @@ STORAGE.mkdir(parents=True, exist_ok=True)
 (STORAGE / "output").mkdir(exist_ok=True)
 (STORAGE / "assets").mkdir(exist_ok=True)
 
-SECRETS = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS = Path(r"D:\cheonmyeongdang\.secrets")
 FFMPEG = r"C:\Users\hdh02\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.1-full_build\bin\ffmpeg.exe"
 
 # 동적 토픽 (topic_refresh.py가 매주 갱신). 파일 없으면 내장 기본값.

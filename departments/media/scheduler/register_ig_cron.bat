@@ -4,7 +4,7 @@ REM Instagram due-post checker: runs every hour
 REM Registers a Windows Task Scheduler entry
 
 set TASKNAME=MetaIGBulkScheduler
-set SCRIPT=C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\scheduler\meta_bulk_scheduler.py
+set SCRIPT=D:\cheonmyeongdang\departments\media\scheduler\meta_bulk_scheduler.py
 set PYEXE=python
 
 schtasks /Create /TN "%TASKNAME%" /TR "\"%PYEXE%\" \"%SCRIPT%\" --ig-run-due" /SC HOURLY /MO 1 /F

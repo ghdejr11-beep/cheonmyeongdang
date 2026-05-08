@@ -46,3 +46,21 @@
 [11:10:01] start: 1718 already collected today
 [11:10:36] [OK] +100 new K-culture posts. total today: 1818
 [11:10:36] [skeleton] 100 posts → C:\Users\hdh02\Desktop\cheonmyeongdang\departments\bluesky_feed\data\skeleton.json
+[12:29:26] [ERR] BLUESKY_HANDLE/APP_PASSWORD missing in .secrets
+[12:29:26] [skeleton] 100 posts → D:\cheonmyeongdang\departments\bluesky_feed\data\skeleton.json
+[12:31:36] [auth] logged in as kunstudio.bsky.social
+[12:31:36] start: 1816 already collected today
+[12:32:10] [OK] +125 new K-culture posts. total today: 1941
+[12:32:10] [skeleton] 100 posts → D:\cheonmyeongdang\departments\bluesky_feed\data\skeleton.json
+[12:32:57] [auth] logged in as kunstudio.bsky.social
+[12:32:57] start: 1939 already collected today
+[12:33:32] [OK] +6 new K-culture posts. total today: 1945
+[12:33:32] [skeleton] 100 posts → D:\cheonmyeongdang\departments\bluesky_feed\data\skeleton.json
+[13:10:01] [auth] logged in as kunstudio.bsky.social
+[13:10:01] start: 1943 already collected today
+[13:10:38] [OK] +82 new K-culture posts. total today: 2025
+[13:10:38] [skeleton] 100 posts → D:\cheonmyeongdang\departments\bluesky_feed\data\skeleton.json
+[14:10:01] [auth] logged in as kunstudio.bsky.social
+[14:10:01] start: 2023 already collected today
+[14:10:37] [OK] +106 new K-culture posts. total today: 2129
+[14:10:37] [skeleton] 100 posts → D:\cheonmyeongdang\departments\bluesky_feed\data\skeleton.json

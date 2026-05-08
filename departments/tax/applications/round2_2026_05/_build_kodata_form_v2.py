@@ -22,7 +22,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 from docx import Document
 from docx.shared import RGBColor, Pt
 
-ROUND2 = r'C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\applications\round2_2026_05'
+ROUND2 = r'D:\cheonmyeongdang\departments\tax\applications\round2_2026_05'
 SRC = os.path.join(ROUND2, '(작성완료)한국관광공사_기업정보_등록의뢰서_쿤스튜디오_2026-05-07.docx')
 DST = os.path.join(ROUND2, '(작성완료_v2)한국관광공사_기업정보_등록의뢰서_쿤스튜디오_2026-05-07.docx')
 

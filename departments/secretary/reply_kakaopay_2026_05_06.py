@@ -1,4 +1,4 @@
-"""KakaoPay 김지은 매니저 답장 발송 (5/6 09:10 메일).
+"""KakaoPay [PG 담당자] 답장 발송 (5/6 09:10 메일).
 
 요청: 결제경로 작성가이드.pptx 양식 작성하여 전체 답장
 현재 상태: KCN 라이브 키 발급 대기 중 → PG 결제창 캡쳐 미가능
@@ -17,13 +17,13 @@ TOKEN_SEND = os.path.join(ROOT, "token_send.json")
 TOKEN = os.path.join(ROOT, "token.json")
 
 # Reply-to threading
-THREAD_MSG_ID = "19dfa9fab66e17f9"  # 5/6 09:10 김지은 답장
+THREAD_MSG_ID = "19dfa9fab66e17f9"  # 5/6 09:10 [REDACTED] 답장
 ORIG_MSG_ID_HEADER = "<CAG2dC1frneSs2EHzYPwEXuAqpP128+e4k7=o9cK8+saJ5EmeTQ@mail.gmail.com>"
-TO = "jella.tto@kakaopaycorp.com"
+TO = "[REDACTED_PG_CONTACT]"
 FROM = "ghdejr11@gmail.com"
 SUBJECT = "Re: [카카오페이] 심사관련 보완사항 안내_쿤스튜디오"
 
-BODY = """안녕하세요. 김지은 매니저님.
+BODY = """안녕하세요. [PG 담당자].
 쿤스튜디오 홍덕훈입니다.
 
 [카카오페이] 심사관련 결제경로 작성가이드.pptx 잘 수령했습니다.

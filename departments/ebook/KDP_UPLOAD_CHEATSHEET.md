@@ -293,7 +293,7 @@
 
 # 📁 PDF 파일 경로
 모든 파일은 여기 아래:
-C:\Users\hdh02\Desktop\cheonmyeongdang\departments\ebook\projects\
+D:\cheonmyeongdang\departments\ebook\projects\
 
 각 폴더에:
 - *_Interior.pdf = 내지 (Upload manuscript에 올릴 파일)

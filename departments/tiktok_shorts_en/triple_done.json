@@ -65,6 +65,28 @@
           "stdout": "[upload] 2026-05-07_korean-10-step-skincare-routine-for-beginners.mp4 (1MB)\n[OK] video_id=2Hhp2SQXwMc\n  url: https://youtu.be/2Hhp2SQXwMc\n  containsSyntheticMedia: True\n"
         }
       }
+    },
+    {
+      "kw": "korean kimchi recipe authentic homemade",
+      "file": "2026-05-07_korean-kimchi-recipe-authentic-homemade.mp4",
+      "title": "Authentic Korean Kimchi Recipe: Homemade Traditional Guide",
+      "posted_at": "2026-05-08T13:30:26.993125",
+      "results": {
+        "kunstudio_multi": [
+          true,
+          {
+            "success": true,
+            "message": "Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=d6f3c7089a924ac9af3b100553a572de. Docs: https://docs.upload-post.com/api/upload-status",
+            "request_id": "d6f3c7089a924ac9af3b100553a572de",
+            "total_platforms": 4,
+            "job_id": "eeef66a036af4ba5afb495456a9dac40"
+          }
+        ],
+        "yt_shorts": {
+          "ok": true,
+          "stdout": "[upload] 2026-05-07_korean-kimchi-recipe-authentic-homemade.mp4 (1MB)\n[OK] video_id=nFZ_3E5gEUc\n  url: https://youtu.be/nFZ_3E5gEUc\n  containsSyntheticMedia: True\n"
+        }
+      }
     }
   ]
 }

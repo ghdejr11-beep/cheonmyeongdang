@@ -79,7 +79,7 @@ def search_bluesky(keyword, jwt, limit=25):
 
 def load_secrets():
     env = {}
-    p = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+    p = Path(r"D:\cheonmyeongdang\.secrets")
     if p.exists():
         for line in p.read_text(encoding="utf-8").splitlines():
             if "=" in line and not line.strip().startswith("#"):

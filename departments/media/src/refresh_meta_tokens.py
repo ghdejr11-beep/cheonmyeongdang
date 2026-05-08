@@ -33,7 +33,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-SECRETS = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS = Path(r"D:\cheonmyeongdang\.secrets")
 LOG = Path(__file__).resolve().parent / "logs" / "refresh_meta_tokens.log"
 LOG.parent.mkdir(parents=True, exist_ok=True)
 

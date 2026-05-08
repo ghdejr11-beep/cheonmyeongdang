@@ -53,7 +53,7 @@ OLD_DRAFT_ID = 'r-346896956585314531'  # 5/7 05:30 자동 발송 직전 draft
 
 SUBJECT = 'Re: 기업정보등록-한국관광공사-쿤스튜디오 (정정 양식 + 사업자등록증 이미지)'
 
-ROUND2_DIR = r'C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\applications\round2_2026_05'
+ROUND2_DIR = r'D:\cheonmyeongdang\departments\tax\applications\round2_2026_05'
 ATTACHMENTS = [
     os.path.join(ROUND2_DIR, '(작성완료_v2)한국관광공사_기업정보_등록의뢰서_쿤스튜디오_2026-05-07.docx'),
     os.path.join(ROUND2_DIR, '사업자등록증_쿤스튜디오_2026-05-07.jpg'),

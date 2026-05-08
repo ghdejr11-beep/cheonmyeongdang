@@ -27,7 +27,7 @@ STORAGE.mkdir(parents=True, exist_ok=True)
 (STORAGE / "output").mkdir(exist_ok=True)
 (STORAGE / "assets").mkdir(exist_ok=True)
 
-SECRETS = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS = Path(r"D:\cheonmyeongdang\.secrets")
 FFMPEG = r"C:\Users\hdh02\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.1-full_build\bin\ffmpeg.exe"
 
 TOPICS = [

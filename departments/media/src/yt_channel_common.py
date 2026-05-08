@@ -35,7 +35,7 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8")
 
 # ───────── 표준 경로 ─────────
-PROJECT_ROOT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+PROJECT_ROOT = Path(r"D:\cheonmyeongdang")
 SECRETS_PATH = PROJECT_ROOT / ".secrets"
 SRC_DIR = PROJECT_ROOT / "departments" / "media" / "src"
 LOG_DIR = PROJECT_ROOT / "departments" / "media" / "logs"

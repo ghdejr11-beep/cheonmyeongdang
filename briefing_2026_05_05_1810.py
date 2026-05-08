@@ -66,7 +66,7 @@ m2 = f"""🔮 천명당팀 상세 보고 | {DATE}
 - Play Console: 비공개 테스트 검토중 (v1.3, 4/10 게시)
 - 카카오 사주봇: 실행중 (월렛 908652)
 - 토스 인앱결제: 라이브키 통과 + webhook URL 등록 대기
-- 갤럭시아: 박치만 회신 우편 5건 발송 대기 (5/4 평일)
+- 갤럭시아: [REDACTED] 회신 우편 5건 발송 대기 (5/4 평일)
 - PayPal: 5/3 100% 라이브 ✅ confirm-payment.js 검증
 - success.html cross-link: Saju Diary $7.99 + Tax Pack 2건 노출 (5/5 git ffaebbc)
 - D+30 winback 메일 시퀀스 + 환불 자동응답 cron 가동중

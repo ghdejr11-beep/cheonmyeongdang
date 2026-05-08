@@ -25,7 +25,7 @@ FROM_NAME = '쿤스튜디오 홍덕훈'
 TO_EMAIL = 'find@kodata.co.kr'
 SUBJECT = '기업정보등록-한국관광공사-쿤스튜디오'
 
-ROUND2 = r'C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\applications\round2_2026_05'
+ROUND2 = r'D:\cheonmyeongdang\departments\tax\applications\round2_2026_05'
 DOWNLOADS = r'C:\Users\hdh02\Downloads'
 
 ATTACHMENTS = [

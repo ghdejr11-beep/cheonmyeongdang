@@ -2,7 +2,7 @@
 """CEO 브리핑 - 2026-05-05 15:10 KST (Tuesday)"""
 import os, json, time, urllib.request, urllib.parse
 
-for line in open(r'C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets', encoding='utf-8'):
+for line in open(r'D:\cheonmyeongdang\.secrets', encoding='utf-8'):
     line = line.strip()
     if '=' in line and not line.startswith('#'):
         k, v = line.split('=', 1)

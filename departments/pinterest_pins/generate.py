@@ -13,7 +13,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent
-CHEON_ROOT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+CHEON_ROOT = Path(r"D:\cheonmyeongdang")
 SEO_PUB = CHEON_ROOT / "departments" / "seo_blog_factory" / "published.json"
 OUT = ROOT / "output"
 OUT.mkdir(exist_ok=True)

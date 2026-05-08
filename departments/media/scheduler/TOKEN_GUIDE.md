@@ -108,7 +108,7 @@ https://developers.facebook.com/tools/debug/accesstoken 에서 토큰 붙여넣�
 ## 실행 순서
 
 ```bash
-cd C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\scheduler
+cd D:\cheonmyeongdang\departments\media\scheduler
 
 # 1. 큐 빌드 (tax 콘텐츠 30개 → 10일치, 하루 3건)
 python meta_bulk_scheduler.py --build --start-date 2026-04-18

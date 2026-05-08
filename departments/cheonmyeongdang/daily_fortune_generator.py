@@ -17,7 +17,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-ROOT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+ROOT = Path(r"D:\cheonmyeongdang")
 YT_SHARED = ROOT / "departments" / "media" / "youtube" / "shared"
 sys.path.insert(0, str(YT_SHARED))
 from claude_script import generate as claude_gen

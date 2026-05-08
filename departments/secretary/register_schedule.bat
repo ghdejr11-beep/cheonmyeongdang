@@ -2,8 +2,8 @@
 REM 비서부 자동 스케줄 등록
 REM 9AM, 12PM, 3PM, 6PM, 9PM, 12AM — CEO 브리핑과 동일 시간대 총 6회
 
-set SCRIPT_PATH=C:\Users\hdh02\Desktop\cheonmyeongdang\departments\secretary\secretary.py
-set EDITOR_PATH=C:\Users\hdh02\Desktop\cheonmyeongdang\departments\secretary\editor.py
+set SCRIPT_PATH=D:\cheonmyeongdang\departments\secretary\secretary.py
+set EDITOR_PATH=D:\cheonmyeongdang\departments\secretary\editor.py
 set PYTHON_PATH=C:\Users\hdh02\AppData\Local\Programs\Python\Python311\python.exe
 
 echo 기존 비서부 스케줄 삭제 중...

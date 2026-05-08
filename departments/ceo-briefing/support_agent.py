@@ -94,7 +94,7 @@ def process_ticket(ticket):
             # 비동기 spawn — 응답 안 기다림 (긴 작업)
             subprocess.Popen(
                 [claude_bin, '-p', prompt],
-                cwd=r'C:\Users\hdh02\Desktop\cheonmyeongdang',
+                cwd=r'D:\cheonmyeongdang',
                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                 creationflags=getattr(subprocess, 'CREATE_NEW_PROCESS_GROUP', 0),
             )

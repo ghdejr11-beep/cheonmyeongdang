@@ -98,7 +98,7 @@ def main():
                 "--description", description_short,
             ],
             capture_output=True, encoding="utf-8", errors="ignore", timeout=300,
-            env={**os.environ, "KS_YT_TOKEN_PATH": r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets_yt_upload_kwisdom.json"},
+            env={**os.environ, "KS_YT_TOKEN_PATH": r"D:\cheonmyeongdang\.secrets_yt_upload_kwisdom.json"},
         )
         ok = "[OK] video_id=" in (proc.stdout or "")
         log(f"  yt_shorts: ok={ok}")

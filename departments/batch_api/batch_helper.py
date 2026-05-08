@@ -23,7 +23,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent
-CHEON = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+CHEON = Path(r"D:\cheonmyeongdang")
 LOG_DIR = ROOT / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 

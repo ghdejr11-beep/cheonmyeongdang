@@ -16,7 +16,7 @@ from googleapiclient.discovery import build
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 TOKEN_PATH = os.path.join(SCRIPT_DIR, 'token.json')
-ROUND2_DIR = r'C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\applications\round2_2026_05'
+ROUND2_DIR = r'D:\cheonmyeongdang\departments\tax\applications\round2_2026_05'
 
 
 def load_service():

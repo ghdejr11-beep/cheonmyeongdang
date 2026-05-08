@@ -17,7 +17,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent
-CHEON_ROOT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+CHEON_ROOT = Path(r"D:\cheonmyeongdang")
 BLOG_DIR = CHEON_ROOT / "blog" / "en"
 PUBLISHED = ROOT / "medium_published.json"
 LOG = ROOT / "logs" / f"medium_{datetime.date.today()}.log"

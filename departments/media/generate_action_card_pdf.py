@@ -14,7 +14,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 import qrcode
 
-ROOT = r"C:\Users\hdh02\Desktop\cheonmyeongdang"
+ROOT = r"D:\cheonmyeongdang"
 OUT = os.path.join(ROOT, "docs", "user_actions_2026_05_07_print.pdf")
 
 # Korean font

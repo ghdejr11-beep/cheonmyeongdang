@@ -11,7 +11,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent
-CHEON = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+CHEON = Path(r"D:\cheonmyeongdang")
 NAMES_DIR = CHEON / "names"
 NAMES_DIR.mkdir(exist_ok=True)
 LOG = ROOT / "logs" / f"names_{datetime.date.today()}.log"

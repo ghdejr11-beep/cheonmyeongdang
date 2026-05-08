@@ -32,7 +32,7 @@ BCC_EMAIL = 'ghdejr11@gmail.com'
 
 SUBJECT = '[Seed 제안] 천명당 - Co-Star $25M 미국만, 정통 한국 사주 4언어 글로벌 (Day 36 라이브)'
 
-PDF_PATH = r'C:\Users\hdh02\Desktop\cheonmyeongdang\departments\fundraising\kakao_ventures_1pager.pdf'
+PDF_PATH = r'D:\cheonmyeongdang\departments\fundraising\kakao_ventures_1pager.pdf'
 
 BODY = """안녕하세요, 카카오벤처스 팀.
 

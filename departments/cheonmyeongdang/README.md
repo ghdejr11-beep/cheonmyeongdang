@@ -1,7 +1,7 @@
 # 🔮 cheonmyeongdang 부서
 
 ## 목적
-천명당 웹(`C:\Users\hdh02\Desktop\cheonmyeongdang\index.html`) + 안드로이드 앱(`android/`) 유지보수, 꿈해몽·사주·관상·손금 콘텐츠 업데이트, 릴리즈 관리.
+천명당 웹(`D:\cheonmyeongdang\index.html`) + 안드로이드 앱(`android/`) 유지보수, 꿈해몽·사주·관상·손금 콘텐츠 업데이트, 릴리즈 관리.
 
 ## 담당 프로젝트
 - 천명당 웹 (ghdejr11-beep.github.io/cheonmyeongdang/)

@@ -195,7 +195,7 @@ module.exports = async (req, res) => {
           const skuSet = new Set((result.records || []).map(r => r.skuId).filter(Boolean));
           const influCoupons = await listInfluencerCouponsByEmail(email);
           if (influCoupons.length > 0) {
-            ['saju_premium_9900', 'comprehensive_29900', 'subscribe_monthly_29900'].forEach(s => skuSet.add(s));
+            ['saju_premium_9900', 'comprehensive_29900', 'comprehensive_15000', 'subscribe_monthly_29900', 'subscribe_basic_2900', 'sinnyeon_15000', 'no_ads_9900'].forEach(s => skuSet.add(s));
           }
           isPremium = skuSet.has('saju_premium_9900') ||
                       skuSet.has('comprehensive_29900') ||

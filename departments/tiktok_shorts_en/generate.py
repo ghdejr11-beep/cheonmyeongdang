@@ -22,7 +22,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent
-CHEON_ROOT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+CHEON_ROOT = Path(r"D:\cheonmyeongdang")
 SEO_PUB = CHEON_ROOT / "departments" / "seo_blog_factory" / "published.json"
 OUT_DIR = Path(r"D:\kunstudio-outputs\tiktok_en")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -33,7 +33,7 @@ QUEUE = ROOT / "queue.json"
 # 기본 BGM (Sori Atlas Suno 음원이 있으면 사용, 없으면 무음)
 BGM_CANDIDATES = [
     Path(r"D:\kunstudio-outputs\audiobooks\korean_coffee_culture.mp3"),
-    Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\server\public\assets\cm_jingle_v1.mp3"),
+    Path(r"D:\cheonmyeongdang\departments\tax\server\public\assets\cm_jingle_v1.mp3"),
 ]
 
 

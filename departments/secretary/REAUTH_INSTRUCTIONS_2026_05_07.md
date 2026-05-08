@@ -9,7 +9,7 @@
 일어나서 1회만 실행:
 
 ```bash
-cd C:\Users\hdh02\Desktop\cheonmyeongdang
+cd D:\cheonmyeongdang
 python departments/secretary/reauth_2026_05_07.py
 ```
 

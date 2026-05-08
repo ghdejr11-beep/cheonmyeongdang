@@ -18,8 +18,8 @@ from PIL import Image
 import io
 
 INPUT_PDF = r'C:\Users\hdh02\Downloads\사업자등록증명서.pdf'
-INPUT_PDF_FALLBACK = r'C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\applications\gyeongbuk_doyak\docs\01_사업자등록증명.pdf'
-OUTPUT_DIR = r'C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\applications\round2_2026_05'
+INPUT_PDF_FALLBACK = r'D:\cheonmyeongdang\departments\tax\applications\gyeongbuk_doyak\docs\01_사업자등록증명.pdf'
+OUTPUT_DIR = r'D:\cheonmyeongdang\departments\tax\applications\round2_2026_05'
 OUTPUT_JPG = os.path.join(OUTPUT_DIR, '사업자등록증_쿤스튜디오_2026-05-07.jpg')
 DPI = 300
 

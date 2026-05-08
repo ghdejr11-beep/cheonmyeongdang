@@ -45,7 +45,7 @@ CC_EMAIL = 'ghdejr11@gmail.com'
 THREAD_ID = '19df70fe428c7e65'  # KoDATA 회신 스레드
 SUBJECT = 'Re: 기업정보등록-한국관광공사-쿤스튜디오 (정정 양식 첨부)'
 
-ROUND2_DIR = r'C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\applications\round2_2026_05'
+ROUND2_DIR = r'D:\cheonmyeongdang\departments\tax\applications\round2_2026_05'
 DOWNLOADS = r'C:\Users\hdh02\Downloads'
 
 ATTACHMENTS = [

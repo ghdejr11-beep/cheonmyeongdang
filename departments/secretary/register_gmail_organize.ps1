@@ -3,7 +3,7 @@
 # 매일 09:30 실행 -> python gmail_organizer.py --all
 
 $TaskName  = "KunStudio_GmailOrganize"
-$ScriptDir = "C:\Users\hdh02\Desktop\cheonmyeongdang\departments\secretary"
+$ScriptDir = "D:\cheonmyeongdang\departments\secretary"
 $Python    = "C:\Users\hdh02\AppData\Local\Programs\Python\Python311\python.exe"
 $LogFile   = Join-Path $ScriptDir "logs\gmail_organize.log"
 

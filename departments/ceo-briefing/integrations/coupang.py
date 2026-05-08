@@ -9,7 +9,7 @@ from pathlib import Path
 
 def _secrets():
     env = {}
-    for line in Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets").read_text(encoding="utf-8").splitlines():
+    for line in Path(r"D:\cheonmyeongdang\.secrets").read_text(encoding="utf-8").splitlines():
         if "=" in line and not line.strip().startswith("#"):
             k, v = line.split("=", 1)
             env[k.strip()] = v.strip()

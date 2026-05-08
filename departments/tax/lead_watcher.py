@@ -24,7 +24,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-BASE = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax")
+BASE = Path(r"D:\cheonmyeongdang\departments\tax")
 OUT_DIR = BASE / "output"
 LOG_DIR = BASE / "logs"
 OUT_DIR.mkdir(exist_ok=True)
@@ -33,7 +33,7 @@ LOG_DIR.mkdir(exist_ok=True)
 SEEN_PATH = OUT_DIR / "seen_ids.json"
 TODAY = datetime.date.today().isoformat()
 
-SECRETS = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS = Path(r"D:\cheonmyeongdang\.secrets")
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) TaxLeadWatcher/1.0"
 

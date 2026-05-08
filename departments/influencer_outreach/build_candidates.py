@@ -153,7 +153,7 @@ def build():
 
 if __name__ == "__main__":
     out = build()
-    target = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\influencer_outreach\candidates_2026_05_06.json")
+    target = Path(r"D:\cheonmyeongdang\departments\influencer_outreach\candidates_2026_05_06.json")
     verified = [c for c in out if not c.get("is_research_slot")]
     slots = [c for c in out if c.get("is_research_slot")]
     payload = {

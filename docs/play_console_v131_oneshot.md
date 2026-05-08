@@ -1,6 +1,6 @@
 # Play Console v1.3.1 AAB 업로드 — 5분 → 3분 원샷 가이드
 
-**파일**: `C:\Users\hdh02\Desktop\cheonmyeongdang\android\app\build\outputs\bundle\release\app-release.aab` (12.36 MB, 2026-05-07 13:05 빌드 완료)
+**파일**: `D:\cheonmyeongdang\android\app\build\outputs\bundle\release\app-release.aab` (12.36 MB, 2026-05-07 13:05 빌드 완료)
 
 ## 1클릭 직링크
 - 프로덕션 출시 페이지: https://play.google.com/console/u/0/developers/9082303253289895857/app-list

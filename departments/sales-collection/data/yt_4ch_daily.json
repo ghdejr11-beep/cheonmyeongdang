@@ -2835,15 +2835,15 @@
           "title": "K-Wisdom",
           "channel_id": "UCjWwRPygY08bYH_vgaDV7ww",
           "subscriber_count": 0,
-          "view_count_total": 371,
-          "video_count": 8,
-          "yesterday_views_diff": 104,
+          "view_count_total": 385,
+          "video_count": 9,
+          "yesterday_views_diff": 118,
           "yesterday_subs_diff": 0,
           "top_videos": [
             {
               "title": "Learn Korean Alphabet Hangul in 30 Days: Complete Guide #shorts",
               "video_id": "vSC-kmnDIYU",
-              "view_count": 230,
+              "view_count": 233,
               "like_count": 2,
               "comment_count": 0
             },
@@ -2857,14 +2857,14 @@
             {
               "title": "Korean 10 Step Skincare Routine for Beginners Guide #shorts",
               "video_id": "2Hhp2SQXwMc",
-              "view_count": 36,
+              "view_count": 38,
               "like_count": 0,
               "comment_count": 0
             },
             {
               "title": "K-Pop Group Leader DNA — What Saju Shows About Why Leaders Lead",
               "video_id": "dMmIdCPmJrI",
-              "view_count": 30,
+              "view_count": 31,
               "like_count": 1,
               "comment_count": 0
             },
@@ -2876,11 +2876,11 @@
               "comment_count": 0
             }
           ],
-          "revenue_estimate_usd": 0.12,
+          "revenue_estimate_usd": 0.14,
           "revenue_source": "cpm_estimate($1.2/1k)",
           "revenue_low_high": [
-            0.06,
-            0.19
+            0.07,
+            0.21
           ],
           "analytics_full": {
             "status": "ypp_not_joined",
@@ -2892,9 +2892,9 @@
           "title": "Wealth Blueprint",
           "channel_id": "UC7G9_Y47IMQUaqKOBSg33TA",
           "subscriber_count": 0,
-          "view_count_total": 821,
+          "view_count_total": 933,
           "video_count": 22,
-          "yesterday_views_diff": 13,
+          "yesterday_views_diff": 125,
           "yesterday_subs_diff": 0,
           "top_videos": [
             {
@@ -2933,11 +2933,11 @@
               "comment_count": 0
             }
           ],
-          "revenue_estimate_usd": 0.07,
+          "revenue_estimate_usd": 0.62,
           "revenue_source": "cpm_estimate($5.0/1k)",
           "revenue_low_high": [
-            0.03,
-            0.1
+            0.31,
+            0.94
           ],
           "analytics_full": {
             "status": "ypp_not_joined",
@@ -2949,15 +2949,29 @@
           "title": "Inner Archetypes",
           "channel_id": "UCmAMBy0V6TXR_R5qoSrbbtQ",
           "subscriber_count": 2,
-          "view_count_total": 1434,
+          "view_count_total": 1438,
           "video_count": 55,
-          "yesterday_views_diff": 150,
+          "yesterday_views_diff": 154,
           "yesterday_subs_diff": 0,
           "top_videos": [
+            {
+              "title": "ENTJ Commander — careers that actually fit #Shorts",
+              "video_id": "CA9iQxNmUrg",
+              "view_count": 106,
+              "like_count": 0,
+              "comment_count": 0
+            },
             {
               "title": "ISTJ Logistician vs ESTP Entrepreneur — who wins at execution? #Shorts",
               "video_id": "7Ry30T-k5N8",
               "view_count": 92,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "title": "ENFJ Protagonist vs ISTP Virtuoso — who wins at social energy? #Shorts",
+              "video_id": "vxI5J7FV8ow",
+              "view_count": 91,
               "like_count": 0,
               "comment_count": 0
             },
@@ -2974,27 +2988,13 @@
               "view_count": 52,
               "like_count": 0,
               "comment_count": 0
-            },
-            {
-              "title": "ENFJ Protagonist and money — the pattern you keep repeating #Shorts",
-              "video_id": "0JdyCsmVLpA",
-              "view_count": 49,
-              "like_count": 0,
-              "comment_count": 0
-            },
-            {
-              "title": "ISTP Virtuoso — the shadow no one warns you about #Shorts",
-              "video_id": "4mtP-R-tlvs",
-              "view_count": 44,
-              "like_count": 0,
-              "comment_count": 0
             }
           ],
-          "revenue_estimate_usd": 0.3,
+          "revenue_estimate_usd": 0.31,
           "revenue_source": "cpm_estimate($2.0/1k)",
           "revenue_low_high": [
             0.15,
-            0.45
+            0.46
           ],
           "analytics_full": {
             "status": "ypp_not_joined",
@@ -3006,9 +3006,9 @@
           "title": "Wealth Blueprint",
           "channel_id": "UC7G9_Y47IMQUaqKOBSg33TA",
           "subscriber_count": 0,
-          "view_count_total": 821,
+          "view_count_total": 933,
           "video_count": 22,
-          "yesterday_views_diff": 13,
+          "yesterday_views_diff": 125,
           "yesterday_subs_diff": 0,
           "top_videos": [
             {
@@ -3047,11 +3047,11 @@
               "comment_count": 0
             }
           ],
-          "revenue_estimate_usd": 0.03,
+          "revenue_estimate_usd": 0.25,
           "revenue_source": "cpm_estimate($2.0/1k)",
           "revenue_low_high": [
-            0.01,
-            0.04
+            0.12,
+            0.38
           ],
           "analytics_full": {
             "status": "ypp_not_joined",
@@ -3060,11 +3060,11 @@
         }
       },
       "totals": {
-        "view_count_total_all": 6430,
+        "view_count_total_all": 6672,
         "subscriber_count_all": 6,
-        "yesterday_views_all": 280,
+        "yesterday_views_all": 522,
         "yesterday_subs_gained_all": 0,
-        "revenue_estimate_usd_all": 0.52
+        "revenue_estimate_usd_all": 1.32
       }
     }
   ]

@@ -59,3 +59,16 @@ departments/media/src/*_state.json
 departments/media/src/seasonal_state.json
 departments/media/src/tax_promo_queue.json
 .secrets.backup_*
+
+# 🔒 PII 보호 (2026-05-08, 카카오페이 침해대응 사건 후속)
+# 외부 담당자 PII가 들어갈 수 있는 폴더 — 절대 commit 금지
+departments/secretary/drafts/
+departments/secretary/logs/
+departments/secretary/inbox_*.json
+departments/secretary/inbox_*.log
+departments/secretary/replies/
+departments/intelligence/cache/
+docs/USER_ACTIONS_*.md
+reports/inbox_*.json
+*_inbox_*.json
+*_inbox_*.log

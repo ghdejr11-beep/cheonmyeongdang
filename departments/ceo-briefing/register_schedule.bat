@@ -2,7 +2,7 @@
 REM CEO 브리핑 자동 스케줄 등록
 REM 9AM, 12PM, 3PM, 6PM, 9PM, 12AM 총 6회
 
-set SCRIPT_PATH=C:\Users\hdh02\Desktop\cheonmyeongdang\departments\ceo-briefing\briefing.py
+set SCRIPT_PATH=D:\cheonmyeongdang\departments\ceo-briefing\briefing.py
 set PYTHON_PATH=C:\Users\hdh02\AppData\Local\Programs\Python\Python311\python.exe
 
 echo 기존 스케줄 삭제 중...

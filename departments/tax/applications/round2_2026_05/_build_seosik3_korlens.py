@@ -12,7 +12,7 @@ from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-OUT = r'C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\applications\round2_2026_05\(작성완료)서식3_참가신청서_유형2_KORLENS_2026-05-07.docx'
+OUT = r'D:\cheonmyeongdang\departments\tax\applications\round2_2026_05\(작성완료)서식3_참가신청서_유형2_KORLENS_2026-05-07.docx'
 
 
 def set_cell_bg(cell, color_hex):

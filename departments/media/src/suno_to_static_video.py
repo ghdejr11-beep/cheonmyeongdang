@@ -8,7 +8,7 @@ from pathlib import Path
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-ROOT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+ROOT = Path(r"D:\cheonmyeongdang")
 OUT_DIR = Path(r"D:\kunstudio-outputs\suno_static_video_2026-05-04")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 

@@ -11,7 +11,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent
-CHEON_ROOT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+CHEON_ROOT = Path(r"D:\cheonmyeongdang")
 KEYWORD_POOL = CHEON_ROOT / "departments" / "seo_blog_factory" / "keyword_pool.json"
 OUTPUT = ROOT / "output" / f"quora_{datetime.date.today()}.md"
 OUTPUT.parent.mkdir(exist_ok=True)

@@ -68,7 +68,7 @@ Use `schtasks /Change /TN <name> /TR "<new command>"` to swap arguments only.
 
 ```powershell
 schtasks /Change /TN KunStudio_SEO_BlogFactory_1300 /TR `
-  "python C:\Users\hdh02\Desktop\cheonmyeongdang\departments\seo_blog_factory\generate.py --lang ja"
+  "python D:\cheonmyeongdang\departments\seo_blog_factory\generate.py --lang ja"
 ```
 
 ## Files

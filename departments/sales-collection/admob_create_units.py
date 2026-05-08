@@ -26,9 +26,9 @@ BASE = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE))
 
 CMD_APP_ID = "ca-app-pub-2954177434416880~7399025784"
-WWW_INDEX = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\www\index.html")
+WWW_INDEX = Path(r"D:\cheonmyeongdang\www\index.html")
 RECORD = Path(
-    r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\cheonmyeongdang\ad_units.json"
+    r"D:\cheonmyeongdang\departments\cheonmyeongdang\ad_units.json"
 )
 
 UNIT_SPECS = [

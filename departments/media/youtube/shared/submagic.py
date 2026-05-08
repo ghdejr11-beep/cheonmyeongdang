@@ -19,7 +19,7 @@ import sys, os, json, time, urllib.request, urllib.parse, urllib.error, mimetype
 from pathlib import Path
 
 BASE = "https://api.submagic.co/v1"
-SECRETS = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS = Path(r"D:\cheonmyeongdang\.secrets")
 
 
 def _load_key():

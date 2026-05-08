@@ -20,7 +20,7 @@ departments/korlens/
 
 ### 스케줄 등록/갱신
 ```cmd
-cd C:\Users\hdh02\Desktop\cheonmyeongdang\departments\ceo-briefing
+cd D:\cheonmyeongdang\departments\ceo-briefing
 register_all_schedules.bat
 ```
 ※ 관리자 권한 CMD로 실행 권장.

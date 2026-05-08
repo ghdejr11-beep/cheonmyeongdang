@@ -33,7 +33,7 @@
 
 ## Issue #1 발행 schedule
 
-- **Issue #1 file**: `C:\Users\hdh02\Desktop\cheonmyeongdang\departments\beehiiv\issue_1_welcome_5000_years.md`
+- **Issue #1 file**: `D:\cheonmyeongdang\departments\beehiiv\issue_1_welcome_5000_years.md`
 - **Schedule**: **2026-05-13 (Tuesday) 09:00 ET (= 22:00 KST)**
   - 화요일 = 뉴스레터 최고 open rate 요일 (Mailchimp 2025 benchmark)
   - 09:00 ET = 미국 동부 출근시간 + 한국 22:00 = 4 lang audience cover

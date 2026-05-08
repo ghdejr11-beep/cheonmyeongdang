@@ -10,7 +10,7 @@ from pathlib import Path
 from collections import defaultdict
 
 
-BASE = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+BASE = Path(r"D:\cheonmyeongdang")
 DEPARTMENTS = [
     "ceo-briefing", "cheonmyeongdang", "digital-products",
     "ebook", "game", "insurance-daboyeo", "intelligence",

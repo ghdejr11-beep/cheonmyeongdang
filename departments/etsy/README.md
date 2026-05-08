@@ -101,7 +101,7 @@ Etsy does **not** offer a public self-serve CSV bulk import for new shops. Two p
 If any KDP_LISTING.md changes or new product added:
 
 ```
-cd C:\Users\hdh02\Desktop\cheonmyeongdang\departments\etsy
+cd D:\cheonmyeongdang\departments\etsy
 python build_etsy_csv.py
 python generate_missing_covers.py
 ```

@@ -21,7 +21,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent
-CHEON = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+CHEON = Path(r"D:\cheonmyeongdang")
 OUTREACH_LOG = CHEON / "departments" / "influencer_outreach" / "outreach_log.json"
 B2B_LOG = CHEON / "departments" / "b2b_sales" / "sent_log.json"
 SEEN_FILE = ROOT / "data" / "reply_monitor_seen.json"

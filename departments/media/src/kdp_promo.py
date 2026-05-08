@@ -14,7 +14,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-BASE = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media")
+BASE = Path(r"D:\cheonmyeongdang\departments\media")
 BOOKS_PATH = BASE / "src" / "kdp_books.json"
 QUEUE_PATH = BASE / "scheduler" / "posts_unified_queue.json"
 

@@ -10,7 +10,7 @@ from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-OUT = r'C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\applications\round2_2026_05\(작성완료)한국관광공사_기업정보_등록의뢰서_쿤스튜디오_2026-05-07.docx'
+OUT = r'D:\cheonmyeongdang\departments\tax\applications\round2_2026_05\(작성완료)한국관광공사_기업정보_등록의뢰서_쿤스튜디오_2026-05-07.docx'
 
 # 기업 정보
 INFO = {

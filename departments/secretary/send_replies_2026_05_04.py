@@ -1,6 +1,6 @@
 """2026-05-04 3건 회신 자동 발송 (Gmail API).
 
-1) 카카오페이 김지은 — 심사 보완 안내
+1) 카카오페이 [REDACTED] — 심사 보완 안내
 2) 부크크 — 사업자등록 PDF 손상 → 재전송 (첨부)
 3) 부크크 — ISBN 발급 불가 도서 반려 → 이해 회신
 
@@ -155,7 +155,7 @@ def main():
 
     # 5/4 16:54 1차 실행으로 카카오페이 + ISBN 반려 회신 완료 (idempotent 위해 주석 처리)
     targets = [
-        # ('카카오페이', 'from:jella.tto@kakaopaycorp.com newer_than:1d', KAKAO_BODY, None),
+        # ('카카오페이', 'from:[REDACTED_PG_CONTACT] newer_than:1d', KAKAO_BODY, None),
         ('부크크 파일 손상', 'from:bookk subject:"사업자 인증 요청" newer_than:1d', BOOKK_FILE_BODY, PDF_BIZ_REG),
         # ('부크크 ISBN 반려', 'from:bookk subject:반려 newer_than:1d', BOOKK_ISBN_BODY, None),
     ]

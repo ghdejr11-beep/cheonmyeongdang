@@ -8,7 +8,7 @@
 - dev.to confirm에 답장 draft
 
 이런 자동알림에는 절대 답장 X. 즉시 삭제.
-유일하게 보존: 카카오페이 jella.tto draftId=r8645647452764228186 (1187자, 정상).
+유일하게 보존: 카카오페이 [REDACTED_HANDLE] draftId=r8645647452764228186 (1187자, 정상).
 """
 import os
 import sys
@@ -23,7 +23,7 @@ TOKEN = os.path.join(ROOT, 'token_send.json')
 
 # 보존할 draft (whitelist) — 나머지 BAD draft 모두 삭제
 KEEP = {
-    'r8645647452764228186',  # 카카오페이 jella.tto - 1187c, OK
+    'r8645647452764228186',  # 카카오페이 [REDACTED_HANDLE] - 1187c, OK
 }
 
 # 명시적 삭제 대상 (verify 결과 BAD list)

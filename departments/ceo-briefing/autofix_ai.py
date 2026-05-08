@@ -25,7 +25,7 @@ BASE = Path(__file__).resolve().parent
 DRAFTS_DIR = BASE / "ai_drafts"
 DRAFTS_DIR.mkdir(parents=True, exist_ok=True)
 BUDGET_FILE = BASE / "autofix_budget.json"
-SECRETS = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS = Path(r"D:\cheonmyeongdang\.secrets")
 
 # 모델 (저렴+빠름)
 MODEL = "claude-haiku-4-5-20251001"

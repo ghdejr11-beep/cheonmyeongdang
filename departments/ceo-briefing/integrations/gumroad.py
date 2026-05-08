@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 def _token():
-    secrets_path = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+    secrets_path = Path(r"D:\cheonmyeongdang\.secrets")
     for line in secrets_path.read_text(encoding="utf-8").splitlines():
         if line.startswith("GUMROAD_ACCESS_TOKEN="):
             return line.split("=", 1)[1].strip()

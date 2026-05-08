@@ -191,7 +191,7 @@ def synth_voice(text: str, out_mp3: Path, env: dict, log) -> Path:
     """edge-tts 무료 우선, 실패 시 ElevenLabs Free."""
     # 1) edge-tts (무료, 키 불필요)
     try:
-        sys.path.insert(0, str(Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\youtube\shared")))
+        sys.path.insert(0, str(Path(r"D:\cheonmyeongdang\departments\media\youtube\shared")))
         from tts import synthesize  # type: ignore
         synthesize(text, out_mp3, voice="en-US-GuyNeural")
         log.info(f"  voice: edge-tts → {out_mp3.name}")

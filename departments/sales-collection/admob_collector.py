@@ -31,7 +31,7 @@ BASE = Path(__file__).resolve().parent
 DATA_DIR = BASE / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 DAILY_JSON = DATA_DIR / "admob_daily.json"
-SECRETS_PATH = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS_PATH = Path(r"D:\cheonmyeongdang\.secrets")
 
 ADMOB_API_SCOPES = ["https://www.googleapis.com/auth/admob.readonly"]
 

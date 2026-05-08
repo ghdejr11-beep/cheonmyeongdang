@@ -29,9 +29,9 @@ LOG_FILE.parent.mkdir(exist_ok=True)
 # 감시 대상: 최근 작성된 브리핑/로그 파일들
 SOURCES = [
     Path(r"D:\scripts\kwisdom_pipeline.log"),
-    Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\ceo-briefing\output"),
-    Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\intelligence\data\health_log.txt"),
-    Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\logs"),
+    Path(r"D:\cheonmyeongdang\departments\ceo-briefing\output"),
+    Path(r"D:\cheonmyeongdang\departments\intelligence\data\health_log.txt"),
+    Path(r"D:\cheonmyeongdang\departments\media\logs"),
 ]
 
 # 문제 패턴 → 핸들러 매핑

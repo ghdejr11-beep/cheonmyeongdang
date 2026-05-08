@@ -39,9 +39,9 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 DAILY_JSON = DATA_DIR / "yt_4ch_daily.json"
 CHANNEL_MAP_JSON = BASE / "yt_channel_map.json"
 
-SECRETS_PATH = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
-GLOBAL_TOKEN = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets_youtube_token.json")
-SHARED_TOKEN_DIR = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\youtube\shared")
+SECRETS_PATH = Path(r"D:\cheonmyeongdang\.secrets")
+GLOBAL_TOKEN = Path(r"D:\cheonmyeongdang\.secrets_youtube_token.json")
+SHARED_TOKEN_DIR = Path(r"D:\cheonmyeongdang\departments\media\youtube\shared")
 
 YT_SCOPES = [
     "https://www.googleapis.com/auth/youtube.readonly",

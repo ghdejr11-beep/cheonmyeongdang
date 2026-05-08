@@ -11,7 +11,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-OUT_DIR = r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\applications\round2_2026_05"
+OUT_DIR = r"D:\cheonmyeongdang\departments\tax\applications\round2_2026_05"
 os.makedirs(OUT_DIR, exist_ok=True)
 
 

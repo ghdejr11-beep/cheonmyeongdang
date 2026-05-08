@@ -12,16 +12,16 @@ from pathlib import Path
 # 인코딩
 sys.stdout.reconfigure(encoding="utf-8")
 
-BASE = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\ceo-briefing")
+BASE = Path(r"D:\cheonmyeongdang\departments\ceo-briefing")
 sys.path.insert(0, str(BASE))
 # 수익집계부 (sales-collection) 도 import 가능하도록 path 추가
-SALES_BASE = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\sales-collection")
+SALES_BASE = Path(r"D:\cheonmyeongdang\departments\sales-collection")
 sys.path.insert(0, str(SALES_BASE))
 
 # 환경변수
 def _load_secrets():
     env = {}
-    for line in Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets").read_text(encoding="utf-8").splitlines():
+    for line in Path(r"D:\cheonmyeongdang\.secrets").read_text(encoding="utf-8").splitlines():
         if "=" in line and not line.strip().startswith("#"):
             k, v = line.split("=", 1)
             env[k.strip()] = v.strip()
@@ -542,7 +542,7 @@ def build_message(hour=None):
             msg += f"📊 <b>GA4 트래픽</b>\n  (모듈 오류: {str(e)[:80]})\n\n"
     # 🛡 가동 상태 (보안부서 uptime monitor)
     try:
-        sys.path.insert(0, str(Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\security")))
+        sys.path.insert(0, str(Path(r"D:\cheonmyeongdang\departments\security")))
         from uptime_monitor import build_uptime_section
         msg += build_uptime_section(window_hours=24)
     except Exception as e:

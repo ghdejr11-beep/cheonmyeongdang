@@ -8,7 +8,7 @@ from pathlib import Path
 from datetime import datetime
 
 
-CSV_DIR = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.kdp_reports")
+CSV_DIR = Path(r"D:\cheonmyeongdang\.kdp_reports")
 
 
 def _latest_csv():

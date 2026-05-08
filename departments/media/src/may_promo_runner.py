@@ -29,7 +29,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-ROOT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+ROOT = Path(r"D:\cheonmyeongdang")
 SRC = ROOT / "departments" / "media" / "src"
 LOG_DIR = ROOT / "departments" / "media" / "logs"
 LOG_DIR.mkdir(parents=True, exist_ok=True)

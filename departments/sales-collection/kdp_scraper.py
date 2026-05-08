@@ -34,10 +34,10 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 DAILY_JSON = DATA_DIR / "kdp_daily.json"
 LOGS_DIR = BASE / "logs"
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
-SECRETS_PATH = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS_PATH = Path(r"D:\cheonmyeongdang\.secrets")
 
 # 수동 CSV fallback 폴더 (기존 integrations/kdp.py 와 동일 위치 사용)
-MANUAL_CSV_DIR = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.kdp_reports")
+MANUAL_CSV_DIR = Path(r"D:\cheonmyeongdang\.kdp_reports")
 
 KDP_REPORTS_URL = "https://kdp.amazon.com/en_US/reports-new"
 KDP_LOGIN_URL = "https://kdp.amazon.com/"

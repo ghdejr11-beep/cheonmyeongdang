@@ -18,7 +18,7 @@ svc = build('gmail', 'v1', credentials=creds)
 
 # RED 메일 본문 fetch
 queries = {
-    'kakaopay': 'from:jella.tto@kakaopaycorp.com newer_than:2d',
+    'kakaopay': 'from:[REDACTED_PG_CONTACT] newer_than:2d',
     'naverpay': 'from:naverpayadmin_noreply@navercorp.com newer_than:2d',
     'kakao_any': 'kakao newer_than:1d',
     'vc_any': 'ventures OR vc.com newer_than:2d',

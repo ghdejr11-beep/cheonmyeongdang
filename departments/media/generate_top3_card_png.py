@@ -8,7 +8,7 @@ import io
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
 
-ROOT = r"C:\Users\hdh02\Desktop\cheonmyeongdang"
+ROOT = r"D:\cheonmyeongdang"
 OUT = os.path.join(ROOT, "docs", "top3_actions_2026_05_07.png")
 
 FONT_REG = r"C:\Windows\Fonts\malgun.ttf"

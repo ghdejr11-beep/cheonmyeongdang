@@ -27,7 +27,7 @@ BASE = Path(__file__).resolve().parent
 DATA_DIR = BASE / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 DAILY_JSON = DATA_DIR / "gumroad_daily.json"
-SECRETS_PATH = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS_PATH = Path(r"D:\cheonmyeongdang\.secrets")
 
 GUMROAD_API = "https://api.gumroad.com/v2"
 USER_AGENT = "KunStudio-Revenue/1.0 (+ghdejr11@gmail.com)"

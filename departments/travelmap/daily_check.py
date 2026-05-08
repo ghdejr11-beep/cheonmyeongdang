@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-ROOT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+ROOT = Path(r"D:\cheonmyeongdang")
 DEPT = ROOT / "departments" / "travelmap"
 OUT = DEPT / "output"
 OUT.mkdir(exist_ok=True)

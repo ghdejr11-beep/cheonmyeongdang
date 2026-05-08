@@ -22,7 +22,7 @@ import datetime
 import shutil
 from pathlib import Path
 
-BASE = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+BASE = Path(r"D:\cheonmyeongdang")
 LOG_DIR = Path(__file__).resolve().parent / "logs"
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 AUTOFIX_LOG = LOG_DIR / "autofix.log"

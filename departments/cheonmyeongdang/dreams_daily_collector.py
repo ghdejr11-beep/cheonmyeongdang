@@ -12,12 +12,12 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-INDEX_HTML = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\index.html")
+INDEX_HTML = Path(r"D:\cheonmyeongdang\index.html")
 LOG_DIR = Path(__file__).parent / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 
 # Claude 생성 모듈 경로
-YT_SHARED = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\youtube\shared")
+YT_SHARED = Path(r"D:\cheonmyeongdang\departments\media\youtube\shared")
 sys.path.insert(0, str(YT_SHARED))
 from claude_script import generate as claude_gen
 

@@ -16,12 +16,12 @@
    - 만들기 → **JSON 다운로드**
 6. 다운로드된 `client_secret_xxxxx.json` 파일을 아래 경로로 **이름 바꿔 저장**:
    ```
-   C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\youtube\shared\client_secret.json
+   D:\cheonmyeongdang\departments\media\youtube\shared\client_secret.json
    ```
 
 ## 2. 1회 인증 (브라우저 자동 열림)
 ```bash
-cd C:\Users\hdh02\Desktop\cheonmyeongdang\departments\media\youtube\shared
+cd D:\cheonmyeongdang\departments\media\youtube\shared
 python youtube_upload.py
 ```
 - 브라우저가 자동으로 열림

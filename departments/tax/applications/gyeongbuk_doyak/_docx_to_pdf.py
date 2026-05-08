@@ -103,7 +103,7 @@ if __name__ == "__main__":
     if len(sys.argv) >= 3:
         convert(sys.argv[1], sys.argv[2])
     else:
-        base = r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\tax\applications\gyeongbuk_doyak"
+        base = r"D:\cheonmyeongdang\departments\tax\applications\gyeongbuk_doyak"
         convert(
             os.path.join(base, "사업계획서_혁신유형_세금N혜택_v2.docx"),
             os.path.join(base, "01_사업계획서_혁신_final.pdf"),

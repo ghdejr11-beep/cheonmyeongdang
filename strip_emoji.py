@@ -14,7 +14,7 @@ import shutil
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
-ROOT = r"C:\Users\hdh02\Desktop\cheonmyeongdang"
+ROOT = r"D:\cheonmyeongdang"
 TARGETS = [
     "index.html",
     "pay.html",

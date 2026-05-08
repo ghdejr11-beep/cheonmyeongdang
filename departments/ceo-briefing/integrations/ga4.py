@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 
 
-SECRETS_PATH = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS_PATH = Path(r"D:\cheonmyeongdang\.secrets")
 
 
 def _load_env():

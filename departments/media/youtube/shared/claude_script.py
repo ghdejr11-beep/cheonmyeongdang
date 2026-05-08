@@ -9,7 +9,7 @@ Claude API로 유튜브 스크립트 자동 생성.
 import os, sys, urllib.request, json
 from pathlib import Path
 
-SECRETS = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets")
+SECRETS = Path(r"D:\cheonmyeongdang\.secrets")
 
 
 def _key():

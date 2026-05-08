@@ -5,7 +5,7 @@ writes them under cover_generated\ and updates the manifest + listings CSV in pl
 """
 import os, csv, urllib.parse, urllib.request, time
 
-OUT_DIR = r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\etsy"
+OUT_DIR = r"D:\cheonmyeongdang\departments\etsy"
 MANIFEST = os.path.join(OUT_DIR, "images_manifest.csv")
 LISTINGS = os.path.join(OUT_DIR, "listings_2026_05_05.csv")
 COVER_DIR = os.path.join(OUT_DIR, "cover_generated")

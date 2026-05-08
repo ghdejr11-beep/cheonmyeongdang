@@ -63,7 +63,7 @@
 ## 4. CSV bulk upload (40 listings)
 
 1. Vela 로그인 → `Listings` → `Import CSV`
-2. 파일: `C:\Users\hdh02\Desktop\cheonmyeongdang\departments\etsy\listings_2026_05_05.csv`
+2. 파일: `D:\cheonmyeongdang\departments\etsy\listings_2026_05_05.csv`
 3. `Validate` → 40 행 모두 OK 확인
 4. `Push to Etsy` → 40개 모두 Draft 상태로 생성
 
@@ -76,7 +76,7 @@ Vela `Drafts` 탭에서 아래 5개 SKU만 체크박스 → `Publish` 일괄.
 ### #1 ADHD Daily Planner (KDP-ADHD-PLANNER)
 - **Price**: $12.99
 - **Title**: `ADHD Daily Planner for Adults: 90-Day Undated Organizer with Brain Dump Pages, Dopamine Menu & Weekly Reviews`
-- **Image1**: `C:\Users\hdh02\Desktop\cheonmyeongdang\departments\ebook\projects\adhd-planner\cover.pdf`
+- **Image1**: `D:\cheonmyeongdang\departments\ebook\projects\adhd-planner\cover.pdf`
 - **Digital File**: `C:\...\adhd-planner\adhd_planner.pdf`
 - **Why first**: "ADHD planner" Etsy search 220k+/yr, mental health printable +47% YoY
 - **Tags (already in CSV)**: adhd daily planner, adult adhd journal, adhd planner women, printable, digital download...
@@ -106,7 +106,7 @@ Vela `Drafts` 탭에서 아래 5개 SKU만 체크박스 → `Publish` 일괄.
 ### #5 Pelvic Floor Recovery Journal (KDP-PELVIC-FLOOR-RECOVERY-JOURNAL)
 - **Price**: $11.99
 - **Title**: `Pelvic Floor Recovery Journal — Postpartum 12-Week Healing Tracker`
-- **Image1**: `C:\Users\hdh02\Desktop\cheonmyeongdang\departments\etsy\cover_generated\pelvic-floor-recovery-journal.png`
+- **Image1**: `D:\cheonmyeongdang\departments\etsy\cover_generated\pelvic-floor-recovery-journal.png`
 - **Digital File**: `C:\...\pelvic-floor-recovery-journal\pelvic_floor_recovery_journal.pdf`
 - **Why fifth**: Postpartum = highest Etsy converting demographic (+38% vs avg).
 

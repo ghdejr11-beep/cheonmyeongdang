@@ -13,7 +13,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 pdfmetrics.registerFont(TTFont('Malgun', 'C:/Windows/Fonts/malgun.ttf'))
 pdfmetrics.registerFont(TTFont('MalgunBold', 'C:/Windows/Fonts/malgunbd.ttf'))
 
-ROOT = r'C:\Users\hdh02\Desktop\cheonmyeongdang'
+ROOT = r'D:\cheonmyeongdang'
 SRC = os.path.join(ROOT, 'docs', 'grant_appendix_2026_05.md')
 DST = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'grant_appendix_2026_05.pdf')
 

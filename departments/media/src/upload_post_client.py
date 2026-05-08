@@ -33,7 +33,7 @@ import json
 import urllib.request
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\hdh02\Desktop\cheonmyeongdang")
+ROOT = Path(r"D:\cheonmyeongdang")
 SECRETS = ROOT / ".secrets"
 
 API_BASE = "https://api.upload-post.com/api"

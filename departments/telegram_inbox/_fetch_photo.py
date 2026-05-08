@@ -12,14 +12,14 @@ DATA.mkdir(exist_ok=True)
 
 # Read secrets
 secrets = {}
-for line in open(r"C:\Users\hdh02\Desktop\cheonmyeongdang\.secrets", encoding="utf-8"):
+for line in open(r"D:\cheonmyeongdang\.secrets", encoding="utf-8"):
     if "=" in line and not line.strip().startswith("#"):
         k, v = line.strip().split("=", 1)
         secrets[k] = v.strip().strip('"').strip("'")
 
 TOKEN = secrets["TELEGRAM_BOT_TOKEN"]
 CHAT = secrets["TELEGRAM_CHAT_ID"]
-OFFSET_FILE = r"C:\Users\hdh02\Desktop\cheonmyeongdang\departments\ceo-briefing\bot_offset.txt"
+OFFSET_FILE = r"D:\cheonmyeongdang\departments\ceo-briefing\bot_offset.txt"
 
 
 def api(method, params=None):
