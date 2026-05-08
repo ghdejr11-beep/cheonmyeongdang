@@ -3758,23 +3758,24 @@ window.cmExecutePremium = function(mode, info) {
     if (typeof window.openPremiumInputModal === 'function') window.openPremiumInputModal(mode);
     return;
   }
-  if (typeof PremiumSaju === 'undefined' || !PremiumSaju.generateReport) {
-    alert('정밀 풀이 모듈을 로드하지 못했습니다. 페이지 새로고침 후 다시 시도해 주세요.');
+  if (typeof SajuEngine === 'undefined' || !SajuEngine.analyzeSaju) {
+    alert('사주 엔진을 로드하지 못했습니다. 페이지 새로고침 후 다시 시도해 주세요.');
     return;
   }
   var bp = info.birth.split('-');
   var newReport;
   try {
-    newReport = PremiumSaju.generateReport(
+    // 무료 사주와 동일한 분석 엔진 사용 → renderSajuResult 형식 호환 (기본정보·사주·대운 키)
+    newReport = SajuEngine.analyzeSaju(
       parseInt(bp[0]), parseInt(bp[1]), parseInt(bp[2]),
       parseInt(info.hour),
-      info.gender || 'M',
-      { marital: info.marital || 'unknown', children: parseInt(info.children || -1), gender: info.gender || 'M' }
+      info.gender || 'M'
     );
+    newReport._userContext = { marital: info.marital || 'unknown', children: parseInt(info.children || -1), gender: info.gender || 'M' };
     window._lastReport = newReport;
     window._lastSajuResult = newReport;
   } catch(e) {
-    console.warn('generateReport failed', e);
+    console.warn('analyzeSaju failed', e);
     alert('정밀 풀이 생성 실패: ' + (e.message || e));
     return;
   }
