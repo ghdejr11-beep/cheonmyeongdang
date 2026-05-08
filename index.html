@@ -3788,32 +3788,44 @@ window.cmExecutePremium = function(mode, info) {
   if (prClear) { prClear.innerHTML = ''; prClear.style.display = 'none'; }
   try { window._cmEntitlementVerified = true; } catch(e) {}
 
-  if (typeof renderSajuResult === 'function') {
+  // mode별 분기 — 각 상품의 가치를 명확히 분리
+  // - saju: 사주 정밀만 (사주 8글자 + 십신/오행/대운 + 7카드 + 개운법)
+  // - sinnyeon: 12개월 운세만 (단독 상품)
+  // - comprehensive: 사주 정밀 + 12개월 운세 통합
+  var sajuResEl = document.getElementById('saju-result');
+  if (!sajuResEl) { alert('saju-result 컨테이너 없음.'); return; }
+  var yr = new Date().getFullYear() + 1;
+  var displayName = info.name || '고객';
+
+  if (mode === 'sinnyeon') {
+    // 신년운세 단독 — saju-result 비우고 hero + 12개월 운세 enhanced view만 표시
+    sajuResEl.innerHTML = '';
+    sajuResEl.classList.remove('hidden');
+    sajuResEl.style.display = '';
+    var heroSn = document.createElement('div');
+    heroSn.id = 'cm-mode-hero';
+    heroSn.innerHTML = '<div style="text-align:center;padding:36px 20px;border-radius:20px;background:radial-gradient(circle at center,rgba(255,140,66,0.15),rgba(15,15,20,0.95));border:1px solid rgba(255,140,66,0.3);margin:0 0 24px;">' +
+      '<div style="font-size:0.7rem;color:#ff8c42;letter-spacing:3px;margin-bottom:8px;">' + yr + ' NEW YEAR FORTUNE</div>' +
+      '<div style="font-size:2.4rem;font-weight:900;color:#ff8c42;font-family:Noto Serif KR,serif;margin:6px 0;">' + yr + ' 신년운세</div>' +
+      '<div style="font-size:0.95rem;color:var(--gold2);">' + displayName + '님의 ' + yr + '년 12개월 운세 단독</div>' +
+      '</div>';
+    sajuResEl.appendChild(heroSn);
+    if (typeof window.renderSinnyeonEnhanced === 'function') {
+      try { window.renderSinnyeonEnhanced(); } catch(snErr) { console.warn('sinnyeon failed', snErr); }
+    }
+  } else {
+    // saju 또는 comprehensive — renderSajuResult로 사주 정밀 풀버전
+    if (typeof renderSajuResult !== 'function') { alert('사주 모듈 로드 실패.'); return; }
     try { renderSajuResult(newReport); } catch(rsErr) {
       console.warn('renderSajuResult failed', rsErr);
       alert('사주 결과 렌더링 실패. 페이지 새로고침 후 다시 시도해 주세요.');
       return;
     }
-  } else {
-    alert('사주 모듈 로드 실패.');
-    return;
-  }
-
-  // mode별 hero
-  var sajuResEl = document.getElementById('saju-result');
-  if (sajuResEl) {
+    // hero 배지 inject
     var heroDiv = document.createElement('div');
     heroDiv.id = 'cm-mode-hero';
-    var yr = new Date().getFullYear() + 1;
     var heroHtml = '';
-    var displayName = info.name || '고객';
-    if (mode === 'sinnyeon') {
-      heroHtml = '<div style="text-align:center;padding:36px 20px;border-radius:20px;background:radial-gradient(circle at center,rgba(255,140,66,0.15),rgba(15,15,20,0.95));border:1px solid rgba(255,140,66,0.3);margin:0 0 24px;">' +
-        '<div style="font-size:0.7rem;color:#ff8c42;letter-spacing:3px;margin-bottom:8px;">' + yr + ' NEW YEAR FORTUNE</div>' +
-        '<div style="font-size:2.4rem;font-weight:900;color:#ff8c42;font-family:Noto Serif KR,serif;margin:6px 0;">' + yr + ' 신년운세</div>' +
-        '<div style="font-size:0.95rem;color:var(--gold2);">' + displayName + '님의 ' + yr + '년 한 해 흐름 + 사주 정밀</div>' +
-        '</div>';
-    } else if (mode === 'comprehensive') {
+    if (mode === 'comprehensive') {
       heroHtml = '<div style="text-align:center;padding:44px 20px;border-radius:20px;background:radial-gradient(circle at center,rgba(74,158,142,0.18),rgba(15,15,20,0.95));border:1px solid rgba(74,158,142,0.4);margin:0 0 24px;">' +
         '<div style="font-size:0.7rem;color:var(--jade);letter-spacing:3px;margin-bottom:8px;">COMPREHENSIVE READING</div>' +
         '<div style="font-size:2.4rem;font-weight:900;color:var(--jade);font-family:Noto Serif KR,serif;margin:6px 0;">종합 풀이</div>' +
@@ -3832,10 +3844,11 @@ window.cmExecutePremium = function(mode, info) {
     sajuResEl.insertBefore(heroDiv, sajuResEl.firstChild);
     sajuResEl.classList.remove('hidden');
     sajuResEl.style.display = '';
-  }
 
-  if ((mode === 'sinnyeon' || mode === 'comprehensive') && typeof window.renderSinnyeonEnhanced === 'function') {
-    try { window.renderSinnyeonEnhanced(); } catch(snErr) { console.warn('sinnyeon failed', snErr); }
+    // 종합 풀이만 12개월 운세 추가
+    if (mode === 'comprehensive' && typeof window.renderSinnyeonEnhanced === 'function') {
+      try { window.renderSinnyeonEnhanced(); } catch(snErr) { console.warn('sinnyeon failed', snErr); }
+    }
   }
 
   // scroll fix: scrollIntoView/scrollTo({behavior:'auto'}) 둘 다 다른 코드에 의해 interrupt됨
