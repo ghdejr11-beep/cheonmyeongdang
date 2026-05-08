@@ -3798,21 +3798,16 @@ window.cmExecutePremium = function(mode, info) {
   var displayName = info.name || '고객';
 
   if (mode === 'sinnyeon') {
-    // 신년운세 단독 — saju-result 비우고 hero + 12개월 운세 enhanced view만 표시
+    // 신년운세 단독 — saju-result 비우고 enhanced view만 (안에 이미 sn-hero 헤더 있음)
     sajuResEl.innerHTML = '';
     sajuResEl.classList.remove('hidden');
     sajuResEl.style.display = '';
-    var heroSn = document.createElement('div');
-    heroSn.id = 'cm-mode-hero';
-    heroSn.innerHTML = '<div style="text-align:center;padding:36px 20px;border-radius:20px;background:radial-gradient(circle at center,rgba(255,140,66,0.15),rgba(15,15,20,0.95));border:1px solid rgba(255,140,66,0.3);margin:0 0 24px;">' +
-      '<div style="font-size:0.7rem;color:#ff8c42;letter-spacing:3px;margin-bottom:8px;">' + yr + ' NEW YEAR FORTUNE</div>' +
-      '<div style="font-size:2.4rem;font-weight:900;color:#ff8c42;font-family:Noto Serif KR,serif;margin:6px 0;">' + yr + ' 신년운세</div>' +
-      '<div style="font-size:0.95rem;color:var(--gold2);">' + displayName + '님의 ' + yr + '년 12개월 운세 단독</div>' +
-      '</div>';
-    sajuResEl.appendChild(heroSn);
     if (typeof window.renderSinnyeonEnhanced === 'function') {
       try { window.renderSinnyeonEnhanced(); } catch(snErr) { console.warn('sinnyeon failed', snErr); }
     }
+    // scroll 타겟용 마커
+    var snEl = document.getElementById('sinnyeon-enhanced');
+    if (snEl) snEl.id = 'sinnyeon-enhanced'; // (이미 그 ID, scroll 함수가 cm-mode-hero 못 찾으면 saju-result 사용)
   } else {
     // saju 또는 comprehensive — renderSajuResult로 사주 정밀 풀버전
     if (typeof renderSajuResult !== 'function') { alert('사주 모듈 로드 실패.'); return; }
