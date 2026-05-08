@@ -3934,7 +3934,7 @@ window.openPremiumInputModal = function(mode) {
           '</label>' +
         '</div>' +
         '<div id="pim-time-preview" style="font-size:0.78rem;color:var(--text2);margin-top:-4px;padding:0 4px;"></div>' +
-        '<label style="display:flex;flex-direction:column;gap:6px;font-size:0.82rem;color:var(--gold2);">출생지 (시간대 보정)' +
+        '<label style="display:flex;flex-direction:column;gap:6px;font-size:0.82rem;color:var(--gold2);">출생지 (현지 시각 기준)' +
           '<select id="pim-tz" style="padding:10px;background:rgba(0,0,0,0.4);border:1px solid var(--border,#2a2e3e);border-radius:8px;color:var(--text);font-size:0.9rem;font-family:inherit;">' +
             '<option value="KST"' + (savedTz === 'KST' ? ' selected' : '') + '>한국 (KST · UTC+9)</option>' +
             '<option value="JST"' + (savedTz === 'JST' ? ' selected' : '') + '>일본 (JST · UTC+9)</option>' +
@@ -3944,6 +3944,10 @@ window.openPremiumInputModal = function(mode) {
             '<option value="UTC"' + (savedTz === 'UTC' ? ' selected' : '') + '>UTC (영국 등)</option>' +
             '<option value="OTHER"' + (savedTz === 'OTHER' ? ' selected' : '') + '>기타 (정확한 현지 시각 입력)</option>' +
           '</select>' +
+        '</label>' +
+        '<label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid var(--border,#2a2e3e);border-radius:8px;cursor:pointer;font-size:0.82rem;color:var(--text);">' +
+          '<input id="pim-tst" type="checkbox"' + (saved.useTST ? ' checked' : '') + '>' +
+          '<div><span style="color:var(--gold2);">진태양시 보정 적용</span> <span style="color:var(--text2);font-size:0.74rem;">(고급 명리학 — 한국 -32분, 일본 -19분 등 경도 보정. 시계 시각 그대로 보려면 OFF)</span></div>' +
         '</label>' +
         '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">' +
           '<label style="display:flex;flex-direction:column;gap:6px;font-size:0.82rem;color:var(--gold2);">성별' +
@@ -4002,18 +4006,15 @@ window.openPremiumInputModal = function(mode) {
     var map = {23:'자시 (子) 23:00~01:00', 1:'축시 (丑) 01:00~03:00', 3:'인시 (寅) 03:00~05:00', 5:'묘시 (卯) 05:00~07:00', 7:'진시 (辰) 07:00~09:00', 9:'사시 (巳) 09:00~11:00', 11:'오시 (午) 11:00~13:00', 13:'미시 (未) 13:00~15:00', 15:'신시 (申) 15:00~17:00', 17:'유시 (酉) 17:00~19:00', 19:'술시 (戌) 19:00~21:00', 21:'해시 (亥) 21:00~23:00'};
     return map[hourCode] || '시간 모름';
   }
-  // ─── 진태양시 (True Solar Time) 보정 ───
-  // 한국: 동경 135° 표준시 vs 한국 평균 경도 127.5° → -32분 (정통 명리학)
-  // 사용자가 "정각 출산"이라 했어도 진태양시 기준 1시진 차이 발생 가능 (예: 시계 5:00 → 진태양 4:28 = 인시)
-  // 진태양시 토글은 모달의 timezone select에서 KST는 자동 적용 (사용자 토글 X — 너무 복잡)
-  // KST/JST는 -32분 (한국 표준 명리학)
-  // CST는 -16분 (북경 116° vs 표준 120° = 4°)
-  // 다른 tz는 사용자가 입력한 시각 그대로 (현지 시각 기준)
-  var _TZ_OFFSET_MIN = { KST: -32, JST: -19, CST: -16, EST: 0, PST: 0, UTC: 0, OTHER: 0 };
-  function _adjustHourForTz(hh, mm, tz) {
-    var offset = _TZ_OFFSET_MIN[tz] || 0;
+  // ─── 진태양시 (True Solar Time) 보정 — 옵션 (디폴트 OFF) ───
+  // 한국: 동경 135° 표준시 vs 한국 평균 경도 127.5° → -32분
+  // 진태양시는 학파에 따라 사용 여부 갈림. 사용자가 "5시 정각"이라 하면 시계 시각 그대로가 일반적.
+  // 옵션 체크 시에만 적용.
+  var _TST_OFFSET_MIN = { KST: -32, JST: -19, CST: -16, EST: 0, PST: 0, UTC: 0, OTHER: 0 };
+  function _adjustHourForTz(hh, mm, tz, useTST) {
+    if (!useTST) return { hh: hh, mm: mm };
+    var offset = _TST_OFFSET_MIN[tz] || 0;
     var total = hh * 60 + mm + offset;
-    // 음수면 전날
     while (total < 0) total += 24 * 60;
     while (total >= 24 * 60) total -= 24 * 60;
     return { hh: Math.floor(total / 60), mm: total % 60 };
@@ -4037,11 +4038,12 @@ window.openPremiumInputModal = function(mode) {
     return { ok: false };
   }
 
-  // 실시간 시진 미리보기 (timezone 진태양시 보정 반영)
+  // 실시간 시진 미리보기 (진태양시 옵션 반영)
   function _updateTimePreview() {
     var tEl = document.getElementById('pim-time');
     var unknownEl = document.getElementById('pim-time-unknown');
     var tzEl = document.getElementById('pim-tz');
+    var tstEl = document.getElementById('pim-tst');
     var preview = document.getElementById('pim-time-preview');
     if (!tEl || !preview) return;
     if (unknownEl && unknownEl.checked) {
@@ -4055,16 +4057,21 @@ window.openPremiumInputModal = function(mode) {
     var parts = v.split(':');
     var hh = parseInt(parts[0]), mm = parseInt(parts[1]);
     var tz = tzEl ? tzEl.value : 'KST';
-    var adj = _adjustHourForTz(hh, mm, tz);
+    var useTST = tstEl ? tstEl.checked : false;
+    var adj = _adjustHourForTz(hh, mm, tz, useTST);
     var sij = _hhmmToSijinHour(adj.hh, adj.mm);
     var adjStr = (adj.hh < 10 ? '0' + adj.hh : adj.hh) + ':' + (adj.mm < 10 ? '0' + adj.mm : adj.mm);
-    var offsetMin = _TZ_OFFSET_MIN[tz] || 0;
-    var offsetNote = offsetMin !== 0 ? ' <span style="color:var(--text2);font-size:0.74rem;">(진태양시 ' + (offsetMin > 0 ? '+' : '') + offsetMin + '분 보정 → ' + adjStr + ')</span>' : '';
+    var offsetNote = '';
+    if (useTST) {
+      var offsetMin = _TST_OFFSET_MIN[tz] || 0;
+      offsetNote = offsetMin !== 0 ? ' <span style="color:var(--text2);font-size:0.74rem;">(진태양시 ' + (offsetMin > 0 ? '+' : '') + offsetMin + '분 → ' + adjStr + ')</span>' : '';
+    }
     preview.innerHTML = '시진 자동 계산: <strong style="color:var(--gold2);">' + _sijinLabel(sij) + '</strong>' + offsetNote;
   }
   document.getElementById('pim-time').addEventListener('input', _updateTimePreview);
   document.getElementById('pim-time-unknown').addEventListener('change', _updateTimePreview);
   document.getElementById('pim-tz').addEventListener('change', _updateTimePreview);
+  document.getElementById('pim-tst').addEventListener('change', _updateTimePreview);
   _updateTimePreview();
 
   document.getElementById('pim-submit').addEventListener('click', function() {
@@ -4074,18 +4081,19 @@ window.openPremiumInputModal = function(mode) {
     var timeVal = document.getElementById('pim-time').value;
     var unknownTime = document.getElementById('pim-time-unknown').checked;
     var tzVal = document.getElementById('pim-tz').value;
+    var useTST = document.getElementById('pim-tst').checked;
     var genderVal = document.getElementById('pim-gender').value;
     var maritalVal = document.getElementById('pim-marital').value;
     var childrenVal = parseInt(document.getElementById('pim-children').value);
 
     if (!birthVal) { alert('생년월일을 입력해 주세요.'); return; }
 
-    // HH:MM → 시진 변환
+    // HH:MM → 시진 변환 (진태양시 옵션 반영)
     var hourVal = -1;
     if (!unknownTime && timeVal) {
       var p = timeVal.split(':');
       var hh = parseInt(p[0]), mm = parseInt(p[1]);
-      var adj = _adjustHourForTz(hh, mm, tzVal);
+      var adj = _adjustHourForTz(hh, mm, tzVal, useTST);
       hourVal = _hhmmToSijinHour(adj.hh, adj.mm);
     }
 
@@ -4108,11 +4116,13 @@ window.openPremiumInputModal = function(mode) {
 
     var newInfo = {
       name: nameVal || '고객',
-      birth: birthForEngine,
-      time: timeVal,           // HH:MM 원본
-      hour: hourVal,           // 시진 코드
+      birth: birthForEngine,        // 양력 환산값 (사주 엔진용)
+      birthInput: birthVal,         // 사용자 입력 원본
+      time: timeVal,                // HH:MM 원본
+      hour: hourVal,                // 시진 코드 (진태양시 옵션 반영)
       calendar: calendarVal,
       tz: tzVal,
+      useTST: useTST,
       gender: genderVal,
       marital: maritalVal,
       children: childrenVal
