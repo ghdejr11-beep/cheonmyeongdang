@@ -3838,10 +3838,22 @@ window.cmExecutePremium = function(mode, info) {
     try { window.renderSinnyeonEnhanced(); } catch(snErr) { console.warn('sinnyeon failed', snErr); }
   }
 
-  setTimeout(function() {
+  // 즉시 + setTimeout 두 번 호출 — smooth scroll이 무시되거나 element가 아직 layout 안 된 경우 대비
+  function _cmScrollToHero() {
     var t = document.getElementById('cm-mode-hero') || document.getElementById('saju-result');
-    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 200);
+    if (!t) return;
+    try { t.scrollIntoView({ behavior: 'auto', block: 'start' }); } catch(e) {}
+    // fallback — getBoundingClientRect 기반 직접 scroll
+    try {
+      var rect = t.getBoundingClientRect();
+      var absTop = rect.top + (window.pageYOffset || document.documentElement.scrollTop || 0);
+      window.scrollTo({ top: Math.max(0, absTop - 16), behavior: 'auto' });
+    } catch(e) {}
+  }
+  _cmScrollToHero();
+  setTimeout(_cmScrollToHero, 50);
+  setTimeout(_cmScrollToHero, 250);
+  setTimeout(_cmScrollToHero, 700);
 };
 
 // ─── 정밀 풀이 입력 모달 (사주/종합/신년운세 공통) ───
