@@ -74,20 +74,26 @@
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
 <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
 
-<!-- Entitlement 체크 — 광고 제거 결제자 / 월회원 / 행운패스(24h 광고 OFF 토큰) -->
+<!-- Entitlement 체크 — 광고 제거 결제자 / 월회원 / 1회성 풀이 / 인플루언서 쿠폰 / 행운패스 -->
 <script>
 (function(){
  try {
  var purchases = JSON.parse(localStorage.getItem('cm_purchases') || '[]');
  if (!Array.isArray(purchases)) purchases = [];
- var paidNoAds = purchases.indexOf('no_ads_9900') >= 0
- || purchases.indexOf('subscribe_monthly_29900') >= 0;
+ // 모든 유료/구독 SKU + 1회성 사주/종합 풀이 + 광고제거 → 광고 OFF
+ var PAID_SKUS = ['no_ads_9900','subscribe_monthly_29900','subscribe_basic_2900','saju_premium_9900','comprehensive_29900','comprehensive_15000','sinnyeon_15000'];
+ var paidNoAds = PAID_SKUS.some(function(s){ return purchases.indexOf(s) >= 0; });
+ // 인플루언서 30일 쿠폰: cm_premium_until 유효 → 광고 OFF
+ var premiumUntil = localStorage.getItem('cm_premium_until') || '';
+ var premiumEmail = localStorage.getItem('cm_premium_email') || '';
+ var influActive = premiumEmail && premiumUntil && Date.parse(premiumUntil) > Date.now();
  // 행운패스 = 이메일 등록 1회로 24시간 광고 OFF (재생성 가능)
  var luckyUntil = parseInt(localStorage.getItem('cm_lucky_pass_until') || '0', 10);
  var luckyActive = luckyUntil > Date.now();
- if (paidNoAds || luckyActive) {
+ if (paidNoAds || influActive || luckyActive) {
  document.documentElement.classList.add('cm-no-ads');
- if (luckyActive && !paidNoAds) document.documentElement.classList.add('cm-lucky-pass');
+ if (influActive && !paidNoAds) document.documentElement.classList.add('cm-influencer-pass');
+ if (luckyActive && !paidNoAds && !influActive) document.documentElement.classList.add('cm-lucky-pass');
  // AdSense 스크립트 자체 로드 차단 — head에 추가될 후속 script 태그 무시
  window.adsbygoogle = window.adsbygoogle || [];
  window.adsbygoogle.push = function(){ return 0; };
@@ -3504,7 +3510,85 @@ async function redeemCoupon(ev){
     });
   } catch(e) { console.warn('coupon_redeem callback failed', e); }
 })();
+
+// ─── 결제 후 사주 결과 자동 렌더 (success.html → 사주 풀이 보기 클릭) ───
+// URL: /?view_saju=1&email=XXX#saju-result
+(function handleViewSajuCallback(){
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('view_saju') !== '1') return;
+    var email = (params.get('email') || '').toLowerCase().trim();
+    if (email) {
+      try {
+        var ui = JSON.parse(localStorage.getItem('cm_user_info') || '{}');
+        ui.email = email;
+        localStorage.setItem('cm_user_info', JSON.stringify(ui));
+        localStorage.setItem('cm_premium_email', email);
+      } catch(e) {}
+    }
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        try {
+          var saved = JSON.parse(localStorage.getItem('cm_user_info') || '{}');
+          if (!saved.birth) {
+            // 생년월일이 저장돼 있지 않으면 사주 섹션으로 스크롤만
+            var sajuSec = document.getElementById('saju');
+            if (sajuSec) sajuSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return;
+          }
+          // 사주 폼 자동 채움
+          if (typeof setDatePickerValue === 'function') {
+            setDatePickerValue('saju-date', saved.birth);
+          } else {
+            var dateEl = document.getElementById('saju-date');
+            if (dateEl) dateEl.value = saved.birth;
+          }
+          if (saved.hour) {
+            var hourEl = document.getElementById('saju-hour');
+            if (hourEl) hourEl.value = saved.hour;
+          }
+          if (saved.gender) {
+            document.querySelectorAll('input[name="saju-gender"]').forEach(function(r) {
+              r.checked = (r.value === saved.gender);
+              var parent = r.closest('.gender-btn');
+              if (parent) parent.classList.toggle('selected', r.checked);
+            });
+          }
+          if (saved.marital) {
+            var mEl = document.getElementById('saju-marital');
+            if (mEl) mEl.value = saved.marital;
+          }
+          if (saved.children !== undefined) {
+            var cEl = document.getElementById('saju-children');
+            if (cEl) cEl.value = saved.children;
+          }
+          // 사주 분석 자동 실행
+          if (typeof runSajuAnalysis === 'function') {
+            runSajuAnalysis();
+            // 결과 영역으로 스크롤
+            setTimeout(function() {
+              var resEl = document.getElementById('saju-result');
+              if (resEl) resEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 600);
+          }
+          // URL 정리
+          try { window.history.replaceState({}, '', '/'); } catch(e) {}
+        } catch(e) { console.warn('view_saju auto-render failed', e); }
+      }, 800);
+    });
+  } catch(e) { console.warn('view_saju callback failed', e); }
+})();
 </script>
+
+<!-- 🔥 24h FLASH SALE banner -->
+<section style="background:linear-gradient(135deg,rgba(220,38,38,0.18),rgba(255,140,66,0.12));border:2px solid rgba(255,140,66,0.5);border-radius:16px;padding:22px 28px;margin:32px auto;max-width:1080px;text-align:center;">
+  <div style="font-size:0.78rem;letter-spacing:0.2em;color:#ff8c42;margin-bottom:6px;font-weight:700;">⏰ 24H FLASH SALE</div>
+  <h2 style="color:#ff8c42;font-size:1.6rem;margin:6px 0 8px;font-weight:900;">🔥 KunStudio Gumroad 7개 상품 50% OFF 🔥</h2>
+  <p style="color:var(--text);font-size:0.92rem;margin:0 0 12px;">Korean Saju · Wisdom Planner · Notion 5-Pack · Wall Art · Tax Guide · Productivity Planner · AI Side Hustle Tracker</p>
+  <div style="display:inline-block;background:rgba(255,255,255,0.9);color:#0a0d18;padding:10px 22px;border-radius:8px;font-family:'Playfair Display',monospace;font-size:1.4rem;font-weight:900;letter-spacing:0.15em;margin:6px 0;">FLASH507</div>
+  <p style="color:var(--text2);font-size:0.78rem;margin:8px 0 14px;">코드 입력 시 결제 페이지에서 즉시 50% 할인 (각 상품 선착순 20개)</p>
+  <a href="https://ghdejr.gumroad.com/" target="_blank" rel="noopener" style="display:inline-block;background:linear-gradient(135deg,#ff8c42,#dc2626);color:#fff;padding:12px 32px;border-radius:24px;font-weight:800;text-decoration:none;font-size:0.95rem;box-shadow:0 4px 16px rgba(220,38,38,0.4);">→ Gumroad 50% OFF 보러가기</a>
+</section>
 
 <!-- 글로벌 영문 디지털 상품 cross-sell (20 PDF) -->
 <section style="background:rgba(74,158,142,0.06);border:1px solid rgba(74,158,142,0.2);border-radius:16px;padding:28px;margin:32px auto;max-width:1080px;">
@@ -3634,7 +3718,7 @@ async function redeemCoupon(ev){
 <script src="js/saju-engine.js?v=20260427d"></script>
 <script src="js/premium-saju.js?v=20260427d"></script>
 <script src="js/premium-render.js?v=20260427d"></script>
-<script src="js/gaewoonbeob.js?v=20260506a"></script>
+<script src="js/gaewoonbeob.js?v=20260507b-colors"></script>
 <script src="js/pdf-generator.js?v=20260506a"></script>
 <script>
 // Global scope (no IIFE)
@@ -4913,6 +4997,17 @@ ${buildDaeunTimelineSVG(r)}
  // AD GATE SYSTEM — 무료 콘텐츠(사주/궁합) 한정. 유료 SKU에는 적용 X
  // ============================================================
  function showAdGate(section) {
+ // 권한 보유자(결제자/구독자/인플루언서 쿠폰)는 광고 게이트 즉시 스킵
+ try {
+ if (document.documentElement.classList.contains('cm-no-ads')) return;
+ var purchases = JSON.parse(localStorage.getItem('cm_purchases') || '[]');
+ var PAID_SKUS = ['no_ads_9900','subscribe_monthly_29900','subscribe_basic_2900','saju_premium_9900','comprehensive_29900','comprehensive_15000','sinnyeon_15000'];
+ if (Array.isArray(purchases) && PAID_SKUS.some(function(s){ return purchases.indexOf(s) >= 0; })) return;
+ var premUntil = localStorage.getItem('cm_premium_until') || '';
+ var premEmail = localStorage.getItem('cm_premium_email') || '';
+ if (premEmail && premUntil && Date.parse(premUntil) > Date.now()) return;
+ if (window._cmEntitlementVerified === true) return;
+ } catch(e) {}
  const resultEl = document.getElementById(section + '-result');
  const overlayEl = document.getElementById(section + '-ad-overlay');
 
@@ -6306,6 +6401,43 @@ ${buildDaeunTimelineSVG(r)}
 
  window.openOrder = function(serviceName, price) {
  currentOrder = { serviceName: serviceName, price: price, orderId: '' };
+
+ // ─── 권한 보유자(인플루언서 쿠폰 / 결제 SKU) 즉시 차단: 결제 폼 자체를 띄우지 않음 ───
+ try {
+   var skuInfoPre = window.cmdLookupSku && window.cmdLookupSku(serviceName);
+   var skuIdPre = skuInfoPre && skuInfoPre.sku;
+   var purchasesPre = JSON.parse(localStorage.getItem('cm_purchases') || '[]');
+   var PAID_SKUS_PRE = ['no_ads_9900','subscribe_monthly_29900','subscribe_basic_2900','saju_premium_9900','comprehensive_29900','comprehensive_15000','sinnyeon_15000'];
+   var hasSkuPre = Array.isArray(purchasesPre) && (skuIdPre ? purchasesPre.indexOf(skuIdPre) >= 0 : PAID_SKUS_PRE.some(function(s){ return purchasesPre.indexOf(s) >= 0; }));
+   var premUntilPre = localStorage.getItem('cm_premium_until') || '';
+   var premEmailPre = localStorage.getItem('cm_premium_email') || '';
+   var influActivePre = premEmailPre && premUntilPre && Date.parse(premUntilPre) > Date.now();
+   if (hasSkuPre || influActivePre) {
+     var untilTxt2 = premUntilPre ? new Date(premUntilPre).toLocaleDateString('ko-KR') : '';
+     var msg2 = influActivePre
+       ? ('이미 30일 무료 구독이 활성 상태입니다.' + (untilTxt2 ? ('\n유효기간: ' + untilTxt2 + '까지') : '') + '\n\n추가 결제 없이 ' + serviceName + ' 결과를 확인하세요.')
+       : ('이미 ' + serviceName + ' 권한을 보유하고 계십니다. 결과를 바로 확인하세요.');
+     if (typeof showModal === 'function') showModal('무료 이용 가능', msg2);
+     else alert(msg2);
+     // 사주 정밀 풀이 → 사주 결과로, 궁합 → 궁합 결과로, 그 외는 메인으로
+     setTimeout(function() {
+       try {
+         if (serviceName.indexOf('사주') !== -1) {
+           var emailQ = encodeURIComponent((premEmailPre || '').toLowerCase());
+           window.location.href = '/?view_saju=1&email=' + emailQ + '#saju-result';
+         } else if (serviceName.indexOf('궁합') !== -1) {
+           var emailQ2 = encodeURIComponent((premEmailPre || '').toLowerCase());
+           window.location.href = '/compat.html?email=' + emailQ2 + '&auto=1';
+         } else {
+           var sajuSec = document.getElementById('saju');
+           if (sajuSec) sajuSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+         }
+       } catch(e) {}
+     }, 300);
+     return;
+   }
+ } catch(e) { console.warn('openOrder pre-check failed', e); }
+
  document.getElementById('order-service-name').textContent = serviceName;
  document.getElementById('order-price').textContent = price.toLocaleString() + '원';
  // 서비스에 따라 상대방 정보 섹션 토글 (궁합 상세 분석 시에만 표시)
@@ -6553,18 +6685,37 @@ ${buildDaeunTimelineSVG(r)}
        method: 'POST', headers: {'Content-Type':'application/json'},
        body: JSON.stringify({ email: email })
      }).then(function(r){ return r.json(); }).then(function(d){
-       if (d && d.ok && Array.isArray(d.skus) && d.skus.indexOf(skuIdAsync) >= 0) {
+       // 인플루언서 30일 무료 쿠폰 보유 → 모든 1회성·구독 결제 차단 (이미 무료 활성)
+       var hasInflu = d && d.ok && d.has_influencer_coupon === true;
+       var hasSku = d && d.ok && Array.isArray(d.skus) && d.skus.indexOf(skuIdAsync) >= 0;
+       if (hasInflu || hasSku) {
          try {
-           localStorage.setItem('cm_purchases', JSON.stringify(d.skus));
+           localStorage.setItem('cm_purchases', JSON.stringify(d.skus || []));
            localStorage.setItem('cm_premium_email', email);
+           if (d.influencer_valid_until) localStorage.setItem('cm_premium_until', d.influencer_valid_until);
          } catch(e) {}
-         runEntitlementSuccess(orderData, skuIdAsync, 'server-check');
+         var src = hasInflu ? 'influencer_coupon' : 'server-check';
+         if (hasInflu) {
+           var untilTxt = d.influencer_valid_until ? new Date(d.influencer_valid_until).toLocaleDateString('ko-KR') : '';
+           var msg = '이미 30일 무료 구독이 활성 상태입니다.' + (untilTxt ? ('\n유효기간: ' + untilTxt + '까지') : '') + '\n\n추가 결제 없이 ' + currentOrder.serviceName + ' 결과를 확인하세요.';
+           if (typeof showModal === 'function') showModal('무료 구독 활성', msg);
+           else alert(msg);
+         }
+         runEntitlementSuccess(orderData, skuIdAsync, src);
        } else {
          // 서버에 권한 없음 → 정상 결제 트리거
          _proceedToPayment(orderData);
        }
      }).catch(function(){
-       // 검증 네트워크 실패 시 정상 결제 진행 (사용자 마찰 최소화)
+       // 검증 네트워크 실패 — localStorage 캐시 (cm_premium_email + cm_premium_until)로 fallback 차단
+       try {
+         var cachedEmail = (localStorage.getItem('cm_premium_email') || '').toLowerCase().trim();
+         var cachedUntil = localStorage.getItem('cm_premium_until') || '';
+         if (cachedEmail && cachedEmail === email.toLowerCase().trim() && cachedUntil && Date.parse(cachedUntil) > Date.now()) {
+           runEntitlementSuccess(orderData, skuIdAsync, 'cache-fallback');
+           return;
+         }
+       } catch(e) {}
        _proceedToPayment(orderData);
      });
      return; // 정상 결제 흐름 차단 — 비동기 결과로 분기
@@ -7047,6 +7198,65 @@ ${buildDaeunTimelineSVG(r)}
  pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
  };
  html2pdf().set(opt).from(el).save();
+ }
+
+ // ─── PDF 30페이지 다운로드 (사주 결과 + 개운법 + 12개월 운세까지 saju-result 전체) ───
+ window.downloadSajuPDF = function() {
+ var el = document.getElementById('saju-result');
+ if (!el || el.classList.contains('hidden') || !el.innerHTML.trim()) {
+ if (typeof showModal === 'function') showModal('알림', '먼저 사주 분석을 실행해 주세요.');
+ else alert('먼저 사주 분석을 실행해 주세요.');
+ return;
+ }
+ // 광고 오버레이는 PDF에서 제외 (blurred-result 클래스 임시 제거)
+ var wasBlur = el.classList.contains('blurred-result');
+ if (wasBlur) el.classList.remove('blurred-result');
+ var overlay = document.getElementById('saju-ad-overlay');
+ var overlayWasShown = overlay && !overlay.classList.contains('hidden');
+ if (overlay) overlay.classList.add('hidden');
+
+ if (typeof html2pdf === 'undefined') {
+ var script = document.createElement('script');
+ script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+ script.onload = function() { _doSajuPdfDownload(el, wasBlur, overlayWasShown); };
+ script.onerror = function() {
+ if (wasBlur) el.classList.add('blurred-result');
+ if (overlayWasShown && overlay) overlay.classList.remove('hidden');
+ if (typeof showModal === 'function') showModal('실패', 'PDF 라이브러리 로드 실패. 인터넷 연결을 확인해 주세요.');
+ };
+ document.head.appendChild(script);
+ } else {
+ _doSajuPdfDownload(el, wasBlur, overlayWasShown);
+ }
+ };
+
+ function _doSajuPdfDownload(el, restoreBlur, restoreOverlay) {
+ var name = '고객';
+ try {
+ var ui = JSON.parse(localStorage.getItem('cm_user_info') || '{}');
+ if (ui.name) name = String(ui.name).replace(/[^가-힣A-Za-z0-9_-]/g, '') || '고객';
+ } catch(e) {}
+ var dateStr = new Date().toISOString().split('T')[0];
+ var opt = {
+ margin: [12, 10, 12, 10],
+ filename: '천명당_사주풀이_' + name + '_' + dateStr + '.pdf',
+ image: { type: 'jpeg', quality: 0.95 },
+ html2canvas: { scale: 2, useCORS: true, backgroundColor: '#0a0d18', logging: false },
+ jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
+ pagebreak: { mode: ['css', 'legacy'] }
+ };
+ if (typeof showModal === 'function') showModal('PDF 생성 중', '잠시만 기다려 주세요. (10~30초 소요)\n\n저장 위치: 다운로드 폴더\n파일명: ' + opt.filename);
+ html2pdf().set(opt).from(el).save().then(function(){
+ var overlay = document.getElementById('saju-ad-overlay');
+ if (restoreBlur) el.classList.add('blurred-result');
+ if (restoreOverlay && overlay) overlay.classList.remove('hidden');
+ }).catch(function(e){
+ console.error('saju pdf save failed', e);
+ var overlay = document.getElementById('saju-ad-overlay');
+ if (restoreBlur) el.classList.add('blurred-result');
+ if (restoreOverlay && overlay) overlay.classList.remove('hidden');
+ if (typeof showModal === 'function') showModal('실패', 'PDF 생성에 실패했습니다. 다시 시도해 주세요.\n오류: ' + (e && e.message ? e.message : '알 수 없음'));
+ });
  }
 
  // 사주 상담 (로컬 기반)
@@ -8116,7 +8326,11 @@ ${buildDaeunTimelineSVG(r)}
  { name: '돌아가신 할머니', icon: '&#128591;', meaning: '돌아가신 할머니나 할아버지가 꿈에 나타나는 것은 한국에서 대표적인 길몽으로 전해집니다. 조상의 가호가 함께 있음을 뜻하며, 특히 음식을 주시거나 머리를 쓰다듬어주시는 꿈이라면 큰 재물운과 건강운의 상승을 예고합니다. 말씀하신 내용을 기억하고 실천하면 더 좋습니다.', luck: '길', advice: '제사나 성묘를 통해 감사의 마음을 전해보세요.', lotto: [1, 9, 18, 27, 36, 45] },
  { name: '옛 친구', icon: '&#129309;', meaning: '오랫동안 연락이 끊긴 옛 친구가 꿈에 나타나는 것은 잊고 지낸 자신의 일부를 다시 만나는 과정입니다. 그 친구가 상징하는 시절의 가치관·꿈·열정을 되찾으라는 신호이며, 실제로 먼저 연락해보면 새로운 기회로 이어질 수 있습니다.', luck: '길', advice: '오늘 옛 친구 한 명에게 먼저 연락해보세요.', lotto: [4, 13, 22, 31, 40, 44] },
  { name: '은퇴한 선배', icon: '&#128100;', meaning: '퇴직했거나 은퇴한 선배·멘토가 꿈에 나오는 것은 인생의 방향성에 대한 깊은 고민이 있음을 반영합니다. 그들이 조언을 해주는 꿈이라면 실제로 그 분야의 멘토를 찾아 상담하는 것이 큰 도움이 되며, 장기 커리어 설계의 전환점이 될 수 있습니다.', luck: '길', advice: '신뢰할 수 있는 멘토에게 커피 한 잔 약속을 제안하세요.', lotto: [6, 15, 24, 33, 41, 45] }
- ]
+ ,
+        { name: '전연인', icon: '&#128148;', meaning: '꿈속에서 전 연인이 등장하는 것은 과거의 감정이나 미완성된 과제를 정리할 시기가 왔음을 알리는 신호입니다. 반드시 그 사람이 그리운 것이 아니라, 당신 내면에 묻어둔 감정·후회·아쉬움이 해소를 원하고 있다는 뜻입니다. 이 꿈 이후 새로운 인연이나 감정적 성장이 찾아오는 경우가 많으니 마음을 열어 두세요.', luck: '평', advice: '과거에 집착하기보다 현재의 인간관계에 집중하면 뜻밖의 좋은 인연이 가까이 있을 수 있습니다.', lotto: [4, 11, 19, 27, 33, 41] },
+        { name: '상사', icon: '&#128084;', meaning: '꿈에 직장 상사가 나타나는 것은 현실에서 권위·압박·인정 욕구와 관련된 감정이 표면으로 드러나는 것입니다. 상사가 칭찬하는 꿈은 자신감 상승과 승진·성과의 길조이며, 혼나는 꿈은 오히려 스스로 완벽을 추구하려는 내면의 긴장을 반영합니다. 꿈의 분위기를 잘 떠올려 현재 직장 내 에너지를 점검해 보세요.', luck: '길', advice: '직장에서 하고 싶은 말이나 아이디어가 있다면 지금이 바로 적극적으로 표현할 적기입니다.', lotto: [7, 15, 22, 30, 38, 44] },
+        { name: '연예인', icon: '&#127775;', meaning: '꿈속에서 연예인을 만나거나 함께 어울리는 장면은 당신이 지금 주목받고 싶은 욕구, 혹은 자신의 숨겨진 재능이 빛을 발하길 바라는 마음을 상징합니다. 그 연예인의 이미지가 밝고 화려할수록 사회적 성공과 명예운이 상승하는 시기임을 뜻하며, 창작·예술·대인관계 분야에서 특히 좋은 기운이 흐릅니다.', luck: '길', advice: '평소 묻어뒀던 끼나 재능을 SNS나 소모임에서 드러내 보세요. 예상치 못한 기회가 따라올 수 있습니다.', lotto: [3, 12, 21, 29, 36, 43] },
+      ]
  },
  food: {
  label: '음식꿈',

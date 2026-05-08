@@ -1444,6 +1444,18 @@ module.exports = async (req, res) => {
       0
     );
 
+    // ─── PayPal 일일 매출 monitor (Vercel Hobby 12 함수 한도 회피용 통합) ───
+    let paypalResult = null;
+    if (!isDryRun) {
+      try {
+        const { runPayPalMonitor } = require('../lib/paypal-monitor.js');
+        paypalResult = await runPayPalMonitor();
+      } catch (ppErr) {
+        console.error('[cron-followup] paypal monitor 실패:', ppErr);
+        paypalResult = { ok: false, error: ppErr.message || String(ppErr) };
+      }
+    }
+
     return res.status(cohortFails.length === cohortsToRun.length ? 500 : 200).json({
       mode: isTest ? 'test' : isDryRun ? 'dry-run' : 'cron',
       cohorts: cohortsToRun,
@@ -1451,6 +1463,7 @@ module.exports = async (req, res) => {
       total_sent: totalSent,
       cohort_failures: cohortFails,
       details: results,
+      paypal_monitor: paypalResult,
     });
   } catch (err) {
     console.error('[cron-followup] 치명 오류:', err);

@@ -1,0 +1,3 @@
+[09:00:02] [skip] BEEHIIV_API_KEY/BEEHIIV_PUB_ID missing — fall back to RSS import only
+[09:00:02] [guide] Beehiiv signup: https://www.beehiiv.com/sign-up — then paste API key + pub ID into .secrets
+[09:00:02] [guide] OR easier: Beehiiv settings → Import → RSS → paste https://kunstudio-kr.hashnode.dev/rss.xml

@@ -104,7 +104,17 @@
       "caption_long": "프리랜서·N잡러 평균 종소세 환급액 약 27만원 (수입 규모/경비에 따라 차이 있음).\n\n3.3% 원천징수가 1년 동안 쌓인 게 환급 가능한 금액입니다.\n신고 안 하면 그대로 국세청에 남고, 5년 지나면 사라집니다.\n\n무료 조회 1분이면 충분.\n5월 31일 마감 전에 확인하세요.\n\n👉 tax-n-benefit-api.vercel.app\n\n광고 · 세금N혜택 마케팅 (환급액은 개인 수입/경비에 따라 다릅니다)\n\n#종합소득세 #종소세 #환급 #프리랜서 #N잡러 #5월마감 #환급평균 #프리랜서절세",
       "date": "2026-05-07",
       "scheduled_time": "18:00",
-      "status": "pending"
+      "status": "posted",
+      "posted_at": "2026-05-07T18:01:21.278728",
+      "results": {
+        "bluesky": true,
+        "discord": true,
+        "mastodon": true,
+        "x": false,
+        "threads": true,
+        "instagram": true,
+        "facebook": true
+      }
     },
     {
       "type": "cards",

@@ -126,9 +126,24 @@
       var combinedColors = [].concat(dayEl.colors.slice(0,2), ysEl.colors.slice(0,1));
       var combinedNumbers = [dayEl.numbers[0], dayEl.numbers[1], ysEl.numbers[0], ysEl.numbers[1], dayEl.numbers[2]];
 
+      // 색상 이름 매핑 (한국어 + 한자 음역, 정통 오행 색명 기준)
+      var COLOR_NAMES = {
+        '#2E7D32': '진초록', '#43A047': '에메랄드', '#66BB6A': '연두',
+        '#D32F2F': '진홍', '#E53935': '주홍', '#EF5350': '산호색',
+        '#FBC02D': '황금색', '#F9A825': '호박색', '#A1887F': '갈색',
+        '#FAFAFA': '백색', '#E0E0E0': '은회색', '#FFD700': '황금',
+        '#0D47A1': '감청색', '#1565C0': '청옥색', '#37474F': '먹청색'
+      };
+
       var swatch = combinedColors.map(function(c){
-        return '<span style="display:inline-block;width:36px;height:36px;border-radius:8px;background:'+c+';border:1px solid rgba(255,255,255,0.2);margin-right:6px;vertical-align:middle;" title="'+c+'"></span>'+
-               '<span style="font-size:0.72rem;color:var(--text2);margin-right:14px;">'+c+'</span>';
+        var name = COLOR_NAMES[c] || '';
+        return '<span style="display:inline-flex;align-items:center;gap:6px;margin:0 14px 8px 0;vertical-align:middle;">'+
+               '<span style="display:inline-block;width:36px;height:36px;border-radius:8px;background:'+c+';border:1px solid rgba(255,255,255,0.2);" title="'+(name?name+' ':'')+c+'"></span>'+
+               '<span style="display:inline-flex;flex-direction:column;line-height:1.2;">'+
+                 (name ? '<span style="font-size:0.85rem;color:var(--text);font-weight:600;">'+name+'</span>' : '')+
+                 '<span style="font-size:0.7rem;color:var(--text2);font-family:\'Playfair Display\',monospace;">'+c+'</span>'+
+               '</span>'+
+               '</span>';
       }).join('');
 
       var html = '';

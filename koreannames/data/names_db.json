@@ -2825,6 +2825,744 @@
         "classically refined",
         "gracefully poised"
       ]
+    },
+    {
+      "romanized": "Jae-min",
+      "hangul": "재민",
+      "hanja": "載旻",
+      "gender": "male",
+      "meaning_short": "Boundless sky of talent",
+      "meaning_long": "재(載) means to carry, to be filled with; 민(旻) refers to the autumn sky—vast, clear, and limitless. Together they evoke a person whose talents are as expansive and brilliant as the open sky above.",
+      "popularity_2026": "trending",
+      "famous_examples": "NCT Jaemin (Na Jae-min), popular K-pop idol known for his visuals and charm",
+      "kpop_match": "NCT Dream Jaemin (youthful energy, visual appeal)",
+      "saju_meaning": "Metal element dominant; sharp intellect and refined aesthetic sensibility",
+      "pronunciation_guide": "JAY-min (like 'Jay' plus 'min')",
+      "personality_traits": [
+        "talented",
+        "charismatic",
+        "ambitious"
+      ]
+    },
+    {
+      "romanized": "Eun-seo",
+      "hangul": "은서",
+      "hanja": "恩瑞",
+      "gender": "female",
+      "meaning_short": "Grace and good fortune",
+      "meaning_long": "은(恩) means grace, kindness, and benevolence; 서(瑞) means auspicious and lucky. Together they bless a child with both inner goodness and outward fortune, suggesting a life filled with meaningful connections and positive outcomes.",
+      "popularity_2026": "top-10",
+      "famous_examples": "Consistently ranked in Korea's top 5 female baby names",
+      "kpop_match": "BLACKPINK Jisoo (elegant, graceful, beloved by all)",
+      "saju_meaning": "Earth element with Water influence; nurturing, reliable, and emotionally intelligent",
+      "pronunciation_guide": "EUN-suh (EUN rhymes with 'moon' without the 'm', suh like 'the')",
+      "personality_traits": [
+        "kind",
+        "fortunate",
+        "nurturing"
+      ]
+    },
+    {
+      "romanized": "Jun-seo",
+      "hangul": "준서",
+      "hanja": "俊瑞",
+      "gender": "male",
+      "meaning_short": "Brilliant and auspicious",
+      "meaning_long": "준(俊) means talented, handsome, and outstanding among peers; 서(瑞) means auspicious, a good omen. The combination suggests a remarkably gifted individual whose birth was itself a blessing to the family.",
+      "popularity_2026": "top-10",
+      "famous_examples": "One of the most popular boy names in South Korea for the 2020s generation",
+      "kpop_match": "Stray Kids Han (multitalented, creative, intense)",
+      "saju_meaning": "Fire and Metal elements; passionate drive balanced with precise execution",
+      "pronunciation_guide": "JOON-suh (JOON like 'June', suh like 'the')",
+      "personality_traits": [
+        "outstanding",
+        "driven",
+        "charismatic"
+      ]
+    },
+    {
+      "romanized": "Ye-won",
+      "hangul": "예원",
+      "hanja": "藝苑",
+      "gender": "female",
+      "meaning_short": "Garden of the arts",
+      "meaning_long": "예(藝) means art, skill, and creative mastery; 원(苑) means garden or a cultivated place of beauty. Together they evoke a person who is a living garden of artistic gifts, someone whose creativity blooms in all aspects of life.",
+      "popularity_2026": "rising",
+      "famous_examples": "Popular among arts school students and emerging K-pop trainees",
+      "kpop_match": "aespa Karina (artistic vision, polished talent, modern beauty)",
+      "saju_meaning": "Wood element; creative growth, artistic sensitivity, and natural elegance",
+      "pronunciation_guide": "YEH-won (YEH like 'yeah', won like 'one')",
+      "personality_traits": [
+        "artistic",
+        "refined",
+        "imaginative"
+      ]
+    },
+    {
+      "romanized": "Min-jae",
+      "hangul": "민재",
+      "hanja": "旻才",
+      "gender": "male",
+      "meaning_short": "Sky-high talent",
+      "meaning_long": "민(旻) evokes the vast autumn sky—clear, boundless, and high; 재(才) means talent, ability, and natural gift. Together they bless a child with gifts as limitless as the heavens, suggesting extraordinary capability and potential.",
+      "popularity_2026": "trending",
+      "famous_examples": "Common among Korean athletes, actors, and musicians",
+      "kpop_match": "GOT7 Jinyoung (versatile, multi-talented, intellectual)",
+      "saju_meaning": "Metal and Wood elements; sharp mind paired with creative versatility",
+      "pronunciation_guide": "MIN-jay (MIN rhymes with 'been', jay like the letter 'J')",
+      "personality_traits": [
+        "talented",
+        "versatile",
+        "ambitious"
+      ]
+    },
+    {
+      "romanized": "So-ra",
+      "hangul": "소라",
+      "hanja": "昭羅",
+      "gender": "female",
+      "meaning_short": "Radiant silk",
+      "meaning_long": "소(昭) means bright, luminous, and illustrious; 라(羅) refers to fine silk gauze, evoking delicacy and refinement. Together they describe a woman of luminous character and delicate grace, someone who shines softly and beautifully.",
+      "popularity_2026": "classic-revival",
+      "famous_examples": "Beloved name from the 1990s–2000s era, now making a nostalgic comeback",
+      "kpop_match": "BoA (pioneering, timeless, elegant)",
+      "saju_meaning": "Fire and Metal elements; inner brilliance with an outer refinement and poise",
+      "pronunciation_guide": "SOH-ra (SOH like 'so', ra like 'rah')",
+      "personality_traits": [
+        "radiant",
+        "refined",
+        "timeless"
+      ]
+    },
+    {
+      "romanized": "Woo-chan",
+      "hangul": "우찬",
+      "hanja": "宇燦",
+      "gender": "male",
+      "meaning_short": "Brilliant universe",
+      "meaning_long": "우(宇) means universe, cosmos, and infinite space; 찬(燦) means brilliant, dazzling, and resplendent. Together they depict a person whose brilliance is cosmic in scale—someone whose light touches and illuminates the entire world around them.",
+      "popularity_2026": "rising",
+      "famous_examples": "ASTRO Cha Eun-woo adjacent naming style; popular in idol fandoms",
+      "kpop_match": "ASTRO Cha Eun-woo (universe-level visual, magnetic presence)",
+      "saju_meaning": "Fire element dominant; passionate, radiant energy with universal appeal",
+      "pronunciation_guide": "WOO-chan (WOO like 'woo', chan like 'chahn')",
+      "personality_traits": [
+        "brilliant",
+        "magnetic",
+        "visionary"
+      ]
+    },
+    {
+      "romanized": "Seo-ah",
+      "hangul": "서아",
+      "hanja": "瑞雅",
+      "gender": "female",
+      "meaning_short": "Auspicious elegance",
+      "meaning_long": "서(瑞) carries the meaning of a lucky omen and auspicious blessing; 아(雅) means elegant, refined, and culturally sophisticated. Together they describe a girl destined for a graceful, blessed life filled with beauty and cultural richness.",
+      "popularity_2026": "top-10",
+      "famous_examples": "Widely used in Korean dramas and popular as a stage name for young actresses",
+      "kpop_match": "Red Velvet Irene (classic beauty, refined elegance)",
+      "saju_meaning": "Metal element; purity of character, aesthetic sensitivity, and graceful precision",
+      "pronunciation_guide": "SUH-ah (SUH like 'the', ah like 'aah')",
+      "personality_traits": [
+        "elegant",
+        "blessed",
+        "sophisticated"
+      ]
+    },
+    {
+      "romanized": "Sung-joon",
+      "hangul": "성준",
+      "hanja": "聖俊",
+      "gender": "male",
+      "meaning_short": "Sacred brilliance",
+      "meaning_long": "성(聖) means holy, sacred, and saintly—evoking a person of the highest moral character; 준(俊) means talented, outstanding, and handsome. Together they describe a man whose exceptional gifts are matched by an equally exceptional character.",
+      "popularity_2026": "stable",
+      "famous_examples": "Actor Lee Sung-joon; well-known in Korean entertainment",
+      "kpop_match": "EXO Suho (leader energy, moral compass, polished talent)",
+      "saju_meaning": "Fire and Metal elements; righteous passion with disciplined execution",
+      "pronunciation_guide": "SUNG-joon (SUNG rhymes with 'young', joon rhymes with 'moon')",
+      "personality_traits": [
+        "principled",
+        "outstanding",
+        "reliable"
+      ]
+    },
+    {
+      "romanized": "Da-sol",
+      "hangul": "다솔",
+      "hanja": "N/A (pure Korean)",
+      "gender": "female",
+      "meaning_short": "Many pines; abundant life",
+      "meaning_long": "다솔 is a pure Korean name meaning 'many pine trees.' Pine trees in Korean culture symbolize perseverance, longevity, and evergreen vitality through all seasons. A child named Da-sol carries the strength to thrive in all circumstances.",
+      "popularity_2026": "rising",
+      "famous_examples": "Growing in popularity as parents return to pure Korean names with natural meanings",
+      "kpop_match": "MAMAMOO Solar (vibrant, resilient, naturally powerful)",
+      "saju_meaning": "Wood element dominant; deep roots, unbreakable resilience, and perennial growth",
+      "pronunciation_guide": "DA-sol (DA like 'dah', sol like 'soul')",
+      "personality_traits": [
+        "resilient",
+        "steadfast",
+        "vibrant"
+      ]
+    },
+    {
+      "romanized": "Rae-won",
+      "hangul": "래원",
+      "hanja": "來苑",
+      "gender": "male",
+      "meaning_short": "A garden of arrivals",
+      "meaning_long": "래(來) means to come, to arrive, and to bring forth; 원(苑) means a cultivated garden or gathering place of beauty. Together they evoke a person whose presence transforms any space into a flourishing garden, and whose arrival is always welcomed.",
+      "popularity_2026": "emerging",
+      "famous_examples": "Modern K-drama style name gaining traction among younger parents",
+      "kpop_match": "Highlight Yoon Doojoon (warm, welcoming, community-centered)",
+      "saju_meaning": "Wood and Earth elements; growth-oriented, nurturing, and community-building",
+      "pronunciation_guide": "RAY-won (RAY like the word 'ray', won like 'one')",
+      "personality_traits": [
+        "welcoming",
+        "nurturing",
+        "magnetic"
+      ]
+    },
+    {
+      "romanized": "Chae-eun",
+      "hangul": "채은",
+      "hanja": "彩恩",
+      "gender": "female",
+      "meaning_short": "Colorful grace",
+      "meaning_long": "채(彩) means color, brilliance, and vibrant beauty—the full spectrum of life's richness; 은(恩) means grace, kindness, and benevolent love. Together they describe a child who brings the full colorful grace of life wherever she goes.",
+      "popularity_2026": "top-10",
+      "famous_examples": "Among the most popular girl names in Korea from 2015 to present",
+      "kpop_match": "ITZY Ryujin (colorful personality, graceful power, youthful energy)",
+      "saju_meaning": "Fire element with Water balance; vibrant expression tempered by emotional depth",
+      "pronunciation_guide": "CHAY-eun (CHAY like 'chai', eun like 'un' in 'under')",
+      "personality_traits": [
+        "vibrant",
+        "gracious",
+        "expressive"
+      ]
+    },
+    {
+      "romanized": "Hyuk-jin",
+      "hangul": "혁진",
+      "hanja": "赫珍",
+      "gender": "male",
+      "meaning_short": "Blazing and precious",
+      "meaning_long": "혁(赫) means brilliant, blazing, and illustrious—the light of achievement; 진(珍) means precious, rare, and treasured like a fine jewel. Together they describe a man of blazing talent who is also extraordinarily rare and deeply valued.",
+      "popularity_2026": "stable",
+      "famous_examples": "MONSTA X Hyungwon (stage presence, rare visual talent); common in idol trainee culture",
+      "kpop_match": "MONSTA X (powerful stage presence, rare talent)",
+      "saju_meaning": "Fire and Metal elements; fierce ambition polished to a brilliant shine",
+      "pronunciation_guide": "HYUK-jin (HYUK like 'hook' with a 'y', jin like 'gene')",
+      "personality_traits": [
+        "brilliant",
+        "rare",
+        "driven"
+      ]
+    },
+    {
+      "romanized": "Yoo-kyeong",
+      "hangul": "유경",
+      "hanja": "裕景",
+      "gender": "female",
+      "meaning_short": "Abundant and scenic",
+      "meaning_long": "유(裕) means abundant, prosperous, and generously endowed; 경(景) means scenery, a beautiful view, and bright light. Together they describe a woman whose life is rich and beautiful—a person whose presence enriches every landscape she inhabits.",
+      "popularity_2026": "classic",
+      "famous_examples": "Actress Yoo In-na's style; popular among Korean women born in the 1990s",
+      "kpop_match": "Girl's Generation Yoona (classic beauty, timeless appeal)",
+      "saju_meaning": "Earth and Fire elements; prosperity, warmth, and an enviable natural radiance",
+      "pronunciation_guide": "YOO-kyung (YOO like 'you', kyung like 'kyung' in 'kung fu' with a soft 'y')",
+      "personality_traits": [
+        "abundant",
+        "beautiful",
+        "prosperous"
+      ]
+    },
+    {
+      "romanized": "Hye-rin",
+      "hangul": "혜린",
+      "hanja": "慧麟",
+      "gender": "female",
+      "meaning_short": "Wise and mythical grace",
+      "meaning_long": "혜(慧) means wisdom, intelligence, and spiritual insight; 린(麟) refers to the qilin—a mythical creature of good fortune, grace, and the arrival of a great person. Together they describe a woman of extraordinary wisdom with an almost mythical, otherworldly presence.",
+      "popularity_2026": "classic-revival",
+      "famous_examples": "Actress Kim Hye-rin; popular in 1990s and returning now as a sophisticated choice",
+      "kpop_match": "EXID Hani (witty, charismatic, uniquely captivating)",
+      "saju_meaning": "Wood and Metal elements; insightful, rare, and exceptionally gifted",
+      "pronunciation_guide": "HYE-rin (HYE like 'hye' in 'hyena', rin like 'rean')",
+      "personality_traits": [
+        "wise",
+        "extraordinary",
+        "graceful"
+      ]
+    },
+    {
+      "romanized": "Shin-ae",
+      "hangul": "신애",
+      "hanja": "信愛",
+      "gender": "female",
+      "meaning_short": "Faithful love",
+      "meaning_long": "신(信) means faith, trust, and unwavering honesty; 애(愛) means love, affection, and deep care. Together they describe a person whose love is anchored in absolute faithfulness—someone who loves purely, truly, and without condition.",
+      "popularity_2026": "classic",
+      "famous_examples": "Actress Jeon Do-yeon won Cannes Best Actress for the film 'Secret Sunshine' (밀양/Miryang), featuring this name",
+      "kpop_match": "IU (deep emotional sincerity, faithful artistry, beloved by all)",
+      "saju_meaning": "Earth and Fire elements; love that is stable, warm, and enduring across all seasons",
+      "pronunciation_guide": "SHEEN-ay (SHEEN like 'sheen', ay like 'day' without the 'd')",
+      "personality_traits": [
+        "faithful",
+        "loving",
+        "sincere"
+      ]
+    },
+    {
+      "romanized": "Geon-woo",
+      "hangul": "건우",
+      "hanja": "健宇",
+      "gender": "male",
+      "meaning_short": "Strong as the universe",
+      "meaning_long": "건(健) means strong, healthy, and vigorous in body and spirit; 우(宇) means universe and infinite cosmic space. Together they describe a man of extraordinary strength whose influence extends outward like the universe itself—boundless and powerful.",
+      "popularity_2026": "stable",
+      "famous_examples": "Actor Ji Geon-woo; popular name in Korean action dramas",
+      "kpop_match": "2PM Nichkhun (physical strength, universal appeal, enduring star)",
+      "saju_meaning": "Wood and Metal elements; vigorous growth backed by unyielding structural strength",
+      "pronunciation_guide": "GUN-woo (GUN like 'gun', woo like 'woo')",
+      "personality_traits": [
+        "strong",
+        "healthy",
+        "boundless"
+      ]
+    },
+    {
+      "romanized": "Seung-hoon",
+      "hangul": "승훈",
+      "hanja": "承勳",
+      "gender": "male",
+      "meaning_short": "Inheriting great merit",
+      "meaning_long": "승(承) means to inherit, to carry on, and to succeed to a legacy; 훈(勳) means merit, distinguished service, and great achievement. Together they express the hope that a child will carry forward and build upon a legacy of honorable achievement.",
+      "popularity_2026": "classic",
+      "famous_examples": "INFINITE L (Kim Myung-soo); Seung-hoon is common in classic Korean naming tradition",
+      "kpop_match": "WINNER Seung-hoon (Nam Seung-hoon; choreographer, dedicated, legacy builder)",
+      "saju_meaning": "Earth and Fire elements; inheriting a strong foundation and igniting it with personal ambition",
+      "pronunciation_guide": "SEUNG-hoon (SEUNG like 'soong', hoon rhymes with 'moon')",
+      "personality_traits": [
+        "responsible",
+        "meritorious",
+        "legacy-minded"
+      ]
+    },
+    {
+      "romanized": "Ah-young",
+      "hangul": "아영",
+      "hanja": "雅英",
+      "gender": "female",
+      "meaning_short": "Elegant and heroic",
+      "meaning_long": "아(雅) means elegant, refined, and culturally sophisticated; 영(英) means heroic, outstanding, and brilliant like a flower in full bloom. Together they describe a woman of extraordinary refinement and heroic spirit—beautiful and capable in equal measure.",
+      "popularity_2026": "classic-revival",
+      "famous_examples": "Actress Park Ah-young; Ryu Ah-young; popular name in Korean film and drama",
+      "kpop_match": "Girls' Generation Taeyeon (refined artistry, heroic perseverance, elegant presence)",
+      "saju_meaning": "Wood and Metal elements; elegant creativity with the strength of a true standout",
+      "pronunciation_guide": "AH-young (AH like 'aah', young like the word 'young')",
+      "personality_traits": [
+        "elegant",
+        "heroic",
+        "outstanding"
+      ]
+    },
+    {
+      "romanized": "Chan-hyuk",
+      "hangul": "찬혁",
+      "hanja": "燦赫",
+      "gender": "male",
+      "meaning_short": "Dazzling brilliance",
+      "meaning_long": "찬(燦) means dazzling, brilliant, and resplendently bright; 혁(赫) means illustrious, blazing, and distinguished. Both characters reinforce the same powerful idea: a man whose brilliance is impossible to ignore—a light that commands attention wherever it shines.",
+      "popularity_2026": "trending",
+      "famous_examples": "AKMU Chanhyuk (Lee Chan-hyuk), multi-talented singer-songwriter with unique artistic vision",
+      "kpop_match": "AKMU Chanhyuk (deeply creative, brilliantly unconventional, dazzling talent)",
+      "saju_meaning": "Fire element dominant; blazing Yang energy, creative passion, and unstoppable radiance",
+      "pronunciation_guide": "CHAN-hyuk (CHAN like 'chahn', hyuk like 'hyook')",
+      "personality_traits": [
+        "brilliant",
+        "creative",
+        "radiant"
+      ]
+    },
+    {
+      "romanized": "Ik-jun",
+      "hangul": "익준",
+      "hanja": "益俊",
+      "gender": "male",
+      "meaning_short": "Beneficial and outstanding",
+      "meaning_long": "익(益) means benefit, profit, and adding value to the world; 준(俊) means outstanding, talented, and exceptional. Together they describe a man whose extraordinary talents are generously used to benefit and uplift others—gifted and giving simultaneously.",
+      "popularity_2026": "rising",
+      "famous_examples": "Popularized by the beloved character Lee Ik-jun in Hospital Playlist (슬기로운 의사생활)",
+      "kpop_match": "BTS J-Hope (spreading joy and benefit, outstanding performer, naturally uplifting)",
+      "saju_meaning": "Wood and Earth elements; grows in order to give, natural teacher and community enricher",
+      "pronunciation_guide": "IK-joon (IK like 'ick', joon rhymes with 'moon')",
+      "personality_traits": [
+        "generous",
+        "outstanding",
+        "uplifting"
+      ]
+    },
+    {
+      "romanized": "Seong-min",
+      "hangul": "성민",
+      "hanja": "成旻",
+      "gender": "male",
+      "meaning_short": "Achieving toward the sky",
+      "meaning_long": "성(成) means to achieve, to accomplish, and to successfully complete; 민(旻) evokes the vast autumn sky—boundless, clear, and lofty. Together they describe an achiever whose ambitions are as high as the sky itself and whose will is strong enough to reach them.",
+      "popularity_2026": "stable",
+      "famous_examples": "Super Junior Sungmin (Kim Sung-min); common in first and second generation K-pop",
+      "kpop_match": "Super Junior Sungmin (skilled, ambitious, devoted to craft)",
+      "saju_meaning": "Metal and Fire elements; disciplined achievement fueled by passionate drive",
+      "pronunciation_guide": "SUNG-min (SUNG rhymes with 'young', min rhymes with 'been')",
+      "personality_traits": [
+        "achiever",
+        "ambitious",
+        "sky-reaching"
+      ]
+    },
+    {
+      "romanized": "Ga-ram",
+      "hangul": "가람",
+      "hanja": "N/A (pure Korean)",
+      "gender": "unisex",
+      "meaning_short": "River",
+      "meaning_long": "가람 is the pure native Korean word for 'river.' Rivers in Korean culture symbolize the continuous flow of life, sustaining nourishment, a steady journey toward the vast sea, and the graceful navigation of obstacles. A truly poetic nature name.",
+      "popularity_2026": "rising",
+      "famous_examples": "Growing trend among parents favoring pure Korean over Hanja-based names",
+      "kpop_match": "BTS Suga (flows effortlessly between states, deep and purposeful like a river)",
+      "saju_meaning": "Water element dominant; flowing, adaptable, life-giving, and naturally purposeful",
+      "pronunciation_guide": "GA-ram (GA like 'gah', ram like 'rahm')",
+      "personality_traits": [
+        "flowing",
+        "adaptable",
+        "sustaining"
+      ]
+    },
+    {
+      "romanized": "In-woo",
+      "hangul": "인우",
+      "hanja": "仁宇",
+      "gender": "male",
+      "meaning_short": "Benevolent universe",
+      "meaning_long": "인(仁) is the supreme Confucian virtue of benevolence—humaneness, compassion, and loving kindness toward all people; 우(宇) means universe and infinite space. Together they describe a person whose compassion is universal and boundless in its reach.",
+      "popularity_2026": "trending",
+      "famous_examples": "Popular in 2020s K-dramas as a name for morally upright male leads",
+      "kpop_match": "EXO D.O. (Kyungsoo; deeply human, quietly compassionate, universally respected)",
+      "saju_meaning": "Water and Earth elements; deep compassion grounded in unwavering moral strength",
+      "pronunciation_guide": "IN-woo (IN like 'in', woo like 'woo')",
+      "personality_traits": [
+        "compassionate",
+        "universal",
+        "virtuous"
+      ]
+    },
+    {
+      "romanized": "Yoon-seo",
+      "hangul": "윤서",
+      "hanja": "潤瑞",
+      "gender": "female",
+      "meaning_short": "Nourishing good fortune",
+      "meaning_long": "윤(潤) means to moisten, nourish, and enrich—like rain that blesses the earth; 서(瑞) means auspicious and fortunate. Together they describe a girl who brings nourishment and good fortune wherever she goes, enriching lives like gentle, life-giving rain.",
+      "popularity_2026": "top-10",
+      "famous_examples": "One of the most popular female names in South Korea in 2023–2025",
+      "kpop_match": "TWICE Mina (nourishing presence, quietly fortunate, beautifully impactful)",
+      "saju_meaning": "Water element dominant; deeply nourishing, bringing life and luck to all around",
+      "pronunciation_guide": "YOON-suh (YOON rhymes with 'moon', suh like 'the')",
+      "personality_traits": [
+        "nourishing",
+        "fortunate",
+        "enriching"
+      ]
+    },
+    {
+      "romanized": "Hyeon-jun",
+      "hangul": "현준",
+      "hanja": "賢俊",
+      "gender": "male",
+      "meaning_short": "Virtuous and outstanding",
+      "meaning_long": "현(賢) means wise, virtuous, and morally excellent; 준(俊) means talented, outstanding, and distinguished above peers. Together they describe a man who unites both inner virtue and outer excellence—someone admired for who he is as much as for what he achieves.",
+      "popularity_2026": "top-10",
+      "famous_examples": "Consistently top-ranked boy name in South Korea from 2018 to present",
+      "kpop_match": "Wanna One Hwang Minhyun (virtuous image, outstanding talent, beloved by all)",
+      "saju_meaning": "Metal element with Wood balance; principled character growing into outstanding achievement",
+      "pronunciation_guide": "HYUN-joon (HYUN like 'hewn', joon rhymes with 'moon')",
+      "personality_traits": [
+        "virtuous",
+        "outstanding",
+        "admirable"
+      ]
+    },
+    {
+      "romanized": "Mi-rae",
+      "hangul": "미래",
+      "hanja": "美來",
+      "gender": "female",
+      "meaning_short": "Beautiful future",
+      "meaning_long": "미(美) means beautiful, fine, and everything that is wonderful; 래(來) means to come, to arrive, and the future that is coming. Together they give a child the most hopeful of names—beautiful future—expressing boundless optimism for the life ahead.",
+      "popularity_2026": "rising",
+      "famous_examples": "Popular in K-dramas as an optimistic, forward-looking character name",
+      "kpop_match": "MAMAMOO Wheein (creative, optimistic, painting a beautiful future)",
+      "saju_meaning": "Fire and Wood elements; the bright future grows from creative, passionate roots",
+      "pronunciation_guide": "MEE-ray (MEE like 'me', ray like the word 'ray')",
+      "personality_traits": [
+        "optimistic",
+        "beautiful",
+        "forward-looking"
+      ]
+    },
+    {
+      "romanized": "Sang-yeon",
+      "hangul": "상연",
+      "hanja": "想衍",
+      "gender": "male",
+      "meaning_short": "Overflowing imagination",
+      "meaning_long": "상(想) means to think, imagine, and dream deeply; 연(衍) means to overflow, to spread abundantly, and to expand without limit. Together they describe a creative mind whose imagination overflows its banks, flooding the world with new ideas and visions.",
+      "popularity_2026": "emerging",
+      "famous_examples": "Gaining traction in artistic and creative circles in Korea",
+      "kpop_match": "BTS RM (intellectual creativity, overflowing imagination, artistic vision)",
+      "saju_meaning": "Wood and Water elements; creative roots drawing on deep emotional wellsprings",
+      "pronunciation_guide": "SANG-yuhn (SANG like 'sang', yuhn like soft 'yun')",
+      "personality_traits": [
+        "imaginative",
+        "creative",
+        "expansive"
+      ]
+    },
+    {
+      "romanized": "Cho-hee",
+      "hangul": "초희",
+      "hanja": "初熙",
+      "gender": "female",
+      "meaning_short": "First brilliant joy",
+      "meaning_long": "초(初) means the beginning, the first, and the original—the pristine start of all things; 희(熙) means radiant joy, prosperity, and brilliance. Together they describe a firstborn or pioneering spirit whose life begins with extraordinary radiance and joy.",
+      "popularity_2026": "classic-revival",
+      "famous_examples": "Actress Choi Cho-hee; historical figure Hwang Jini; classic Korean literary name",
+      "kpop_match": "CL (pioneering, radiant, first of her kind)",
+      "saju_meaning": "Fire element; the original spark, the first light, burning brightly from the very start",
+      "pronunciation_guide": "CHO-hee (CHO like 'choh', hee like 'hee')",
+      "personality_traits": [
+        "pioneering",
+        "joyful",
+        "original"
+      ]
+    },
+    {
+      "romanized": "Yoo-chan",
+      "hangul": "유찬",
+      "hanja": "裕燦",
+      "gender": "male",
+      "meaning_short": "Abundant brilliance",
+      "meaning_long": "유(裕) means abundant, prosperous, and generously endowed; 찬(燦) means dazzlingly brilliant and resplendently bright. Together they describe a child who is abundantly gifted in every way—someone whose brilliance is matched only by their generosity of spirit.",
+      "popularity_2026": "rising",
+      "famous_examples": "Popular among K-pop trainee generation names",
+      "kpop_match": "SEVENTEEN Seungkwan (abundantly talented, brilliantly expressive, generous performer)",
+      "saju_meaning": "Fire and Earth elements; brilliant talent nourished by a stable, generous foundation",
+      "pronunciation_guide": "YOO-chan (YOO like 'you', chan like 'chahn')",
+      "personality_traits": [
+        "abundant",
+        "brilliant",
+        "generous"
+      ]
+    },
+    {
+      "romanized": "Eun-ha",
+      "hangul": "은하",
+      "hanja": "銀河",
+      "gender": "female",
+      "meaning_short": "Silver river; Milky Way",
+      "meaning_long": "은(銀) means silver, precious and luminous; 하(河) means river and flowing water. Together 은하 is the Korean word for the Milky Way galaxy—the Silver River in the sky. A child named Eun-ha carries the cosmos in her name, born to shine on a universal scale.",
+      "popularity_2026": "trending",
+      "famous_examples": "GFRIEND Eunha (Jung Eun-ha), beloved K-pop idol with ethereal stage presence",
+      "kpop_match": "GFRIEND Eunha (galaxy-level beauty, cosmic stage presence, beloved)",
+      "saju_meaning": "Water and Metal elements; the silver luminosity of stars reflecting in deep cosmic waters",
+      "pronunciation_guide": "EUN-ha (EUN like 'un' in 'under', ha like 'hah')",
+      "personality_traits": [
+        "cosmic",
+        "luminous",
+        "ethereal"
+      ]
+    },
+    {
+      "romanized": "Hyun-tae",
+      "hangul": "현태",
+      "hanja": "賢泰",
+      "gender": "male",
+      "meaning_short": "Wise and great",
+      "meaning_long": "현(賢) means wise, virtuous, and morally excellent; 태(泰) means great, peaceful, and in a state of supreme well-being. Together they describe a man of profound wisdom who carries himself with great peace and magnanimous spirit—a naturally revered figure.",
+      "popularity_2026": "stable",
+      "famous_examples": "Popular among older millennials and Gen-X Koreans; gaining new appreciation",
+      "kpop_match": "BIGBANG T.O.P (wise, grand, commanding dignified presence)",
+      "saju_meaning": "Earth and Metal elements; peaceful wisdom rooted in unshakeable moral ground",
+      "pronunciation_guide": "HYUN-tay (HYUN like 'hewn', tay like 'tay')",
+      "personality_traits": [
+        "wise",
+        "peaceful",
+        "magnanimous"
+      ]
+    },
+    {
+      "romanized": "Yeo-jin",
+      "hangul": "여진",
+      "hanja": "麗珍",
+      "gender": "female",
+      "meaning_short": "Beautiful treasure",
+      "meaning_long": "여(麗) means beautiful, magnificent, and splendidly radiant—a beauty that commands admiration; 진(珍) means precious, rare, and treasured. Together they describe a woman who is not merely beautiful but a rare treasure whose value only grows over time.",
+      "popularity_2026": "classic",
+      "famous_examples": "Actress Kim Yeo-jin; Oh Yeon-seo; classic Korean feminine name with elegant depth",
+      "kpop_match": "Miss A Suzy (rare treasure beauty, elegant magnificence, timeless appeal)",
+      "saju_meaning": "Fire and Metal elements; magnificent beauty that is as enduring as precious metal",
+      "pronunciation_guide": "YUH-jin (YUH like 'yuh', jin like 'gene')",
+      "personality_traits": [
+        "beautiful",
+        "precious",
+        "magnificent"
+      ]
+    },
+    {
+      "romanized": "Baek-joon",
+      "hangul": "백준",
+      "hanja": "伯俊",
+      "gender": "male",
+      "meaning_short": "First among the outstanding",
+      "meaning_long": "백(伯) means the eldest, the first, the chief, and the one who leads among peers; 준(俊) means outstanding, talented, and exceptionally gifted. Together they create a name of bold aspiration—the first and greatest among exceptional people.",
+      "popularity_2026": "emerging",
+      "famous_examples": "Growing in use; also connected to BOJ (Baekjoon Online Judge), Korea's most famous coding platform",
+      "kpop_match": "EXO Baekhyun (first in everything, outstanding talent, leads the pack)",
+      "saju_meaning": "Metal element dominant; natural leadership, standards of excellence, first-among-equals energy",
+      "pronunciation_guide": "BAEK-joon (BAEK like 'beck', joon rhymes with 'moon')",
+      "personality_traits": [
+        "leading",
+        "outstanding",
+        "first-rate"
+      ]
+    },
+    {
+      "romanized": "Seul-gi",
+      "hangul": "슬기",
+      "hanja": "N/A (pure Korean)",
+      "gender": "unisex",
+      "meaning_short": "Wisdom; clever insight",
+      "meaning_long": "슬기 is the pure Korean word for wisdom and clever insight—the kind of practical intelligence that navigates life's challenges with skill and grace. It is a name that honors intellect not as an academic quality but as a living, active wisdom.",
+      "popularity_2026": "stable",
+      "famous_examples": "Red Velvet Seulgi (Kang Seul-gi), beloved K-pop idol renowned for dance skill and bright energy",
+      "kpop_match": "Red Velvet Seulgi (wise in performance, skillfully clever, practically gifted)",
+      "saju_meaning": "Metal and Water elements; sharp, clear wisdom that flows into practical, graceful action",
+      "pronunciation_guide": "SEUL-gee (SEUL like 'soul' without the 'o', gee like 'gee')",
+      "personality_traits": [
+        "wise",
+        "clever",
+        "skillful"
+      ]
+    },
+    {
+      "romanized": "Ryu-seo",
+      "hangul": "류서",
+      "hanja": "流瑞",
+      "gender": "male",
+      "meaning_short": "Flowing fortune",
+      "meaning_long": "류(流) means to flow, stream, and move with natural ease and grace; 서(瑞) means auspicious, lucky, and a good omen. Together they describe a person through whom good fortune flows naturally and effortlessly—someone who brings luck wherever life takes them.",
+      "popularity_2026": "emerging",
+      "famous_examples": "Modern K-drama naming trend; appears in contemporary Korean fiction",
+      "kpop_match": "Highlight Gikwang (naturally fluid performer, fortunate charisma, effortlessly cool)",
+      "saju_meaning": "Water element dominant; fortune that flows freely, navigating all obstacles with natural ease",
+      "pronunciation_guide": "RYOO-suh (RYOO like 'ryu', suh like 'the')",
+      "personality_traits": [
+        "flowing",
+        "fortunate",
+        "effortless"
+      ]
+    },
+    {
+      "romanized": "Ah-jin",
+      "hangul": "아진",
+      "hanja": "雅珍",
+      "gender": "female",
+      "meaning_short": "Elegant treasure",
+      "meaning_long": "아(雅) means elegant, refined, and possessing a classical, sophisticated beauty; 진(珍) means precious and rare like a fine jewel. Together they describe a woman of exquisite, classical elegance who is treasured for the depth and refinement of her character.",
+      "popularity_2026": "rising",
+      "famous_examples": "Gaining popularity as a softer alternative to Ji-young and Soo-jin",
+      "kpop_match": "SISTAR Hyolyn (elegant refinement beneath powerful presence, truly treasured talent)",
+      "saju_meaning": "Metal element; classical elegance, refined taste, and lasting precious value",
+      "pronunciation_guide": "AH-jin (AH like 'aah', jin like 'gene')",
+      "personality_traits": [
+        "elegant",
+        "precious",
+        "refined"
+      ]
+    },
+    {
+      "romanized": "Gyeong-su",
+      "hangul": "경수",
+      "hanja": "慶秀",
+      "gender": "male",
+      "meaning_short": "Joyful excellence",
+      "meaning_long": "경(慶) means joy, congratulations, and a cause for celebration; 수(秀) means excellent, exceptional, and standing out beautifully above all others. Together they describe a person whose very excellence is a reason for celebration—someone whose achievements bring joy to all who know them.",
+      "popularity_2026": "stable",
+      "famous_examples": "EXO D.O. (Do Kyung-soo); famous actor and singer with this name",
+      "kpop_match": "EXO D.O. (Do Kyung-soo; quiet excellence, joyful when performing, celebrated talent)",
+      "saju_meaning": "Fire and Wood elements; celebratory excellence that blooms and grows with natural vitality",
+      "pronunciation_guide": "GYUNG-soo (GYUNG like 'young' with a 'g', soo like 'sue')",
+      "personality_traits": [
+        "excellent",
+        "joyful",
+        "celebrated"
+      ]
+    },
+    {
+      "romanized": "Nae-rin",
+      "hangul": "내린",
+      "hanja": "奈麟",
+      "gender": "female",
+      "meaning_short": "Enduring and mythical grace",
+      "meaning_long": "내(奈) means to endure, persevere through hardship, and face what comes with grace; 린(麟) refers to the qilin, the mythical creature symbolizing the arrival of a great sage and extraordinary fortune. Together they describe a woman of remarkable endurance and mythical grace.",
+      "popularity_2026": "emerging",
+      "famous_examples": "Growing in use among parents who seek both strength and elegance in a name",
+      "kpop_match": "TWICE Chaeyoung (enduring artistry, quietly mythical creative presence)",
+      "saju_meaning": "Earth and Wood elements; endurance through all seasons, eventually flowering into extraordinary grace",
+      "pronunciation_guide": "NAY-rin (NAY like 'nay', rin like 'rean')",
+      "personality_traits": [
+        "enduring",
+        "graceful",
+        "extraordinary"
+      ]
+    },
+    {
+      "romanized": "Sung-hyun",
+      "hangul": "성현",
+      "hanja": "聖賢",
+      "gender": "male",
+      "meaning_short": "Holy wisdom",
+      "meaning_long": "성(聖) means holy, sacred, and of the highest moral order—the sagehood of Confucian tradition; 현(賢) means wise, virtuous, and morally excellent. Together these two powerful virtue characters describe someone destined to be a sage—a person of exemplary wisdom and character.",
+      "popularity_2026": "classic",
+      "famous_examples": "Historical usage refers to Confucian sages; common among academics and leaders",
+      "kpop_match": "EXO Suho (Kim Jun-myeon; sage-like leadership, holy dedication to his craft)",
+      "saju_meaning": "Metal element dominant; the highest refined virtue, moral clarity, and exemplary character",
+      "pronunciation_guide": "SUNG-hyun (SUNG rhymes with 'young', hyun like 'hewn')",
+      "personality_traits": [
+        "sage-like",
+        "virtuous",
+        "exemplary"
+      ]
+    },
+    {
+      "romanized": "Seo-hyeon",
+      "hangul": "서현",
+      "hanja": "瑞賢",
+      "gender": "female",
+      "meaning_short": "Auspicious and virtuous",
+      "meaning_long": "서(瑞) means auspicious, lucky, and a good omen from heaven; 현(賢) means wise, virtuous, and morally excellent. Together they describe a girl who brings good fortune through her virtue—someone whose wisdom and goodness are themselves a blessing to the world.",
+      "popularity_2026": "top-10",
+      "famous_examples": "Girls' Generation Seohyun (Seo Joo-hyun), K-pop idol and actress known for her intellect and grace",
+      "kpop_match": "Girls' Generation Seohyun (auspiciously talented, virtuously disciplined, enduringly beloved)",
+      "saju_meaning": "Metal and Earth elements; fortunate virtue grounded in practical wisdom and stable character",
+      "pronunciation_guide": "SUH-hyun (SUH like 'the', hyun like 'hewn')",
+      "personality_traits": [
+        "virtuous",
+        "auspicious",
+        "wise"
+      ]
     }
   ]
 }

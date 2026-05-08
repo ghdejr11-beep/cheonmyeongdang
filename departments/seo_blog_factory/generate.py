@@ -245,11 +245,53 @@ Output format (strict JSON, no extra text):
         data = json.loads(r.read())
 
     text = data["content"][0]["text"]
-    # JSON 추출 (코드 블록 안에 있을 수 있음)
-    match = re.search(r"\{[\s\S]*\}", text)
-    if not match:
-        raise RuntimeError(f"no JSON in: {text[:200]}")
-    return json.loads(match.group(0))
+    # JSON 추출 (코드 블록 안에 있을 수 있음) — 다중 fallback 패턴
+    candidates = []
+    # 1. ```json ... ``` code block 우선
+    cb = re.search(r"```(?:json)?\s*(\{[\s\S]*?\})\s*```", text)
+    if cb:
+        candidates.append(cb.group(1))
+    # 2. greedy outermost braces
+    g = re.search(r"\{[\s\S]*\}", text)
+    if g:
+        candidates.append(g.group(0))
+    # 3. first balanced JSON object (brace counter)
+    start = text.find("{")
+    if start >= 0:
+        depth = 0
+        in_str = False
+        esc = False
+        for i in range(start, len(text)):
+            ch = text[i]
+            if esc:
+                esc = False
+                continue
+            if ch == "\\":
+                esc = True
+                continue
+            if ch == '"' and not esc:
+                in_str = not in_str
+                continue
+            if in_str:
+                continue
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    candidates.append(text[start:i + 1])
+                    break
+
+    last_err = None
+    for cand in candidates:
+        try:
+            return json.loads(cand)
+        except json.JSONDecodeError as e:
+            last_err = e
+            continue
+    # 모든 candidate 실패 → 원문 일부 + 마지막 에러 보고
+    snippet = text[:300].replace("\n", " ")
+    raise RuntimeError(f"JSON parse failed ({last_err}). Text head: {snippet}...")
 
 
 def fetch_image(prompt, slug):

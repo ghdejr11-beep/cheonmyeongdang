@@ -62,3 +62,5 @@
 2026-05-05 18:00:02 [post] shorts shorts3_deadline
 2026-05-06 18:00:03 [post] cards shorts3_deadline_cards
 2026-05-06 18:00:31 [post] results: {'bluesky': True, 'discord': True, 'mastodon': True, 'x': False, 'threads': True, 'instagram': True, 'facebook': True}
+2026-05-07 18:00:03 [post] shorts shorts4_average
+2026-05-07 18:01:21 [post] results: {'bluesky': True, 'discord': True, 'mastodon': True, 'x': False, 'threads': True, 'instagram': True, 'facebook': True}

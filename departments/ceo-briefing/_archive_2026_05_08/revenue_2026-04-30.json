@@ -1,0 +1,802 @@
+{
+  "revenue": {
+    "gumroad": {
+      "period": "2026-04-29 ~ 2026-04-30",
+      "total_sales": 0,
+      "total_krw": 0,
+      "by_product": {}
+    },
+    "gumroad_products": {
+      "total_products": 10,
+      "total_sales_count": 0,
+      "total_revenue": 0.0,
+      "zero_sale_products": [
+        "궁합 풀이 워크북 — 두 사람의 사주 8글자로 보는 진짜 궁합 분석",
+        "2026 띠별 운세 다이어리 — 12띠 × 12개월 흐름 + 셀프 다이어리 워크시트",
+        "사주명리학 입문 가이드 — 천명당 사용자를 위한 35페이지 완전 정리",
+        "Saju Diary — 사주 일기 노트 (12개월 워크북)",
+        "Tax Advisor Pack — 세무사 첫 미팅 절세 50가지 + Excel 체크리스트",
+        "Legal First Consult Pack — 변호사 첫 상담 질문 50개",
+        "1인 퇴사후 사업 플레이북",
+        "클로드 코드 실전 가이드 — 코딩 몰라도 하루 만에 앱 만드는 법",
+        "2026 AI 부업 수익 리포트 — 13개 카테고리 실제 수익 분석",
+        "노션 템플릿 50개 + 제작·판매 완전 가이드"
+      ],
+      "warning": "🚨 Gumroad 10상품 등록돼있지만 누적 판매 0건 — 노출/마케팅 필요"
+    },
+    "kdp": {
+      "status": "no_data",
+      "message": "수동 CSV 다운로드 필요 — C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\.kdp_reports 에 저장",
+      "how_to": "kdp.amazon.com/reports → Sales Dashboard → Download → .csv → 해당 폴더 저장"
+    },
+    "coupang": {
+      "status": "error",
+      "error": "'cp949' codec can't decode byte 0xe2 in position 1684: illegal multibyte sequence"
+    },
+    "play": {
+      "status": "no_credentials",
+      "message": "GCP 서비스 계정 JSON 저장 필요: C:\\Users\\hdh02\\Desktop\\cheonmyeongdang\\.secrets\\play-service-account.json",
+      "how_to": "1) console.cloud.google.com 프로젝트 생성 2) Play Developer Reporting API 활성화 3) 서비스 계정 생성 + JSON 다운로드 4) Play Console에서 해당 서비스 계정 연결 + 재무 권한"
+    },
+    "admob": {
+      "status": "no_publisher_id",
+      "message": "AdMob Publisher ID 미설정",
+      "how_to": ".secrets 에 ADMOB_PUBLISHER_ID=pub-XXX 추가"
+    },
+    "yt_4ch": {
+      "status": "auth_required",
+      "message": "글로벌 토큰 로드 실패: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description'"
+    },
+    "vercel": {
+      "status": "no_token",
+      "date": "2026-04-29",
+      "analytics_source": "stub",
+      "note": "VERCEL_API_TOKEN 미설정 — .secrets 에 추가 필요",
+      "totals": {
+        "pv": null,
+        "uv": null,
+        "deployments_24h": 0,
+        "projects_count": 3
+      },
+      "projects": [
+        {
+          "slug": "tax-n-benefit-api",
+          "deployments_24h": 0,
+          "last_state": null,
+          "pv": null,
+          "uv": null,
+          "error": "no_token"
+        },
+        {
+          "slug": "korlens",
+          "deployments_24h": 0,
+          "last_state": null,
+          "pv": null,
+          "uv": null,
+          "error": "no_token"
+        },
+        {
+          "slug": "cheonmyeongdang.com",
+          "deployments_24h": 0,
+          "last_state": null,
+          "pv": null,
+          "uv": null,
+          "error": "no_token"
+        }
+      ]
+    }
+  },
+  "customer_feedback": {
+    "play_reviews": {
+      "our_apps": {
+        "천명당": {
+          "status": "unlisted_or_404",
+          "error": "App not found(404)."
+        },
+        "HexDrop": {
+          "status": "unlisted_or_404",
+          "error": "App not found(404)."
+        }
+      },
+      "competitors": {},
+      "warnings": [
+        "📱 천명당 Play Store 미출시 (리뷰 수집 불가)",
+        "📱 HexDrop Play Store 미출시 (리뷰 수집 불가)"
+      ]
+    }
+  },
+  "market_signals": {
+    "trends": {
+      "core_keywords": {
+        "ai side hustle": {
+          "avg": 0.1,
+          "latest": 0,
+          "direction": "📈 상승",
+          "change_pct": 66.7
+        },
+        "사주 앱": {
+          "avg": 0.0,
+          "latest": 0,
+          "direction": "➡️ 유지",
+          "change_pct": 0
+        },
+        "세금 환급": {
+          "avg": 0.1,
+          "latest": 0,
+          "direction": "➡️ 유지",
+          "change_pct": -12.5
+        },
+        "ai agent": {
+          "avg": 51.8,
+          "latest": 54,
+          "direction": "➡️ 유지",
+          "change_pct": 0.6
+        },
+        "notion template": {
+          "avg": 2.0,
+          "latest": 2,
+          "direction": "➡️ 유지",
+          "change_pct": 5.4
+        }
+      },
+      "rising_items": [
+        {
+          "keyword": "ai side hustle",
+          "change_pct": 66.7,
+          "direction": "📈 상승"
+        }
+      ],
+      "related_rising_queries": [
+        {
+          "query": "digital marketing trends",
+          "value": 252550
+        },
+        {
+          "query": "best freelancing platforms",
+          "value": 212750
+        },
+        {
+          "query": "best side hustle apps",
+          "value": 350
+        }
+      ]
+    },
+    "product_hunt": {
+      "total_entries": 50,
+      "top_today": [
+        {
+          "title": "Open Wearables",
+          "link": "https://www.producthunt.com/products/open-wearables",
+          "summary": "Open infrastructure for wearable-powered health products. Discussion | Link",
+          "published": "2026-04-25T01:36:06-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Plurai",
+          "link": "https://www.producthunt.com/products/plurai",
+          "summary": "Vibe-train evals and guardrails tailored to your use case Discussion | Link",
+          "published": "2026-03-23T02:57:44-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Venture Factory AI",
+          "link": "https://www.producthunt.com/products/venture-factory-ai",
+          "summary": "Your full venture strategy, built in minutes. Discussion | Link",
+          "published": "2026-04-28T08:33:54-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Plannotator",
+          "link": "https://www.producthunt.com/products/plannotator",
+          "summary": "Annotate any doc, URL, or folder - send feedback to agents Discussion | Link",
+          "published": "2026-04-28T22:30:31-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Gro v2",
+          "link": "https://www.producthunt.com/products/gro-2",
+          "summary": "Spot signals, trigger outreach - turn posts into pipeline Discussion | Link",
+          "published": "2026-04-28T00:10:55-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Dreambase Data Agent Skills",
+          "link": "https://www.producthunt.com/products/dreambase-ai",
+          "summary": "Analytical skills for data agents running on Supabase Discussion | Link",
+          "published": "2026-04-28T14:32:44-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "CodeHealth MCP Server by CodeScene",
+          "link": "https://www.producthunt.com/products/codescene-codehealth-mcp-server",
+          "summary": "Keep AI-generated code healthy and maintainable Discussion | Link",
+          "published": "2026-04-20T07:08:53-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "noirdoc",
+          "link": "https://www.producthunt.com/products/noirdoc",
+          "summary": "PII guard for Claude Code to keep client data out of context Discussion | Link",
+          "published": "2026-04-28T08:32:08-07:00",
+          "kun_score": 5,
+          "matched_keywords": [
+            "ai",
+            "claude"
+          ]
+        },
+        {
+          "title": "UXPin Forge",
+          "link": "https://www.producthunt.com/products/uxpin",
+          "summary": "Generate UI from your design system, not around it Discussion | Link",
+          "published": "2026-04-23T05:16:07-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        },
+        {
+          "title": "Netlify Database",
+          "link": "https://www.producthunt.com/products/netlify",
+          "summary": "Ship data-driven apps without breaking flow Discussion | Link",
+          "published": "2026-04-27T07:16:09-07:00",
+          "kun_score": 3,
+          "matched_keywords": [
+            "ai"
+          ]
+        }
+      ],
+      "high_match_for_kun": [
+        {
+          "title": "ZenTrack",
+          "link": "https://www.producthunt.com/products/zentrack-finances-streaks-health",
+          "summary": "Notes, money, and health. Sorted. Discussion | Link",
+          "published": "2026-04-28T04:45:55-07:00",
+          "kun_score": 7,
+          "matched_keywords": [
+            "ai",
+            "finance",
+            "money"
+          ]
+        },
+        {
+          "title": "Markdown Editor For Notion Lovers",
+          "link": "https://www.producthunt.com/products/markdown-editor-for-notion-lovers",
+          "summary": "A clean Markdown editor with a smooth, block-based UX Discussion | Link",
+          "published": "2026-04-25T12:00:43-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "notion"
+          ]
+        },
+        {
+          "title": "runprompt",
+          "link": "https://www.producthunt.com/products/runprompt",
+          "summary": "Heroku for AI prompts Discussion | Link",
+          "published": "2026-04-14T14:32:19-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "prompt"
+          ]
+        },
+        {
+          "title": "Heym",
+          "link": "https://www.producthunt.com/products/heym",
+          "summary": "Self-hosted AI workflow automation with agents, RAG, and MCP Discussion | Link",
+          "published": "2026-04-24T00:06:51-07:00",
+          "kun_score": 6,
+          "matched_keywords": [
+            "ai",
+            "automat"
+          ]
+        },
+        {
+          "title": "noirdoc",
+          "link": "https://www.producthunt.com/products/noirdoc",
+          "summary": "PII guard for Claude Code to keep client data out of context Discussion | Link",
+          "published": "2026-04-28T08:32:08-07:00",
+          "kun_score": 5,
+          "matched_keywords": [
+            "ai",
+            "claude"
+          ]
+        }
+      ],
+      "fetched_at": "2026-04-30T08:30:12.992382"
+    }
+  },
+  "departments": {
+    "ceo-briefing": {
+      "dept": "ceo-briefing",
+      "commits_count": 1,
+      "files_changed_count": 14,
+      "mtime_changed_count": 5,
+      "changes_summary": "커밋 1건: add Sori Atlas YT cross-promo shelf to homepage / 신규 10개 / 수정 4개",
+      "positive_highlights": [
+        "add Sori Atlas YT cross-promo shelf to homepage"
+      ],
+      "active_problems": [
+        {
+          "file": "departments\\ceo-briefing\\support_agent.py",
+          "kw": "TODO",
+          "text": "`claude -p \"티켓 {tid} 분석 후 해당 수정 커밋\"` 호출"
+        }
+      ],
+      "files": {
+        "added": [
+          "\"ai_drafts/2026-04-27_ceo-briefing__claude_-p__\\355\\213\\260\\354\\274\\223__tid__\\353\\266\\204\\354\\204\\235_\\355\\233\\204_\\355\\225\\264\\353\\213\\271_\\354\\210\\230\\354\\240\\225_\\354\\273\\244\\353\\260\\213___\\355\\230\\270\\354\\266\\234.md\"",
+          "\"ai_drafts/2026-04-27_tax_Claude_Agent_SDK\\353\\241\\234_\\353\\266\\204\\353\\245\\230_\\354\\236\\254\\355\\214\\220\\354\\240\\225___auto_fix\\353\\212\\224_PR_.md\"",
+          "\"ai_drafts/2026-04-28_tax_Claude_Agent_SDK\\353\\241\\234_\\353\\266\\204\\353\\245\\230_\\354\\236\\254\\355\\214\\220\\354\\240\\225___auto_fix\\353\\212\\224_PR_.md\"",
+          "\"ai_drafts/2026-04-29_tax_Claude_Agent_SDK\\353\\241\\234_\\353\\266\\204\\353\\245\\230_\\354\\236\\254\\355\\214\\220\\354\\240\\225___auto_fix\\353\\212\\224_PR_.md\"",
+          "integrations/ga4.py",
+          "integrations/vercel_analytics.py",
+          "output/briefing_send_2026-04-26_18.py",
+          "output/revenue_2026-04-27.md",
+          "output/revenue_2026-04-28.md",
+          "output/revenue_2026-04-29.md"
+        ],
+        "modified": [
+          "\"ai_drafts/2026-04-26_tax_Claude_Agent_SDK\\353\\241\\234_\\353\\266\\204\\353\\245\\230_\\354\\236\\254\\355\\214\\220\\354\\240\\225___auto_fix\\353\\212\\224_PR_.md\"",
+          "briefing_v2.py",
+          "output/briefing_send_2026-04-26_09.py",
+          "output/briefing_send_2026-04-26_12.py"
+        ],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\ceo-briefing\\autofix_budget.json",
+        "departments\\ceo-briefing\\ai_drafts\\2026-04-30_tax_Claude_Agent_SDK로_분류_재판정___auto_fix는_PR_.md",
+        "departments\\ceo-briefing\\ai_drafts\\2026-04-29_tax_Claude_Agent_SDK로_분류_재판정___auto_fix는_PR_.md",
+        "departments\\ceo-briefing\\output\\revenue_2026-04-29.md",
+        "departments\\ceo-briefing\\output\\revenue_2026-04-29.json"
+      ]
+    },
+    "cheonmyeongdang": {
+      "dept": "cheonmyeongdang",
+      "commits_count": 1,
+      "files_changed_count": 11,
+      "mtime_changed_count": 10,
+      "changes_summary": "커밋 1건: add Sori Atlas YT cross-promo shelf to homepage / 신규 10개 / 수정 1개",
+      "positive_highlights": [
+        "add Sori Atlas YT cross-promo shelf to homepage"
+      ],
+      "active_problems": [],
+      "files": {
+        "added": [
+          "daily_fortune_generator.py",
+          "daily_fortune_run.py",
+          "daily_fortune_send.py",
+          "data/referrals.json",
+          "data/subscribers.json",
+          "kakao_template_daily_fortune.txt",
+          "kakao_template_daily_fortune_v2.txt",
+          "kakao_template_daily_fortune_v3.txt",
+          "register_daily_fortune.bat",
+          "sku_pricing.md"
+        ],
+        "modified": [
+          "README.md"
+        ],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\cheonmyeongdang\\logs\\dreams_2026-04-30.json",
+        "departments\\cheonmyeongdang\\data\\subscribers.json",
+        "departments\\cheonmyeongdang\\logs\\daily_fortune_2026-04-30.json",
+        "departments\\cheonmyeongdang\\press_release_2026_05.md",
+        "departments\\cheonmyeongdang\\kakao_chatbot_faq_v1.md"
+      ]
+    },
+    "digital-products": {
+      "dept": "digital-products",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "ebook": {
+      "dept": "ebook",
+      "commits_count": 1,
+      "files_changed_count": 77,
+      "mtime_changed_count": 4,
+      "changes_summary": "커밋 1건: add Sori Atlas YT cross-promo shelf to homepage / 신규 77개",
+      "positive_highlights": [
+        "add Sori Atlas YT cross-promo shelf to homepage"
+      ],
+      "active_problems": [],
+      "files": {
+        "added": [
+          "bulk_create_manifests.py",
+          "bulk_validate.py",
+          "bulk_write_descriptions.py",
+          "kdp_validator.py",
+          "logs/kdp_reports/adhd-planner.json",
+          "logs/kdp_reports/ai-prompt-workbook.json",
+          "logs/kdp_reports/ai-side-hustle-en.json",
+          "logs/kdp_reports/airbnb-guestbook.json",
+          "logs/kdp_reports/blood-pressure-log.json",
+          "logs/kdp_reports/blood-sugar-tracker.json",
+          "logs/kdp_reports/bold-easy-coloring-animals.json",
+          "logs/kdp_reports/budget-planner-couples.json",
+          "logs/kdp_reports/caregiver-daily-log.json",
+          "logs/kdp_reports/cottagecore-coloring.json",
+          "logs/kdp_reports/dog-health-training-log.json",
+          "logs/kdp_reports/dot-marker-kids.json",
+          "logs/kdp_reports/fishing-log-book.json",
+          "logs/kdp_reports/fortune-notebook.json",
+          "logs/kdp_reports/genz-stress.json",
+          "logs/kdp_reports/introvert-confidence.json",
+          "logs/kdp_reports/math-workbook-grade1.json",
+          "logs/kdp_reports/meal-prep-planner.json",
+          "logs/kdp_reports/mental-reset-journal.json",
+          "logs/kdp_reports/password-logbook-premium.json",
+          "logs/kdp_reports/password-logbook.json",
+          "logs/kdp_reports/perimenopause-symptom-tracker.json",
+          "logs/kdp_reports/saju-diary.json",
+          "logs/kdp_reports/sleep-planner.json",
+          "logs/kdp_reports/spot-difference-seniors.json",
+          "logs/kdp_reports/yoga-progress-journal.json",
+          "logs/kdp_reports/zodiac-mandala-coloring.json",
+          "projects/adhd-planner/manifest.json",
+          "projects/ai-prompt-workbook/manifest.json",
+          "projects/ai-side-hustle-en/manifest.json",
+          "projects/airbnb-guestbook/manifest.json",
+          "projects/blood-pressure-log/manifest.json",
+          "projects/blood-sugar-tracker/manifest.json",
+          "projects/bold-easy-coloring-animals/manifest.json",
+          "projects/budget-planner-couples/manifest.json",
+          "projects/caregiver-daily-log/cover.pdf",
+          "projects/caregiver-daily-log/manifest.json",
+          "projects/cottagecore-coloring/manifest.json",
+          "projects/dog-health-training-log/cover.pdf",
+          "projects/dog-health-training-log/manifest.json",
+          "projects/dot-marker-kids/manifest.json",
+          "projects/fishing-log-book/cover.pdf",
+          "projects/fishing-log-book/manifest.json",
+          "projects/fortune-notebook/manifest.json",
+          "projects/genz-stress/manifest.json",
+          "projects/introvert-confidence/manifest.json",
+          "projects/math-workbook-grade1/manifest.json",
+          "projects/meal-prep-planner/manifest.json",
+          "projects/mental-reset-journal/manifest.json",
+          "projects/password-logbook-premium/manifest.json",
+          "projects/password-logbook/manifest.json",
+          "projects/pelvic-floor-recovery-journal/KDP_LISTING.md",
+          "projects/pelvic-floor-recovery-journal/generate.py",
+          "projects/pelvic-floor-recovery-journal/manifest.json",
+          "projects/pelvic-floor-recovery-journal/pelvic_floor_recovery_journal.pdf",
+          "projects/perimenopause-symptom-tracker/cover.pdf",
+          "projects/perimenopause-symptom-tracker/manifest.json",
+          "projects/saju-diary/manifest.json",
+          "projects/sleep-planner/manifest.json",
+          "projects/sobriety-90-day-journal/KDP_LISTING.md",
+          "projects/sobriety-90-day-journal/cover.pdf",
+          "projects/sobriety-90-day-journal/cover_gen.py",
+          "projects/sobriety-90-day-journal/generate.py",
+          "projects/sobriety-90-day-journal/manifest.json",
+          "projects/sobriety-90-day-journal/sobriety_90_day_journal.pdf",
+          "projects/sourdough-baking-journal/KDP_LISTING.md",
+          "projects/sourdough-baking-journal/generate.py",
+          "projects/sourdough-baking-journal/sourdough-baking-journal.pdf",
+          "projects/spot-difference-seniors/manifest.json",
+          "projects/yoga-progress-journal/manifest.json",
+          "projects/zodiac-mandala-coloring/manifest.json",
+          "run_validator_all.py",
+          "validation_summary.json"
+        ],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\ebook\\projects\\pelvic-floor-recovery-journal\\manifest.json",
+        "departments\\ebook\\projects\\pelvic-floor-recovery-journal\\KDP_LISTING.md",
+        "departments\\ebook\\projects\\pelvic-floor-recovery-journal\\pelvic_floor_recovery_journal.pdf",
+        "departments\\ebook\\projects\\pelvic-floor-recovery-journal\\generate.py"
+      ]
+    },
+    "game": {
+      "dept": "game",
+      "commits_count": 1,
+      "files_changed_count": 5,
+      "mtime_changed_count": 0,
+      "changes_summary": "커밋 1건: add Sori Atlas YT cross-promo shelf to homepage / 신규 5개",
+      "positive_highlights": [
+        "add Sori Atlas YT cross-promo shelf to homepage"
+      ],
+      "active_problems": [],
+      "files": {
+        "added": [
+          "design/README.md",
+          "design/brand_guide.md",
+          "design/characters/mascot_palette.json",
+          "design/playbooks/new_game_checklist.md",
+          "design/templates/start_screen.html"
+        ],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "insurance-daboyeo": {
+      "dept": "insurance-daboyeo",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "intelligence": {
+      "dept": "intelligence",
+      "commits_count": 1,
+      "files_changed_count": 1,
+      "mtime_changed_count": 14,
+      "changes_summary": "커밋 1건: add Sori Atlas YT cross-promo shelf to homepage / 수정 1개",
+      "positive_highlights": [
+        "add Sori Atlas YT cross-promo shelf to homepage"
+      ],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [
+          "sales_collector.py"
+        ],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\intelligence\\data\\health_log.txt",
+        "departments\\intelligence\\data\\health_state.json",
+        "departments\\intelligence\\data\\korlens_snapshot_2026-04-30.json",
+        "departments\\intelligence\\data\\kdp_snapshot_2026-04-30.json",
+        "departments\\intelligence\\data\\prompts_snapshot_2026-04-30.json"
+      ]
+    },
+    "korlens": {
+      "dept": "korlens",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 0,
+      "changes_summary": "변화 없음",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": []
+    },
+    "media": {
+      "dept": "media",
+      "commits_count": 1,
+      "files_changed_count": 20,
+      "mtime_changed_count": 8,
+      "changes_summary": "커밋 1건: add Sori Atlas YT cross-promo shelf to homepage / 신규 14개 / 수정 6개",
+      "positive_highlights": [
+        "add Sori Atlas YT cross-promo shelf to homepage"
+      ],
+      "active_problems": [],
+      "files": {
+        "added": [
+          "logs/may_promo.log",
+          "logs/tax_promo.log",
+          "src/coupang_inject.py",
+          "src/coupang_products.json",
+          "src/launch_cheonmyeongdang_now.bat",
+          "src/may_promo_runner.py",
+          "src/may_promo_state.json",
+          "src/promo_messages_may.json",
+          "src/register_may_promo_tasks.bat",
+          "src/register_tax_promo_task.bat",
+          "src/tax_promo_pipeline.py",
+          "src/tax_promo_queue.json",
+          "youtube/ai_sidehustle/logs_weekly.log",
+          "youtube/ai_sidehustle/video_analytics.jsonl"
+        ],
+        "modified": [
+          "logs/yt_3ch_daily.log",
+          "src/multi_poster.py",
+          "src/product_promo_state.json",
+          "youtube/ai_sidehustle/run_history.jsonl",
+          "youtube/ai_sidehustle/topics.json",
+          "youtube/ai_sidehustle/topics_history.jsonl"
+        ],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\media\\logs\\yt_3ch_daily.log",
+        "departments\\media\\youtube\\shared\\token_sori_atlas.pickle",
+        "departments\\media\\src\\yt_channel_common.py",
+        "departments\\media\\src\\coupang_products.json",
+        "departments\\media\\src\\product_promo_state.json"
+      ]
+    },
+    "secretary": {
+      "dept": "secretary",
+      "commits_count": 1,
+      "files_changed_count": 6,
+      "mtime_changed_count": 4,
+      "changes_summary": "커밋 1건: add Sori Atlas YT cross-promo shelf to homepage / 신규 6개",
+      "positive_highlights": [
+        "add Sori Atlas YT cross-promo shelf to homepage"
+      ],
+      "active_problems": [],
+      "files": {
+        "added": [
+          "README.md",
+          "authorize_gmail_send.py",
+          "gmail_organizer.py",
+          "logs/gmail_organize.log",
+          "pg_mail_monitor.py",
+          "register_gmail_organize.ps1"
+        ],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\secretary\\token.json",
+        "departments\\secretary\\pg_mail_monitor.py",
+        "departments\\secretary\\logs\\gmail_organize.log",
+        "departments\\secretary\\edit_queue.json"
+      ]
+    },
+    "security": {
+      "dept": "security",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 2,
+      "changes_summary": "편집 작업 2건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\security\\logs\\intrusion_state.json",
+        "departments\\security\\intrusion_watch.py"
+      ]
+    },
+    "tax": {
+      "dept": "tax",
+      "commits_count": 1,
+      "files_changed_count": 54,
+      "mtime_changed_count": 15,
+      "changes_summary": "커밋 1건: add Sori Atlas YT cross-promo shelf to homepage / 신규 51개 / 수정 3개",
+      "positive_highlights": [
+        "add Sori Atlas YT cross-promo shelf to homepage"
+      ],
+      "active_problems": [
+        {
+          "file": "departments\\tax\\server\\api\\support.js",
+          "kw": "TODO",
+          "text": "Claude Agent SDK로 분류 재판정 + auto_fix는 PR 자동 생성"
+        }
+      ],
+      "files": {
+        "added": [
+          "docs/CODEF.md",
+          "logs/run_2026-04-27.log",
+          "logs/run_2026-04-28.log",
+          "logs/run_2026-04-29.log",
+          "output/leads_2026-04-27.md",
+          "output/leads_2026-04-28.md",
+          "output/leads_2026-04-29.md",
+          "server/api/confirm-payment.js",
+          "server/api/payment-config.js",
+          "server/api/tax-cert-all.js",
+          "server/public/app.html",
+          "server/public/assets/app_auth.jpg",
+          "server/public/assets/app_auth.webp",
+          "server/public/assets/app_calc.jpg",
+          "server/public/assets/app_calc.webp",
+          "server/public/assets/app_chat.jpg",
+          "server/public/assets/app_chat.webp",
+          "server/public/assets/app_coaching.jpg",
+          "server/public/assets/app_coaching.webp",
+          "server/public/assets/app_subsidy.jpg",
+          "server/public/assets/app_subsidy.webp",
+          "server/public/assets/capture.py",
+          "server/public/blog/01-30min-deadline.html",
+          "server/public/blog/02-freelancer-27.html",
+          "server/public/blog/03-fee-compare.html",
+          "server/public/blog/04-bundle-refund.html",
+          "server/public/blog/05-njob-5step.html",
+          "server/public/blog/child-tax-credit.html",
+          "server/public/blog/freelancer-tax-tips.html",
+          "server/public/blog/hometax-easy-refund.html",
+          "server/public/blog/index.html",
+          "server/public/blog/jonghapsodeukse-refund-2026.html",
+          "server/public/blog/og/child-tax-credit.png",
+          "server/public/blog/og/freelancer-tax-tips.png",
+          "server/public/blog/og/hometax-easy-refund.png",
+          "server/public/blog/og/jonghapsodeukse-refund-2026.png",
+          "server/public/blog/og/prepaid-tax-credit.png",
+          "server/public/blog/prepaid-tax-credit.html",
+          "server/public/d36c6c00cec20261eabe2e1ea32164e0.txt",
+          "server/public/index.html",
+          "server/public/og.jpg",
+          "server/public/og.png",
+          "server/public/payment.html",
+          "server/public/payment/fail.html",
+          "server/public/payment/success.html",
+          "server/public/privacy.html",
+          "server/public/refund.html",
+          "server/public/robots.txt",
+          "server/public/sitemap.xml",
+          "server/public/support.html",
+          "server/public/terms.html"
+        ],
+        "modified": [
+          "output/seen_ids.json",
+          "server/vercel.json",
+          "src/index.html"
+        ],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\tax\\server\\public\\index.html",
+        "departments\\tax\\server\\public\\blog\\prepaid-tax-credit.html",
+        "departments\\tax\\server\\public\\blog\\jonghapsodeukse-refund-2026.html",
+        "departments\\tax\\server\\public\\blog\\hometax-easy-refund.html",
+        "departments\\tax\\server\\public\\blog\\freelancer-tax-tips.html"
+      ]
+    },
+    "travelmap": {
+      "dept": "travelmap",
+      "commits_count": 0,
+      "files_changed_count": 0,
+      "mtime_changed_count": 3,
+      "changes_summary": "편집 작업 3건 (미반영)",
+      "positive_highlights": [],
+      "active_problems": [],
+      "files": {
+        "added": [],
+        "modified": [],
+        "deleted": []
+      },
+      "recent_files_mtime": [
+        "departments\\travelmap\\logs\\poi_2026-04-30.json",
+        "departments\\travelmap\\logs\\korlens_2026-04-30.json",
+        "departments\\travelmap\\output\\health_2026-04-29.json"
+      ]
+    }
+  }
+}

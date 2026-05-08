@@ -395,6 +395,8 @@
  '<strong style="color:var(--gold2);">사주 정밀 풀이</strong>결제가 완료되었습니다.<br>' +
  '직업·재물·건강·인연 정밀 분석 리포트를 확인하세요.';
  document.getElementById('back-btn').textContent = ' 사주 풀이 보기';
+ var sajuEmail = encodeURIComponent((orderData.email || '').toLowerCase().trim());
+ document.getElementById('back-btn').href = '/?view_saju=1&email=' + sajuEmail + '#saju-result';
  recordCmPurchase(resolvedSkuId || 'saju_premium');
  } else if (isGunghap) {
  // 궁합 단건 → compat.html 풀 리포트로 직접 이동

@@ -1,0 +1,2 @@
+[11:30:02] === 2026-byeongo-year-12sinshin.html ===
+[11:30:02]   HTTPError 400: {"errors":[{"message":"Variable \"$input\" got invalid value \"\" at \"input.contentMarkdown\". Must be at least 5 characters in length","extensions":{"field":"input.contentMarkdown","context":[{"arg"

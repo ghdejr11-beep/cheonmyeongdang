@@ -608,3 +608,89 @@
 2026-05-07 08:35:10,217 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'Rb1rMqoXHoQ', 'url': 'https://www.youtube.com/watch?v=Rb1rMqoXHoQ', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
 2026-05-07 08:36:40,019 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': '_cBMKy3_s8A', 'url': 'https://www.youtube.com/watch?v=_cBMKy3_s8A', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
 2026-05-07 08:38:10,226 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'AkqAeSZKI4A', 'url': 'https://www.youtube.com/watch?v=AkqAeSZKI4A', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-07 16:00:04,446 [INFO] === Wealth Blueprint | quote=Jocko Willink theme=discipline dry_run=False ===
+2026-05-07 16:00:08,536 [INFO]   script: 984 chars
+2026-05-07 16:00:15,438 [INFO]   voice: edge-tts → discipline_2026-05-07.mp3
+2026-05-07 16:00:15,438 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-05-07 16:00:15,465 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-05-07 16:00:15,466 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-05-07 16:00:15,466 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-05-07 16:00:15,467 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-05-07 16:00:18,210 [INFO]   clip 1/5 538KB
+2026-05-07 16:00:20,220 [INFO]   clip 2/5 615KB
+2026-05-07 16:00:22,251 [INFO]   clip 3/5 572KB
+2026-05-07 16:00:24,514 [INFO]   clip 4/5 517KB
+2026-05-07 16:00:26,524 [INFO]   clip 5/5 556KB
+2026-05-07 16:00:26,525 [INFO]   render → discipline_2026-05-07.mp4
+2026-05-07 16:00:27,897 [INFO]   size: 3.39 MB
+2026-05-07 16:00:37,926 [INFO] upload wealth_blueprint attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'RU-LKIijFqA', 'url': 'https://www.youtube.com/watch?v=RU-LKIijFqA', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-07 16:00:37,927 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'RU-LKIijFqA', 'url': 'https://www.youtube.com/watch?v=RU-LKIijFqA', ')
+2026-05-07 16:00:37,928 [INFO] === Wealth Blueprint done ===
+2026-05-07 23:57:31,107 [INFO] === Inner Archetypes | Enneagram · Type 2 The Helper | dry_run=False ===
+2026-05-07 23:57:49,739 [INFO]   script: 6806 chars (~1079 words)
+2026-05-07 23:59:55,090 [INFO]   voice: edge-tts → enn_2.mp3
+2026-05-07 23:59:55,090 [INFO]   image 1/6: Type 2 The Helper archetype mood, abstract symbolic fig...
+2026-05-08 00:00:13,118 [INFO]   image 2/6: Inner landscape representing Type 2 The Helper, surreal...
+2026-05-08 00:01:42,432 [INFO]   image 3/6: Tarot-card-style emblem for Type 2 The Helper, mystical...
+2026-05-08 00:03:12,349 [INFO]   image 4/6: Shadow side of Type 2 The Helper archetype, twilight mo...
+2026-05-08 00:04:42,497 [INFO]   image 5/6: Light side of Type 2 The Helper archetype, dawn mood, e...
+2026-05-08 00:06:14,814 [INFO]   image 6/6: Integration journey of Type 2 The Helper, bridge from s...
+2026-05-08 00:07:49,786 [INFO]   clip 1/6 (60s)
+2026-05-08 00:07:56,212 [INFO]   clip 2/6 (60s)
+2026-05-08 00:08:02,670 [INFO]   clip 3/6 (60s)
+2026-05-08 00:08:09,289 [INFO]   clip 4/6 (60s)
+2026-05-08 00:08:15,739 [INFO]   clip 5/6 (60s)
+2026-05-08 00:08:22,210 [INFO]   clip 6/6 (60s)
+2026-05-08 00:08:22,210 [INFO]   render → enn_2.mp4
+2026-05-08 00:08:31,109 [INFO]   size: 14.30 MB
+2026-05-08 00:08:41,532 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': '98HB1vIyyrw', 'url': 'https://www.youtube.com/watch?v=98HB1vIyyrw', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-08 00:08:41,532 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': '98HB1vIyyrw', 'url': 'https://www.youtube.com/watch?v=98HB1vIyyrw', ')
+2026-05-08 00:08:41,533 [INFO] === Inner Archetypes done ===
+2026-05-08 04:00:02,003 [INFO] === Wealth Blueprint | quote=Albert Einstein (attributed) theme=mindset dry_run=False ===
+2026-05-08 04:00:05,483 [INFO]   script: 928 chars
+2026-05-08 04:00:12,353 [INFO]   voice: edge-tts → mindset_2026-05-08.mp3
+2026-05-08 04:00:12,354 [INFO]   image 1: Cinematic young person at sunrise window writing i...
+2026-05-08 04:00:14,318 [INFO]   image 2: Minimal aesthetic desk with notebook, coffee, plan...
+2026-05-08 04:01:44,475 [INFO]   image 3: Person walking at golden hour silhouette over city...
+2026-05-08 04:03:14,092 [INFO]   image 4: Close-up hands typing on laptop with soft bokeh ba...
+2026-05-08 04:04:43,880 [INFO]   image 5: Sunrise over calm mountain ridge, quiet beginning ...
+2026-05-08 04:06:15,986 [INFO]   clip 1/5 591KB
+2026-05-08 04:06:17,893 [INFO]   clip 2/5 580KB
+2026-05-08 04:06:19,786 [INFO]   clip 3/5 586KB
+2026-05-08 04:06:21,626 [INFO]   clip 4/5 519KB
+2026-05-08 04:06:23,478 [INFO]   clip 5/5 604KB
+2026-05-08 04:06:23,478 [INFO]   render → mindset_2026-05-08.mp4
+2026-05-08 04:06:24,738 [INFO]   size: 3.46 MB
+2026-05-08 04:06:33,498 [INFO] upload wealth_blueprint attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'i-LqblrrA1U', 'url': 'https://www.youtube.com/watch?v=i-LqblrrA1U', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-08 04:06:33,499 [INFO]   upload ok=True ({'success': True, 'results': {'youtube': {'success': True, 'post_id': 'i-LqblrrA1U', 'url': 'https://www.youtube.com/watch?v=i-LqblrrA1U', ')
+2026-05-08 04:06:33,499 [INFO] === Wealth Blueprint done ===
+2026-05-08 06:00:01,196 [INFO] === Inner Archetypes | Enneagram · Type 2 The Helper | dry_run=False ===
+2026-05-08 06:00:21,973 [INFO]   script: 7680 chars (~1261 words)
+2026-05-08 06:04:03,295 [INFO]   voice: edge-tts → enn_2.mp3
+2026-05-08 06:04:03,296 [INFO]   image 1/6: Type 2 The Helper archetype mood, abstract symbolic fig...
+2026-05-08 08:30:42,675 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'vm7xOd8fGfQ', 'url': 'https://www.youtube.com/watch?v=vm7xOd8fGfQ', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-08 08:32:11,808 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'CA9iQxNmUrg', 'url': 'https://www.youtube.com/watch?v=CA9iQxNmUrg', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-08 08:33:41,994 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': '7Ry30T-k5N8', 'url': 'https://www.youtube.com/watch?v=7Ry30T-k5N8', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-08 08:35:10,141 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'ZGt-CgsH6H0', 'url': 'https://www.youtube.com/watch?v=ZGt-CgsH6H0', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-08 08:36:39,730 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': 'vxI5J7FV8ow', 'url': 'https://www.youtube.com/watch?v=vxI5J7FV8ow', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-08 08:38:09,979 [INFO] upload inner_archetypes attempt 1/3 ok=True resp={'success': True, 'results': {'youtube': {'success': True, 'post_id': '4mtP-R-tlvs', 'url': 'https://www.youtube.com/watch?v=4mtP-R-tlvs', 'video_was_transcoded': False, 'changes': [], 'prevalidation_
+2026-05-08 11:03:19,434 [INFO] === Inner Archetypes | Enneagram · Type 2 The Helper | dry_run=True ===
+2026-05-08 11:03:37,419 [INFO]   script: 7043 chars (~1141 words)
+2026-05-08 11:05:29,919 [INFO]   voice: edge-tts → enn_2.mp3
+2026-05-08 11:05:29,919 [INFO]   image 1/6: Type 2 The Helper archetype mood, abstract symbolic fig...
+2026-05-08 11:05:31,477 [INFO]   image 2/6: Inner landscape representing Type 2 The Helper, surreal...
+2026-05-08 11:07:02,265 [INFO]   image 3/6: Tarot-card-style emblem for Type 2 The Helper, mystical...
+2026-05-08 11:08:33,868 [INFO]   image 4/6: Shadow side of Type 2 The Helper archetype, twilight mo...
+2026-05-08 11:10:01,376 [INFO]   image 5/6: Light side of Type 2 The Helper archetype, dawn mood, e...
+2026-05-08 11:11:31,404 [INFO]   image 6/6: Integration journey of Type 2 The Helper, bridge from s...
+2026-05-08 11:13:08,636 [INFO]   clip 1/6 (60s)
+2026-05-08 11:13:15,809 [INFO]   clip 2/6 (60s)
+2026-05-08 11:13:22,997 [INFO]   clip 3/6 (60s)
+2026-05-08 11:13:30,188 [INFO]   clip 4/6 (60s)
+2026-05-08 11:13:37,181 [INFO]   clip 5/6 (60s)
+2026-05-08 11:13:44,693 [INFO]   clip 6/6 (60s)
+2026-05-08 11:13:44,693 [INFO]   render → enn_2.mp4
+2026-05-08 11:13:53,731 [INFO]   size: 13.64 MB
+2026-05-08 11:13:53,732 [INFO] [DRY-RUN] would upload enn_2.mp4 → inner_archetypes ('Type 2 The Helper — Deep Dive | Enneagram')
+2026-05-08 11:13:53,732 [INFO]   upload ok=True (dry-run)
+2026-05-08 11:13:53,732 [INFO] === Inner Archetypes done ===
