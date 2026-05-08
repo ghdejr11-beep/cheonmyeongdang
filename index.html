@@ -3838,17 +3838,21 @@ window.cmExecutePremium = function(mode, info) {
     try { window.renderSinnyeonEnhanced(); } catch(snErr) { console.warn('sinnyeon failed', snErr); }
   }
 
-  // 즉시 + setTimeout 두 번 호출 — smooth scroll이 무시되거나 element가 아직 layout 안 된 경우 대비
+  // scroll fix: scrollIntoView/scrollTo({behavior:'auto'}) 둘 다 다른 코드에 의해 interrupt됨
+  // 검증된 path: scrollTo({behavior:'instant'}) + location.hash fallback
   function _cmScrollToHero() {
     var t = document.getElementById('cm-mode-hero') || document.getElementById('saju-result');
     if (!t) return;
-    try { t.scrollIntoView({ behavior: 'auto', block: 'start' }); } catch(e) {}
-    // fallback — getBoundingClientRect 기반 직접 scroll
     try {
       var rect = t.getBoundingClientRect();
       var absTop = rect.top + (window.pageYOffset || document.documentElement.scrollTop || 0);
-      window.scrollTo({ top: Math.max(0, absTop - 16), behavior: 'auto' });
-    } catch(e) {}
+      window.scrollTo({ top: Math.max(0, absTop - 16), left: 0, behavior: 'instant' });
+    } catch(e) {
+      // 구브라우저 fallback
+      try { window.scrollTo(0, t.getBoundingClientRect().top + window.pageYOffset - 16); } catch(e2) {}
+    }
+    // hash fallback — anchor scroll trigger
+    try { if (t.id) { history.replaceState(null, '', '#' + t.id); } } catch(e) {}
   }
   _cmScrollToHero();
   setTimeout(_cmScrollToHero, 50);
